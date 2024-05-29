@@ -13,4 +13,14 @@ export class DashboardComponent {
     event.preventDefault();
     this.themeService.toggleTheme();
   }
+
+
+  toggleSidebar(event: Event) {
+    event.stopPropagation();
+    document.body.classList.toggle('small-screen-sidebar-active');
+  }
+
+  closeSidebar() {
+    document.body.classList.toggle('small-screen-sidebar-active');
+  }
 }
