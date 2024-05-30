@@ -1,18 +1,11 @@
 /* Layout */
 
-body {
-    background: #DAE6F6;
-    color: #717BA2;
-}
+
 
 .page-header .navbar ul.navbar-nav > li > a {
     color: #717BA2;
 }
 
-.page-header .navbar-search #nav-search {
-    background: #fdfeff;
-    opacity: .8;
-}
 
 .page-header .navbar-search #nav-search:focus {
     background: #fff;
@@ -21,16 +14,6 @@ body {
     opacity: 1;
 }
 
-.page-sidebar,
-.dark-theme .page-sidebar {
-    margin: 30px;
-    overflow: hidden;
-    padding-bottom: 100px;
-    border-radius: 10px;
-    padding-top: 20px;
-    background: linear-gradient(#236115, #6FB95D) !important;
-    box-shadow: 0 0 1.25rem rgba(0,0,0,.2);
-}
 
 .logo-box a.logo-text {
     color: #fff;
@@ -50,95 +33,23 @@ body {
     color: rgba(255,255,255,1);
 }
 
-.compact-sidebar .page-sidebar {
+/* .compact-sidebar .page-sidebar {
     overflow: visible;
     margin-right: 0;
     padding-top: 20px;
-}
+} */
 
-.compact-sidebar .page-sidebar:before {
+/* .compact-sidebar .page-sidebar:before {
     top: 30px;
     bottom: 30px;
     border-radius: 10px;
     height: calc(100% - 90px);
     position: fixed;
     z-index: -1;
-}
+} */
 
-.page-container {
-    margin-left: 310px;
-    padding-top: 20px;
-}
 
-.compact-sidebar .page-container {
-    width: calc(100% - 110px);
-}
 
-.accordion-menu li.sidebar-title,
-.dark-theme .accordion-menu li.sidebar-title {
-    color: rgba(255,255,255, .4)!important;
-    opacity: 1!important;
-}
-
-.accordion-menu > li > a,
-.dark-theme .accordion-menu > li > a {
-    color: rgba(255,255,255, .6)!important;
-}
-
-.accordion-menu > li > a:hover,
-.dark-theme .accordion-menu > li > a:hover,
-.accordion-menu > li.open > a,
-.dark-theme .accordion-menu > li.open > a {
-    color: rgba(255,255,255,1)!important;
-    background: transparent!important;
-}
-
-.accordion-menu li.active-page > a:only-child,
-.dark-theme .accordion-menu li.active-page > a:only-child {
-    background: rgba(255,255,255,.2)!important;
-    color: #fff!important;
-}
-
-.accordion-menu li.open,
-.dark-theme .accordion-menu li.open {
-    background: rgba(255,255,255,.2)!important;
-}
-
-.accordion-menu li.open > a {
-    color: #fff;
-}
-
-.accordion-menu li ul li a {
-    color: rgba(255,255,255, .6);
-}
-
-.compact-sidebar .accordion-menu li ul li a.active,
-.compact-sidebar .accordion-menu li ul li a:hover {
-    color: #7168FC!important;
-}
-
-.accordion-menu li ul li a:hover,
-.accordion-menu li ul li a.active,
-.dark-theme .accordion-menu li ul li a:hover,
-.dark-theme .accordion-menu li ul li a.active {
-    color: #fff!important;
-}
-
-.accordion-menu > li.active-page > a,
-.dark-theme .accordion-menu > li.active-page > a {
-    color: #fff!important;
-    background: rgba(255,255,255,.1)!important;
-}
-
-/* UI */
-
-a {
-    color: #7168FC;
-}
-
-a:hover {
-    color: #5852eb;
-}
 
 .card {
     box-shadow: 0 0 1.25rem rgba(0,0,0,.1);

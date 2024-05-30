@@ -20,6 +20,11 @@ export class DashboardComponent {
     document.body.classList.toggle('small-screen-sidebar-active');
   }
 
+  toggleState(event: Event) {
+    
+    event.stopPropagation();
+    document.body.classList.toggle('compact-sidebar');
+  }
   closeSidebar() {
     document.body.classList.toggle('small-screen-sidebar-active');
   }
