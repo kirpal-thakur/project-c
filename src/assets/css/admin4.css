@@ -55,14 +55,7 @@
     box-shadow: 0 0 1.25rem rgba(0,0,0,.1);
 }
 
-.card .card-header,
-.card .card-title,
-.modal-title,
-.dark-theme .card .card-title,
-.dark-theme .card .card-header,
-.dark-theme .file-manager-menu .fmm-title {
-    color: #5a638a!important;
-}
+
 
 .breadcrumb-item.active {
     color: #717BA2;
@@ -582,12 +575,5 @@ table.dataTable thead th {
 
     .page-header .navbar-search #nav-search:focus {
         background: #e3edfa;
-    }
-}
-
-@media (max-width: 991px) {
-    .small-screen-sidebar-active .page-sidebar {
-        margin: 0;
-        border-radius: 0;
     }
 }

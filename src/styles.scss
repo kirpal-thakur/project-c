@@ -49,6 +49,10 @@ body {
   }
 }
 
+.small-screen-sidebar-active .page-sidebar {
+    transform: translateX(0)
+  }
+
 @media (min-width: 1200px) {
   .compact-sidebar .page-container {
     margin-left: 110px;
@@ -58,9 +62,25 @@ body {
 @media (max-width: 991px) {
     .page-sidebar {
         width: 100%;
-        padding: 50px;
+        padding: 30px;
         visibility: hidden;
         opacity: 0;
         transform: translateX(0);
     }
+
+    .small-screen-sidebar-active .page-sidebar {
+        opacity: 1;
+        visibility: visible;
+        margin: 0;
+        border-radius: 0;
+        height: 100%;
+        width: 100%;
+        .sidebar_menu_span {
+            display: block;
+        }
+        .sidebar_state{
+            display: none;
+        }
+      }
+
 }

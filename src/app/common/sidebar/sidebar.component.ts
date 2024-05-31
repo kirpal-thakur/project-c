@@ -8,13 +8,7 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class SidebarComponent {
 
-  toggleSidebar(event: Event) {
-    event.stopPropagation();
-    document.body.classList.toggle('small-screen-sidebar-active');
-  }
-
   toggleState() {
-    console.log('Toggle state function called');
     document.body.classList.toggle('compact-sidebar');
   }
   closeSidebar() {

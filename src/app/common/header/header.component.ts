@@ -15,7 +15,8 @@ export class HeaderComponent {
   }
 
 
-  toggleSidebar(event: Event) {
+  toggleSidebar() {
+    console.log('Toggle state function called');
     document.body.classList.toggle('small-screen-sidebar-active');
   }
 

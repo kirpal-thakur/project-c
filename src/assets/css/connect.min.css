@@ -38,7 +38,7 @@ a:hover {
   padding: 35px 35px 25px 35px;
 }
 .compact-sidebar .page-content {
-  padding: 0 35px 0px 40px;
+  padding: 0 35px 0px 35px;
 }
 
 p {
@@ -547,17 +547,7 @@ h6 {
   background-color: #f4f4f5 !important
 }
 
-.bg-success {
-  background-color: #5fd0a5 !important
-}
 
-.bg-danger {
-  background-color: #f05154 !important
-}
-
-.bg-warning {
-  background-color: #f49e31 !important
-}
 
 .bg-info {
   background-color: #36a1ea !important
@@ -1476,7 +1466,6 @@ h6 {
   background: 0 0;
   padding: 15px 25px;
   font-weight: 700;
-  text-transform: uppercase;
   font-size: 12px;
   font-family: Montserrat, sans-serif;
   color: #5c6662;
@@ -1487,8 +1476,6 @@ h6 {
   margin-bottom: 25px;
   font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
-  font-family: Montserrat, sans-serif;
   color: #5c6662
 }
 
