@@ -14,6 +14,8 @@ const routes: Routes = [
   loadChildren:()=> import('./modules/users/users.module').then(m=> m.UsersModule)},
   {path : 'Inbox', 
   loadChildren:()=> import('./modules/inbox/inbox.module').then(m=> m.InboxModule)},
+  {path : 'Setting', 
+  loadChildren:()=> import('./modules/setting/setting.module').then(m=> m.SettingModule)},
 ];
 
 @NgModule({

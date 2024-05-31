@@ -1,7 +1,10 @@
-<div class="connect-container align-content-stretch d-flex flex-wrap">
+<div class="d-flex flex-wrap">
   <app-sidebar></app-sidebar>
   <div class="page-container">
     <app-header></app-header>
-    <router-outlet></router-outlet>
+    <div class="outlet_outer">
+      <router-outlet></router-outlet>
+    </div>
   </div>
+  <!-- <app-new-registrations></app-new-registrations> -->
 </div>
