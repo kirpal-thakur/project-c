@@ -1,0 +1,556 @@
+<div class="page-content">
+    <div class="main-wrapper">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <h2 class="card-title mb-0 me-3">User Management</h2>
+            </div>
+            <div class="card-search">
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g opacity="0.5">
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.1441 11.9881C11.8739 10.8279 13.1464 7.67448 11.9863 4.94465C10.8261 2.21481 7.67265 0.942328 4.94281 2.10248C2.21297 3.26263 0.94049 6.4161 2.10064 9.14593C3.2608 11.8758 6.41426 13.1483 9.1441 11.9881Z"
+                        stroke="black"
+                        stroke-width="1.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M10.8408 10.8398L15.0062 15.0058"
+                        stroke="black"
+                        stroke-width="1.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </g></svg></span
+                ><input
+                  type="text"
+                  placeholder="Search Message"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  class="form-control ps-0"
+                />
+              </div>
+              <div class="d-flex align-items-center pe-2 border-start ps-3">
+                <svg
+                  width="18"
+                  height="19"
+                  viewBox="0 0 18 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="me-2"
+                >
+                  <path
+                    d="M16.5938 6.23438H1.40625C1.18247 6.23438 0.967862 6.14054 0.809629 5.97352C0.651395 5.80649 0.5625 5.57996 0.5625 5.34375C0.5625 5.10754 0.651395 4.88101 0.809629 4.71398C0.967862 4.54696 1.18247 4.45313 1.40625 4.45312H16.5938C16.8175 4.45312 17.0321 4.54696 17.1904 4.71398C17.3486 4.88101 17.4375 5.10754 17.4375 5.34375C17.4375 5.57996 17.3486 5.80649 17.1904 5.97352C17.0321 6.14054 16.8175 6.23438 16.5938 6.23438ZM13.7812 10.3906H4.21875C3.99497 10.3906 3.78036 10.2968 3.62213 10.1298C3.46389 9.96274 3.375 9.73621 3.375 9.5C3.375 9.26379 3.46389 9.03726 3.62213 8.87023C3.78036 8.70321 3.99497 8.60938 4.21875 8.60938H13.7812C14.005 8.60938 14.2196 8.70321 14.3779 8.87023C14.5361 9.03726 14.625 9.26379 14.625 9.5C14.625 9.73621 14.5361 9.96274 14.3779 10.1298C14.2196 10.2968 14.005 10.3906 13.7812 10.3906ZM10.4062 14.5469H7.59375C7.36997 14.5469 7.15536 14.453 6.99713 14.286C6.83889 14.119 6.75 13.8925 6.75 13.6562C6.75 13.42 6.83889 13.1935 6.99713 13.0265C7.15536 12.8595 7.36997 12.7656 7.59375 12.7656H10.4062C10.63 12.7656 10.8446 12.8595 11.0029 13.0265C11.1611 13.1935 11.25 13.42 11.25 13.6562C11.25 13.8925 11.1611 14.119 11.0029 14.286C10.8446 14.453 10.63 14.5469 10.4062 14.5469Z"
+                    fill="#787878"
+                  ></path>
+                </svg>
+                <span>Filter</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between mt-3">
+            <div class="d-flex align-items-center">
+              <a class="btn btn-outline-white">
+                <svg
+                  width="18"
+                  height="19"
+                  viewBox="0 0 18 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 1L2 3.55V8.7265C2 13.019 4.98375 17.0225 9 18C13.0163 17.0225 16 13.019 16 8.7265V3.55L9 1Z"
+                    fill="#787878"
+                  />
+                  <path
+                    d="M13.1749 7.80954L13.3574 7.63087L13.1749 7.45221L12.5303 6.82133L12.3555 6.65026L12.1806 6.82125L7.51415 11.3843L5.81922 9.7294L5.64436 9.55867L5.4697 9.72961L4.82513 10.3605L4.64259 10.5391L4.82513 10.7178L7.33942 13.1787L7.51429 13.3498L7.68915 13.1787L13.1749 7.80954Z"
+                    fill="white"
+                    stroke="white"
+                    stroke-width="0.5"
+                  />
+                </svg>
+  
+                Verify Users</a
+              >
+              <a class="btn btn-outline-white"
+                ><svg
+                  width="22"
+                  height="23"
+                  viewBox="0 0 22 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="me-1"
+                >
+                  <path
+                    d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                    fill="#787878"
+                  ></path>
+                </svg>
+                Delete Users</a
+              >
+              <a class="btn btn-outline-white">
+                <svg
+                  width="23"
+                  height="23"
+                  viewBox="0 0 23 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.83203 7.3737V3.2487C3.83203 3.00558 3.933 2.77243 4.11272 2.60052C4.29244 2.42861 4.5362 2.33203 4.79036 2.33203H18.207C18.4612 2.33203 18.705 2.42861 18.8847 2.60052C19.0644 2.77243 19.1654 3.00558 19.1654 3.2487V19.7487C19.1654 19.9918 19.0644 20.225 18.8847 20.3969C18.705 20.5688 18.4612 20.6654 18.207 20.6654H4.79036C4.5362 20.6654 4.29244 20.5688 4.11272 20.3969C3.933 20.225 3.83203 19.9918 3.83203 19.7487V15.6237"
+                    stroke="#787878"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M14.8535 7.375H16.291M13.416 11.0417H16.291M13.416 14.7083H16.291"
+                    stroke="#787878"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M4.79102 10.125L7.66602 12.875M7.66602 10.125L4.79102 12.875M1.91602 7.375H10.541V15.625H1.91602V7.375Z"
+                    stroke="#787878"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+  
+                Export XLS</a
+              >
+            </div>
+            <div class="d-flex align-items-center">
+              <div style="color: #787878; margin-right: 10px; font-weight: 500">
+                1-12 of 1600
+              </div>
+              <a class="left-slide"
+                ><svg
+                  width="33"
+                  height="33"
+                  viewBox="0 0 33 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="33"
+                    y="33"
+                    width="33"
+                    height="33"
+                    rx="16.5"
+                    transform="rotate(-180 33 33)"
+                    fill="#F3F3F3"
+                  ></rect>
+                  <path
+                    d="M18 21L13 16.5L18 12"
+                    stroke="#C2C2C2"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path></svg></a
+              ><a class="right-slide ms-1"
+                ><svg
+                  width="33"
+                  height="33"
+                  viewBox="0 0 33 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="33" height="33" rx="16.5" fill="#F3F3F3"></rect>
+                  <path
+                    d="M14 12L19 16.5L14 21"
+                    stroke="#787878"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">User Type <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                      </svg>
+                      </th>
+                  <th scope="col">Language</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Joined Date - Time <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                      </svg>
+                      </th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Membership</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                    <span class="bg_success">Approved </span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>         
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                    <span class="bg_pending">Pending</span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Free</td>
+                  <td>
+                    <span class="bg_reject">Rejected</span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                    <span class="bg_success">Approved </span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                      <span class="bg_reject">Rejected</span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                      <span class="bg_pending">Pending</span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                    <span class="bg_success">Approved </span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+                <tr>
+                  <td style="width: 220px;">
+                    <div class="d-flex align-items-center">
+                      <span class="form-check align-self-center me-2">
+                        <input
+                          type="checkbox"
+                          value=""
+                          id="defaultCheck1"
+                          class="form-check-input"
+                        /><label
+                          for="defaultCheck1"
+                          class="form-check-label"
+                        ></label>
+                      </span>
+                      <span class="position-relative">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <span class="position-absolute" style="right: -10px; bottom: 0px;"><svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z" fill="#236115"/>
+                              <path d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z" fill="white" stroke="white" stroke-width="0.2"/>
+                              </svg>
+                              </span>
+                      </span>
+                      <span style="padding-left: 15px;">Elton Prince</span>
+                    </div>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>talent&#64;fifa.com</td>
+                  <td>Paid</td>
+                  <td>
+                      <span class="bg_reject">Rejected</span>
+                  </td>
+                  <td><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                      </svg>
+                      </td>
+                </tr>
+  
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

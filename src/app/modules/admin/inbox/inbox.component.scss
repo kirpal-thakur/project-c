@@ -1,51 +1,6 @@
-.text-light{
-    color:#787878;
-}
-.card-title{
-    font-size:18px;
-    font-weight: 700;
-    color: #787878;
-}
-.btn{
-    font-size:16px;
-    font-weight: 700;
-    border-radius: 10px;
-    &.btn-sm{
-        padding: 9px 15px;
-    }
-}
-.btn-primary{
-    background-color: #6FB95D;
-    border-color: #6FB95D;
-    background-image: unset;
 
-}
-.card{
-    padding: 15px 0px;
-    .card-header{
-       background: #fff;
-        
-    }
- }
- .card-search{
-    width: 344px;
-    background-color: #F3F3F3;
-    display:flex;
-    align-items: center;
-    .input-group-text,
-    .form-control{
-        background-color: transparent;
-       
-        border-radius: 0;
-        padding: 5px 10px;
-        border: 0;
-        
-    }
-    .form-control{
-        border-left: 0;
-    }
- }
- .form-control{
+
+.form-control{
     font-size: 14px;
     font-weight: 400;
  }
@@ -53,15 +8,7 @@
     font-size: 14px;
     font-weight: 400;
  }
- .btn-outline-white{
-    padding: 5px 10px 5px 10px;
-    border: 1px solid #E5E5E5;
-    font-size: 14px;
-    color: #787878;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
- }
+
 .message-media{
     width:60px;
     height:60px;
