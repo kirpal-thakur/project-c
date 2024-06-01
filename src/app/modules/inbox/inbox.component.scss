@@ -4,6 +4,7 @@
 .card-title{
     font-size:18px;
     font-weight: 700;
+    color: #787878;
 }
 .btn{
     font-size:16px;
@@ -20,10 +21,9 @@
 
 }
 .card{
+    padding: 15px 0px;
     .card-header{
-        // display: flex;
-        // align-items: center;
-        // justify-content: space-between;
+       background: #fff;
         
     }
  }
@@ -57,6 +57,10 @@
     padding: 5px 10px 5px 10px;
     border: 1px solid #E5E5E5;
     font-size: 14px;
+    color: #787878;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
  }
 .message-media{
     width:60px;
@@ -151,4 +155,7 @@
 }
 .bg-info-light{
     background-color: #EBF8FF;
+}
+.form-check-input[type=checkbox] {
+    border-radius: 0px;
 }

@@ -1,6 +1,6 @@
 body {
   position: relative;
-  background: #f5f5f5;
+  background: #F0F0F0;
 }
 ul , p {
     margin-bottom: 0px;
@@ -21,15 +21,17 @@ a{
     position: fixed;
     width: calc(100% - 100px);
     z-index: 99;
-    top: 20px;
-    padding: 0px 30px 0px 0px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    background: #F0F0F0;
   }
   .page-header {
     position: fixed;
     width: calc(100% - 230px);
-    top: 20px;
     z-index: 99;
-    padding: 0px 30px 0px 0px;
+    padding: 20px 25px;
+    border-radius: 10px;
+    background: #F0F0F0;
   }
   .new_registrations{
 width: 300px;
@@ -39,7 +41,7 @@ background-color: #fff;
 height: 100vh;
   }
 .page-container {
-  margin-left: 270px;
+  margin-left: 245px;
   width: 100%;
   position: relative;
   
@@ -50,7 +52,7 @@ height: 100vh;
     z-index: 1;
 }
 .compact-sidebar .page-container {
-    margin-left: 140px;
+    margin-left: 115px;
   }
 
 .compact-sidebar .page-sidebar {
@@ -74,6 +76,20 @@ height: 100vh;
 .compact-sidebar .sidebar_menu a {
   margin: 2px 13px !important;
 }
+.logo_img {
+    width: 110px;
+    display: block;
+  }
+  .compact-sidebar .logo_img {
+    display: none !important;
+  }
+.logo_img1 {
+  display: none;
+}
+.compact-sidebar .logo_img1 {
+  width: 110px;
+  display: block !important;
+}
 .compact-sidebar .bottom_box {
   padding: 0px 20px 0px 30px !important;
 }
@@ -91,9 +107,43 @@ height: 100vh;
     transform: translateX(0)
   }
 .page-content{
-    padding: 0px 30px 0px 0px;
+    padding: 0px 25px 50px 25px;
 }
+.table > :not(caption) > * > * {
+    background-color: transparent !important;
+    border-bottom-width: 0px !important;
+    vertical-align: middle;
+  }
 
+  .bg_success {
+    background: #236115;
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+  }
+  .bg_pending {
+    background: #fcbe2d;
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+  }
+  .bg_reject {
+    background: #fd5454;
+    padding: 5px 10px;
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+  }
+  .table_img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .form-check-input[type=checkbox] {
+    border-radius: 0px;
+}
 // @media (min-width: 1200px) {
  
 // }
