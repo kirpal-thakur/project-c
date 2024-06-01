@@ -1,207 +1,422 @@
 <div class="page-content">
   <div class="main-wrapper">
-    <div class="dashboard_table">
-      <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="home-tab-pane"
-          role="tabpanel"
-          aria-labelledby="home-tab"
-          tabindex="0"
-        >
-          <canvas id="canvas1">{{ chart1 }}</canvas>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="profile-tab-pane"
-          role="tabpanel"
-          aria-labelledby="profile-tab"
-          tabindex="0"
-        >
-          <canvas id="canvas2">{{ chart2 }}</canvas>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="contact-tab-pane"
-          role="tabpanel"
-          aria-labelledby="contact-tab"
-          tabindex="0"
-        >
-          <canvas id="canvas3">{{ chart3 }}</canvas>
-        </div>
-        <div
-          class="tab-pane fade"
-          id="disabled-tab-pane"
-          role="tabpanel"
-          aria-labelledby="disabled-tab"
-          tabindex="0"
-        >
-          <canvas id="canvas4">{{ chart4 }}</canvas>
-        </div>
-      </div>
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link active"
-            id="home-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#home-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="home-tab-pane"
-            aria-selected="true"
-          >
-          <div class="navtabs_button">
-            <p>Total Users</p>
-            <h6>40689</h6>
-            <p>April</p>
+    <div class="row">
+        <div class="col-lg-9">
+          <div class="dashboard_table">
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="home-tab-pane"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+                tabindex="0"
+              >
+                <canvas id="canvas1">{{ chart1 }}</canvas>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="profile-tab-pane"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+                tabindex="0"
+              >
+                <canvas id="canvas2">{{ chart2 }}</canvas>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="contact-tab-pane"
+                role="tabpanel"
+                aria-labelledby="contact-tab"
+                tabindex="0"
+              >
+                <canvas id="canvas3">{{ chart3 }}</canvas>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="disabled-tab-pane"
+                role="tabpanel"
+                aria-labelledby="disabled-tab"
+                tabindex="0"
+              >
+                <canvas id="canvas4">{{ chart4 }}</canvas>
+              </div>
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#home-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="home-tab-pane"
+                  aria-selected="true"
+                >
+                <div class="navtabs_button">
+                  <p>Total Users</p>
+                  <h6>40689</h6>
+                  <p>April</p>
+                </div>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#profile-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile-tab-pane"
+                  aria-selected="false"
+                >
+                <div class="navtabs_button">
+                  <p>Total Sales</p>
+                  <h6>CHF 89000</h6>
+                  <p>April</p>
+                </div>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="contact-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#contact-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="contact-tab-pane"
+                  aria-selected="false"
+                >
+                <div class="navtabs_button">
+                  <p>Total Subscriptions</p>
+                  <h6>10293</h6>
+                  <p>April</p>
+                </div>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="disabled-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#disabled-tab-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="disabled-tab-pane"
+                  aria-selected="false"
+                >
+                <div class="navtabs_button">
+                  <p>New Registrations</p>
+                  <h6>1090</h6>
+                  <p>April</p>
+                </div>
+                </button>
+              </li>
+            </ul>
           </div>
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="profile-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#profile-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="profile-tab-pane"
-            aria-selected="false"
-          >
-          <div class="navtabs_button">
-            <p>Total Sales</p>
-            <h6>CHF 89000</h6>
-            <p>April</p>
+      
+          <div class="dashboard_table">
+            <div class="table_title">
+              <div class="d-flex align-items-center">
+                <p>New Registrations</p>
+      
+                <div>
+                  <select name="" id="">
+                    <option value="">October 2024</option>
+                    <option value="">October 2024</option>
+                    <option value="">October 2024</option>
+                    <option value="">October 2024</option>
+                  </select>
+                </div>
+              </div>
+              <span>Veiw All</span>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">User Type</th>
+                  <th scope="col">Language</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Date - Time</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img
+                      src="../../../assets/images/1.jpg"
+                      alt=""
+                      class="table_img"
+                    />
+                    <span>Elton Prince</span>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>
+                    <span class="bg_success">Approved </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="../../../assets/images/1.jpg"
+                      alt=""
+                      width="50px"
+                      height="50px"
+                      class="table_img"
+                    />
+                    <span>Elton Prince</span>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>
+                    <span class="bg_pending">Pending</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="../../../assets/images/1.jpg"
+                      alt=""
+                      width="50px"
+                      height="50px"
+                      class="table_img"
+                    />
+                    <span>Elton Prince</span>
+                  </td>
+                  <td>Talent</td>
+                  <td>English</td>
+                  <td>Switzerland</td>
+                  <td>08.04.2024-12.53 PM</td>
+                  <td>
+                    <span class="bg_reject">Rejected</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="contact-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#contact-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="contact-tab-pane"
-            aria-selected="false"
-          >
-          <div class="navtabs_button">
-            <p>Total Subscriptions</p>
-            <h6>10293</h6>
-            <p>April</p>
-          </div>
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="disabled-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#disabled-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="disabled-tab-pane"
-            aria-selected="false"
-          >
-          <div class="navtabs_button">
-            <p>New Registrations</p>
-            <h6>1090</h6>
-            <p>April</p>
-          </div>
-          </button>
-        </li>
-      </ul>
-    </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="right-sidebar">
+            <div class="card">
+              <div class="card-header d-flex align-items-center justify-content-between border-0">
+                  <h4>Registrations</h4>
+                  <a href="#">View All</a>
+              </div>
+              <div class="card-body card-tabs">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab-1" data-bs-toggle="tab" data-bs-target="#home-tab-pane-1" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Talent</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab-1" data-bs-toggle="tab" data-bs-target="#profile-tab-pane-1" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Club</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab-1" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Scout</button>
+                  </li>
+                 
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
 
-    <div class="dashboard_table">
-      <div class="table_title">
-        <div class="d-flex align-items-center">
-          <p>New Registrations</p>
+                    <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     
 
-          <div>
-            <select name="" id="">
-              <option value="">October 2024</option>
-              <option value="">October 2024</option>
-              <option value="">October 2024</option>
-              <option value="">October 2024</option>
-            </select>
+                  </div>
+                  <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
+                    <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
+                    <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                     <div class="card-tabs-content">
+                     
+                      <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                      <div class="mesaage-content">
+                          <h6 class="mb-0">Kadin Septimus</h6>
+                          <small>10 mins ago</small>
+                      </div>
+                      
+                     </div>
+                  </div>
+                  
+                </div>
+              </div>
           </div>
+          </div>
+          
         </div>
-        <span>Veiw All</span>
-      </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">User Type</th>
-            <th scope="col">Language</th>
-            <th scope="col">Location</th>
-            <th scope="col">Date - Time</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <img
-                src="../../../assets/images/1.jpg"
-                alt=""
-                class="table_img"
-              />
-              <span>Elton Prince</span>
-            </td>
-            <td>Talent</td>
-            <td>English</td>
-            <td>Switzerland</td>
-            <td>08.04.2024-12.53 PM</td>
-            <td>
-              <span class="bg_success">Approved </span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="../../../assets/images/1.jpg"
-                alt=""
-                width="50px"
-                height="50px"
-                class="table_img"
-              />
-              <span>Elton Prince</span>
-            </td>
-            <td>Talent</td>
-            <td>English</td>
-            <td>Switzerland</td>
-            <td>08.04.2024-12.53 PM</td>
-            <td>
-              <span class="bg_pending">Pending</span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                src="../../../assets/images/1.jpg"
-                alt=""
-                width="50px"
-                height="50px"
-                class="table_img"
-              />
-              <span>Elton Prince</span>
-            </td>
-            <td>Talent</td>
-            <td>English</td>
-            <td>Switzerland</td>
-            <td>08.04.2024-12.53 PM</td>
-            <td>
-              <span class="bg_reject">Rejected</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        </div>
+        
     </div>
-  </div>
+    
+    
 </div>
 <!-- </div>
 </div> -->

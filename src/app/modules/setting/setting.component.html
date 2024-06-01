@@ -230,7 +230,8 @@
                         <div class="card">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <h4 class="card-title">Team</h4>
-                                <a href="javascript:void(0);">+ Add member</a>
+                                <a href="javascript:void(0);"  data-bs-toggle="modal" data-bs-target="#settingModal">+ Add member</a>
+                              
 
                             </div>
                             <div class="card-body p-2">
@@ -291,3 +292,41 @@
         </div>
     </div>
 </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="settingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Team Member</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-xl-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="example@email.com">
+                </div>
+              </div>
+              <div class="col-xl-12">
+                <div class="mb-3">
+                  <label for="exampleFormControlInput1" class="form-label">Site Role</label>
+                  <select class="form-select" aria-label="Default select example">
+                      <option selected>Select</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class=" btn btn-tranapernt text-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Invite</button>
+        </div>
+      </div>
+    </div>
+  </div>
