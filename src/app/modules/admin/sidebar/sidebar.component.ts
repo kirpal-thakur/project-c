@@ -10,6 +10,6 @@ export class SidebarComponent {
     document.body.classList.toggle('compact-sidebar');
   }
   closeSidebar() {
-    document.body.classList.toggle('small-screen-sidebar-active');
+    document.body.classList.toggle('mobile-sidebar-active');
   }
 }

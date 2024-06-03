@@ -1,7 +1,7 @@
 <div class="page-header">
     <nav class="navbar navbar-expand">
      <ul class="navbar-nav">
-       <li class="nav-item small-screens-sidebar-link">
+       <li class="nav-item sidebar-menu">
          <a (click)="toggleSidebar()" class="nav-link" style="margin-right: 10px;">
            <i class="fa fa-bars" style="font-size: 30px;"></i>
        </a>
@@ -81,11 +81,11 @@
        </div>
    </li>
 
-   <li class="nav-item mx-2 dropdown country_dropdown">
-       <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+   <li class="nav-item dropdown country_dropdown">
+       <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
            <img src="../../../assets/images/2.png" width="50" alt="">
        </a>
-       <div class="dropdown-menu dropdown-menu-end">
+       <div class="dropdown-menu">
            <h6 class="mx-3 border-bottom pb-2 fs-15">Select Country</h6>
            
            <a href="#" class="dropdown-item ai-icon ">
@@ -104,10 +104,10 @@
 
    </li>
    <li class="nav-item dropdown  profile">
-       <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+       <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
            <img src="../../../assets/images/1.jpg" width="56" alt="">
        </a>
-       <div class="dropdown-menu dropdown-menu-end">
+       <div class="dropdown-menu ">
            <h6>Laura Schneider</h6>
            <span class="badge badge-warning">Super Admin</span>
            <p class="border-bottom">View my Profile</p>

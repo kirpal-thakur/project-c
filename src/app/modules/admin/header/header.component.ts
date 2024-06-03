@@ -16,11 +16,10 @@ export class HeaderComponent {
 
 
   toggleSidebar() {
-    console.log('Toggle state function called');
-    document.body.classList.toggle('small-screen-sidebar-active');
+    document.body.classList.toggle('mobile-sidebar-active');
   }
 
   closeSidebar() {
-    document.body.classList.toggle('small-screen-sidebar-active');
+    document.body.classList.toggle('mobile-sidebar-active');
   }
 }

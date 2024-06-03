@@ -17,7 +17,10 @@
   
       <a class="sidebar-close" (click)="closeSidebar()">X</a>
       <a (click)="toggleState()" class="sidebar_state">
-        <i class="fa fa-angle-right"></i>
+        <svg width="8" height="11" viewBox="0 0 8 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L6 5.5L1 10" stroke="#95A3B8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          
       </a>
     </div>
     <div class="page-sidebar-inner">
@@ -53,7 +56,7 @@
           >
         </li>
         <li>
-          <a routerLink="/Templates">
+          <a routerLink="/Admin/Templates">
             <img
               src="../../../assets/images/sidebar/template_icon.png"
               alt=""

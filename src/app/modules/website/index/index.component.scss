@@ -370,17 +370,15 @@ input:checked + .slider {
     border-radius: 20px;
 }
 .modal-body{
-    padding: 10px 64px;
+    padding: 15px 60px 10px 60px;
+    z-index: 1;
 }
-.btn-outline-primary{
-    color:#E05263;
-    border-color:#E05263
-}
-.btn-outline-primary:hover{
-    background-color: #E05263;
-    color: #fff;
 
-}
+// .socail_btn:hover{
+//     background-color: #E05263;
+//     color: #fff;
+
+// }
 .form-control::placeholder{
     color: #85B1D3;
 }
@@ -388,7 +386,9 @@ input:checked + .slider {
     padding: 10px 158px;
     border-radius: 20px;
 }
-.modal-btn .btn-outline-primary{
+.modal-btn .socail_btn{
+  color:#000;
+    border-color:#E05263;
     padding: 10px 88px;
 }
 .modal-footer{
@@ -417,4 +417,38 @@ input:checked + .slider {
     height: 1px;
     top:0;
     left: 0;
+}
+.modal-header{
+  padding: 0px;
+}
+
+.forgot_btn{
+  font-size: 16px;
+  font-weight: 400;
+  color: #449AFF;
+}
+.dont-account{
+  font-size: 16px;
+  font-family: 400;
+}
+.register{
+  color: #E05263;
+  font-weight: 600;
+  font-size: 18px;
+}
+ .btn-close {
+  background-image: url('../../../../assets/images/carbon_close-outline.png');
+  background-size: cover;
+  width: 35px; 
+  height: 35px;
+  border: none;
+  padding: 0px;
+  position: absolute;
+  right: 17px;
+  top: 15px;
+  z-index: 2;
+}
+
+ .btn-close::after {
+  content: none;
 }
