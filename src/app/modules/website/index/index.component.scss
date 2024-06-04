@@ -378,6 +378,9 @@ input:checked + .slider {
     padding: 15px 55px 10px 55px;
     z-index: 1;
 }
+.modal-footer{
+  padding: 15px 55px 10px 55px;
+}
 
 .form-control::placeholder{
     color: #85B1D3;
@@ -392,10 +395,7 @@ input:checked + .slider {
     border-color:#E05263;
     padding: 10px 88px;
 }
-.modal-footer{
-    padding-bottom: 28px;
-    padding: 0px;
-}
+
 .text-primary{
     color:#E05263!important;
 }
@@ -603,6 +603,13 @@ input:checked + .slider:before {
   -webkit-transform: translateX(20px);
   -ms-transform: translateX(20px);
   transform: translateX(20px);
+}
+.modal-body{
+  padding: 15px ;
+  z-index: 1;
+}
+.modal-footer{
+padding: 15px 55px 10px 55px;
 }
 
 }
