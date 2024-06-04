@@ -628,3 +628,17 @@ padding: 15px 55px 10px 55px;
 }
 
 }
+.check-resister{
+  padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #E05263;
+
+    .form-check-input:checked{
+      background-color: E05263;
+      border-color: red;
+    }
+    span{
+      font-size: 18px;
+      font-weight: 400;
+    }
+}
