@@ -69,3 +69,19 @@
     object-fit: cover;
     margin-right: 4px;
 }
+.dropdown-toggle{
+    display: flex;
+    align-items: center;
+    background-color: #FAFAFA;
+    border-color: #D9D9D9;
+    padding: 3px 10px 3px 10px;
+   
+    border-radius: 4px;
+    &:after{
+        border-top-color:#646464;
+
+    }
+    .form-check{
+        margin-bottom: 0;
+    }
+}
