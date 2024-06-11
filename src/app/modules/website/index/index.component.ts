@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './index.component.scss'
 })
 export class IndexComponent {
-
+  activeIndex: number = -1; // -1 means no button is active initially
+  isVisible: boolean = true;
+  setActive(index: number): void {
+    this.activeIndex = index; // Set the activeIndex to the index of the clicked button
+  }
+  toggleVisibility() {
+    this.isVisible = !this.isVisible;
+  }
 }

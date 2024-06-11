@@ -17,6 +17,7 @@ a {
   margin: 20px 0px 20px 20px;
   position: fixed;
   height: 95%;
+  transition: all 0.4s;
 }
 .page-header {
   position: fixed;
@@ -24,11 +25,14 @@ a {
   z-index: 9;
   padding: 20px 25px;
   background: #f0f0f0;
+  transition: all 0.4s;
+
 }
 .page-container {
   margin-left: 245px;
   width: 100%;
   position: relative;
+  transition: all 0.4s;
 }
 .page-content {
   padding: 0px 25px 50px 25px;
@@ -44,10 +48,12 @@ a {
   z-index: 9;
   padding: 20px 25px;
   background: #f0f0f0;
+  transition: all 0.4s;
 }
 .compact-sidebar .dash_header {
  width: calc(100% - 430px) ;
  padding: 20px 0px ;
+
 }
 .dash_header {
  width: calc(100% - 560px) ;
@@ -55,11 +61,13 @@ a {
 }
 .compact-sidebar .page-container {
   margin-left: 115px;
+  transition: all 0.4s;
 }
 .compact-sidebar .page-sidebar {
   width: 80px;
   position: fixed;
   box-shadow: none;
+  transition: all 0.4s;
   height: 95%;
   z-index: 2;
 }
@@ -84,7 +92,7 @@ a {
   display: block !important;
 }
 .compact-sidebar .bottom_box {
-  padding: 0px 20px 0px 30px !important;
+  // padding: 0px 20px 0px 30px !important;
 }
 .table {
   margin-bottom: 0px;
@@ -202,17 +210,17 @@ a {
 .bottom_box {
   height: 9%;
   min-height: 65px;
-  display: flex;
+  // display: flex;
  
-  align-items: center;
-  color: #fff;
+  // align-items: center;
+  // color: #fff;
   border-top: 1px solid #fff;
-  padding: 0px 20px 0px 40px;
+  // padding: 0px 20px 0px 40px;
 }
 
-.bottom_box > h5 > img {
-  margin-right: 10px;
-}
+// .bottom_box > h5 > img {
+//   margin-right: 10px;
+// }
 .page-sidebar-inner {
   height: 80% !important;
 }
@@ -265,8 +273,9 @@ a {
   width: 180px;
 }
 
-.sidebar_menu a img {
+.sidebar_menu a svg {
   margin-right: 15px;
+  min-width: 32px;
 }
 .sidebar-close {
   position: absolute;
