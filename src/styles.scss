@@ -674,13 +674,14 @@ left: unset;
   border-bottom: 1px solid #E7E7E7;
   h6{
       color: #111418;
-      opacity: 0.8;
       font-weight: 500;
+      font-size: 16px;
   }
+ 
 }
 .modal-avtar{
-  width: 65px;
-  height: 65px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 4px;
