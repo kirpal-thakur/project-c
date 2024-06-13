@@ -8,6 +8,7 @@ import { TemplatesComponent } from './templates/templates.component';
 import { MarketingComponent } from './marketing/marketing.component';
 import { WebsiteComponent } from './website/website.component';
 import { SettingComponent } from './setting/setting.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'Marketing', component: MarketingComponent},
       {path: 'Website', component: WebsiteComponent},
       {path: 'Setting', component: SettingComponent},
+      {path: 'User-detail', component: UserDetailComponent},
 
     ]
   }
