@@ -181,6 +181,12 @@ font-weight: 400;
 .form-check-input[type="checkbox"] {
   border-radius: 0px;
 }
+.form-check-input:focus{
+  box-shadow: none;
+}
+.c_pointer{
+  cursor: pointer;
+}
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-bg-type: #fafafa !important;
 }
