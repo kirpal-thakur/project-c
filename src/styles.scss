@@ -91,37 +91,58 @@ a {
   width: 110px;
   display: block !important;
 }
-.compact-sidebar .bottom_box {
-  // padding: 0px 20px 0px 30px !important;
-}
-.table {
-  margin-bottom: 0px;
-}
+
+// .table {
+//   margin-bottom: 0px;
+// }
 .table > :not(caption) > * > * {
-  background-color: transparent !important;
   border-bottom-width: 0px !important;
   vertical-align: middle;
 }
 
+
+
+
+
+
+
+.table th{
+  color: #000;
+font-size: 14px;
+font-weight: 700;
+}
+.table td , .table td span{
+  color: #111418;
+font-size: 16px;
+font-weight: 400;
+}
+
+
 .bg_success {
   background: #236115;
   padding: 5px 10px;
-  color: #fff;
+  color: #fff !important;
   text-align: center;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   border-radius: 15px;
 }
 .bg_pending {
   background: #fcbe2d;
   padding: 5px 10px;
-  color: #fff;
+  color: #fff !important;
   text-align: center;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   border-radius: 15px;
 }
 .bg_reject {
   background: #fd5454;
   padding: 5px 10px;
-  color: #fff;
+  color: #fff !important;
   text-align: center;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   border-radius: 15px;
 }
 .table_img {
@@ -510,21 +531,26 @@ left: unset;
 
 // ------------------------- dashboard start ------------------
 .dashboard_table {
-  margin-bottom: 20px;
   border-radius: 10px;
   padding: 15px;
   overflow: hidden;
   position: relative;
   background-color: #fff;
 }
+
+.table{
+  --bs-table-bg:transparent;
+}
 .table_title {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 .table_title p {
   font-size: 18px;
   font-weight: 700;
+  color: #111418;
 }
 .table_title select {
   border-radius: 20px;
@@ -535,17 +561,14 @@ left: unset;
 .table_title span {
   font-size: 14px;
   font-weight: 700;
+  color: #023A4A;
 }
 .dashboard_table .table {
   border: none;
   background: transparent;
   padding: 0px 5px;
 }
-.dashboard_table .table > :not(caption) > * > * {
-  background-color: transparent !important;
-  border-bottom-width: 0px !important;
-  vertical-align: middle;
-}
+
 
 .canvas {
   max-width: 100%;
@@ -570,6 +593,7 @@ left: unset;
         font-size:18px;
         font-weight: 700;
         margin-bottom: 0px;
+        color: #111418;
       }
       a{
         color:#023A4A;
@@ -581,6 +605,97 @@ left: unset;
 }
 
 // ------------------------- dashboard end ------------------
+// ------------------------- users start ------------------
+
+.offcanvas{
+  width: 300px;
+}
+.edit-bx{
+  margin-bottom: 30px;
+}
+.text-light{
+  color: #787878!important;
+}
+.font-w400{
+  font-weight: 400;
+}
+.edit-canvas{
+  .offcanvas-title{
+      font-size:18px;
+      font-weight: 700;
+  }
+  .close{
+      font-size:14px;
+      font-weight: 700;
+      color:#787878;
+  }
+  .edit-canvas-media{
+      position: relative;
+      img{
+          width: 49px;
+          object-fit: cover;
+          border-radius: 50%;
+          height: 49px;
+          margin-right: 25px;
+      }
+      .shield{
+          position: absolute;
+          right: 14px;
+          bottom: 0;
+
+      }
+
+  }
+  .edit-canvas-content{
+      h6{
+          color:#111418;
+          opacity: 0.8;
+          font-weight: 500;
+      }
+  }
+}
+.list-view-title{
+  font-size: 14px;
+  font-weight: 700;
+  color: #023A4A;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E7E7E7;
+}
+.list-view{
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid #E7E7E7;
+  h6{
+      color: #111418;
+      opacity: 0.8;
+      font-weight: 500;
+  }
+}
+.modal-avtar{
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 4px;
+}
+.dropdown-toggle{
+  display: flex;
+  align-items: center;
+  background-color: #FAFAFA;
+  border-color: #D9D9D9;
+  padding: 3px 10px 3px 10px;
+ 
+  border-radius: 4px;
+  &:after{
+      border-top-color:#646464;
+
+  }
+  .form-check{
+      margin-bottom: 0;
+  }
+}
+
+// ------------------------- users end ------------------
 
 // ------------------------- respone------------------
 @media (max-width: 1200px) {

@@ -5,7 +5,6 @@
   width: calc(100% - 310px);
 }
 
-
 .card-tabs {
   .nav-tabs {
     border-radius: 20px;
@@ -74,7 +73,6 @@
     border-top: 0;
     background: rgba(11, 149, 100, 0.08);
   }
-  
 }
 
 .dashboard_table .nav-tabs .nav-item {
@@ -91,6 +89,34 @@
   font-weight: 500;
   line-height: 34px;
   color: #023a4a;
+}
+.mesaage-content h6 {
+  color: #4d4d4d;
+  font-size: 14px;
+  font-weight: 600;
+}
+.mesaage-content small {
+  color: #959595;
+  font-size: 12px;
+  font-weight: 400;
+}
+.table tbody tr:hover {
+  border: 1px solid #236115 !important;
+  border-collapse: separate;
+  background: #edffe9;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+tr:first-child td:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+tr:first-child td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 @media (max-width: 1024px) {
