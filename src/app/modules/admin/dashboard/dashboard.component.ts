@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     Chart.register(...registerables);
 
-    
     this.chart1 = new Chart('canvas1', {
       type: 'line',
       data: {
@@ -55,7 +54,7 @@ export class DashboardComponent implements OnInit {
       options: {
         layout: {
           padding: 0, // Remove padding
-        },    
+        },
         responsive: true,
         scales: {
           y: {
@@ -76,7 +75,7 @@ export class DashboardComponent implements OnInit {
               display: false,
             },
             ticks: {
-              display: false,
+              display: true,
             },
             border: {
               display: false,
@@ -113,9 +112,6 @@ export class DashboardComponent implements OnInit {
       },
     });
 
-
-    console.log(this.chart1)
-
     this.chart2 = new Chart('canvas2', {
       type: 'line',
       data: {
@@ -135,41 +131,74 @@ export class DashboardComponent implements OnInit {
         ],
         datasets: [
           {
-            label: '',
-            data: [1, 3, 4, 3, 2, 1, 1, 3, 4, 3, 2, 1, 2],
+            data: [2, 3, 4, 3, 2, 3, 3, 3, 4, 3, 2, 3, 2],
             borderWidth: 4,
             borderColor: '#236115',
-
-            pointBorderWidth: 20,
-            spanGaps: false,
-            fill: false,
+            pointBorderWidth: 15,
+            fill: {
+              target: 'origin',
+              above: 'rgba(11, 149, 100, 0.08)',
+              below: 'rgba(218, 96, 96, 0.08)',
+            },
           },
         ],
       },
       options: {
+        layout: {
+          padding: 0, // Remove padding
+        },
         responsive: true,
         scales: {
           y: {
-            stacked: true,
+            stacked: false,
             beginAtZero: true,
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: false,
+            },
+            border: {
+              display: false,
             },
           },
           x: {
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: true,
+            },
+            border: {
+              display: false,
             },
           },
         },
         elements: {
           line: {
-            tension: 0.4, // Smooth the line
+            tension: 0.5,
           },
         },
         plugins: {
           legend: {
             display: false, // Optionally hide the legend
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'index',
+            intersect: false,
+            backgroundColor: '#E05263', // Background color of tooltip
+            titleColor: '#fff',
+            titleFont: {
+              family: 'Poppins',
+              size: 14,
+            },
+            callbacks: {
+              label: function (tooltipItem: any) {
+                return ` ${tooltipItem.raw}`;
+              },
+            },
+            displayColors: false,
           },
         },
       },
@@ -193,40 +222,74 @@ export class DashboardComponent implements OnInit {
         ],
         datasets: [
           {
-            label: '',
-            data: [1, 3, 4, 3, 2, 1, 1, 3, 4, 3, 2, 1, 2],
+            data: [2, 3, 4, 3, 2, 3, 3, 3, 4, 3, 2, 3, 2],
             borderWidth: 4,
             borderColor: '#236115',
-            pointBorderWidth: 20,
-            spanGaps: false,
-            fill: false,
+            pointBorderWidth: 15,
+            fill: {
+              target: 'origin',
+              above: 'rgba(11, 149, 100, 0.08)',
+              below: 'rgba(218, 96, 96, 0.08)',
+            },
           },
         ],
       },
       options: {
+        layout: {
+          padding: 0, // Remove padding
+        },
         responsive: true,
         scales: {
           y: {
-            stacked: true,
+            stacked: false,
             beginAtZero: true,
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: false,
+            },
+            border: {
+              display: false,
             },
           },
           x: {
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: true,
+            },
+            border: {
+              display: false,
             },
           },
         },
         elements: {
           line: {
-            tension: 0.4, // Smooth the line
+            tension: 0.5,
           },
         },
         plugins: {
           legend: {
             display: false, // Optionally hide the legend
+          },
+          tooltip: {
+            enabled: true,
+            mode: 'index',
+            intersect: false,
+            backgroundColor: '#E05263', // Background color of tooltip
+            titleColor: '#fff',
+            titleFont: {
+              family: 'Poppins',
+              size: 14,
+            },
+            callbacks: {
+              label: function (tooltipItem: any) {
+                return ` ${tooltipItem.raw}`;
+              },
+            },
+            displayColors: false,
           },
         },
       },
@@ -250,44 +313,79 @@ export class DashboardComponent implements OnInit {
         ],
         datasets: [
           {
-            label: '',
-            data: [1, 3, 4, 3, 2, 1, 1, 3, 4, 3, 2, 1, 2],
+            data: [2, 3, 4, 3, 2, 3, 3, 3, 4, 3, 2, 3, 2],
             borderWidth: 4,
             borderColor: '#236115',
-            pointBorderWidth: 20,
-            spanGaps: false,
-            fill: false,
+            pointBorderWidth: 15,
+            fill: {
+              target: 'origin',
+              above: 'rgba(11, 149, 100, 0.08)',
+              below: 'rgba(218, 96, 96, 0.08)',
+            },
           },
         ],
       },
       options: {
+        layout: {
+          padding: 0, // Remove padding
+        },
         responsive: true,
         scales: {
           y: {
-            stacked: true,
+            stacked: false,
             beginAtZero: true,
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: false,
+            },
+            border: {
+              display: false,
             },
           },
           x: {
             grid: {
-              display: false, // Optionally hide grid lines
+              display: false,
+            },
+            ticks: {
+              display: true,
+            },
+            border: {
+              display: false,
             },
           },
         },
         elements: {
           line: {
-            tension: 0.4, // Smooth the line
+            tension: 0.5,
           },
         },
         plugins: {
           legend: {
             display: false, // Optionally hide the legend
           },
+          tooltip: {
+            enabled: true,
+            mode: 'index',
+            intersect: false,
+            backgroundColor: '#E05263', // Background color of tooltip
+            titleColor: '#fff',
+            titleFont: {
+              family: 'Poppins',
+              size: 14,
+            },
+            callbacks: {
+              label: function (tooltipItem: any) {
+                return ` ${tooltipItem.raw}`;
+              },
+            },
+            displayColors: false,
+          },
         },
       },
     });
+
   }
 
   toggleTheme(event: Event) {
