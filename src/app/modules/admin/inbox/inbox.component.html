@@ -31,7 +31,30 @@
                     </div>
                    </div>
                    <div class="d-flex align-items-center justify-content-between mt-3">
-                        <div>
+                        
+                        <div class="d-flex align-items-center">
+                            <div class="dropdown">
+                                <button
+                                  class="btn btn-secondary dropdown-toggle"
+                                  type="button"
+                                  data-bs-toggle="dropdown"
+                                  aria-expanded="false"
+                                >
+                                  <div class="form-check">
+                                    <input
+                                      class="form-check-input"
+                                      type="checkbox"
+                                      value=""
+                                      id="flexCheckDefault"
+                                    />
+                                  </div>
+                                </button>
+                                <!-- <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                  </ul> -->
+                              </div>
                             <a href="javascript:void(0);" class="btn btn-outline-white"><svg width="22" class="me-1" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z" fill="#787878"/>
                                 </svg>
@@ -200,7 +223,7 @@
                                     <div class="d-flex">
                                         
                                         <div class="ms-1 text">
-                                            <p class=" me-3">woohoooo</p>
+                                            <p class=" me-3 mb-2">woohoooo</p>
                                             <p class="me-3">Haha oh man</p>
                                            
                                         </div>	
@@ -208,19 +231,19 @@
                                     </div>
                                     
                                 </div>
-                                <div class="message-send style-2">
-                                    <div class="type-massage style-1 d-flex align-items-center">
-                                        <div class="input-group">
-                                            <textarea rows="1" class="form-control" placeholder="Type a message"></textarea>
-                                        </div>
-                                        <a class="">
-                                       
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16.1401 2.95907L7.11012 5.95907C1.04012 7.98907 1.04012 11.2991 7.11012 13.3191L9.79012 14.2091L10.6801 16.8891C12.7001 22.9591 16.0201 22.9591 18.0401 16.8891L21.0501 7.86907C22.3901 3.81907 20.1901 1.60907 16.1401 2.95907ZM16.4601 8.33907L12.6601 12.1591C12.5101 12.3091 12.3201 12.3791 12.1301 12.3791C11.9401 12.3791 11.7501 12.3091 11.6001 12.1591C11.4606 12.0179 11.3824 11.8275 11.3824 11.6291C11.3824 11.4306 11.4606 11.2402 11.6001 11.0991L15.4001 7.27907C15.6901 6.98907 16.1701 6.98907 16.4601 7.27907C16.7501 7.56907 16.7501 8.04907 16.4601 8.33907Z" fill="#6FB95D"/>
-                                                </svg>
-                                                
-                                        </a>
-                                    </div>
+                                <div class="message-send d-flex align-items-center style-2">
+                                    <svg class="me-4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.9697 12V15.5C11.9697 17.43 13.5397 19 15.4697 19C17.3997 19 18.9697 17.43 18.9697 15.5V10C18.9697 6.13 15.8397 3 11.9697 3C8.09973 3 4.96973 6.13 4.96973 10V16C4.96973 19.31 7.65973 22 10.9697 22" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        
+                                    <div class="input-group mb-3">
+                                        
+                                        <input type="text" class="form-control border-end-0" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                        <span class="input-group-text" id="basic-addon1"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.1401 2.96004L7.11012 5.96004C1.04012 7.99004 1.04012 11.3 7.11012 13.32L9.79012 14.21L10.6801 16.89C12.7001 22.96 16.0201 22.96 18.0401 16.89L21.0501 7.87004C22.3901 3.82004 20.1901 1.61004 16.1401 2.96004ZM16.4601 8.34004L12.6601 12.16C12.5101 12.31 12.3201 12.38 12.1301 12.38C11.9401 12.38 11.7501 12.31 11.6001 12.16C11.4606 12.0189 11.3824 11.8285 11.3824 11.63C11.3824 11.4316 11.4606 11.2412 11.6001 11.1L15.4001 7.28004C15.6901 6.99004 16.1701 6.99004 16.4601 7.28004C16.7501 7.57004 16.7501 8.05004 16.4601 8.34004Z" fill="#6FB95D"/>
+                                            </svg>
+                                            </span>
+                                      </div>
                                     
                                 </div>
                             </div>
