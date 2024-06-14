@@ -97,6 +97,7 @@ a {
 // }
 .table > :not(caption) > * > * {
   border-bottom-width: 0px !important;
+  padding: 0.938rem .5rem;
   vertical-align: middle;
 }
 
@@ -119,6 +120,37 @@ a {
   .input-group-text{
     border: 0;
     border-radius: 12px;
+  }
+}
+.search-area {
+  width: 17.063rem;
+  border-radius: 30px;
+  padding: 13px 16px;
+  background-color: #fff;
+  .input-group-text,
+  .form-control{
+    background-color:transparent;
+    border-radius: 0;
+    border:0;
+    padding-top: 0;
+    padding-bottom: 0;
+
+  }
+  .input-group-text{
+    padding-right: 0;
+    padding-left: 0;
+    
+  }
+  .form-control{
+    font-size: 14px;
+    font-weight: 400;
+    color:#202224;
+    opacity: 0.5;
+
+    &:focus{
+      box-shadow: unset;
+    }
+    
   }
 }
 
@@ -177,6 +209,11 @@ font-weight: 400;
   background-color: #6fb95d;
   border-color: #6fb95d;
   background-image: unset;
+  &:hover,
+  &:active{
+    background-color: #6fb95d;
+  border-color: #6fb95d;
+  }
 }
 .form-check-input[type="checkbox"] {
   border-radius: 0px;
@@ -200,14 +237,15 @@ font-weight: 400;
   font-size: 16px;
   font-weight: 700;
   border-radius: 10px;
+  padding: 8px 24px;
   &.btn-sm {
     padding: 9px 15px;
   }
 }
-.btn:hover{
-  color: #787878;
-  border: 1px solid #e5e5e5;
-}
+// .btn:hover{
+//   color: #787878;
+//   border: 1px solid #e5e5e5;
+// }
 .card {
   padding: 15px 0px;
   .card-header {
@@ -244,7 +282,7 @@ font-weight: 400;
 }
 .btn-outline-white {
   padding: 5px 10px 5px 10px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #D9D9D9;
   font-size: 14px;
   color: #787878;
   font-weight: 400;
@@ -252,7 +290,15 @@ font-weight: 400;
   align-items: center;
   border-radius: 5px !important;
  margin-right: 7px;
+ &:hover{
+  border: 1px solid #D9D9D9;
+ }
+ &:active{
+  border-color:#D9D9D9!important;
+ }
 }
+
+
 
 // ------------------------- sidebar start ------------------
 .logo-box {
