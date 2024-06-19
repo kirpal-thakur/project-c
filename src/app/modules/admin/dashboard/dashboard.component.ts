@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
 import { Chart, registerables } from 'chart.js';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +10,13 @@ import { Chart, registerables } from 'chart.js';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
+
+  constructor( private themeService: ThemeService, private authService: AuthService, private router: Router) {}
+  
+  logout() {
+   this.authService.logout();
+  }
+
   chart1: any = [];
   chart2: any = [];
   chart3: any = [];
@@ -15,10 +24,9 @@ export class DashboardComponent implements OnInit {
 
   colors = 'linear-gradient(90deg, #7BDA66 0%, #236115 51.5%, #7BDA66 100%)';
 
-  constructor(private themeService: ThemeService) {}
-
   ngOnInit() {
     Chart.register(...registerables);
+
 
     this.chart1 = new Chart('canvas1', {
       type: 'line',
