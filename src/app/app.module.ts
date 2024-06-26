@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MaterialModule } from '../app/modules/material/material.module'
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -22,6 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MaterialModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -30,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     })
+    
 
   ],
   providers: [HttpClient],

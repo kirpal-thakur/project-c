@@ -11,7 +11,7 @@
       </ul>
  
       <div class="dashboard-title">
-        <h6 class="mb-0">View as  <img src="../../../assets/images/1.jpg" class="avatar" width="50px" alt=""> <strong>  Peter Mark</strong> <span class="badgeinfo">Admin</span> <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <h6 class="mb-0">{{ 'View' | translate }}<img src="../../../assets/images/1.jpg" class="avatar" width="50px" alt=""> <strong> {{ 'Peter' | translate }}</strong> <span class="badgeinfo">{{ 'Admin' | translate }}</span> <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
           <mask id="mask0_3545_5663" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="9" height="5">
           <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="white"/>
@@ -20,7 +20,7 @@
           </g>
           </svg>
           </h6>
-        Dashboard
+          {{ 'Dashboard' | translate }}
     </div>
       
       <div class="navbar-search">
@@ -35,13 +35,19 @@
           </div>
         </form>
       </div>
+      <div>
+      
+      </div>
+
+
       <div class="navbarcollapse" >
       <ul class="navbar-nav align-items-center">
+        <p id="theme-text">Light mode</p>
         <li class="nav-item dropdown theme_dropdown me-3">
           <div>
             <!-- (click)="toggleTheme($event)" -->
-            <label class="switch" >
-              <input type="checkbox" />
+            <label  class="switch" >
+              <input type="checkbox" (change)="toggleTheme($event)" />
               <span class="slider round"></span>
             </label>
           </div>
@@ -103,7 +109,7 @@
         </div>
     </li>
  
-    <li class="nav-item mx-2 dropdown country_dropdown">
+    <li class="nav-item mx-2 dropdown country_dropdown "  (change)="ChangeLang($event)">
         <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="40" height="27" rx="5" fill="#D8D8D8"/>
@@ -125,18 +131,84 @@
         <div class="dropdown-menu dropdown-menu-end">
             <h6 class="mx-3 border-bottom pb-2 fs-15">Select Country</h6>
             
-            <a href="#" class="dropdown-item ai-icon ">
-                <img src="../../../assets/images/2.png" class="me-3" width="30" alt="">India
+            <a href="#" class="dropdown-item ai-icon active" [class.selected]="lang==='en'" (click)="ChangeLang('en')">
+              <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="40" height="27" rx="5" fill=""/>
+                <mask id="mask0_3546_62" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+                <rect width="20" height="20" rx="5" fill="transparent"/>
+                </mask>
+                <g mask="url(#mask0_3546_62)">
+                <rect width="30" height="27" fill="url(#pattern0_3546_62)"/>
+                </g>
+                <defs>
+                <pattern id="pattern0_3546_62" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#image0_3546_62" transform="scale(0.0125 0.025)"/>
+                </pattern>
+                <image id="image0_3546_62" width="80" height="40" xlink:href="data:image/png;base64,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"/>
+                </defs>
+                </svg>
+                <span style="margin-left: 5px;">
+              {{ 'EN' | translate }}
+              </span>
             </a>
-            <a href="#" class="dropdown-item ai-icon ">
-                <img src="../../../assets/images/2.png" class="me-3" width="30" alt="">India
+            <a href="#" class="dropdown-item ai-icon " [class.selected]="lang==='de'" (click)="ChangeLang('de')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="30" class="me-3">
+                <rect width="900" height="600" fill="#000000"/>
+                <path fill="#FFCE00" d="M0 0h900v600H0z"/>
+                <path fill="#D00" d="M0 0h900v400H0z"/>
+                <path fill="#000" d="M0 0h900v200H0z"/>
+              </svg>
+              
+              {{ 'DE' | translate }} 
             </a>
-            <a href="#" class="dropdown-item ai-icon ">
-                <img src="../../../assets/images/2.png" class="me-3" width="30" alt="">India
+            <a href="#" class="dropdown-item ai-icon " [class.selected]="lang==='it'" (click)="ChangeLang('it')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="30" class="me-3">
+                <rect width="1200" height="800" fill="#009246"/>
+                <path fill="#FFFFFF" d="M0 0h1200v533.33H0z"/>
+                <path fill="#CE2B37" d="M0 0h1200v266.67H0z"/>
+              </svg>
+              {{ 'IT' | translate }}  
             </a>
-                    </div>
+            <a href="#" class="dropdown-item ai-icon" [class.selected]="lang==='fr'" (click)="ChangeLang('fr')">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="30" class="me-3">
+                <rect width="900" height="600" fill="#0055A4"/>
+                <path fill="#FFFFFF" d="M0 0h900v200H0zm0 400h900V600H0z"/>
+                <path fill="#EF4135" d="M0 200h900v200H0z"/>
+              </svg>
+              {{ 'FR' | translate }}    
+          </a>
+          <a href="#" class="dropdown-item ai-icon" [class.selected]="lang==='es'" (click)="ChangeLang('es')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="30" class="me-3">
+              <rect width="900" height="600" fill="#FFC400"/>
+              <path fill="#FF0000" d="M0 0h900v600H0z"/>
+              <path fill="#FF0000" d="M0 250h900v100H0z"/>
+            </svg>
+            {{ 'ES' | translate }}
+        </a>
+        <a href="#" class="dropdown-item ai-icon" [class.selected]="lang==='pt'" (click)="ChangeLang('pt')">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="30" class="me-3">
+            <rect width="900" height="600" fill="#FF0000"/>
+            <g transform="translate(300,0)">
+              <path fill="#FFD700" d="M0 0h300v600H0z"/>
+              <path fill="#008000" d="M0 0h100v600H0z"/>
+            </g>
+          </svg>
+          {{ 'PT' | translate }}
+      </a>
+      <a href="#" class="dropdown-item ai-icon" [class.selected]="lang==='dk'" (click)="ChangeLang('dk')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="30" class="me-3">
+          <rect width="900" height="600" fill="#C60C30"/>
+          <path fill="#FFF" d="M0 0h900v200H0zm0 400h900v200H0z"/>
+        </svg>
+        {{ 'Dk' | translate }}
+    </a>
+        
+        </div>
+      
 
     </li>
+
+
     <li class="nav-item dropdown  profile">
         <a class="nav-link" role="button" data-bs-toggle="dropdown">
             <img src="../../../assets/images/1.jpg" width="56" alt="">
@@ -205,7 +277,8 @@
             aria-labelledby="home-tab"
             tabindex="0"
           >
-            <canvas id="canvas1" class="canvas">{{ chart1 }}</canvas>
+            <!-- <canvas id="canvas1" class="canvas">{{ chart1 }}</canvas> -->
+            <canvas id="canvas1" class="canvas" #canvas1></canvas>
           </div>
           <div
             class="tab-pane fade"
@@ -214,7 +287,7 @@
             aria-labelledby="profile-tab"
             tabindex="0"
           >
-            <canvas id="canvas2" class="canvas">{{ chart2 }}</canvas>
+            <canvas id="canvas2" class="canvas"  #canvas2></canvas>
           </div>
           <div
             class="tab-pane fade"
@@ -223,7 +296,7 @@
             aria-labelledby="contact-tab"
             tabindex="0"
           >
-            <canvas id="canvas3" class="canvas">{{ chart3 }}</canvas>
+            <canvas id="canvas3" class="canvas"  #canvas3></canvas>
           </div>
           <div
             class="tab-pane fade"
@@ -232,7 +305,7 @@
             aria-labelledby="disabled-tab"
             tabindex="0"
           >
-            <canvas id="canvas4" class="canvas">{{ chart4 }}</canvas>
+            <canvas id="canvas4" class="canvas"  #canvas4></canvas>
           </div>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -248,7 +321,7 @@
               aria-selected="true"
             >
             <div class="navtabs_button">
-              <p>Total Users</p>
+              <p>{{ 'Total Users' | translate }} </p>
               <h6>40689</h6>
               <p>April</p>
             </div>
@@ -266,7 +339,7 @@
               aria-selected="false"
             >
             <div class="navtabs_button">
-              <p>Total Sales</p>
+              <p> {{ 'Total Sales' | translate}}</p>
               <h6>CHF 89000</h6>
               <p>April</p>
             </div>
@@ -284,7 +357,7 @@
               aria-selected="false"
             >
             <div class="navtabs_button">
-              <p>Total Subscriptions</p>
+              <p>{{ 'Total Subscriptions' | translate }}</p>
               <h6>10293</h6>
               <p>April</p>
             </div>
@@ -330,34 +403,35 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">User Type</th>
-              <th scope="col">Language</th>
-              <th scope="col">Location</th>
-              <th scope="col">Date - Time</th>
-              <th scope="col">Status</th>
+              <th scope="col">{{ 'Name' | translate }}</th>
+              <th scope="col">{{ 'User Type' | translate }}</th>
+               <th scope="col">{{ 'Language' | translate }}</th>
+              <th scope="col">{{ 'Location' | translate }}</th>
+              <th scope="col">{{ 'DateTime' | translate }}</th>
+              <th scope="col">{{ 'Status' | translate }}</th>
+
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
+              <td  class="main-table">
                 <img
                   src="../../../assets/images/1.jpg"
                   alt=""
                   class="table_img"
                 />
-                <span>Elton Prince</span>
+                <span>{{ 'Name' | translate }}</span>
               </td>
-              <td>Talent</td>
-              <td>English</td>
-              <td>Switzerland</td>
-              <td>08.04.2024-12.53 PM</td>
-              <td>
-                <span class="bg_success">Approved </span>
+              <td>{{ 'Talent' | translate }}</td>
+              <td>{{ 'English' | translate }}</td>
+              <td> {{ 'Switzerland' | translate }}</td>
+              <td> {{ 'date_time' | translate }}</td>
+              <td  class="main-table-2">
+                <span class="bg_success"> {{ 'Approved' | translate }} </span>
               </td>
             </tr>
-            <tr>
-              <td>
+            <tr >
+              <td  class="main-table">
                 <img
                   src="../../../assets/images/1.jpg"
                   alt=""
@@ -365,18 +439,18 @@
                   height="50px"
                   class="table_img"
                 />
-                <span>Elton Prince</span>
+                 <span>{{ 'Name' | translate }}</span>
               </td>
-              <td>Talent</td>
-              <td>English</td>
-              <td>Switzerland</td>
-              <td>08.04.2024-12.53 PM</td>
-              <td>
-                <span class="bg_pending">Pending</span>
+              <td>{{ 'Talent' | translate }}</td>
+              <td>{{ 'English' | translate }}</td>
+              <td> {{ 'Switzerland' | translate }}</td>
+              <td> {{ 'date_time' | translate }}</td>
+              <td  class="main-table-2">
+                <span class="bg_pending"> {{ 'Pending' | translate }}</span>
               </td>
             </tr>
             <tr>
-              <td>
+              <td  class="main-table">
                 <img
                   src="../../../assets/images/1.jpg"
                   alt=""
@@ -384,13 +458,14 @@
                   height="50px"
                   class="table_img"
                 />
-                <span>Elton Prince</span>
+                <span>{{ 'Name' | translate }}</span>
+
               </td>
-              <td>Talent</td>
-              <td>English</td>
-              <td>Switzerland</td>
-              <td>08.04.2024-12.53 PM</td>
-              <td>
+              <td>{{ 'Talent' | translate }}</td>
+              <td>{{ 'English' | translate }}</td>
+              <td> {{ 'Switzerland' | translate }}</td>
+              <td> {{ 'date_time' | translate }}</td>
+              <td  class="main-table-2">
                 <span class="bg_reject">Rejected</span>
               </td>
             </tr>
@@ -404,19 +479,19 @@
   <div class="right-sidebar">
     <div class="card">
       <div class="card-header d-flex align-items-center justify-content-between border-0">
-          <h4>Registrations</h4>
-          <a href="#">View All</a>
+          <h4>{{ 'Registrations' | translate }}</h4>
+          <a href="#">{{ 'View' | translate }} </a>
       </div>
       <div class="card-body card-tabs">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab-1" data-bs-toggle="tab" data-bs-target="#home-tab-pane-1" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Talent</button>
+            <button class="nav-link active" id="home-tab-1" data-bs-toggle="tab" data-bs-target="#home-tab-pane-1" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">{{ 'talent' | translate }} </button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab-1" data-bs-toggle="tab" data-bs-target="#profile-tab-pane-1" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Club</button>
+            <button class="nav-link" id="profile-tab-1" data-bs-toggle="tab" data-bs-target="#profile-tab-pane-1" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">{{ 'my-club' | translate }}</button>
           </li>
           <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab-1" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Scout</button>
+            <button class="nav-link" id="contact-tab-1" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">{{ 'scout' | translate }}</button>
           </li>
          
         </ul>
@@ -427,8 +502,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -445,8 +520,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -454,8 +529,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -463,8 +538,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -472,8 +547,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -481,8 +556,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -494,8 +569,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -503,8 +578,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -512,8 +587,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -521,8 +596,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -530,8 +605,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -539,8 +614,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -550,8 +625,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -559,8 +634,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -568,8 +643,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -577,8 +652,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -586,8 +661,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>
@@ -595,8 +670,8 @@
              
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
               <div class="mesaage-content">
-                  <h6 class="mb-0">Kadin Septimus</h6>
-                  <small>10 mins ago</small>
+                <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                <small>{{ 'time' | translate }}</small>
               </div>
               
              </div>

@@ -3,6 +3,8 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { ThemeService } from '../../../services/theme.service';
+import { environment } from '../../../../environments/environment';
 
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
@@ -47,7 +49,7 @@ export class IndexComponent implements OnInit{
   forgotPasswordEmail: string = '';
   forgotPasswordMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private translateService: TranslateService) {}
+  constructor(private themeService: ThemeService,private authService: AuthService, private router: Router, private translateService: TranslateService) {}
 
   lang:string = '';
 
@@ -69,6 +71,12 @@ export class IndexComponent implements OnInit{
     this.translateService.use(selectedLanguage)
   }
 
+  toggleTheme(event: Event) {
+    event.preventDefault();
+    this.themeService.toggleTheme();
+  }
+
+
   login() {
     this.loginButtonClicked = true;
 
@@ -76,9 +84,16 @@ export class IndexComponent implements OnInit{
       console.error('Please fill in all required fields.');
       return;
     }
+
+    const selectedLanguage = localStorage.getItem('lang') || '';
+    const domain = environment.targetDomain?.domain || 'ch';
+
     const loginData = {
       email: this.email,
       password: this.password,
+      lang: selectedLanguage,
+      domain: domain,
+      
     };
 
     this.authService.login(loginData).subscribe(
@@ -95,11 +110,29 @@ export class IndexComponent implements OnInit{
           const storedToken = localStorage.getItem('authToken');
           if (storedToken === token) {
             console.log('Token successfully saved to local storage.');
+
+            this.translateService.use(selectedLanguage);
+
+            // const selectedLanguage = localStorage.getItem('lang');
+            // if (selectedLanguage) {
+            //   this.translateService.use(selectedLanguage);
+            // }
+
+            // let targetDomain = '';
+            //   if (selectedLanguage === 'en') {
+            //     targetDomain = environment.targetDomain.en;
+            //   } else if (selectedLanguage === 'de') {
+            //     targetDomain = environment.targetDomain.de;
+            //   }
+            //   console.log(targetDomain, "domain");
+            //   console.log(selectedLanguage, "check language")
+
             let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
             if (modal) {
               modal.hide();
             }
             this.router.navigate(['/Admin/Dashboard']);
+            // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
             console.error('Failed to save token to local storage.');
           }
@@ -125,19 +158,24 @@ export class IndexComponent implements OnInit{
       return;
     }
 
+    const selectedLanguage = localStorage.getItem('lang') || '';
+    const domain = environment.targetDomain?.domain || 'ch';
+
     const registrationData = {
       first_name: this.firstName,
       last_name: this.lastName,
       username: this.username,
       role: this.role,
       email: this.email,
-      lang: this.language,
       newsletter: this.newsletter,
       user_domain: this.userDomain,
       password: this.password,
       password_confirm: this.confirmPassword,
-      privacy_policy: this.privacyPolicy
+      privacy_policy: this.privacyPolicy,
+      lang: selectedLanguage, 
+      domain: domain
     };
+
 
     this.authService.register(registrationData).subscribe(
       response => {

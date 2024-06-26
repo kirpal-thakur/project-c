@@ -6,39 +6,7 @@
 }
 
 
-.card-tabs {
-  .nav-tabs {
-    border-radius: 20px;
-    background-color: white;
-    padding: 15px 17px;
-    border: 1px solid #236115;
-    white-space: nowrap;
-    .nav-item {
-      flex: 1;
-      .nav-link {
-        border: 0;
-        font-size: 12px;
-        border-radius: 10px;
-        margin: 0;
-        padding: 0.5rem 1.125rem;
-        font-weight: 500;
-        color: #236115;
-        font-weight: 700;
-        text-align: center;
-        &.active {
-          background: #236115;
-          color: #fff;
-          &:hover {
-            color: #fff;
-          }
-        }
-        &:hover {
-          color: #236115;
-        }
-      }
-    }
-  }
-}
+
 .tab-content {
   margin-top: 30px;
 }
@@ -48,6 +16,8 @@
   align-items: center;
   cursor: pointer;
 }
+
+
 
 .message-media {
   width: 60px;
@@ -70,9 +40,11 @@
 }
 .dashboard_table .nav-tabs .nav-link {
   margin-bottom: 0px;
-  border-top: 3px solid #236115;
+  border-top: 2px solid #236115;
+  border-right: 0;
+    border-left: 0;
   &.active {
-    border: 3px solid #236115;
+    border: 2px solid #236115;
     border-top: 0;
     background: rgba(11, 149, 100, 0.08);
   }
@@ -81,54 +53,10 @@
 .dashboard_table .nav-tabs .nav-item {
   width: 25%;
 }
-.navtabs_button p {
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 22px;
-  color: #727477;
-}
-.navtabs_button h6 {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 34px;
-  color: #023a4a;
-}
-.mesaage-content h6 {
-  color: #4d4d4d;
-  font-size: 14px;
-  font-weight: 600;
-}
-.mesaage-content small {
-  color: #959595;
-  font-size: 12px;
-  font-weight: 400;
-}
-.table tbody tr:hover {
-  border: 1px solid #236115 !important;
-  border-collapse: separate;
-  background: #edffe9;
-  td{
-    border-top: 1px solid #236115 !important;
-      border-bottom: 1px solid #236115 !important;
-     border: 1px solid #236115;
 
-     &:first-child{
-      border-right: 0;
-     }
-     &:last-child{
-      border-left: 0;
-     }
-    &:nth-child(2),
-    &:nth-child(3),
-    &:nth-child(4),
-    &:nth-child(5){
-      border-top: 1px solid #236115 !important;
-      border-bottom: 1px solid #236115 !important;
-      border: 0;
-    }
-    
-  }
-}
+
+
+
 table {
   border-collapse: separate;
   border-spacing: 0;

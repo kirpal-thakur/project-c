@@ -34,10 +34,10 @@
       }
     }
   }
-  .card-title {
-    font-weight: 700;
-    font-size: 14px;
-  }
+  // .card-title {
+  //   font-weight: 700;
+  //   font-size: 14px;
+  // }
   .card {
     background-color: #fff;
     .card-header {
@@ -145,19 +145,63 @@
         border-color: transparent;
       }
     }
-    tbody {
-      tr {
-        background-color: #fafafa;
-        border-color: transparent;
-      }
-    }
+    // tbody {
+    //   tr {
+    //     background-color: #fafafa;
+    //     border-color: transparent;
+    //   }
+    // }
   }
   .btn-outline-white {
     padding: 5px 10px 5px 10px;
     border: 1px solid #e5e5e5;
     font-size: 14px;
   }
+
+
+  .table tbody tr:hover {
+    td.main-table-2 {
+    border-right: 1px solid #236115  !important;
+  }
+  }
+  .table tbody tr:hover {
+    td.main-table {
+    border-left: 1px solid #236115  !important;
+  }
+  }
+  .table tbody tr:hover {
+    // border: 1px solid #236115 !important;
+    border-collapse: separate;
+    // background: #edffe9;
+    // color: #000;
+    td{
+      border-top:none !important;
+        border-bottom:none !important;
+      //  border: 1px solid #236115;
   
+       &:first-child{
+        border-right: 0;
+       }
+       &:last-child{
+        border-left: 0;
+       }
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4),
+      &:nth-child(5){
+        border-top: none !important;
+        border-bottom: none !important;
+        border: 0;
+      }
+      
+    }
+  }
+
+
+  
+.title-text{
+  color: #000;
+}
 
   .table_img {
     width: 50px;

@@ -33,6 +33,37 @@ ul {
   color: #fff;
 }
 
+.check-resister {
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #85b1d3;
+  cursor: pointer; /* Added for better UX */
+}
+
+.check-resister.active {
+  border-color: #e05263;
+}
+
+.check-resister .form-check-label span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #85b1d3;
+}
+
+.check-resister.active .form-check-label span {
+  color: #e05263;
+}
+
+.form-check-input:checked {
+  background-color: #e05263;
+  border-color: #e05263;
+}
+
+
+
+
+
 .social-media ul li a {
   color: #fff;
   margin-right: 10px;
@@ -65,18 +96,25 @@ ul {
   padding: 10px 20px;
   font-size: 16px;
 }
-.btn-primary {
-  background-color: #e05263;
-  border-color: #e05263;
+a.btn-primary {
+  background: #E05263;
+  border: #E05263;
 }
-.btn-primary:hover {
-  background-color: #e05263;
-  border-color: #e05263;
-}
-.btn-primary:hover:active {
-  background-color: #e05263;
-  border-color: #e05263;
-}
+
+
+// .light-theme .btn-primary {
+//   background-color: #e05263 !important;
+//   border-color: #e05263 !important;
+// }
+
+// .btn-primary:hover {
+//   background-color: #e05263;
+//   border-color: #e05263;
+// }
+// .btn-primary:hover:active {
+//   background-color: #e05263;
+//   border-color: #e05263;
+// }
 .nav-header {
   display: flex;
   align-items: center;
@@ -106,6 +144,20 @@ ul {
   border-color: none;
   outline: 0;
   box-shadow: none;
+}
+.overlay{
+  position: absolute;
+  height: auto;
+  background-color: #000;
+}
+.overlay{
+  position: absolute;
+  height: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+  background: black;
+  opacity: 10%;
 }
 .main-bnr {
   background-image: url("../../../../assets/images/bnr.jpg");
@@ -277,7 +329,9 @@ input:checked + .slider:before {
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.06);
   text-align: left;
 }
-
+// #footer{
+//   background-color: #ffffff;
+// }
 #footer .footer-newsletter form input[type="email"] {
   border: 0;
   padding: 4px 8px;
@@ -323,7 +377,6 @@ input:checked + .slider:before {
   font-size: 18px;
   color: #000;
   font-weight: 500;
-
   padding-bottom: 20px;
 }
 
@@ -362,6 +415,7 @@ input:checked + .slider:before {
   margin-bottom: 12px;
 }
 .social-link {
+  margin-top: 40px;
   display: flex;
   align-items: center;
 }
@@ -369,7 +423,7 @@ input:checked + .slider:before {
   margin-left: 35px;
 }
 .bgprimary {
-  background-color: #e05263 !important;
+  background-color: #e05263;
 }
 .footer-bottom {
   padding: 12px 0;
@@ -420,6 +474,7 @@ input:checked + .slider:before {
   padding: 10px;
   border-radius: 20px;
 }
+
 .modal-btn .socail_btn {
   color: #000;
   border-color: #e05263;
