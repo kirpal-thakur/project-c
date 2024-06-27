@@ -1044,6 +1044,21 @@ color: #ffffff;
 .dark-theme .overlay{
   opacity: 40% !important;
 }
+
+
+.dark-theme .mat-mdc-dialog-surface.mdc-dialog__surface {
+  background-color: #072944;
+}
+.dark-theme .parent-popup{
+background-color: #072944;
+}
+.dark-theme .text-size{
+  color: #ffffff;
+}
+.dark-theme .button-text{
+  color: #ffffff !important;
+}
+
 // ------------------------- users end ------------------
 
 // ------------------------- respone------------------

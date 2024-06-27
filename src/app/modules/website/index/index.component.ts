@@ -106,8 +106,16 @@ export class IndexComponent implements OnInit{
         } else {
           console.log('Login successful.');
           const token = response.data.token;
+          const userData = response.data.user_data;
+        
+          console.log(userData,"check user data index ")
+
+
           localStorage.setItem('authToken', token);
+        
           const storedToken = localStorage.getItem('authToken');
+          localStorage.setItem('userData', JSON.stringify(userData));
+        
           if (storedToken === token) {
             console.log('Token successfully saved to local storage.');
 

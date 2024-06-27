@@ -67,6 +67,8 @@ a {
   margin-right: 8px;
 }
 
+
+
 .compact-sidebar .page-container {
   margin-left: 115px;
   transition: all 0.4s;
@@ -897,7 +899,17 @@ left: unset;
   display: none;
 }
 
-// 
+// ------------------marketing popup
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  z-index: 9 ;
+}
+.mat-mdc-dialog-inner-container.mdc-dialog__container {
+  position: relative;
+  left: 386px;
+  bottom: 290px;
+  height: 550px;
+  width: 50%;
+}
 
 // ------------------------- users end ------------------
 

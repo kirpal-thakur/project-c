@@ -15,6 +15,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    TranslateModule 
+    TranslateModule ,
+    FormsModule
   ]
 })
 export class AdminModule { }

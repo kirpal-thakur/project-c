@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {  MatDialog } from '@angular/material/dialog';
+import { MarketingPopupComponent } from './marketing-popup/marketing-popup.component'; 
 
 @Component({
   selector: 'app-marketing',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './marketing.component.scss'
 })
 export class MarketingComponent {
+  readonly dialog = inject(MatDialog);
 
+  editMarkiting(){
+    console.log('Edit user button clicked!');
+    const dialogRef = this.dialog.open(MarketingPopupComponent);
+
+  }
 }
