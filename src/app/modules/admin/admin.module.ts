@@ -16,6 +16,8 @@ import { FooterComponent } from './footer/footer.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AdminRoutingModule,
     TranslateModule ,
-    FormsModule
-  ]
+    FormsModule,
+    MatDialogModule
+  ],
+  providers: [UserService]
 })
 export class AdminModule { }

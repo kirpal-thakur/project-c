@@ -248,7 +248,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
+            <tr *ngFor="let user of users" >
               <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
                 <span class="form-check align-self-center me-2">
                   <input
@@ -290,14 +290,14 @@
                       </svg>
                     </span>
                   </span>
-                  <span style="padding-left: 15px">Elton Prince</span>
+                  <span style="padding-left: 15px">{{ user.first_name }} {{ user.last_name }}</span>
                 </div>
               </td>
               <td>Talent</td>
-              <td>English</td>
-              <td>Switzerland</td>
-              <td>08.04.2024-12.53 PM</td>
-              <td>talent&#64;fifa.com</td>
+              <td>{{ user.lang }}</td>
+              <td>{{ user.meta?.place_of_birth || 'Unknown' }}</td>
+              <td>{{ user.created_at }}</td>
+              <td>{{ user.email }}</td>
               <td>Paid</td>
               <td >
                 <span class="bg_success">Approved </span>
@@ -541,22 +541,6 @@
       </div>
     </div>
 
-
-    <!------------------- testing-------------  -->
-<div>
-    <!-- <mat-sidenav-container class="example-container">
-      <mat-sidenav #sidenav mode="side">
-        <p>This is the content inside the sidenav.</p>
-        <button mat-button (click)="closeSidenav()">Close</button>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <button mat-button (click)="openSidenav()">
-          <mat-icon>edit</mat-icon> Edit
-        </button>
-     </mat-sidenav-content>
-    </mat-sidenav-container> -->
-  </div>
-    
 
 
 

@@ -13,6 +13,6 @@ export class MarketingComponent {
   editMarkiting(){
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(MarketingPopupComponent);
-
+    hasBackdrop : true
   }
 }

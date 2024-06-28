@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from '../app/modules/material/material.module'
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

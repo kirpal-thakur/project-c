@@ -1,31 +1,37 @@
-// import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../../../services/user.service';
+import { User } from './user.model';
+import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component';
 
-// @Component({
-//   selector: 'app-users',
-//   templateUrl: './users.component.html',
-//   styleUrl: './users.component.scss'
-// })
-// export class UsersComponent {
-
-// }
-
-
-import { Component,inject, ViewChild } from '@angular/core';
-import {  MatDialog } from '@angular/material/dialog';
-import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component'; 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
+export class UsersComponent implements OnInit {
+  users: User[] = [];
 
-export class UsersComponent {
+  constructor(private userService: UserService, public dialog: MatDialog) {}
 
-  readonly dialog = inject(MatDialog);
-
-  editUser(){
-    const dialogRef = this.dialog.open(UserDetailPopupComponent);
-
+  ngOnInit(): void {
+    this.userService.getUsers().subscribe(
+      (response) => {
+        console.log('API Response:', response);
+        if (response && response.data && response.data.userData) {
+          this.users = Object.values(response.data.userData);
+        } else {
+          console.error('Invalid API response structure:', response);
+          
+        }
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
 
+  editUser(): void {
+    this.dialog.open(UserDetailPopupComponent);
+  }
 }
