@@ -1,3 +1,5 @@
+
+
 body{
   font-family: "Libre Franklin", sans-serif;
 }
@@ -900,15 +902,17 @@ left: unset;
 }
 
 // ------------------marketing popup
+
+
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   z-index: 9 ;
 }
 .mat-mdc-dialog-inner-container.mdc-dialog__container {
   position: relative;
-  left: 386px;
-  bottom: 311px;
+  // left: 386px;
+  // bottom: 311px;
   height: 528px;
-  width: 50%;
+  width: 100%;
 }
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   border-radius: 16px;

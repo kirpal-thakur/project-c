@@ -13,19 +13,19 @@ export class UsersComponent implements OnInit {
   users: User[] = [];
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
+  
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
-      (response) => {
+      response => {
         console.log('API Response:', response);
-        if (response && response.data && response.data.userData) {
-          this.users = Object.values(response.data.userData);
+        if (response && response.status && response.data && response.data.userData) {
+          this.users = response.data.userData;
         } else {
           console.error('Invalid API response structure:', response);
-          
         }
       },
-      (error) => {
+      error => {
         console.error('Error fetching users:', error);
       }
     );
