@@ -5,11 +5,13 @@ import { WebsiteRoutingModule } from './website-routing.module';
 import { IndexComponent } from './index/index.component';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConfirmPasswordComponent } from './SetPassword/confirmPassword.component';
 
 
 @NgModule({
   declarations: [
-    IndexComponent
+    IndexComponent,
+    ConfirmPasswordComponent
   ],
   imports: [
     CommonModule,

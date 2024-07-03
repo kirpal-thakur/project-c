@@ -1,10 +1,12 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
+import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
+import { MatDialog } from '@angular/material/dialog';
 
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
@@ -49,9 +51,18 @@ export class IndexComponent implements OnInit{
   forgotPasswordEmail: string = '';
   forgotPasswordMessage: string = '';
 
-  constructor(private themeService: ThemeService,private authService: AuthService, private router: Router, private translateService: TranslateService) {}
+  constructor(
+    private themeService: ThemeService,
+    private authService: AuthService,
+     private route: ActivatedRoute,
+      private router: Router, 
+      private translateService: TranslateService, 
+      public dialog: MatDialog
+     ) {}
 
   lang:string = '';
+
+  magic_link_url: string='';
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en'
@@ -63,6 +74,18 @@ export class IndexComponent implements OnInit{
         // Google API script might not be loaded yet; wait for it to load
         console.warn('Google API script is not fully loaded.');
       }
+
+     
+      this.route.queryParams.subscribe(params => {
+        this.magic_link_url = params['magic-login'];
+        console.log('Magic Token:', this.magic_link_url);
+  
+        // Open modal/dialog only if magic_link_url exists
+        if (this.magic_link_url) {
+          console.log("workling", this.magic_link_url)
+          this.openModal();
+        }
+      });
   }
 
   ChangeLang(lang:any){
@@ -246,34 +269,73 @@ export class IndexComponent implements OnInit{
     );
   }
 
+  // forgotPassword() {
+  //   if (!this.forgotPasswordEmail.trim()) {
+  //     console.error('Email is required for password recovery.');
+  //     this.forgotPasswordMessage = 'Please provide a valid email address.';
+  //     return;
+  //   }
+
+  //   this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
+  //     response => {
+  //       console.log('Password recovery response:', response);
+  //       if (response.status === true) {
+  //         const magicLinkUrl = response.data.magic_link_url;
+  //         console.log("check magick link url",magicLinkUrl)
+  //         this.authService.magicLogin(magicLinkUrl).subscribe(
+  //           magicLoginResponse => {
+  //             console.log('Magic login response:', magicLoginResponse);
+  //             if (magicLoginResponse.status === true) {
+  //               console.log('Auto-login successful.');
+  //               this.router.navigate(['/Admin/Dashboard']);
+  //             } else {
+  //               console.error('Auto-login failed:', magicLoginResponse.message);
+  //               this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
+  //             }
+  //           },
+  //           magicLoginError => {
+  //             console.error('An error occurred during auto-login:', magicLoginError);
+  //             this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
+  //           }
+  //         );
+  //       } else {
+  //         console.error('Password recovery failed:', response.message);
+  //         this.forgotPasswordMessage = response.message;
+  //       }
+  //     },
+  //     error => {
+  //       console.error('An error occurred while requesting password recovery:', error);
+  //       this.forgotPasswordMessage = 'An error occurred. Please try again later.';
+  //     }
+  //   );
+  // }
+
+
+
+
   forgotPassword() {
     if (!this.forgotPasswordEmail.trim()) {
       console.error('Email is required for password recovery.');
       this.forgotPasswordMessage = 'Please provide a valid email address.';
       return;
     }
-
+  
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
         console.log('Password recovery response:', response);
         if (response.status === true) {
-          const magicLinkUrl = response.data.magic_link_url;
-          this.authService.magicLogin(magicLinkUrl).subscribe(
-            magicLoginResponse => {
-              console.log('Magic login response:', magicLoginResponse);
-              if (magicLoginResponse.status === true) {
-                console.log('Auto-login successful.');
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                console.error('Auto-login failed:', magicLoginResponse.message);
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            magicLoginError => {
-              console.error('An error occurred during auto-login:', magicLoginError);
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
+          const magicToken = response.data.magic_link_url; // Assuming magic token is returned from API
+          const magicLinkUrl = `http://localhost:4200/Index?magic-login=${magicToken}`;
+          console.log("Magic link URL:", magicLinkUrl);
+  
+          // Redirect to magic link URL
+          // this.router.navigateByUrl(magicLinkUrl).then(nav => {
+          //   console.log('Navigation to magic link:', nav);
+          //   if (!nav) {
+          //     console.error('Navigation to magic link failed.');
+          //     this.forgotPasswordMessage = 'Failed to navigate to magic link. Please try again.';
+          //   }
+          // });
         } else {
           console.error('Password recovery failed:', response.message);
           this.forgotPasswordMessage = response.message;
@@ -285,7 +347,7 @@ export class IndexComponent implements OnInit{
       }
     );
   }
-
+  
 
 
   initializeGoogleSignIn(): void {
@@ -323,7 +385,7 @@ export class IndexComponent implements OnInit{
       if (modal) {
         modal.hide();
       }
-      this.router.navigate(['/Admin/Dashboard']);
+      // this.router.navigate(['/Admin/Dashboard']);
     } else {
       console.error('Failed to decode Google ID token');
       this.invalidCred = 'Failed to log in with Google';
@@ -345,5 +407,18 @@ export class IndexComponent implements OnInit{
       return null;
     }
   }
+
+
+//   editpassword():void  {
+//     console.log("hiii ")
+//   this.dialog.open(ConfirmPasswordComponent)
+// }
+
+openModal() {
+  this.dialog.open(ConfirmPasswordComponent, {
+    width:'500px',
+    // data: { token: this.token }
+  });
+}
 
 }

@@ -104,7 +104,9 @@
   "Rejected":"Abgelehnt",
   "Total Users":"Gesamte Benutzer",
   "Total Sales":"Gesamtumsatz",
-  "Total Subscriptions":"Gesamtabonnements"
+  "Total Subscriptions":"Gesamtabonnements",
+    "SetPassword": "Passwort festlegen"
+  
   
 }
 

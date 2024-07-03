@@ -1099,6 +1099,23 @@ background-color: #072944;
 background-color: #072944;
 }
 
+
+//--- fiter  ---
+
+
+.dark-theme .bg-body {
+  background-color: #072944 !important;
+  color: white;
+}
+.dark-theme .input-filter-text{
+  color: #000 !important;
+}
+
+
+
+
+
+
 @media (max-width: 1024px) {
   .page-header #nav-search {
     padding: 10px 22px;
@@ -1156,6 +1173,10 @@ background-color: #072944;
     }
   }
 }
+
+
+
+
 @media (max-width: 767px) {
   .theme_dropdown,
   .notification_dropdown,

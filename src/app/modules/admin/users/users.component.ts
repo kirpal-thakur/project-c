@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { User } from './user.model';
 import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component';
+import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 
 @Component({
   selector: 'app-users',
@@ -33,5 +34,16 @@ export class UsersComponent implements OnInit {
 
   editUser(): void {
     this.dialog.open(UserDetailPopupComponent);
+  }
+
+  editfilter():void {
+    this.dialog.open(FilterPopupComponrnt,{
+      height: '450px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      }
+    })
   }
 }

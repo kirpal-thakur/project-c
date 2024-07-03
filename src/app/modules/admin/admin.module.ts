@@ -18,7 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ClickOutsideDirective } from '../../modules/admin/marketing/click-outside.directive';
+import { ClickOutsideDirective } from './marketing/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { ClickOutsideDirective } from '../../modules/admin/marketing/click-outsi
     SidebarComponent,
     FooterComponent,
     UserDetailComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
   ],
   imports: [
     CommonModule,

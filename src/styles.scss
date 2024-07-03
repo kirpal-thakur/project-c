@@ -909,13 +909,18 @@ left: unset;
 }
 .mat-mdc-dialog-inner-container.mdc-dialog__container {
   position: relative;
+  top: 30px;
+
   // left: 386px;
   // bottom: 311px;
-  height: 528px;
-  width: 100%;
+  // height: 528px;
+  // width: 100%;
 }
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   border-radius: 16px;
+}
+.cursor-pointer{
+  cursor: pointer;
 }
 
 // ------------------------- users end ------------------
