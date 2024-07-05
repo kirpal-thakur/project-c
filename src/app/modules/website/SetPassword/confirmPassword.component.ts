@@ -56,6 +56,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-password',
@@ -63,44 +64,58 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./confirmPassword.component.scss']
 })
 export class ConfirmPasswordComponent implements OnInit {
-  token: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
-  message: string = '';
-
+  token= '';
+  tokenVerified = false;
+  tokenErrorTemplate: any;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
+    private dialogRef: MatDialogRef<ConfirmPasswordComponent>
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
+    // this.route.queryParams.subscribe(params => {
+    //   this.token = params['confirm-token'] || '';
+    //   console.log('Magic Token:', this.token);
+
+    //   if (this.token) {
+    //     // Call authService to verify magic token
+    //     this.authService.magicLogin(this.token).subscribe(
+    //       (response: any) => {
+    //         console.log('Magic Login Response:', response);
+    //         if (response.success) {
+    //           this.tokenVerified = true;
+    //           this.openModal();
+    //         } else {
+    //           this.tokenVerified = false;
+    //           console.log('Token is not verified please check');
+    //           this.openModal();
+    //           console.log("popup is not open")
+    //         }
+    //       },
+    //       (error) => {
+    //         console.error('Error verifying token:', error);
+    //         this.tokenVerified = false;
+    //       }
+    //     );
+    //   } else {
+    //     this.tokenVerified = false;
+    //     console.log('Token is not provided');
+    //   }
+    // });
+  }
+  openModal() {
+    this.dialog.open(ConfirmPasswordComponent, {
+      width: '500px',
     });
   }
-
-  resetPassword() {
-    if (this.newPassword !== this.confirmPassword) {
-      this.message = 'Passwords do not match.';
-      return;
-    }
-
-    this.authService.forgotPassword(this.token,).subscribe(
-      response => {
-        if (response.status === true) {
-          this.message = 'Password reset successful. Redirecting to login...';
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
-        } else {
-          this.message = response.message;
-        }
-      },
-      error => {
-        console.error('Error resetting password:', error);
-        this.message = 'An error occurred. Please try again later.';
-      }
-    );
+  notverifyed() {
+    // Your method logic here
+    console.log('Not verified clicked');
   }
-}
+  
+  }
+
+ 

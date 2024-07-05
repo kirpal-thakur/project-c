@@ -61,8 +61,8 @@ export class IndexComponent implements OnInit{
      ) {}
 
   lang:string = '';
-
-  magic_link_url: string='';
+  token= '';
+  tokenVerified = false;
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en'
@@ -74,18 +74,58 @@ export class IndexComponent implements OnInit{
         // Google API script might not be loaded yet; wait for it to load
         console.warn('Google API script is not fully loaded.');
       }
+  this.route.queryParams.subscribe(params => {
+      this.token = params['confirm-token'] || '';
+      console.log('Magic Token:', this.token);
 
-     
-      this.route.queryParams.subscribe(params => {
-        this.magic_link_url = params['magic-login'];
-        console.log('Magic Token:', this.magic_link_url);
-  
-        // Open modal/dialog only if magic_link_url exists
-        if (this.magic_link_url) {
-          console.log("workling", this.magic_link_url)
+      if (this.token) {
+        // Call authService to verify magic token
+        this.authService.magicLogin(this.token).subscribe(
+          (response: any) => {
+            console.log('Magic Login Response:', response);
+            if (response.success) {
+              this.tokenVerified = true;
+              this.openModal();
+            } else {
+              this.tokenVerified = false;
+              console.log('Token is not verified please check');
+              this.notverifyed();
+              console.log("popup is not open")
+            }
+          },
+          (error) => {
+            console.error('Error verifying token:', error);
+            this.tokenVerified = false;
+            this.notverifyed();
+          }
+        );
+      } else {
+        this.tokenVerified = false;
+        console.log('Token is not provided');
+      }
+    });
+
+    
+   
+  }
+
+  performMagicLogin(token: string) {
+    this.authService.magicLogin(token).subscribe(
+      magicLoginResponse => {
+        console.log('Magic login response:', magicLoginResponse);
+        if (magicLoginResponse.status === true) {
           this.openModal();
+          
+        } else {
+          console.error('Auto-login failed:', magicLoginResponse.message);
+          console.log("Token is not verified");
         }
-      });
+      },
+      error => {
+        console.error('An error occurred during auto-login:', error);
+        // Handle error scenario if needed
+      }
+    );
   }
 
   ChangeLang(lang:any){
@@ -269,73 +309,36 @@ export class IndexComponent implements OnInit{
     );
   }
 
-  // forgotPassword() {
-  //   if (!this.forgotPasswordEmail.trim()) {
-  //     console.error('Email is required for password recovery.');
-  //     this.forgotPasswordMessage = 'Please provide a valid email address.';
-  //     return;
-  //   }
-
-  //   this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
-  //     response => {
-  //       console.log('Password recovery response:', response);
-  //       if (response.status === true) {
-  //         const magicLinkUrl = response.data.magic_link_url;
-  //         console.log("check magick link url",magicLinkUrl)
-  //         this.authService.magicLogin(magicLinkUrl).subscribe(
-  //           magicLoginResponse => {
-  //             console.log('Magic login response:', magicLoginResponse);
-  //             if (magicLoginResponse.status === true) {
-  //               console.log('Auto-login successful.');
-  //               this.router.navigate(['/Admin/Dashboard']);
-  //             } else {
-  //               console.error('Auto-login failed:', magicLoginResponse.message);
-  //               this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-  //             }
-  //           },
-  //           magicLoginError => {
-  //             console.error('An error occurred during auto-login:', magicLoginError);
-  //             this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-  //           }
-  //         );
-  //       } else {
-  //         console.error('Password recovery failed:', response.message);
-  //         this.forgotPasswordMessage = response.message;
-  //       }
-  //     },
-  //     error => {
-  //       console.error('An error occurred while requesting password recovery:', error);
-  //       this.forgotPasswordMessage = 'An error occurred. Please try again later.';
-  //     }
-  //   );
-  // }
-
-
-
-
   forgotPassword() {
     if (!this.forgotPasswordEmail.trim()) {
       console.error('Email is required for password recovery.');
       this.forgotPasswordMessage = 'Please provide a valid email address.';
       return;
     }
-  
+
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
         console.log('Password recovery response:', response);
         if (response.status === true) {
-          const magicToken = response.data.magic_link_url; // Assuming magic token is returned from API
-          const magicLinkUrl = `http://localhost:4200/Index?magic-login=${magicToken}`;
-          console.log("Magic link URL:", magicLinkUrl);
-  
-          // Redirect to magic link URL
-          // this.router.navigateByUrl(magicLinkUrl).then(nav => {
-          //   console.log('Navigation to magic link:', nav);
-          //   if (!nav) {
-          //     console.error('Navigation to magic link failed.');
-          //     this.forgotPasswordMessage = 'Failed to navigate to magic link. Please try again.';
-          //   }
-          // });
+            const magicToken = response.data.magic_link_url;
+            const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
+             console.log("Magic link URL:", magic_link_url);
+          this.authService.magicLogin(magic_link_url).subscribe(
+            magicLoginResponse => {
+              console.log('Magic login response:', magicLoginResponse);
+              if (magicLoginResponse.status === true) {
+                console.log('Auto-login successful.');
+                this.router.navigate(['/Admin/Dashboard']);
+              } else {
+                console.error('Auto-login failed:', magicLoginResponse.message);
+                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
+              }
+            },
+            magicLoginError => {
+              console.error('An error occurred during auto-login:', magicLoginError);
+              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
+            }
+          );
         } else {
           console.error('Password recovery failed:', response.message);
           this.forgotPasswordMessage = response.message;
@@ -347,6 +350,44 @@ export class IndexComponent implements OnInit{
       }
     );
   }
+
+
+
+
+  // forgotPassword(): void {
+  //   if (!this.forgotPasswordEmail.trim()) {
+  //     console.error('Email is required for password recovery.');
+  //     this.forgotPasswordMessage = 'Please provide a valid email address.';
+  //     return;
+  //   }
+
+  //   this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
+  //     response => {
+  //       console.log('Password recovery response:', response);
+  //       if (response.status === true && response.data.magic_link_url) {
+  //         const magicToken = response.data.magic_link_url;
+  //         const magicLinkUrl = `http://localhost:4200/Index?confirm-token=${magicToken}`;
+  //         console.log("Magic link URL:", magicLinkUrl);
+
+  //         // Redirect to magic link URL
+  //         this.router.navigateByUrl(magicLinkUrl).then(nav => {
+  //           console.log('Navigation to magic link:', nav);
+  //           if (!nav) {
+  //             console.error('Navigation to magic link failed.');
+  //             this.forgotPasswordMessage = 'Failed to navigate to magic link. Please try again.';
+  //           }
+  //         });
+  //       } else {
+  //         console.error('Password recovery failed or magic token not received:', response.message);
+  //         this.forgotPasswordMessage = response.message || 'Magic token not received. Please try again.';
+  //       }
+  //     },
+  //     error => {
+  //       console.error('An error occurred while requesting password recovery:', error);
+  //       this.forgotPasswordMessage = 'An error occurred. Please try again later.';
+  //     }
+  //   );
+  // }
   
 
 
@@ -420,5 +461,11 @@ openModal() {
     // data: { token: this.token }
   });
 }
-
+notverifyed()
+{
+  this.dialog.open(ConfirmPasswordComponent, {
+    width:'500px',
+    // data: { token: this.token }
+  });
+}
 }

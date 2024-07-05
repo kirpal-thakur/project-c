@@ -107,6 +107,7 @@ import { User } from '../modules/admin/users/user.model';
 export class UserService {
 
   private apiUrl = 'https://api.socceryou.ch/api/users';
+  private apiUrl2 = 'https://api.socceryou.ch/api';
 
   constructor(private http: HttpClient) {}
 
@@ -148,4 +149,17 @@ export class UserService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
+  getProfileData(): Observable<any> {
+    const authToken = localStorage.getItem('authToken'); 
+
+    // Example headers with authorization token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.apiUrl2}/profile/`, { headers });
+  }
+
 }

@@ -39,11 +39,27 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
 
-  magicLogin(magic_link_url: string): Observable<any> {
-    console.log('Magic link URL received:', magic_link_url);
-    return this.http.get(`${this.apiUrl}/magic-login`);
+  // magicLogin(magic_link_url: string): Observable<any> {
+  //   console.log('Magic link URL received:', magic_link_url);
+  //   // return this.http.get(`${this.apiUrl}/magic-login`);
 
-    // return this.http.get(`${magic_link_url}`);
+  //   return this.http.get(`${magic_link_url}`);
+  // }
+
+  magicLogin(token: string): Observable<any> {
+    const endpointUrl = `${this.apiUrl}/magic-login/${token}`;
+    console.log(endpointUrl,"chek the magic token")
+    console.log('Token:', token); 
+    return this.http.get<any>(endpointUrl);
   }
+
+
+
+  showToken(token: string): Observable<any> {
+    console.log('Showing token:', token);
+    return this.magicLogin(token);
+  }
+  
+
   
 }

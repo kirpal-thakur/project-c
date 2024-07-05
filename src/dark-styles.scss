@@ -222,16 +222,7 @@ font-weight: 400;
   border: #BDE34F !important;
 }
 
-// .btn-primary {
-//   background-color: #6fb95d;
-//   border-color: #6fb95d;
-//   background-image: unset;
-//   &:hover,
-//   &:active{
-//     background-color: #6fb95d;
-//   border-color: #6fb95d;
-//   }
-// }
+
 
 .form-check-input[type="checkbox"] {
   border-radius: 0px;
@@ -251,6 +242,18 @@ font-weight: 400;
   font-weight: 700;
   color: #FFFFFF;
 }
+
+// .dark-theme.users-icon svg path {
+//   fill: white;
+// }
+
+.dark-theme #users-icon svg path {
+  fill: white;
+}
+.dark-theme #users-icon  path {
+  fill: white;
+}
+
 .btn {
   font-size: 16px;
   font-weight: 700;
@@ -558,17 +561,25 @@ input:checked + .slider:before {
   stroke: #000;
 }
 
-.nav-action svg path {
+.dark-theme .nav-action svg path {
   fill: #f0f0f0;
+  stroke: white;
 }
 
 
 .dark-theme .card-tabs .nav-tabs .nav-link svg path {
   fill: #f0f0f0 !important;
+  stroke: #ffffff;
 
 }
 
+.dark-theme #search-icon path{
+  stroke: white;
 
+} 
+.dark-theme .token-chek{
+color: #ffffff;
+}
 .profile img {
   height: 40px;
   object-fit: cover;
@@ -774,6 +785,9 @@ left: unset;
           color: #fff;
         }
       }
+    }
+    .nav-link{
+      border-top: none !important;
     }
    
 }
@@ -1021,9 +1035,16 @@ color: #ffffff;
   background-color: #072944 ;
   color: #ffffff ;
 }
+.dark-theme .footer-text{
+color: #ffffff !important;
+}
+.dark-theme .footer_main_inner {
+  color: #ffffff !important;
 
+}
 .dark-theme #footer .footer-top h4 {
   color: #ffffff !important;
+
 }
 
 

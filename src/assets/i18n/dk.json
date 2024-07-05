@@ -101,7 +101,8 @@
   "date_time": "08.04.2024-12:53",
   "Approved": "Godkendt",
   "Pending": "Afventer",
-  "Rejected": "Afvist"
+  "Rejected": "Afvist",
+  "SetPassword": "Nulstil din adgangskode"
 
 
   }

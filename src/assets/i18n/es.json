@@ -101,7 +101,8 @@
   "date_time": "08.04.2024-12:53",
   "Approved": "Aprobado",
   "Pending": "Pendiente",
-  "Rejected": "Rechazado"
+  "Rejected": "Rechazado",
+   "SetPassword": "Restablecer tu contraseña"
 
 
   }

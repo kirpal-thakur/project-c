@@ -9,7 +9,7 @@ const routes: Routes = [
     component:IndexComponent
   },
   // { path: 'Index', component: ConfirmPasswordComponent, pathMatch: 'full' },
-  { path: 'magic-login/:token', component: ConfirmPasswordComponent },
+  { path: '', component: ConfirmPasswordComponent },
 
 ];
 

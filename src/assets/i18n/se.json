@@ -102,8 +102,6 @@
   "Approved": "Godkänd",
   "Pending": "Väntande",
   "Rejected": "Avvisad",
-  "etPassword": "Ställ in lösenord"
-
-
+  "SetPassword": "Återställ ditt lösenord"
   }
 
