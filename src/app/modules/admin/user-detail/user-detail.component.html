@@ -4,7 +4,7 @@
       <div class="card-header border-bottom">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
-            <h2 class="card-title mb-0 me-3">User Management / <span class="user-text" style="font-weight: 400;">Elton Prince</span> <span
+            <h2 class="card-title mb-0 me-3">{{ 'UserManagement' | translate}} \<span class="user-text" style="font-weight: 400;">Elton Prince</span> <span
                 style="margin-left: 10px;" class="bg_pending">Talent</span></h2>
           </div>
 
@@ -13,7 +13,7 @@
           <div class="d-flex align-items-center">
 
             <a class="btn btn-outline-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg id="users-icon" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 1L2 3.55V8.7265C2 13.019 4.98375 17.0225 9 18C13.0163 17.0225 16 13.019 16 8.7265V3.55L9 1Z"
                   fill="#787878" />
                 <path
@@ -21,16 +21,17 @@
                   fill="white" stroke="white" stroke-width="0.5" />
               </svg>
 
-              Verify Users</a>
-            <a class="btn btn-outline-white" data-bs-toggle="modal" data-bs-target="#exampleModal-1" ><svg width="22" height="23" viewBox="0 0 22 23" fill="none"
+              {{ 'VerifyUsers' | translate }}</a>
+            <a class="btn btn-outline-white" data-bs-toggle="modal" data-bs-target="#exampleModal-1" >
+              <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
                 xmlns="http://www.w3.org/2000/svg" class="me-1">
                 <path
                   d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
                   fill="#787878"></path>
               </svg>
-              Delete Users</a>
+             {{ 'DeleteUsers' | translate }}</a>
             <a class="btn btn-outline-white">
-              <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
+              <svg  id="users-icon" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="me-1">
                 <path
                   d="M3.83203 7.3737V3.2487C3.83203 3.00558 3.933 2.77243 4.11272 2.60052C4.29244 2.42861 4.5362 2.33203 4.79036 2.33203H18.207C18.4612 2.33203 18.705 2.42861 18.8847 2.60052C19.0644 2.77243 19.1654 3.00558 19.1654 3.2487V19.7487C19.1654 19.9918 19.0644 20.225 18.8847 20.3969C18.705 20.5688 18.4612 20.6654 18.207 20.6654H4.79036C4.5362 20.6654 4.29244 20.5688 4.11272 20.3969C3.933 20.225 3.83203 19.9918 3.83203 19.7487V15.6237"
@@ -42,10 +43,10 @@
                   stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
 
-              Export XLS</a>
+              {{ 'ExportXLS' | translate }}</a>
           </div>
           <div class="d-flex align-items-center">
-            <div style="color: #787878; margin-right: 10px; font-weight: 500">
+            <div style=" margin-right: 10px; font-weight: 500">
               1-12 of 1600
             </div>
             <a class="left-slide"><svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -87,29 +88,29 @@
                 <small>Talent</small>
               </div>
               <div class="list-view d-flex align-items-center border-top justify-content-between">
-                <h6 class="mb-0 me-3">Status:</h6>
-                <span class="bg_success">Approved</span>
+                <h6 class="mb-0 me-3">{{ 'Status' | translate }}:</h6>
+                <span class="bg_success approv">Approved</span>
               </div>
               <div class="list-view">
-                <h6 class="mb-1">Registration Date:</h6>
+                <h6 class="mb-1">{{'RegistrationDate' | translate }} :</h6>
                 <h6 class="mb-0 font-w400">08.04.2024 - 12.53 PM</h6>
               </div>
               <div class="list-view">
-                <h6 class="mb-1">Next payment due:</h6>
+                <h6 class="mb-1">{{'NextPaymentDue' | translate }} :</h6>
                 <h6 class="mb-2 font-w400">Apr 5, 2025 / Yearly cycle</h6>
-                <p class="font-w400">View payment details</p>
+                <p class="font-w400"> {{ 'ViewPaymentDetails' | translate }}</p>
               </div>
               <div class="list-view">
-                <h6 class="mb-1">Last payment:</h6>
+                <h6 class="mb-1">{{ 'LastPayment' | translate }} :</h6>
                 <h6 class="mb-2 font-w400">Apr 5, 2024</h6>
-                <p class=" font-w400">View Invoice</p>
+                <p class=" font-w400">{{ 'ViewInvoice' | translate }}</p>
               </div>
               <div class="list-view">
-                <h6 class="mb-1">Voucher Applied:</h6>
+                <h6 class="mb-1">{{ 'VoucherApplied' | translate }} :</h6>
                 <h6 class="mb-0 font-w400">SOCC30</h6>
               </div>
               <div class="list-view border-0">
-                <h6 class="mb-2">Payment method:</h6>
+                <h6 class="mb-2">{{ 'PaymentMethod' | translate }} :</h6>
                 <div class="d-flex align-items-center">
                   <svg width="29" height="13" viewBox="0 0 29 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_2019_4040)">
@@ -133,74 +134,81 @@
           <div class="col-lg-10 px-0">
             <ul class="nav nav-tabs user-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                  type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"><svg width="24"
+                <button class="nav-link active" id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                  type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                  <svg  id="users-icon" width="24"
                     height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M12 0.125C14.0599 0.125 15.974 0.644531 17.7422 1.68359C19.4557 2.6862 20.8138 4.04427 21.8164 5.75781C22.8555 7.52604 23.375 9.4401 23.375 11.5C23.375 13.5599 22.8555 15.474 21.8164 17.2422C20.8138 18.9557 19.4557 20.3138 17.7422 21.3164C15.974 22.3555 14.0599 22.875 12 22.875C9.9401 22.875 8.02604 22.3555 6.25781 21.3164C4.54427 20.3138 3.1862 18.9557 2.18359 17.2422C1.14453 15.474 0.625 13.5599 0.625 11.5C0.625 9.4401 1.14453 7.52604 2.18359 5.75781C3.1862 4.04427 4.54427 2.6862 6.25781 1.68359C8.02604 0.644531 9.9401 0.125 12 0.125ZM12 1.875C10.25 1.875 8.6276 2.3125 7.13281 3.1875C5.69271 4.04427 4.54427 5.19271 3.6875 6.63281C2.8125 8.1276 2.375 9.75 2.375 11.5C2.375 13.25 2.8125 14.8724 3.6875 16.3672C4.54427 17.8073 5.69271 18.9557 7.13281 19.8125C8.6276 20.6875 10.25 21.125 12 21.125C13.75 21.125 15.3724 20.6875 16.8672 19.8125C18.3073 18.9557 19.4557 17.8073 20.3125 16.3672C21.1875 14.8724 21.625 13.25 21.625 11.5C21.625 9.75 21.1875 8.1276 20.3125 6.63281C19.4557 5.19271 18.3073 4.04427 16.8672 3.1875C15.3724 2.3125 13.75 1.875 12 1.875ZM12 4.5C12.7839 4.5 13.513 4.70052 14.1875 5.10156C14.862 5.48438 15.3906 6.01302 15.7734 6.6875C16.1745 7.36198 16.375 8.09115 16.375 8.875C16.375 9.51302 16.2383 10.1237 15.9648 10.707C15.6914 11.2721 15.3086 11.7643 14.8164 12.1836C15.819 12.694 16.6211 13.4414 17.2227 14.4258C17.8242 15.3919 18.125 16.4583 18.125 17.625H16.375C16.375 16.8229 16.1745 16.0938 15.7734 15.4375C15.3906 14.763 14.862 14.2344 14.1875 13.8516C13.5312 13.4505 12.8021 13.25 12 13.25C11.1979 13.25 10.4596 13.4505 9.78516 13.8516C9.12891 14.2344 8.60026 14.763 8.19922 15.4375C7.81641 16.0938 7.625 16.8229 7.625 17.625H5.875C5.875 16.4583 6.17578 15.3919 6.77734 14.4258C7.37891 13.4414 8.18099 12.694 9.18359 12.1836C8.69141 11.7643 8.30859 11.2721 8.03516 10.707C7.76172 10.1237 7.625 9.51302 7.625 8.875C7.625 8.09115 7.81641 7.36198 8.19922 6.6875C8.60026 6.01302 9.13802 5.48438 9.8125 5.10156C10.487 4.70052 11.2161 4.5 12 4.5ZM12 6.25C11.2708 6.25 10.651 6.50521 10.1406 7.01562C9.63021 7.52604 9.375 8.14583 9.375 8.875C9.375 9.60417 9.63021 10.224 10.1406 10.7344C10.651 11.2448 11.2708 11.5 12 11.5C12.7292 11.5 13.349 11.2448 13.8594 10.7344C14.3698 10.224 14.625 9.60417 14.625 8.875C14.625 8.14583 14.3698 7.52604 13.8594 7.01562C13.349 6.50521 12.7292 6.25 12 6.25Z"
                       fill="#023A4A" />
                   </svg>
-                  Profile</button>
+                  {{ 'Profile' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                  type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><svg width="24"
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
+                  type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+                  <svg  id="users-icon" width="24"
                     height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
                       fill="#023A4A" />
                   </svg>
-                  Performance</button>
+                  {{ 'Performance' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane"
-                  type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><svg width="24"
+                <button class="nav-link transfer" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
+                  type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">
+                  <svg  id="users-icon" width="24"
                     height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M17.4141 0.496094L23.293 6.375L17.4141 12.2539L16.1836 10.9961L19.9297 7.25H1.5V5.5H19.9297L16.1836 1.75391L17.4141 0.496094ZM6.58594 12.7461L7.81641 14.0039L4.07031 17.75H22.5V19.5H4.07031L7.81641 23.2461L6.58594 24.5039L0.707031 18.625L6.58594 12.7461Z"
                       fill="#023A4A" />
                   </svg>
-                  Transfers</button>
+                  {{ 'Transfers' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-1" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
-                  type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false"><svg width="26"
+                <button class="nav-link" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                  type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
+                  <svg  id="users-icon" width="26"
                     height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
                       fill="#023A4A" />
                   </svg>
-                  Gallery</button>
+                  {{ 'Gallery' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-2" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
-                  type="button" role="tab" aria-controls="contact-tab-pane-2" aria-selected="false"><svg width="16"
+                <button class="nav-link" id="contact-tab-2" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
+                  type="button" role="tab" aria-controls="contact-tab-pane-2" aria-selected="false">
+                  <svg  id="users-icon" width="16"
                     height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M0.125 0.875H15.875V21L8 15.0938L0.125 21V0.875ZM1.875 2.625V17.5L8 12.9062L14.125 17.5V2.625H1.875Z"
                       fill="#023A4A" />
                   </svg>
-                  Favorites</button>
+                  {{ 'Favorites' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab-3" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-3"
-                  type="button" role="tab" aria-controls="contact-tab-pane-3" aria-selected="false"><svg width="24"
+                  type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-3" aria-selected="false">
+                  <svg  id="users-icon" width="24"
                     height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M4.125 0.203125L6.75 1.51562L8.5 0.640625L10.25 1.51562L12 0.640625L13.75 1.51562L15.5 0.640625L17.25 1.51562L19.875 0.203125V6.875H23.375V19.125H0.625V6.875H4.125V0.203125ZM8.5 2.60938L6.75 3.48438L5.875 3.04688V10.375H18.125V3.04688L17.25 3.48438L15.5 2.60938L13.75 3.48438L12 2.60938L10.25 3.48438L8.5 2.60938ZM2.375 8.625V17.375H21.625V8.625H19.875V12.125H4.125V8.625H2.375ZM5.875 13.875H7.625V15.625H5.875V13.875ZM9.375 13.875H11.125V15.625H9.375V13.875ZM12.875 13.875H14.625V15.625H12.875V13.875ZM16.375 13.875H18.125V15.625H16.375V13.875Z"
                       fill="#023A4A" />
                   </svg>
-                  Purchases</button>
+                  {{ 'Purchases' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
                 <button class="nav-link" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-4"
-                  type="button" role="tab" aria-controls="contact-tab-pane-4" aria-selected="false"><svg width="26"
+                  type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-4" aria-selected="false">
+                  <svg  id="users-icon" width="26"
                     height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M0.75 0.875H18.25V14.875H9.80078L4.25 19.332V14.875H0.75V0.875ZM2.5 2.625V13.125H6V15.668L9.19922 13.125H16.5V2.625H2.5ZM20 4.375H25.25V18.375H21.75V22.832L16.1992 18.375H8.05078L10.2383 16.625H16.8008L20 19.168V16.625H23.5V6.125H20V4.375Z"
                       fill="#023A4A" />
                   </svg>
-                  Chat</button>
+                  {{ 'Chat' | translate }}</button>
               </li>
 
             </ul>
@@ -209,52 +217,51 @@
                 tabindex="0">
                 <div class="user-right-content">
                   <div class="d-flex align-items-center">
-                    <h6 class="mb-0 me-2">General Details </h6>
-                    <a class="btn btn-outline-white">
-                      <svg class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <h6 class="mb-0 me-2 main-template"> {{ 'GeneralDetails' | translate}} </h6>
+                    <a class="btn btn-outline-white main-template">
+                      <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
                         </svg>
-                        
         
-                      Edit</a>
+                        {{ 'Edit' | translate}}</a>
                   </div>
                   <div class="row">
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>Current Club</p>
-                        <h6><img src="../../../../assets/images/team-badge.png" class="fc-img" alt="">FC Thun U21<img
+                        <p>{{ 'CurrentClub' | translate}}</p>
+                        <h6><img src="../../../../assets/images/team-badge.png" class="fc-img" alt=""> {{'FCThunU21' |translate }}<img
                             src="../../../../assets/images/flag.svg" class="fc-img  style-1" alt=""></h6>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>League level</p>
-                        <h6>Challenge League</h6>
+                        <p> {{ 'League level ' | translate }}</p>
+                        <h6>{{ 'ChallengeLeague ' | translate }}</h6>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>Nationality</p>
+                        <p> {{ 'Nationality' | translate }}</p>
 
                         <div class="d-flex align-items-center mb-2">
                           <img src="../../../../assets/images/flag.svg" alt="">
-                          <h6>Switzerland</h6>
+                          <h6> {{'Switzerland' | translate }} </h6>
                         </div>
                         <div class="d-flex align-items-center">
                           <img src="../../../../assets/images/flag.svg" alt="">
-                          <h6>Kosovo</h6>
+                          <h6> {{ 'Kosovo' | translate }}</h6>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>Position</p>
-                        <h6>Center Forward</h6>
+                        <p> {{ 'Position' | translate}}</p>
+                        <h6> {{'CenterForward' | translate}}</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details">
-                        <p>International player</p>
+                        <p> {{ 'InternationalPlayer' | translate}}</p>
                         <div class="d-flex align-items-center">
                           <img src="../../../../assets/images/flag.svg" alt="">
                           <h6>Kosovo</h6>
@@ -266,33 +273,31 @@
                 </div>
                 <!-- second -->
                 <div class="user-right-content">
-                  
                   <div class="d-flex align-items-center">
-                    <h6 class="mb-0 me-2">Personal Details</h6>
-                    <a class="btn btn-outline-white">
-                      <svg class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <h6 class="mb-0 me-2 main-template"> {{ 'PersonalDetails' | translate}}</h6>
+                    <a class="btn btn-outline-white  main-template">
+                      <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
                         </svg>
-                        
         
-                      Edit</a>
+                       {{ 'Edit' | translate}}</a>
                   </div>
                   <div class="row">
                     <div class="col-lg-3">
                       <div class="team-details style-1">
-                        <p>Full Name</p>
+                        <p> {{ 'FullName' | translate}}</p>
                         <h6>Elton Prince Morina</h6>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details style-1">
-                        <p>Date of birth</p>
+                        <p> {{ 'Date of birth' | translate}}</p>
                         <h6>Apr 21, 2004</h6>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details style-1">
-                        <p>Foot</p>
+                        <p> {{ 'Foot' | translate}}</p>
 
                         <h6>Right</h6>
                       </div>
@@ -300,52 +305,53 @@
 
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>In the team since</p>
+                        <p>{{ 'Intheteamsince ' | translate}}</p>
                         <h6>Apr 07, 2023</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>Age</p>
+                        <p>{{ 'Age' | translate}}</p>
                         <h6>19</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3 ">
                       <div class="team-details style-1">
-                        <p>Place of birth</p>
+                        <p> {{"Placeofbirth" | translate }}</p>
                         <h6>Zurich, <img src="../../../../assets/images/flag.svg" alt="">Switzerland</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>Contract until</p>
+                        <p>{{ 'ContractUntil' | translate}}</p>
                         <h6>-</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>Top Speed</p>
+                        <p> {{ 'TopSpeed' | translate}}</p>
                         <h6>33.7 km/h</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>Height</p>
+                        <p> {{ 'Height' | translate }}</p>
                         <h6>1.92 m</h6>
                       </div>
                     </div>
                     <div class="col-lg-3 mt-3">
                       <div class="team-details style-1">
-                        <p>Position</p>
+                        <p> {{ 'Position' | translate }}</p>
                         <h6>Center Forward</h6>
                       </div>
                     </div>
                     <div class="col-lg-4 mt-3">
                       <div class="team-details style-1">
-                        <p>Social Media</p>
+                        <p> {{'SocialMedia' | translate }}</p>
                         <div class="d-flex align-items-center team-details-sub ">
 
-                          <h6><svg class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
+                          <h6>
+                            <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
                               xmlns="http://www.w3.org/2000/svg">
                               <path
                                 d="M5.6044 6.13187V3.89011C5.6044 3.2967 6.13187 2.76923 6.72528 2.76923H7.84615V0H5.6044C3.75824 0 2.24176 1.51648 2.24176 3.36264V6.1978H0V9.03297H2.24176V18H5.6044V8.9011H7.84615L8.96703 6.06593L5.6044 6.13187Z"
@@ -355,7 +361,8 @@
                         </div>
                         <div class="d-flex align-items-center">
 
-                          <h6><svg class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <h6>
+                            <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
                             <path d="M10.0004 5C7.20625 5 5.00037 7.20588 5.00037 10C5.00037 12.7941 7.20625 15 10.0004 15C12.7945 15 15.0004 12.7941 15.0004 10C15.0004 7.27941 12.7945 5 10.0004 5ZM10.0004 13.1618C8.30919 13.1618 6.8386 11.7647 6.8386 10C6.8386 8.23529 8.23566 6.83824 10.0004 6.83824C11.7651 6.83824 13.1621 8.23529 13.1621 10C13.1621 11.7647 11.7651 13.1618 10.0004 13.1618Z" fill="#111418"/>
                             <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
@@ -367,12 +374,12 @@
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>Email</p>
+                        <p> {{ 'Email' | translate}}</p>
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
-                        <p>Password</p>
+                        <p> {{ 'Password' | translate}}</p>
                       </div>
                     </div>
                   </div>
@@ -419,7 +426,7 @@
         </a>
       </div>
       <div class="modal-body text-center pb-5">
-           This user is already verified.
+           {{ 'UserAlreadyVerified'  | translate }}
       </div>
      
     </div>
@@ -438,11 +445,11 @@
           </svg>
         </a>
       </div>
-      <div class="modal-body text-center">
-        Once user is deleted, it can’t be undone. Do you want to delete?
+      <div class="modal-body text-center user-text">
+         {{ 'ConfirmDeleteUser' | translate }}
       </div>
       <div class="modal-footer border-0 justify-content-center pb-4">
-        <a  class="text-danger" data-bs-dismiss="modal">Delete Account</a>
+        <a  class="text-danger" data-bs-dismiss="modal"> {{ 'DeleteAccount' | translate }}</a>
       </div>
      
     </div>

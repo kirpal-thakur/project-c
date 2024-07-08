@@ -24,7 +24,7 @@ const routes: Routes = [
       {path: 'Marketing', component: MarketingComponent},
       // {path: 'Website', component: WebsiteComponent},
       {path: 'Setting', component: SettingComponent},
-      // {path: 'User-detail', component: UserDetailComponent},
+      {path: 'User-detail', component: UserDetailComponent},
     ]
   }
 

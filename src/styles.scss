@@ -135,9 +135,9 @@ a {
   }
 }
 .search-area {
-  width: 17.063rem;
+  width: 16.063rem;
   border-radius: 30px;
-  padding: 13px 16px;
+  padding: 8px 13px;
   background-color: #fff;
   .input-group-text,
   .form-control{
@@ -309,7 +309,9 @@ font-weight: 400;
  }
 }
 
-
+a.dropdown-item.ai-icon.selected {
+  background: #0d6efd !important ;
+}
 
 // ------------------------- sidebar start ------------------
 .logo-box {
@@ -489,8 +491,7 @@ input:checked + .slider:before {
 .dashboard-title {
   font-size: 22px;
   font-weight: 700;
-  white-space: nowrap;
-  margin-right: 10%;
+  margin-right: 18px;
   color: #111418;
 }
 .dashboard-title h6{
