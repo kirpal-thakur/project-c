@@ -1,0 +1,42 @@
+//   --------------gallery--------
+.gallery-parent{
+    padding: 15px 20px ;
+}
+.covergallery{
+    background-image: url('../../../../../assets/images/palyers.png');
+    height: 400px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: contain;
+        background-position: center;
+        position: relative;
+    }
+    .cover-photo-container{
+    position: absolute;
+    bottom: 9px;
+    right: 15px;
+    }
+    .Delete-cover{
+        background-color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 10px;
+    }
+    .img-fluid {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+      }
+     .edit-cover{
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        background: rgb(0 0 0 / 50%);
+        border-radius: 50%;
+        height: 31px;
+        width: 28px;
+        padding: 7px 5px;
+        fill: #fff !important;
+     }

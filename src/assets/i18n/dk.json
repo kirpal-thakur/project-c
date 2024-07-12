@@ -152,7 +152,28 @@
   "Privacy": "Privatlivspolitik",
   "Terms": "Vilkår",
   "FAQ": "Ofte stillede spørgsmål",
-  "PressRoom": "Pressemeddelelser"
+  "PressRoom": "Pressemeddelelser",
+  "Published": "Udgivet",
+  "LastModified": "Sidst ændret",
+  "Remove": "Fjern",
+  "Pages": "Sider",
+    "Blog": "Blog",
+    "CouponCode": "Rabatkode",
+    "AdBanners": "Annoncebannere",
+    "Webpages": "Websider",
+    "CreateNew": "Opret ny",
+    "Filter": "Filter",
+    "Publish": "Udgiv",
+    "Draft": "Kladde",
+    "Delete": "Slet",
+     "Advertising": "Reklame",
+    "Deactivate": "Deaktiver",
+    "OrderNo": "Ordre nr.",
+    "PurchasedDate": "Købsdato",
+    "ValidUntil": "Gyldig indtil",
+    "VoucherCode": "Rabatkode",
+    "DownloadInvoice": "Download faktura",
+    "PurchaseHistory": "Købshistorik"
   
 
 

@@ -9,6 +9,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from '../app/modules/material/material.module'
 import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -25,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MaterialModule,
     MatDialogModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

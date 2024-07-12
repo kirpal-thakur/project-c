@@ -10,6 +10,7 @@ import { WebsiteComponent } from './website/website.component';
 import { SettingComponent } from './setting/setting.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { AuthGuard } from '../../services/auth.guard'; // Import the AuthGuard
+import { GalleryDetailComponent } from './user-detail/gallery/gallery.detail.component';
 
 const routes: Routes = [
   {
@@ -22,9 +23,10 @@ const routes: Routes = [
       // {path: 'Inbox', component: InboxComponent},
       {path: 'Templates', component: TemplatesComponent},
       {path: 'Marketing', component: MarketingComponent},
-      // {path: 'Website', component: WebsiteComponent},
+      {path: 'Website', component: WebsiteComponent},
       {path: 'Setting', component: SettingComponent},
       {path: 'User-detail', component: UserDetailComponent},
+      { path: 'gallery-detail', component: GalleryDetailComponent },
     ]
   }
 

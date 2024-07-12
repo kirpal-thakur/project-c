@@ -12,28 +12,100 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
+  checkboxIds: string[] = [];
+  allSelected: boolean = false;
+  userId: any; 
+  newStatus: any;
+
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
   
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe(
+    this.fetchUsers();
+  }
+
+
+
+  async fetchUsers(): Promise<void> {
+    try {
+      const response: any = await this.userService.getUsers().toPromise();
+  
+      console.log('API Response:', response);
+  
+      if (response && response.status && response.data && response.data.userData) {
+        this.users = response.data.userData; 
+        console.log('Fetched users:', this.users);
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  }
+  
+
+  selectedUserIds: number[] = [];
+  
+  onCheckboxChange(user: any) {
+    const index = this.selectedUserIds.indexOf(user.id);
+    if (index === -1) {
+      this.selectedUserIds.push(user.id);
+    } else {
+      this.selectedUserIds.splice(index, 1);
+    }
+    console.log('Selected user IDs:', this.selectedUserIds);
+  }
+
+
+  selectAllUsers() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedUserIds = this.users.map(user => user.id);
+    } else {
+      this.selectedUserIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedUserIds);
+  }
+
+  updateAllSelected() {
+    this.allSelected = this.selectedUserIds.length === this.users.length;
+  }
+
+
+  getAllCheckboxIds(): string[] {
+    return this.checkboxIds;
+  }
+  
+  onUpdateUser(userId: number): void {
+     console.log('Updating user with id:', userId);
+    console.log('New status:', this.newStatus);
+    this.userService.updateUserStatus(userId, this.newStatus).subscribe(
       response => {
-        console.log('API Response:', response);
-        if (response && response.status && response.data && response.data.userData) {
-          this.users = response.data.userData;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
+        console.log('User status updated successfully:', response);
+        alert('User status updated successfully!');
       },
       error => {
-        console.error('Error fetching users:', error);
+        console.error('Error updating user status:', error);
+        alert('Error updating user status. Please try again.');
       }
     );
   }
 
-  editUser(): void {
-    this.dialog.open(UserDetailPopupComponent);
+
+  editUser(user:any): void {
+    const dialogRef = this.dialog.open(UserDetailPopupComponent, {
+      data: user,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+       console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
   }
 
   editfilter():void {

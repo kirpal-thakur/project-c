@@ -69,7 +69,9 @@ a {
   margin-right: 8px;
 }
 
-
+button.btn.btn-secondary.dropdown-toggle {
+  background: none;
+}
 
 .compact-sidebar .page-container {
   margin-left: 115px;
@@ -92,9 +94,38 @@ a {
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
 }
+
+.toggle-padding {
+  padding: 4px 8px !important;
+  border-radius: 4px !important;
+}
+
+
 .compact-sidebar .sidebar_menu_span {
   display: none;
 }
+.custom-size-calendar .mdc-text-field--filled {
+  background: none !important;
+  border: 1px solid #111418; 
+  border-radius: 5px !important;
+}
+.custom-size-calendar .mdc-text-field--filled:hover{
+  background: none !important;
+}
+.custom-size-calendar .mdc-line-ripple::before, .mdc-line-ripple::after {
+  position: static !important;
+}
+.custom-size-calendar .mat-mdc-form-field-infix {
+  padding: 0 !important;
+}
+.custom-size-calendar .mat-mdc-text-field-wrapper {
+  height: 42px;
+  padding: 10px 11px !important;
+}
+.custom-size-calendar .mat-mdc-form-field-subscript-wrapper{
+  display: none;
+}
+
 
 .compact-sidebar .logo_img {
   display: none !important;
@@ -873,7 +904,7 @@ left: unset;
 }
 }
 .table tbody tr:hover {
-  // border: 1px solid #236115 !important;
+  border: 1px solid #236115 !important;
   border-collapse: separate;
   background: #edffe9;
   td{
@@ -923,6 +954,10 @@ left: unset;
 .cursor-pointer{
   cursor: pointer;
 }
+
+
+
+
 
 // ------------------------- users end ------------------
 

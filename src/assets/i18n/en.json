@@ -131,7 +131,27 @@
        "Privacy": "Privacy",
        "Terms": "Terms",
        "FAQ": "FAQ",
-       "PressRoom": "Press Room"
-      
+       "PressRoom": "Press Room",
+       "Published": "Published",
+       "LastModified": "Last Modified",
+       "Remove": "Remove",
+       "Pages": "Pages",
+    "Blog": "Blog",
+    "CouponCode": "Coupon Code",
+    "AdBanners": "Ad Banners",
+    "Webpages": "Webpages",
+    "CreateNew": "Create New",
+    "Filter": "Filter" ,
+    "Publish": "Publish",
+    "Draft": "Draft",
+    "Delete": "Delete" ,
+    "Advertising": "Advertising",
+    "Deactivate": "Deactivate",
+    "OrderNo": "Order No",
+    "PurchasedDate": "Purchased Date",
+    "ValidUntil": "Valid Until",
+    "VoucherCode": "Voucher code",
+    "DownloadInvoice": "Download Invoice",
+    "PurchaseHistory": "Purchase History"
     }
 

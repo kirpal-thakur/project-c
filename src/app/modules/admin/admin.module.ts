@@ -19,6 +19,19 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ClickOutsideDirective } from './marketing/click-outside.directive';
+import { RouterModule } from '@angular/router'; 
+import { UserDetailPopupComponent } from './users/user-detail-popup/user-detail-popup.component';
+import { GalleryDetailComponent } from './user-detail/gallery/gallery.detail.component';
+import { TransfersDetailComponent } from './user-detail/transfers/transfers.detail.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FavoritesDetailComponent } from './user-detail/favriots/favorites.detail.component';
+import { PurchaseDetailComponent } from './user-detail/purchase/purchase.detail.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -35,13 +48,26 @@ import { ClickOutsideDirective } from './marketing/click-outside.directive';
     FooterComponent,
     UserDetailComponent,
     ClickOutsideDirective,
+    UserDetailPopupComponent,
+    GalleryDetailComponent,
+    TransfersDetailComponent,
+    FavoritesDetailComponent,
+    PurchaseDetailComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     TranslateModule ,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    RouterModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatTabsModule 
   ],
   providers: [UserService]
 })

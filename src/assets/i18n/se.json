@@ -155,6 +155,27 @@
     "Privacy": "Integritet",
     "Terms": "Villkor",
     "FAQ": "Vanliga frågor",
-    "PressRoom": "Pressrum"
+    "PressRoom": "Pressrum",
+    "Published": "Publicerad",
+    "LastModified": "Senast ändrad",
+    "Remove": "Ta bort",
+    "Pages": "Sidor",
+    "Blog": "Blogg",
+    "CouponCode": "Kupongkod",
+    "AdBanners": "Annonsbanners",
+    "Webpages": "Webbsidor",
+    "CreateNew": "Skapa ny",
+    "Filter": "Filter",
+    "Publish": "Publicera",
+    "Draft": "Utkast",
+    "Delete": "Radera",
+      "Advertising": "Reklam",
+    "Deactivate": "Inaktivera",
+    "OrderNo": "Beställningsnr.",
+    "PurchasedDate": "Köpedatum",
+    "ValidUntil": "Giltig till",
+    "VoucherCode": "Kupongkod",
+    "DownloadInvoice": "Ladda ner faktura",
+    "PurchaseHistory": "Köphistorik"
   }
 

@@ -65,6 +65,9 @@
     
     }
 }
+.main-template{
+    color: black;
+}
 
 .nav-tabs{
     &.user-tabs{
@@ -166,3 +169,17 @@
         font-weight: 500;
     }
 }
+
+
+/* user-detail.component.css */
+
+  
+  .tab-pane {
+    display: none;
+  }
+  
+  .tab-pane.show {
+    display: block;
+  }
+
+

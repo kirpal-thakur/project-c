@@ -1027,6 +1027,16 @@ color: #ffffff;
 }
 
 
+// ----------------setting ---------------
+
+.dark-theme .card-tabs .nav-tabs .nav-link {
+  border-bottom: none !important;
+}
+
+.dark-theme .card-tabs {
+background-color: #072944 !important;
+}
+
 
 
 // ---------------------Footer --------------------
@@ -1066,6 +1076,11 @@ color: #ffffff !important;
 .dark-theme .overlay{
   opacity: 40% !important;
 }
+.dark-theme #eye-icon path {
+  fill: white;
+}
+
+
 
 
 .dark-theme .mat-mdc-dialog-surface.mdc-dialog__surface {
@@ -1082,6 +1097,19 @@ background-color: #072944;
 }
 .dark-theme .main-template{
   color: #ffffff !important;
+}
+
+
+// ------------------
+
+
+
+.dark-theme .custom-size-calendar .mdc-text-field--filled{
+  background: white !important;
+}
+.dark-theme .Delete-cover{
+  color: white;
+  background-color: #072944 !important;
 }
 
 // ------------------------- users end ------------------

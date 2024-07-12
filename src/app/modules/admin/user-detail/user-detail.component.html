@@ -134,7 +134,7 @@
           <div class="col-lg-10 px-0">
             <ul class="nav nav-tabs user-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                <button class="nav-link " (click)="isActive = '1'" [ngClass]="{'active': isActive == '1'}" id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                   type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
                   <svg  id="users-icon" width="24"
                     height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,10 +142,11 @@
                       d="M12 0.125C14.0599 0.125 15.974 0.644531 17.7422 1.68359C19.4557 2.6862 20.8138 4.04427 21.8164 5.75781C22.8555 7.52604 23.375 9.4401 23.375 11.5C23.375 13.5599 22.8555 15.474 21.8164 17.2422C20.8138 18.9557 19.4557 20.3138 17.7422 21.3164C15.974 22.3555 14.0599 22.875 12 22.875C9.9401 22.875 8.02604 22.3555 6.25781 21.3164C4.54427 20.3138 3.1862 18.9557 2.18359 17.2422C1.14453 15.474 0.625 13.5599 0.625 11.5C0.625 9.4401 1.14453 7.52604 2.18359 5.75781C3.1862 4.04427 4.54427 2.6862 6.25781 1.68359C8.02604 0.644531 9.9401 0.125 12 0.125ZM12 1.875C10.25 1.875 8.6276 2.3125 7.13281 3.1875C5.69271 4.04427 4.54427 5.19271 3.6875 6.63281C2.8125 8.1276 2.375 9.75 2.375 11.5C2.375 13.25 2.8125 14.8724 3.6875 16.3672C4.54427 17.8073 5.69271 18.9557 7.13281 19.8125C8.6276 20.6875 10.25 21.125 12 21.125C13.75 21.125 15.3724 20.6875 16.8672 19.8125C18.3073 18.9557 19.4557 17.8073 20.3125 16.3672C21.1875 14.8724 21.625 13.25 21.625 11.5C21.625 9.75 21.1875 8.1276 20.3125 6.63281C19.4557 5.19271 18.3073 4.04427 16.8672 3.1875C15.3724 2.3125 13.75 1.875 12 1.875ZM12 4.5C12.7839 4.5 13.513 4.70052 14.1875 5.10156C14.862 5.48438 15.3906 6.01302 15.7734 6.6875C16.1745 7.36198 16.375 8.09115 16.375 8.875C16.375 9.51302 16.2383 10.1237 15.9648 10.707C15.6914 11.2721 15.3086 11.7643 14.8164 12.1836C15.819 12.694 16.6211 13.4414 17.2227 14.4258C17.8242 15.3919 18.125 16.4583 18.125 17.625H16.375C16.375 16.8229 16.1745 16.0938 15.7734 15.4375C15.3906 14.763 14.862 14.2344 14.1875 13.8516C13.5312 13.4505 12.8021 13.25 12 13.25C11.1979 13.25 10.4596 13.4505 9.78516 13.8516C9.12891 14.2344 8.60026 14.763 8.19922 15.4375C7.81641 16.0938 7.625 16.8229 7.625 17.625H5.875C5.875 16.4583 6.17578 15.3919 6.77734 14.4258C7.37891 13.4414 8.18099 12.694 9.18359 12.1836C8.69141 11.7643 8.30859 11.2721 8.03516 10.707C7.76172 10.1237 7.625 9.51302 7.625 8.875C7.625 8.09115 7.81641 7.36198 8.19922 6.6875C8.60026 6.01302 9.13802 5.48438 9.8125 5.10156C10.487 4.70052 11.2161 4.5 12 4.5ZM12 6.25C11.2708 6.25 10.651 6.50521 10.1406 7.01562C9.63021 7.52604 9.375 8.14583 9.375 8.875C9.375 9.60417 9.63021 10.224 10.1406 10.7344C10.651 11.2448 11.2708 11.5 12 11.5C12.7292 11.5 13.349 11.2448 13.8594 10.7344C14.3698 10.224 14.625 9.60417 14.625 8.875C14.625 8.14583 14.3698 7.52604 13.8594 7.01562C13.349 6.50521 12.7292 6.25 12 6.25Z"
                       fill="#023A4A" />
                   </svg>
-                  {{ 'Profile' | translate }}</button>
+                  {{ 'Profile' | translate }}
+                </button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
+                <button class="nav-link " (click)="isActive = '2'"  [ngClass]="{'active': isActive == '2'}" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
                   type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +157,7 @@
                   {{ 'Performance' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link transfer" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
+                <button class="nav-link transfer" (click)="isActive = '3'" [ngClass]="{'active': isActive == '3'}" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
                   type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +168,7 @@
                   {{ 'Transfers' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                <button class="nav-link" (click)="isActive = '4'" [ngClass]="{'active': isActive == '4'}" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
                   type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
                   <svg  id="users-icon" width="26"
                     height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,8 +179,8 @@
                   {{ 'Gallery' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-2" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
-                  type="button" role="tab" aria-controls="contact-tab-pane-2" aria-selected="false">
+                <button class="nav-link "  (click)="isActive = '5'" [ngClass]="{'active': isActive == '5'}" id="contact-tab-2" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
+                  type="button" role="tab" aria-controls="contact-tab-pane-2" aria-selected="true">
                   <svg  id="users-icon" width="16"
                     height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -187,9 +188,10 @@
                       fill="#023A4A" />
                   </svg>
                   {{ 'Favorites' | translate }}</button>
+                 
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-3" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-3"
+                <button class="nav-link" (click)="isActive = '6'" [ngClass]="{'active': isActive == '5'}" id="contact-tab-3" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-3"
                   type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-3" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +202,7 @@
                   {{ 'Purchases' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-4"
+                <button class="nav-link" (click)="isActive = '7'" [ngClass]="{'active': isActive == '6'}" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-4"
                   type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-4" aria-selected="false">
                   <svg  id="users-icon" width="26"
                     height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -212,6 +214,8 @@
               </li>
 
             </ul>
+         
+
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
                 tabindex="0">
@@ -375,11 +379,13 @@
                     <div class="col-lg-3">
                       <div class="team-details">
                         <p> {{ 'Email' | translate}}</p>
+                        <input type="email" />
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="team-details">
                         <p> {{ 'Password' | translate}}</p>
+                        <input type="password" />
                       </div>
                     </div>
                   </div>
@@ -402,15 +408,33 @@
 
 
             </div>
-          </div>
+
+           <!-- gallery -->
+           <div *ngIf="isActive === '4'">
+             <app-user-gallery></app-user-gallery>
+            </div>
+
+         <!-- Favorites -->
+        
+      
+         <div *ngIf="isActive === '5'">
+          <app-user-favorites></app-user-favorites>
         </div>
 
+        <!-- purchase history -->
+        <div *ngIf="isActive === '6'">
+          <app-user-purchase></app-user-purchase>
+        </div>
 
-      </div>
-
-      <app-footer></app-footer>
+        <div *ngIf="isActive === '3'">
+     <app-user-transfers></app-user-transfers>
+     </div>
     </div>
+  <app-footer></app-footer>
+
   </div>
+
+  
 
 
   <!-- Modal -->

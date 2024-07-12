@@ -155,7 +155,28 @@
   "Privacy": "Confidentialité",
   "Terms": "Conditions",
   "FAQ": "FAQ",
-  "PressRoom": "Salle de presse"
+  "PressRoom": "Salle de presse",
+  "Published": "Publié",
+    "LastModified": "Dernière modification",
+    "Remove": "Supprimer",
+    "Pages": "Pages",
+    "Blog": "Blog",
+    "CouponCode": "Code promo",
+    "AdBanners": "Bannières publicitaires",
+    "Webpages": "Pages Web",
+    "CreateNew": "Créer nouveau",
+    "Filter": "Filtrer",
+    "Publish": "Publier",
+    "Draft": "Brouillon",
+    "Delete": "Supprimer",
+    "Advertising": "Publicité",
+    "Deactivate": "Désactiver",
+    "OrderNo": "N° de commande",
+    "PurchasedDate": "Date d'achat",
+    "ValidUntil": "Valable jusqu'au",
+    "VoucherCode": "Code promo",
+    "DownloadInvoice": "Télécharger la facture",
+    "PurchaseHistory": "Historique des achats"
 
 
   }
