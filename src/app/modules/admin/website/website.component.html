@@ -137,7 +137,7 @@
                   >
                     <div class="d-flex align-items-center">
                       <h2 class="card-title mb-0 me-3">{{'Webpages' | translate}}</h2>
-                      <a class="btn btn-primary">{{'CreateNew' | translate}}</a>
+                      <a  class="btn btn-primary">{{'CreateNew' | translate}}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -574,7 +574,8 @@
                   >
                     <div class="d-flex align-items-center">
                       <h2 class="card-title mb-0 me-3">{{'Blog' | translate}}</h2>
-                      <a class="btn btn-primary">{{'CreateNew' | translate}}</a>
+                      <a  class="btn btn-primary">{{ 'CreateNew' | translate }}</a>
+
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -1008,7 +1009,7 @@
                   >
                     <div class="d-flex align-items-center">
                       <h2 class="card-title mb-0 me-3">{{'CouponCode' | translate }}</h2>
-                      <a class="btn btn-primary">{{'CreateNew' | translate  }}</a>
+                      <a (click)="editCoupenCode()" class="btn btn-primary">{{'CreateNew' | translate  }}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -1452,7 +1453,7 @@
                   >
                     <div class="d-flex align-items-center">
                       <h2 class="card-title mb-0 me-3">{{'Advertising' | translate}}</h2>
-                      <a class="btn btn-primary">{{'CreateNew' | translate }}</a>
+                      <a (click)="editAdvertising()" class="btn btn-primary">{{'CreateNew' | translate }}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">

@@ -173,7 +173,16 @@
     "ValidUntil": "Gyldig indtil",
     "VoucherCode": "Rabatkode",
     "DownloadInvoice": "Download faktura",
-    "PurchaseHistory": "Købshistorik"
+    "PurchaseHistory": "Købshistorik",
+     "ViewProfile": "Vis profil",
+    "RemoveFromFavorite": "Fjern fra favoritter",
+    "CoverPhoto": "Forsidebillede",
+    "UploadCoverPhoto": "Upload forsidebillede",
+    "Photos": "Fotos",
+    "AddPhotos": "Tilføj fotos",
+    "Season": "Sæson",
+    "MovingFrom": "Flytter fra",
+    "MovingTo": "Flytter til"
   
 
 

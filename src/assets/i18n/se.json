@@ -176,6 +176,15 @@
     "ValidUntil": "Giltig till",
     "VoucherCode": "Kupongkod",
     "DownloadInvoice": "Ladda ner faktura",
-    "PurchaseHistory": "Köphistorik"
+    "PurchaseHistory": "Köphistorik",
+    "ViewProfile": "Visa profil",
+    "RemoveFromFavorite": "Ta bort från favoriter",
+    "CoverPhoto": "Omslagsfoto",
+    "UploadCoverPhoto": "Ladda upp omslagsfoto",
+    "Photos": "Foton",
+    "AddPhotos": "Lägg till foton",
+    "Season": "Säsong",
+    "MovingFrom": "Flyttar från",
+    "MovingTo": "Flyttar till"
   }
 

@@ -27,6 +27,7 @@
     "angularx-social-login": "^4.1.0",
     "chart.js": "^4.4.3",
     "dotenv": "^16.4.5",
+    "ngx-editor": "^17.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

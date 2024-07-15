@@ -176,7 +176,16 @@
     "ValidUntil": "Válido hasta",
     "VoucherCode": "Código de cupón",
     "DownloadInvoice": "Descargar factura",
-    "PurchaseHistory": "Historial de compras"
+    "PurchaseHistory": "Historial de compras",
+     "ViewProfile": "Ver perfil",
+    "RemoveFromFavorite": "Eliminar de favoritos",
+    "CoverPhoto": "Foto de portada",
+    "UploadCoverPhoto": "Subir foto de portada",
+    "Photos": "Fotos",
+    "AddPhotos": "Agregar fotos",
+    "Season": "Temporada",
+    "MovingFrom": "Mudanza de",
+    "MovingTo": "Mudanza a"
 
   }
 

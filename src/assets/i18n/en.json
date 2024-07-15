@@ -152,6 +152,15 @@
     "ValidUntil": "Valid Until",
     "VoucherCode": "Voucher code",
     "DownloadInvoice": "Download Invoice",
-    "PurchaseHistory": "Purchase History"
+    "PurchaseHistory": "Purchase History",
+    "ViewProfile": "View Profile",
+    "RemoveFromFavorite": "Remove From Favorite",
+    "CoverPhoto": "Cover Photo",
+    "UploadCoverPhoto": "Upload Cover Photo",
+    "Photos": "Photos",
+    "AddPhotos": "Add Photos",
+    "Season": "Season",
+    "MovingFrom": "Moving From",
+    "MovingTo": "Moving To"
     }
 

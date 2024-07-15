@@ -179,7 +179,16 @@
     "ValidUntil": "Gültig bis",
     "VoucherCode": "Gutscheincode",
     "DownloadInvoice": "Rechnung herunterladen",
-    "PurchaseHistory": "Kaufhistorie"
+    "PurchaseHistory": "Kaufhistorie",
+    "ViewProfile": "Profil anzeigen",
+    "RemoveFromFavorite": "Aus Favoriten entfernen",
+    "CoverPhoto": "Titelbild",
+    "UploadCoverPhoto": "Titelbild hochladen",
+    "Photos": "Fotos",
+    "AddPhotos": "Fotos hinzufügen",
+    "Season": "Saison",
+    "MovingFrom": "Umzug von",
+    "MovingTo": "Umzug nach"
   
 }
 

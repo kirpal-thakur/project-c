@@ -29,9 +29,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PerformanceDetailComponent } from './user-detail/performance/performance.detail.component';
 import { FavoritesDetailComponent } from './user-detail/favriots/favorites.detail.component';
 import { PurchaseDetailComponent } from './user-detail/purchase/purchase.detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { NgxEditorModule } from 'ngx-editor';
+import { CoupenCodePopupComponent } from './website/coupen/coupenCode-popup.component';
+import { AdvertisingPopupComponent } from './website/advertising/advertising-popup.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     GalleryDetailComponent,
     TransfersDetailComponent,
     FavoritesDetailComponent,
-    PurchaseDetailComponent
+    PurchaseDetailComponent,
+    PerformanceDetailComponent,
+    CoupenCodePopupComponent,
+    AdvertisingPopupComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +74,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatNativeDateModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatTabsModule 
+    MatTabsModule ,
+    NgxEditorModule 
   ],
   providers: [UserService]
 })
