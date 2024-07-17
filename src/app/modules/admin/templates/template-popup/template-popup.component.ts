@@ -10,7 +10,10 @@ import { Editor } from 'ngx-editor';
   styleUrl: './template-popup.component.scss'
 })
 export class MarketingPopupComponent  implements OnInit, OnDestroy  {
-  editor!: Editor; // Using "!" to assert that editor will be initialized
+  
+  editor!: Editor;
+  html: string = '';
+  
 
   constructor(
     public dialogRef: MatDialogRef<MarketingPopupComponent>
@@ -25,7 +28,6 @@ export class MarketingPopupComponent  implements OnInit, OnDestroy  {
   }
 
   close(): void {
-    console.log('Close button clicked');
     this.dialogRef.close();
   }
 

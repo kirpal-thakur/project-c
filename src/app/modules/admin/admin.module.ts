@@ -33,9 +33,11 @@ import { PerformanceDetailComponent } from './user-detail/performance/performanc
 import { FavoritesDetailComponent } from './user-detail/favriots/favorites.detail.component';
 import { PurchaseDetailComponent } from './user-detail/purchase/purchase.detail.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { NgxEditorModule } from 'ngx-editor';
 import { CoupenCodePopupComponent } from './website/coupen/coupenCode-popup.component';
 import { AdvertisingPopupComponent } from './website/advertising/advertising-popup.component';
+import { NgxEditorModule  } from 'ngx-editor';
+import { ChatDetailComponent } from './user-detail/chat/chat.detail.component';
+import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detail.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { AdvertisingPopupComponent } from './website/advertising/advertising-pop
     PurchaseDetailComponent,
     PerformanceDetailComponent,
     CoupenCodePopupComponent,
-    AdvertisingPopupComponent
+    AdvertisingPopupComponent,
+    ChatDetailComponent,
+    TeamMemberDetailComponent
   ],
   imports: [
     CommonModule,

@@ -1,14 +1,24 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ThemeService } from '../../../services/theme.service';
 import { UserService } from '../../../services/user.service';
+import {  MatDialog } from '@angular/material/dialog';
+
+import { TeamMemberDetailComponent } from './teamMember/teamMember.detail.component';
+
+import {
+  MatDialogRef,
+} from '@angular/material/dialog';
+
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent implements OnInit {
+  readonly dialog = inject(MatDialog);
 
   constructor(
     private themeService: ThemeService,
@@ -45,6 +55,17 @@ export class SettingComponent implements OnInit {
     }
     // this.fetchProfileData();
   }
+
+  editTeamMember(){
+    console.log('Edit user button clicked!');
+    const dialogRef = this.dialog.open(TeamMemberDetailComponent,
+     { 
+      height: '380px',
+      width: '500px',
+  });
+}
+
+
 
   // fetchProfileData(): void {
   //   this.userService.getProfileData().subscribe(
