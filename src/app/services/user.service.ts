@@ -16,7 +16,16 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-
+  getUser(){
+    // Set headers with token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${'566dc6f9bcc27471f2c7b334789f67a9b4493e336a69066db2e7f88ef7c549b4'}`
+    });
+    return this.http.get<any>(
+      `https://api.socceryou.ch/api/admin/profile/60`,
+      { headers }
+    );
+  }
 
   getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[] } }> {
     const params = new HttpParams()

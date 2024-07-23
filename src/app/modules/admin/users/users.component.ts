@@ -22,6 +22,12 @@ export class UsersComponent implements OnInit {
   
 
   ngOnInit(): void {
+    const response: any = this.userService.getUser().subscribe((user)=>{
+
+      console.log('newMagazine',user);
+
+ }); 
+    console.log('response',response);
     this.fetchUsers();
   }
 
