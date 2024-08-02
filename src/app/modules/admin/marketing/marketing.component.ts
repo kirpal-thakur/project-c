@@ -3,7 +3,7 @@ import {  MatDialog } from '@angular/material/dialog';
 import {
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MarketingPopupComponent } from './marketing-popup/marketing-popup.component'; 
+import { MarketingPopupComponent } from './marketing-popup/marketing-popup.component';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 
 @Component({
@@ -12,18 +12,19 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
   styleUrls: ['./marketing.component.scss']
 })
 export class MarketingComponent {
+  checkboxIds: string[] = [];
   readonly dialog = inject(MatDialog);
 
   editMarkiting(){
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(MarketingPopupComponent,
-     { 
+     {
       height: '528px',
       width: '500px',
   });
-  
+
   }
-  
+
   editfilter(){
     this.dialog.open(FilterPopupComponrnt,{
       height: '450px',
@@ -33,5 +34,9 @@ export class MarketingComponent {
         top:'150px'
       }
     })
+  }
+
+  getAllCheckboxIds(): string[] {
+    return this.checkboxIds;
   }
 }

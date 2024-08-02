@@ -45,17 +45,30 @@ font-size: 13px;
     position: absolute;
     bottom: 20px;
     display: flex;
-    column-gap: 94px; 
+    column-gap: 94px;
 }
 
 // .marketing-button-child{
 //     display: flex;
 //     justify-content: space-between;
-    
+
 // }
 .text-size{
     font-size: 14px;
 }
 .title-text{
     font-size: 16px;
+}
+.template-name-input input{
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.template-name-input input:focus-visible {
+ outline: 0px !important;
+}
+
+.template-name-input input[type=text]:disabled {
+  border: none !important;
 }

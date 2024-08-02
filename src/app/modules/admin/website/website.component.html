@@ -133,11 +133,11 @@
               <div class="card rounded-end rounded-0 overflow-hidden" style="padding: 0px 0px 15px 0px">
                 <div class="card-header">
                   <div
-                    class="d-flex align-items-center justify-content-between"
+                    class="d-flex align-items-center justify-content-between website-header-bar"
                   >
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center heading w-100">
                       <h2 class="card-title mb-0 me-3">{{'Webpages' | translate}}</h2>
-                      <a  class="btn btn-primary">{{'CreateNew' | translate}}</a>
+                      <a  class="btn btn-success btn-sm web-create-bg">{{'CreateNew' | translate}}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -176,9 +176,9 @@
                         />
                       </div>
                       <div
-                        class="d-flex align-items-center pe-2 border-start ps-3"
+                        class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg"
                       >
-                        <svg 
+                        <svg
                           width="18"
                           height="19"
                           viewBox="0 0 18 19"
@@ -201,7 +201,7 @@
                     <div class="d-flex align-items-center">
                       <div class="dropdown">
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          class="btn btn-secondary dropdown-toggle website-main-checkbox"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -256,7 +256,7 @@
                       >
                       <a class="btn  btn-outline-white">
                         <svg id="users-icon"
-                          width="22" 
+                          width="22"
                           height="24"
                           viewBox="0 0 22 23"
                           fill="none"
@@ -274,18 +274,18 @@
                     <div class="d-flex align-items-center">
                       <div
                         style="
-                         
+
                           font-size: 14px;
                           font-weight: 500;
                         "
                       >
                       15 Items
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
-                <div>
+                <!-- <div>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -308,7 +308,7 @@
                           </svg>
                         </th>
                         <th scope="col">
-                          {{'LastModified' | translate  }}
+                          {{'Last Modified' | translate }}
                           <svg id="users-icon"
                             width="9"
                             height="15"
@@ -324,9 +324,9 @@
                         </th>
 
                         <th scope="col">{{'Status' | translate   }}</th>
-                        <th scope="col">{{'View' | translate }}</th>
-                        <th scope="col">{{'Edit' | translate }}</th>
-                        <th scope="col">{{'Remove' | translate  }}</th>
+                        <th class="text-center" scope="col">{{'View' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Edit' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Remove' | translate  }}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -347,7 +347,7 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span class="main-template">Title goes here</span>
+                           <span class="main-template">Home</span>
                           </div>
                         </td>
                         <td>English</td>
@@ -357,7 +357,7 @@
                         <td>
                           <span class="bg_success">Pubished</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -375,7 +375,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -389,7 +389,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -405,7 +405,7 @@
                           </svg>
                         </td>
                       </tr>
-                     
+
                       <tr>
                         <td style="width: 50px;">
                           <span class="form-check align-self-center me-2">
@@ -422,7 +422,7 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span class="main-template">Title goes here</span>
+                           <span class="main-template">Talent</span>
                           </div>
                         </td>
                         <td>English</td>
@@ -432,7 +432,7 @@
                         <td>
                           <span class="bg_pending">Draft</span>
                         </td>
-                        <td>
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -450,8 +450,8 @@
                             />
                           </svg>
                         </td>
-                        <td>
-                          <svg id="users-icon"
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon "
                             width="24"
                             height="24"
                             viewBox="0 0 24 24"
@@ -464,8 +464,8 @@
                             />
                           </svg>
                         </td>
-                        <td>
-                          <svg id="users-icon"
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon "
                             width="22"
                             height="23"
                             viewBox="0 0 22 23"
@@ -497,7 +497,7 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span class="main-template">Title goes here</span>
+                           <span class="main-template">About</span>
                           </div>
                         </td>
                         <td>English</td>
@@ -507,7 +507,7 @@
                         <td>
                           <span class="bg_success">Pubished</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -525,7 +525,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -539,7 +539,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -557,7 +557,264 @@
                       </tr>
                     </tbody>
                   </table>
+                </div> -->
+
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{ 'Name' | translate }}</th>
+                        <th scope="col">{{ 'Language' | translate }}</th>
+                        <th scope="col" class="d-none d-sm-table-cell">
+                          {{ 'Published' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                          </svg>
+                        </th>
+                        <th scope="col" class="d-none d-sm-table-cell">
+                          {{ 'Last Modified' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                          </svg>
+                        </th>
+                        <th scope="col">{{ 'Status' | translate }}</th>
+                        <th class="text-center" scope="col">{{ 'View' | translate }}</th>
+                        <th class="text-center" scope="col">{{ 'Edit' | translate }}</th>
+                        <th class="text-center" scope="col">{{ 'Remove' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">Home</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_success">Pubished</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                              fill="#787878"
+                            />
+                            <path
+                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">Talent</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_pending">Draft</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                              fill="#787878"
+                            />
+                            <path
+                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon "
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon "
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">About</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_success">Pubished</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                              fill="#787878"
+                            />
+                            <path
+                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
                 </div>
+
               </div>
             </div>
             <div
@@ -570,11 +827,11 @@
               <div class="card rounded-end rounded-0 overflow-hidden p-0">
                 <div class="card-header">
                   <div
-                    class="d-flex align-items-center justify-content-between"
+                    class="d-flex align-items-center justify-content-between website-header-bar"
                   >
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center heading w-100">
                       <h2 class="card-title mb-0 me-3">{{'Blog' | translate}}</h2>
-                      <a  class="btn btn-primary">{{ 'CreateNew' | translate }}</a>
+                      <a  class="btn btn-success btn-sm web-create-bg">{{ 'CreateNew' | translate }}</a>
 
                     </div>
                     <div class="card-search">
@@ -614,9 +871,8 @@
                         />
                       </div>
                       <div
-                        class="d-flex align-items-center pe-2 border-start ps-3"
-                      >
-                        <svg 
+                        class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg" >
+                        <svg
                           width="18"
                           height="19"
                           viewBox="0 0 18 19"
@@ -639,7 +895,7 @@
                     <div class="d-flex align-items-center">
                       <div class="dropdown">
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          class="btn btn-secondary dropdown-toggle  website-main-checkbox"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -712,18 +968,18 @@
                     <div class="d-flex align-items-center">
                       <div
                         style="
-                          
+
                           font-size: 14px;
                           font-weight: 500;
                         "
                       >
                       15 Items
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
-                <div>
+                <!-- <div>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -762,9 +1018,9 @@
                         </th>
 
                         <th scope="col">{{'Status' | translate }}</th>
-                        <th scope="col">{{'View' | translate }}</th>
-                        <th scope="col">{{'Edit' | translate }}</th>
-                        <th scope="col">{{'Remove'  | translate }}</th>
+                        <th class="text-center" scope="col">{{'View' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Edit' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Remove'  | translate }}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -784,7 +1040,7 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span class="main-template">Title goes here</span>
+                           <span class="main-template">Edit goes here</span>
                           </div>
                         </td>
                         <td>English</td>
@@ -794,7 +1050,7 @@
                         <td>
                           <span class="bg_success">Pubished</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -812,7 +1068,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -826,7 +1082,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -868,7 +1124,7 @@
                         <td>
                           <span class="bg_pending">Draft</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -886,7 +1142,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -900,7 +1156,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -942,7 +1198,7 @@
                         <td>
                           <span class="bg_success">Pubished</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="25"
                             height="25"
@@ -960,7 +1216,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -974,7 +1230,219 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> -->
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{'Name' | translate}}</th>
+                        <th scope="col">{{'Language' | translate }}</th>
+                        <th scope="col">
+                          {{'Published' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                          </svg>
+                        </th>
+                        <th scope="col">
+                          {{'LastModified' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                          </svg>
+                        </th>
+                        <th scope="col">{{'Status' | translate }}</th>
+                        <th class="text-center" scope="col">{{'View' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Edit' | translate }}</th>
+                        <th class="text-center" scope="col">{{'Remove' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
+                            <label for="defaultCheck1" class="form-check-label"></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="main-template">Edit goes here</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_success">Published</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z" fill="#787878"/>
+                            <path d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z" fill="#787878"/>
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59418 21.0028 6.46454 21.0028 6.33354C21.0028 6.20253 20.9766 6.07289 20.9264 5.95191C20.8762 5.83093 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12227 18.0466 3.07204C17.9256 3.02182 17.796 2.99561 17.665 2.99561C17.534 2.99561 17.4044 3.02182 17.2834 3.07204C17.1624 3.12227 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 0.75H11.5L10.5 0H7.5L6.5 0.75H1C0.602178 0.75 0.220644 0.908035 0.939339 1.12689C0.284019 1.34575 0 1.66421 0 2.25V21.75C0 22.3358 0.284019 22.6542 0.939339 22.8731C1.22064 23.092 1.60218 23.25 2 23.25H17C17.3978 23.25 17.7794 23.092 18.0607 22.8731C18.716 22.6542 19 22.3358 19 21.75V2.25C19 1.66421 18.716 1.34575 18.0607 1.12689C17.7794 0.908035 17.3978 0.75 17 0.75ZM17 21.75H2V5.25H17V21.75ZM17 3.75H2V2.25H17V3.75ZM12.5 8.25H4.5C4.30109 8.25 4.11032 8.32902 3.96967 8.46967C3.82902 8.61032 3.75 8.80109 3.75 9C3.75 9.19891 3.82902 9.38968 3.96967 9.53033C4.11032 9.67098 4.30109 9.75 4.5 9.75H12.5C12.6989 9.75 12.8897 9.67098 13.0303 9.53033C13.171 9.38968 13.25 9.19891 13.25 9C13.25 8.80109 13.171 8.61032 13.0303 8.46967C12.8897 8.32902 12.6989 8.25 12.5 8.25ZM12.5 12H4.5C4.30109 12 4.11032 12.079 3.96967 12.2197C3.82902 12.3603 3.75 12.5511 3.75 12.75C3.75 12.9489 3.82902 13.1397 3.96967 13.2803C4.11032 13.421 4.30109 13.5 4.5 13.5H12.5C12.6989 13.5 12.8897 13.421 13.0303 13.2803C13.171 13.1397 13.25 12.9489 13.25 12.75C13.25 12.5511 13.171 12.3603 13.0303 12.2197C12.8897 12.079 12.6989 12 12.5 12ZM9.5 15.75H4.5C4.30109 15.75 4.11032 15.829 3.96967 15.9697C3.82902 16.1103 3.75 16.3011 3.75 16.5C3.75 16.6989 3.82902 16.8897 3.96967 17.0303C4.11032 17.171 4.30109 17.25 4.5 17.25H9.5C9.69891 17.25 9.88968 17.171 10.0303 17.0303C10.171 16.8897 10.25 16.6989 10.25 16.5C10.25 16.3011 10.171 16.1103 10.0303 15.9697C9.88968 15.829 9.69891 15.75 9.5 15.75Z" fill="#787878"/>
+                          </svg>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">Title goes here</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_pending">Draft</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                              fill="#787878"
+                            />
+                            <path
+                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                          <span class="main-template">Title goes here</span>
+                          </div>
+                        </td>
+                        <td>English</td>
+
+                        <td>08.04.2024</td>
+                        <td>08.05.2024</td>
+                        <td>
+                          <span class="bg_success">Pubished</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="25"
+                            height="25"
+                            viewBox="0 0 25 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                              fill="#787878"
+                            />
+                            <path
+                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -993,6 +1461,8 @@
                     </tbody>
                   </table>
                 </div>
+
+
               </div>
             </div>
             <div
@@ -1005,11 +1475,11 @@
               <div class="card rounded-end rounded-0 overflow-hidden p-0">
                 <div class="card-header">
                   <div
-                    class="d-flex align-items-center justify-content-between"
+                    class="d-flex align-items-center justify-content-between website-header-bar"
                   >
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center heading w-100">
                       <h2 class="card-title mb-0 me-3">{{'CouponCode' | translate }}</h2>
-                      <a (click)="editCoupenCode()" class="btn btn-primary">{{'CreateNew' | translate  }}</a>
+                      <a (click)="editCoupenCode()" class="btn btn-success web-create-bg">{{'CreateNew' | translate  }}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -1048,9 +1518,9 @@
                         />
                       </div>
                       <div
-                        class="d-flex align-items-center pe-2 border-start ps-3"
+                        class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg"
                       >
-                        <svg 
+                        <svg
                           width="18"
                           height="19"
                           viewBox="0 0 18 19"
@@ -1073,7 +1543,7 @@
                     <div class="d-flex align-items-center">
                       <div class="dropdown">
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          class="btn btn-secondary dropdown-toggle  website-main-checkbox"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -1146,139 +1616,86 @@
                     <div class="d-flex align-items-center">
                       <div
                         style="
-                       
+
                          font-size: 14px;
                           font-weight: 500;
                         "
                       >
                        15 Items
                       </div>
-                      
+
                     </div>
                   </div>
                 </div>
-                <div>
+
+                <div class="table-responsive">
                   <table class="table table-striped">
                     <thead>
                       <tr>
                         <th scope="col"></th>
                         <th scope="col">{{'Name' | translate }}</th>
-                        <th scope="col">{{'Language' | translate}}</th>
+                        <th scope="col">{{'Discount' | translate}}</th>
                         <th scope="col">
-                          {{'Published' | translate  }}
-                          <svg id="users-icon"
-                            width="9"
-                            height="15"
-                            viewBox="0 0 9 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                              fill="#111418"
-                            />
+                          {{'Type' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
                           </svg>
                         </th>
                         <th scope="col">
-                          {{'LastModified' | translate }}
-                          <svg id="users-icon"
-                            width="9"
-                            height="15"
-                            viewBox="0 0 9 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                              fill="#111418"
-                            />
+                          {{'Code' | translate }}
+                          <svg id="users-icon" width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
                           </svg>
                         </th>
-
+                        <th scope="col">{{'Uses' | translate }}</th>
                         <th scope="col">{{'Status' | translate }}</th>
-                        <th scope="col">{{'Deactivate' | translate}}</th>
-                        <th scope="col">{{'Edit' | translate}}</th>
-                        <th scope="col">{{'Remove' | translate}}</th>
+                        <th class="text-center" scope="col">{{'Deactivate' | translate}}</th>
+                        <th class="text-center" scope="col">{{'Edit' | translate}}</th>
+                        <th class="text-center" scope="col">{{'Remove' | translate}}</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td style="width: 50px;">
                           <span class="form-check align-self-center me-2">
-                            <input
-                              type="checkbox"
-                              value=""
-                              id="defaultCheck1"
-                              class="form-check-input"
-                            /><label
-                              for="defaultCheck1"
-                              class="form-check-label"
-                            ></label>
+                            <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
+                            <label for="defaultCheck1" class="form-check-label"></label>
                           </span>
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span class="main-template">Title goes here</span>
+                            <span class="main-template">Summer Discount</span>
                           </div>
                         </td>
-                        <td>English</td>
-
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
-                        <td>
-                          <span class="bg_success">Pubished</span>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                        <td>30%</td>
+                        <td>% discount</td>
+                        <td>SOCC30</td>
+                        <td>0/1</td>
+                        <td><span class="bg_success">Published</span></td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_2433_6069)">
-                              <path
-                                d="M17.071 2.92896C13.1658 -0.976321 6.83451 -0.976321 2.92896 2.92896C-0.976321 6.83425 -0.976321 13.1655 2.92896 17.071C6.83425 20.9763 13.1655 20.9763 17.071 17.071C20.9763 13.1657 20.9763 6.8345 17.071 2.92896ZM14.3462 3.8863L3.88655 14.3457C1.79893 11.4168 2.06915 7.32448 4.69695 4.69668C7.32475 2.06888 11.4173 1.79866 14.346 3.88628L14.3462 3.8863ZM16.114 5.65376C18.2014 8.58273 17.9311 12.6753 15.3031 15.3028C12.6755 17.9308 8.58298 18.2013 5.65403 16.1134L16.1137 5.65376H16.114Z"
-                                fill="#787878"
-                              />
+                              <path d="M17.071 2.92896C13.1658 -0.976321 6.83451 -0.976321 2.92896 2.92896C-0.976321 6.83425 -0.976321 13.1655 2.92896 17.071C6.83425 20.9763 13.1655 20.9763 17.071 17.071C20.9763 13.1657 20.9763 6.8345 17.071 2.92896ZM14.3462 3.8863L3.88655 14.3457C1.79893 11.4168 2.06915 7.32448 4.69695 4.69668C7.32475 2.06888 11.4173 1.79866 14.346 3.88628L14.3462 3.8863ZM16.114 5.65376C18.2014 8.58273 17.9311 12.6753 15.3031 15.3028C12.6755 17.9308 8.58298 18.2013 5.65403 16.1134L16.1137 5.65376H16.114Z" fill="#787878"/>
                             </g>
                             <defs>
                               <clipPath id="clip0_2433_6069">
-                                <rect width="20" height="20" fill="white" />
+                                <rect width="20" height="20" fill="white"/>
                               </clipPath>
                             </defs>
                           </svg>
                         </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                              fill="#787878"
-                            />
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
                           </svg>
                         </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="22"
-                            height="23"
-                            viewBox="0 0 22 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="me-1"
-                          >
-                            <path
-                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                              fill="#787878"
-                            ></path>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                            <path d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z" fill="#787878"></path>
                           </svg>
                         </td>
                       </tr>
+
                       <tr>
                         <td style="width: 50px;">
                           <span class="form-check align-self-center me-2">
@@ -1295,17 +1712,18 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                           <span  class="main-template">Title goes here</span>
+                           <span class="main-template">Winter Offer</span>
                           </div>
                         </td>
-                        <td>English</td>
+                        <td>$20</td>
 
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
+                        <td>$20 discount</td>
+                        <td>SOCC20</td>
+                        <td>3</td>
                         <td>
                           <span class="bg_pending">Draft</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="20"
                             height="20"
@@ -1326,9 +1744,9 @@
                             </defs>
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
-                            width="24" 
+                            width="24"
                             height="24"
                             viewBox="0 0 24 24"
                             fill="none"
@@ -1340,7 +1758,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -1372,17 +1790,18 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                          <span class="main-template">Title goes here</span>
+                           <span class="main-template">Christmas Offer</span>
                           </div>
                         </td>
-                        <td>English</td>
+                        <td>$10</td>
 
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
+                        <td>$10 discount</td>
+                        <td>Play10</td>
+                        <td>10</td>
                         <td>
-                          <span class="bg_success">Pubished</span>
+                          <span class="bg_reject text-white">Expired</span>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="20"
                             height="20"
@@ -1403,7 +1822,7 @@
                             </defs>
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="24"
                             height="24"
@@ -1417,7 +1836,7 @@
                             />
                           </svg>
                         </td>
-                        <td class="c_pointer">
+                        <td class="c_pointer text-center">
                           <svg id="users-icon"
                             width="22"
                             height="23"
@@ -1433,10 +1852,166 @@
                           </svg>
                         </td>
                       </tr>
-                     
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">New Account</span>
+                          </div>
+                        </td>
+                        <td>$25</td>
+
+                        <td>$25 discount</td>
+                        <td>Win25</td>
+                        <td>10</td>
+                        <td>
+                          <span class="bg_success">Pubished</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_2433_6069)">
+                              <path
+                                d="M17.071 2.92896C13.1658 -0.976321 6.83451 -0.976321 2.92896 2.92896C-0.976321 6.83425 -0.976321 13.1655 2.92896 17.071C6.83425 20.9763 13.1655 20.9763 17.071 17.071C20.9763 13.1657 20.9763 6.8345 17.071 2.92896ZM14.3462 3.8863L3.88655 14.3457C1.79893 11.4168 2.06915 7.32448 4.69695 4.69668C7.32475 2.06888 11.4173 1.79866 14.346 3.88628L14.3462 3.8863ZM16.114 5.65376C18.2014 8.58273 17.9311 12.6753 15.3031 15.3028C12.6755 17.9308 8.58298 18.2013 5.65403 16.1134L16.1137 5.65376H16.114Z"
+                                fill="#787878"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_2433_6069">
+                                <rect width="20" height="20" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="width: 50px;">
+                          <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                           <span class="main-template">Black Friday</span>
+                          </div>
+                        </td>
+                        <td>20%</td>
+
+                        <td>% discount</td>
+                        <td>SOCC20</td>
+                        <td>5</td>
+                        <td>
+                          <span class="bg_success">Pubished</span>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_2433_6069)">
+                              <path
+                                d="M17.071 2.92896C13.1658 -0.976321 6.83451 -0.976321 2.92896 2.92896C-0.976321 6.83425 -0.976321 13.1655 2.92896 17.071C6.83425 20.9763 13.1655 20.9763 17.071 17.071C20.9763 13.1657 20.9763 6.8345 17.071 2.92896ZM14.3462 3.8863L3.88655 14.3457C1.79893 11.4168 2.06915 7.32448 4.69695 4.69668C7.32475 2.06888 11.4173 1.79866 14.346 3.88628L14.3462 3.8863ZM16.114 5.65376C18.2014 8.58273 17.9311 12.6753 15.3031 15.3028C12.6755 17.9308 8.58298 18.2013 5.65403 16.1134L16.1137 5.65376H16.114Z"
+                                fill="#787878"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_2433_6069">
+                                <rect width="20" height="20" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                              fill="#787878"
+                            />
+                          </svg>
+                        </td>
+                        <td class="c_pointer text-center">
+                          <svg id="users-icon"
+                            width="22"
+                            height="23"
+                            viewBox="0 0 22 23"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="me-1"
+                          >
+                            <path
+                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                              fill="#787878"
+                            ></path>
+                          </svg>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
+
               </div>
             </div>
             <div
@@ -1449,11 +2024,11 @@
               <div class="card rounded-end rounded-0 overflow-hidden p-0">
                 <div class="card-header">
                   <div
-                    class="d-flex align-items-center justify-content-between"
+                    class="d-flex align-items-center justify-content-between website-header-bar"
                   >
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center heading w-100">
                       <h2 class="card-title mb-0 me-3">{{'Advertising' | translate}}</h2>
-                      <a (click)="editAdvertising()" class="btn btn-primary">{{'CreateNew' | translate }}</a>
+                      <a (click)="editAdvertising()" class="btn btn-success web-create-bg">{{'CreateNew' | translate }}</a>
                     </div>
                     <div class="card-search">
                       <div class="input-group">
@@ -1492,9 +2067,9 @@
                         />
                       </div>
                       <div
-                        class="d-flex align-items-center pe-2 border-start ps-3"
+                        class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg"
                       >
-                        <svg 
+                        <svg
                           width="18"
                           height="19"
                           viewBox="0 0 18 19"
@@ -1517,7 +2092,7 @@
                     <div class="d-flex align-items-center">
                       <div class="dropdown">
                         <button
-                          class="btn btn-secondary dropdown-toggle"
+                          class="btn btn-secondary dropdown-toggle  website-main-checkbox"
                           type="button"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
@@ -1595,130 +2170,138 @@
                         ">
                       15 Items
                       </div>
-                     
+
                     </div>
                   </div>
                 </div>
-                <div>
-                  <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col"></th>
-                        <th scope="col">{{'Name' | translate}}</th>
-                        <th scope="col">{{'Language' | translate }}</th>
-                        <th scope="col">
-                          {{'Published' | translate }}
-                          <svg id="users-icon"
-                            width="9"
-                            height="15"
-                            viewBox="0 0 9 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                              fill="#111418"
-                            />
-                          </svg>
-                        </th>
-                        <th scope="col">
-                          {{'LastModified' | translate }}
-                          <svg id="users-icon"
-                            width="9"
-                            height="15"
-                            viewBox="0 0 9 15"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                              fill="#111418"
-                            />
-                          </svg>
-                        </th>
+                <div class="container">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col">{{'Name' | translate}}</th>
+                          <th scope="col">{{'Type' | translate }}</th>
+                          <th scope="col">{{'page' | translate }}</th>
+                          <th scope="col">{{'Display Duration' | translate }}</th>
+                          <th scope="col">{{'Status' | translate}}</th>
+                          <th class="text-center" scope="col">{{'View' | translate}}</th>
+                          <th class="text-center" scope="col">{{'Edit' | translate}}</th>
+                          <th class="text-center" scope="col">{{'Remove' | translate}}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="width: 50px;">
+                            <span class="form-check align-self-center me-2">
+                              <input type="checkbox" value="" id="defaultCheck1" class="form-check-input" />
+                              <label for="defaultCheck1" class="form-check-label"></label>
+                            </span>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <span class="main-template">Puma</span>
+                            </div>
+                          </td>
+                          <td>Square</td>
+                          <td>Home</td>
+                          <td>1 Day</td>
+                          <td>
+                            <span class="bg_success">Published</span>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z" fill="#787878"/>
+                              <path d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z" fill="#787878"/>
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z" fill="#787878"/>
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+                              <path d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z" fill="#787878"></path>
+                            </svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50px;">
+                            <span class="form-check align-self-center me-2">
+                              <input
+                                type="checkbox"
+                                value=""
+                                id="defaultCheck1"
+                                class="form-check-input"
+                              /><label
+                                for="defaultCheck1"
+                                class="form-check-label"
+                              ></label>
+                            </span>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <span class="main-template">Nike</span>
+                            </div>
+                          </td>
+                          <td>Banner</td>
 
-                        <th scope="col">{{'Status' | translate}}</th>
-                        <th scope="col">{{'View' | translate}}</th>
-                        <th scope="col">{{'Edit' | translate}}</th>
-                        <th scope="col">{{'Remove' | translate}}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td style="width: 50px;"> <span class="form-check align-self-center me-2">
-                          <input
-                            type="checkbox"
-                            value=""
-                            id="defaultCheck1"
-                            class="form-check-input"
-                          /><label
-                            for="defaultCheck1"
-                            class="form-check-label"
-                          ></label>
-                        </span></td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                          <span class="main-template">Title goes here</span>
-                          </div>
-                        </td>
-                        <td>English</td>
-
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
-                        <td>
-                          <span class="bg_success">Pubished</span>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="25"
-                            height="25"
-                            viewBox="0 0 25 25"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                              fill="#787878"
-                            />
-                            <path
-                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="22"
-                            height="23"
-                            viewBox="0 0 22 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="me-1"
-                          >
-                            <path
-                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                              fill="#787878"
-                            ></path>
-                          </svg>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="width: 50px;">
-                          <span class="form-check align-self-center me-2">
+                          <td>Home</td>
+                          <td>7 Days</td>
+                          <td>
+                            <span class="bg_pending">Draft</span>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="25"
+                              height="25"
+                              viewBox="0 0 25 25"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                                fill="#787878"
+                              />
+                              <path
+                                d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="22"
+                              height="23"
+                              viewBox="0 0 22 23"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="me-1"
+                            >
+                              <path
+                                d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                                fill="#787878"
+                              ></path>
+                            </svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50px;"> <span class="form-check align-self-center me-2">
                             <input
                               type="checkbox"
                               value=""
@@ -1728,143 +2311,217 @@
                               for="defaultCheck1"
                               class="form-check-label"
                             ></label>
-                          </span>
-                        </td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <span class="main-template">Title goes here</span>
-                          </div>
-                        </td>
-                        <td>English</td>
+                          </span></td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <span class="main-template">Addidas</span>
+                            </div>
+                          </td>
+                          <td>Leaderboard</td>
 
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
-                        <td>
-                          <span class="bg_pending">Draft</span>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="25"
-                            height="25"
-                            viewBox="0 0 25 25"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                              fill="#787878"
-                            />
-                            <path
-                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="22"
-                            height="23"
-                            viewBox="0 0 22 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="me-1"
-                          >
-                            <path
-                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                              fill="#787878"
-                            ></path>
-                          </svg>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="width: 50px;"> <span class="form-check align-self-center me-2">
-                          <input
-                            type="checkbox"
-                            value=""
-                            id="defaultCheck1"
-                            class="form-check-input"
-                          /><label
-                            for="defaultCheck1"
-                            class="form-check-label"
-                          ></label>
-                        </span></td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <span class="main-template">Title goes here</span>
-                          </div>
-                        </td>
-                        <td>English</td>
+                          <td>Blog</td>
+                          <td>1 Month</td>
+                          <td>
+                            <span class="bg_reject">Expired</span>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="25"
+                              height="25"
+                              viewBox="0 0 25 25"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                                fill="#787878"
+                              />
+                              <path
+                                d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="22"
+                              height="23"
+                              viewBox="0 0 22 23"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="me-1"
+                            >
+                              <path
+                                d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                                fill="#787878"
+                              ></path>
+                            </svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50px;"> <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span></td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                            <span class="main-template">Puma</span>
+                            </div>
+                          </td>
+                          <td>Skyscraper</td>
 
-                        <td>08.04.2024</td>
-                        <td>08.05.2024</td>
-                        <td>
-                          <span class="bg_success">Pubished</span>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="25"
-                            height="25"
-                            viewBox="0 0 25 25"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                              fill="#787878"
-                            />
-                            <path
-                              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                              fill="#787878"
-                            />
-                          </svg>
-                        </td>
-                        <td class="c_pointer">
-                          <svg id="users-icon"
-                            width="22"
-                            height="23"
-                            viewBox="0 0 22 23"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="me-1"
-                          >
-                            <path
-                              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                              fill="#787878"
-                            ></path>
-                          </svg>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          <td>Login</td>
+                          <td>6 Months</td>
+                          <td>
+                            <span class="bg_success">Pubished</span>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="25"
+                              height="25"
+                              viewBox="0 0 25 25"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                                fill="#787878"
+                              />
+                              <path
+                                d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="22"
+                              height="23"
+                              viewBox="0 0 22 23"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="me-1"
+                            >
+                              <path
+                                d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                                fill="#787878"
+                              ></path>
+                            </svg>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="width: 50px;"> <span class="form-check align-self-center me-2">
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="defaultCheck1"
+                              class="form-check-input"
+                            /><label
+                              for="defaultCheck1"
+                              class="form-check-label"
+                            ></label>
+                          </span></td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                            <span class="main-template">Puma</span>
+                            </div>
+                          </td>
+                          <td>Wide Skyscraper</td>
+
+                          <td>Home</td>
+                          <td>6 Hours</td>
+                          <td>
+                            <span class="bg_success">Pubished</span>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="25"
+                              height="25"
+                              viewBox="0 0 25 25"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                                fill="#787878"
+                              />
+                              <path
+                                d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                                fill="#787878"
+                              />
+                            </svg>
+                          </td>
+                          <td class="c_pointer text-center">
+                            <svg id="users-icon"
+                              width="22"
+                              height="23"
+                              viewBox="0 0 22 23"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="me-1"
+                            >
+                              <path
+                                d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                                fill="#787878"
+                              ></path>
+                            </svg>
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>

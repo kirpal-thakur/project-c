@@ -18,8 +18,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+
 import { ClickOutsideDirective } from './marketing/click-outside.directive';
-import { RouterModule } from '@angular/router'; 
+import { RouterModule } from '@angular/router';
 import { UserDetailPopupComponent } from './users/user-detail-popup/user-detail-popup.component';
 import { GalleryDetailComponent } from './user-detail/gallery/gallery.detail.component';
 import { TransfersDetailComponent } from './user-detail/transfers/transfers.detail.component';
@@ -38,7 +40,9 @@ import { AdvertisingPopupComponent } from './website/advertising/advertising-pop
 import { NgxEditorModule  } from 'ngx-editor';
 import { ChatDetailComponent } from './user-detail/chat/chat.detail.component';
 import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detail.component';
-
+import { InboxPopupComponent } from './inbox/inbox-popup/inbox-popup.component';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -63,7 +67,8 @@ import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detai
     CoupenCodePopupComponent,
     AdvertisingPopupComponent,
     ChatDetailComponent,
-    TeamMemberDetailComponent
+    TeamMemberDetailComponent,
+    InboxPopupComponent
   ],
   imports: [
     CommonModule,
@@ -71,6 +76,9 @@ import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detai
     TranslateModule ,
     FormsModule,
     MatDialogModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatChipsModule,
     RouterModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -79,7 +87,7 @@ import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detai
     MatInputModule,
     ReactiveFormsModule,
     MatTabsModule ,
-    NgxEditorModule 
+    NgxEditorModule
   ],
   providers: [UserService]
 })

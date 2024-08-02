@@ -1,0 +1,64 @@
+<div >
+
+  <div class="p-3">
+    <div><h4 class="text-center mb-3 title-text">New Message</h4></div>
+
+    <div class="close-img" (click)="close()">
+    </div>
+  </div>
+
+    <div class="inbox-body">
+      <div class="text-center w-100 body-background">
+        <mat-form-field class="example-chip-list inbox-wrapper bg-white ">
+          <!-- <mat-label>To:</mat-label> -->
+           <!-- <span>To:</span> -->
+          <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector bg-white" >
+            <p class="mt-2">To:</p>
+            @for (fruit of fruits(); track $index) {
+              <mat-chip-row (removed)="remove(fruit)">
+                <img width="20" height="20" class="img-list" src="../../../../../assets/images/1.jpg">
+
+                {{fruit}}
+                <span  matChipRemove [attr.aria-label]="'remove ' + fruit" class="cancel-icon" > </span>
+                <!-- <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                  <mat-icon>cancel</mat-icon>
+                </button> -->
+              </mat-chip-row>
+            }
+            <input
+            name="currentFruit"
+            placeholder="New Fruit..."
+            #fruitInput
+            [(ngModel)]="currentFruit"
+            [matChipInputFor]="chipGrid"
+            [matAutocomplete]="auto"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+
+          />
+          </mat-chip-grid>
+          <!-- <input
+            name="currentFruit"
+            placeholder="New Fruit..."
+            #fruitInput
+            [(ngModel)]="currentFruit"
+            [matChipInputFor]="chipGrid"
+            [matAutocomplete]="auto"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          /> -->
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" class="listBox">
+              @for (fruit of filteredFruits(); track fruit) {
+                <mat-option [value]="fruit" class="fruit-font">
+                  <img width="50" height="50" class="img-list" src="../../../../../assets/images/1.jpg">
+                  {{fruit}}
+                </mat-option>
+              }
+            </mat-autocomplete>
+
+        </mat-form-field>
+      </div>
+
+    </div>
+
+</div>

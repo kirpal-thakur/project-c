@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import Talk from 'talkjs';
+import { InboxPopupComponent } from './inbox-popup/inbox-popup.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-inbox',
@@ -7,6 +9,7 @@ import Talk from 'talkjs';
   styleUrl: './inbox.component.scss'
 })
 export class InboxComponent {
+  readonly dialog = inject(MatDialog);
   userData:any;
   ngAfterViewInit(): void{
       const userDataString = localStorage.getItem('userData');
@@ -27,8 +30,18 @@ export class InboxComponent {
       const inbox = session.createInbox({
         showChatHeader: true
       });
-      inbox.mount(document.getElementById("talkjs-container"));  
+      inbox.mount(document.getElementById("talkjs-container"));
     }
   });
+  }
+
+  editinbox() {
+    console.log("svcoiufuy")
+    this.dialog.open(InboxPopupComponent, {
+      height: '450px',
+      width: '40vw',
+
+
+    })
   }
 }

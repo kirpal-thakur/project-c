@@ -11,7 +11,7 @@ describe('SettingComponent', () => {
       declarations: [SettingComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(SettingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -21,3 +21,5 @@ describe('SettingComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+

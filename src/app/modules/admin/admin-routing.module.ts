@@ -18,7 +18,7 @@ const routes: Routes = [
     component: IndexComponent,
     children: [
       {path: '', redirectTo: 'Dashboard', pathMatch: 'full'},
-      { path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      {path: 'Dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       {path: 'Users', component: UsersComponent},
       {path: 'Inbox', component: InboxComponent},
       {path: 'Templates', component: TemplatesComponent},

@@ -23,3 +23,22 @@ padding: 7px 0px;
 .footer_main_inner p{
     margin: 0px 5px;
 }
+
+@media(max-width: 480px){
+
+  .footer-responsive{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .footer_main_inner{
+    padding-left:0;
+  }
+
+  .footer-text{
+    font-size:13px;
+  }
+  .footer_main_inner p{
+    font-size:13px;
+  }
+}

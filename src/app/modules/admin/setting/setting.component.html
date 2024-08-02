@@ -128,10 +128,12 @@
                   <div class="col-lg-4">
                     <div class="setting-media">
                       <img src="../../../assets/images/1.jpg" alt="" />
+
                       <span class="setting-edit"
                         >Click to <br />
                         Change Photo</span
                       >
+
                     </div>
                   </div>
                   <div class="col-lg-8">
@@ -149,6 +151,12 @@
                         </div>
                         <div class="mb-3">
                           <label for="emailInput" class="form-label">Email</label>
+                          <!-- <label for="formFileLg" class="form-label">Large file input example</label>
+                          <input class="form-control form-control-lg"
+                          id="formFileLg"
+                          type="file"
+                          [(ngModel)]="image"
+                          > -->
                           <input
                             type="text"
                             class="form-control"
@@ -244,7 +252,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -270,9 +278,20 @@
 
 
             <div class="card">
+
               <div class="card-header">
-                <div>
-                  <a href="javascript:void(0);" class="btn btn-outline-white"
+                <div class="d-flex col-md-3">
+                   <button class="btn activity-log-del-checkbox btn-secondary dropdown-toggle p-0 px-2 py-1 "
+                type="button">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckDefault" />
+                    </div>
+                   </button>
+                  <a href="javascript:void(0);" class="btn btn-outline-white ml-3"
                     ><svg id="users-icon"
                       width="22"
                       class="me-1"
@@ -281,15 +300,16 @@
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path 
+                      <path
                         d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
                         fill="#787878"
                       />
                     </svg>
-                    Delete</a
-                  >
+                    Delete
+                  </a>
                 </div>
-                <div class="d-flex align-items-center">
+
+                <div class="d-flex align-items-center justify-content-end col-md-4">
                   <p class="mb-0 me-3">1-12 of 100</p>
                   <a href="javascript:void(0);" class="left-slide">
                     <svg id="users-icon"
@@ -334,6 +354,7 @@
                     </svg>
                   </a>
                 </div>
+
               </div>
               <div class="card-body p-0">
                 <table class="table setting-table">
@@ -457,7 +478,7 @@
             </div>
           </div>
           <div
-          
+
             class="tab-pane fade"
             id="contact-tab-pane"
             role="tabpanel"
@@ -479,7 +500,7 @@
                 <h4 class="card-title">Team</h4>
                 <a
                 (click)="editTeamMember()"
-              
+
                   >+  <span class="Addmember">Add member</span></a
                 >
               </div>
@@ -499,7 +520,16 @@
                       <td>
                         <span class="bg_success">Approved </span>
                       </td>
-                      <td>Owner</td>
+
+                      <td>
+                          <select class="custom-select custom-select-wrapper" >
+                            <option value="1" >Admin</option>
+                            <option value="2">View-Only</option>
+                            <option value="3">Editor</option>
+                            <option value="4">Transfer Ownership</option>
+                          </select>
+
+                      </td>
                       <td class="c_pointer">
                         <svg id="users-icon"
                           width="22"
@@ -528,9 +558,18 @@
                       <td>
                         <span class="bg_success">Approved </span>
                       </td>
-                      <td>Owner</td>
 
-                      <td class="c_pointer"> 
+                      <td>
+
+                        <select class="custom-select custom-select-wrapper" >
+                          <option value="1" >Admin</option>
+                          <option value="2">View-Only</option>
+                          <option value="3">Editor</option>
+                          <option value="4">Transfer Ownership</option>
+                        </select>
+
+                    </td>
+                      <td class="c_pointer">
                         <svg id="users-icon"
                           width="22"
                           height="22"
@@ -558,8 +597,16 @@
                       <td>
                         <span class="bg_success">Approved </span>
                       </td>
-                      <td>Owner</td>
-                      <td class="c_pointer">
+                      <td>
+
+                        <select class="custom-select custom-select-wrapper" >
+                          <option value="1" >Admin</option>
+                          <option value="2">View-Only</option>
+                          <option value="3">Editor</option>
+                          <option value="4">Transfer Ownership</option>
+                        </select>
+
+                    </td>                    <td class="c_pointer">
                         <svg id="users-icon"
                           width="22"
                           height="22"
@@ -587,5 +634,5 @@
   </div>
 
   <!-- Modal -->
- 
+
 </div>

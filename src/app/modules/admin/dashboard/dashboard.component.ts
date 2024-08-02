@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.updateChartBackgroundColor();
   }
 
- 
+
 
   createChart(canvas: HTMLCanvasElement, chartId: string): Chart | null {
     const ctx = canvas.getContext('2d');
@@ -63,20 +63,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     gradientStroke.addColorStop(0, '#7BDA66');
     gradientStroke.addColorStop(0.5, '#236115');
     gradientStroke.addColorStop(1, '#7BDA66');
- 
-  
+
+
 
     const data = {
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [
         {
-          data: [2, 3, 4, 3, 2, 3, 3, 3, 4, 3, 2, 3, 2],
+          data: [ 15456, 30456, 25456, 40689, 30111, 37987, 29543, 35680, 27231, 37231, 22231, 32231],
           borderWidth: 4,
           borderColor: gradientStroke,
           pointBorderWidth: 15,
           weight: 600,
 
-        
+
           fill: {
             target: 'origin',
             above: 'rgba(11, 149, 100, 0.08)',
@@ -106,7 +106,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             border: {
               display: false,
             },
-            
+
           },
           x: {
             grid: {
@@ -115,8 +115,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             ticks: {
               display: true,
               font: {
+                size: 20,
                 family: 'poppins,sans-serif',
-                weight: 700, 
+                weight: 700,
               },
             },
             border: {
@@ -139,17 +140,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             intersect: false,
             backgroundColor: '#E05263',
             titleColor: '#fff',
+          
             titleFont: {
               family: 'Poppins',
-              size: 30,
-              weight: 800, 
+              size: 20,
+              weight: 800,
             },
-         
+
             callbacks: {
               label: function (tooltipItem: any) {
-                return ` ${tooltipItem.raw}`;
+                return  "Total Users:" + ` ${tooltipItem.raw}`;
               },
-              
+
+
             },
             displayColors: false,
           },
@@ -193,7 +196,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.themeText = isDarkMode ? 'Dark Mode' : 'Light Mode';
     document.getElementById('theme-text')!.textContent = this.themeText;
   }
-  
+
   logout() {
     this.authService.logout();
   }
@@ -215,5 +218,34 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   closeSidebar() {
     document.body.classList.toggle('mobile-sidebar-active');
   }
+
+  toggleLoadmore() {
+    const elements = document.querySelectorAll('.Toggle-Notification');
+    // console.log(elements);
+    elements.forEach(el => {
+      el.classList.toggle('d-none');
+    });
+  }
+
+
 }
+
+// @Component({
+//   selector: 'app-notifications',
+//   templateUrl: './notifications.component.html',
+//   // styleUrls: ['./notifications.component.css']
+//   styleUrls: ['./dashboard.component.scss'],
+
+// })
+// export class NotificationsComponent {
+//   showAll = false;
+//   notifications = [
+//     // Array of notifications
+//   ];
+
+//   toggleNotifications() {
+//     this.showAll = !this.showAll;
+//   }
+// }
+
 

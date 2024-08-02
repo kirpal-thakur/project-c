@@ -36,6 +36,7 @@ export class SettingComponent implements OnInit {
   state: string = '';
   zipcode: string = '';
   password: string = '';
+  image: string = '';
 
   profileData: any;
   error: string | null = null;
@@ -59,7 +60,7 @@ export class SettingComponent implements OnInit {
   editTeamMember(){
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(TeamMemberDetailComponent,
-     { 
+     {
       height: '380px',
       width: '500px',
   });
@@ -70,7 +71,7 @@ export class SettingComponent implements OnInit {
   // fetchProfileData(): void {
   //   this.userService.getProfileData().subscribe(
   //     (response) => {
-  //       console.log('Profile Data:', response); 
+  //       console.log('Profile Data:', response);
   //       this.profileData = response.data.user_data;
   //     },
   //     (error) => {
@@ -79,5 +80,14 @@ export class SettingComponent implements OnInit {
   //     }
   //   );
   // }
+
+  // selectAllActivity() {
+  //   this.allSelectedActivity = !this.allSelectedActivity;
+  //   if (this.allSelectedActivity) {
+  //     this.selectedUserIds = this.users.map(user => user.id);
+  //   } else {
+  //     this.selectedUserIds = [];
+  //   }
+  //   console.log('Selected user IDs:', this.selectedUserIds);
 
 }
