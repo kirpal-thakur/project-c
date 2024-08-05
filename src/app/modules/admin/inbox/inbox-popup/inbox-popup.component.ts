@@ -1,37 +1,11 @@
-// import { Component, Inject } from '@angular/core';
-// import {
-//   MatDialogRef,
-//   MAT_DIALOG_DATA
-// } from '@angular/material/dialog';
-
-// @Component({
-//   selector: 'app-marketing-popup',
-//   templateUrl: './marketing-popup.component.html',
-//   styleUrl: './marketing-popup.component.scss'
-// })
-// export class MarketingPopupComponent {
-//   constructor(
-//   // readonly dialogRef = inject(MatDialogRef<MarketingPopupComponent>)
-//   readonly dialogRef: MatDialogRef<MarketingPopupComponent>,
-//   @Inject(MAT_DIALOG_DATA) public data: any) {}
-//   // onNoClick(): void {
-//   //   this.dialogRef.close();
-//   // }
-
-//   close() {
-//     console.log('Close button clicked');
-//     this.dialogRef.close();
-//   }
-
-
-// }
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { UserService } from '../../../../services/user.service';
 @Component({
   selector: 'app-inbox-popup',
   templateUrl: './inbox-popup.component.html',
@@ -39,59 +13,71 @@ import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 })
 export class InboxPopupComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  readonly currentFruit = model('');
-  readonly fruits = signal(['Lemon']);
-  readonly allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
-  readonly filteredFruits = computed(() => {
-    const currentFruit = this.currentFruit().toLowerCase();
-    return currentFruit
-      ? this.allFruits.filter(fruit => fruit.toLowerCase().includes(currentFruit))
-      : this.allFruits.slice();
-  });
   readonly announcer = inject(LiveAnnouncer);
+  filteredUsers:any = [];
+  users:any = [];
+  allUsers:any = [];
+  @ViewChild("userInput") userInput!: ElementRef;
 
   constructor(
+    private userService: UserService,
     public dialogRef: MatDialogRef<InboxPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    this.fetchUsers();
+  }
+  ngOnInit(): void {
+    
+  }
+ 
+  async fetchUsers(): Promise<void> {
+       try {
+          const response: any = await this.userService.getUsers().toPromise();
+          if (response && response.status && response.data && response.data.userData) {
+              this.allUsers = response.data.userData;
+            } else {
+            console.error('Invalid API response structure:', response);
+          }
+        } catch (error) {
+          console.error('Error fetching users:', error);
+        }
 
+  }
   close() {
-    console.log('Close button clicked');
-    this.dialogRef.close();
+    this.dialogRef.close({ data: this.users });
   }
 
   onClickOutside() {
-    console.log('Clicked outside the dialog');
-    this.dialogRef.close();
+    this.dialogRef.close({ data: this.users });
   }
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
 
-    // Add our fruit
-    if (value) {
-      this.fruits.update(fruits => [...fruits, value]);
+  callListApi(userInput: HTMLInputElement) {
+    setTimeout(() => {
+      this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  && 
+      user.first_name.toLowerCase().indexOf(userInput.value.toLowerCase()) != -1
+      );
+    }, 2000);
+    console.log(userInput.value);
+  }
+
+  remove(user: any): void {
+    const index = this.users.indexOf(user);
+    if (index >= 0) {
+      this.users.splice(index, 1);
     }
-
-    // Clear the input value
-    this.currentFruit.set('');
-  }
-
-  remove(fruit: string): void {
-    this.fruits.update(fruits => {
-      const index = fruits.indexOf(fruit);
-      if (index < 0) {
-        return fruits;
-      }
-
-      fruits.splice(index, 1);
-      this.announcer.announce(`Removed ${fruit}`);
-      return [...fruits];
-    });
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.update(fruits => [...fruits, event.option.viewValue]);
-    this.currentFruit.set('');
-    event.option.deselect();
+    if (!this.users?.length){
+      this.users.push(event.option.value);
+      this.userInput.nativeElement.value = "";
+    }else if (this.users?.length && !this.users.find((user:any) => user.id === event.option.value.id)) {
+      this.users.push(event.option.value);
+      this.userInput.nativeElement.value = "";
+    } else {
+      this.userInput.nativeElement.value = "";
+    }
   }
+ 
+    
 }
