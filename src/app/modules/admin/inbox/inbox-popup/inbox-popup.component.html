@@ -1,4 +1,4 @@
-<div >
+<div class="position-relative">
 
   <div class="p-3">
     <div><h4 class="text-center mb-3 title-text">New Message</h4></div>
@@ -8,12 +8,12 @@
   </div>
 
     <div class="inbox-body">
-      <div class="text-center w-100 body-background">
-        <mat-form-field class="example-chip-list inbox-wrapper bg-white ">
+      <div class="text-center w-100 h-100 body-background">
+        <mat-form-field class="example-chip-list inbox-wrapper bg-white">
           <!-- <mat-label>To:</mat-label> -->
            <!-- <span>To:</span> -->
-          <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector bg-white" >
-            <p class="mt-2">To:</p>
+          <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector bg-white " >
+            <p>To:</p>
             @for (user of users; track $index) {
               <mat-chip-row (removed)="remove(user)">
                 <img width="20" height="20" class="img-list" src="../../../../../assets/images/1.jpg">
@@ -42,7 +42,10 @@
 
         </mat-form-field>
       </div>
-
+    
+    </div>
+    <div class=" position-absolute ">
+      <button class="btn btn-success btn-sm web-create-bg mx-2" type="button">Chat</button>
     </div>
 
 </div>

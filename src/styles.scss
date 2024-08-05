@@ -1230,3 +1230,15 @@ left: unset;
 }
 }
 
+.messanger-selector .mdc-evolution-chip-set__chips{
+  align-items: center !important;
+}
+
+.listBox .fruit-font .mat-pseudo-checkbox {
+    padding: 15px !important;
+    background: #148DE4 !important;
+    border-radius: 50% !important;
+}
+
+.listBox .fruit-font .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+  color: white;}
