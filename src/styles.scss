@@ -1092,11 +1092,24 @@ left: unset;
   .page-content{
     padding: 0px 10px;
   }
+
+  
 }
 @media (max-width: 550px) {
 }
 
 @media(max-width: 425px){
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0px;
+    right: 10px !important;
+    bottom: 1px !important;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
   .bg_pending {
     background: #fcbe2d;
     padding: 3px 10px;
@@ -1126,6 +1139,24 @@ left: unset;
   }
 }
 
+@media(max-width: 768px){
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0px;
+    right: 0px !important;
+    bottom: 1px !important;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+
+  .search-area {
+    width: 10rem !important;
+    border-radius: 20px !important;
+  }
+}
 // Inbox Pop Up
 .body-background .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background:inherit !important;
@@ -1178,9 +1209,24 @@ left: unset;
   box-shadow:inherit !important;
   background-color: #FAFAFA !important;
   border-bottom: 1px solid #EBEBEB ;
-  
+
 }
 .listBox::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: 768px) {
+  app-sidebar{
+    margin-top: 60px;
+  }
+  .page-sidebar{
+    overflow : auto;
+  } 
+  .page-sidebar-inner {
+    height: 67% !important;
+  }
+  .bottom_box {
+    min-height: 45px !important;
+}
 }
 

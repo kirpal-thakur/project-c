@@ -197,5 +197,71 @@
     white-space: nowrap;
   }
 
+  @media(max-width: 320px){
+    .btn-outline-white {
+      padding: 3px;
+      border: 1px solid #D9D9D9;
+      font-size: 8px;
+      color: #787878;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      border-radius: 5px !important;
+      margin-right: 7px;
+    }
+
+    .form-check-input{
+      margin-top: 6px;
+    }
+
+    .website-main-checkbox{
+      padding: 3px  !important;
+      font-size: 12px !important;
+      border-radius: 4px;
+    }
+
+    .card-title {
+      font-size: 14px;
+    }
+
+    .input-filter-text{
+      font-size: 10px;
+    }
+    .filter-svg svg{
+        height: 12px;
+        width: 12px;
+    }
+    .card-search .input-group .input-group-text svg{
+      height: 12px;
+      width: 12px;
+    }
+    .website-header-bar{
+      flex-direction: column;
+    }
+    .website-header-bar .card-search{
+      margin-top: 10px;
+    }
+
+    .btn-outline-white svg{
+        height: 17px;
+        width: 17px;
+    }
+
+    .items-count{
+      font-size: 10px !important;
+    }
+
+    .table td, .table td span {
+      color: #111418;
+      font-size: 12px !important;
+      font-weight: 400 !important;
+  }
+  .table th {
+    color: #000;
+    font-size: 12px !important;
+    font-weight: 700;
+  }
+  }
 
 }
+

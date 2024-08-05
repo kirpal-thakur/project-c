@@ -131,6 +131,9 @@ tbody td:first-child {
 
 
 @media(max-width: 480px){
+  .page-header {
+    padding: 0px 30px 0px 30px !important;
+  }
 
   .dashboard_table .user-dash-table{
     overflow-x: auto;
@@ -154,6 +157,9 @@ tbody td:first-child {
 }
 @media(max-width: 360px){
 
+  .page-header {
+    padding: 0px 30px 0px 30px !important;
+  }
   .nav-link{
     padding: 0.3rem 0.3rem;
     }
@@ -180,6 +186,9 @@ tbody td:first-child {
 
 @media(max-width: 425px){
 
+   .page-header {
+    padding: 0px 30px 0px 30px !important;
+  }
   .navbar-nav svg{
     height: 42px;
     width: 42px;
@@ -199,6 +208,10 @@ tbody td:first-child {
 @media(max-width: 450px){
   #theme-text{
     margin-right:0;
+  }
+
+  .page-header {
+    padding: 0px 30px 0px 30px !important;
   }
 
   .nav-action .badge{
@@ -252,3 +265,19 @@ tbody td:first-child {
     width: 280px;
 }
 }
+@media(width: 768px){
+  .sidebar-menu a svg{
+    width: 35px;
+    height: 35px;
+  }
+}
+@media(width: 768px){
+  .page-header {
+    padding: 0px 30px 0px 0px !important;
+  }
+}
+.view-all {
+  color: #023A4A !important;
+  font-weight: 700;
+}
+

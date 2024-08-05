@@ -297,7 +297,13 @@
   }
 
 
+  .setting-media-2::-webkit-file-upload-button{
+      display: none;
+  }
 
+  .setting-edit{
+    color: transparent !important;
+  }
 
 
 

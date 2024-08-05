@@ -26,14 +26,7 @@
 
       <div class="navbar-search">
         <form>
-          <!-- <div class="form-group">
-            <input
-              type="text"
-              name="search"
-              id="nav-search"
-              placeholder="Search..."
-            />
-          </div> -->
+    
 
           <div class="input-group search-area">
             <span class="input-group-text"><a href="javascript:void(0)">
@@ -57,7 +50,7 @@
 
           <li class="nav-item dropdown theme_dropdown me-3">
               <div class="d-flex align-items-center light-theme">
-                <!-- (click)="toggleTheme($event)" -->
+
                 <p id="theme-text">Light mode</p>
                 <label  class="switch" >
                   <input type="checkbox" (change)="toggleTheme($event)" />
@@ -161,7 +154,7 @@
 
                             <div class="load_more">
                               <a (click)="toggleLoadmore()">View all notifications</a>
-                              <!-- <p>View all notifications</p> -->
+                              
                             </div>
 
 
@@ -333,7 +326,7 @@
               aria-labelledby="home-tab"
               tabindex="0"
             >
-              <!-- <canvas id="canvas1" class="canvas">{{ chart1 }}</canvas> -->
+
               <canvas id="canvas1" class="canvas" #canvas1></canvas>
             </div>
             <div
@@ -378,7 +371,9 @@
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Users' | translate }} </p>
-                <h6>40689</h6>
+                <h6>35680</h6>
+                <p>Aug</p>
+
               </div>
               </button>
             </li>
@@ -396,6 +391,7 @@
               <div class="navtabs_button">
                 <p> {{ 'Total Sales' | translate}}</p>
                 <h6>CHF 89000</h6>
+                <p>Aug</p>
               </div>
               </button>
             </li>
@@ -413,6 +409,7 @@
               <div class="navtabs_button">
                 <p>{{ 'Total Subscriptions' | translate }}</p>
                 <h6>10293</h6>
+                <p>Aug</p>
               </div>
               </button>
             </li>
@@ -430,6 +427,7 @@
               <div class="navtabs_button">
                 <p>New Registrations</p>
                 <h6>1090</h6>
+                <p>Aug</p>
               </div>
               </button>
             </li>
@@ -451,7 +449,7 @@
                 </select>
               </div>
               </div>
-            <div class=" text-end">
+            <div class="view-all text-end ">
               <a>View All</a>
             </div>
 
