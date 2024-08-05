@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class InboxComponent {
   readonly dialog = inject(MatDialog);
   userData:any;
+  private inbox: any;
+  private chatUserSession:any;
   ngAfterViewInit(): void{
       const userDataString = localStorage.getItem('userData');
       Talk.ready.then(() => {
@@ -23,25 +25,43 @@ export class InboxComponent {
             photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
             welcomeMessage: "Hi!",
           });
-       const session = new Talk.Session({
+        this.chatUserSession = new Talk.Session({
         appId: "tHcyGZjg",
         me: me,
       });
-      const inbox = session.createInbox({
+      this.inbox = this.chatUserSession.createInbox({
         showChatHeader: true
       });
-      inbox.mount(document.getElementById("talkjs-container"));
+      this.inbox.mount(document.getElementById("talkjs-container"));
     }
   });
   }
 
   editinbox() {
-    console.log("svcoiufuy")
     this.dialog.open(InboxPopupComponent, {
       height: '450px',
       width: '40vw',
-
-
     })
+    .afterClosed()
+      .subscribe(users => {
+        const conv_id = "" + Date.now();
+        const conversation = this.chatUserSession.getOrCreateConversation(conv_id);
+        const me = new Talk.User(this.chatUserSession.me.id);
+        conversation.setParticipant(me);
+          for(let user of users.data){
+            let currUser = new Talk.User({
+              id: user.id,
+              name: user.first_name,
+              email: user.username,
+              photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+              welcomeMessage: "Hi!",
+            });
+            conversation.setParticipant(currUser);
+          }
+          this.inbox = this.chatUserSession.createInbox({
+            showChatHeader: true
+          });
+        // this.inbox.mount(document.getElementById("talkjs-container"));
+      });
   }
 }
