@@ -14,44 +14,28 @@
            <!-- <span>To:</span> -->
           <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector bg-white" >
             <p class="mt-2">To:</p>
-            @for (fruit of fruits(); track $index) {
-              <mat-chip-row (removed)="remove(fruit)">
+            @for (user of users; track $index) {
+              <mat-chip-row (removed)="remove(user)">
                 <img width="20" height="20" class="img-list" src="../../../../../assets/images/1.jpg">
-
-                {{fruit}}
-                <span  matChipRemove [attr.aria-label]="'remove ' + fruit" class="cancel-icon" > </span>
-                <!-- <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-                  <mat-icon>cancel</mat-icon>
-                </button> -->
+                {{user?.first_name}}
+                <span  matChipRemove [attr.aria-label]="'remove ' + user" class="cancel-icon" > </span>
               </mat-chip-row>
             }
             <input
-            name="currentFruit"
-            placeholder="New Fruit..."
-            #fruitInput
-            [(ngModel)]="currentFruit"
-            [matChipInputFor]="chipGrid"
-            [matAutocomplete]="auto"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"
-
-          />
+              placeholder="Search users..."
+              #userInput
+              [matAutocomplete]="auto"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputFor]="chipGrid"
+              (focus)="callListApi(userInput)"
+            />
           </mat-chip-grid>
-          <!-- <input
-            name="currentFruit"
-            placeholder="New Fruit..."
-            #fruitInput
-            [(ngModel)]="currentFruit"
-            [matChipInputFor]="chipGrid"
-            [matAutocomplete]="auto"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="add($event)"
-          /> -->
+         
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" class="listBox">
-              @for (fruit of filteredFruits(); track fruit) {
-                <mat-option [value]="fruit" class="fruit-font">
+              @for (user of filteredUsers; track user) {
+                <mat-option [value]="user" class="fruit-font">
                   <img width="50" height="50" class="img-list" src="../../../../../assets/images/1.jpg">
-                  {{fruit}}
+                  {{user.first_name}}
                 </mat-option>
               }
             </mat-autocomplete>
