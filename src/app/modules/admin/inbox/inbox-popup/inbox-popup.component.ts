@@ -44,11 +44,14 @@ export class InboxPopupComponent {
 
   }
   close() {
+    this.dialogRef.close();
+  }
+  startChat(){
     this.dialogRef.close({ data: this.users });
   }
-
+  
   onClickOutside() {
-    this.dialogRef.close({ data: this.users });
+    this.dialogRef.close();
   }
 
   callListApi(userInput: HTMLInputElement) {
