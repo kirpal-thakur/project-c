@@ -49,7 +49,7 @@ export class InboxPopupComponent {
   startChat(){
     this.dialogRef.close({ data: this.users });
   }
-  
+
   onClickOutside() {
     this.dialogRef.close();
   }
