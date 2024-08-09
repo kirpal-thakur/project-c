@@ -196,3 +196,20 @@ h2{
 //     height: 528px;
 //     width: 100%;
 // }
+
+.mat-cell{
+  height: 61vh;
+}
+.user-empty-tr:hover{
+  border: 0 !important;
+  border-collapse: separate;
+  background: #edffe9;
+}
+.user-empty-tr:hover td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+.mat-cell .rounded-circle {
+  border-radius: 0 !important;
+}

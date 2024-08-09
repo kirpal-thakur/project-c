@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from './user.model';
 import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
+import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
@@ -11,6 +12,8 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  displayedColumns: string[] = ['#','Name', 'User Type', 'Language', 'Location','Joined Date - Time','Email','Membership', 'Status','Edit'];
+  
   users: User[] = [];
   checkboxIds: string[] = [];
   allSelected: boolean = false;
@@ -22,29 +25,21 @@ export class UsersComponent implements OnInit {
   
 
   ngOnInit(): void {
-    const response: any = this.userService.getUser().subscribe((user)=>{
-
-      console.log('newMagazine',user);
-
- }); 
-    console.log('response',response);
-    //  this.fetchUsers();
+    // this.fetchUsers();
   }
 
 
 
   async fetchUsers(): Promise<void> {
     try {
-      const response: any = await this.userService.getUsers().toPromise();
-  
-      console.log('API Response:', response);
-  
+     this.userService.getUsers().subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.users = response.data.userData; 
         console.log('Fetched users:', this.users);
       } else {
         console.error('Invalid API response structure:', response);
       }
+      });     
     } catch (error) {
       console.error('Error fetching users:', error);
     }
