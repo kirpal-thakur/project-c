@@ -29,7 +29,7 @@ export class UserService {
 
   getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[] } }> {
     const params = new HttpParams()
-      .set('limit', '10')
+      .set('limit', '20')
       .set('orderBy', 'first_name')
       .set('order', 'asc');
 

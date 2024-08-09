@@ -13,6 +13,7 @@ import { SettingComponent } from './setting/setting.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
+import { EmptyTableComponent } from './empty-table/emplty-table.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
@@ -56,6 +57,7 @@ import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/mate
     HeaderComponent,
     SidebarComponent,
     FooterComponent,
+    EmptyTableComponent,
     UserDetailComponent,
     ClickOutsideDirective,
     UserDetailPopupComponent,

@@ -23,12 +23,12 @@ export class InboxComponent {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
       this.userData = JSON.parse(userDataString);
-      console.log('userData',this.userData.role);
       this.user = {
           id: this.userData.id,
           name: this.userData.first_name,
           email: this.userData.username,
           photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+          welcomeMessage: "Hi!",
           role:(this.userData.role == '1') ? "hidden" : "default"
       } 
       const session = await this.talkService.init(this.user);
@@ -41,8 +41,7 @@ export class InboxComponent {
 
       const session = await this.talkService.init(this.user);
       const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
-      console.log('conversation',conversation)
-      this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
+       this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
       const inbox = session.createInbox({
         selected: conversation
       });
@@ -64,13 +63,14 @@ export class InboxComponent {
 
 
   editinbox() {
+    this.users = [];
     this.dialog.open(InboxPopupComponent, {
       height: '450px',
       width: '40vw',
     })
     .afterClosed()
       .subscribe(users => {
-        this.users = this.newUser;
+        console.log('first users',users);
         for(let user of users.data){
             this.users.push({
               id: user.id,
@@ -79,29 +79,12 @@ export class InboxComponent {
               photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
             })
         }
+        console.log('last users',this.users);
         const groupId = this.userData.id+"-"+ Date.now();
         const groupName = this.userData.first_name+ "-" + Date.now();
         this.groupName = groupName;
         this.groupId   = groupId;
         this.createGroup();
-       /*  const conv_id = "" + Date.now();
-        const conversation = this.chatUserSession.getOrCreateConversation(conv_id);
-        const me = new Talk.User(this.chatUserSession.me.id);
-        conversation.setParticipant(me);
-          for(let user of users.data){
-            let currUser = new Talk.User({
-              id: user.id,
-              name: user.first_name,
-              email: user.username,
-              photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-              welcomeMessage: "Hi!",
-            });
-            conversation.setParticipant(currUser);
-          }
-          this.inbox = this.chatUserSession.createInbox({
-            showChatHeader: true
-          }); */
-        // this.inbox.mount(document.getElementById("talkjs-container"));
       });
   }
 }
