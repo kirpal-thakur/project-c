@@ -29,7 +29,7 @@ export class InboxComponent {
           name: this.userData.first_name,
           email: this.userData.username,
           photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-          role:(this.userData.role == '1') ? "default" : "hidden"
+          role:(this.userData.role == '1') ? "hidden" : "default"
       } 
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
