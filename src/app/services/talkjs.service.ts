@@ -43,9 +43,7 @@ export class TalkService {
     if (!this.session) {
       throw new Error('TalkJS session is not initialized');
     }
-    console.log('groupId',groupId);
     const conversation = this.session.getOrCreateConversation(groupId);
-    console.log('conversation here',conversation)
     conversation.setAttributes({
       subject: groupName
     });
