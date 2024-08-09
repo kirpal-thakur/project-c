@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   
 
   ngOnInit(): void {
-    // this.fetchUsers();
+     this.fetchUsers();
   }
 
 

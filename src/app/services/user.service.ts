@@ -4,39 +4,35 @@ import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular
 import { Observable  } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../modules/admin/users/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private apiUrl = 'https://api.socceryou.ch/api/users';
+  private apiUrl;
+  private userToken;
   private apiUrl2 = 'https://api.socceryou.ch/api/admin';
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment?.apiUrl;
+    this.userToken = localStorage.getItem('authToken');
 
-  getUser(){
-    // Set headers with token
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${'566dc6f9bcc27471f2c7b334789f67a9b4493e336a69066db2e7f88ef7c549b4'}`
-    });
-    return this.http.get<any>(
-      `https://api.socceryou.ch/api/admin/profile/60`,
-      { headers }
-    );
   }
 
   getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[] } }> {
+    const headers = new HttpHeaders({
+         'Authorization': `Bearer ${this.userToken}`
+    });
     const params = new HttpParams()
-      .set('limit', '20')
-      .set('orderBy', 'first_name')
-      .set('order', 'asc');
-
-
+      .set('limit', '10')
+      .set('orderBy', 'id')
+      .set('order', 'desc');
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}`,
-      { params, }
+      `${this.apiUrl}admin/users`,
+      { params,headers }
     );
   }
 
@@ -46,7 +42,7 @@ export class UserService {
 
     // Set headers with token
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${userToken}`
+      'Authorization': `Bearer ${this.userToken}`
     });
 
     return this.http.post<any>(`${this.apiUrl2}/update-user-status`, { userId, status: newStatus }, { headers });
