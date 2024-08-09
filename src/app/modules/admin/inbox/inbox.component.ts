@@ -14,7 +14,7 @@ export class InboxComponent {
   groupName: string = '';
   groupId: string = '';
   users: { id: string; name: string; email: string; photoUrl: string }[] = [];
-  newUser = { id: '', name: '', email: '', photoUrl: '' };
+  newUser : { id: string; name: string; email: string; photoUrl: string }[] = [];
   createdGroups: { groupId: string, groupName: string }[] = [];
   user:any = {};
   constructor(private talkService : TalkService) {}
@@ -29,7 +29,7 @@ export class InboxComponent {
           name: this.userData.first_name,
           email: this.userData.username,
           photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-          role:(this.userData.role == '1') ? "hidden" : "default"
+          role:(this.userData.role == '1') ? "default" : "hidden"
       } 
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
@@ -38,8 +38,10 @@ export class InboxComponent {
   }
   async createGroup() {
     if (this.groupName && this.groupId && this.users.length > 0) {
+
       const session = await this.talkService.init(this.user);
       const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
+      console.log('conversation',conversation)
       this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
       const inbox = session.createInbox({
         selected: conversation
@@ -59,12 +61,7 @@ export class InboxComponent {
 
     inbox.mount(document.getElementById('talkjs-container'));
   }
-  addUser() {
-    if (this.newUser.id && this.newUser.name && this.newUser.email && this.newUser.photoUrl) {
-      this.users.push({ ...this.newUser });
-      this.newUser = { id: '', name: '', email: '', photoUrl: '' };
-    }
-  }
+
 
   editinbox() {
     this.dialog.open(InboxPopupComponent, {
@@ -73,7 +70,7 @@ export class InboxComponent {
     })
     .afterClosed()
       .subscribe(users => {
-        this.users = [];
+        this.users = this.newUser;
         for(let user of users.data){
             this.users.push({
               id: user.id,
@@ -82,8 +79,8 @@ export class InboxComponent {
               photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
             })
         }
-        const groupId = this.userData.id + Date.now();
-        const groupName = this.userData.first_name+"" + Date.now();
+        const groupId = this.userData.id+"-"+ Date.now();
+        const groupName = this.userData.first_name+ "-" + Date.now();
         this.groupName = groupName;
         this.groupId   = groupId;
         this.createGroup();
