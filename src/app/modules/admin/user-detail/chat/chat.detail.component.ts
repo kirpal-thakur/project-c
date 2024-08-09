@@ -48,7 +48,7 @@ export class ChatDetailComponent implements OnInit {
       });
 
       const session = new Talk.Session({
-        appId: "tHcyGZjg",
+        appId: "tmI75KXB",
         me: me,
       });
 
