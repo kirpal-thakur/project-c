@@ -10,7 +10,7 @@ export class TalkService {
 
   constructor() {}
 
-  async init(user: { id: string; name: string; email: string; photoUrl: string }) {
+  async init(user: { id: string; name: string; email: string; photoUrl: string,role: string }) {
     await Talk.ready;
 
     const me = new Talk.User({
@@ -19,7 +19,7 @@ export class TalkService {
       email: user.email,
       photoUrl: user.photoUrl,
       welcomeMessage: 'Hey there! How can I help?',
-      role:'default'
+      role:user.role
     });
 
     this.session = new Talk.Session({

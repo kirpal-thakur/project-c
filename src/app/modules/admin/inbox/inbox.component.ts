@@ -23,12 +23,13 @@ export class InboxComponent {
     const userDataString = localStorage.getItem('userData');
     if (userDataString) {
       this.userData = JSON.parse(userDataString);
+      console.log('userData',this.userData.role);
       this.user = {
           id: this.userData.id,
           name: this.userData.first_name,
           email: this.userData.username,
           photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-          role:"default"
+          role:(this.userData.role == '1') ? "hidden" : "default"
       } 
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
@@ -39,9 +40,7 @@ export class InboxComponent {
     if (this.groupName && this.groupId && this.users.length > 0) {
       const session = await this.talkService.init(this.user);
       const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
-
       this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
-
       const inbox = session.createInbox({
         selected: conversation
       });
@@ -74,6 +73,7 @@ export class InboxComponent {
     })
     .afterClosed()
       .subscribe(users => {
+        this.users = [];
         for(let user of users.data){
             this.users.push({
               id: user.id,
@@ -82,8 +82,10 @@ export class InboxComponent {
               photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
             })
         }
-        this.groupName = "test2";
-        this.groupId   = "123";
+        const groupId = this.userData.id + Date.now();
+        const groupName = this.userData.first_name+"" + Date.now();
+        this.groupName = groupName;
+        this.groupId   = groupId;
         this.createGroup();
        /*  const conv_id = "" + Date.now();
         const conversation = this.chatUserSession.getOrCreateConversation(conv_id);
