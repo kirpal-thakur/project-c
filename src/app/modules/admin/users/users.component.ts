@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
 
  }); 
     console.log('response',response);
-    this.fetchUsers();
+    //  this.fetchUsers();
   }
 
 

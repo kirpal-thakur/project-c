@@ -1,11 +1,5 @@
-<div class="footer_main footer-responsive ">
-    <div>
-        <p class="footer-text">{{ 'Copyright' | translate }}</p>
-    </div>
-    <div class="footer_main_inner">
-        <p>{{ 'Privacy' | translate}} |</p>
-        <p>{{ 'Terms' | translate}} |</p>
-        <p>{{ 'FAQ' | translate }} |</p>
-        <p>{{ 'PressRoom' | translate}}</p>
-    </div>
-</div>
+<tr class="mat-row" *matNoDataRow>
+  <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+    No data matching the filter.
+  </td>
+</tr>
