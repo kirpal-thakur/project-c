@@ -13,7 +13,7 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 })
 export class MarketingComponent {
   checkboxIds: string[] = [];
-  readonly dialog = inject(MatDialog);
+  constructor(public dialog: MatDialog) {}
 
   editMarkiting(){
     console.log('Edit user button clicked!');

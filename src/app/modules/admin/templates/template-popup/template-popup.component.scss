@@ -72,3 +72,7 @@ font-size: 13px;
 .template-name-input input[type=text]:disabled {
   border: none !important;
 }
+ngx-editor {
+    height: 35vh; /* Set the height you want */
+    display: block; /* Ensure it behaves like a block element */
+}

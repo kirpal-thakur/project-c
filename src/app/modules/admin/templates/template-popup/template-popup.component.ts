@@ -2,8 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import {
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Editor } from 'ngx-editor';
-
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-templates',
@@ -13,6 +12,14 @@ import { Editor } from 'ngx-editor';
 export class MarketingPopupComponent  implements OnInit, OnDestroy  {
 
   editor!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['ordered_list', 'bullet_list'],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
   html: string = '';
 
 
@@ -22,6 +29,7 @@ export class MarketingPopupComponent  implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.editor = new Editor();
+
   }
 
   ngOnDestroy(): void {

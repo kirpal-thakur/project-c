@@ -45,6 +45,7 @@ import { InboxPopupComponent } from './inbox/inbox-popup/inbox-popup.component';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
+import { MarketingPopupComponent } from './templates/template-popup/template-popup.component';
 @NgModule({
   declarations: [
     IndexComponent,
@@ -71,7 +72,8 @@ import {MatTableModule} from '@angular/material/table';
     AdvertisingPopupComponent,
     ChatDetailComponent,
     TeamMemberDetailComponent,
-    InboxPopupComponent
+    InboxPopupComponent,
+    MarketingPopupComponent
   ],
   imports: [
     CommonModule,

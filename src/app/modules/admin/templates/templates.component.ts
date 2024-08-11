@@ -9,7 +9,7 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
   styleUrl: './templates.component.scss'
 })
 export class TemplatesComponent {
-  readonly dialog = inject(MatDialog);
+  constructor(public dialog: MatDialog) {}
 
   editTemplate(){
     console.log('Edit user button clicked!');
