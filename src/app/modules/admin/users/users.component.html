@@ -342,14 +342,11 @@
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <tr class="mat-row user-empty-tr" *matNoDataRow>
-                    <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">
-                      <img src="../../../assets/images/no-data-img.png" class="avatar me-2" width="250" height="250" class="rounded-circle" alt="">
-                     <p class="text-secondary">No Data Found</p> 
-                     <p class="text-secondary">There is no data to show you right now</p> 
-                    </td>
+                    <emplty-table *ngIf="isLoading==false" />
+                    
                   </tr>
                 </table>
-                <emplty-table />
+                
 
               </div>
             </div>

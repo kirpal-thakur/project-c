@@ -19,12 +19,13 @@ export class UsersComponent implements OnInit {
   allSelected: boolean = false;
   userId: any; 
   newStatus: any;
-
+  isLoading = false;
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
   
 
   ngOnInit(): void {
+    this.isLoading = true;
      this.fetchUsers();
   }
 
@@ -35,12 +36,15 @@ export class UsersComponent implements OnInit {
      this.userService.getUsers().subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.users = response.data.userData; 
+        this.isLoading = false;
         console.log('Fetched users:', this.users);
       } else {
+        this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
       });     
     } catch (error) {
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
