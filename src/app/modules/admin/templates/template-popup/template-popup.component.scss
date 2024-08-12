@@ -76,3 +76,7 @@ ngx-editor {
     height: 35vh; /* Set the height you want */
     display: block; /* Ensure it behaves like a block element */
 }
+
+::ng-deep .mat-mdc-select-panel{
+    min-width: 110px !important;
+}

@@ -45,6 +45,7 @@ import { InboxPopupComponent } from './inbox/inbox-popup/inbox-popup.component';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { MarketingPopupComponent } from './templates/template-popup/template-popup.component';
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { MarketingPopupComponent } from './templates/template-popup/template-pop
     ReactiveFormsModule,
     MatTabsModule ,
     MatTableModule,
+    MatPaginator,
     NgxEditorModule
   ],
   providers: [UserService]

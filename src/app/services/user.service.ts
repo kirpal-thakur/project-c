@@ -22,7 +22,7 @@ export class UserService {
 
   }
 
-  getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[] } }> {
+  getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
     const headers = new HttpHeaders({
          'Authorization': `Bearer ${this.userToken}`
     });
@@ -30,7 +30,7 @@ export class UserService {
       .set('limit', '10')
       .set('orderBy', 'id')
       .set('order', 'desc');
-    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
       `${this.apiUrl}admin/users`,
       { params,headers }
     );

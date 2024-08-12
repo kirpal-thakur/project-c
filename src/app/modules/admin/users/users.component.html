@@ -162,6 +162,7 @@
             <div class="paging-data">
               1-12 of 1600
             </div>
+            <mat-paginator [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
             <a class="left-slide" id="users-icon"
               ><svg
                 width="33"

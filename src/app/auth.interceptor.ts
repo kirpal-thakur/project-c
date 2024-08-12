@@ -24,6 +24,8 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
           this.handle403Error();
+        }else{
+          console.log('here show error',error)
         }
 
         return throwError(() => new Error(error.message));
