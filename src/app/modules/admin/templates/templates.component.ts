@@ -1,6 +1,6 @@
 import { Component, inject,ViewChild } from '@angular/core';
 import {  MatDialog } from '@angular/material/dialog';
-import { MarketingPopupComponent } from './template-popup/template-popup.component'; 
+import { TemplatePopupComponent } from './template-popup/template-popup.component'; 
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 import { TemplateService } from '../../../services/template.service';
 import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
@@ -84,7 +84,7 @@ export class TemplatesComponent {
     }
   }
   addTemplate(){
-    const dialogRef = this.dialog.open(MarketingPopupComponent,{
+    const dialogRef = this.dialog.open(TemplatePopupComponent,{
       height: '528px',
       width: '500px',
     });
@@ -121,7 +121,7 @@ export class TemplatesComponent {
 
   }
   editTemplate(tempalateData: any){
-    const dialogRef = this.dialog.open(MarketingPopupComponent,{
+    const dialogRef = this.dialog.open(TemplatePopupComponent,{
       height: '528px',
       width: '500px',
       data: tempalateData
