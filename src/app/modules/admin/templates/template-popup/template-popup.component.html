@@ -10,55 +10,58 @@
 
   <div class="d-flex align-items-baseline pb-2 template-name-input">
     <h4 class="text-size">Name:</h4>
-    <input type="text" ng-model="name" disabled>
+    <input type="text"  [(ngModel)]="title" >
   </div>
 
   <div class="d-flex  main-popup-div ">
       <div class="d-flex align-items-baseline mb-3">
         <h4 class="text-size">For:</h4>
         <div class="btn-group">
-          <button class="btn btn-secondary dropdown-toggle button-text" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-              Talent-Paid
-          </button>
+          <mat-select [(ngModel)]="selectedRole">
+            <mat-option [value]="0">All</mat-option>
+            @for (role of roles; track role) {
+              <mat-option [value]="role.id" *ngIf="role.id !=1">{{role.role}}</mat-option>
+            }
+          </mat-select>
 
         </div>
       </div>
       <div  class="d-flex align-items-baseline" >
        <h4 class="text-size">Language</h4>
        <div class="btn-group">
-          <button class="btn btn-secondary dropdown-toggle button-text" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-              English
-          </button>
+          <mat-select [(ngModel)]="selectedLang">
+            @for (lang of langs; track lang) {
+              <mat-option [value]="lang.id">{{lang.language}}</mat-option>
+            }
+          </mat-select>
 
         </div>
       </div>
         <div  class="d-flex align-items-baseline">
           <h4 class="text-size">Location</h4>
           <div class="btn-group">
-              <button class="btn btn-secondary dropdown-toggle button-text" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                  Location
-              </button>
+            <mat-select style="width: 37%;" [(ngModel)]="selectedLocation">
+              @for (location of locations; track location) {
+                <mat-option [value]="location.id">{{location.name}}</mat-option>
+              }
+            </mat-select>
+
+  
 
           </div>
         </div>
       </div>
 
 
-
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [(ngModel)]="content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+      </div>
       <div class="marketing-button">
-          <!-- <div class="marketing-button-child"> -->
          <div>
-          <a class="btn btn-delete">Delete</a>
+          <a class="btn btn-delete" (click)="remove()">Delete</a>
          </div>
           <div>
-          <a class="btn Launch" >Create and Launch</a>
+          <a class="btn Launch"  (click)="save()" >Create and Launch</a>
       </div>
-
-      <!-- <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
-      </div> -->
-
-
-      <!-- </div> -->
 </div>

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { User } from './user.model';
 import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 import {MatTableModule} from '@angular/material/table';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -19,33 +20,50 @@ export class UsersComponent implements OnInit {
   allSelected: boolean = false;
   userId: any; 
   newStatus: any;
+  isLoading = false;
+  filterValue: string = '';
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
   
 
   ngOnInit(): void {
-    this.fetchUsers();
+    this.isLoading = true;
+     this.fetchUsers();
   }
 
 
 
   async fetchUsers(): Promise<void> {
+    const page = this.paginator ? this.paginator.pageIndex : 0;
+    const pageSize = this.paginator ? this.paginator.pageSize : 10;
+    const sortOrder = this.sort ? this.sort.direction : 'asc';
+    const sortField = this.sort ? this.sort.active : '';
+
     try {
      this.userService.getUsers().subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.users = response.data.userData; 
-        console.log('Fetched users:', this.users);
+        this.paginator.length = response.data.totalCount;
+        this.isLoading = false;
+       // this.paginator.length = data.totalCount;
       } else {
+        this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
       });     
     } catch (error) {
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
   
-
+  onPageChange() {
+    this.fetchUsers();
+  }
   selectedUserIds: number[] = [];
   
   onCheckboxChange(user: any) {
