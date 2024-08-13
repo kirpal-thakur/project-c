@@ -1262,3 +1262,6 @@ left: unset;
 .listBox .fruit-font .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
   color: white;}
 
+  .mat-mdc-paginator-page-size{
+    display: none !important;
+  }

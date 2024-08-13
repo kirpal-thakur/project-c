@@ -80,11 +80,6 @@
                   />
                 </div>
               </button>
-              <!-- <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul> -->
             </div>
             <a class="btn btn-outline-white users-icon">
               <svg id="users-icon"
@@ -108,7 +103,7 @@
 
               {{ 'VerifyUsers' | translate }}</a
             >
-            <a class="btn btn-outline-white" id="users-icon"
+            <a class="btn btn-outline-white" (click)="deleteUsers()" id="users-icon"
               ><svg
                 width="22"
                 height="23"
@@ -159,50 +154,9 @@
             >
           </div>
           <div class="d-flex align-items-center">
-            <div class="paging-data">
-              1-12 of 1600
-            </div>
+            
             <mat-paginator [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
-            <a class="left-slide" id="users-icon"
-              ><svg
-                width="33"
-                height="33"
-                viewBox="0 0 33 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect
-                  x="33"
-                  y="33"
-                  width="33"
-                  height="33"
-                  rx="16.5"
-                  transform="rotate(-180 33 33)"
-                  fill="#F3F3F3"
-                ></rect>
-                <path
-                  d="M18 21L13 16.5L18 12"
-                  stroke="#C2C2C2"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                ></path></svg></a
-            ><a class="right-slide ms-1"
-              ><svg  id="users-icon"
-                width="33"
-                height="33"
-                viewBox="0 0 33 33"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect width="33" height="33" rx="16.5" fill="#F3F3F3"></rect>
-                <path
-                  d="M14 12L19 16.5L14 21"
-                  stroke="#787878"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                ></path>
-              </svg>
-            </a>
+           
           </div>
         </div>
       </div>
