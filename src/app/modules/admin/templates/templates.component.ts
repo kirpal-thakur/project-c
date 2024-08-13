@@ -24,7 +24,7 @@ export class TemplatesComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
-     this.fetchTemplates();
+    this.fetchTemplates();
   }
   
   showRole(id:number){
@@ -69,7 +69,8 @@ export class TemplatesComponent {
       this.isLoading = true;
      this.tempalateApi.getTemplates().subscribe((response)=>{
       if (response && response.status && response.data && response.data.emailTemplates) {
-        this.templates = response.data.emailTemplates;
+        //this.templates = [];
+        // this.templates = response.data.emailTemplates;
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
         
@@ -85,8 +86,8 @@ export class TemplatesComponent {
   }
   addTemplate(){
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
-      height: '528px',
-      width: '500px',
+      height: '550px',
+      width: '650px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result && result?.action !='remove'){

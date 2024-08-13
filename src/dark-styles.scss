@@ -1564,3 +1564,47 @@ background-color: #072944;
 .dark-theme .table-users tr{
   background: #072944 !important;
 }
+
+
+.dark-theme .mat-mdc-paginator-range-label{
+  color: white !important;
+}
+
+.dark-theme .paginator-components .mat-mdc-paginator-container{
+  background: #072944 !important;
+}
+
+
+.dark-theme .paginator-components .mat-mdc-paginator-range-actions button{
+  background-color: white;
+  --mdc-icon-button-state-layer-size: 32px !important;
+  margin-right: 10px !important;
+  padding: 2px !important;
+}
+
+.dark-theme .main-popup-div mat-select{
+  color: white !important;
+}
+
+.dark-theme .main-popup-div .mat-mdc-select-trigger {
+  border: 1px solid white !important;
+}
+
+.dark-theme .main-popup-div .mat-mdc-select-arrow-wrapper svg {
+  color: white !important;
+}
+
+.dark-theme .template-name-inputField{
+  background-color: #0C3453;
+  color: white;
+}
+.dark-theme .NgxEditor__MenuBar {
+  background-color: #0C3453 !important;
+  color: white;
+
+}
+.dark-theme .NgxEditor__Content{
+  background-color: #072944;
+  color: white;
+  
+}

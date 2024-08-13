@@ -79,4 +79,6 @@ ngx-editor {
 
 ::ng-deep .mat-mdc-select-panel{
     min-width: 110px !important;
+    scrollbar-width: none !important;
 }
+

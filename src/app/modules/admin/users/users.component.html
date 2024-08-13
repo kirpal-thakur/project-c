@@ -96,7 +96,7 @@
                 <path
                   d="M13.1749 7.80954L13.3574 7.63087L13.1749 7.45221L12.5303 6.82133L12.3555 6.65026L12.1806 6.82125L7.51415 11.3843L5.81922 9.7294L5.64436 9.55867L5.4697 9.72961L4.82513 10.3605L4.64259 10.5391L4.82513 10.7178L7.33942 13.1787L7.51429 13.3498L7.68915 13.1787L13.1749 7.80954Z"
                   fill="white"
-                  stroke="white"
+                  stroke="black"
                   stroke-width="0.5"
                 />
               </svg>
@@ -153,10 +153,8 @@
               {{ 'ExportXLS' | translate }}</a
             >
           </div>
-          <div class="d-flex align-items-center">
-            
-            <mat-paginator [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
-           
+          <div class="d-flex align-items-center">            
+            <mat-paginator class="paginator-components" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>           
           </div>
         </div>
       </div>
@@ -165,7 +163,7 @@
           <div class="row">
             <div class="col">
               <div class="table-responsive">
-                <table mat-table [dataSource]="users" class="table table-users ">
+                <table mat-table [dataSource]="users" class="table table-hover table-users ">
                  
                   <!-- Position Column -->
                   <ng-container matColumnDef="#">
@@ -228,7 +226,7 @@
                   </ng-container>
 
                   <ng-container matColumnDef="User Type">
-                    <th mat-header-cell *matHeaderCellDef> User Type </th>
+                    <th mat-header-cell *matHeaderCellDef > User Type </th>
                     <td mat-cell *matCellDef="let element">  {{ element.role_name }}</td>
                   </ng-container>
                   
@@ -238,7 +236,7 @@
                   </ng-container>
 
                   <ng-container matColumnDef="Location">
-                    <th mat-header-cell *matHeaderCellDef> Location </th>
+                    <th mat-header-cell *matHeaderCellDef > Location </th>
                     <td mat-cell *matCellDef="let element">  {{ element.language }}</td>
                   </ng-container>
                   <ng-container matColumnDef="Joined Date - Time">
@@ -250,12 +248,12 @@
                     <td mat-cell *matCellDef="let element">  {{ element.email }}</td>
                   </ng-container>
                   <ng-container matColumnDef="Membership">
-                    <th mat-header-cell *matHeaderCellDef> Membership </th>
-                    <td mat-cell *matCellDef="let element">  {{ element.subscription_status }}</td>
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Membership </th>
+                    <td mat-cell *matCellDef="let element" class="text-center">  {{ element.subscription_status }}</td>
                   </ng-container>
                   <ng-container matColumnDef="Status">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let element"> 
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Status </th>
+                    <td mat-cell *matCellDef="let element" class="text-center"> 
                       <span
                       *ngIf="element.status === '0'"
                       class="bg_pending"
@@ -275,8 +273,8 @@
                     </td>
                   </ng-container>
                   <ng-container matColumnDef="Edit">
-                    <th mat-header-cell *matHeaderCellDef> Edit </th>
-                    <td mat-cell *matCellDef="let element">  
+                    <th mat-header-cell *matHeaderCellDef class="text-center"> Edit </th>
+                    <td mat-cell *matCellDef="let element" class="text-center cursor-pointer">  
                       <svg
                       (click)="editUser(element)"
                       id="users-icon"
@@ -294,12 +292,18 @@
 
                     </td>
                   </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <tr class="mat-row user-empty-tr" *matNoDataRow>
                     <emplty-table *ngIf="isLoading==false" />
                     
+                  </tr> -->
+                  <tr class="mat-row user-empty-tr" *matNoDataRow>
+                    <td [attr.colspan]="displayedColumns.length" class="empty-state-cell">
+                      <emplty-table *ngIf="!isLoading"></emplty-table>
+                    </td>
                   </tr>
+                  
                 </table>
                 
 

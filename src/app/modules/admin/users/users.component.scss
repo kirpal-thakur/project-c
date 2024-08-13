@@ -213,3 +213,14 @@ h2{
 .mat-cell .rounded-circle {
   border-radius: 0 !important;
 }
+
+.empty-state-cell {
+  display: flex !important;
+  justify-content: center !important; /* Horizontal centering */
+  align-items: center !important;    /* Vertical centering */
+  height: 200px !important;           /* Adjust height as needed */
+}
+.empty-state-cell {
+  text-align: center !important;
+  padding: 20px !important; /* Adjust as needed for spacing */
+}

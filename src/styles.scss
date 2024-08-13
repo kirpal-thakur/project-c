@@ -1234,6 +1234,11 @@ left: unset;
   display: none;
 }
 
+.template-option-dropdown::-webkit-scrollbar{
+  display: none !important;
+}
+
+
 @media (max-width: 768px) {
   app-sidebar{
     margin-top: 60px;
@@ -1265,3 +1270,16 @@ left: unset;
   .mat-mdc-paginator-page-size{
     display: none !important;
   }
+
+.main-popup-div .mat-mdc-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-left: 4px;
+}
