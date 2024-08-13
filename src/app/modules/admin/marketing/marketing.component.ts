@@ -96,8 +96,8 @@ export class MarketingComponent {
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(MarketingPopupComponent,
      {
-      height: '528px',
-      width: '500px',
+      height: '550px',
+      width: '550px',
   });
 
   }

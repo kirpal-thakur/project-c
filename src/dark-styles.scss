@@ -1608,3 +1608,25 @@ background-color: #072944;
   color: white;
   
 }
+
+.dark-theme .marketing-calender-field .mat-mdc-text-field-wrapper{
+    background-color: #0C3453 !important;
+}
+.dark-theme .label-enter-date-range{
+  color: white;
+}
+.dark-theme .marketing-calender-field .mdc-icon-button svg{
+  color: white;
+}
+.dark-theme .marketing-calender-field .mat-date-range-input-inner{
+  color: white;
+}
+
+.dark-theme .NgxEditor__MenuItem .NgxEditor__MenuItem--Icon:hover {
+  background-color: #f1f1f114 !important;
+}
+
+.dark-theme .NgxEditor__Dropdown:hover {
+  background-color: #f1f1f114 !important;
+
+}

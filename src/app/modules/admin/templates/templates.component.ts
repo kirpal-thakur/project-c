@@ -86,8 +86,8 @@ export class TemplatesComponent {
   }
   addTemplate(){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '528px',
-      width: '500px',
+      height: '550px',
+      width: '550px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result && result?.action !='remove'){
@@ -123,8 +123,8 @@ export class TemplatesComponent {
   }
   editTemplate(tempalateData: any){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '528px',
-      width: '500px',
+      height: '550px',
+      width: '550px',
       data: tempalateData
     });
     dialogRef.afterClosed().subscribe(result => {

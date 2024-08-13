@@ -1283,3 +1283,7 @@ left: unset;
   padding: 5px 10px;
   margin-left: 4px;
 }
+
+.marketing-calender-field .mdc-text-field--filled .mdc-line-ripple::before {
+  border-bottom: 0 !important;
+}
