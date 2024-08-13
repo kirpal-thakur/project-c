@@ -9,7 +9,7 @@ import { environment } from '../../../../../environments/environment';
   templateUrl: './template-popup.component.html',
   styleUrl: './template-popup.component.scss'
 })
-export class MarketingPopupComponent  implements OnInit, OnDestroy  {
+export class TemplatePopupComponent  implements OnInit, OnDestroy  {
   id = 0;
   editor!: Editor;
   title:string = "";
@@ -31,7 +31,7 @@ export class MarketingPopupComponent  implements OnInit, OnDestroy  {
   content: string = '';
   constructor(
     
-    public dialogRef: MatDialogRef<MarketingPopupComponent>,
+    public dialogRef: MatDialogRef<TemplatePopupComponent>,
     @Inject(MAT_DIALOG_DATA) public template: any
   ) {
     if(template){
