@@ -5,7 +5,7 @@ import { Chart, registerables, ChartDataset } from 'chart.js';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import { DashboardService } from '../../../services/dashboard.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas1') canvas1!: ElementRef<HTMLCanvasElement>;
   @ViewChild('canvas2') canvas2!: ElementRef<HTMLCanvasElement>;
   @ViewChild('canvas3') canvas3!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('canvas4') canvas4!: ElementRef<HTMLCanvasElement>;
+ // @ViewChild('canvas4') canvas4!: ElementRef<HTMLCanvasElement>;
 
   lang: string = '';
   chart1!: Chart;
@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   chart3!: Chart;
   chart4!: Chart;
 
+  chartData:any = [];
   activeLanguage: string = '';
   themeText: string = 'Light Mode'
 
@@ -30,9 +31,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
+    private dashboardApi:DashboardService,
     private router: Router,
     private translateService: TranslateService
-  ) {}
+  ) {
+    this.getChardData();
+  }
 
   ngOnInit() {
     this.updateThemeText();
@@ -42,16 +46,31 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1')!;
-    this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2')!;
-    this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3')!;
-    this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
-    this.updateChartBackgroundColor();
+    
   }
 
+  getChardData(){
+    try {
+    this.dashboardApi.getChartData(2024).subscribe((response)=>{
+      if (response && response.status && response.data) {
+        this.chartData = response.data;
 
-
-  createChart(canvas: HTMLCanvasElement, chartId: string): Chart | null {
+        this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1',response.data.sales.labels,response.data.sales.values)!;
+        this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2',response.data.subscriptions.labels,response.data.subscriptions.values)!;
+        this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3',response.data.users.labels,response.data.users.values)!;
+        // this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
+        this.updateChartBackgroundColor();
+        
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+      });     
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  }
+ 
+  createChart(canvas: HTMLCanvasElement, chartId: string,labels:any,values:any): Chart | null {
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       console.error(`Failed to get canvas context for ${chartId}`);
@@ -64,13 +83,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     gradientStroke.addColorStop(0.5, '#236115');
     gradientStroke.addColorStop(1, '#7BDA66');
 
-
-
     const data = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      labels: labels,
       datasets: [
         {
-          data: [ 15456, 30456, 25456, 40689, 30111, 37987, 29543, 35680, 27231, 37231, 22231, 32231],
+          data: values,
           borderWidth: 4,
           borderColor: gradientStroke,
           pointBorderWidth: 15,
@@ -162,7 +179,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   updateChartBackgroundColor() {
     const isDarkMode = this.themeService.isDarkMode();
-    const charts = [this.chart1, this.chart2, this.chart3, this.chart4];
+    const charts = [this.chart1, this.chart2, this.chart3];
 
     charts.forEach((chart) => {
       if (chart.options && chart.options.scales && chart.options.plugins) {
