@@ -6,11 +6,6 @@ import { NonAuthGuard } from './services/non.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/Index',
-    pathMatch: 'full',
-  },
-  {
-    path: 'Index',
     loadChildren: () =>
       import('./modules/website/website.module').then(
         (m) => m.WebsiteModule
