@@ -1,9 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,ViewChild } from '@angular/core';
 import {  MatDialog } from '@angular/material/dialog';
 import { MarketingPopupComponent } from './template-popup/template-popup.component'; 
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 import { TemplateService } from '../../../services/template.service';
 import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-templates',
   templateUrl: './templates.component.html',
@@ -13,21 +16,63 @@ export class TemplatesComponent {
   displayedColumns: string[] = ['#','Name', 'For', 'Language','Created Date - Time','Edit','Remove'];
   isLoading= false;
   templates: any = [];
+  allSelected: boolean = false;
+  selectedTemplatesIds: number[] = [];
+  
   constructor(public dialog: MatDialog,private tempalateApi: TemplateService,) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
      this.fetchTemplates();
   }
   
-
+  showRole(id:number){
+    return environment.roles.filter(role =>
+      role.id == id
+    ).map(role =>
+      role.role
+    );
+  }
+  onCheckboxChange(template: any) {
+    const index = this.selectedTemplatesIds.indexOf(template.id);
+    if (index === -1) {
+      this.selectedTemplatesIds.push(template.id);
+    } else {
+      this.selectedTemplatesIds.splice(index, 1);
+    }
+  }
+  deleteSelected(){
+    const templateIds = {
+      id: this.selectedTemplatesIds,
+    };
+    this.tempalateApi.deleteEmailTemplate(templateIds).subscribe(result => {
+      if (result && result.status) {
+          this.fetchTemplates();
+      } else {
+        this.isLoading = false;
+        console.error('Invalid API response structure:', result);
+      }
+     });
+  }
+  selectAllTemplates() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedTemplatesIds = this.templates.map((template:any) => template.id);
+    } else {
+      this.selectedTemplatesIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedTemplatesIds);
+  }
   async fetchTemplates(): Promise<void> {
     try {
       this.isLoading = true;
      this.tempalateApi.getTemplates().subscribe((response)=>{
       if (response && response.status && response.data && response.data.emailTemplates) {
-        this.templates = response.data.emailTemplates; 
+        this.templates = response.data.emailTemplates;
+        this.paginator.length = response.data.totalCount;
         this.isLoading = false;
-       // this.paginator.length = data.totalCount;
+        
       } else {
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -71,6 +116,9 @@ export class TemplatesComponent {
           console.error('Invalid API response structure:', result);
         }
        });
+  }
+  onPageChange(){
+
   }
   editTemplate(tempalateData: any){
     const dialogRef = this.dialog.open(MarketingPopupComponent,{

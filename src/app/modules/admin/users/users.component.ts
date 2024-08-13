@@ -73,10 +73,11 @@ export class UsersComponent implements OnInit {
     } else {
       this.selectedUserIds.splice(index, 1);
     }
-    console.log('Selected user IDs:', this.selectedUserIds);
   }
 
-
+  deleteUsers(){
+    console.log('selected',this.selectedUserIds);
+  }
   selectAllUsers() {
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
