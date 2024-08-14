@@ -14,7 +14,7 @@ export class WebsiteComponent {
   editCoupenCode(){
     const dialogRef = this.dialog.open(CoupenCodePopupComponent,{
       height: '528px',
-      width: '500px',
+      width: '550px',
       position: {
         top:'85px',
         left:'340px'
@@ -27,7 +27,7 @@ export class WebsiteComponent {
   editAdvertising(){
     const dialogRef = this.dialog.open(AdvertisingPopupComponent,{
       height: '580px',
-      width: '500px',
+      width: '550px',
       position: {
         top:'75px',
         left:'340px'

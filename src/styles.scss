@@ -1287,3 +1287,11 @@ left: unset;
 .marketing-calender-field .mdc-text-field--filled .mdc-line-ripple::before {
   border-bottom: 0 !important;
 }
+
+.meta-date .mat-mdc-form-field-subscript-wrapper::before {
+  display: none !important;
+}
+
+.meta-date .mdc-line-ripple::before {
+  border-bottom: 0 !important;
+}
