@@ -508,186 +508,34 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
-
-              <div class="card-tabs-content">
-
+             <div   *ngFor="let player of newRegistrationPlayers" class="card-tabs-content">
                 <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
                 <div class="mesaage-content">
-                    <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                    <small>{{ 'time' | translate }}</small>
+                    <h6 class="mb-0">{{player.first_name +' '+player.last_name }}</h6>
+                    <small>{{player.last_activity_time}}</small>
                 </div>
-
               </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                    <h6 class="mb-0">Kadin Septimus</h6>
-                    <small>10 mins ago</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-
-
+             
             </div>
+
             <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content">
+              <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
                 <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
+                  <h6 class="mb-0">{{club.first_name + '' +club.last_name}}</h6>
+                  <small>{{club.last_activity_time}}</small>
                 </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-            </div>
+             </div>
+           </div>
             <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
-              <div class="card-tabs-content">
-
+         
+              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content">
                 <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
+                  <div class="mesaage-content">
+                    <h6 class="mb-0">{{scout.first_name + '' +scout.last_name}}</h6>
+                    <small>{{scout.last_activity_time}}</small>
                 </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
-              <div class="card-tabs-content">
-
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
-                  <small>{{ 'time' | translate }}</small>
-                </div>
-
-              </div>
             </div>
-
           </div>
         </div>
     </div>

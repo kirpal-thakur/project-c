@@ -29,7 +29,18 @@ export class DashboardService {
         { params}
       );
     }
-
+    getNewRegistrationWithRole(role=2,limit=3): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
+      let whererole = [role];
+      const params = new HttpParams()
+      .set('limit', limit)
+      .set('whereClause[role]',role)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}admin/users`,
+      { params}
+    );
+  }
     getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
         const params = new HttpParams()
           .set('limit', '10')

@@ -26,8 +26,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   chartData:any = [];
   activeLanguage: string = '';
   themeText: string = 'Light Mode'
-
-
+  newRegistrationClubs:any = [];
+  newRegistrationPlayers:any = [];
+  newRegistrationScouts:any = [];
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
@@ -41,6 +42,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.updateThemeText();
     this.getNewRegistrations();
+    this.getNewRegistrationsWithScout();
+    this.getNewRegistrationsWithClub();
+    this.getNewRegistrationsWithPlayers();
+
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
@@ -51,7 +56,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   getNewRegistrations(){
     try {
-      this.dashboardApi.getNewRegistration(3).subscribe((response)=>{
+      this.dashboardApi.getNewRegistration(5).subscribe((response)=>{
         if (response && response.status && response.data) { 
           this.newRegistrations = response.data.userData;
         } else {
@@ -62,6 +67,46 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         console.error('Error fetching users:', error);
       }
   }
+  getNewRegistrationsWithPlayers(){
+    try {
+      this.dashboardApi.getNewRegistrationWithRole(4,10).subscribe((response)=>{
+        if (response && response.status && response.data) { 
+          this.newRegistrationPlayers = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        });     
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+  }
+  getNewRegistrationsWithClub(){
+    try {
+      this.dashboardApi.getNewRegistrationWithRole(2,10).subscribe((response)=>{
+        if (response && response.status && response.data) { 
+          this.newRegistrationClubs = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        });     
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+  }
+  getNewRegistrationsWithScout(){
+    try {
+      this.dashboardApi.getNewRegistrationWithRole(3,10).subscribe((response)=>{
+        if (response && response.status && response.data) { 
+          this.newRegistrationScouts = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        });     
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+  }
+
   getChardData(){
     try {
     this.dashboardApi.getChartData(2024).subscribe((response)=>{
