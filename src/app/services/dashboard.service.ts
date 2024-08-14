@@ -21,8 +21,8 @@ export class DashboardService {
 
     getNewRegistration(limit=3): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
         const params = new HttpParams()
-        .set('limit', '10')
-        .set('orderBy', limit)
+        .set('limit', limit)
+        .set('orderBy', 'id')
         .set('order', 'desc');
       return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
         `${this.apiUrl}admin/users`,

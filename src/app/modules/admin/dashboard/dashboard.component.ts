@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   chart2!: Chart;
   chart3!: Chart;
   chart4!: Chart;
-
+  newRegistrations:any = [];
   chartData:any = [];
   activeLanguage: string = '';
   themeText: string = 'Light Mode'
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.updateThemeText();
+    this.getNewRegistrations();
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
@@ -48,7 +49,19 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     
   }
-
+  getNewRegistrations(){
+    try {
+      this.dashboardApi.getNewRegistration(3).subscribe((response)=>{
+        if (response && response.status && response.data) { 
+          this.newRegistrations = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        });     
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+  }
   getChardData(){
     try {
     this.dashboardApi.getChartData(2024).subscribe((response)=>{

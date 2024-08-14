@@ -421,10 +421,6 @@
                 aria-controls="disabled-tab-pane"
                 aria-selected="false"
               >
-              <!-- <div class="navtabs_button">
-                <p>New Registrations</p>
-                <h6>1090</h6>
-              </div> -->
               </button>
             </li>
           </ul>
@@ -460,66 +456,30 @@
                 <th scope="col">{{ 'Location' | translate }}</th>
                 <th scope="col">{{ 'DateTime' | translate }}</th>
                 <th scope="col">{{ 'Status' | translate }}</th>
-
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr   *ngFor="let user of newRegistrations">
                 <td  class="main-table ">
                   <img
                     src="../../../assets/images/1.jpg"
                     alt=""
                     class="table_img"
                   />
-                  <span>{{ 'Name' | translate }}</span>
+                  <span>{{user.first_name +' '+user.last_name }}</span>
                 </td>
-                <td>{{ 'Talent' | translate }}</td>
-                <td>{{ 'English' | translate }}</td>
-                <td> {{ 'Switzerland' | translate }}</td>
-                <td> {{ 'date_time' | translate }}</td>
+                <td>{{user.role_name}}</td>
+                <td>{{ user.language }}</td>
+                <td> {{ user.user_location }}</td>
+                <td> {{ user.created_at}}</td>
                 <td  class="main-table-2">
-                  <span class="bg_success approved"> {{ 'Approved' | translate }} </span>
-                </td>
-              </tr>
-              <tr >
-                <td  class="main-table">
-                  <img
-                    src="../../../assets/images/1.jpg"
-                    alt=""
-                    width="50px"
-                    height="50px"
-                    class="table_img"
-                  />
-                  <span>{{ 'Name' | translate }}</span>
-                </td>
-                <td>{{ 'Talent' | translate }}</td>
-                <td>{{ 'English' | translate }}</td>
-                <td> {{ 'Switzerland' | translate }}</td>
-                <td> {{ 'date_time' | translate }}</td>
-                <td  class="main-table-2">
-                  <span class="bg_pending"> {{ 'Pending' | translate }}</span>
-                </td>
-              </tr>
-              <tr>
-                <td  class="main-table">
-                  <img
-                    src="../../../assets/images/1.jpg"
-                    alt=""
-                    width="50px"
-                    height="50px"
-                    class="table_img"
-                  />
-                  <span>{{ 'Name' | translate }}</span>
+                  <span *ngIf="user.status==1" class="bg_success approved"> {{ 'Approved' | translate }} </span>
+                  <span *ngIf="user.status==2" class="bg_pending"> {{ 'Pending' | translate }}</span>
+                  <span *ngIf="user.status==3" class="bg_reject">Rejected</span>
 
                 </td>
-                <td>{{ 'Talent' | translate }}</td>
-                <td>{{ 'English' | translate }}</td>
-                <td> {{ 'Switzerland' | translate }}</td>
-                <td> {{ 'date_time' | translate }}</td>
-                <td  class="main-table-2">
-                  <span class="bg_reject">Rejected</span>
-                </td>
               </tr>
+  
             </tbody>
           </table>
         </div>
