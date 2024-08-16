@@ -989,9 +989,12 @@ left: unset;
   cursor: pointer;
 }
 
-
-
-
+.cutam-cupen{
+margin: auto;
+}
+.cutam-cupen .mat-mdc-dialog-surface::-webkit-scrollbar {
+  display: none;
+}
 
 // ------------------------- users end ------------------
 
@@ -1294,4 +1297,36 @@ left: unset;
 
 .meta-date .mdc-line-ripple::before {
   border-bottom: 0 !important;
+}
+
+.cupen-btn-date .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
+  border-radius: 10px !important;
+}
+
+.cupen-btn-date .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #fff;
+}
+
+.cupen-btn-date .mdc-text-field{
+  padding: 0;
+}
+
+.cupen-btn-date .mat-mdc-form-field-infix {
+  width: 120px;
+}
+
+.cupen-btn-date-1 .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
+  border-radius: 10px !important;
+}
+
+.cupen-btn-date-1 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #fff;
+}
+
+.cupen-btn-date-1 .mdc-text-field{
+  padding: 0;
+}
+
+.cupen-btn-date-1 .mat-mdc-form-field-infix {
+  width: 120px;
 }
