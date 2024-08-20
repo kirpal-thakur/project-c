@@ -78,7 +78,7 @@ export class ChatDetailComponent implements OnInit {
     const userDataString = localStorage.getItem('userData');
         try {
 
-          const response: any = await this.userService.getUsers().toPromise();
+         /*  const response: any = await this.userService.getUsers().toPromise();
           if (response && response.status && response.data && response.data.userData) {
             Talk.ready.then(() => {
             if (userDataString) {
@@ -121,7 +121,7 @@ export class ChatDetailComponent implements OnInit {
               });
             } else {
             console.error('Invalid API response structure:', response);
-          }
+          } */
 
 
         } catch (error) {

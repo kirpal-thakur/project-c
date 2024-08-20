@@ -35,13 +35,15 @@
                         stroke-linejoin="round"
                       ></path>
                     </g></svg></span
-                ><input
-                  type="text"
-                  placeholder="Search Message"
-                  aria-label="Username"
-                  aria-describedby="basic-addon1"
-                  class="form-control ps-0"
-                />
+                >
+                <input
+                matInput
+                placeholder="Search"
+                aria-label="search"
+                (keyup)="applyFilter($event)"
+                aria-describedby="basic-addon1"
+                class="form-control ps-0"
+              />
               </div>
               <div class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg" (click)="editfilter()">
                 <svg
@@ -174,12 +176,6 @@
                 </svg>
                 </td>
               </ng-container>
-              <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                  <tr class="mat-row user-empty-tr" *matNoDataRow>
-                    <emplty-table *ngIf="isLoading==false" />
-                    <emplty-table *ngIf="isLoading==false" />
-                  </tr> -->
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <tr class="mat-row user-empty-tr" *matNoDataRow>

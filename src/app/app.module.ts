@@ -11,6 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MaterialModule } from '../app/modules/material/material.module'
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    NgxEditorModule
+    NgxEditorModule,
+    OAuthModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
