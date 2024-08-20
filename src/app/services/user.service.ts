@@ -22,17 +22,16 @@ export class UserService {
 
   }
 
-  getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
-    const headers = new HttpHeaders({
-         'Authorization': `Bearer ${this.userToken}`
-    });
+  getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
     const params = new HttpParams()
-      .set('limit', '10')
+      .set('offset',pageIndex)
+      .set('search',filter)
+      .set('limit', pageSize)
       .set('orderBy', 'id')
       .set('order', 'desc');
     return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
       `${this.apiUrl}admin/users`,
-      { params,headers }
+      { params }
     );
   }
 

@@ -35,13 +35,17 @@
                       stroke-linejoin="round"
                     ></path>
                   </g></svg></span
-              ><input
-                type="text"
+              >
+              <input
+                matInput
                 placeholder="Search"
-                aria-label="Username"
+                aria-label="search"
+                (keyup)="applyFilter($event)"
                 aria-describedby="basic-addon1"
                 class="form-control ps-0"
               />
+
+            
             </div>
             <div class="d-flex align-items-center filter-icon pe-2 border-start ps-3 cursor-pointer" (click)="editfilter()">
               <svg

@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { User } from './user.model';
 import { UserDetailPopupComponent } from './user-detail-popup/user-detail-popup.component';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
-import {MatTableModule} from '@angular/material/table';
+import {MatTableModule,MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 @Component({
@@ -14,8 +14,8 @@ import { MatSort } from '@angular/material/sort';
 })
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['#','Name', 'User Type', 'Language', 'Location','Joined Date - Time','Email','Membership', 'Status','Edit'];
-  
   users: User[] = [];
+
   checkboxIds: string[] = [];
   allSelected: boolean = false;
   userId: any; 
@@ -38,18 +38,17 @@ export class UsersComponent implements OnInit {
 
 
   async fetchUsers(): Promise<void> {
-    const page = this.paginator ? this.paginator.pageIndex : 0;
+    const page = this.paginator ? this.paginator.pageIndex+10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
 
     try {
-     this.userService.getUsers().subscribe((response)=>{
+     this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.users = response.data.userData; 
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
-       // this.paginator.length = data.totalCount;
       } else {
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -60,7 +59,18 @@ export class UsersComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
-  
+  applyFilter(filterValue:any) {
+   
+    this.filterValue = filterValue.target?.value.trim().toLowerCase();
+   console.log('filterValue',this.filterValue);
+   console.log('length',this.filterValue.length);
+    if(this.filterValue.length >= 3){
+      this.fetchUsers();
+     } else if(this.filterValue.length == 0){
+      this.fetchUsers();
+     }
+   
+  }
   onPageChange() {
     this.fetchUsers();
   }
