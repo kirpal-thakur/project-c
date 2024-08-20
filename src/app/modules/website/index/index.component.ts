@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit,inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -7,6 +7,7 @@ import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthGoogleService } from  '../../../services/auth-google.service';
 
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
@@ -17,6 +18,8 @@ declare var google: any; // Declare google
   styleUrl: './index.component.scss'
 })
 export class IndexComponent implements OnInit{
+  private authGoogleService = inject(AuthGoogleService);
+
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
 
@@ -32,6 +35,7 @@ export class IndexComponent implements OnInit{
   toggleVisibility() {
     this.isVisible = !this.isVisible;
   }
+ 
   username: string = '';
   password: string = '';
   firstName: string = '';
@@ -108,7 +112,9 @@ export class IndexComponent implements OnInit{
     
    
   }
-
+  signInWithGoogle(){
+    this.authGoogleService.login();
+  }
   performMagicLogin(token: string) {
     this.authService.magicLogin(token).subscribe(
       magicLoginResponse => {

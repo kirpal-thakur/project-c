@@ -62,8 +62,6 @@ export class UsersComponent implements OnInit {
   applyFilter(filterValue:any) {
    
     this.filterValue = filterValue.target?.value.trim().toLowerCase();
-   console.log('filterValue',this.filterValue);
-   console.log('length',this.filterValue.length);
     if(this.filterValue.length >= 3){
       this.fetchUsers();
      } else if(this.filterValue.length == 0){
