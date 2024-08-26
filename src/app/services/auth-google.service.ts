@@ -17,8 +17,8 @@ export class AuthGoogleService {
     const authConfig: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      clientId: '156115430884-qbtnhb5dlnn6fnqtj2k6vh7khol2p7e8.apps.googleusercontent.com',
-      redirectUri: window.location.origin + '/admin/dashboard',
+      clientId: '628784911134-dhjavrka1or8i37v8odavd09dno8jgmc.apps.googleusercontent.com',
+      redirectUri: "https://pofepave.myhostpoint.ch/validate-user",
       scope: 'openid profile email',
     };
 

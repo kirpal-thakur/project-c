@@ -59,6 +59,10 @@ export class AuthService {
     console.log('Showing token:', token);
     return this.magicLogin(token);
   }
+
+  googleLogin(loginData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/google-signin`, loginData);
+  }
   
 
   

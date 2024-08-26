@@ -371,7 +371,7 @@
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Users' | translate }} </p>
-                <h6>{{chartData.users.total}}</h6>
+                <h6>{{chartData?.users?.total}}</h6>
 
               </div>
               </button>
@@ -389,7 +389,7 @@
               >
               <div class="navtabs_button">
                 <p> {{ 'Total Sales' | translate}}</p>
-                <h6>{{chartData.sales.total}}</h6>
+                <h6>{{chartData?.sales?.total}}</h6>
               </div>
               </button>
             </li>
@@ -406,7 +406,7 @@
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Subscriptions' | translate }}</p>
-                <h6>{{chartData.subscriptions.total}}</h6>
+                <h6>{{chartData?.subscriptions?.total}}</h6>
               </div>
               </button>
             </li>
@@ -507,7 +507,7 @@
 
           </ul>
           <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane-1 " role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
+            <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
              <div   *ngFor="let player of newRegistrationPlayers" class="card-tabs-content">
                 <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
                 <div class="mesaage-content">
