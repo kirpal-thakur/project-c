@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { ConfirmPasswordComponent } from './SetPassword/confirmPassword.component'
-
+import { ValidateUserComponent } from './validateUser/validateUser.component';
 const routes: Routes = [
   {
     path:"",
@@ -10,6 +10,7 @@ const routes: Routes = [
   },
   // { path: 'Index', component: ConfirmPasswordComponent, pathMatch: 'full' },
   { path: '', component: ConfirmPasswordComponent },
+  { path: 'validate-user', component: ValidateUserComponent },
 
 ];
 
