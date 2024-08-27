@@ -22,13 +22,24 @@ export class UserService {
 
   }
 
-  getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
-    const params = new HttpParams()
-      .set('offset',pageIndex)
-      .set('search',filter)
-      .set('limit', pageSize)
-      .set('orderBy', 'id')
-      .set('order', 'desc');
+  // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
+  getUsers(data: any): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
+    // const params = new HttpParams()
+    //   .set('offset',pageIndex)
+    //   .set('search',filter)
+    //   .set('limit', pageSize)
+    //   .set('orderBy', 'id')
+    //   .set('order', 'desc');
+
+    let params = new HttpParams();
+  
+    // Loop through the queryParams object and set each parameter
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.set(key, data[key]);
+      }
+    }
+    // params = params.set("whereClause[membership]", 'free');
     return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
       `${this.apiUrl}admin/users`,
       { params }
@@ -61,5 +72,18 @@ export class UserService {
 
   //   return this.http.get<any>(`${this.apiUrl2}/profile/`, { headers });
   // }
+
+  getLocations(): Observable<any> {
+    // const params = new HttpParams()
+    //   .set('offset',pageIndex)
+    //   .set('search',filter)
+    //   .set('limit', pageSize)
+    //   .set('orderBy', 'id')
+    //   .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}get-domains`
+    );
+  }
 
 }

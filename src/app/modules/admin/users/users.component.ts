@@ -22,7 +22,10 @@ export class UsersComponent implements OnInit {
   newStatus: any;
   isLoading = false;
   filterValue: string = '';
+  filterDialogRef:any = ""
 
+  customFilters:any = [];
+  locations:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -33,6 +36,7 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
      this.fetchUsers();
+     this.getLocations();
   }
 
 
@@ -43,8 +47,44 @@ export class UsersComponent implements OnInit {
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
 
+    let params:any = {};
+    params.offset = page;
+    params.search = this.filterValue;
+    params.limit  = pageSize;
+    
+    if(this.customFilters['alphabetically']){
+      params.orderBy = "first_name";
+      params.order = this.customFilters['alphabetically'];
+    }else{
+      params.orderBy = "id";
+      params.order = "desc";
+    }
+
+    if(this.customFilters['membership']){
+      params = {...params, "whereClause[membership]" : this.customFilters['membership']};
+    }
+
+    if(this.customFilters['role']){
+      params = {...params, "whereClause[role]" : this.customFilters['role']};
+    }
+
+    if(this.customFilters['newsletter']){
+      params = {...params, "whereClause[newsletter]" : this.customFilters['newsletter']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
+
+    
+    
+    console.log('params');
+    console.log(params);
+    
     try {
-     this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
+    //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
+     this.userService.getUsers(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.users = response.data.userData; 
         this.paginator.length = response.data.totalCount;
@@ -137,13 +177,45 @@ export class UsersComponent implements OnInit {
   }
 
   editfilter():void {
-    this.dialog.open(FilterPopupComponrnt,{
+    const filterDialog = this.dialog.open(FilterPopupComponrnt,{
       height: '450px',
       width: '300px',
       position: {
         right: '30px',
         top:'150px'
+      },
+      data: {
+        filters:this.customFilters,
+        locations: this.locations
       }
     })
+
+    filterDialog.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+      //  console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.fetchUsers();
+    console.log("applied filter others new", this.customFilters)
+  }
+
+  getLocations(){
+    try {
+      this.userService.getLocations().subscribe((response)=>{
+
+        this.locations = response.data.domains;
+      
+      });     
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+    }
   }
 }
