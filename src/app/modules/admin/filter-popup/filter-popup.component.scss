@@ -67,3 +67,21 @@ label.activefilter{
   background: #023A4A;
   color: #ffffff;
 }
+
+select.location-filter.activefilter{
+  background: #023A4A;
+  color: #ffffff;
+}
+
+select.location-filter{
+  background: #c6c7c8;
+  border: none;
+  outline: none !important;
+}
+
+
+select.location-filter option{
+  background: #ffffff;
+  color: #333333;
+  // outline: none !important;
+}

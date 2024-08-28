@@ -58,14 +58,14 @@
   </div>
   <div class="shadow-sm p-1 mb-1 bg-body rounded">
     <h5 class="filter-text mb-1">Location</h5>
-    <label class="btn btn-light filter-button">
-      <input type="radio" name="location" value="Type to search" hidden> Type to search
-      <!-- <select>
+    <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['location']">
+      <!-- <input type="radio" name="location" value="Type to search" hidden> Type to search -->
+
+      <select [(ngModel)]="selectedLocation" class="location-filter" [class.activefilter] = "userFilters['location']" (change)="onLocationChange($event)">
         <option value="">Select Location</option>
-        <option *ngFor="let location of locations" [value]="location.id">
-          {{ location.location }}
-        </option>
-      </select> -->
+        <option *ngFor="let location of locations" [value]="location.id" 
+                [selected]="location.id == selectedLocation">{{ location.location }}</option>
+      </select>
     </label>
   </div>
   <div class="shadow-sm p-1 mb-1 bg-body rounded">

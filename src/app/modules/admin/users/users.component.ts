@@ -52,11 +52,16 @@ export class UsersComponent implements OnInit {
     params.search = this.filterValue;
     params.limit  = pageSize;
     
+    params.orderBy = "id";
+    params.order = "desc";
+
     if(this.customFilters['alphabetically']){
       params.orderBy = "first_name";
       params.order = this.customFilters['alphabetically'];
-    }else{
-      params.orderBy = "id";
+    }
+
+    if(this.customFilters['activity']){
+      params.orderBy = "last_active";
       params.order = "desc";
     }
 
@@ -76,11 +81,9 @@ export class UsersComponent implements OnInit {
       params = {...params, "whereClause[status]" : this.customFilters['status']};
     }
 
-
-    
-    
-    console.log('params');
-    console.log(params);
+    if(this.customFilters['location']){
+      params = {...params, "whereClause[user_domain]" : this.customFilters['location']};
+    }
     
     try {
     //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
@@ -162,6 +165,7 @@ export class UsersComponent implements OnInit {
 
 
   editUser(user:any): void {
+    console.log(user)
     const dialogRef = this.dialog.open(UserDetailPopupComponent, {
       data: user,
     });
@@ -191,7 +195,6 @@ export class UsersComponent implements OnInit {
     })
 
     filterDialog.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       if (result !== undefined) {
         this.applyUserFilter(result);
       //  console.log('Dialog result:', result);
@@ -204,7 +207,6 @@ export class UsersComponent implements OnInit {
   applyUserFilter(filters:any){
     this.customFilters = filters;
     this.fetchUsers();
-    console.log("applied filter others new", this.customFilters)
   }
 
   getLocations(){

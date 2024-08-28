@@ -48,7 +48,9 @@ import {MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { TemplatePopupComponent } from './templates/template-popup/template-popup.component';
 import { MarketingPopupComponent } from './marketing/marketing-popup/marketing-popup.component';
+import { FilterPopupComponrnt } from './filter-popup/filter-popup.component';
 
+  
 @NgModule({
   declarations: [
     IndexComponent,
@@ -77,7 +79,8 @@ import { MarketingPopupComponent } from './marketing/marketing-popup/marketing-p
     TeamMemberDetailComponent,
     InboxPopupComponent,
     MarketingPopupComponent,
-    TemplatePopupComponent
+    TemplatePopupComponent,
+    FilterPopupComponrnt
   ],
   imports: [
     CommonModule,
