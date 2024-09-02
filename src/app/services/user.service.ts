@@ -74,15 +74,38 @@ export class UserService {
   // }
 
   getLocations(): Observable<any> {
-    // const params = new HttpParams()
-    //   .set('offset',pageIndex)
-    //   .set('search',filter)
-    //   .set('limit', pageSize)
-    //   .set('orderBy', 'id')
-    //   .set('order', 'desc');
-
     return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
       `${this.apiUrl}get-domains`
+    );
+  }
+
+  getProfileData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
+      `${this.apiUrl}admin/profile/${userId}`
+    );
+  }
+
+  getGalleryData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}admin/get-gallery/${userId}`
+    );
+  }
+
+  getFavoritesData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}admin/get-favorites/${userId}`
+    );
+  }
+
+  getPurchaseData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}admin/get-purchase-history/${userId}`
+    );
+  }
+
+  getTransferData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}admin/get-transfer-detail/${userId}`
     );
   }
 
