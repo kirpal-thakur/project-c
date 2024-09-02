@@ -66,7 +66,7 @@ export class ValidateUserComponent implements OnInit {
         
           if (storedToken === token) {
             console.log('Token successfully saved to local storage.');
-            this.router.navigate(['/Admin/Dashboard']);
+            this.router.navigate(['/admin/dashboard']);
             // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
             console.error('Failed to save token to local storage.');
@@ -76,7 +76,7 @@ export class ValidateUserComponent implements OnInit {
       error => {
         console.error('An error occurred while logging in:', error);
       }
-    );
+    ); 
   }
   
   }

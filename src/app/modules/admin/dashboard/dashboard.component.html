@@ -311,10 +311,7 @@
             </div>
             <span> <div>
               <select name="" id="">
-                <option value="">2024</option>
-                <option value="">2023</option>
-                <option value="">2022</option>
-                <option value="">2021</option>
+                <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
               </select>
             </div></span>
           </div>
@@ -345,7 +342,7 @@
               aria-labelledby="contact-tab"
               tabindex="0"
             >
-              <!-- <canvas id="canvas3" class="canvas"  #canvas3></canvas> -->
+              <canvas id="canvas3" class="canvas"  #canvas3></canvas>
             </div>
            <!--  <div
               class="tab-pane fade"
@@ -368,6 +365,7 @@
                 role="tab"
                 aria-controls="home-tab-pane"
                 aria-selected="true"
+                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Users' | translate }} </p>
@@ -386,6 +384,7 @@
                 role="tab"
                 aria-controls="profile-tab-pane"
                 aria-selected="false"
+                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p> {{ 'Total Sales' | translate}}</p>
@@ -403,6 +402,7 @@
                 role="tab"
                 aria-controls="contact-tab-pane"
                 aria-selected="false"
+                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Subscriptions' | translate }}</p>
@@ -432,17 +432,17 @@
               <div>
                 <p>New Registrations</p>
               </div>
-              <div >
+              <!-- <div >
                 <select name="" id="">
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                 </select>
-              </div>
+              </div> -->
               </div>
             <div class="view-all text-end ">
-              <a href="Admin/Users" >{{ 'View' | translate }} </a> 
+              <a href="admin/users" >{{ 'View' | translate }} </a> 
             </div>
 
           </div>
@@ -459,7 +459,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr   *ngFor="let user of newRegistrations">
+              <tr *ngFor="let user of newRegistrations" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: user.id }">
                 <td  class="main-table ">
                   <img
                     src="../../../assets/images/1.jpg"
@@ -479,7 +479,6 @@
 
                 </td>
               </tr>
-  
             </tbody>
           </table>
         </div>
@@ -491,7 +490,7 @@
       <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between border-0">
             <h4>{{ 'Registrations' | translate }}</h4>
-            <a href="Admin/Users" >{{ 'View' | translate }} </a> 
+            <a href="admin/users" >{{ 'View' | translate }} </a> 
         </div>
         <div class="card-body card-tabs overflow-auto registered-content">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -508,32 +507,34 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
-             <div   *ngFor="let player of newRegistrationPlayers" class="card-tabs-content">
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+             <div *ngFor="let player of newRegistrationPlayers" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: player.id }">
+                <img src="{{player.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="player.meta && player.meta.profile_image_path">
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!player.meta || !player.meta.profile_image_path">
                 <div class="mesaage-content">
-                    <h6 class="mb-0">{{player.first_name +' '+player.last_name }}</h6>
-                    <small>{{player.last_activity_time}}</small>
+                    <h6 class="mb-0">{{player.first_name}} {{player.last_name}}</h6>
+                    <small>{{getDaysAgo(player.created_at)}}</small>
                 </div>
               </div>
-             
             </div>
 
             <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
-              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content">
-              <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: club.id }">
+              <img src="{{club.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="club.meta && club.meta.profile_image_path">
+              <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!club.meta || !club.meta.profile_image_path">
                 <div class="mesaage-content">
-                  <h6 class="mb-0">{{club.first_name + '' +club.last_name}}</h6>
-                  <small>{{club.last_activity_time}}</small>
+                  <h6 class="mb-0">{{club.first_name}} {{club.last_name}}</h6>
+                  <small>{{getDaysAgo(club.created_at)}}</small>
                 </div>
              </div>
            </div>
             <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
          
-              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content">
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: scout.id }">
+                <img src="{{scout.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="scout.meta && scout.meta.profile_image_path">
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!scout.meta || !scout.meta.profile_image_path">
                   <div class="mesaage-content">
-                    <h6 class="mb-0">{{scout.first_name + '' +scout.last_name}}</h6>
-                    <small>{{scout.last_activity_time}}</small>
+                    <h6 class="mb-0">{{scout.first_name}} {{scout.last_name}}</h6>
+                    <small>{{getDaysAgo(scout.created_at)}}</small>
                 </div>
             </div>
           </div>

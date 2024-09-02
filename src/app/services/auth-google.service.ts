@@ -11,6 +11,7 @@ export class AuthGoogleService {
 
   constructor() {
     this.initConfiguration();
+    
   }
 
   initConfiguration() {
@@ -19,7 +20,7 @@ export class AuthGoogleService {
       strictDiscoveryDocumentValidation: false,
       clientId: '628784911134-dhjavrka1or8i37v8odavd09dno8jgmc.apps.googleusercontent.com',
       redirectUri: "https://pofepave.myhostpoint.ch/validate-user",
-      scope: 'openid profile email',
+      scope: 'openid profile email'
     };
 
     this.oAuthService.configure(authConfig);

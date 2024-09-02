@@ -6,6 +6,8 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DashboardService } from '../../../services/dashboard.service';
+import { ViewportScroller } from '@angular/common';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -29,12 +31,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationClubs:any = [];
   newRegistrationPlayers:any = [];
   newRegistrationScouts:any = [];
+  years:any = [];
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
     private dashboardApi:DashboardService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private viewportScroller: ViewportScroller
   ) {
     this.getChardData();
   }
@@ -45,7 +49,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.getNewRegistrationsWithScout();
     this.getNewRegistrationsWithClub();
     this.getNewRegistrationsWithPlayers();
-
+    this.generateYears();
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
@@ -302,6 +306,37 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     elements.forEach(el => {
       el.classList.toggle('d-none');
     });
+  }
+
+  getDaysAgo(creationDate: string) {
+    const currentDate = new Date(); // Current date
+    const createdDate = new Date(creationDate); // Creation date converted to Date object
+
+    // Calculate the difference in milliseconds
+    const timeDifference = currentDate.getTime() - createdDate.getTime();
+
+    // Convert milliseconds to days
+    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+    let text = " days ago";
+    if(daysAgo == 1){
+      text = " day ago";
+    }
+    return daysAgo+text;
+  }
+
+  generateYears() {
+    const startYear = 2024;
+    const currentYear = new Date().getFullYear();
+
+    // Populate the years array from startYear to currentYear
+    for (let year = startYear; year <= currentYear; year++) {
+      this.years.push(year);
+    }
+  }
+
+  scrollToTop() {
+    this.viewportScroller.scrollToPosition([0, 0]); // Scrolls to the top-left corner
   }
 
 

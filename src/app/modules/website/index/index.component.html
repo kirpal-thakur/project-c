@@ -577,7 +577,7 @@
                 class="form-control"
                 placeholder="{{ 'emailPlaceholder' | translate }}"
                 name="password"
-                required
+                required (keydown)="checkEnterKey($event)"
               />
             </div>
             <div class="mb-3">
@@ -589,7 +589,7 @@
                 type="password"
                 class="form-control"
                 id="exampleFormControlInput2"
-                placeholder="{{ 'passwordPlaceholder' | translate }}"
+                placeholder="{{ 'passwordPlaceholder' | translate }}" (keydown)="checkEnterKey($event)"
               />
             </div>
             <div *ngIf="loginButtonClicked && (!email || !password)" class="text-danger">

@@ -208,7 +208,7 @@ export class IndexComponent implements OnInit{
             if (modal) {
               modal.hide();
             }
-            this.router.navigate(['/Admin/Dashboard']);
+            this.router.navigate(['/admin/dashboard']);
             // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
             console.error('Failed to save token to local storage.');
@@ -334,7 +334,7 @@ export class IndexComponent implements OnInit{
               console.log('Magic login response:', magicLoginResponse);
               if (magicLoginResponse.status === true) {
                 console.log('Auto-login successful.');
-                this.router.navigate(['/Admin/Dashboard']);
+                this.router.navigate(['/admin/dashboard']);
               } else {
                 console.error('Auto-login failed:', magicLoginResponse.message);
                 this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
@@ -474,4 +474,12 @@ notverifyed()
     // data: { token: this.token }
   });
 }
+
+checkEnterKey(event: KeyboardEvent) {
+  // Check if the Enter key is pressed
+  if (event.key === 'Enter') {
+    this.login();
+  }
+}
+
 }
