@@ -31,6 +31,7 @@ export class ValidateUserComponent implements OnInit {
     let token = this.authGoogleService.getToken();
     let profile:any = this.authGoogleService.getProfile();
 
+    console.log(token, profile);
     let selectedLanguage = localStorage.getItem('lang') || '';
     let domain = environment.targetDomain?.domain || 'ch';
 

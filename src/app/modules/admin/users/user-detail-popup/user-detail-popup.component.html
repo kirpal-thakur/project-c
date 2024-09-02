@@ -84,7 +84,7 @@
     </div>
     <div class="list-view">
       <h6 class="mb-2">Next payment due:</h6>
-      <h6 class="mb-2 font-w400" *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }} / Yearly cycle</h6>
+      <h6 class="mb-2 font-w400" *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }} / {{user.plan_interval}} cycle</h6>
       <h6 class="mb-2 font-w400" *ngIf="!user.plan_period_end">NA</h6>
       <h6 class="text-light font-w400">View payment details</h6>
     </div>
@@ -96,7 +96,8 @@
     </div>
     <div class="list-view">
       <h6 class="mb-2">Voucher Applied:</h6>
-      <h6 class="mb-2 font-w400">SOCC30</h6>
+      <h6 class="mb-2 font-w400" *ngIf="user.coupon_used">{{user.coupon_used}}</h6>
+      <h6 class="mb-2 font-w400" *ngIf="!user.coupon_used">NA</h6>
     </div>
     <div class="list-view">
       <h6 class="mb-2">Payment method:</h6>
@@ -120,7 +121,8 @@
             </clipPath>
           </defs>
         </svg>
-        <h6 class="mb-2 font-w400">••••••••3418</h6>
+        <h6 class="mb-2 font-w400" *ngIf="user.last4">••••••••{{user.last4}}</h6>
+        <h6 class="mb-2 font-w400" *ngIf="!user.last4">NA</h6>
       </div>
     </div>
 
