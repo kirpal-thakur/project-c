@@ -383,9 +383,9 @@ a.dropdown-item.ai-icon.selected {
 .sidebar_state {
   position: absolute;
   background-color: #fff;
-  right: -15px;
-  width: 30px;
-  height: 30px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -789,7 +789,7 @@ left: unset;
         font-size: 12px;
         border-radius: 10px;
         margin: 0;
-        padding: 0.5rem 1.125rem;
+        padding: 10px;
         font-weight: 500;
         color: #236115;
         font-weight: 700;
@@ -1354,5 +1354,9 @@ margin: auto;
   font-family:sans-serif, Poppins ;
   font-size: 12px;
   font-weight: 400;
+}
+
+.view-all a{
+  color : #023A4A ;
 }
 // new changes CSS End

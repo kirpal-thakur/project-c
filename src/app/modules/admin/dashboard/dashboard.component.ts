@@ -148,10 +148,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       datasets: [
         {
           data: values,
-          borderWidth: 4,
+          borderWidth: 6,
           borderColor: gradientStroke,
-          pointBorderWidth: 15,
-          weight: 600,
+          pointBorderWidth: 3, 
+          pointBackgroundColor: '#BDE34F',
+          pointBorderColor: '#FFFFFF', 
+          pointRadius: 10, 
+          weight: 700,
 
 
           fill: {
