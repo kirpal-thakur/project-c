@@ -586,8 +586,9 @@ input:checked + .slider:before {
 }
 .badgeinfo{
   background-color: #7EC9FF;
-  padding: 5px;
+  padding: 2px 7px;
   font-size: 10px;
+  font-weight: 500;
   border-radius: 20px;
   margin: 0px 5px;
 }
@@ -1403,7 +1404,7 @@ background-color: #072944;
 //     background-color:#0c3453;
 //   }
   .dark-theme .light-theme {
-    background-color:#0c3453 !important;
+    // background-color:#0c3453 !important;
   }
 
 
