@@ -2,10 +2,11 @@
 
 body{
   font-family: "Libre Franklin", sans-serif;
+  background: #f0f0f0;
 }
  .light-theme{
   position: relative;
-  background: #f0f0f0 !important;
+  // background: #f0f0f0 !important;
   font-family: "Libre Franklin", sans-serif;
 }
 ul,
@@ -565,6 +566,7 @@ input:checked + .slider:before {
   background-color: #7EC9FF;
   padding: 5px;
   font-size: 10px;
+  font-weight: 500;
   border-radius: 20px;
   margin: 0px 5px;
 }
@@ -677,7 +679,7 @@ left: unset;
   padding: 10px 22px;
   font-size: 13px;
   width: 230px;
-  background: #fff;
+  // background: #fff;
   color: #7d7d83;
   font-weight: 700;
   display: block;
@@ -691,7 +693,7 @@ left: unset;
 // ------------------------- dashboard start ------------------
 .dashboard_table {
   border-radius: 10px;
-  padding: 15px;
+  // padding: 15px;
   overflow: hidden;
   position: relative;
   background-color: #fff;
@@ -1330,3 +1332,27 @@ margin: auto;
 .cupen-btn-date-1 .mat-mdc-form-field-infix {
   width: 120px;
 }
+
+// new changes CSS Start
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  isolation: isolate;
+  border-color: transparent; 
+}
+
+.header-view{
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.user-name{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mode-text{
+  font-family:sans-serif, Poppins ;
+  font-size: 12px;
+  font-weight: 400;
+}
+// new changes CSS End
