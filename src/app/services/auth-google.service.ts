@@ -20,6 +20,7 @@ export class AuthGoogleService {
       strictDiscoveryDocumentValidation: false,
       clientId: '628784911134-dhjavrka1or8i37v8odavd09dno8jgmc.apps.googleusercontent.com',
       redirectUri: "https://pofepave.myhostpoint.ch/validate-user",
+      showDebugInformation: true,
       scope: 'openid profile email'
     };
 
