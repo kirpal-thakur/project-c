@@ -13,7 +13,7 @@ const routes: Routes = [
     canActivate: [NonAuthGuard]
   },
   {
-    path: 'admin',
+    path: 'Admin',
     loadChildren: () =>
       import('./modules/admin/admin.module').then(
         (m) => m.AdminModule

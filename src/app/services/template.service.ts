@@ -7,22 +7,15 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-
 export class TemplateService {
     private apiUrl;
     constructor(private http: HttpClient) {
         this.apiUrl = environment?.apiUrl;
     
     }
-    getTemplates(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: any }> {
-        const params = new HttpParams()
-        .set('offset',pageIndex)
-        .set('search',filter)
-        .set('limit', pageSize)
-        .set('orderBy', 'id')
-        .set('order', 'desc');
+    getTemplates(): Observable<{ status: boolean, message: string, data: any }> {
         return this.http.get<{ status: boolean, message: string, data: any }>(
-            `${this.apiUrl}admin/get-email-templates`, { params }
+            `${this.apiUrl}admin/get-email-templates`,
           );
     }
 

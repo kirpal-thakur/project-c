@@ -24,14 +24,14 @@ export class InboxPopupComponent {
     public dialogRef: MatDialogRef<InboxPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-   // this.fetchUsers();
+    this.fetchUsers();
   }
   ngOnInit(): void {
     
   }
  
   async fetchUsers(): Promise<void> {
-     /*   try {
+       try {
           const response: any = await this.userService.getUsers().toPromise();
           if (response && response.status && response.data && response.data.userData) {
               this.allUsers = response.data.userData;
@@ -41,7 +41,7 @@ export class InboxPopupComponent {
         } catch (error) {
           console.error('Error fetching users:', error);
         }
- */
+
   }
   close() {
     this.dialogRef.close();

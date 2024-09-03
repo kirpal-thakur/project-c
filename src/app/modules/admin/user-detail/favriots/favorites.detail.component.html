@@ -444,8 +444,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let favorite of userFavorites">
-          <td class="main-table" style="width: 50px">
+        <tr >
+          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
             <span class="form-check align-self-center me-2">
               <input
                 type="checkbox"
@@ -487,21 +487,156 @@
                 </span>
               </span>
               <span class="main-template"
-              style="padding-left: 15px">{{favorite.first_name}} {{favorite.last_name}}</span>
+              style="padding-left: 15px">Elton Prince</span>
             </div>
           </td>
-          <td>{{favorite.role_name}}</td>
-          <td>{{favorite.location}}</td>
-          <td>{{ favorite.user_created_at | date:'MM.dd.yyyy - hh.mm a' }}</td>
+          <td>Talent</td>
+          <td>Switzerland</td>
+          <td>08.04.2024-12.53 PM</td>
 
           <td  data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight2"
           aria-controls="offcanvasRight2"
           class="c_pointer main-table-2 text-center"
           >
-          <svg (click)="navigateToUserDetail(favorite.favorite_id)" id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+          <svg id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
             <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
           </svg>
+          </td>
+          <td class="text-center">
+
+            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="me-1">
+            <path
+              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+              fill="#787878"></path>
+          </svg>
+          </td>
+        </tr>
+        <tr >
+          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
+            <span class="form-check align-self-center me-2">
+              <input
+                type="checkbox"
+                value=""
+                id="defaultCheck1"
+                class="form-check-input"
+              /><label for="defaultCheck1" class="form-check-label"></label>
+            </span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="position-relative">
+                <img
+                  src="../../../assets/images/1.jpg"
+                  alt=""
+                  class="table_img"
+                />
+                <span
+                  class="position-absolute"
+                  style="right: -10px; bottom: 0px"
+                  >
+                  <svg id="users-icon"
+                    width="27"
+                    height="27"
+                    viewBox="0 0 27 27"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
+                      fill="#236115"
+                    />
+                    <path
+                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
+                      fill="white"
+                      stroke="white"
+                      stroke-width="0.2"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span class="main-template" style="padding-left: 15px">Elton Prince</span>
+            </div>
+          </td>
+          <td>Talent</td>
+          <td>Switzerland</td>
+          <td>08.04.2024-12.53 PM</td>
+
+
+          <td  data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight3"
+          aria-controls="offcanvasRight3"
+          class="c_pointer main-table-2 text-center"
+          >
+          <svg id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+            <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
+          </svg>
+          </td>
+          <td class="text-center">
+
+            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
+            xmlns="http://www.w3.org/2000/svg" class="me-1">
+            <path
+              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+              fill="#787878"></path>
+          </svg>
+          </td>
+        </tr>
+        <tr>
+          <td class="main-table" style="width: 50px">
+            <span class="form-check align-self-center me-2">
+              <input
+                type="checkbox"
+                value=""
+                id="defaultCheck1"
+                class="form-check-input"
+              /><label for="defaultCheck1" class="form-check-label"></label>
+            </span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center">
+              <span class="position-relative">
+                <img
+                  src="../../../assets/images/1.jpg"
+                  alt=""
+                  class="table_img"
+                />
+                <span
+                  class="position-absolute"
+                  style="right: -10px; bottom: 0px"
+                  ><svg id="users-icon"
+                    width="27"
+                    height="27"
+                    viewBox="0 0 27 27"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
+                      fill="#236115"
+                    />
+                    <path
+                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
+                      fill="white"
+                      stroke="white"
+                      stroke-width="0.2"
+                    />
+                  </svg>
+                </span>
+              </span>
+              <span class="main-template" style="padding-left: 15px">Elton Prince</span>
+            </div>
+          </td>
+          <td>Talent</td>
+          <td>Switzerland</td>
+          <td>08.04.2024-12.53 PM</td>
+
+          <td class="c_pointer main-table-2 text-center">
+            <svg  id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
+              <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
+            </svg>
+
           </td>
           <td class="text-center">
 

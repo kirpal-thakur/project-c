@@ -5,8 +5,6 @@ import { Chart, registerables, ChartDataset } from 'chart.js';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DashboardService } from '../../../services/dashboard.service';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,124 +15,43 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas1') canvas1!: ElementRef<HTMLCanvasElement>;
   @ViewChild('canvas2') canvas2!: ElementRef<HTMLCanvasElement>;
   @ViewChild('canvas3') canvas3!: ElementRef<HTMLCanvasElement>;
- // @ViewChild('canvas4') canvas4!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('canvas4') canvas4!: ElementRef<HTMLCanvasElement>;
 
   lang: string = '';
   chart1!: Chart;
   chart2!: Chart;
   chart3!: Chart;
   chart4!: Chart;
-  newRegistrations:any = [];
-  chartData:any = [];
+
   activeLanguage: string = '';
   themeText: string = 'Light Mode'
-  newRegistrationClubs:any = [];
-  newRegistrationPlayers:any = [];
-  newRegistrationScouts:any = [];
-  years:any = [];
+
+
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
-    private dashboardApi:DashboardService,
     private router: Router,
-    private translateService: TranslateService,
-    private viewportScroller: ViewportScroller
-  ) {
-    this.getChardData();
-  }
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit() {
     this.updateThemeText();
-    this.getNewRegistrations();
-    this.getNewRegistrationsWithScout();
-    this.getNewRegistrationsWithClub();
-    this.getNewRegistrationsWithPlayers();
-    this.generateYears();
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
   }
 
   ngAfterViewInit() {
-    
-  }
-  getNewRegistrations(){
-    try {
-      this.dashboardApi.getNewRegistration(5).subscribe((response)=>{
-        if (response && response.status && response.data) { 
-          this.newRegistrations = response.data.userData;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-        });     
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-  }
-  getNewRegistrationsWithPlayers(){
-    try {
-      this.dashboardApi.getNewRegistrationWithRole(4,10).subscribe((response)=>{
-        if (response && response.status && response.data) { 
-          this.newRegistrationPlayers = response.data.userData;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-        });     
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-  }
-  getNewRegistrationsWithClub(){
-    try {
-      this.dashboardApi.getNewRegistrationWithRole(2,10).subscribe((response)=>{
-        if (response && response.status && response.data) { 
-          this.newRegistrationClubs = response.data.userData;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-        });     
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-  }
-  getNewRegistrationsWithScout(){
-    try {
-      this.dashboardApi.getNewRegistrationWithRole(3,10).subscribe((response)=>{
-        if (response && response.status && response.data) { 
-          this.newRegistrationScouts = response.data.userData;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-        });     
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
+    this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1')!;
+    this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2')!;
+    this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3')!;
+    this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
+    this.updateChartBackgroundColor();
   }
 
-  getChardData(){
-    try {
-    this.dashboardApi.getChartData(2024).subscribe((response)=>{
-      if (response && response.status && response.data) {
-        this.chartData = response.data;
-        setTimeout(() => {
-          this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1',response.data.sales.labels,response.data.sales.values)!;
-          this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2',response.data.subscriptions.labels,response.data.subscriptions.values)!;
-          this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3',response.data.users.labels,response.data.users.values)!;
-          // this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
-          this.updateChartBackgroundColor();
-            
-        }, 1000);
-       
-      } else {
-        console.error('Invalid API response structure:', response);
-      }
-      });     
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  }
- 
-  createChart(canvas: HTMLCanvasElement, chartId: string,labels:any,values:any): Chart | null {
+
+
+  createChart(canvas: HTMLCanvasElement, chartId: string): Chart | null {
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       console.error(`Failed to get canvas context for ${chartId}`);
@@ -147,18 +64,17 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     gradientStroke.addColorStop(0.5, '#236115');
     gradientStroke.addColorStop(1, '#7BDA66');
 
+
+
     const data = {
-      labels: labels,
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [
         {
-          data: values,
-          borderWidth: 6,
+          data: [ 15456, 30456, 25456, 40689, 30111, 37987, 29543, 35680, 27231, 37231, 22231, 32231],
+          borderWidth: 4,
           borderColor: gradientStroke,
-          pointBorderWidth: 3, 
-          pointBackgroundColor: '#BDE34F',
-          pointBorderColor: '#FFFFFF', 
-          pointRadius: 10, 
-          weight: 700,
+          pointBorderWidth: 15,
+          weight: 600,
 
 
           fill: {
@@ -246,7 +162,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   updateChartBackgroundColor() {
     const isDarkMode = this.themeService.isDarkMode();
-    const charts = [this.chart1, this.chart2, this.chart3];
+    const charts = [this.chart1, this.chart2, this.chart3, this.chart4];
 
     charts.forEach((chart) => {
       if (chart.options && chart.options.scales && chart.options.plugins) {
@@ -309,37 +225,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     elements.forEach(el => {
       el.classList.toggle('d-none');
     });
-  }
-
-  getDaysAgo(creationDate: string) {
-    const currentDate = new Date(); // Current date
-    const createdDate = new Date(creationDate); // Creation date converted to Date object
-
-    // Calculate the difference in milliseconds
-    const timeDifference = currentDate.getTime() - createdDate.getTime();
-
-    // Convert milliseconds to days
-    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-    let text = " days ago";
-    if(daysAgo == 1){
-      text = " day ago";
-    }
-    return daysAgo+text;
-  }
-
-  generateYears() {
-    const startYear = 2024;
-    const currentYear = new Date().getFullYear();
-
-    // Populate the years array from startYear to currentYear
-    for (let year = startYear; year <= currentYear; year++) {
-      this.years.push(year);
-    }
-  }
-
-  scrollToTop() {
-    this.viewportScroller.scrollToPosition([0, 0]); // Scrolls to the top-left corner
   }
 
 

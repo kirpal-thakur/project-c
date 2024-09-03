@@ -6,8 +6,7 @@
   <div class="offcanvas-body">
     <div class="d-flex align-items-center edit-bx">
       <div class="edit-canvas-media">
-        <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta.profile_image_path" />
-        <img src="{{user.meta.profile_image_path}}" alt="" *ngIf="user.meta.profile_image_path" />
+        <img src="../../../../assets/images/1.jpg" alt="" />
         <div class="shield">
           <svg
             width="27"
@@ -43,9 +42,7 @@
 
     <div class="list-view d-flex align-items-center">
       <h6 class="mb-0 me-3">Status:</h6>
-      <span class="bg_pending" *ngIf="user.status == '0'">Pending</span>
-      <span class="bg_success" *ngIf="user.status == '1'">Approved</span>
-      <span class="bg_reject" *ngIf="user.status == '2'">Rejected</span>
+      <span class="bg_success">Approved</span>
     </div>
     <!-- comment -->
 
@@ -84,20 +81,17 @@
     </div>
     <div class="list-view">
       <h6 class="mb-2">Next payment due:</h6>
-      <h6 class="mb-2 font-w400" *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }} / {{user.plan_interval}} cycle</h6>
-      <h6 class="mb-2 font-w400" *ngIf="!user.plan_period_end">NA</h6>
+      <h6 class="mb-2 font-w400">Apr 5, 2025 / Yearly cycle</h6>
       <h6 class="text-light font-w400">View payment details</h6>
     </div>
     <div class="list-view">
       <h6 class="mb-2">Last payment:</h6>
-      <h6 class="mb-2 font-w400" *ngIf="user.plan_period_start">{{user.plan_period_start | date:'MMM d, y' }}</h6>
-      <h6 class="mb-2 font-w400" *ngIf="!user.plan_period_start">NA</h6>
+      <h6 class="mb-2 font-w400">Apr 5, 2024</h6>
       <h6 class="text-light font-w400">View Invoice</h6>
     </div>
     <div class="list-view">
       <h6 class="mb-2">Voucher Applied:</h6>
-      <h6 class="mb-2 font-w400" *ngIf="user.coupon_used">{{user.coupon_used}}</h6>
-      <h6 class="mb-2 font-w400" *ngIf="!user.coupon_used">NA</h6>
+      <h6 class="mb-2 font-w400">SOCC30</h6>
     </div>
     <div class="list-view">
       <h6 class="mb-2">Payment method:</h6>
@@ -121,8 +115,7 @@
             </clipPath>
           </defs>
         </svg>
-        <h6 class="mb-2 font-w400" *ngIf="user.last4">••••••••{{user.last4}}</h6>
-        <h6 class="mb-2 font-w400" *ngIf="!user.last4">NA</h6>
+        <h6 class="mb-2 font-w400">••••••••3418</h6>
       </div>
     </div>
 

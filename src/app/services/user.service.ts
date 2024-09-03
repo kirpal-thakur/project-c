@@ -22,27 +22,17 @@ export class UserService {
 
   }
 
-  // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
-  getUsers(data: any): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
-    // const params = new HttpParams()
-    //   .set('offset',pageIndex)
-    //   .set('search',filter)
-    //   .set('limit', pageSize)
-    //   .set('orderBy', 'id')
-    //   .set('order', 'desc');
-
-    let params = new HttpParams();
-  
-    // Loop through the queryParams object and set each parameter
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        params = params.set(key, data[key]);
-      }
-    }
-    // params = params.set("whereClause[membership]", 'free');
+  getUsers(): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
+    const headers = new HttpHeaders({
+         'Authorization': `Bearer ${this.userToken}`
+    });
+    const params = new HttpParams()
+      .set('limit', '10')
+      .set('orderBy', 'id')
+      .set('order', 'desc');
     return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
       `${this.apiUrl}admin/users`,
-      { params }
+      { params,headers }
     );
   }
 
@@ -72,41 +62,5 @@ export class UserService {
 
   //   return this.http.get<any>(`${this.apiUrl2}/profile/`, { headers });
   // }
-
-  getLocations(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
-      `${this.apiUrl}get-domains`
-    );
-  }
-
-  getProfileData(userId:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}admin/profile/${userId}`
-    );
-  }
-
-  getGalleryData(userId:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}admin/get-gallery/${userId}`
-    );
-  }
-
-  getFavoritesData(userId:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}admin/get-favorites/${userId}`
-    );
-  }
-
-  getPurchaseData(userId:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}admin/get-purchase-history/${userId}`
-    );
-  }
-
-  getTransferData(userId:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}admin/get-transfer-detail/${userId}`
-    );
-  }
 
 }

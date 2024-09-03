@@ -18,6 +18,5 @@ export class CoupenCodePopupComponent   {
     console.log('Close button clicked');
     this.dialogRef.close();
   }
-  
 
 }

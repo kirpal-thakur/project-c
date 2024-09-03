@@ -10,8 +10,8 @@
         </li>
       </ul>
 
-      <div class="dashboard-title ">
-        <div class="mb-0 align-dashboard-title d-flex align-items-center"><span class="header-view">{{ 'View as' | translate }} </span>&nbsp;<img src="../../../assets/images/1.jpg" class="avatar" width="40px" alt=""> &nbsp;<span class="user-name">{{ 'Peter' | translate }}</span> <span class="badgeinfo">{{ 'Admin' | translate }}</span> <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="dashboard-title">
+        <div class="mb-0 align-dashboard-title"><span class="header-view">{{ 'View as' | translate }} </span>&nbsp;<img src="../../../assets/images/1.jpg" class="avatar" width="40px" alt=""> &nbsp;<span class="header-peter">{{ 'Peter' | translate }}</span> <span class="badgeinfo">{{ 'Admin' | translate }}</span> <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
           <mask id="mask0_3545_5663" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="9" height="5">
           <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="white"/>
@@ -51,7 +51,7 @@
           <li class="nav-item dropdown theme_dropdown me-3">
               <div class="d-flex align-items-center light-theme">
 
-                <p id="theme-text" class="mode-text">Light mode</p>
+                <p id="theme-text">Light mode</p>
                 <label  class="switch" >
                   <input type="checkbox" (change)="toggleTheme($event)" />
                   <span class="slider round"></span>
@@ -300,8 +300,8 @@
       </div>
       </nav>
     </div>
-      <div class="main-wrapper ">
-        <div class="dashboard_table pb-4 " >
+      <div class="main-wrapper">
+        <div class="dashboard_table pb-4" >
 
           <div class="table_title p-3">
             <div class="d-flex align-items-center">
@@ -311,7 +311,10 @@
             </div>
             <span> <div>
               <select name="" id="">
-                <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
+                <option value="">2024</option>
+                <option value="">2023</option>
+                <option value="">2022</option>
+                <option value="">2021</option>
               </select>
             </div></span>
           </div>
@@ -344,7 +347,7 @@
             >
               <canvas id="canvas3" class="canvas"  #canvas3></canvas>
             </div>
-           <!--  <div
+            <div
               class="tab-pane fade"
               id="disabled-tab-pane"
               role="tabpanel"
@@ -352,7 +355,7 @@
               tabindex="0"
             >
               <canvas id="canvas4" class="canvas"  #canvas4></canvas>
-            </div> -->
+            </div>
           </div>
           <ul class="nav nav-tabs " id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -365,12 +368,11 @@
                 role="tab"
                 aria-controls="home-tab-pane"
                 aria-selected="true"
-                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Users' | translate }} </p>
-                <h6>{{chartData?.users?.total}}</h6>
-                <p>{{ 'September' | translate }} </p>
+                <h6>35680</h6>
+
               </div>
               </button>
             </li>
@@ -384,13 +386,10 @@
                 role="tab"
                 aria-controls="profile-tab-pane"
                 aria-selected="false"
-                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p> {{ 'Total Sales' | translate}}</p>
-                <h6>{{chartData?.sales?.total}}</h6>
-                <p>{{ 'September' | translate }} </p>
-
+                <h6>CHF 89000</h6>
               </div>
               </button>
             </li>
@@ -404,17 +403,14 @@
                 role="tab"
                 aria-controls="contact-tab-pane"
                 aria-selected="false"
-                (click)="scrollToTop()"
               >
               <div class="navtabs_button">
                 <p>{{ 'Total Subscriptions' | translate }}</p>
-                <h6>{{chartData?.subscriptions?.total}}</h6>
-                <p>{{ 'September' | translate }} </p>
-
+                <h6>10293</h6>
               </div>
               </button>
             </li>
-            <!-- <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation">
               <button
                 class="nav-link w-100"
                 id="disabled-tab"
@@ -425,8 +421,12 @@
                 aria-controls="disabled-tab-pane"
                 aria-selected="false"
               >
+              <div class="navtabs_button">
+                <p>New Registrations</p>
+                <h6>1090</h6>
+              </div>
               </button>
-            </li> -->
+            </li>
           </ul>
         </div>
 
@@ -436,51 +436,88 @@
               <div>
                 <p>New Registrations</p>
               </div>
-              <!-- <div >
+              <div >
                 <select name="" id="">
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                   <option value="">October 2024</option>
                 </select>
-              </div> -->
+              </div>
               </div>
             <div class="view-all text-end ">
-              <a href="admin/users" >{{ 'View' | translate }} </a> 
+              <a>View All</a>
             </div>
 
           </div>
           <table class="table user-dash-table overflow-auto ">
-            <thead class="dashboard-table-2-table-head">
+            <thead>
               <tr>
-               
+                <!-- <th scope="col"></th> -->
                 <th scope="col-2">{{ 'Name' | translate }}</th>
                 <th scope="col">{{ 'User Type' | translate }}</th>
                 <th scope="col">{{ 'Language' | translate }}</th>
                 <th scope="col">{{ 'Location' | translate }}</th>
-                <th scope="col">{{ 'Date-Time' | translate }}</th>
+                <th scope="col">{{ 'DateTime' | translate }}</th>
                 <th scope="col">{{ 'Status' | translate }}</th>
+
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of newRegistrations" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: user.id }">
+              <tr>
                 <td  class="main-table ">
                   <img
                     src="../../../assets/images/1.jpg"
                     alt=""
                     class="table_img"
                   />
-                  <span>{{user.first_name +' '+user.last_name }}</span>
+                  <span>{{ 'Name' | translate }}</span>
                 </td>
-                <td>{{user.role_name}}</td>
-                <td>{{ user.language }}</td>
-                <td> {{ user.user_location }}</td>
-                <td> {{ user.created_at}}</td>
+                <td>{{ 'Talent' | translate }}</td>
+                <td>{{ 'English' | translate }}</td>
+                <td> {{ 'Switzerland' | translate }}</td>
+                <td> {{ 'date_time' | translate }}</td>
                 <td  class="main-table-2">
-                  <span *ngIf="user.status==1" class="bg_success approved"> {{ 'Approved' | translate }} </span>
-                  <span *ngIf="user.status==2" class="bg_pending"> {{ 'Pending' | translate }}</span>
-                  <span *ngIf="user.status==3" class="bg_reject">Rejected</span>
+                  <span class="bg_success approved"> {{ 'Approved' | translate }} </span>
+                </td>
+              </tr>
+              <tr >
+                <td  class="main-table">
+                  <img
+                    src="../../../assets/images/1.jpg"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                    class="table_img"
+                  />
+                  <span>{{ 'Name' | translate }}</span>
+                </td>
+                <td>{{ 'Talent' | translate }}</td>
+                <td>{{ 'English' | translate }}</td>
+                <td> {{ 'Switzerland' | translate }}</td>
+                <td> {{ 'date_time' | translate }}</td>
+                <td  class="main-table-2">
+                  <span class="bg_pending"> {{ 'Pending' | translate }}</span>
+                </td>
+              </tr>
+              <tr>
+                <td  class="main-table">
+                  <img
+                    src="../../../assets/images/1.jpg"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                    class="table_img"
+                  />
+                  <span>{{ 'Name' | translate }}</span>
 
+                </td>
+                <td>{{ 'Talent' | translate }}</td>
+                <td>{{ 'English' | translate }}</td>
+                <td> {{ 'Switzerland' | translate }}</td>
+                <td> {{ 'date_time' | translate }}</td>
+                <td  class="main-table-2">
+                  <span class="bg_reject">Rejected</span>
                 </td>
               </tr>
             </tbody>
@@ -494,9 +531,9 @@
       <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between border-0">
             <h4>{{ 'Registrations' | translate }}</h4>
-            <a href="admin/users" >{{ 'View' | translate }} </a> 
+            <a href="#">{{ 'View' | translate }} </a>
         </div>
-        <div class="card-body card-tabs overflow-auto registered-content">
+        <div class="card-body card-tabs">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab-1" data-bs-toggle="tab" data-bs-target="#home-tab-pane-1" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">{{ 'talent' | translate }} </button>
@@ -511,36 +548,186 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
-             <div *ngFor="let player of newRegistrationPlayers" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: player.id }">
-                <img src="{{player.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="player.meta && player.meta.profile_image_path">
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!player.meta || !player.meta.profile_image_path">
+
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
                 <div class="mesaage-content">
-                    <h6 class="mb-0">{{player.first_name}} {{player.last_name}}</h6>
-                    <small>{{getDaysAgo(player.created_at)}}</small>
+                    <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                    <small>{{ 'time' | translate }}</small>
                 </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                    <h6 class="mb-0">Kadin Septimus</h6>
+                    <small>10 mins ago</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+            </div>
+            <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
+              </div>
+              <div class="card-tabs-content">
+
+                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="">
+                <div class="mesaage-content">
+                  <h6 class="mb-0">{{ 'name-text' | translate }}</h6>
+                  <small>{{ 'time' | translate }}</small>
+                </div>
+
               </div>
             </div>
 
-            <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
-              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: club.id }">
-              <img src="{{club.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="club.meta && club.meta.profile_image_path">
-              <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!club.meta || !club.meta.profile_image_path">
-                <div class="mesaage-content">
-                  <h6 class="mb-0">{{club.first_name}} {{club.last_name}}</h6>
-                  <small>{{getDaysAgo(club.created_at)}}</small>
-                </div>
-             </div>
-           </div>
-            <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
-         
-              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: scout.id }">
-                <img src="{{scout.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="scout.meta && scout.meta.profile_image_path">
-                <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!scout.meta || !scout.meta.profile_image_path">
-                  <div class="mesaage-content">
-                    <h6 class="mb-0">{{scout.first_name}} {{scout.last_name}}</h6>
-                    <small>{{getDaysAgo(scout.created_at)}}</small>
-                </div>
-            </div>
           </div>
         </div>
     </div>

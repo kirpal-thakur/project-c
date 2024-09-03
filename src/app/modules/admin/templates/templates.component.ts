@@ -18,8 +18,7 @@ export class TemplatesComponent {
   templates: any = [];
   allSelected: boolean = false;
   selectedTemplatesIds: number[] = [];
-  filterValue: string = '';
-
+  
   constructor(public dialog: MatDialog,private tempalateApi: TemplateService,) {}
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -48,9 +47,7 @@ export class TemplatesComponent {
       id: this.selectedTemplatesIds,
     };
     this.tempalateApi.deleteEmailTemplate(templateIds).subscribe(result => {
-      this.isLoading = true;
       if (result && result.status) {
-        this.isLoading = false;
           this.fetchTemplates();
       } else {
         this.isLoading = false;
@@ -70,21 +67,15 @@ export class TemplatesComponent {
   async fetchTemplates(): Promise<void> {
     try {
       this.isLoading = true;
-      const page = this.paginator ? this.paginator.pageIndex+10 : 0;
-      const pageSize = this.paginator ? this.paginator.pageSize : 10;
-      const sortOrder = this.sort ? this.sort.direction : 'asc';
-      const sortField = this.sort ? this.sort.active : '';
-  
-     this.tempalateApi.getTemplates(page, pageSize,this.filterValue).subscribe((response)=>{
+     this.tempalateApi.getTemplates().subscribe((response)=>{
       if (response && response.status && response.data && response.data.emailTemplates) {
         //this.templates = [];
-        this.templates = response.data.emailTemplates;
+        // this.templates = response.data.emailTemplates;
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
         
       } else {
         this.isLoading = false;
-        this.templates = [];
         console.error('Invalid API response structure:', response);
       }
       });     
@@ -92,16 +83,6 @@ export class TemplatesComponent {
       this.isLoading = false;
       console.error('Error fetching users:', error);
     }
-  }
-
-  applyFilter(filterValue:any) {
-    this.filterValue = filterValue.target?.value.trim().toLowerCase();
-    if(this.filterValue.length >= 3){
-      this.fetchTemplates();
-     } else if(this.filterValue.length == 0){
-      this.fetchTemplates();
-     }
-   
   }
   addTemplate(){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
@@ -138,7 +119,7 @@ export class TemplatesComponent {
        });
   }
   onPageChange(){
-    this.fetchTemplates();
+
   }
   editTemplate(tempalateData: any){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
