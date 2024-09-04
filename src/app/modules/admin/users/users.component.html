@@ -85,7 +85,7 @@
                 </div>
               </button>
             </div>
-            <a class="btn btn-outline-white users-icon">
+            <a class="btn btn-outline-white users-icon" (click)="verifyUsers()">
               <svg id="users-icon"
                 width="18"
                 height="19"
@@ -107,7 +107,7 @@
 
               {{ 'VerifyUsers' | translate }}</a
             >
-            <a class="btn btn-outline-white" (click)="deleteUsers()" id="users-icon"
+            <a class="btn btn-outline-white" (click)="confirmDeletion()" id="users-icon"
               ><svg
                 width="22"
                 height="23"
@@ -199,9 +199,11 @@
                           />
                           <span
                             class="position-absolute verified-icon"
-                            style="right: -10px; bottom: 0px"
                           >
-                            <svg
+                          <img src="../../../assets/images/pending.png" alt="" class="user-pending-icon" *ngIf="element.status === '1'"/>
+                          <img src="../../../assets/images/approved.png" alt="" class="user-approved-icon" *ngIf="element.status === '2'"/>
+                          <img src="../../../assets/images/rejected.png" alt="" class="user-rejected-icon" *ngIf="element.status === '3'"/>
+                            <!-- <svg
                               width="27"
                               height="27"
                               viewBox="0 0 27 27"
@@ -218,7 +220,7 @@
                                 stroke="white"
                                 stroke-width="0.2"
                               />
-                            </svg>
+                            </svg> -->
                           </span>
                         </span>
                         <span class="main-template" style="padding-left: 15px">
@@ -241,7 +243,7 @@
 
                   <ng-container matColumnDef="Location">
                     <th mat-header-cell *matHeaderCellDef > Location </th>
-                    <td mat-cell *matCellDef="let element">  {{ element.language }}</td>
+                    <td mat-cell *matCellDef="let element">  {{ element.user_location }}</td>
                   </ng-container>
                   <ng-container matColumnDef="Joined Date - Time">
                     <th mat-header-cell *matHeaderCellDef> Joined Date - Time </th>
@@ -253,23 +255,23 @@
                   </ng-container>
                   <ng-container matColumnDef="Membership">
                     <th mat-header-cell *matHeaderCellDef class="text-center"> Membership </th>
-                    <td mat-cell *matCellDef="let element" class="text-center">  {{ element.subscription_status }}</td>
+                    <td mat-cell *matCellDef="let element" class="text-center">  {{ element.subscription_status == "active" ? "Paid" : "Free" }}</td>
                   </ng-container>
                   <ng-container matColumnDef="Status">
                     <th mat-header-cell *matHeaderCellDef class="text-center"> Status </th>
                     <td mat-cell *matCellDef="let element" class="text-center"> 
                       <span
-                      *ngIf="element.status === '0'"
+                      *ngIf="element.status === '1'"
                       class="bg_pending"
                       >Pending</span
                     >
                     <span
-                      *ngIf="element.status === '1'"
+                      *ngIf="element.status === '2'"
                       class="bg_success"
                       >Approved</span
                     >
                     <span
-                      *ngIf="element.status === '2'"
+                      *ngIf="element.status === '3'"
                       class="bg_reject"
                       >Rejected</span
                     >

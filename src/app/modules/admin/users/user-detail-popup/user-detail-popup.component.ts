@@ -11,27 +11,30 @@ import { Router } from '@angular/router';
 })
 export class UserDetailPopupComponent {
   updatedData: any;
+  selectedOption: any = "";
  
   constructor(private router: Router,
     public dialogRef : MatDialogRef<UserDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public user: any) {
-    console.log('edit user', user);
+    console.log('edit user', user); 
 
     }
   close() {
     this.dialogRef.close();
   }
 
-  save(updatedData: any) {
-    this.dialogRef.close(updatedData);
+  save() {
+    this.dialogRef.close({user: this.user.id, status: this.selectedOption});
   }
 
   closePopup(): void {
     // Navigate to User-detail with query parameter
     this.dialogRef.close(); 
     this.router.navigate(['/Admin/User-detail'], { queryParams: { user: this.user.id } });
+  }
 
-
+  onSelectionChange(event: Event): void {
+    this.selectedOption = (event.target as HTMLInputElement).value;
   }
 
 }

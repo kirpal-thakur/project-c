@@ -7,6 +7,7 @@ import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 import {MatTableModule,MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -37,20 +38,27 @@ export class UsersComponent implements OnInit {
     this.isLoading = true;
      this.fetchUsers();
      this.getLocations();
+    //  this.showMessage("My message here");
   }
 
 
 
-  async fetchUsers(): Promise<void> {
-    const page = this.paginator ? this.paginator.pageIndex+10 : 0;
+  async fetchUsers(filterApplied:boolean = false): Promise<void> {
+    const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
 
+    
     let params:any = {};
     params.offset = page;
     params.search = this.filterValue;
     params.limit  = pageSize;
+
+    if(filterApplied){
+      params.offset = 0;
+      this.paginator.firstPage(); // to reset the page if user applied filter on any page except the first one
+    }
     
     params.orderBy = "id";
     params.order = "desc";
@@ -126,9 +134,6 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  deleteUsers(){
-    console.log('selected',this.selectedUserIds);
-  }
   selectAllUsers() {
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
@@ -173,6 +178,9 @@ export class UsersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if (result !== undefined) {
+        if(result.status != ""){
+          this.updateUserStatus(result.user, result.status)
+        }
        console.log('Dialog result:', result);
       }else{
         console.log('Dialog closed without result');
@@ -206,7 +214,7 @@ export class UsersComponent implements OnInit {
 
   applyUserFilter(filters:any){
     this.customFilters = filters;
-    this.fetchUsers();
+    this.fetchUsers(true);
   }
 
   getLocations(){
@@ -219,5 +227,104 @@ export class UsersComponent implements OnInit {
     } catch (error) {
       console.error('Error fetching locations:', error);
     }
+  }
+
+  verifyUsers():any {
+    if(this.selectedUserIds.length == 0){
+      this.showMessage('Select user(s) first.');
+      return false;
+    }
+
+    this.userService.updateUserStatus(this.selectedUserIds, 2).subscribe(
+      response => {
+        this.fetchUsers();
+        this.selectedUserIds = [];
+        this.allSelected = false;
+        // console.log('User status updated successfully:', response);
+        this.showMessage('User(s) verified successfully!');
+      },
+      error => {
+        console.error('Error updating user status:', error);
+        this.showMessage('Error updating user status. Please try again.');
+      }
+    );
+  }
+
+
+  confirmDeletion():any {
+    if(this.selectedUserIds.length == 0){
+      this.showMessage('Select user(s) first.');
+      return false;
+    }
+
+    this.showDeleteConfirmationPopup();
+  }
+
+  showDeleteConfirmationPopup(){
+    this.showMatDialog("", "delete-confirmation");
+  }
+
+
+  deleteUsers():any {
+    this.userService.deleteUser(this.selectedUserIds).subscribe(
+      response => {
+        this.fetchUsers();
+        this.selectedUserIds = [];
+        this.allSelected = false;
+        console.log('User deleted successfully:', response);
+        this.showMessage('User deleted successfully!');
+      },
+      error => {
+        console.error('Error deleting user:', error);
+        this.showMessage('Error deleting user. Please try again.');
+      }
+    );
+  }
+
+  showMessage(message:string){
+    this.showMatDialog(message, 'display');
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteUsers();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  updateUserStatus(user:any, status:any):any {
+
+    let userId = [user];
+    this.userService.updateUserStatus(userId, status).subscribe(
+      response => {
+
+        let index = this.users.findIndex((x:any) => x.id == user);
+        this.users[index].status = status;
+        // this.fetchUsers();
+        // this.selectedUserIds = [];
+        // this.allSelected = false;
+        // console.log('User status updated successfully:', response);
+        this.showMessage('User status updated successfully!');
+      },
+      error => {
+        console.error('Error updating user status:', error);
+        this.showMessage('Error updating user status. Please try again.');
+      }
+    );
   }
 }

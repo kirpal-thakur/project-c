@@ -49,6 +49,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { TemplatePopupComponent } from './templates/template-popup/template-popup.component';
 import { MarketingPopupComponent } from './marketing/marketing-popup/marketing-popup.component';
 import { FilterPopupComponrnt } from './filter-popup/filter-popup.component';
+import { MessagePopupComponent } from './message-popup/message-popup.component';
 
   
 @NgModule({
@@ -80,7 +81,8 @@ import { FilterPopupComponrnt } from './filter-popup/filter-popup.component';
     InboxPopupComponent,
     MarketingPopupComponent,
     TemplatePopupComponent,
-    FilterPopupComponrnt
+    FilterPopupComponrnt,
+    MessagePopupComponent
   ],
   imports: [
     CommonModule,

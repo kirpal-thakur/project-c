@@ -46,7 +46,7 @@ export class UserService {
     );
   }
 
-  updateUserStatus(userId: number, newStatus: number): Observable<any> {
+  updateUserStatus(userIds: any, newStatus: number): Observable<any> {
 
     const userToken = localStorage.getItem('authToken');
 
@@ -55,7 +55,7 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/update-user-status`, { userId, status: newStatus }, { headers });
+    return this.http.post<any>(`${this.apiUrl2}/update-user-status`, { id: userIds, status: newStatus }, { headers });
   }
   
 
@@ -107,6 +107,15 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}admin/get-transfer-detail/${userId}`
     );
+  }
+
+  deleteUser(userIds: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/delete-user`, { id: userIds }, { headers });
   }
 
 }
