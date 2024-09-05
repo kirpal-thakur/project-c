@@ -190,9 +190,6 @@ font-weight: 400 !important;
 .dark-theme .title-text{
   color: #FFFFFF !important;
 }
-.dark-theme .title-text:hover{
-  color: #000 !important;
-}
 
 .dark-theme .bg_success {
   background: #00B69B;
@@ -276,9 +273,9 @@ font-weight: 400 !important;
   font-size: 16px;
   font-weight: 700;
   border-radius: 10px;
-  padding: 8px 24px;
+  padding: 5px 10px;
   &.btn-sm {
-    padding: 9px 15px;
+    padding: 6px 18px;
   }
 }
 // .btn:hover{
@@ -297,9 +294,10 @@ color: white;
 // border: none !important;
 box-shadow: none !important;
 }
-.card-search {
+.dark-theme .card-search {
   width: 344px;
-  background-color: #f3f3f3;
+  background-color: #0C3453;
+  color: #ffffff;
   display: flex;
   align-items: center;
   .input-group-text,
@@ -968,7 +966,7 @@ left: unset;
 .dark-theme .dropdown-toggle{
   display: flex;
   align-items: center;
-  background-color: #023A4A;
+  background-color: #072944  ;
   // border-color: #D9D9D9;
   padding: 3px 10px 3px 10px;
 
@@ -980,6 +978,10 @@ left: unset;
   .form-check{
       margin-bottom: 0;
   }
+}
+
+.dark-theme .dropdown-toggle-checkbox{
+  background-color: #ffffff  !important;
 }
 
 .dark-theme .dashboard_table .nav-tabs .nav-link {
@@ -1684,5 +1686,18 @@ background-color: #072944;
 }
 .dark-theme a:hover .my-svg-icon .my-path {
   fill: white !important ; /* Change the color of the SVG when the link is active */
+}
+.dark-theme .card-search .form-control{
+  color: #ffffff !important;
+}
+.dark-theme .custom-search{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .filter-svg svg path{
+  fill: #ffffff !important;
+}
+.dark-theme .input-filter-text{
+  color: #ffffff !important;
 }
 // new changes css Start

@@ -288,7 +288,7 @@ font-weight: 400;
   border-radius: 10px;
   padding: 8px 24px;
   &.btn-sm {
-    padding: 9px 15px;
+    padding: 6px 18px;
   }
 }
 // .btn:hover{
@@ -949,8 +949,8 @@ left: unset;
   border-collapse: separate;
   background: #edffe9;
   td{
-    border-top: 1px solid #236115 !important;
-      border-bottom: 1px solid #236115 !important;
+    // border-top: 1px solid #236115 !important;
+    //   border-bottom: 1px solid #236115 !important;
     //  border: 1px solid #236115;
 
      &:first-child{
@@ -963,8 +963,8 @@ left: unset;
     &:nth-child(3),
     &:nth-child(4),
     &:nth-child(5){
-      border-top: 1px solid #236115 !important;
-      border-bottom: 1px solid #236115 !important;
+      // border-top: 1px solid #236115 !important;
+      // border-bottom: 1px solid #236115 !important;
       border: 0;
     }
 
@@ -1375,4 +1375,5 @@ margin: auto;
 .trans-color:hover{
   color: transparent !important;
 }
+
 // new changes CSS End
