@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
-  selector: 'app-user-favorites',
-  templateUrl: './favorites.detail.component.html',
-  styleUrl: './favorites.detail.component.scss'
+  selector: 'app-transfers-tab',
+  templateUrl: './transfers-tab.component.html',
+  styleUrl: './transfers-tab.component.scss',
 })
-export class FavoritesDetailComponent {
+export class TransfersTabComponent {
+  date = new FormControl(new Date());
+
   userId: any = '';
-  userFavorites: any = [];
-  // imageBaseUrl: any = "";
+  userTransfers: any = [];
   
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
   
@@ -19,20 +21,20 @@ export class FavoritesDetailComponent {
       if (params['user']) {
         this.userId = JSON.parse(params['user']);
         console.log('User data:', this.userId);  // Log the user data 
-        this.getUserFavorites(this.userId)
+        this.getUserTransfers(this.userId)
       }
     });
   }
 
-  getUserFavorites(userId:any){
+  getUserTransfers(userId:any){
     console.log(userId)
     try {
-      this.userService.getFavoritesData(userId).subscribe((response)=>{
+      this.userService.getTransferData(userId).subscribe((response)=>{
 
         console.log(response)
         if (response && response.status && response.data) {
-          this.userFavorites = response.data[0].favorites;
-          console.log(this.userFavorites) 
+          this.userTransfers = response.data.transferDetail;
+          console.log(this.userTransfers) 
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
@@ -43,9 +45,5 @@ export class FavoritesDetailComponent {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
-  }
-
-  navigateToUserDetail(favorite:any) {
-    this.router.navigate(['Admin/User-detail'], { queryParams: { user: favorite } });
   }
 }

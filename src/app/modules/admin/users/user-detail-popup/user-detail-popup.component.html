@@ -19,7 +19,7 @@
         <h6 class="font-w400">{{user.role_name}}</h6>
       </div>
     </div>
-    <h6 [routerLink]="['/Admin/User-detail']" class="list-view-title">View Full Profile</h6>
+    <h6 (click)="closePopup(user.role_name, user.id)" class="list-view-title">View Full Profile</h6>
      
       <!-- <h6 class="list-view-title">
         <a  class="text-danger">View Full Profile</a>
@@ -124,7 +124,7 @@
         </label>
       </div>
       <div class="form-check" *ngIf="user.status == '1' || user.status == '2'">
-        <label class="form-check-label pointer" for="flexCheckDefault2">
+        <label class="form-check-label pointer text-danger" for="flexCheckDefault2">
           <input
             class="form-check-input"
             name="userAction"
@@ -138,10 +138,7 @@
   </div>
   <div class="offcanvas-footer p-3 mt-4">
     <div class="d-flex align-items-center justify-content-between">
-      <!-- <a href="javascript:void(0);" [routerLink]="['/Admin/User-detail']"  [queryParams]="{ user: user.id }" class="text-danger">Edit Account</a> -->
-      <a [routerLink]="['/Admin/User-detail']" [queryParams]="{ user: user | json }" class="text-danger" (click)="closePopup()">Edit Account</a>
-
-      
+      <span class="text-danger pointer" (click)="closePopup(user.role_name, user.id)">Edit Account</span>   
       <button class="btn btn-success btn-sm web-create-bg" (click)="save()">Save</button>
 
     </div>

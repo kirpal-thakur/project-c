@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-user-performance',
-  templateUrl: './performance.detail.component.html',
-  styleUrl: './performance.detail.component.scss'
+  selector: 'app-performance-tab',
+  templateUrl: './performance-tab.component.html',
+  styleUrl: './performance-tab.component.scss'
 })
-export class PerformanceDetailComponent {
+export class PerformanceTabComponent {
   isEditing: boolean = false;
 
   startEditing(): void {

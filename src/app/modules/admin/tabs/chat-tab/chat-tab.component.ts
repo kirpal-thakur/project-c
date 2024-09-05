@@ -4,11 +4,11 @@ import { UserService } from '../../../../services/user.service';
 import Talk from 'talkjs';
 
 @Component({
-  selector: 'app-user-chat',
-  templateUrl: './chat.detail.component.html',
-  styleUrls: ['./chat.detail.component.scss']
+  selector: 'app-chat-tab',
+  templateUrl: './chat-tab.component.html',
+  styleUrls: ['./chat-tab.component.scss']
 })
-export class ChatDetailComponent implements OnInit {
+export class ChatTabComponent implements OnInit {
   userData: any;
   otherUsers: any;
   constructor(private userService: UserService){

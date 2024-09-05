@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserDetailComponent } from './user-detail.component';
+import { ProfileTabComponent } from './profile-tab.component';
 
-describe('UserDetailComponent', () => {
-  let component: UserDetailComponent;
-  let fixture: ComponentFixture<UserDetailComponent>;
+describe('ProfileTabComponent', () => {
+  let component: ProfileTabComponent;
+  let fixture: ComponentFixture<ProfileTabComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UserDetailComponent]
+      declarations: [ProfileTabComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UserDetailComponent);
+    fixture = TestBed.createComponent(ProfileTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

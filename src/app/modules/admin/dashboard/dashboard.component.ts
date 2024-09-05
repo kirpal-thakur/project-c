@@ -351,6 +351,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     return modifiedData;
   }
 
+  redirectUser(slug:string, id:Number): void {
+
+    let pageRoute = 'admin/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
+  }
+
 
 }
 

@@ -460,7 +460,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of newRegistrations" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: user.id }" class="pointer">
+              <tr *ngFor="let user of newRegistrations" (click)="redirectUser(user.role_name, user.id)" class="pointer">
                 <td  class="main-table ">
                   <img
                     src="../../../assets/images/1.jpg"
@@ -508,7 +508,7 @@
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home-tab-pane-1" role="tabpanel" aria-labelledby="home-tab-1" tabindex="0">
-             <div *ngFor="let player of newRegistrationPlayers" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: player.id }">
+             <div *ngFor="let player of newRegistrationPlayers" class="card-tabs-content" [routerLink]="['/admin/player', player.id]">
                 <img src="{{player.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="player.meta && player.meta.profile_image_path">
                 <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!player.meta || !player.meta.profile_image_path">
                 <div class="mesaage-content">
@@ -519,7 +519,7 @@
             </div>
 
             <div class="tab-pane fade" id="profile-tab-pane-1" role="tabpanel" aria-labelledby="profile-tab-1" tabindex="0">
-              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: club.id }">
+              <div  *ngFor="let club of newRegistrationClubs" class="card-tabs-content" [routerLink]="['/admin/club', club.id]">
               <img src="{{club.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="club.meta && club.meta.profile_image_path">
               <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!club.meta || !club.meta.profile_image_path">
                 <div class="mesaage-content">
@@ -530,7 +530,7 @@
            </div>
             <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1" tabindex="0">
          
-              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content" [routerLink]="['/admin/user-detail']" [queryParams]="{ user: scout.id }">
+              <div *ngFor="let scout of newRegistrationScouts" class="card-tabs-content" [routerLink]="['/admin/scout', scout.id]">
                 <img src="{{scout.meta.profile_image_path}}" class="message-media me-3" alt="" *ngIf="scout.meta && scout.meta.profile_image_path">
                 <img src="../../../assets/images/1.jpg" class="message-media me-3" alt="" *ngIf="!scout.meta || !scout.meta.profile_image_path">
                   <div class="mesaage-content">

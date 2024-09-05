@@ -27,10 +27,12 @@ export class UserDetailPopupComponent {
     this.dialogRef.close({user: this.user.id, status: this.selectedOption});
   }
 
-  closePopup(): void {
+  closePopup(slug:string, id:Number): void {
+
+    let pageRoute = 'admin/'+slug.toLowerCase();
     // Navigate to User-detail with query parameter
     this.dialogRef.close(); 
-    this.router.navigate(['/Admin/User-detail'], { queryParams: { user: this.user.id } });
+    this.router.navigate([pageRoute, id]);
   }
 
   onSelectionChange(event: Event): void {

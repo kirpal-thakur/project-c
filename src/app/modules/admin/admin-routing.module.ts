@@ -8,9 +8,11 @@ import { TemplatesComponent } from './templates/templates.component';
 import { MarketingComponent } from './marketing/marketing.component';
 import { WebsiteComponent } from './website/website.component';
 import { SettingComponent } from './setting/setting.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { AuthGuard } from '../../services/auth.guard'; // Import the AuthGuard
-import { GalleryDetailComponent } from './user-detail/gallery/gallery.detail.component';
+import { GalleryTabComponent } from './tabs/gallery-tab/gallery-tab.component';
+import { ScoutDetailComponent } from './scout-detail/scout-detail.component';
+import { ClubDetailComponent } from './club-detail/club-detail.component';
 
 const routes: Routes = [
   {
@@ -25,8 +27,10 @@ const routes: Routes = [
       {path: 'marketing', component: MarketingComponent},
       {path: 'website', component: WebsiteComponent},
       {path: 'setting', component: SettingComponent},
-      {path: 'user-detail', component: UserDetailComponent},
-      { path: 'gallery-detail', component: GalleryDetailComponent },
+      {path: 'player/:id', component: PlayerDetailComponent},
+      { path: 'gallery-detail', component: GalleryTabComponent },
+      { path: 'scout/:id', component: ScoutDetailComponent },
+      { path: 'club/:id', component: ClubDetailComponent },
     ]
   }
 

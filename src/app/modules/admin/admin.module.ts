@@ -14,7 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { EmptyTableComponent } from './empty-table/emplty-table.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
+import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -24,22 +24,22 @@ import {MatIconModule} from '@angular/material/icon';
 import { ClickOutsideDirective } from './marketing/click-outside.directive';
 import { RouterModule } from '@angular/router';
 import { UserDetailPopupComponent } from './users/user-detail-popup/user-detail-popup.component';
-import { GalleryDetailComponent } from './user-detail/gallery/gallery.detail.component';
-import { TransfersDetailComponent } from './user-detail/transfers/transfers.detail.component';
+import { GalleryTabComponent } from './tabs/gallery-tab/gallery-tab.component';
+import { TransfersTabComponent } from './tabs/transfers-tab/transfers-tab.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
-import { PerformanceDetailComponent } from './user-detail/performance/performance.detail.component';
-import { FavoritesDetailComponent } from './user-detail/favriots/favorites.detail.component';
-import { PurchaseDetailComponent } from './user-detail/purchase/purchase.detail.component';
+import { PerformanceTabComponent } from './tabs/performance-tab/performance-tab.component';
+import { FavoritesTabComponent } from './tabs/favorites-tab/favorites-tab.component';
+import { PurchaseTabComponent } from './tabs/purchase-tab/purchase-tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CoupenCodePopupComponent } from './website/coupen/coupenCode-popup.component';
 import { AdvertisingPopupComponent } from './website/advertising/advertising-popup.component';
 import { NgxEditorModule  } from 'ngx-editor';
-import { ChatDetailComponent } from './user-detail/chat/chat.detail.component';
+import { ChatTabComponent } from './tabs/chat-tab/chat-tab.component';
 import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detail.component';
 import { InboxPopupComponent } from './inbox/inbox-popup/inbox-popup.component';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
@@ -50,6 +50,9 @@ import { TemplatePopupComponent } from './templates/template-popup/template-popu
 import { MarketingPopupComponent } from './marketing/marketing-popup/marketing-popup.component';
 import { FilterPopupComponrnt } from './filter-popup/filter-popup.component';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
+import { ScoutDetailComponent } from './scout-detail/scout-detail.component';
+import { ClubDetailComponent } from './club-detail/club-detail.component';
+import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
 
   
 @NgModule({
@@ -66,23 +69,26 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
     SidebarComponent,
     FooterComponent,
     EmptyTableComponent,
-    UserDetailComponent,
+    PlayerDetailComponent,
     ClickOutsideDirective,
     UserDetailPopupComponent,
-    GalleryDetailComponent,
-    TransfersDetailComponent,
-    FavoritesDetailComponent,
-    PurchaseDetailComponent,
-    PerformanceDetailComponent,
+    GalleryTabComponent,
+    TransfersTabComponent,
+    FavoritesTabComponent,
+    PurchaseTabComponent,
+    PerformanceTabComponent,
     CoupenCodePopupComponent,
     AdvertisingPopupComponent,
-    ChatDetailComponent,
+    ChatTabComponent,
     TeamMemberDetailComponent,
     InboxPopupComponent,
     MarketingPopupComponent,
     TemplatePopupComponent,
     FilterPopupComponrnt,
-    MessagePopupComponent
+    MessagePopupComponent,
+    ScoutDetailComponent,
+    ClubDetailComponent,
+    ProfileTabComponent
   ],
   imports: [
     CommonModule,

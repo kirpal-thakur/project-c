@@ -2,11 +2,11 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 @Component({
-  selector: 'app-user-gallery',
-  templateUrl: './gallery.detail.component.html',
-  styleUrl: './gallery.detail.component.scss'
+  selector: 'app-gallery-tab',
+  templateUrl: './gallery-tab.component.html',
+  styleUrl: './gallery-tab.component.scss'
 })
-export class GalleryDetailComponent {
+export class GalleryTabComponent {
   
   userId: any = '';
   userImages: any = [];

@@ -3,13 +3,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
-  selector: 'app-user-purchase',
-  templateUrl: './purchase.detail.component.html',
-  styleUrl: './purchase.detail.component.scss'
+  selector: 'app-favorites-tab',
+  templateUrl: './favorites-tab.component.html',
+  styleUrl: './favorites-tab.component.scss'
 })
-export class PurchaseDetailComponent {
+export class FavoritesTabComponent {
   userId: any = '';
-  userPurchases: any = [];
+  userFavorites: any = [];
   // imageBaseUrl: any = "";
   
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
@@ -19,20 +19,20 @@ export class PurchaseDetailComponent {
       if (params['user']) {
         this.userId = JSON.parse(params['user']);
         console.log('User data:', this.userId);  // Log the user data 
-        this.getUserPurchases(this.userId)
+        this.getUserFavorites(this.userId)
       }
     });
   }
 
-  getUserPurchases(userId:any){
+  getUserFavorites(userId:any){
     console.log(userId)
     try {
-      this.userService.getPurchaseData(userId).subscribe((response)=>{
+      this.userService.getFavoritesData(userId).subscribe((response)=>{
 
         console.log(response)
         if (response && response.status && response.data) {
-          this.userPurchases = response.data.purchaseHistory;
-          console.log(this.userPurchases) 
+          this.userFavorites = response.data[0].favorites;
+          console.log(this.userFavorites) 
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
@@ -45,4 +45,7 @@ export class PurchaseDetailComponent {
     }
   }
 
+  navigateToUserDetail(favorite:any) {
+    this.router.navigate(['Admin/User-detail'], { queryParams: { user: favorite } });
+  }
 }

@@ -10,29 +10,28 @@
               <span style="margin-left: 10px;" class="bg_pending">{{user.role_name}}</span>
             </h2>
           </div>
-
         </div>
         <div class="d-flex align-items-center justify-content-between mt-3">
           <div class="d-flex align-items-center">
-
-            <a class="btn btn-outline-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <svg id="users-icon" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span class="btn btn-outline-white" (click)="changeUserStatus(user.status)">
+              <svg id="users-icon" width="22" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 1L2 3.55V8.7265C2 13.019 4.98375 17.0225 9 18C13.0163 17.0225 16 13.019 16 8.7265V3.55L9 1Z"
                   fill="#787878" />
                 <path
                   d="M13.1749 7.80954L13.3574 7.63087L13.1749 7.45221L12.5303 6.82133L12.3555 6.65026L12.1806 6.82125L7.51415 11.3843L5.81922 9.7294L5.64436 9.55867L5.4697 9.72961L4.82513 10.3605L4.64259 10.5391L4.82513 10.7178L7.33942 13.1787L7.51429 13.3498L7.68915 13.1787L13.1749 7.80954Z"
                   fill="white" stroke="white" stroke-width="0.5" />
               </svg>
-
-              {{ 'VerifyUsers' | translate }}</a>
-            <a class="btn btn-outline-white" data-bs-toggle="modal" data-bs-target="#exampleModal-1" >
+               <span *ngIf="user.status == '3'">{{ 'Verify User' | translate }}</span>
+               <span *ngIf="user.status == '2'">{{ 'Reject User' | translate }}</span>
+              </span>
+            <span class="btn btn-outline-white" >
               <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
                 xmlns="http://www.w3.org/2000/svg" class="me-1">
                 <path
                   d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
                   fill="#787878"></path>
               </svg>
-             {{ 'DeleteUsers' | translate }}</a>
+             {{ 'Delete User' | translate }}</span>
             <a class="btn btn-outline-white">
               <svg  id="users-icon" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
                 class="me-1">
@@ -100,8 +99,8 @@
           <div class="col-lg-2 border-end">
             <div class="user-details-left">
               <div class="user-media">
-                <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta.profile_image_path">
-                <img src="{{user.meta.profile_image_path}}" alt="" *ngIf="user.meta.profile_image_path">
+                <img src="{{user.meta.profile_image_path}}" alt="" *ngIf="user.meta && user.meta.profile_image_path">
+                <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path">
                 <div class="user-edit">
                   <img src="../../../../assets/images/team-badge.png" alt="">
                 </div>
@@ -121,9 +120,9 @@
               </div>
               <div class="list-view d-flex align-items-center border-top justify-content-between">
                 <h6 class="mb-0 me-3">{{ 'Status' | translate }}:</h6>
-                <span class="bg_pending approv" *ngIf="user.status == '0'">Pending</span>
-                <span class="bg_success approv" *ngIf="user.status == '1'">Approved</span>
-                <span class="bg_reject approv" *ngIf="user.status == '2'">Rejected</span>
+                <span class="bg_pending approv" *ngIf="user.status == '1'">Pending</span>
+                <span class="bg_success approv" *ngIf="user.status == '2'">Approved</span>
+                <span class="bg_reject approv" *ngIf="user.status == '3'">Rejected</span>
               </div>
               <div class="list-view">
                 <h6 class="mb-1">{{'RegistrationDate' | translate }} :</h6>
@@ -167,14 +166,12 @@
                   <h6 class="mb-2 ml-2 font-w400" *ngIf="!user.last4"> NA</h6>
                 </div>
               </div>
-
-
             </div>
           </div>
           <div class="col-lg-10 px-0">
             <ul class="nav nav-tabs user-tabs" id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
-                <button class="nav-link " (click)="isActive = '1'" [ngClass]="{'active': isActive == '1'}" id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                <button class="nav-link" (click)="switchTab('profile')" [ngClass]="{'active': activeTab == 'profile'}" id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
                   type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
                   <svg  id="users-icon" width="24"
                     height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +183,7 @@
                 </button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link " (click)="isActive = '2'"  [ngClass]="{'active': isActive == '2'}" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
+                <button class="nav-link" (click)="switchTab('performance')" [ngClass]="{'active': activeTab == 'performance'}" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
                   type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,7 +194,7 @@
                   {{ 'Performance' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link transfer" (click)="isActive = '3'" [ngClass]="{'active': isActive == '3'}" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
+                <button class="nav-link transfer" (click)="switchTab('transfers')" [ngClass]="{'active': activeTab == 'transfers'}" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
                   type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,7 +205,7 @@
                   {{ 'Transfers' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="isActive = '4'" [ngClass]="{'active': isActive == '4'}" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{'active': activeTab == 'gallery'}" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
                   type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
                   <svg  id="users-icon" width="26"
                     height="21" viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -219,7 +216,7 @@
                   {{ 'Gallery' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link "  (click)="isActive = '5'" [ngClass]="{'active': isActive == '5'}" id="contact-tab-2" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
+                <button class="nav-link" (click)="switchTab('favorites')" [ngClass]="{'active': activeTab == 'favorites'}" id="contact-tab-2" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-2"
                   type="button" role="tab" aria-controls="contact-tab-pane-2" aria-selected="true">
                   <svg  id="users-icon" width="16"
                     height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -231,7 +228,7 @@
 
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="isActive = '6'" [ngClass]="{'active': isActive == '5'}" id="contact-tab-3" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-3"
+                <button class="nav-link" (click)="switchTab('purchases')" [ngClass]="{'active': activeTab == 'purchases'}" id="contact-tab-3" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-3"
                   type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-3" aria-selected="false">
                   <svg  id="users-icon" width="24"
                     height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -242,7 +239,7 @@
                   {{ 'Purchases' | translate }}</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="isActive = '7'" [ngClass]="{'active': isActive == '6'}" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-4"
+                <button class="nav-link" (click)="switchTab('chat')" [ngClass]="{'active': activeTab == 'chat'}" id="contact-tab-4" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-4"
                   type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-4" aria-selected="false">
                   <svg  id="users-icon" width="26"
                     height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -252,283 +249,27 @@
                   </svg>
                   {{ 'Chat' | translate }}</button>
               </li>
-
             </ul>
 
-
-            <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
-                tabindex="0">
-                <div class="user-right-content">
-                  <div class="d-flex align-items-center">
-                    <h6 class="mb-0 me-2 main-template"> {{ 'GeneralDetails' | translate}} </h6>
-                    <a class="btn btn-outline-white main-template">
-                      <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
-                        </svg>
-
-                        {{ 'Edit' | translate}}</a>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p>{{ 'CurrentClub' | translate}}</p>
-                        <h6><img src="../../../../assets/images/team-badge.png" class="fc-img" alt=""> {{user?.meta?.current_club |translate }}<img
-                            src="../../../../assets/images/flag.svg" class="fc-img  style-1" alt=""></h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p> {{ 'League level ' | translate }}</p>
-                        <h6>{{ user?.meta?.league_level | translate }}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p> {{ 'Nationality' | translate }}</p>
-
-                        <div class="d-flex align-items-center mb-2" *ngFor="let nation of userNationalities">
-                          <img src="{{nation.flag_path}}" alt="">
-                          <h6> {{nation.country_name | translate }} </h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p> {{ 'Position' | translate}}</p>
-                        <h6> {{user?.meta?.main_position | translate}}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details">
-                        <p> {{ 'InternationalPlayer' | translate}}</p>
-                        <div class="d-flex align-items-center">
-                          <img src="../../../../assets/images/flag.svg" alt="">
-                          <h6>Kosovo</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!-- second -->
-                <div class="user-right-content">
-                  <div class="d-flex align-items-center">
-                    <h6 class="mb-0 me-2 main-template"> {{ 'PersonalDetails' | translate}}</h6>
-                    <a class="btn btn-outline-white  main-template">
-                      <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
-                        </svg>
-
-                       {{ 'Edit' | translate}}</a>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'FullName' | translate}}</p>
-                        <h6>{{user.first_name}} {{user.last_name}}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'Date of birth' | translate}}</p>
-                        <h6>{{user?.meta?.date_of_birth | date:'MMM d, y' }}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'Foot'  | translate}}</p>
-
-                        <h6>{{user?.meta?.foot}}</h6>
-                      </div>
-                    </div>
-
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p>{{ 'Intheteamsince ' | translate}}</p>
-                        <h6>{{user?.meta?.in_team_since | date:'MMM d, y' }}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p>{{ 'Age' | translate}}</p>
-                        <h6>{{calculateAge(user?.meta?.date_of_birth)}}</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3 ">
-                      <div class="team-details style-1">
-                        <p> {{"Placeofbirth" | translate }}</p>
-                        <h6>Zurich, <img src="../../../../assets/images/flag.svg" alt="">Switzerland</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p>{{ 'ContractUntil' | translate}}</p>
-                        <h6 *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }}</h6>
-                        <h6 *ngIf="!user.plan_period_end">NA</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'TopSpeed' | translate}}</p>
-                        <h6 *ngIf="user.meta && user.meta.top_speed">{{user.meta.top_speed}} {{user.meta.top_speed_unit}}/h</h6>
-                        <h6 *ngIf="!user.meta || !user.meta.top_speed">NA</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'Height' | translate }}</p>
-                        <h6 *ngIf="user.meta && user.meta.height">{{user.meta.height}} {{user.meta.height_unit}}</h6>
-                        <h6 *ngIf="!user.meta || !user.meta.height">NA</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 mt-3">
-                      <div class="team-details style-1">
-                        <p> {{ 'Position' | translate }}</p>
-                        <h6 *ngIf="user.other_position">{{user.other_position}}</h6>
-                        <h6 *ngIf="!user.other_position">NA</h6>
-                      </div>
-                    </div>
-                    <div class="col-lg-4 mt-3">
-                      <div class="team-details style-1">
-                        <p> {{'SocialMedia' | translate }}</p>
-                        <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_x">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M5.6044 6.13187V3.89011C5.6044 3.2967 6.13187 2.76923 6.72528 2.76923H7.84615V0H5.6044C3.75824 0 2.24176 1.51648 2.24176 3.36264V6.1978H0V9.03297H2.24176V18H5.6044V8.9011H7.84615L8.96703 6.06593L5.6044 6.13187Z"
-                                fill="#111418" />
-                            </svg>
-                            www.x.com/{{user.meta.sm_x}}</h6>
-                        </div>
-                        <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_facebook">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                d="M5.6044 6.13187V3.89011C5.6044 3.2967 6.13187 2.76923 6.72528 2.76923H7.84615V0H5.6044C3.75824 0 2.24176 1.51648 2.24176 3.36264V6.1978H0V9.03297H2.24176V18H5.6044V8.9011H7.84615L8.96703 6.06593L5.6044 6.13187Z"
-                                fill="#111418" />
-                            </svg>
-                            www.facebook.com/{{user.meta.sm_facebook}}</h6>
-                        </div>
-                        <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_instagram">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
-                            <path d="M10.0004 5C7.20625 5 5.00037 7.20588 5.00037 10C5.00037 12.7941 7.20625 15 10.0004 15C12.7945 15 15.0004 12.7941 15.0004 10C15.0004 7.27941 12.7945 5 10.0004 5ZM10.0004 13.1618C8.30919 13.1618 6.8386 11.7647 6.8386 10C6.8386 8.23529 8.23566 6.83824 10.0004 6.83824C11.7651 6.83824 13.1621 8.23529 13.1621 10C13.1621 11.7647 11.7651 13.1618 10.0004 13.1618Z" fill="#111418"/>
-                            <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
-                            </svg>
-
-                            www.instagram.com/{{user.meta.sm_instagram}}</h6>
-                        </div>
-
-                        <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_tiktok">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
-                            <path d="M10.0004 5C7.20625 5 5.00037 7.20588 5.00037 10C5.00037 12.7941 7.20625 15 10.0004 15C12.7945 15 15.0004 12.7941 15.0004 10C15.0004 7.27941 12.7945 5 10.0004 5ZM10.0004 13.1618C8.30919 13.1618 6.8386 11.7647 6.8386 10C6.8386 8.23529 8.23566 6.83824 10.0004 6.83824C11.7651 6.83824 13.1621 8.23529 13.1621 10C13.1621 11.7647 11.7651 13.1618 10.0004 13.1618Z" fill="#111418"/>
-                            <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
-                            </svg>
-
-                            www.tiktok.com/{{user.meta.sm_tiktok}}</h6>
-                        </div>
-
-                        <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_youtube">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
-                            <path d="M10.0004 5C7.20625 5 5.00037 7.20588 5.00037 10C5.00037 12.7941 7.20625 15 10.0004 15C12.7945 15 15.0004 12.7941 15.0004 10C15.0004 7.27941 12.7945 5 10.0004 5ZM10.0004 13.1618C8.30919 13.1618 6.8386 11.7647 6.8386 10C6.8386 8.23529 8.23566 6.83824 10.0004 6.83824C11.7651 6.83824 13.1621 8.23529 13.1621 10C13.1621 11.7647 11.7651 13.1618 10.0004 13.1618Z" fill="#111418"/>
-                            <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
-                            </svg>
-
-                            www.youtube.com/{{user.meta.sm_youtube}}</h6>
-                        </div>
-
-                        <div class="d-flex align-items-center" *ngIf="user.meta && user.meta.sm_vimeo">
-                          <h6>
-                            <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
-                            <path d="M10.0004 5C7.20625 5 5.00037 7.20588 5.00037 10C5.00037 12.7941 7.20625 15 10.0004 15C12.7945 15 15.0004 12.7941 15.0004 10C15.0004 7.27941 12.7945 5 10.0004 5ZM10.0004 13.1618C8.30919 13.1618 6.8386 11.7647 6.8386 10C6.8386 8.23529 8.23566 6.83824 10.0004 6.83824C11.7651 6.83824 13.1621 8.23529 13.1621 10C13.1621 11.7647 11.7651 13.1618 10.0004 13.1618Z" fill="#111418"/>
-                            <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
-                            </svg>
-
-                            www.vimeo.com/{{user.meta.sm_vimeo}}</h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p> {{ 'Email' | translate}}</p>
-                        <input type="email" />
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="team-details">
-                        <p> {{ 'Password' | translate}}</p>
-                        <input type="password" />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
-              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                tabindex="0"></div>
-              <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
-                tabindex="0"></div>
-              <div class="tab-pane fade" id="contact-tab-pane-1" role="tabpanel" aria-labelledby="contact-tab-1"
-                tabindex="0"></div>
-              <div class="tab-pane fade" id="contact-tab-pane-2" role="tabpanel" aria-labelledby="contact-tab-2"
-                tabindex="0"></div>
-              <div class="tab-pane fade" id="contact-tab-pane-3" role="tabpanel" aria-labelledby="contact-tab-3"
-                tabindex="0"></div>
-              <div class="tab-pane fade" id="contact-tab-pane-4" role="tabpanel" aria-labelledby="contact-tab-4"
-                tabindex="0"></div>
-
-
-            </div>
-
-           <!-- gallery -->
-            <div *ngIf="isActive === '4'">
-             <app-user-gallery [coverImage]="coverImage"></app-user-gallery>
-            </div>
-
-         <!-- Favorites -->
-
-
-         <div *ngIf="isActive === '5'">
-          <app-user-favorites></app-user-favorites>
+            <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-profile-tab>
+            <app-performance-tab *ngIf="activeTab == 'performance'"></app-performance-tab>
+            <app-transfers-tab *ngIf="activeTab == 'transfers'"></app-transfers-tab>
+            <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage"></app-gallery-tab>
+            <app-favorites-tab *ngIf="activeTab == 'favorites'"></app-favorites-tab>
+            <app-purchase-tab *ngIf="activeTab == 'purchases'"></app-purchase-tab>
+            <app-chat-tab *ngIf="activeTab == 'chat'"></app-chat-tab>
+          </div>
         </div>
-
-        <!-- purchase history -->
-        <div *ngIf="isActive === '6'">
-          <app-user-purchase></app-user-purchase>
-        </div>
-
-        <div *ngIf="isActive === '3'">
-          <app-user-transfers></app-user-transfers>
-     </div>
-
-     <div *ngIf="isActive === '2'">
-      <app-user-performance></app-user-performance>
-     </div>
-
-
-     <div *ngIf="isActive === '7'">
-      <app-user-chat></app-user-chat>
-     </div>
-
+      </div>
+      <app-footer></app-footer>
     </div>
-  <app-footer></app-footer>
-
   </div>
+</div>
 
 
 
 
-  <!-- Modal -->
+  <!--
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -548,7 +289,6 @@
   </div>
 </div>
 
- <!-- Modal -->
  <div class="modal modal-delete fade" id="exampleModal-1" tabindex="-1" aria-labelledby="exampleModalLabel-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -569,4 +309,4 @@
 
     </div>
   </div>
-</div>
+</div> -->
