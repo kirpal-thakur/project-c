@@ -22,6 +22,7 @@
                       fill-rule="evenodd"
                       clip-rule="evenodd"
                       d="M9.1441 11.9881C11.8739 10.8279 13.1464 7.67448 11.9863 4.94465C10.8261 2.21481 7.67265 0.942328 4.94281 2.10248C2.21297 3.26263 0.94049 6.4161 2.10064 9.14593C3.2608 11.8758 6.41426 13.1483 9.1441 11.9881Z"
+                      class="custom-search"
                       stroke="black"
                       stroke-width="1.2"
                       stroke-linecap="round"
@@ -29,6 +30,7 @@
                     ></path>
                     <path
                       d="M10.8408 10.8398L15.0062 15.0058"
+                      class="custom-search"
                       stroke="black"
                       stroke-width="1.2"
                       stroke-linecap="round"
@@ -64,13 +66,14 @@
         <div class="d-flex align-items-center justify-content-between mt-3">
           <div class="d-flex align-items-center">
 
-            <div class="dropdown">
+            <div class="dropdown dropdown-market">
               <button
-                class="btn btn-secondary dropdown-toggle marketing-main-checkbox"
+                class="btn btn-secondary dropdown-toggle dropdown-toggle-checkbox marketing-main-checkbox"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
+             
                 <div class="form-check">
                   <input
                     class="form-check-input"
@@ -79,8 +82,12 @@
                     id="selectAllCheckbox"
                   />
                 </div>
+                 <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                </svg>
               </button>
             </div>
+           
             <a class="btn btn-outline-white">
               <svg id="users-icon"
                 width="22"
@@ -150,8 +157,8 @@
           <table   mat-table [dataSource]="popups" class="table table-hover table-users">
           
             <ng-container matColumnDef="#">
-              <th mat-header-cell *matHeaderCellDef> # </th>
-              <td mat-cell *matCellDef="let element"> 
+              <th mat-header-cell *matHeaderCellDef >  </th>
+              <td mat-cell *matCellDef="let element" class="d-flex justify-content-center"> 
                 <span class="form-check align-self-center me-2">
                   <input
                     type="checkbox"
@@ -198,7 +205,7 @@
             </ng-container>
             <ng-container matColumnDef="Status">
               <th mat-header-cell *matHeaderCellDef> Status </th>
-              <td mat-cell *matCellDef="let element">  {{ element.status }}</td>
+              <td mat-cell *matCellDef="let element"><span class="bg_reject">{{ element.status }}</span></td>
             </ng-container>
             <ng-container matColumnDef="Edit">
               <th mat-header-cell *matHeaderCellDef> Edit</th>

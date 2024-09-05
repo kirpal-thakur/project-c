@@ -2,6 +2,19 @@
     z-index: 9 !important;
   }
 
+  .dropdown-market .dropdown-toggle::after{
+   
+      display: none;
+      margin-left: .255em;
+      vertical-align: .255em;
+      content: "";
+      border-top: .3em solid;
+      border-right: .3em solid transparent;
+      border-bottom: 0;
+      border-left: .3em solid transparent;
+  }
+  
+
   @media(max-width: 425px){
     .btn-outline-white {
       padding: 5px;
@@ -99,3 +112,13 @@
     }
   }
 
+
+  .form-control:focus{
+    box-shadow: inherit;
+  }
+
+  .input-filter-text{
+    font-size: 14px;
+  }
+
+  // 
