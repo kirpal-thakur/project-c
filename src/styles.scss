@@ -411,6 +411,7 @@ a.dropdown-item.ai-icon.selected {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 10px !important;
   font-size: 14px;
   color: #fff !important;
@@ -422,6 +423,10 @@ a.dropdown-item.ai-icon.selected {
   cursor: pointer;
   z-index: 1;
   white-space: nowrap;
+}
+
+.sidebar_menu a:hover{
+  justify-content: inherit !important;
 }
 
 // .sidebar_menu a:hover {
@@ -451,7 +456,7 @@ a.dropdown-item.ai-icon.selected {
 
 }
 .sidebar_menu a svg {
-  margin-right: 10px;
+  // margin-right: 10px;
   min-width: 32px;
 }
 .sidebar-close {
@@ -1358,5 +1363,16 @@ margin: auto;
 
 .view-all a{
   color : #023A4A ;
+}
+
+.nav-link:focus-visible{
+  box-shadow: inherit;
+}
+
+.trans-color{
+  color: transparent !important;
+}
+.trans-color:hover{
+  color: transparent !important;
 }
 // new changes CSS End

@@ -476,7 +476,7 @@ box-shadow: none !important;
 }
 
 .sidebar_menu a svg {
-  margin-right: 10px;
+  // margin-right: 10px;
   min-width: 32px;
 }
 .sidebar-close {
@@ -1671,5 +1671,18 @@ background-color: #072944;
 .dark-theme .dashboard-table-2-table-head th:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.dark-theme .my-svg-icon .my-path{
+  fill: #4F7A9D;
+  
+}
+.dark-theme .my-svg-icon .my-path a.active{
+ 
+}
+.dark-theme .active .my-svg-icon .my-path {
+  fill: white !important ; /* Change the color of the SVG when the link is active */
+}
+.dark-theme a:hover .my-svg-icon .my-path {
+  fill: white !important ; /* Change the color of the SVG when the link is active */
 }
 // new changes css Start
