@@ -13,20 +13,21 @@
         <div class="col-lg-3">
         <div class="team-details">
             <p>{{ 'CurrentClub' | translate}}</p>
-            <h6><img src="../../../../assets/images/team-badge.png" class="fc-img" alt=""> {{user?.meta?.current_club |translate }}<img
-                src="../../../../assets/images/flag.svg" class="fc-img  style-1" alt=""></h6>
+            <h6>
+                <img *ngIf="userData.club_logo_path" src="{{userData.club_logo_path}}" class="fc-img" alt=""> 
+                {{userData?.current_club_name |translate }}
+                <img src="../../../../assets/images/flag.svg" class="fc-img  style-1" alt=""></h6>
         </div>
         </div>
         <div class="col-lg-3">
         <div class="team-details">
             <p> {{ 'League level ' | translate }}</p>
-            <h6>{{ user?.meta?.league_level | translate }}</h6>
+            <h6>{{ userData?.league_name | translate }}</h6>
         </div>
         </div>
         <div class="col-lg-3">
         <div class="team-details">
             <p> {{ 'Nationality' | translate }}</p>
-
             <div class="d-flex align-items-center mb-2" *ngFor="let nation of userNationalities">
             <img src="{{nation.flag_path}}" alt="">
             <h6> {{nation.country_name | translate }} </h6>
@@ -36,15 +37,15 @@
         <div class="col-lg-3">
         <div class="team-details">
             <p> {{ 'Position' | translate}}</p>
-            <h6> {{user?.meta?.main_position | translate}}</h6>
+            <h6> {{userData?.meta?.main_position | translate}}</h6>
         </div>
         </div>
         <div class="col-lg-3 mt-3">
         <div class="team-details">
             <p> {{ 'InternationalPlayer' | translate}}</p>
             <div class="d-flex align-items-center">
-            <img src="../../../../assets/images/flag.svg" alt="">
-            <h6>Kosovo</h6>
+            <img *ngIf="userData.int_player_country_logo_path" src="{{userData.int_player_country_logo_path}}" alt="">
+            <h6>{{userData?.int_player_country}}</h6>
             </div>
         </div>
         </div>
@@ -65,25 +66,25 @@
         <div class="col-lg-3">
             <div class="team-details style-1">
                 <p> {{ 'FullName' | translate}}</p>
-                <h6>{{user.first_name}} {{user.last_name}}</h6>
+                <h6>{{userData.first_name}} {{userData.last_name}}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details style-1">
                 <p> {{ 'Date of birth' | translate}}</p>
-                <h6>{{user?.meta?.date_of_birth | date:'MMM d, y' }}</h6>
+                <h6>{{userData?.meta?.date_of_birth | date:'MMM d, y' }}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details style-1">
                 <p> {{ 'Foot'  | translate}}</p>
-                <h6>{{user?.meta?.foot}}</h6>
+                <h6>{{userData?.meta?.foot}}</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
                 <p>{{ 'Intheteamsince ' | translate}}</p>
-                <h6>{{user?.meta?.in_team_since | date:'MMM d, y' }}</h6>
+                <h6>{{userData?.meta?.in_team_since | date:'MMM d, y' }}</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
@@ -94,42 +95,42 @@
         </div>
         <div class="col-lg-3 mt-3 ">
             <div class="team-details style-1">
-                <p> {{"Placeofbirth" | translate }}</p>
-                <h6>Zurich, <img src="../../../../assets/images/flag.svg" alt="">Switzerland</h6>
+                <p> {{"Place of birth" | translate }}</p>
+                <h6>{{userData?.meta?.place_of_birth}}, <img src="../../../../assets/images/flag.svg" alt="">Switzerland</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
                 <p>{{ 'ContractUntil' | translate}}</p>
-                <h6 *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }}</h6>
-                <h6 *ngIf="!user.plan_period_end">NA</h6>
+                <h6 *ngIf="userData.plan_period_end">{{userData.plan_period_end | date:'MMM d, y' }}</h6>
+                <h6 *ngIf="!userData.plan_period_end">NA</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
                 <p> {{ 'TopSpeed' | translate}}</p>
-                <h6 *ngIf="user.meta && user.meta.top_speed">{{user.meta.top_speed}} {{user.meta.top_speed_unit}}/h</h6>
-                <h6 *ngIf="!user.meta || !user.meta.top_speed">NA</h6>
+                <h6 *ngIf="userData.meta && userData.meta.top_speed">{{userData.meta.top_speed}} {{userData.meta.top_speed_unit}}</h6>
+                <h6 *ngIf="!userData.meta || !userData.meta.top_speed">NA</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
                 <p> {{ 'Height' | translate }}</p>
-                <h6 *ngIf="user.meta && user.meta.height">{{user.meta.height}} {{user.meta.height_unit}}</h6>
-                <h6 *ngIf="!user.meta || !user.meta.height">NA</h6>
+                <h6 *ngIf="userData.meta && userData.meta.height">{{userData.meta.height}} {{userData.meta.height_unit}}</h6>
+                <h6 *ngIf="!userData.meta || !userData.meta.height">NA</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p> {{ 'Position' | translate }}</p>
-                <h6 *ngIf="user.other_position">{{user.other_position}}</h6>
-                <h6 *ngIf="!user.other_position">NA</h6>
+                <p> {{ 'Other Position' | translate }}</p>
+                <h6 *ngIf="userData.meta && userData.meta.other_position">{{userData.meta.other_position}}</h6>
+                <h6 *ngIf="!userData.meta || !userData.meta.other_position">NA</h6>
             </div>
         </div>
         <div class="col-lg-4 mt-3">
             <div class="team-details style-1">
                 <p> {{'SocialMedia' | translate }}</p>
-                <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_x">
+                <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_x">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -137,9 +138,9 @@
                         d="M5.6044 6.13187V3.89011C5.6044 3.2967 6.13187 2.76923 6.72528 2.76923H7.84615V0H5.6044C3.75824 0 2.24176 1.51648 2.24176 3.36264V6.1978H0V9.03297H2.24176V18H5.6044V8.9011H7.84615L8.96703 6.06593L5.6044 6.13187Z"
                         fill="#111418" />
                     </svg>
-                    www.x.com/{{user.meta.sm_x}}</h6>
+                    www.x.com/{{userData.meta.sm_x}}</h6>
                 </div>
-                <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_facebook">
+                <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_facebook">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -147,9 +148,9 @@
                         d="M5.6044 6.13187V3.89011C5.6044 3.2967 6.13187 2.76923 6.72528 2.76923H7.84615V0H5.6044C3.75824 0 2.24176 1.51648 2.24176 3.36264V6.1978H0V9.03297H2.24176V18H5.6044V8.9011H7.84615L8.96703 6.06593L5.6044 6.13187Z"
                         fill="#111418" />
                     </svg>
-                    www.facebook.com/{{user.meta.sm_facebook}}</h6>
+                    www.facebook.com/{{userData.meta.sm_facebook}}</h6>
                 </div>
-                <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_instagram">
+                <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_instagram">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
@@ -157,10 +158,10 @@
                     <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
                     </svg>
 
-                    www.instagram.com/{{user.meta.sm_instagram}}</h6>
+                    www.instagram.com/{{userData.meta.sm_instagram}}</h6>
                 </div>
 
-                <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_tiktok">
+                <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_tiktok">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
@@ -168,10 +169,10 @@
                     <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
                     </svg>
 
-                    www.tiktok.com/{{user.meta.sm_tiktok}}</h6>
+                    www.tiktok.com/{{userData.meta.sm_tiktok}}</h6>
                 </div>
 
-                <div class="d-flex align-items-center team-details-sub" *ngIf="user.meta && user.meta.sm_youtube">
+                <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_youtube">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
@@ -179,10 +180,10 @@
                     <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
                     </svg>
 
-                    www.youtube.com/{{user.meta.sm_youtube}}</h6>
+                    www.youtube.com/{{userData.meta.sm_youtube}}</h6>
                 </div>
 
-                <div class="d-flex align-items-center" *ngIf="user.meta && user.meta.sm_vimeo">
+                <div class="d-flex align-items-center" *ngIf="userData.meta && userData.meta.sm_vimeo">
                 <h6>
                     <svg id="users-icon" class="social-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M13.75 0H6.25C2.79412 0 0 2.79412 0 6.25V13.75C0 17.2059 2.79412 20 6.25 20H13.75C17.2059 20 20 17.2059 20 13.75V6.25C20.0735 2.79412 17.2794 0 13.75 0ZM18.1618 13.75C18.1618 16.1765 16.1765 18.1618 13.75 18.1618H6.25C3.82353 18.1618 1.83824 16.1765 1.83824 13.75V6.25C1.83824 3.82353 3.82353 1.83824 6.25 1.83824H13.75C16.1765 1.83824 18.1618 3.82353 18.1618 6.25V13.75Z" fill="#111418"/>
@@ -190,20 +191,20 @@
                     <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" fill="#111418"/>
                     </svg>
 
-                    www.vimeo.com/{{user.meta.sm_vimeo}}</h6>
+                    www.vimeo.com/{{userData.meta.sm_vimeo}}</h6>
                 </div>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details">
-                <p> {{ 'Email' | translate}}</p>
-                <input type="email" />
+                <p> {{ 'Email' | translate }}</p>
+                <h6>{{userData.email}}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details">
-                <p> {{ 'Password' | translate}}</p>
-                <input type="password" />
+                <p> {{ 'Password' | translate }}</p>
+                <h6>***************</h6>
             </div>
         </div>
     </div>

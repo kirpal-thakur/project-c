@@ -113,9 +113,7 @@
 .social-svg{
     margin-right: 11px;
 }
-.team-details-sub{
-    margin-bottom: 19px;
-}
+
 .modal-delete{
     .text-danger{
         color:         #FD5454!important;
@@ -173,3 +171,18 @@
   }
 
 
+
+  .user-pending-icon{
+    max-width: 22px;
+    margin-left: 10px;
+  }
+  
+  .user-approved-icon{
+    max-width: 26px;
+    margin-left: 10px;
+  }
+  
+  .user-rejected-icon{
+    max-width: 22px;
+    margin-left: 10px;
+  }
