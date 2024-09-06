@@ -4,11 +4,11 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="card border-0 p-0">
-          <div class="card-body card-tabs">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <div class="card-body card-tabs settings-tabs">
+            <ul class="nav nav-tabs p-0 " id="myTab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link active"
+                  class="nav-link active d-flex align-items-center"
                   id="home-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#home-tab-pane"
@@ -18,9 +18,9 @@
                   aria-selected="true"
                 >
                   <svg id="users-icon"
-                    class="me-1"
-                    width="14"
-                    height="15"
+                    class="me-1 profile"
+                    width="20"
+                    height="20"
                     viewBox="0 0 14 15"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +28,7 @@
                     <path
                       d="M7 0.625C7.79427 0.625 8.52344 0.820312 9.1875 1.21094C9.86458 1.60156 10.3984 2.13542 10.7891 2.8125C11.1797 3.47656 11.375 4.20573 11.375 5C11.375 5.74219 11.1992 6.43229 10.8477 7.07031C10.5091 7.70833 10.0404 8.22917 9.44141 8.63281C10.1836 8.95833 10.8411 9.40755 11.4141 9.98047C12 10.5534 12.4492 11.2109 12.7617 11.9531C13.0872 12.7214 13.25 13.5286 13.25 14.375H12C12 13.4635 11.7721 12.6302 11.3164 11.875C10.8737 11.1068 10.2682 10.5013 9.5 10.0586C8.74479 9.60286 7.91146 9.375 7 9.375C6.08854 9.375 5.2487 9.60286 4.48047 10.0586C3.72526 10.5013 3.11979 11.1068 2.66406 11.875C2.22135 12.6302 2 13.4635 2 14.375H0.75C0.75 13.5286 0.91276 12.7214 1.23828 11.9531C1.55078 11.2109 1.99349 10.5534 2.56641 9.98047C3.15234 9.40755 3.81641 8.95833 4.55859 8.63281C3.95964 8.22917 3.48438 7.70833 3.13281 7.07031C2.79427 6.43229 2.625 5.74219 2.625 5C2.625 4.20573 2.82031 3.47656 3.21094 2.8125C3.60156 2.13542 4.12891 1.60156 4.79297 1.21094C5.47005 0.820312 6.20573 0.625 7 0.625ZM7 1.875C6.42708 1.875 5.89974 2.01823 5.41797 2.30469C4.94922 2.57812 4.57161 2.95573 4.28516 3.4375C4.01172 3.90625 3.875 4.42708 3.875 5C3.875 5.57292 4.01172 6.10026 4.28516 6.58203C4.57161 7.05078 4.94922 7.42839 5.41797 7.71484C5.89974 7.98828 6.42708 8.125 7 8.125C7.57292 8.125 8.09375 7.98828 8.5625 7.71484C9.04427 7.42839 9.42188 7.05078 9.69531 6.58203C9.98177 6.10026 10.125 5.57292 10.125 5C10.125 4.42708 9.98177 3.90625 9.69531 3.4375C9.42188 2.95573 9.04427 2.57812 8.5625 2.30469C8.09375 2.01823 7.57292 1.875 7 1.875Z"
                       fill="#111418"
+                      fill-opacity="0.5"
                     />
                   </svg>
                   Profile
@@ -35,7 +36,7 @@
               </li>
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="nav-link d-flex align-items-center"
                   id="profile-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#profile-tab-pane"
@@ -45,9 +46,9 @@
                   aria-selected="false"
                 >
                   <svg id="users-icon"
-                    class="me-1"
-                    width="16"
-                    height="14"
+                    class="me-1 activity"
+                    width="20"
+                    height="25"
                     viewBox="0 0 16 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +66,7 @@
               </li>
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link"
+                  class="nav-link d-flex align-items-center"
                   id="contact-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#contact-tab-pane"
@@ -76,8 +77,8 @@
                 >
                   <svg id="users-icon"
                     class="me-1"
-                    width="14"
-                    height="17"
+                    width="20"
+                    height="25"
                     viewBox="0 0 14 17"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +105,17 @@
             aria-labelledby="home-tab"
             tabindex="0"
           >
+          <div class="card mb-4">
+            <div class="card-header border-0">
+              <div>
+                <h6 class="card-title">Profile</h6>
+                <p>Set your personal information.</p>
+              </div>
+            </div>
+          </div>
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Profile</h4>
+                <h4 class="card-title mb-0">Profile</h4>
                 <span class="font-w500"
                   ><svg id="users-icon"
                     width="18"
@@ -126,13 +135,26 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-4">
-                    <div class="setting-media">
+                    <!-- <div class="setting-media">
                       <img src="../../../assets/images/1.jpg" alt="" />
                       <span class="setting-edit">
-                        Click to <br />
+                        <br>
+                        Click to <br>
                         Change Photo
+                          <br>
                         <input type="file"  class="setting-media-2"/>
                       </span>
+                    </div> -->
+                    <div class="setting-media">
+                      <label for="file-upload" class="custom-file-upload">
+                        <img src="../../../assets/images/1.jpg" alt="" />
+                        <span class="setting-edit">
+                          Click to <br>
+                          Change Photo
+                          <br>
+                        </span>
+                      </label>
+                      <input id="file-upload" type="file" class="setting-media-2" style="display: none;" />
                     </div>
                   </div>
                   <div class="col-lg-8">
@@ -217,7 +239,7 @@
                             aria-label="Default select example"
                             [(ngModel)]="state"
                           >
-                            <option selected>Select</option>
+                            <option value="" disabled  class="text-white">Select</option>
                             <option value="1">One</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -278,17 +300,20 @@
 
             <div class="card">
 
-              <div class="card-header">
+              <div class="card-header header-activity-log">
                 <div class="d-flex col-md-3">
-                   <button class="btn activity-log-del-checkbox btn-secondary dropdown-toggle p-0 px-2 py-1 "
+                   <button class="btn activity-log-del-checkbox btn-secondary dropdown-toggle dropdown-activity-log p-0 "
                 type="button">
-                    <div class="form-check">
+                    <div class="form-check ">
                       <input
-                        class="form-check-input"
+                        class="form-check-input "
                         type="checkbox"
                         value=""
                         id="flexCheckDefault" />
                     </div>
+                    <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2">
+                      <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                    </svg>
                    </button>
                   <a href="javascript:void(0);" class="btn btn-outline-white ml-3"
                     ><svg id="users-icon"
@@ -368,7 +393,7 @@
                   <tbody>
                     <tr>
                       <td style="width: 50px">
-                        <div class="form-check me-3">
+                        <div class="form-check  ">
                           <input
                             class="form-check-input"
                             type="checkbox"
@@ -499,21 +524,28 @@
                 <h4 class="card-title">Team</h4>
                 <a
                 (click)="editTeamMember()"
-
-                  >+  <span class="Addmember">Add member</span></a
+                  ><small><i class="fa-solid fa-plus text-primary me-1 "></i></small> <span class="Addmember">Add member</span></a
                 >
               </div>
-              <div class="card-body p-2">
+              <div class="card-body px-3 py-2" >
                 <table class="table">
                   <tbody>
                     <tr>
                       <td>
-                        <img
-                          src="../../../assets/images/1.jpg"
-                          alt=""
-                          class="table_img"
-                        />
-                        <span class="title-text">Elton Prince</span>
+                        <div class="d-flex">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <div>
+                          <span class="title-text">Elton Prince</span>
+                            <br>
+                          <span class="title-text">Elton Prince</span>
+  
+                          </div>
+                        </div>
+                                                
                       </td>
 
                       <td>
@@ -546,12 +578,19 @@
                     </tr>
                     <tr>
                       <td>
-                        <img
-                          src="../../../assets/images/1.jpg"
-                          alt=""
-                          class="table_img"
-                        />
-                        <span class="title-text">Elton Prince</span>
+                        <div class="d-flex">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <div>
+                          <span class="title-text">Elton Prince</span>
+                            <br>
+                          <span class="title-text">Elton Prince</span>
+  
+                          </div>
+                        </div>
                       </td>
 
                       <td>
@@ -585,26 +624,31 @@
                     </tr>
                     <tr>
                       <td>
-                        <img
-                          src="../../../assets/images/1.jpg"
-                          alt=""
-                          class="table_img"
-                        />
-                        <span class="title-text">Elton Prince</span>
+                        <div class="d-flex">
+                          <img
+                            src="../../../assets/images/1.jpg"
+                            alt=""
+                            class="table_img"
+                          />
+                          <div>
+                          <span class="title-text">Elton Prince</span>
+                            <br>
+                          <span class="title-text">Elton Prince</span>
+  
+                          </div>
+                        </div>    
                       </td>
 
                       <td>
                         <span class="bg_success">Approved </span>
                       </td>
                       <td>
-
                         <select class="custom-select custom-select-wrapper" >
                           <option value="1" >Admin</option>
                           <option value="2">View-Only</option>
                           <option value="3">Editor</option>
                           <option value="4">Transfer Ownership</option>
                         </select>
-
                     </td>                    <td class="c_pointer">
                         <svg id="users-icon"
                           width="22"
