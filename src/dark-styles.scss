@@ -230,8 +230,8 @@ font-weight: 400 !important;
 
 
 .dark-theme a.btn-primary {
-  background: #BDE34F !important;
-  border: #BDE34F !important;
+  background: #6FB95D !important;
+  border: #6FB95D !important;
 }
 
 
@@ -629,6 +629,8 @@ input:checked + .slider:before {
 }
 
 
+
+
 .dark-theme .card-tabs .nav-tabs .nav-link svg path {
   fill: #f0f0f0 ;
   stroke: #ffffff;
@@ -758,7 +760,7 @@ left: unset;
   margin-left: 15px;
   padding: 5px 15px;
   border: 0.7px solid #e5e5e5;
-  background-color: #072944;
+  background-color: #0C3453;
   color:#ffffff;
   border-color: transparent;
 }
@@ -1637,12 +1639,14 @@ background-color: #072944;
 }
 
 .dark-theme .card-tabs .nav-tabs .nav-item .nav-link.active{
-  background-color: #0C3453 !important;
+  background-color: #072944 !important;
   color: #ffffff !important;
 }
 
 .dark-theme .card-tabs .nav-tabs .nav-item .nav-link{
   color: #4F7A9D !important;
+  background-color: #0C3453 !important;
+
 }
 
 .dark-theme  .view-all a{
@@ -1700,4 +1704,59 @@ background-color: #072944;
 .dark-theme .input-filter-text{
   color: #ffffff !important;
 }
+.dark-theme .card-tabs .nav-tabs{
+ background-color: #0C3453;
+}
+
+// .dark-theme .settings-tabs .nav-tabs{
+//   border-top-right-radius: 10px;
+//   border-top-left-radius: 10px;
+//   background-color: #072944 !important;
+  
+// }
+
+.dark-theme .settings-tabs  .nav-tabs .nav-item .nav-link{
+  background-color: #072944 !important ;
+}
+
+.dark-theme .card-header p{
+  color: #ffffff !important;
+}
+
+.dark-theme .profile path{
+  fill: #4F7A9D !important ;
+  stroke: #4F7A9D !important ;
+} 
+
+.dark-theme .settings-tabs .nav-tabs .nav-link svg path {
+  fill: none !important;
+  stroke: #4F7A9D !important;
+}
+
+.dark-theme .settings-tabs .nav-tabs  .nav-link.active svg path {
+ 
+  stroke: #ffffff !important;
+}
+.dark-theme .dropdown-activity-log {
+  background-color: #ffffff !important;
+}
+
+.dark-theme .form-control{
+  background: #072944 ;
+  border-color: #ffffff !important;
+  height: 44px;
+  border-radius: 5px;
+  color: #ffffff !important;
+  padding: 13px 19px;
+}
+
+.dark-theme .form-select{
+  background: #072944;
+  border-color: #ffffff !important;
+  height: 44px;
+  border-radius: 5px;
+  color: #ffffff !important;
+  padding: 13px 19px;
+}
+
 // new changes css Start
