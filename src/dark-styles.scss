@@ -192,7 +192,7 @@ font-weight: 400 !important;
 }
 
 .dark-theme .bg_success {
-  background: #00B69B;
+  background: #236115;
   padding: 5px 15px;
   color: #fff !important;
   text-align: center;
@@ -1463,6 +1463,16 @@ background-color: #072944;
     font-weight: 600 !important;
     border-radius: 15px;
   }
+  .dark-theme .bg_secondary {
+    background: #A4A4A4;
+    padding: 3px 10px;
+    color: #fff !important;
+    text-align: center;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 15px;
+  }
+
   .dark-theme .bg_reject {
     background: #fd5454;
     padding: 3px 10px;
@@ -1756,7 +1766,25 @@ background-color: #072944;
   height: 44px;
   border-radius: 5px;
   color: #ffffff !important;
-  padding: 13px 19px;
+  padding: 11px 19px;
 }
 
+.dark-theme .btn-delete{
+  color: #FD5454 !important;
+}
+
+.dark-theme .pagination-values .mat-mdc-icon-button{
+  padding: 2px !important;
+  background-color: #ffffff !important;
+  color: #787878;
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 5px;
+  cursor: pointer !important;
+  pointer-events: visible !important;
+}
+
+.dark-theme .filter-icon svg path{
+  fill: #ffffff ;
+}
 // new changes css Start

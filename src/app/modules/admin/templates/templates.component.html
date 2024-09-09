@@ -23,6 +23,7 @@
                         clip-rule="evenodd"
                         d="M9.1441 11.9881C11.8739 10.8279 13.1464 7.67448 11.9863 4.94465C10.8261 2.21481 7.67265 0.942328 4.94281 2.10248C2.21297 3.26263 0.94049 6.4161 2.10064 9.14593C3.2608 11.8758 6.41426 13.1483 9.1441 11.9881Z"
                         stroke="black"
+                        class="custom-search"
                         stroke-width="1.2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -30,6 +31,7 @@
                       <path
                         d="M10.8408 10.8398L15.0062 15.0058"
                         stroke="black"
+                        class="custom-search"
                         stroke-width="1.2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -66,9 +68,9 @@
           <div class="d-flex align-items-center justify-content-between mt-3">
             <div class="d-flex align-items-center">
 
-              <div class="dropdown">
+              <div class="dropdown dropdown-template">
                 <button
-                  class="btn btn-secondary dropdown-toggle template-main-checkbox"
+                  class="btn btn-secondary dropdown-toggle dropdown-toggle-checkbox template-main-checkbox"
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -83,6 +85,9 @@
                       [checked]="allSelected"
                     />
                   </div>
+                  <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                  </svg>
                 </button>
               
               </div>
@@ -107,7 +112,7 @@
 
             </div>
             <div class="d-flex align-items-center">
-               <mat-paginator class="paginator-components" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
+               <mat-paginator class="paginator-components pagination-values" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
             </div>
           </div>
         </div>
@@ -116,9 +121,9 @@
           <table mat-table [dataSource]="templates" class="table table-hover table-users">
               
               <ng-container matColumnDef="#">
-                <th mat-header-cell *matHeaderCellDef> # </th>
-                <td mat-cell *matCellDef="let element"> 
-                  <span class="form-check align-self-center me-2">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element" class="d-flex justify-content-center"> 
+                  <span class="form-check align-self-center ">
                     <input
                       type="checkbox"
                       value=""
@@ -139,7 +144,9 @@
                 <td mat-cell *matCellDef="let element">  {{ element.title }}</td>
               </ng-container>
               <ng-container matColumnDef="For">
-                <th mat-header-cell *matHeaderCellDef> For </th>
+                <th mat-header-cell *matHeaderCellDef> For
+                <small><i class="fas fa-sort"></i> </small>  
+                </th>
                 <td mat-cell *matCellDef="let element">  {{ showRole(element.email_for) }}</td>
               </ng-container>
               <ng-container matColumnDef="Language">
@@ -147,7 +154,10 @@
                 <td mat-cell *matCellDef="let element">  {{ element.language }}</td>
               </ng-container>
               <ng-container matColumnDef="Created Date - Time">
-                <th mat-header-cell *matHeaderCellDef> Created Date - Time </th>
+                <small><i class="fas fa-sort"></i> </small>  
+                <th mat-header-cell *matHeaderCellDef> Created Date - Time 
+                  <small><i class="fas fa-sort"></i> </small>  
+                </th>
                 <td mat-cell *matCellDef="let element">  {{ element.created_at }}</td>
               </ng-container>
               <ng-container matColumnDef="Edit">
