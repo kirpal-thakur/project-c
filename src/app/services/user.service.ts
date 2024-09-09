@@ -118,4 +118,25 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl2}/delete-user`, { id: userIds }, { headers });
   }
 
+  getPerformanceData(userId:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-performance-detail/${userId}`
+    );
+  }
+
+  getAllTeams(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}/get-teams`
+    );
+  }
+
+  updatePerformance(performanceId:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/edit-performance-detail/${performanceId}`, params, { headers });
+  }
+
 }

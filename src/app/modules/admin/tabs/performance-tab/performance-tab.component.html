@@ -1,251 +1,7 @@
-<!-- <div>
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th></th>
-            <th scope="col">{{'Team' | translate  }}.</th>
-            <th scope="col">
-              {{'Saison' | translate  }}
-
-            </th>
-            <th scope="col">{{'Matches' | translate }}
-
-            </th>
-            <th scope="col">
-              {{'Goal' | translate  }}
-              <svg id="users-icon"
-              width="9"
-              height="15"
-              viewBox="0 0 9 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                fill="#111418"
-              />
-            </svg>
-            </th>
-            <th scope="col">{{'Coach during debut'| translate}}</th>
-            <th scope="col">{{'Age of the player' | translate}}</th>
-            <th scope="col">{{'Edit'| translate}}</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr *ngIf="!isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template"> <img src="../../../../assets/images/team-badge.png" height="20px" /> FC Thun <img src="../../../../../assets/images/flag.svg" alt=""> </span>
-                  </div>
-                </td>
-                <td>23/24</td>
-                <td>5</td>
-                <td>3</td>
-                <td>Stipe Matic</td>
-                <td>19 Years</td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
-                  </svg>
-                </td>
-              </tr>
-
-              <tr *ngIf="isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template">
-                      <select class="form-select" aria-label="Default select example">
-                        <option class="testing" selected>FC thun </option>
-                       <option  value="1" style="background-image: url('../../../../../assets/images/palyers.png');" > One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
-                    </span>
-                  </div>
-                </td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)=" stopEditing()"
-                   id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                    <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-                  </svg>
-                </td>
-              </tr>
-
-
-              <tr *ngIf="!isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template"> <img src="../../../../assets/images/team-badge.png" height="20px" /> FC Sion <img src="../../../../../assets/images/flag.svg" alt=""> </span>
-                  </div>
-                </td>
-                <td>23/24</td>
-                <td>5</td>
-                <td>3</td>
-                <td>Stipe Matic</td>
-                <td>19 Years</td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
-                  </svg>
-                </td>
-              </tr>
-
-              <tr *ngIf="isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected><img src="../../../../assets/images/team-badge.png" height="20px" /> FC thun <img src="../../../../../assets/images/flag.svg" alt=""></option>
-
-                      </select>
-                    </span>
-                  </div>
-                </td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)=" stopEditing()"
-                   id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                    <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-                  </svg>
-                </td>
-              </tr>
-              <tr *ngIf="!isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template"><img src="../../../../assets/images/team-badge.png" height="20px" /> FC Thun <img src="../../../../../assets/images/flag.svg" alt=""> </span>
-                  </div>
-                </td>
-                <td>23/24</td>
-                <td>5</td>
-                <td>3</td>
-                <td>Stipe Matic</td>
-                <td>19 Years</td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
-                  </svg>
-                </td>
-              </tr>
-
-              <tr *ngIf="isEditing">
-                <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-                  <span class="form-check align-self-center me-2">
-                    <input
-                      type="checkbox"
-                      value=""
-                      id="defaultCheck1"
-                      class="form-check-input"
-                    /><label for="defaultCheck1" class="form-check-label"></label>
-                  </span>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <span class="position-relative">
-                      <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-                    </span>
-                    <span class="main-template">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>FC thun <img src="../../../../../assets/images/flag.svg" alt=""></option>
-
-                      </select>
-                    </span>
-                  </div>
-                </td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-                <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-                <td class="d-flex justify-content-center">
-                  <svg (click)=" stopEditing()"
-                   id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-                    <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-                  </svg>
-                </td>
-              </tr>
-      </table>
-</div> -->
-
-
 <div class="table-responsive" style="width: 100%;">
   <table class="table table-striped w-100">
       <thead>
         <tr>
-          <th></th>
           <th scope="col">{{'Team' | translate}}.</th>
           <th scope="col">{{'Saison' | translate}}</th>
           <th scope="col">{{'Matches' | translate}}</th>
@@ -260,209 +16,57 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="!isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
+        <tr *ngFor="let performance of performances">
           <td>
             <div class="d-flex align-items-center">
               <span class="position-relative">
                 <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
               </span>
-              <span class="main-template"> <img src="../../../../assets/images/team-badge.png" height="20px" /> FC Thun <img src="../../../../../assets/images/flag.svg" alt=""> </span>
+              <span class="main-template" *ngIf="editableId != performance.id"> 
+                <img src="{{performance.team_logo_path}}" height="20px" /> 
+                {{performance.country_name}}
+                <img src="{{performance.country_flag_path}}" alt=""> 
+              </span>
+
+              <select class="form-control" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
+                <ng-container *ngFor="let team of teams">
+                  <option *ngIf="team.id == performance.team_id" selected [value]="team.id">
+                    {{team.team_name}}, {{team.country_name}}
+                  </option>
+
+                  <option *ngIf="team.id != performance.team_id" [value]="team.id">
+                    {{team.team_name}}, {{team.country_name}}
+                  </option>
+                </ng-container>
+              </select>
             </div>
           </td>
-          <td>23/24</td>
-          <td>5</td>
-          <td>3</td>
-          <td>Stipe Matic</td>
-          <td>19 Years</td>
+          <td>
+            <span *ngIf="editableId != performance.id">{{performance.session}}</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.session}}" (input)="onInputChange($event, 'session')" class="form-control">
+          </td>
+          <td>
+            <span *ngIf="editableId != performance.id">{{performance.matches}}</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.matches}}" class="form-control" (input)="onInputChange($event, 'matches')">
+          </td>
+          <td>
+            <span *ngIf="editableId != performance.id">{{performance.goals}}</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.goals}}" class="form-control" (input)="onInputChange($event, 'goals')">
+          </td>
+          <td>
+            <span *ngIf="editableId != performance.id">{{performance.coach}}</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.coach}}" class="form-control" (input)="onInputChange($event, 'coach')">
+          </td>
+          <td>
+            <span *ngIf="editableId != performance.id">{{performance.player_age}}</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.player_age}}" class="form-control" (input)="onInputChange($event, 'player_age')"> Years
+          </td>
           <td class="d-flex justify-content-center">
-            <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
+            <svg  *ngIf="editableId != performance.id" (click)="editPerformance(performance.id)" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg" class="pointer">
               <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
             </svg>
-          </td>
-        </tr>
 
-        <tr *ngIf="isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-              </span>
-              <span class="main-template">
-                <select class="form-select" aria-label="Default select example">
-                  <option class="testing" selected>FC thun </option>
-                 <option  value="1" style="background-image: url('../../../../../assets/images/palyers.png');" > One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </span>
-            </div>
-          </td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-          <td class="d-flex justify-content-center">
-            <svg (click)=" stopEditing()"
-             id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-              <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-            </svg>
-          </td>
-        </tr>
-
-
-        <tr *ngIf="!isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-              </span>
-              <span class="main-template"> <img src="../../../../assets/images/team-badge.png" height="20px" /> FC Sion <img src="../../../../../assets/images/flag.svg" alt=""> </span>
-            </div>
-          </td>
-          <td>23/24</td>
-          <td>5</td>
-          <td>3</td>
-          <td>Stipe Matic</td>
-          <td>19 Years</td>
-          <td class="d-flex justify-content-center">
-            <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
-            </svg>
-          </td>
-        </tr>
-
-        <tr *ngIf="isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-              </span>
-              <span class="main-template">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected><img src="../../../../assets/images/team-badge.png" height="20px" /> FC thun <img src="../../../../../assets/images/flag.svg" alt=""></option>
-
-                </select>
-              </span>
-            </div>
-          </td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-          <td class="d-flex justify-content-center">
-            <svg (click)=" stopEditing()"
-             id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-              <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-            </svg>
-          </td>
-        </tr>
-        <tr *ngIf="!isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-              </span>
-              <span class="main-template"><img src="../../../../assets/images/team-badge.png" height="20px" /> FC Thun <img src="../../../../../assets/images/flag.svg" alt=""> </span>
-            </div>
-          </td>
-          <td>23/24</td>
-          <td>5</td>
-          <td>3</td>
-          <td>Stipe Matic</td>
-          <td>19 Years</td>
-          <td class="d-flex justify-content-center">
-            <svg (click)="startEditing()" id="users-icon" width="24" height="24" viewBox="0 0 24 24" fill="#787878" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"/>
-            </svg>
-          </td>
-        </tr>
-
-        <tr *ngIf="isEditing">
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <span class="position-absolute" style="right: -10px; bottom: 0px"></span>
-              </span>
-              <span class="main-template">
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>FC thun <img src="../../../../../assets/images/flag.svg" alt=""></option>
-
-                </select>
-              </span>
-            </div>
-          </td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">23/24</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">5</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">3</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">Stipe Matic</button></td>
-          <td> <button type="button" class="btn btn-outline-secondary Performance-btn">19 Years</button></td>
-          <td class="d-flex justify-content-center">
-            <svg (click)=" stopEditing()"
-             id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-              <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h200v80H160v480h640v-480H600v-80h200q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-184L280-544l56-56 104 104v-304h80v304l104-104 56 56-200 200Z"/>
-            </svg>
+            <img *ngIf="editableId == performance.id" (click)="savePerformance(performance.id)" src="../../../../assets/images/save-icon.png" style="width:26px;">
           </td>
         </tr>
       </tbody>

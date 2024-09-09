@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
@@ -11,7 +11,7 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 })
 export class PlayerDetailComponent implements OnInit {
   
-  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog, private router: Router) { }
   activeTab: string = 'profile';
   userId: any = {};
   user: any = {};
@@ -79,33 +79,32 @@ export class PlayerDetailComponent implements OnInit {
     messageDialog.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if(result.action == "delete-confirmed"){
-          // this.deleteUsers();
+          this.deleteUser();
         }
       //  console.log('Dialog result:', result);
       }
     });
   }
 
-  /*calculateAge(dob: string | Date): number {
-    // Convert the input date to a Date object if it's a string
-    const birthDate = new Date(dob);
-    const today = new Date();
-
-    // Calculate the difference in years
-    let age = today.getFullYear() - birthDate.getFullYear();
-
-    // Adjust the age if the current date is before the birthday
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    const dayDifference = today.getDate() - birthDate.getDate();
-    
-    if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-      age--;
-    }
-
-    return age;
-  }*/
-
   switchTab(tab: string){
     this.activeTab = tab;
+  }
+
+  confirmDeletion(){
+    this.showMatDialog("", "delete-confirmation");
+  }
+
+
+  deleteUser(){
+    this.userService.deleteUser([this.userId]).subscribe(
+      response => {
+        this.showMatDialog('User deleted successfully!', 'display');
+        this.router.navigate(['/admin/users']);
+      },
+      error => {
+        console.error('Error deleting user:', error);
+        this.showMatDialog('Error deleting user. Please try again.', 'display');
+      }
+    );
   }
 }
