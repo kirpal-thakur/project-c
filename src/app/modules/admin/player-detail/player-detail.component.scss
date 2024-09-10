@@ -249,10 +249,18 @@
     height: 30px
 }
 .border-end, .border-bottom, .border-top{
-    border-color: #E7E7E7 !important;
+    border-color: #E7E7E7 ;
   }
 
 .profile-tab-content{
     color: #787878 ;
+}
+
+.border-bottom-card{
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.border-top-list-view{
+    border-top:  1px solid #e7e7e7;
 }
 // new css end 

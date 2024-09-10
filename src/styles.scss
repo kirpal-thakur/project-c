@@ -908,7 +908,7 @@ left: unset;
   font-weight: 700;
   color: #023A4A;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #E7E7E7 !important;
 }
 .list-view{
   padding-bottom: 1rem;
@@ -1407,6 +1407,10 @@ margin: auto;
   font-weight: 400;
   font-family: Libre Franklin, sans-serif !important;
 
+}
+
+.border-end, .border-bottom, .border-top{
+  border-color: #E7E7E7 ;
 }
 
 

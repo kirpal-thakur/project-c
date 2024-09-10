@@ -1,7 +1,7 @@
 <div class="page-content">
   <div class="main-wrapper">
     <div class="card">
-      <div class="card-header border-bottom">
+      <div class="card-header border-bottom-card">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <h2 class="card-title mb-0 ">
@@ -131,7 +131,7 @@
                 </h6>
                 <small>{{user.role_name}}</small>
               </div>
-              <div class="list-view d-flex align-items-center border-top justify-content-between">
+              <div class="list-view d-flex align-items-center border-top-list-view justify-content-between">
                 <h6 class="mb-0 me-3">{{ 'Status' | translate }}:</h6>
                 <span class="bg_pending approv" *ngIf="user.status == '1'">Pending</span>
                 <span class="bg_success approv" *ngIf="user.status == '2'">Approved</span>

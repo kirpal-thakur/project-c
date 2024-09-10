@@ -941,12 +941,12 @@ left: unset;
   font-weight: 700;
   color: #E7E7E7;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #E7E7E7 !important;
 }
 .dark-theme .list-view{
   padding-bottom: 1rem;
   padding-top: 1rem;
-  border-bottom: 1px solid #1F4360;
+  border-bottom: 1px solid #1F4360 !important;
   h6{
       color: #E7E7E7;
       font-weight: 500;
@@ -1335,9 +1335,9 @@ background-color: #072944;
       color: #ffffff !important;
   }
 }
-.dark-theme .approv{
-  background-color: #0C3453;
-}
+// .dark-theme .approv{
+//   background-color: #0C3453;
+// }
 .dark-theme .user-text {
   color: #ffffff !important;
 }
@@ -1800,6 +1800,8 @@ background-color: #072944;
 .dark-theme .border-end, .border-bottom, .border-top{ 
   border-color: #1F4360 !important;
 }
+
+
 .dark-theme .nav-tabs.user-tabs{
   border: 0;
   border-bottom: 1px solid #1F4360 !important  ;
@@ -1840,5 +1842,12 @@ background-color: #072944;
 }
 .dark-theme .thread{
   fill: #ffffff !important;
+}
+
+.dark-theme .border-bottom-card{
+  border-bottom: 1px solid #1F4360 !important;
+}
+.dark-theme .border-top-list-view{
+  border-top:  1px solid #1F4360 !important ;
 }
 // new changes css Start
