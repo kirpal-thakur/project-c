@@ -130,17 +130,17 @@ a {
   }
 }
 .dark-theme .search-area {
-  width: 16.063rem;
-  border-radius: 30px;
-  padding: 8px 13px;
-  background-color: #072944;
+  width: 16.063rem !important;
+  border-radius: 30px !important;
+  padding: 8px 13px !important;
+  background-color: #072944 !important;
   .input-group-text,
   .form-control{
     background-color:transparent;
     color: #fff !important;
     border-radius: 0;
     border:0;
-    padding-bottom: 0;
+    // padding-bottom: 0;
 
   }
   .input-group-text{
@@ -1760,13 +1760,13 @@ background-color: #072944;
   padding: 13px 19px;
 }
 
-.dark-theme .form-select{
-  background: #072944;
+.dark-theme .form-control{
+  background: #072944 ;
   border-color: #ffffff !important;
-  height: 44px;
+  height: 20px;
   border-radius: 5px;
   color: #ffffff !important;
-  padding: 11px 19px;
+  padding: 13px 19px;
 }
 
 .dark-theme .btn-delete{
@@ -1850,4 +1850,6 @@ background-color: #072944;
 .dark-theme .border-top-list-view{
   border-top:  1px solid #1F4360 !important ;
 }
+
+
 // new changes css Start
