@@ -1,0 +1,237 @@
+/*--------------------------------------------------------------
+   banner
+--------------------------------------------------------------*/
+h4{
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+p{
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+}
+.information{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.address{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+li{
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+    margin-top: 20px;
+}
+.list-text{
+    margin-left: 20px;
+}
+
+.py_0 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+body {
+  background-color: #fff;
+}
+
+
+.main-bnr {
+  position: relative;
+  z-index: 1;
+}
+
+.bnr-media {
+  position: relative;
+}
+
+.bnr-media img {
+  width: 100%;
+}
+
+.form-select:focus {
+  border-color: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.overlay {
+  position: absolute;
+  height: auto;
+  // background-color: #000;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.main-bnr{
+  background-image: url("../../../../assets/images/imprint-banner.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-transparent {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+.imprint-text{
+    font-size: 45px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    filter: brightness(0) invert(1);
+    text-transform: uppercase;
+    margin-top: 60px;
+
+}
+
+/*--------------------------------------------------------------
+#  Banner
+--------------------------------------------------------------*/
+
+.imprint{
+    background-color: #092E01;
+}
+li::marker {
+    color: #E05263;
+    font-size: 22px;
+}
+ul {
+    padding-left: 0;
+    margin-left: 20px;
+}
+.contact-text{
+    margin-bottom: 20px;
+}
+.info-text{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.company-heading{
+    margin-bottom: 0;
+}
+.imprint-cols::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    background-color: #929292;
+}
+.imprint-cols{
+    position: relative;
+}
+.e-mail{
+    text-decoration: underline;
+    color: white;
+}
+
+@media (max-width: 1441px) {}
+@media (max-width: 1199px) {
+    .main-bnr {
+        height: 270px;
+    }
+    .imprint-text {
+        font-size: 35px;
+    }
+    h4{
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    p{
+        font-size: 16px;
+    }
+    li{
+        font-size: 16px;
+    }
+    .py_0{
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+@media (max-width: 991px) {
+    .main-bnr {
+        height: 200px;
+    }
+    .imprint-text {
+        font-size: 28px;
+    }
+    li::marker {
+        font-size: 18px;
+    }
+
+}
+@media (max-width: 767px) {}
+@media (max-width: 575px) {
+    .main-bnr {
+        height: 250px;
+        background-position: bottom;
+    }
+    .information{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .address{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .py_0 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    h4{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 14px;
+    }
+    .info-text {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    li::marker {
+        color: #E05263;
+        font-size: 19px;
+    }
+}
+@media (max-width: 400px) {
+    li::marker {
+        color: #E05263;
+        font-size: 20px;
+    }
+}
+@media (max-width: 321px) {
+    h4{
+        font-size: 14px;
+    }
+    p {
+        font-size: 12px;
+    }
+    li {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    li::marker {
+        font-size: 18px;
+    }
+}
+
+
+

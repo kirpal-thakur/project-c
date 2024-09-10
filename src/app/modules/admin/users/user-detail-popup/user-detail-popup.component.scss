@@ -1,0 +1,10 @@
+.offcanvas-body {
+  overflow-y: none  !important; 
+}
+
+.list-view-title:focus-visible{
+  outline: none;
+}
+.list-view-title{
+  cursor: pointer;
+}

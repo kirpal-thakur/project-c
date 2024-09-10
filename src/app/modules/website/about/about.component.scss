@@ -1,0 +1,423 @@
+/*--------------------------------------------------------------
+   banner
+--------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 35px;
+  color: white;
+}
+
+h4 {
+  font-size: 30px;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.py_0 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+body {
+  background-color: #fff;
+}
+
+
+.main-bnr {
+  position: relative;
+  z-index: 1;
+}
+
+.bnr-media {
+  position: relative;
+}
+
+.bnr-media img {
+  width: 100%;
+}
+
+.form-select:focus {
+  border-color: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.overlay {
+  position: absolute;
+  height: auto;
+  // background-color: #000;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.main-bnr {
+  background-image: url("../../../../assets/images/about-banner.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-transparent {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+.about-text{
+    font-size: 45px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    filter: brightness(0) invert(1);
+    text-transform: uppercase;
+
+}
+
+/*--------------------------------------------------------------
+#  Banner
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+#  about -content
+--------------------------------------------------------------*/
+.about-content{
+    background-color: #092E01;
+}
+.content-image img {
+    height: 411px;
+    width: 620px;
+    object-fit: cover;
+}
+.content-text{
+    color: white;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 90px;
+}
+/*--------------------------------------------------------------
+#  about-content
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#  Countries
+--------------------------------------------------------------*/
+.country-available{
+    color: white;
+    font-size: 35px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.countries{
+    background-color: #092E01;
+}
+.country-name{
+    color: white;
+    font-size: 20px;
+    margin-left: 32px;
+    margin-bottom: 8px;
+}
+.map{
+    position: relative;
+    height: 750px;
+}
+.map img{
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -72px;
+    height: 724px;
+    object-fit: cover;
+    width: 801px;
+}
+.country-list {
+    margin-top: 80px;
+    background-color: #163E0D;
+    width: 311px;
+    padding: 20px;
+    border-radius: 10px;
+}
+::marker {
+    color: #E05263;
+}
+
+/*--------------------------------------------------------------
+# countries
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#  Club
+--------------------------------------------------------------*/
+.club button {
+    display: flex;
+    height: 53px;
+    width: 273px;
+    border-radius: 60px;
+    // margin-left: 5px;
+    // margin-top: 5px;
+    padding: 8px 20px 8px 20px;
+  }
+  .club-buttons {
+    margin-top: 50px;
+}
+  
+  .club .border-btn {
+    height: 63px;
+    width: 283px;
+    padding: 5px;
+    // border: 5px solid;
+    border-radius: 60px;
+    margin-top: 50px;
+    // padding: 10px 55px;
+  }
+  
+  img.vector-img {
+    height: 30px;
+  }
+  
+  .club h3 {
+    color: white;
+  }
+  
+  .club {
+    // background-image: url("../../../../assets/images/player-6.jpeg");
+    /* Adjust the path based on your project structure */
+    background-size: cover;
+    background-position: center;
+    /* Center the background image */
+    height: 800px;
+    position: relative;
+  }
+  
+  .club_players {
+    margin-top: 15%;
+  }
+  
+  .club h4 {
+    margin-left: 33px;
+    font-size: 30px;
+  }
+  
+  .vector-img {
+    margin-left: 10px;
+    margin-top: 8px;
+  }
+ /*--------------------------------------------------------------
+#  Club
+--------------------------------------------------------------*/
+@media (max-width: 1441px) {}
+@media (max-width: 1024px) {
+  .main-bnr{
+    height: 300px;
+}
+  .content-image img {
+    height: 280px;
+    width: 450px;
+    object-fit: cover;
+}
+.content-text{
+  padding: 20px;
+}
+.country-list{
+  padding: 10px;
+  margin-top: 40px;
+  width: 300px;
+}
+.map {
+  height: 470px;
+}
+.map img {
+  top: -50px;
+  right: -43px;
+  height: 540px;
+  width: 514px;
+}
+.club_players{
+  margin-top: 10%;
+}
+.club{
+  height: 600px;
+}
+}
+
+@media (max-width: 991px) {
+  .py_0{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.main-bnr{
+  height: 250px;
+}
+  .about-text {
+    font-size: 35px;
+}
+  .content-image img {
+    height: 230px;
+    width: 350px;
+}
+.content-text {
+  padding: 10px;
+  font-size: 14px;
+}
+.country-available {
+  font-size: 25px;
+}
+.country-name {
+  font-size: 16px;
+  margin-left: 20px;
+  margin-bottom: 4px;
+}
+.country-list{
+  padding: 10px;
+  width: 250px;
+}
+.map img {
+  top: -50px;
+  right: -35px;
+  height: 412px;
+  width: 430px;
+}
+.map {
+  height: 300px;
+}
+.club_players{
+  margin-top: 10%;
+}
+h3 {
+  font-size: 27px;
+}
+.club-buttons {
+  margin-top: 40px;
+}
+.club {
+  height: 450px;
+}
+.map img {
+  top: -27px;
+  right: -104px;
+  height: 412px;
+  width: 481px;
+}
+}
+@media (max-width: 767px) {
+  .content-image img {
+    height: 230px;
+    width: 100%;
+}
+.country-list {
+  padding: 10px;
+  width: 100%;
+}
+.map {
+  height: 600px;
+  width: 100%;
+}
+.map img {
+  top: 50px;
+  right: -61px;
+  height: 500px;
+  width: 620px;
+}
+}
+@media (max-width: 575px) {
+  .map img {
+    top: -50px;
+    right: -11px;
+    height: 412px;
+    width: 430px;
+}
+.about-text {
+  font-size: 30px;
+}
+.main-bnr{
+  height: 200px;
+  padding-top: 70px;
+}
+.content-image img {
+  width: 100%;
+}
+.content-text {
+  padding: 20px 0px 20px 0px;
+}
+.about-content.py_0 {
+  padding-bottom: 0;
+}
+.country-list{
+  padding: 10px 0px 10px 0px;
+  width: 100%;
+  margin-top: 20px;
+}
+.map {
+  height: 400px;
+}
+.map img {
+  top: 20px;
+  height: 360px;
+  width: 100%;
+}
+h3 {
+  font-size: 22px;
+}
+.club {
+  height: 350px;
+}
+.light-button img {
+  height: 50px;
+  width: 200px;
+}
+}
+@media (max-width: 400px) {
+  .about-text {
+    font-size: 25px;
+}
+.main-bnr {
+  height: 200px;
+  padding-top: 50px;
+}
+.map img {
+  height: 315px;
+}
+.map {
+  height: 340px;
+}
+}
+@media (max-width: 321px) {
+  .main-bnr {
+    height: 150px;
+    padding-top: 50px;
+}
+  .country-available {
+    font-size: 20px;
+}
+
+.countries.py_0 {
+  padding-bottom: 0;
+}
+}

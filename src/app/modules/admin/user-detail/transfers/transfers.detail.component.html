@@ -1,0 +1,309 @@
+<!-- <div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">{{'Season' | translate }}</th>
+        <th scope="col">{{'Date' | translate  }}
+          <svg id="users-icon"
+          width="9"
+          height="15"
+          viewBox="0 0 9 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
+            fill="#111418"
+          />
+        </svg>
+        </th>
+        <th scope="col">
+          {{'MovingFrom' | translate }}
+
+        </th>
+        <th scope="col">
+          {{'MovingTo' | translate  }}
+
+        </th>
+
+
+        <th scope="col">{{'Edit' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <select class="form-select custom-size" aria-label="Default select example">
+            <option selected>2023</option>
+            <option value="1">2022</option>
+            <option value="2">2021</option>
+            <option value="3">2020</option>
+          </select>
+        </td>
+
+        <td>
+          <mat-form-field class="custom-size-calendar" appearance="fill">
+            <input matInput [matDatepicker]="picker" placeholder="21/5/2023" (click)="picker.open()"
+                   style="background-color: transparent !important; border: none;">
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+        </td>
+        <td>
+          <select class="form-select custom-size-2" aria-label="Default select example">
+            <option selected> <span> FC Thun </span> <div><img src="../../../../../assets/images/flag.svg" alt=""> </div>  </option>
+
+          </select>
+      </td>
+        <td>
+          <select class="form-select custom-size-2" aria-label="Default select example">
+            <option selected>FC Sion</option>
+
+          </select>
+        </td>
+
+        <td class="c_pointer">
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td>
+          2023
+
+        </td>
+        <td>21-5-2023</td>
+
+        <td>FC Vaduz Liechtensteiner Cup.. <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+
+
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          2023
+
+        </td>
+        <td>21-5-2023</td>
+
+        <td>FC Vaduz Liechtensteiner Cup..  <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+
+
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          2023
+
+        </td>
+        <td>21-5-2023</td>
+
+        <td>FC Vaduz Liechtensteiner Cup.. <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+</div> -->
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">{{'Season' | translate }}</th>
+        <th scope="col">{{'Date' | translate  }}
+          <svg id="users-icon"
+          width="9"
+          height="15"
+          viewBox="0 0 9 15"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
+            fill="#111418"
+          />
+        </svg>
+        </th>
+        <th scope="col">
+          {{'MovingFrom' | translate }}
+        </th>
+        <th scope="col">
+          {{'MovingTo' | translate  }}
+        </th>
+        <th scope="col">{{'Edit' | translate }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <select class="form-select custom-size custom-size-season" aria-label="Default select example">
+            <option selected>2023</option>
+            <option value="1">2022</option>
+            <option value="2">2021</option>
+            <option value="3">2020</option>
+          </select>
+        </td>
+
+        <td>
+          <mat-form-field class="custom-size-calendar" appearance="fill">
+            <input matInput [matDatepicker]="picker" placeholder="21/5/2023" (click)="picker.open()"
+                   style="background-color: transparent !important; border: none;">
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <select class="form-select custom-size-2" aria-label="Default select example">
+            <option selected> <span> FC Thun </span> <div><img src="../../../../../assets/images/flag.svg" alt=""> </div>  </option>
+          </select>
+        </td>
+        <td>
+          <select class="form-select custom-size-2" aria-label="Default select example">
+            <option selected>FC Sion</option>
+          </select>
+        </td>
+        <td class="c_pointer">
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          2023
+        </td>
+        <td>21-5-2023</td>
+        <td>FC Vaduz Liechtensteiner Cup.. <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          2023
+        </td>
+        <td>21-5-2023</td>
+        <td>FC Vaduz Liechtensteiner Cup..  <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          2023
+        </td>
+        <td>21-5-2023</td>
+        <td>FC Vaduz Liechtensteiner Cup.. <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>Neuchâtel Xamax FCS <img src="../../../../../assets/images/flag.svg" alt=""></td>
+        <td>
+          <svg id="users-icon"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+              fill="#787878"
+            />
+          </svg>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
