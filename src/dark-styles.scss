@@ -946,7 +946,7 @@ left: unset;
 .dark-theme .list-view{
   padding-bottom: 1rem;
   padding-top: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #1F4360;
   h6{
       color: #E7E7E7;
       font-weight: 500;
@@ -1315,7 +1315,7 @@ background-color: #072944;
 
 .dark-theme .transfer{
   background-color: #072944 !important;
-  border-bottom: 1px solid #fff !important;
+  border-bottom: 1px solid #1F4360 !important;
 
 }
 
@@ -1786,5 +1786,59 @@ background-color: #072944;
 
 .dark-theme .filter-icon svg path{
   fill: #ffffff ;
+}
+
+.dark-theme .user-media {
+  background-color: #0C3453 !important;
+}
+
+.dark-theme .user-right-content{
+  border-top: 1px solid #1F4360;
+  background-color: #0C3453;
+  // margin: 0 10px  ;
+}
+.dark-theme .border-end, .border-bottom, .border-top{ 
+  border-color: #1F4360 !important;
+}
+.dark-theme .nav-tabs.user-tabs{
+  border: 0;
+  border-bottom: 1px solid #1F4360 !important  ;
+}
+
+.profile-tab-content{
+  color: #ffffff !important ;
+}
+
+.dark-theme .display-message{
+  color: #ffffff;
+}
+.dark-theme .visa-card svg path{
+  fill: #ffffff;
+}
+
+.dark-theme .reject-stroke{
+  stroke: #000000;
+} 
+.dark-theme .export-xls svg path{
+  fill: transparent !important;
+  stroke: #ffffff;
+}
+
+.dark-theme .nav-tabs.user-tabs .nav-item .nav-link:after {
+  content: "";
+  position: absolute;
+  height: 1px !important;
+  background: #ffffff !important;
+  
+}
+
+.dark-theme .user-details-left .list-view p{
+  color: #A5AFBA !important;
+}
+.dark-theme .youtube{
+  fill: #0c3453 !important;
+}
+.dark-theme .thread{
+  fill: #ffffff !important;
 }
 // new changes css Start
