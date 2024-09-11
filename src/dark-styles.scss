@@ -1850,6 +1850,28 @@ background-color: #072944;
 .dark-theme .border-top-list-view{
   border-top:  1px solid #1F4360 !important ;
 }
+.dark-theme .light-performance-save-svg{
+  display: block;
+}
 
+.dark-theme .dark-performance-save-svg{
+  display: none;
+}
+
+.dark-theme .perfermance-team-country svg path{
+  stroke: #ffffff;
+}
+
+.dark-theme .performance-dark-bg{
+  background-color: #0C3453 !important;
+}
+
+.dark-theme .table-striped tbody tr:nth-child(even) {
+  background-color: #0C3453 !important; 
+}
+
+.dark-theme .table-striped thead th {
+  background-color: #0C3453; 
+}
 
 // new changes css Start

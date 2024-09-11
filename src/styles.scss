@@ -567,6 +567,7 @@ input:checked + .slider:before {
   margin-right: 18px;
   color: #111418;
 }
+
 .dashboard-title h6{
   font-size: 14px;
   font-weight: 400;
@@ -1411,6 +1412,13 @@ margin: auto;
 
 .border-end, .border-bottom, .border-top{
   border-color: #E7E7E7 ;
+}
+
+ .light-performance-save-svg{
+  display: none;
+}
+.dark-performance-save-svg{
+  display: block;
 }
 
 

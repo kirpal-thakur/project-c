@@ -30,5 +30,36 @@
 }
 
 select.form-control{
-    width:140px;
+    min-width:190px;
+    width: 80%;
+
 }
+.coach-debt-input{
+    min-width: 150px;
+    width: 80%;
+}
+.year-input{
+    max-width: 120px;
+    width: 100px; 
+}
+
+.select-wrapper {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-icon {
+position: absolute;
+top: 50%;
+right: 10px;
+transform: translateY(-50%);
+pointer-events: none; 
+}
+
+.w-10{
+    width:10%;
+}
+
+  
+
+
