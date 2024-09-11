@@ -38,6 +38,7 @@ export class PerformanceTabComponent {
     try {
       this.userService.getPerformanceData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.performanceDetail) {
+          this.editableId = "";
           this.performances = response.data.performanceDetail; 
 
           console.log(this.performances)
@@ -92,19 +93,21 @@ export class PerformanceTabComponent {
     // this.editableId = "";
     this.userService.updatePerformance(performanceId, this.dataTOBeUpdated).subscribe((response)=>{
       // console.log(response)
-      // if(response)
+      // this.editableId = "";
+      if(response.status){
+        this.getUserPerformance(this.userId);
+      }
     }); 
   }
 
   onSelectChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    this.updateRow('team_id',selectElement.value);
+    this.updateRow('team_id',Number(selectElement.value));
   }
 
   onInputChange(event: Event, key:string): void {
     let inputElement = event.target as HTMLInputElement;
     this.updateRow(key,inputElement.value);
-    
   }
 
   updateRow(key:any, value:any){

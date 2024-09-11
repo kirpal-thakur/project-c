@@ -91,9 +91,9 @@ export class UserService {
     );
   }
 
-  getFavoritesData(userId:any): Observable<any> {
+  getFavoritesData(userId:any, params:any): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}admin/get-favorites/${userId}`
+      `${this.apiUrl}admin/get-favorites/${userId}`, { params }
     );
   }
 
@@ -137,6 +137,24 @@ export class UserService {
     });
 
     return this.http.post<any>(`${this.apiUrl2}/edit-performance-detail/${performanceId}`, params, { headers });
+  }
+
+  updateTransfer(transferId:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/edit-transfer-detail/${transferId}`, params, { headers });
+  }
+
+  removeFavorites(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/delete-favorites`, params, { headers });
   }
 
 }

@@ -23,6 +23,7 @@ export class PlayerDetailComponent implements OnInit {
       console.log(params.id)
       this.userId = params.id;
       this.getUserProfile(this.userId);
+      this.activeTab = 'profile';
     });
   }
 

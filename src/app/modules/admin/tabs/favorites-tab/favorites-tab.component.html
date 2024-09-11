@@ -4,7 +4,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
-        <h2 class="card-title mb-0 me-3">{{'Favorites' | translate}} (100)</h2>
+        <h2 class="card-title mb-0 me-3">{{'Favorites' | translate}} ({{totalFavorites}})</h2>
       </div>
       <div class="card-search">
         <div class="input-group">
@@ -40,6 +40,7 @@
             aria-label="Username"
             aria-describedby="basic-addon1"
             class="form-control ps-0"
+            (keyup)="search($event)"
           />
         </div>
         <div class="d-flex align-items-center pe-2 border-start ps-3 cursor-pointer filter-svg">
@@ -67,15 +68,12 @@
             class="btn btn-secondary dropdown-toggle  toggle-padding"
             type="button"
             data-bs-toggle="dropdown"
-            aria-expanded="false"
+            aria-expanded="false" 
+            (click)="selectAllFavorites()"
           >
             <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault"
-              />
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked *ngIf="allSelected" />
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" *ngIf="!allSelected" />
             </div>
           </button>
           <!-- <ul class="dropdown-menu">
@@ -85,7 +83,7 @@
             </ul> -->
         </div>
 
-        <a class="btn btn-outline-white ms-2 delete-text" id="users-icon"
+        <a class="btn btn-outline-white ms-2 delete-text" id="users-icon" (click)="confirmDeletion()"
           >
           <svg
             width="22"
@@ -99,421 +97,100 @@
               d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
               fill="#787878"
             ></path>
-          </svg>
+          </svg> 
           {{'RemoveFromFavorite' | translate }}</a
         >
 
       </div>
       <div class="d-flex align-items-center">
-        <div class="paging-data">
-          1-12 of 1600
-        </div>
-        <a class="left-slide" id="users-icon"
-          ><svg
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="33"
-              y="33"
-              width="33"
-              height="33"
-              rx="16.5"
-              transform="rotate(-180 33 33)"
-              fill="#F3F3F3"
-            ></rect>
-            <path
-              d="M18 21L13 16.5L18 12"
-              stroke="#C2C2C2"
-              stroke-width="2"
-              stroke-linecap="round"
-            ></path></svg></a
-        ><a class="right-slide ms-1"
-          ><svg  id="users-icon"
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="33" height="33" rx="16.5" fill="#F3F3F3"></rect>
-            <path
-              d="M14 12L19 16.5L14 21"
-              stroke="#787878"
-              stroke-width="2"
-              stroke-linecap="round"
-            ></path>
-          </svg>
-        </a>
+        <mat-paginator class="paginator-components" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator> 
       </div>
     </div>
 
-<!--
-   <div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th scope="col">{{ 'Name' | translate }}</th>
-          <th scope="col">
-            {{ 'UserType' | translate }}
-            <svg id="users-icon"
-              width="9"
-              height="15"
-              viewBox="0 0 9 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                fill="#111418"
-              />
-            </svg>
-          </th>
-          <th scope="col">{{ 'Location' | translate }}</th>
-          <th scope="col">
-            {{ 'JoinedDateTime' | translate }}
-            <svg  id="users-icon"
-              width="9"
-              height="15"
-              viewBox="0 0 9 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                fill="#111418"
-              />
-            </svg>
-          </th>
-          <th class="text-center" scope="col">{{'ViewProfile' | translate}}</th>
-          <th class="text-center" scope="col">{{'Remove' | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
 
-        <tr >
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <img
-                  src="../../../assets/images/1.jpg"
-                  alt=""
-                  class="table_img"
-                />
-                <span
-                  class="position-absolute"
-                  style="right: -10px; bottom: 0px"
-                  ><svg
-                    width="27"
-                    height="27"
-                    viewBox="0 0 27 27"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
-                      fill="#236115"
-                    />
-                    <path
-                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
-                      fill="white"
-                      stroke="white"
-                      stroke-width="0.2"
-                    />
-                  </svg>
-                </span>
-              </span>
-              <span class="main-template"
-              style="padding-left: 15px">Elton Prince</span>
-            </div>
-          </td>
-          <td>Talent</td>
-          <td>Switzerland</td>
-          <td>08.04.2024-12.53 PM</td>
-
-          <td  data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight2"
-          aria-controls="offcanvasRight2"
-          class="c_pointer main-table-2 text-center"
-          >
-          <svg id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
-          </svg>
-          </td>
-          <td class="text-center">
-
-            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
-            xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path
-              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-              fill="#787878"></path>
-          </svg>
-          </td>
-        </tr>
-        <tr >
-          <td class="main-table" style="width: 50px" routerLink="/Admin/User-detail">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <img
-                  src="../../../assets/images/1.jpg"
-                  alt=""
-                  class="table_img"
-                />
-                <span
-                  class="position-absolute"
-                  style="right: -10px; bottom: 0px"
-                  >
-                  <svg id="users-icon"
-                    width="27"
-                    height="27"
-                    viewBox="0 0 27 27"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
-                      fill="#236115"
-                    />
-                    <path
-                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
-                      fill="white"
-                      stroke="white"
-                      stroke-width="0.2"
-                    />
-                  </svg>
-                </span>
-              </span>
-              <span class="main-template" style="padding-left: 15px">Elton Prince</span>
-            </div>
-          </td>
-          <td>Talent</td>
-          <td>Switzerland</td>
-          <td>08.04.2024-12.53 PM</td>
-
-
-          <td  data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight3"
-          aria-controls="offcanvasRight3"
-          class="c_pointer main-table-2 text-center"
-          >
-          <svg id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
-          </svg>
-          </td>
-          <td class="text-center">
-
-            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
-            xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path
-              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-              fill="#787878"></path>
-          </svg>
-          </td>
-        </tr>
-        <tr>
-          <td class="main-table" style="width: 50px">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <img
-                  src="../../../assets/images/1.jpg"
-                  alt=""
-                  class="table_img"
-                />
-                <span
-                  class="position-absolute"
-                  style="right: -10px; bottom: 0px"
-                  ><svg id="users-icon"
-                    width="27"
-                    height="27"
-                    viewBox="0 0 27 27"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
-                      fill="#236115"
-                    />
-                    <path
-                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
-                      fill="white"
-                      stroke="white"
-                      stroke-width="0.2"
-                    />
-                  </svg>
-                </span>
-              </span>
-              <span class="main-template" style="padding-left: 15px">Elton Prince</span>
-            </div>
-          </td>
-          <td>Talent</td>
-          <td>Switzerland</td>
-          <td>08.04.2024-12.53 PM</td>
-
-          <td class="c_pointer main-table-2 text-center">
-            <svg  id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
-              <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
-            </svg>
-
-          </td>
-          <td class="text-center">
-
-            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
-            xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path
-              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-              fill="#787878"></path>
-          </svg>
-          </td>
-        </tr>
-
-    </table>
-   </div> -->
    <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th scope="col">{{ 'Name' | translate }}</th>
-          <th scope="col">
-            {{ 'UserType' | translate }}
-            <svg id="users-icon"
-              width="9"
-              height="15"
-              viewBox="0 0 9 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                fill="#111418"
+    <table mat-table [dataSource]="userFavorites" class="table table-hover table-users ">
+      <!-- Position Column -->
+      <ng-container matColumnDef="#">
+        <th mat-header-cell *matHeaderCellDef># </th>
+        <td mat-cell *matCellDef="let element">
+          <span class="form-check align-self-center me-2">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="selectedIds.includes(element.id)"
+              (change)="onCheckboxChange(element)"
+            />
+            <label for="defaultCheck1" class="form-check-label"></label>
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element">  
+          
+          <div class="d-flex align-items-center">
+            <span class="position-relative">
+              <img *ngIf="!element.profile_image_path"
+                src="../../../assets/images/1.jpg"
+                alt=""
+                class="table_img"
               />
-            </svg>
-          </th>
-          <th scope="col">{{ 'Location' | translate }}</th>
-          <th scope="col">
-            {{ 'JoinedDateTime' | translate }}
-            <svg id="users-icon"
-              width="9"
-              height="15"
-              viewBox="0 0 9 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                fill="#111418"
+
+              <img *ngIf="element.profile_image_path"
+                src="{{element.profile_image_path}}"
+                alt=""
+                class="table_img"
               />
-            </svg>
-          </th>
-          <th class="text-center" scope="col">{{ 'ViewProfile' | translate }}</th>
-          <th class="text-center" scope="col">{{ 'Remove' | translate }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let favorite of userFavorites">
-          <td class="main-table" style="width: 50px">
-            <span class="form-check align-self-center me-2">
-              <input
-                type="checkbox"
-                value=""
-                id="defaultCheck1"
-                class="form-check-input"
-              /><label for="defaultCheck1" class="form-check-label"></label>
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center">
-              <span class="position-relative">
-                <img
-                  src="../../../assets/images/1.jpg"
-                  alt=""
-                  class="table_img"
-                />
-                <span
-                  class="position-absolute"
-                  style="right: -10px; bottom: 0px"
-                  ><svg
-                    width="27"
-                    height="27"
-                    viewBox="0 0 27 27"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.5 2.25L4.5 5.625V12.4762C4.5 18.1575 8.33625 23.4562 13.5 24.75C18.6637 23.4562 22.5 18.1575 22.5 12.4762V5.625L13.5 2.25Z"
-                      fill="#236115"
-                    />
-                    <path
-                      d="M19.0688 10.9137L19.1453 10.8412L19.0688 10.7686L18.1826 9.92747L18.1137 9.86216L18.0449 9.92743L11.4571 16.1739L8.95504 13.8051L8.8862 13.7399L8.81745 13.8052L7.93116 14.6463L7.85474 14.7189L7.93116 14.7914L11.3883 18.0725L11.4571 18.1379L11.526 18.0725L19.0688 10.9137Z"
-                      fill="white"
-                      stroke="white"
-                      stroke-width="0.2"
-                    />
-                  </svg>
-                </span>
+              <span class="position-absolute verified-icon">
+                <img src="../../../assets/images/pending.png" alt="" class="user-pending-icon" *ngIf="element.user_status === '1'"/>
+                <img src="../../../assets/images/approved.png" alt="" class="user-approved-icon" *ngIf="element.user_status === '2'"/>
+                <img src="../../../assets/images/rejected.png" alt="" class="user-rejected-icon" *ngIf="element.user_status === '3'"/>
               </span>
-              <span class="main-template"
-              style="padding-left: 15px">{{favorite.first_name}} {{favorite.last_name}}</span>
-            </div>
-          </td>
-          <td>{{favorite.role_name}}</td>
-          <td>{{favorite.location}}</td>
-          <td>{{ favorite.user_created_at | date:'MM.dd.yyyy - hh.mm a' }}</td>
+            </span>
+            <span class="main-template"
+            style="padding-left: 15px">{{element.first_name}} {{element.last_name}}</span>
+          </div>
+        </td>
+      </ng-container>
 
-          <td  data-bs-toggle="offcanvas"
-          data-bs-target="#offcanvasRight2"
-          aria-controls="offcanvasRight2"
-          class="c_pointer main-table-2 text-center"
-          >
-          <svg (click)="navigateToUserDetail(favorite.favorite_id)" id="users-icon" id="eye-icon" width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path d="M11 3.5C6 3.5 1.7 7.6 0 11.5C1.7 15.4 6 19.5 11 19.5C16 19.5 20.3 15.4 22 11.5C20.3 7.6 16 3.5 11 3.5ZM11 17.5C8.5 17.5 6.5 15.5 6.5 13C6.5 10.5 8.5 8.5 11 8.5C13.5 8.5 15.5 10.5 15.5 13C15.5 15.5 13.5 17.5 11 17.5ZM11 10.5C9.6 10.5 8.5 11.6 8.5 13C8.5 14.4 9.6 15.5 11 15.5C12.4 15.5 13.5 14.4 13.5 13C13.5 11.6 12.4 10.5 11 10.5Z" fill="#787878"></path>
-          </svg>
-          </td>
-          <td class="text-center">
+      <ng-container matColumnDef="User Type">
+        <th mat-header-cell *matHeaderCellDef > User Type </th>
+        <td mat-cell *matCellDef="let element">  {{ element.role_name }}</td>
+      </ng-container>
 
-            <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
-            xmlns="http://www.w3.org/2000/svg" class="me-1">
-            <path
-              d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-              fill="#787878"></path>
-          </svg>
-          </td>
-        </tr>
-      </tbody>
+      <ng-container matColumnDef="Location">
+        <th mat-header-cell *matHeaderCellDef > Location </th>
+        <td mat-cell *matCellDef="let element">  {{ element.location }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Joined Date - Time">
+        <th mat-header-cell *matHeaderCellDef> Joined Date - Time </th>
+        <td mat-cell *matCellDef="let element"> {{ element.user_created_at | date:'MM.dd.yyyy - hh.mm a' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="View Profile">
+        <th mat-header-cell *matHeaderCellDef> View Profile </th>
+        <td mat-cell *matCellDef="let element">
+          <img src="../../../../assets/images/view-filled.png" alt="" class="pointer" (click)="navigate(element.role_name, element.favorite_id)" />
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Remove">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Remove </th>
+        <td mat-cell *matCellDef="let element" class="text-center">  
+          <img src="../../../../assets/images/trash-filled.png" alt="" class="pointer" (click)="confirmSingleDeletion(element.id)" />
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+      <tr class="mat-row user-empty-tr" *matNoDataRow>
+        <td [attr.colspan]="displayedColumns.length" class="user-empty-td">
+          <!-- <emplty-table *ngIf="isLoading"></emplty-table> -->
+        </td>
+      </tr>
     </table>
   </div>
 
