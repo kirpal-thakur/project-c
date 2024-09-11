@@ -78,6 +78,7 @@ export class PerformanceTabComponent {
     }
   }
 
+  
   savePerformance(performanceId:any){
 
     // let index = this.performances.findIndex((x:any) => x.id == performanceId);
@@ -114,3 +115,4 @@ export class PerformanceTabComponent {
     this.dataTOBeUpdated[key] = value;
   }
 }
+
