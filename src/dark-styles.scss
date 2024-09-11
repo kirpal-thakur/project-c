@@ -130,17 +130,17 @@ a {
   }
 }
 .dark-theme .search-area {
-  width: 16.063rem;
-  border-radius: 30px;
-  padding: 8px 13px;
-  background-color: #072944;
+  width: 16.063rem !important;
+  border-radius: 30px !important;
+  padding: 8px 13px !important;
+  background-color: #072944 !important;
   .input-group-text,
   .form-control{
     background-color:transparent;
     color: #fff !important;
     border-radius: 0;
     border:0;
-    padding-bottom: 0;
+    // padding-bottom: 0;
 
   }
   .input-group-text{
@@ -192,7 +192,7 @@ font-weight: 400 !important;
 }
 
 .dark-theme .bg_success {
-  background: #00B69B;
+  background: #236115;
   padding: 5px 15px;
   color: #fff !important;
   text-align: center;
@@ -941,12 +941,12 @@ left: unset;
   font-weight: 700;
   color: #E7E7E7;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #E7E7E7 !important;
 }
 .dark-theme .list-view{
   padding-bottom: 1rem;
   padding-top: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #1F4360 !important;
   h6{
       color: #E7E7E7;
       font-weight: 500;
@@ -1315,7 +1315,7 @@ background-color: #072944;
 
 .dark-theme .transfer{
   background-color: #072944 !important;
-  border-bottom: 1px solid #fff !important;
+  border-bottom: 1px solid #1F4360 !important;
 
 }
 
@@ -1335,9 +1335,9 @@ background-color: #072944;
       color: #ffffff !important;
   }
 }
-.dark-theme .approv{
-  background-color: #0C3453;
-}
+// .dark-theme .approv{
+//   background-color: #0C3453;
+// }
 .dark-theme .user-text {
   color: #ffffff !important;
 }
@@ -1463,6 +1463,16 @@ background-color: #072944;
     font-weight: 600 !important;
     border-radius: 15px;
   }
+  .dark-theme .bg_secondary {
+    background: #A4A4A4;
+    padding: 3px 10px;
+    color: #fff !important;
+    text-align: center;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    border-radius: 15px;
+  }
+
   .dark-theme .bg_reject {
     background: #fd5454;
     padding: 3px 10px;
@@ -1750,13 +1760,96 @@ background-color: #072944;
   padding: 13px 19px;
 }
 
-.dark-theme .form-select{
-  background: #072944;
+.dark-theme .form-control{
+  background: #072944 ;
   border-color: #ffffff !important;
-  height: 44px;
+  height: 20px;
   border-radius: 5px;
   color: #ffffff !important;
   padding: 13px 19px;
 }
+
+.dark-theme .btn-delete{
+  color: #FD5454 !important;
+}
+
+.dark-theme .pagination-values .mat-mdc-icon-button{
+  padding: 2px !important;
+  background-color: #ffffff !important;
+  color: #787878;
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 5px;
+  cursor: pointer !important;
+  pointer-events: visible !important;
+}
+
+.dark-theme .filter-icon svg path{
+  fill: #ffffff ;
+}
+
+.dark-theme .user-media {
+  background-color: #0C3453 !important;
+}
+
+.dark-theme .user-right-content{
+  border-top: 1px solid #1F4360;
+  background-color: #0C3453;
+  // margin: 0 10px  ;
+}
+.dark-theme .border-end, .border-bottom, .border-top{ 
+  border-color: #1F4360 !important;
+}
+
+
+.dark-theme .nav-tabs.user-tabs{
+  border: 0;
+  border-bottom: 1px solid #1F4360 !important  ;
+}
+
+.dark-theme .profile-tab-content{
+  color: #ffffff !important ;
+}
+
+.dark-theme .display-message{
+  color: #ffffff;
+}
+.dark-theme .visa-card svg path{
+  fill: #ffffff;
+}
+
+.dark-theme .reject-stroke{
+  stroke: #000000;
+} 
+.dark-theme .export-xls svg path{
+  fill: transparent !important;
+  stroke: #ffffff;
+}
+
+.dark-theme .nav-tabs.user-tabs .nav-item .nav-link:after {
+  content: "";
+  position: absolute;
+  height: 1px !important;
+  background: #ffffff !important;
+  
+}
+
+.dark-theme .user-details-left .list-view p{
+  color: #A5AFBA !important;
+}
+.dark-theme .youtube{
+  fill: #0c3453 !important;
+}
+.dark-theme .thread{
+  fill: #ffffff !important;
+}
+
+.dark-theme .border-bottom-card{
+  border-bottom: 1px solid #1F4360 !important;
+}
+.dark-theme .border-top-list-view{
+  border-top:  1px solid #1F4360 !important ;
+}
+
 
 // new changes css Start

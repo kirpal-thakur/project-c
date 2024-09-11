@@ -227,6 +227,17 @@ font-weight: 400;
   font-weight: 600 !important;
   border-radius: 15px;
 }
+
+.bg_secondary {
+  background: #A4A4A4;
+  padding: 3px 10px;
+  color: #fff !important;
+  text-align: center;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border-radius: 15px;
+}
+
 .bg_pending {
   background: #fcbe2d;
   padding: 5px 15px;
@@ -897,7 +908,7 @@ left: unset;
   font-weight: 700;
   color: #023A4A;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #E7E7E7 !important;
 }
 .list-view{
   padding-bottom: 1rem;
@@ -1375,5 +1386,32 @@ margin: auto;
 .trans-color:hover{
   color: transparent !important;
 }
+
+.pagination-values .mat-mdc-paginator-range-label {
+  margin: 0 1rem 0 1rem ;
+}
+
+.pagination-values .mat-mdc-icon-button{
+  padding: 2px !important;
+  background-color: #F3F3F3 !important;
+  color: #787878;
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 5px;
+  cursor: pointer !important;
+  pointer-events: visible !important;
+}
+
+.template-option-dropdown .mat-mdc-select-trigger{
+  font-size: 14px;
+  font-weight: 400;
+  font-family: Libre Franklin, sans-serif !important;
+
+}
+
+.border-end, .border-bottom, .border-top{
+  border-color: #E7E7E7 ;
+}
+
 
 // new changes CSS End

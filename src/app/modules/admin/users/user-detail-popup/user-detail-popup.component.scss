@@ -2,6 +2,10 @@
   overflow-y: none  !important; 
 }
 
+.offcanvas{
+
+  --bs-offcanvas-width: 350px;}
+
 .list-view-title:focus-visible{
   outline: none;
 }

@@ -22,9 +22,11 @@
             @for (role of roles; track role) {
               <mat-option [value]="role.id" *ngIf="role.id !=1">{{role.role}}</mat-option>
             }
+            <i class="fas fa-chevron-down text-white"></i>
           </mat-select>
 
         </div>
+               
       </div>
       <div  class="d-flex align-items-baseline" >
        <h4 class="text-size fw-bold">Language:</h4>

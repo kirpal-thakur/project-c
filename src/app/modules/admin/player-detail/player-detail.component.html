@@ -1,7 +1,7 @@
 <div class="page-content">
   <div class="main-wrapper">
     <div class="card">
-      <div class="card-header border-bottom">
+      <div class="card-header border-bottom-card">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
             <h2 class="card-title mb-0 ">
@@ -13,18 +13,18 @@
         </div>
         <div class="d-flex align-items-center justify-content-between mt-3">
           <div class="d-flex align-items-center">
-            <span class="btn btn-outline-white" (click)="changeUserStatus(user.status)">
+            <span class="btn btn-outline-white profile-tab-content" (click)="changeUserStatus(user.status)">
               <svg id="users-icon" width="22" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 1L2 3.55V8.7265C2 13.019 4.98375 17.0225 9 18C13.0163 17.0225 16 13.019 16 8.7265V3.55L9 1Z"
                   fill="#787878" />
                 <path
                   d="M13.1749 7.80954L13.3574 7.63087L13.1749 7.45221L12.5303 6.82133L12.3555 6.65026L12.1806 6.82125L7.51415 11.3843L5.81922 9.7294L5.64436 9.55867L5.4697 9.72961L4.82513 10.3605L4.64259 10.5391L4.82513 10.7178L7.33942 13.1787L7.51429 13.3498L7.68915 13.1787L13.1749 7.80954Z"
-                  fill="white" stroke="white" stroke-width="0.5" />
+                  fill="white" stroke="white" class="reject-stroke" stroke-width="0.5" />
               </svg>
                <span *ngIf="user.status == '1' || user.status == '3'">{{ 'Verify User' | translate }}</span>
                <span *ngIf="user.status == '2'">{{ 'Reject User' | translate }}</span>
               </span>
-            <span class="btn btn-outline-white" (click)="confirmDeletion()">
+            <span class="btn btn-outline-white profile-tab-content" (click)="confirmDeletion()">
               <svg  id="users-icon" width="22" height="23" viewBox="0 0 22 23" fill="none"
                 xmlns="http://www.w3.org/2000/svg" class="me-1">
                 <path
@@ -32,12 +32,12 @@
                   fill="#787878"></path>
               </svg>
              {{ 'Delete User' | translate }}</span>
-            <a class="btn btn-outline-white">
-              <svg  id="users-icon" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg"
+            <a class="btn btn-outline-white profile-tab-content export-xls">
+              <svg  id="users-icon" width="23" height="23" viewBox="0 0 23 23" fill="none"  xmlns="http://www.w3.org/2000/svg"
                 class="me-1">
                 <path
                   d="M3.83203 7.3737V3.2487C3.83203 3.00558 3.933 2.77243 4.11272 2.60052C4.29244 2.42861 4.5362 2.33203 4.79036 2.33203H18.207C18.4612 2.33203 18.705 2.42861 18.8847 2.60052C19.0644 2.77243 19.1654 3.00558 19.1654 3.2487V19.7487C19.1654 19.9918 19.0644 20.225 18.8847 20.3969C18.705 20.5688 18.4612 20.6654 18.207 20.6654H4.79036C4.5362 20.6654 4.29244 20.5688 4.11272 20.3969C3.933 20.225 3.83203 19.9918 3.83203 19.7487V15.6237"
-                  stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  />
                 <path d="M14.8535 7.375H16.291M13.416 11.0417H16.291M13.416 14.7083H16.291" stroke="#787878"
                   stroke-width="2" stroke-linecap="round" />
                 <path
@@ -98,15 +98,32 @@
         <div class="row">
           <div class="col-lg-2 border-end">
             <div class="user-details-left">
-              <div class="user-media">
+              <div class="user-media ">
+                <img src="{{user.meta.profile_image_path}}" alt="" *ngIf="user.meta && user.meta.profile_image_path" class="user-img mt-1">
+                <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path" class="user-img"> 
+                  <div class="user-edit">
+
+                    <img src="../../../../assets/images/edit-icon.png" class="edit-profile" alt="">
+                    <!-- <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" class="club-icon-round" alt=""> -->
+                    <div class="club-icon">
+                      <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" class="club-icon-round" alt="">
+                      <!-- <img *ngIf="user.club_logo_path" src="../../../assets/images/team-badge.png" class="club-icon-round"  alt=""> -->
+                    </div>
+                    
+                      <!-- <img src="path/to/edit-icon.png" alt="Edit Profile" class="edit-profile">
+                      <img src="path/to/team-badge.png" alt="Club Badge" class="club-icon"> -->
+                  </div>
+              </div>
+              <!-- <div class="user-media">
                 <img src="{{user.meta.profile_image_path}}" alt="" *ngIf="user.meta && user.meta.profile_image_path">
                 <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path">
                 <div class="user-edit">
-                  <!-- <img src="../../../../assets/images/edit-icon.png" alt=""> -->
-                  <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" alt="">
+                  <img src="../../../../assets/images/edit-icon.png" class="edit-profile" alt=""> -->
+                  <!-- <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" class="club-icon" alt=""> -->
+                  <!-- <img *ngIf="user.club_logo_path" src="../../../assets/images/team-badge.png" class="club-icon" alt="">
                 </div>
-              </div>
-              <div class="user-info">
+              </div> -->
+              <div class="user-info mt-3">
                 <h6><span class="user-info-name">{{user.first_name}} {{user.last_name}}</span> 
                   <img src="../../../assets/images/pending.png" alt="" class="user-pending-icon" *ngIf="user.status == '1'"/>
                   <img src="../../../assets/images/approved.png" alt="" class="user-approved-icon" *ngIf="user.status == '2'"/>
@@ -114,7 +131,7 @@
                 </h6>
                 <small>{{user.role_name}}</small>
               </div>
-              <div class="list-view d-flex align-items-center border-top justify-content-between">
+              <div class="list-view d-flex align-items-center border-top-list-view justify-content-between">
                 <h6 class="mb-0 me-3">{{ 'Status' | translate }}:</h6>
                 <span class="bg_pending approv" *ngIf="user.status == '1'">Pending</span>
                 <span class="bg_success approv" *ngIf="user.status == '2'">Approved</span>
@@ -145,7 +162,7 @@
               </div>
               <div class="list-view border-0">
                 <h6 class="mb-2">{{ 'PaymentMethod' | translate }} :</h6>
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center visa-card">
                   <svg width="29" height="13" viewBox="0 0 29 13" fill="none" xmlns="http://www.w3.org/2000/svg" *ngIf="user.last4">
                     <g clip-path="url(#clip0_2019_4040)">
                       <path
