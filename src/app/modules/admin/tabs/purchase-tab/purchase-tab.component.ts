@@ -100,15 +100,14 @@ export class PurchaseTabComponent {
       // Return the image link if the user is found, otherwise return null or undefined
       return purchase ? purchase.invoice_file_path : null;
     });
-
-    console.log(allLinksToDownload)
+    this.downloadAllFiles(allLinksToDownload);
   }
 
   async downloadAllFiles(allLinksToDownload:any) {
     // Loop over each file URL and trigger the download sequentially
-    for (const [index, fileUrl] of allLinksToDownload) {
+    for (const [index, fileUrl] of allLinksToDownload.entries()) {
       // Call downloadFile with each URL and a custom filename
-      await this.downloadInvoice('id', fileUrl);
+      await this.downloadInvoice(index+1, fileUrl);
     }
   }
 

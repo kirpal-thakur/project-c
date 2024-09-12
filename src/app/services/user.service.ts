@@ -157,4 +157,38 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl2}/delete-favorites`, params, { headers });
   }
 
+  uploadCoverImage(userId:any, formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/upload-cover-image/${userId}`, formdata, { headers });
+  }
+
+  deleteCoverImage(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/delete-cover-image/${userId}`, {headers}
+    );
+  }
+
+  uploadGalleryImages(userId:any, formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/upload-gallery-image/${userId}`, formdata, { headers });
+  }
+
+  deleteGalleryImage(params:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/delete-gallery-file`, params, { headers });
+  }
+
 }

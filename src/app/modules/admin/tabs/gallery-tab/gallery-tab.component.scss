@@ -54,3 +54,22 @@ h5{
         padding: 7px 5px;
         fill: #fff !important;
      }
+
+     .pointer{
+      cursor:pointer;
+     }
+
+  .wc_floatingMenu {
+      display: none;
+      position: absolute;
+      top: 42px;
+      right: 15px;
+      background: #ffffff;
+      padding: 10px 10px;
+      border-radius: 4px;
+      box-shadow: 1px 1px 4px #999;
+  }
+
+  .wc_floatingMenu.active{
+    display: block;
+  }

@@ -53,6 +53,7 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { ScoutDetailComponent } from './scout-detail/scout-detail.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
 import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
+import { UploadPopupComponent } from './upload-popup/upload-popup.component';
 
   
 @NgModule({
@@ -88,7 +89,8 @@ import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
     MessagePopupComponent,
     ScoutDetailComponent,
     ClubDetailComponent,
-    ProfileTabComponent
+    ProfileTabComponent,
+    UploadPopupComponent
   ],
   imports: [
     CommonModule,
