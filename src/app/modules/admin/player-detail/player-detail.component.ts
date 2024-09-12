@@ -108,4 +108,9 @@ export class PlayerDetailComponent implements OnInit {
       }
     );
   }
+
+  handleCoverImageData(data: string) {
+    this.coverImage = data; // Assign the received data to a variable
+    console.log('Data received from child:', data);
+  }
 }

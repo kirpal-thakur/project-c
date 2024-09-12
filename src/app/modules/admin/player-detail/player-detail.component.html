@@ -267,7 +267,7 @@
             <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-profile-tab>
             <app-performance-tab *ngIf="activeTab == 'performance'"></app-performance-tab>
             <app-transfers-tab *ngIf="activeTab == 'transfers'"></app-transfers-tab>
-            <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage"></app-gallery-tab>
+            <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>
             <app-favorites-tab *ngIf="activeTab == 'favorites'"></app-favorites-tab>
             <app-purchase-tab *ngIf="activeTab == 'purchases'"></app-purchase-tab>
             <app-chat-tab *ngIf="activeTab == 'chat'"></app-chat-tab>
