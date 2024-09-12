@@ -1,14 +1,14 @@
-<div class="tab-content-2 Favorite-parent" id="myTabContent-2">
+<div class="tab-content-2 Favorite-parent bg-0C3453" id="myTabContent-2">
   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
   tabindex="0">
 
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between" >
       <div class="d-flex align-items-center">
         <h2 class="card-title mb-0 me-3">{{'Favorites' | translate}} ({{totalFavorites}})</h2>
       </div>
-      <div class="card-search">
-        <div class="input-group">
-          <span class="input-group-text"
+      <div class="card-search bg-072944">
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-text "
             ><svg
               width="16"
               height="16"
@@ -25,6 +25,7 @@
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  class="search-icon-favourites"
                 ></path>
                 <path
                   d="M10.8408 10.8398L15.0062 15.0058"
@@ -32,6 +33,7 @@
                   stroke-width="1.2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
+                  class="search-icon-favourites"
                 ></path>
               </g></svg></span
           ><input
@@ -39,7 +41,7 @@
             placeholder="Search"
             aria-label="Username"
             aria-describedby="basic-addon1"
-            class="form-control ps-0"
+            class="form-control ps-0 "
             (keyup)="search($event)"
           />
         </div>
@@ -61,11 +63,11 @@
         </div>
       </div>
     </div>
-    <div class="d-flex align-items-center justify-content-between mt-3">
+    <div class="d-flex align-items-center justify-content-between ">
       <div class="d-flex align-items-center">
-        <div class="dropdown">
+        <div class="dropdown dropdown-favourites">
           <button
-            class="btn btn-secondary dropdown-toggle  toggle-padding"
+            class="btn btn-secondary dropdown-toggle  toggle-padding dropdown-toggle-checkbox favourites-main-checkbox"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false" 
@@ -75,6 +77,9 @@
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked *ngIf="allSelected" />
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" *ngIf="!allSelected" />
             </div>
+            <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+            </svg>
           </button>
           <!-- <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Action</a></li>
@@ -103,21 +108,21 @@
 
       </div>
       <div class="d-flex align-items-center">
-        <mat-paginator class="paginator-components" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator> 
+        <mat-paginator class="paginator-components pagination-values" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator> 
       </div>
     </div>
 
 
-   <div class="table-responsive">
-    <table mat-table [dataSource]="userFavorites" class="table table-hover table-users ">
+   <div class="table-responsive" >
+    <table mat-table [dataSource]="userFavorites" class="table table-striped table-hover table-users ">
       <!-- Position Column -->
       <ng-container matColumnDef="#">
-        <th mat-header-cell *matHeaderCellDef># </th>
+        <th mat-header-cell *matHeaderCellDef> </th>
         <td mat-cell *matCellDef="let element">
-          <span class="form-check align-self-center me-2">
+          <span class="form-check align-self-center ">
             <input
               type="checkbox"
-              class="form-check-input"
+              class="form-check-input "
               [checked]="selectedIds.includes(element.id)"
               (change)="onCheckboxChange(element)"
             />
@@ -157,7 +162,12 @@
       </ng-container>
 
       <ng-container matColumnDef="User Type">
-        <th mat-header-cell *matHeaderCellDef > User Type </th>
+        <th mat-header-cell *matHeaderCellDef > User Type 
+          <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.15341 7.43701H7.84716C8.44903 7.43701 8.74997 8.1958 8.32528 8.63818L4.97841 12.1245C4.71404 12.3999 4.28654 12.3999 4.02497 12.1245L0.675285 8.63818C0.250597 8.1958 0.551535 7.43701 1.15341 7.43701ZM8.32528 4.36084L4.97841 0.874512C4.71404 0.599121 4.28654 0.599121 4.02497 0.874512L0.675285 4.36084C0.250597 4.80322 0.551535 5.56201 1.15341 5.56201H7.84716C8.44903 5.56201 8.74997 4.80322 8.32528 4.36084Z" fill="#111418" class="td-icon-favourites"/>
+            </svg>
+            
+        </th>
         <td mat-cell *matCellDef="let element">  {{ element.role_name }}</td>
       </ng-container>
 
@@ -167,19 +177,33 @@
       </ng-container>
 
       <ng-container matColumnDef="Joined Date - Time">
-        <th mat-header-cell *matHeaderCellDef> Joined Date - Time </th>
+        <th mat-header-cell *matHeaderCellDef> Joined Date - Time 
+          <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.15341 7.43701H7.84716C8.44903 7.43701 8.74997 8.1958 8.32528 8.63818L4.97841 12.1245C4.71404 12.3999 4.28654 12.3999 4.02497 12.1245L0.675285 8.63818C0.250597 8.1958 0.551535 7.43701 1.15341 7.43701ZM8.32528 4.36084L4.97841 0.874512C4.71404 0.599121 4.28654 0.599121 4.02497 0.874512L0.675285 4.36084C0.250597 4.80322 0.551535 5.56201 1.15341 5.56201H7.84716C8.44903 5.56201 8.74997 4.80322 8.32528 4.36084Z" fill="#111418" class="td-icon-favourites"/>
+            </svg>
+            
+        </th>
         <td mat-cell *matCellDef="let element"> {{ element.user_created_at | date:'MM.dd.yyyy - hh.mm a' }}</td>
       </ng-container>
       <ng-container matColumnDef="View Profile">
-        <th mat-header-cell *matHeaderCellDef> View Profile </th>
-        <td mat-cell *matCellDef="let element">
-          <img src="../../../../assets/images/view-filled.png" alt="" class="pointer" (click)="navigate(element.role_name, element.favorite_id)" />
+      
+        <th mat-header-cell *matHeaderCellDef class="text-center"> View Profile </th>
+        <td mat-cell *matCellDef="let element" class="text-center">
+            <!-- <img src="../../../../assets/images/view-filled.png" alt="" class="pointer" (click)="navigate(element.role_name, element.favorite_id)" />  -->
+          <svg class="pointer" (click)="navigate(element.role_name, element.favorite_id)" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z" fill="#787878" class="td-icon-favourites"/>
+            <path d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z" fill="#787878" class="td-icon-favourites" />
+          </svg>
         </td>
       </ng-container>
       <ng-container matColumnDef="Remove">
         <th mat-header-cell *matHeaderCellDef class="text-center"> Remove </th>
         <td mat-cell *matCellDef="let element" class="text-center">  
-          <img src="../../../../assets/images/trash-filled.png" alt="" class="pointer" (click)="confirmSingleDeletion(element.id)" />
+          <!-- <img src="../../../../assets/images/trash-filled.png" alt=""  class="pointer" (click)="confirmSingleDeletion(element.id)" /> -->
+          <svg  class="pointer" (click)="confirmSingleDeletion(element.id)" width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.50065 14.0589C1.50065 15.0112 2.32565 15.7904 3.33398 15.7904H10.6673C11.6757 15.7904 12.5007 15.0112 12.5007 14.0589V3.66999H1.50065V14.0589ZM13.4173 1.07277H10.209L9.29232 0.207031H4.70898L3.79232 1.07277H0.583984V2.80425H13.4173V1.07277Z" fill="#787878" class="td-icon-favourites"/>
+            </svg>
+            
         </td>
       </ng-container>
       

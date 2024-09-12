@@ -1097,10 +1097,10 @@ color: #ffffff;
   color: #BDE34F !important;
 }
 
-.dark-theme .form-check-input:checked {
-  background-color: #BDE34F !important;
-  border-color: #BDE34F !important;
-}
+// .dark-theme .form-check-input:checked {
+//   background-color: #BDE34F !important;
+//   border-color: #BDE34F !important;
+// }
 
 
 // ----------------setting ---------------
@@ -1579,7 +1579,7 @@ background-color: #072944;
 }
 
 .dark-theme .paginator-components .mat-mdc-paginator-container{
-  background: #072944 !important;
+  background: #0C3453 !important;
 }
 
 
@@ -1897,5 +1897,28 @@ background-color: #072944;
 
 .dark-theme .dropdown-icon path{
   stroke: #ffffff !important;
+}
+
+.dark-theme .search-icon-favourites{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .td-icon-favourites{
+  fill: #fff;
+}
+.dark-theme .bg-0C3453 {
+  background-color: #0C3453;
+}
+
+.dark-theme .bg-072944 {
+  background-color: #072944;
+}
+
+.dark-theme .search-icon-purchase{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .td-icon-purchase{
+  stroke: #fff;
 }
 // new changes css Start
