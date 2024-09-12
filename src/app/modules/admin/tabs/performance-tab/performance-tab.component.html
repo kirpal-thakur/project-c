@@ -1,4 +1,4 @@
-<div class="table-responsive" style="width: 100%;">
+<div class="table-responsive px-3 bg-0C3453" style="width: 100%;">
   <table class=" table table-striped w-100 ">
       <thead>
         <tr>
@@ -25,7 +25,7 @@
               <span class="main-template" *ngIf="editableId != performance.id"> 
                 <img src="{{performance.team_logo_path}}" height="20px" /> 
                 {{performance.country_name}}
-                <img src="{{performance.country_flag_path}}" alt=""> 
+                <img src="{{performance.country_flag_path}}" width="26" height="26" alt=""> 
               </span>
             </div>
               <!-- <select class="form-control performance-dark-bg" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
@@ -41,7 +41,7 @@
               </select> -->
 
               <div *ngIf="editableId == performance.id" class="select-wrapper perfermance-team-country mt-1">
-                <select class="form-control performance-dark-bg " *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
+                <select class="form-control performance-dark-bg h-auto py-1 px-2" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
                   <ng-container *ngFor="let team of teams">
                     <option *ngIf="team.id == performance.team_id" selected [value]="team.id">
                       {{team.team_name}}, {{team.country_name}}
@@ -100,12 +100,7 @@
 
               <svg  *ngIf="editableId == performance.id" (click)="savePerformance(performance.id)" class="dark-performance-save-svg cursor-pointer mt-2" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21.5 5.16667V19.1667C21.5 19.8083 21.2717 20.3578 20.8152 20.8152C20.3586 21.2725 19.8091 21.5008 19.1667 21.5H2.83333C2.19167 21.5 1.64256 21.2717 1.186 20.8152C0.729444 20.3586 0.500778 19.8091 0.5 19.1667V2.83333C0.5 2.19167 0.728667 1.64256 1.186 1.186C1.64333 0.729444 2.19244 0.500778 2.83333 0.5H16.8333L21.5 5.16667ZM11 18C11.9722 18 12.7986 17.6597 13.4792 16.9792C14.1597 16.2986 14.5 15.4722 14.5 14.5C14.5 13.5278 14.1597 12.7014 13.4792 12.0208C12.7986 11.3403 11.9722 11 11 11C10.0278 11 9.20139 11.3403 8.52083 12.0208C7.84028 12.7014 7.5 13.5278 7.5 14.5C7.5 15.4722 7.84028 16.2986 8.52083 16.9792C9.20139 17.6597 10.0278 18 11 18ZM4 8.66667H14.5V4H4V8.66667Z" fill="#236115"/>
-                </svg>
-                
-                
-              
-
-            
+                </svg>                         
           </td>
         </tr>
       </tbody>

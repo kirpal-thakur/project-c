@@ -1097,10 +1097,10 @@ color: #ffffff;
   color: #BDE34F !important;
 }
 
-.dark-theme .form-check-input:checked {
-  background-color: #BDE34F !important;
-  border-color: #BDE34F !important;
-}
+// .dark-theme .form-check-input:checked {
+//   background-color: #BDE34F !important;
+//   border-color: #BDE34F !important;
+// }
 
 
 // ----------------setting ---------------
@@ -1182,9 +1182,7 @@ background-color: #072944;
 
 
 
-.dark-theme .custom-size-calendar .mdc-text-field--filled{
-  background: white !important;
-}
+
 .dark-theme .Delete-cover{
   color: white;
   background-color: #072944 !important;
@@ -1581,7 +1579,7 @@ background-color: #072944;
 }
 
 .dark-theme .paginator-components .mat-mdc-paginator-container{
-  background: #072944 !important;
+  background: #0C3453 !important;
 }
 
 
@@ -1874,4 +1872,53 @@ background-color: #072944;
   background-color: #0C3453; 
 }
 
+.dark-theme .custom-size, .custom-size-calendar .mat-mdc-text-field-wrapper{
+  background-color: #0C3453;
+  color: #ffffff;
+}
+
+.dark-theme .custom-size-calendar .mat-mdc-text-field-wrapper{
+  background-color: #0C3453 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .custom-size-calendar .mdc-text-field--filled:not(.mdc-text-field--disabled){
+  color: #ffffff !important;
+} 
+
+.dark-theme  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+
+  color: rgb(255 255 255 / 87%);
+}
+
+.dark-theme .dark-form-select-bg{
+  background-color: #0C3453;
+}
+
+.dark-theme .dropdown-icon path{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .search-icon-favourites{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .td-icon-favourites{
+  fill: #fff;
+}
+.dark-theme .bg-0C3453 {
+  background-color: #0C3453;
+}
+
+.dark-theme .bg-072944 {
+  background-color: #072944;
+}
+
+.dark-theme .search-icon-purchase{
+  stroke: #ffffff !important;
+}
+
+.dark-theme .td-icon-purchase{
+  stroke: #fff;
+}
 // new changes css Start
