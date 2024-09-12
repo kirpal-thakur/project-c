@@ -84,7 +84,7 @@ export class UploadPopupComponent {
         console.log(row);
         this.uploadResponse.push(row.message)
         if(row.status){
-          this.uploadedFiles.push({id:0, file_name: row.data.file});
+          this.uploadedFiles.push({id:row.data.id, file_name: row.data.uploaded_file});
         }
 
       });
