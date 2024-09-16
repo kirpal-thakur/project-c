@@ -305,7 +305,7 @@ box-shadow: none !important;
     background-color: transparent;
 
     border-radius: 0;
-    padding: 5px 10px;
+    padding: 0 10px;
     border: 0;
   }
   .form-control {
@@ -1578,11 +1578,6 @@ background-color: #072944;
   color: white !important;
 }
 
-.dark-theme .paginator-components .mat-mdc-paginator-container{
-  background: #0C3453 !important;
-}
-
-
 .dark-theme .paginator-components .mat-mdc-paginator-range-actions button{
   background-color: white;
   --mdc-icon-button-state-layer-size: 32px !important;
@@ -1921,4 +1916,11 @@ background-color: #072944;
 .dark-theme .td-icon-purchase{
   stroke: #fff;
 }
+
+.dark-theme .gallery-upload-icon svg path{
+  fill: #ffffff;
+}
+
+
+
 // new changes css Start
