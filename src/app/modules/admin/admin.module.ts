@@ -54,6 +54,9 @@ import { ScoutDetailComponent } from './scout-detail/scout-detail.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
 import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
 import { UploadPopupComponent } from './upload-popup/upload-popup.component';
+import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
+import { ScoutProfileTabComponent } from './tabs/scout-profile-tab/scout-profile-tab.component';
+import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
 
   
 @NgModule({
@@ -90,7 +93,10 @@ import { UploadPopupComponent } from './upload-popup/upload-popup.component';
     ScoutDetailComponent,
     ClubDetailComponent,
     ProfileTabComponent,
-    UploadPopupComponent
+    UploadPopupComponent,
+    PortfolioTabComponent,
+    ScoutProfileTabComponent,
+    HistoryTabComponent
   ],
   imports: [
     CommonModule,
