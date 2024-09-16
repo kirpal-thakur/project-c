@@ -1,21 +1,24 @@
-<div appClickOutside (clickOutside)="onClickOutside()" class="p-3 parent-popup">
-    <h4 class="text-center mb-3 title-text">Create New Pop Up</h4>
+<div appClickOutside (clickOutside)="onClickOutside()" class="p-0 parent-popup">
+  <div class="p-4 bg-0C3453">
+
+    <h4 class="text-center title-text">Create New Pop Up</h4>
 
     <div class="close-img" (click)="close()">
     </div>
-    <div>
+  </div>
+  <hr class="m-0">
 
-    </div>
-
-    <div class="d-flex align-items-baseline pb-2 ">
+    <div class="d-flex align-items-baseline py-2 bg-0C3453 px-3">
         <h4 class="text-size">Name: &nbsp;</h4>
         <p class="text-size"> Black Friday Offer</p>
     </div>
 
-    <div class="d-flex  main-popup-div ">
-        <div class="d-flex align-items-baseline mb-3">
+    <hr class="m-0">
+
+    <div class="d-flex  main-popup-div py-2 px-3 bg-0C3453">
+        <div class="d-flex align-items-baseline ">
           <h4 class="text-size fw-bold">For:</h4>
-          <div class="btn-group">
+          <!-- <div class="btn-group">
             <mat-select [(ngModel)]="selectedRole">
                 <mat-option [value]="0">All</mat-option>
                 @for (role of roles; track role) {
@@ -23,34 +26,55 @@
                 }
             </mat-select>
 
+          </div> -->
+
+          <div class="btn-group" style="position: relative; display: inline-block;">
+            <mat-select [(ngModel)]="selectedRole" class="mat-select-div">
+              <mat-option [value]="0">All</mat-option>
+            
+              <ng-container *ngFor="let role of roles">
+                <mat-option *ngIf="role.id != 1" [value]="role.id">{{ role.role }}</mat-option>
+              </ng-container>
+            </mat-select>
+          
+            <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+            </svg>
           </div>
+          
         </div>
         <div  class="d-flex align-items-baseline" >
          <h4 class="text-size fw-bold">Language:</h4>
          <div class="btn-group">
-            <mat-select [(ngModel)]="selectedLang">
+            <mat-select [(ngModel)]="selectedLang" class="mat-select-div">
                 @for (lang of langs; track lang) {
                   <mat-option [value]="lang.id">{{lang.language}}</mat-option>
                 }
               </mat-select>
+              <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+              </svg>
 
           </div>
         </div>
-          <div  class="d-flex align-items-baseline">
-            <h4 class="text-size fw-bold">Location:</h4>
-            <div class="btn-group">
-                <mat-select [(ngModel)]="selectedLocation">
-                    @for (location of locations; track location) {
-                      <mat-option [value]="location.id">{{location.name}}</mat-option>
-                    }
-                  </mat-select>
+        <div  class="d-flex align-items-baseline">
+          <h4 class="text-size fw-bold">Location:</h4>
+          <div class="btn-group">
+              <mat-select [(ngModel)]="selectedLocation" class="mat-select-div">
+                  @for (location of locations; track location) {
+                    <mat-option [value]="location.id">{{location.name}}</mat-option>
+                  }
+                </mat-select>
+                <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                </svg>
 
-            </div>
           </div>
         </div>
+    </div>
+    <hr class="m-0">
 
-
-    <div class="main-popup-div">
+    <div class="main-popup-div bg-0C3453 " style="padding-right: 1rem;">
         <div>
             <mat-form-field class="marketing-calender-field">
                 <mat-date-range-picker #picker></mat-date-range-picker>
@@ -67,26 +91,36 @@
 
 
         </div>
-        <div class="d-flex align-items-baseline">
+        <div class="d-flex align-items-center">
             <h4 class="text-size fw-bold"> Display Freq: </h4>
             <div class="btn-group">
                 <button class="btn btn-secondary dropdown-toggle button-text " type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
                     Location
+
+                    <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                    </svg>
                 </button>
             </div>
         </div>    
     </div>
+
+    <hr class="m-0 ">
+
+
     <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
     </div>
-    <div class="mt-3 d-flex  justify-content-between">
-        <!-- <div class="marketing-button-child"> -->
-        <div style=" margin-left: 52px;">
-        <a class="btn btn-delete">Delete</a>
-        </div>
-        <div>
-        <a class="btn Launch" >Create and Launch</a>
+    <div>
+      <div class=" d-flex justify-content-around bg-0C3453 p-3">
+    
+       <div>
+         <a class="btn btn-delete text-danger ">Delete</a>
+       </div>
+       <div>
+         <a class="btn Launch px-5" >Create and Launch</a>
+       </div>
+    
+      </div>
     </div>
-        <!-- </div> -->
-</div>
