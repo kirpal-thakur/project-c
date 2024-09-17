@@ -196,7 +196,7 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" (click)="switchTab('performance')" [ngClass]="{'active': activeTab == 'performance'}" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
+                  <button class="nav-link" (click)="switchTab('history')" [ngClass]="{'active': activeTab == 'history'}" id="profile-tab" data-bs-toggle="tab" id="manage-button" data-bs-target="#profile-tab-pane"
                     type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
                     <svg  id="users-icon" width="24"
                       height="21" viewBox="0 0 24 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -204,10 +204,10 @@
                         d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
                         fill="#023A4A" />
                     </svg>
-                    {{ 'Performance' | translate }}</button>
+                    {{ 'Club History' | translate }}</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link transfer" (click)="switchTab('transfers')" [ngClass]="{'active': activeTab == 'transfers'}" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
+                  <button class="nav-link transfer" (click)="switchTab('teams')" [ngClass]="{'active': activeTab == 'teams'}" id="contact-tab"  data-bs-toggle="tab"  data-bs-target="#contact-tab-pane"
                     type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">
                     <svg  id="users-icon" width="24"
                       height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -215,7 +215,7 @@
                         d="M17.4141 0.496094L23.293 6.375L17.4141 12.2539L16.1836 10.9961L19.9297 7.25H1.5V5.5H19.9297L16.1836 1.75391L17.4141 0.496094ZM6.58594 12.7461L7.81641 14.0039L4.07031 17.75H22.5V19.5H4.07031L7.81641 23.2461L6.58594 24.5039L0.707031 18.625L6.58594 12.7461Z"
                         fill="#023A4A" />
                     </svg>
-                    {{ 'Transfers' | translate }}</button>
+                    {{ 'Teams' | translate }}</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{'active': activeTab == 'gallery'}" id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
@@ -262,15 +262,27 @@
                     </svg>
                     {{ 'Chat' | translate }}</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('sighting')" [ngClass]="{'active': activeTab == 'sighting'}" id="contact-tab-5" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-5"
+                    type="button" role="tab" id="manage-button" aria-controls="contact-tab-pane-4" aria-selected="false">
+                    <svg  id="users-icon" width="26"
+                      height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.75 0.875H18.25V14.875H9.80078L4.25 19.332V14.875H0.75V0.875ZM2.5 2.625V13.125H6V15.668L9.19922 13.125H16.5V2.625H2.5ZM20 4.375H25.25V18.375H21.75V22.832L16.1992 18.375H8.05078L10.2383 16.625H16.8008L20 19.168V16.625H23.5V6.125H20V4.375Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ 'Sighting' | translate }}</button>
+                </li>
               </ul>
   
-              <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-profile-tab>
-              <app-performance-tab *ngIf="activeTab == 'performance'"></app-performance-tab>
-              <app-transfers-tab *ngIf="activeTab == 'transfers'"></app-transfers-tab>
+              <app-club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-club-profile-tab>
+              <app-history-tab *ngIf="activeTab == 'history'" role="Club"></app-history-tab>
+              <app-teams-tab *ngIf="activeTab == 'teams'"></app-teams-tab>
               <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>
               <app-favorites-tab *ngIf="activeTab == 'favorites'"></app-favorites-tab>
               <app-purchase-tab *ngIf="activeTab == 'purchases'"></app-purchase-tab>
               <app-chat-tab *ngIf="activeTab == 'chat'"></app-chat-tab>
+              <app-sighting-tab *ngIf="activeTab == 'sighting'"></app-sighting-tab>
             </div>
           </div>
         </div>

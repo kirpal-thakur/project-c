@@ -23,15 +23,37 @@ export class HistoryTabComponent {
     this.route.params.subscribe((params: any) => {
       console.log(params);
       this.userId = params.id;
-      this.getHistory(this.userId);
+      if(this.role == "Scout"){
+        this.getScoutHistory(this.userId);
+      }else if(this.role == "Club"){
+        this.getClubHistory(this.userId);
+      }
+      
     })
   }
 
-  getHistory(userId:any){
+  getScoutHistory(userId:any){
     try {
-      this.userService.getHistory(userId).subscribe((response)=>{
+      this.userService.getScoutHistory(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = response.data.company_history.meta_value; 
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+  }
+
+  getClubHistory(userId:any){
+    try {
+      this.userService.getClubHistory(userId).subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.history = response.data.club_history.meta_value; 
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
@@ -48,7 +70,16 @@ export class HistoryTabComponent {
     this.isEditable = true;
   }
 
-  updateHistory(): any{
+  updateHistory(){
+
+    if(this.role == "Scout"){
+      this.updateScoutHistory();
+    }else if(this.role == "Club"){
+      this.updateClubHistory();
+    }
+  }
+
+  updateScoutHistory(): any {
     const history = this.textarea.nativeElement.value;
 
     if(history.trim() == ""){
@@ -56,7 +87,31 @@ export class HistoryTabComponent {
     }
 
     try {
-      this.userService.updateHistory(this.userId, history).subscribe((response)=>{
+      this.userService.updateScoutHistory(this.userId, history).subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.history = history; 
+          this.isEditable = false;
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+  }
+
+  updateClubHistory(): any {
+    const history = this.textarea.nativeElement.value;
+
+    if(history.trim() == ""){
+      return false;
+    }
+
+    try {
+      this.userService.updateClubHistory(this.userId, history).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = history; 
           this.isEditable = false;

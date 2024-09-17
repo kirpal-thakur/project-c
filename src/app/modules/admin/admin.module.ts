@@ -58,6 +58,9 @@ import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.compon
 import { ScoutProfileTabComponent } from './tabs/scout-profile-tab/scout-profile-tab.component';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
 import { ScoutPlayerViewPopupComponent } from './tabs/scout-player-view-popup/scout-player-view-popup.component';
+import { ClubProfileTabComponent } from './tabs/club-profile-tab/club-profile-tab.component';
+import { TeamsTabComponent } from './tabs/teams-tab/teams-tab.component';
+import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component';
 
   
 @NgModule({
@@ -98,7 +101,10 @@ import { ScoutPlayerViewPopupComponent } from './tabs/scout-player-view-popup/sc
     PortfolioTabComponent,
     ScoutProfileTabComponent,
     HistoryTabComponent,
-    ScoutPlayerViewPopupComponent
+    ScoutPlayerViewPopupComponent,
+    ClubProfileTabComponent,
+    TeamsTabComponent,
+    SightingTabComponent
   ],
   imports: [
     CommonModule,

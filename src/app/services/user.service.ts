@@ -191,7 +191,7 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl2}/delete-gallery-file`, params, { headers });
   }
 
-  getHistory(userId:any): Observable<any> {
+  getScoutHistory(userId:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
@@ -201,12 +201,30 @@ export class UserService {
     );
   }
 
-  updateHistory(userId:any, history:any): Observable<any> {
+  getClubHistory(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-club-history/${userId}`, {headers}
+    );
+  }
+
+  updateScoutHistory(userId:any, history:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.post<any>(`${this.apiUrl2}/add-company-history/${userId}`, {company_history: history}, { headers });
+  }
+
+  updateClubHistory(userId:any, history:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/edit-club-history/${userId}`, {club_history: history}, { headers });
   }
 
   getScoutPlayers(userId:any): Observable<any> {
