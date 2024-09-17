@@ -13,6 +13,7 @@
     font-size: 14px;
       
     }
+    
   
 .custom-button:hover {
   color: #E05263;
@@ -67,7 +68,7 @@
   }
 
   .codeCoupen{
-    position: absolute;
+    // position: absolute;
     display: flex;
     column-gap: 160px; 
     bottom: -40px;
@@ -96,5 +97,13 @@
 .form-check-input:checked {
     background-color: #e05263;
     border-color: #e05263;
+  }
+
+  .form-check-input:checked + label .custom-button{
+    border-color: #E05263; /* Border color when checked */
+    color: #E05263;
+  }
+  .form-check-input:checked + label {
+    color: #E05263; /* Text color when checked */
   }
 

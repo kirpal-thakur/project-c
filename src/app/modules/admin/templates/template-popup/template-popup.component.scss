@@ -86,3 +86,20 @@ ngx-editor {
     padding: 0.5rem 3rem;
 }
 
+.NgxEditor__Wrapper{
+    border: 0 !important;
+}
+ 
+.mat-mdc-select-arrow-wrapper{
+    display: none !important;
+  }
+
+  .dropdown-icon {
+    position: absolute;
+    right: 5px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+

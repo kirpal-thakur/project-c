@@ -13,7 +13,7 @@ export class WebsiteComponent {
 
   editCoupenCode(){
     const dialogRef = this.dialog.open(CoupenCodePopupComponent,{
-      height: '600px',
+      height: '598px',
       width: '600px',
       panelClass: 'cutam-cupen'
    
