@@ -57,6 +57,7 @@ import { UploadPopupComponent } from './upload-popup/upload-popup.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
 import { ScoutProfileTabComponent } from './tabs/scout-profile-tab/scout-profile-tab.component';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
+import { ScoutPlayerViewPopupComponent } from './tabs/scout-player-view-popup/scout-player-view-popup.component';
 
   
 @NgModule({
@@ -96,7 +97,8 @@ import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
     UploadPopupComponent,
     PortfolioTabComponent,
     ScoutProfileTabComponent,
-    HistoryTabComponent
+    HistoryTabComponent,
+    ScoutPlayerViewPopupComponent
   ],
   imports: [
     CommonModule,

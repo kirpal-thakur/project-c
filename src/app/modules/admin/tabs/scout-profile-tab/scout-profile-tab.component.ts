@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-scout-profile-tab',
@@ -11,4 +11,12 @@ export class ScoutProfileTabComponent {
   userNationalities:any = [];
 
   @Input() userData: any;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['userData']) {
+      if(changes['userData'].currentValue.user_nationalities){
+        this.userNationalities = JSON.parse(this.userData.user_nationalities);
+      }
+    }
+  }
 }

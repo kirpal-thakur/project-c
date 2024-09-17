@@ -1,1 +1,13 @@
-<p>history-tab works!</p>
+<div>
+    <span>About {{role}}</span>
+    <button *ngIf="!isEditable" (click)="editHistory()">Edit</button>
+    <button *ngIf="isEditable" (click)="updateHistory()">Update</button>
+</div>
+
+<div>
+    <div *ngIf="!isEditable">{{history}}</div>
+    <div *ngIf="isEditable">
+        <textarea #historyTextarea>{{history}}</textarea>
+    </div>
+
+</div>

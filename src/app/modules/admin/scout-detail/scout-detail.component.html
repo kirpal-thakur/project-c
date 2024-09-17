@@ -265,7 +265,7 @@
               </ul>
   
               <app-scout-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-scout-profile-tab>
-              <app-history-tab *ngIf="activeTab == 'history'"></app-history-tab>
+              <app-history-tab *ngIf="activeTab == 'history'" role="Scout"></app-history-tab>
               <app-portfolio-tab *ngIf="activeTab == 'portfolio'"></app-portfolio-tab>
               <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>
               <app-favorites-tab *ngIf="activeTab == 'favorites'"></app-favorites-tab>
