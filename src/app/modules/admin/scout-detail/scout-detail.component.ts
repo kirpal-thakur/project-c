@@ -22,7 +22,8 @@ export class ScoutDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       console.log(params.id)
-      this.userId = params.id;
+      // this.userId = params.id;
+      this.userId = 59;
       this.getUserProfile(this.userId);
       this.activeTab = 'profile';
     });
