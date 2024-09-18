@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-teams-tab',
@@ -7,4 +9,61 @@ import { Component } from '@angular/core';
 })
 export class TeamsTabComponent {
 
+  userId:any = '';
+  teams:any = [];
+  players:any = [];
+  view: string = "team";
+  displayedColumns: string[] = ['Player Name', 'Joining Date', 'Exit Date', 'Location','Edit'];
+  isLoading = false;
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router){}
+
+
+  ngOnInit(){
+    this.route.params.subscribe((params:any) => {
+      this.userId = params.id;
+      this.getClubTeams(this.userId)
+    })
+  }
+
+  getClubTeams(userId:any){
+    try {
+      this.userService.getClubTeams(userId).subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.teams = response.data.teams;
+          console.log(this.teams) 
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error); 
+    }
+  }
+
+  getTeamPlayers(teamId:any){
+    this.view = 'player';
+    try {
+      this.userService.getTeamPlayers(teamId).subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.players = response.data.players;
+          console.log(this.players) 
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);  
+    }
+  }
+
+  navigate(playerId:any){
+    let pageRoute = 'admin/player';
+    this.router.navigate([pageRoute, playerId]);
+  }
 }

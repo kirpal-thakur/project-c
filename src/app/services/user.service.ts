@@ -246,4 +246,34 @@ export class UserService {
       `${this.apiUrl2}/delete-scout-player/${id}`, {headers}
     );
   }  
+
+  getClubTeams(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}/get-club-teams/${id}`, {headers}
+    );
+  } 
+
+  getTeamPlayers(teamId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-club-players/${teamId}`, {headers}
+    );
+  } 
+
+  getSightings(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-sightings/${id}`, {headers}
+    );
+  } 
 }
