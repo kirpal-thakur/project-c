@@ -1322,6 +1322,13 @@ background-color: #072944;
   color: #ffffff !important;
 
 }
+
+.dark-theme .user-right-content .scout-team p{
+  color: #787878 !important;
+}
+.dark-theme .user-right-content .scout-team h6{
+  color: #ffffff !important;
+}
 .dark-theme .user-info{
   h6{
       color: #ffffff !important;
@@ -2002,5 +2009,43 @@ background-color: #072944;
 
 .dark-theme .NgxEditor__Wrapper .NgxEditor__MenuBar{
   background-color: #072944 !important;
+}
+
+.dark-theme .scout-edit {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .scout-delete {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .scout-up-down {
+  fill: #ffffff !important ;
+}
+.dark-theme .table-scout-profile{
+  border-radius:10px ;
+  border: 1px solid #1F4360 !important;
+}
+
+.dark-theme .tbody-scout-profile  tr:first-child {
+  border-top: 2px solid #1F4360 !important; 
+}
+
+.dark-theme .tbody-scout-profile {
+  border-top: 2px solid #1F4360 !important; 
+}
+
+.dark-theme .historyTextarea {
+  background-color: #0C3453 !important; 
+  border: 1px solid #072944 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .scout-player-name{
+ color: #ffffff;
+}
+
+.dark-theme .scout-player-detail{
+  color:#d9d9d9a3 ;
 }
 // new changes css Start

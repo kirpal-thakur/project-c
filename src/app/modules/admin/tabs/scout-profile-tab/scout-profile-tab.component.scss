@@ -46,6 +46,7 @@
     }
 }
 
+
 .team-details-sub{
     margin-bottom: 19px;
 }
@@ -53,3 +54,29 @@
 td{
     font-size: 14px;
 }
+
+
+
+  .table thead  {
+    border-radius: 10px ; 
+    overflow: hidden;
+  }
+  
+  .border-table-thead thead{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px; 
+    
+  }
+  
+  .table-scout-profile{
+    border-radius:10px ;
+    border: 1px solid #E5E5E5;
+  }
+
+  tbody tr:first-child {
+    border-top: 2px solid #e5e5e5; /* Adjust color and thickness as needed */
+  }
+  
+  tbody {
+    border-top: 2px solid #e5e5e5; /* Adjust color and thickness as needed */
+  }

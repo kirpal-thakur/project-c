@@ -1,5 +1,5 @@
 <div>
-    <div class="container">
+    <div class="container bg-0C3453">
       <div class="row">
         <div class="col">
           <div class="table-responsive">
@@ -45,12 +45,23 @@
               </ng-container>
 
               <ng-container matColumnDef="Contract Starts">
-                <th mat-header-cell *matHeaderCellDef > Contract Starts </th>
-                <td mat-cell *matCellDef="let element"> - </td>
+                <th mat-header-cell *matHeaderCellDef > Contract Starts
+                  <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.15341 7.43701H7.84716C8.44903 7.43701 8.74997 8.1958 8.32528 8.63818L4.97841 12.1245C4.71404 12.3999 4.28654 12.3999 4.02497 12.1245L0.675285 8.63818C0.250597 8.1958 0.551535 7.43701 1.15341 7.43701ZM8.32528 4.36084L4.97841 0.874512C4.71404 0.599121 4.28654 0.599121 4.02497 0.874512L0.675285 4.36084C0.250597 4.80322 0.551535 5.56201 1.15341 5.56201H7.84716C8.44903 5.56201 8.74997 4.80322 8.32528 4.36084Z" fill="#111418" class="scout-up-down"/>
+                    </svg>
+                    
+                     </th>
+                <td mat-cell *matCellDef="let element"> 03.04.2023 </td>
               </ng-container>
               <ng-container matColumnDef="Contract Expires">
-                <th mat-header-cell *matHeaderCellDef> Contract Expires </th>
-                <td mat-cell *matCellDef="let element"> - </td>
+                <th mat-header-cell *matHeaderCellDef> Contract Expires 
+                  <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.15341 7.43701H7.84716C8.44903 7.43701 8.74997 8.1958 8.32528 8.63818L4.97841 12.1245C4.71404 12.3999 4.28654 12.3999 4.02497 12.1245L0.675285 8.63818C0.250597 8.1958 0.551535 7.43701 1.15341 7.43701ZM8.32528 4.36084L4.97841 0.874512C4.71404 0.599121 4.28654 0.599121 4.02497 0.874512L0.675285 4.36084C0.250597 4.80322 0.551535 5.56201 1.15341 5.56201H7.84716C8.44903 5.56201 8.74997 4.80322 8.32528 4.36084Z" fill="#111418" class="scout-up-down"/>
+                    </svg>
+                    
+                    
+                </th>
+                <td mat-cell *matCellDef="let element"> 03.04.2023 </td>
               </ng-container>
               
               <ng-container matColumnDef="View">
@@ -67,7 +78,7 @@
                 <th mat-header-cell *matHeaderCellDef class="text-center"> Delete </th>
                 <td mat-cell *matCellDef="let element" class="text-center cursor-pointer">  
                     <svg (click)=confirmDeletion(element.id,element.first_name,element.last_name) width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.916667 13.8519C0.916667 14.8042 1.74167 15.5833 2.75 15.5833H10.0833C11.0917 15.5833 11.9167 14.8042 11.9167 13.8519V3.46296H0.916667V13.8519ZM12.8333 0.865741H9.625L8.70833 0H4.125L3.20833 0.865741H0V2.59722H12.8333V0.865741Z" fill="#787878"/>
+                        <path d="M0.916667 13.8519C0.916667 14.8042 1.74167 15.5833 2.75 15.5833H10.0833C11.0917 15.5833 11.9167 14.8042 11.9167 13.8519V3.46296H0.916667V13.8519ZM12.8333 0.865741H9.625L8.70833 0H4.125L3.20833 0.865741H0V2.59722H12.8333V0.865741Z" fill="#787878" class="scout-delete"/>
                     </svg>   
                 </td>
               </ng-container>
