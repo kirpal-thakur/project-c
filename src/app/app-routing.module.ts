@@ -20,12 +20,18 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard]
   },
- 
-
+  {
+    path: 'talent',
+    loadChildren: () =>
+      import('./modules/talent/talent.module').then(
+        (m) => m.TalentModule
+      ),
+    canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
