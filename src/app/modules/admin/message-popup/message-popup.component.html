@@ -24,5 +24,12 @@
                 <span (click)="deleteConfirmed()">Delete</span>
             </div>
         </div>
+        <div class="display-message" *ngIf="data.action == 'popup-delete-confirmation'">
+            Once popup is deleted, it can’t be undone. <br> Do you want to delete?
+
+            <div class="popup-delete-btn">
+                <span (click)="deleteConfirmed()">Delete</span>
+            </div>
+        </div>
     </div>
 </div>

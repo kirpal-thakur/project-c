@@ -13,10 +13,17 @@ export class MarketingService {
         this.apiUrl = environment?.apiUrl;
     
     }
-    getPopups(): Observable<{ status: boolean, message: string, data: any }> {
+    getSystemPopups(data:any): Observable<{ status: boolean, message: string, data: any }> {
+        let params = new HttpParams();
+        // Loop through the queryParams object and set each parameter
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                params = params.set(key, data[key]);
+            }
+        }
         return this.http.get<{ status: boolean, message: string, data: any }>(
-            `${this.apiUrl}admin/get-system-popups`,
-          );
+            `${this.apiUrl}admin/get-system-popups`, {params}
+        );
     }
 
     addPopups(record: any): Observable<any> {
@@ -28,8 +35,8 @@ export class MarketingService {
     }
 
     // Method to delete a record by IDs
-    deletePopups(ids: any): Observable<any> {
+    deletePopups(params: any): Observable<any> {
         
-        return this.http.post<any>(`${this.apiUrl}admin/delete-system-popup`, ids);
+        return this.http.post<any>(`${this.apiUrl}admin/delete-system-popup`, params);
     }
 }

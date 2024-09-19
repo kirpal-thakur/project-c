@@ -9,6 +9,8 @@ import { MarketingService } from '../../../services/marketing.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { environment } from '../../../../environments/environment';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
+
 @Component({
   selector: 'app-marketing',
   templateUrl: './marketing.component.html',
@@ -18,21 +20,36 @@ export class MarketingComponent {
   displayedColumns: string[] = ['#','Name', 'For', 'Language','Display Freq','Display Location','Start Date','End Date','Status','Edit','Remove'];
   isLoading= false;
   popups: any = [];
-  allSelected: boolean = false;
-  selectedPopIds: number[] = [];
   checkboxIds: string[] = [];
+  allSelected: boolean = false;
+  selectedIds: number[] = [];  
+  filterValue: string = '';
+  idsToDelete: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog: MatDialog,private marketingApi: MarketingService) {}
   ngOnInit(): void {
-    this.fetchPopups();
+    this.getSystemPopups();
   }
 
-  async fetchPopups(): Promise<void> {
+  async getSystemPopups(): Promise<void> {
+
+    const page = this.paginator ? this.paginator.pageIndex*10 : 0;
+    const pageSize = this.paginator ? this.paginator.pageSize : 10;
+    // const sortOrder = this.sort ? this.sort.direction : 'asc';
+    // const sortField = this.sort ? this.sort.active : '';
+
+    let params:any = {};
+    params.offset = page;
+    params.search = this.filterValue;
+    params.limit  = pageSize;
+    params.orderBy = "id";
+    params.order = "desc";
+
     try {
       this.isLoading = true;
-     this.marketingApi.getPopups().subscribe((response)=>{
+     this.marketingApi.getSystemPopups(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.popups) {
         this.popups = response.data.popups;
         this.paginator.length = response.data.totalCount;
@@ -48,13 +65,115 @@ export class MarketingComponent {
       console.error('Error fetching users:', error);
     }
   }
-  onCheckboxChange(template: any) {
-    const index = this.checkboxIds.indexOf(template.id);
-    if (index === -1) {
-      this.checkboxIds.push(template.id);
-    } else {
-      this.checkboxIds.splice(index, 1);
+
+  createSystemPoup(){
+    console.log('Edit user button clicked!');
+    const dialogRef = this.dialog.open(MarketingPopupComponent,{
+      height: '537px',
+      width: '600px',
+    });
+  }
+
+  applyFilter(filterValue:any) {
+    this.filterValue = filterValue.target?.value.trim().toLowerCase();
+    if(this.filterValue.length >= 3){
+      this.getSystemPopups();
+    } else if(this.filterValue.length == 0){
+      this.getSystemPopups();
     }
+  }
+
+  showFiltersPopup(){
+    alert('show filters popup')
+    //   this.dialog.open(FilterPopupComponrnt,{
+    //     height: '450px',
+    //     width: '300px',
+    //     position: {
+    //       right: '30px',
+    //       top:'150px'
+    //     }
+    //   })
+  }
+
+  onPageChange() {
+    this.getSystemPopups();
+  }
+
+  onCheckboxChange(popup: any) {
+    const index = this.selectedIds.indexOf(popup.id);
+    if (index === -1) {
+      this.selectedIds.push(popup.id);
+    } else {
+      this.selectedIds.splice(index, 1);
+    }
+  }
+
+  selectAllPopups() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedIds = this.popups.map((popup:any) => popup.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedIds);
+  }
+
+  confirmDeletion():any {
+    if(this.selectedIds.length == 0){
+      this.showMessage('Select popup(s) first.');
+      return false;
+    }
+    this.idsToDelete = this.selectedIds;
+    this.showDeleteConfirmationPopup();
+  }
+
+  showDeleteConfirmationPopup(){
+    this.showMatDialog("", "popup-delete-confirmation");
+  }
+
+
+  deletePopups():any {
+
+    let params = {id:this.idsToDelete};
+    this.marketingApi.deletePopups(params).subscribe(
+      response => {
+        this.getSystemPopups();
+        this.selectedIds = [];
+        this.allSelected = false;
+        // console.log('Popups deleted successfully:', response);
+        this.showMessage('Popup(s) deleted successfully!');
+      },
+      error => {
+        console.error('Error deleting popup:', error);
+        this.showMessage('Error deleting popup. Please try again.');
+      }
+    );
+  }
+
+  showMessage(message:string){
+    this.showMatDialog(message, 'display');
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deletePopups();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
   }
 
   showRole(id:number){
@@ -67,53 +186,9 @@ export class MarketingComponent {
   editPopup(id:number){
 
   }
-  removePopup(id:number){
-    
-  }
-  deleteSelected(){
-    const templateIds = {
-      id: this.checkboxIds,
-    };
-   /*  this.marketingApi.deleteEmailTemplate(templateIds).subscribe(result => {
-      if (result && result.status) {
-          this.fetchTemplates();
-      } else {
-        this.isLoading = false;
-        console.error('Invalid API response structure:', result);
-      }
-     }); */
-  }
-  selectAllTemplates() {
-    this.allSelected = !this.allSelected;
-    if (this.allSelected) {
-      this.checkboxIds = this.popups.map((popup:any) => popup.id);
-    } else {
-      this.checkboxIds = [];
-    }
-    console.log('Selected user IDs:', this.checkboxIds);
-  }
-  editMarkiting(){
-    console.log('Edit user button clicked!');
-    const dialogRef = this.dialog.open(MarketingPopupComponent,
-     {
-      height: '537px',
-      width: '600px',
-  });
-
-  }
-
-  editfilter(){
-    this.dialog.open(FilterPopupComponrnt,{
-      height: '450px',
-      width: '300px',
-      position: {
-        right: '30px',
-        top:'150px'
-      }
-    })
-  }
-
-  getAllCheckboxIds(): string[] {
-    return this.checkboxIds;
+  
+  confirmSingleDeletion(id:any){
+    this.idsToDelete = [id];
+    this.showMatDialog("", "popup-delete-confirmation");
   }
 }
