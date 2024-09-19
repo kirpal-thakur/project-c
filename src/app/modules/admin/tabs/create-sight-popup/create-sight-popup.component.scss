@@ -1,0 +1,100 @@
+
+.main-popup-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-img{
+    background-image: url(../../../../../assets/images/carbon_close-outline.png);
+    background-size: cover;
+    width: 33px;
+    height: 33px;
+    border: none;
+    padding: 0px;
+    position: absolute;
+    right: 17px;
+    top: 32px;
+    z-index: 2;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.cupen-btn{
+color: black;
+border: none;
+border: 1px solid #999999;
+border-radius: 10px;
+padding: 8px 8px;
+cursor: pointer;
+background: none;
+font-size: 13px;
+}
+
+.code-text{
+   color: #000;
+}
+
+
+.upload-img {
+    border: 2px dashed #EBEBEB;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .heading-text{
+    font-size: 18px;
+    color: #A9AAAB;
+  }
+  .main-upload-text{
+    font-size: 14px;
+    color: #A9AAAB;
+  }
+  .upload-btn{
+    background: #ffffff;
+    color: #A9AAAB;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #A9AAAB;
+    font-weight: 500;
+  }
+
+  .mr-4{
+    margin-right: 2rem;
+  }
+
+    .custom-date-input {
+    border: none;         
+    font-size: 14px;     
+    outline: none;       
+    }
+
+
+   
+    .overflow-auto {
+        overflow: auto;
+        max-height: 600px; 
+        max-width:100%; 
+      }
+      
+      .overflow-auto::-webkit-scrollbar {
+        display: none;
+      }
+     .invite-form{
+      font-size: 13px;
+      font-weight: 400;
+      padding: 8px;
+      border: 1px solid #999999;
+      border-radius: 10px;
+    }
+
+    .pop-up-button{
+      font-family: Libre Franklin, sans-serif !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      padding: 10px 5px 10px 5px !important;
+      border-radius: 10px 0px 0px 0px !important;     
+    }

@@ -69,7 +69,7 @@
                     <p > {{ 'Country' | translate}}</p>
                     <div class="d-flex align-items-center mb-2" *ngFor="let nation of userNationalities">
                         <img src="{{nation.flag_path}}" alt="">
-                        <h6> {{nation.country_name | translate }} </h6>
+                        <h6 class="mb-0"> {{nation.country_name | translate }} </h6>
                     </div>
                     <h6 *ngIf="userNationalities.length == 0">NA</h6>
                 </div>
