@@ -105,7 +105,7 @@ export class SightingTabComponent {
 
   createSightPopup(){
     const messageDialog = this.dialog.open(CreateSightPopupComponent,{
-      width: '650px',
+      width: '600px',
       position: {
         top:'150px'
       },

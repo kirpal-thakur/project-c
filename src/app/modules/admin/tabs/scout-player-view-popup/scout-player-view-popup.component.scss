@@ -85,12 +85,27 @@ hr{
     max-width:100%; 
   }
   
+  .overflow-auto::-webkit-scrollbar {
+    display: none;
+  }
  
   
   .team-details h6 {
     white-space: nowrap; 
   }
 
-  .overflow-auto::-webkit-scrollbar {
-    display: none;
-  }
+
+  .close-img{
+    background-image: url(../../../../../assets/images/carbon_close-outline.png);
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    border: none;
+    padding: 0px;
+    position: absolute;
+    right: 17px;
+    top: 15px;
+    z-index: 2;
+    opacity: 1;
+    cursor: pointer;
+}
