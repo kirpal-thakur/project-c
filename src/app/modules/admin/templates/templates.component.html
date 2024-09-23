@@ -10,7 +10,8 @@
             <div class="card-search p-1">
               <div class="input-group">
                 <span class="input-group-text"
-                  ><svg
+                  >
+                  <svg
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
@@ -36,7 +37,9 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       ></path>
-                    </g></svg></span
+                    </g>
+                  </svg>
+                </span
                 >
                 <input
                 matInput
@@ -111,14 +114,14 @@
               >
 
             </div>
-            <div class="d-flex align-items-center">
-               <mat-paginator class="paginator-components pagination-values" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
+            <div class="d-flex align-items-center ">
+               <mat-paginator class="paginator-components bg-072944 pagination-values" [length]="0" [pageSize]="10" (page)="onPageChange()"></mat-paginator>
             </div>
           </div>
         </div>
 
         <div class="table-responsive">
-          <table mat-table [dataSource]="templates" class="table table-hover table-users">
+          <table mat-table [dataSource]="templates" class="table table-hover table-striped table-users">
               
               <ng-container matColumnDef="#">
                 <th mat-header-cell *matHeaderCellDef></th>

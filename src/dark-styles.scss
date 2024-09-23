@@ -628,9 +628,6 @@ input:checked + .slider:before {
   stroke: white;
 }
 
-
-
-
 .dark-theme .card-tabs .nav-tabs .nav-link svg path {
   fill: #f0f0f0 ;
   stroke: #ffffff;
@@ -1325,6 +1322,13 @@ background-color: #072944;
   color: #ffffff !important;
 
 }
+
+.dark-theme .user-right-content .scout-team p{
+  color: #787878 !important;
+}
+.dark-theme .user-right-content .scout-team h6{
+  color: #ffffff !important;
+}
 .dark-theme .user-info{
   h6{
       color: #ffffff !important;
@@ -1642,13 +1646,17 @@ background-color: #072944;
 }
 
 .dark-theme .card-tabs .nav-tabs .nav-item .nav-link.active{
-  background-color: #072944 !important;
+  background-color: #0C3453 !important;
   color: #ffffff !important;
+}
+
+.dark-theme .card-tabs .nav-tabs .nav-item .nav-link.active svg path{
+  stroke: #ffffff !important;
 }
 
 .dark-theme .card-tabs .nav-tabs .nav-item .nav-link{
   color: #4F7A9D !important;
-  background-color: #0C3453 !important;
+  background-color: #072944 !important;
 
 }
 
@@ -1707,9 +1715,9 @@ background-color: #072944;
 .dark-theme .input-filter-text{
   color: #ffffff !important;
 }
-.dark-theme .card-tabs .nav-tabs{
- background-color: #0C3453;
-}
+// .dark-theme .card-tabs .nav-tabs{
+//  background-color: #0C3453;
+// }
 
 // .dark-theme .settings-tabs .nav-tabs{
 //   border-top-right-radius: 10px;
@@ -1921,6 +1929,136 @@ background-color: #072944;
   fill: #ffffff;
 }
 
+.dark-theme .gallery-h6{
+  color: #ffffff;
+}
 
+.dark-theme .gallery-p{
+  color: #ffffff;
+  
+}
+
+.dark-theme .upload-box svg path{
+  stroke: #ffffff;
+}
+.dark-theme .gallery-upload-button{    
+  color: #2C2C2C;
+}
+
+.dark-theme .upload-btn{    
+  color: #2C2C2C;
+}
+.dark-theme .upload-img svg path{
+  stroke: #ffffff;
+}
+
+.dark-theme hr{    
+  color: #fff;
+}
+
+
+.dark-theme  .gallery-photo{
+  color: #ffffff;
+}
+
+ 
+.dark-theme .gallery-h5{
+  color: #ffffff;
+}
+
+.dark-theme .wc_menuItem{
+  color: #111418;
+}
+
+.dark-theme .social-svg-x {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .meta-date .mat-mdc-form-field-flex{
+  background-color: #0C3453; 
+  color: #ffffff;
+}
+
+.dark-theme .meta-date .mat-mdc-floating-label.mdc-floating-label {
+  color: #ffffff;
+}
+
+.dark-theme .meta-date .mat-mdc-icon-button svg {
+  fill: #ffffff;
+}
+
+.dark-theme .custom-button{
+  background: #0C3453 !important;
+}
+
+.dark-theme .cupen-btn{
+  background: #0C3453 !important;
+}
+
+.dark-theme .cupen-btn-1{
+  background: #0C3453 !important;
+}
+
+.dark-theme .main-upload-text{
+  color: #ffffff !important;
+}
+
+.dark-theme .heading-text{
+  color: #ffffff !important;
+}
+
+.dark-theme .NgxEditor__Wrapper .NgxEditor__MenuBar{
+  background-color: #072944 !important;
+}
+
+.dark-theme .scout-edit {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .scout-delete {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .scout-up-down {
+  fill: #ffffff !important ;
+}
+.dark-theme .table-scout-profile{
+  border-radius:10px ;
+  border: 1px solid #1F4360 !important;
+}
+
+.dark-theme .tbody-scout-profile  tr:first-child {
+  border-top: 2px solid #1F4360 !important; 
+}
+
+.dark-theme .tbody-scout-profile {
+  border-top: 2px solid #1F4360 !important; 
+}
+
+.dark-theme .historyTextarea {
+  background-color: #0C3453 !important; 
+  border: 1px solid #072944 !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .scout-player-name{
+ color: #ffffff;
+}
+
+.dark-theme .scout-player-detail{
+  color:#d9d9d9a3 ;
+}
+
+.dark-theme .team-up-down {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .club-edit {
+  fill: #ffffff !important ;
+}
+
+.dark-theme .custom-date-input{
+  background: #0c3453;
+}
 
 // new changes css Start

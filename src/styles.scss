@@ -202,7 +202,7 @@ button.btn.btn-secondary.dropdown-toggle {
 
 
 .table th{
-color: #000 ;
+color: #111418 ;
 font-size: 14px;
 font-weight: 700;
 }
@@ -214,8 +214,8 @@ font-weight: 400;
 }
 
 .web-create-bg{
-  background-color: #6FB95D;
-  border: 1px solid #6FB95D;
+  background-color: #6FB95D !important;
+  border: 1px solid #6FB95D !important;
 }
 
 .bg_success {
@@ -825,6 +825,11 @@ left: unset;
     }
   }
 }
+
+.card-tabs .nav-tabs .nav-item .nav-link.active svg path{
+  stroke: #111418 !important;
+}
+
 .light-theme .mesaage-content h6 {
   color: #4d4d4d;
   font-size: 14px;
@@ -1428,6 +1433,22 @@ margin: auto;
   background-color: #fff;
 }
 
+.meta-date .mat-mdc-form-field-flex{
+  background-color: #ffffff; /* Replace with your desired color */
+}
+
+.marketing-calender-field .mat-mdc-form-field-subscript-wrapper{
+  display: none !important;
+}
+
+
+.main-popup-div .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper{
+  background: #ffffff;
+}
+
+.mat-select-div .mat-mdc-select-arrow-wrapper svg{
+  display: none !important;
+}
 
 .password_box input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset !important; /* Change 'white' to your background color */

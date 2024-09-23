@@ -105,8 +105,8 @@ export class TemplatesComponent {
   }
   addTemplate(){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '550px',
-      width: '550px',
+      height: '568px',
+      width: '600px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result && result?.action !='remove'){
@@ -142,8 +142,8 @@ export class TemplatesComponent {
   }
   editTemplate(tempalateData: any){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '550px',
-      width: '550px',
+      height: '600px',
+      width: '600px',
       data: tempalateData
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -174,8 +174,8 @@ export class TemplatesComponent {
   }
   editfilter(){
     this.dialog.open(FilterPopupComponrnt,{
-      height: '450px',
-      width: '300px',
+      height: '600px',
+      width: '600px',
       position: {
         right: '30px',
         top:'150px'

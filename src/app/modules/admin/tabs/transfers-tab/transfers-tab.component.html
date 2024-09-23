@@ -50,7 +50,7 @@
         <td>
           <span *ngIf="editableId != transfer.id">{{ transfer.date_of_transfer | date:'MM.dd.yyyy' }}</span>
           <mat-form-field  *ngIf="editableId == transfer.id" class="custom-size-calendar h-auto " appearance="fill">
-            <input matInput [matDatepicker]="picker" placeholder="21/5/2023" (click)="picker.open()" (dateChange)="onDateChange($event)"
+            <input matInput [matDatepicker]="picker" placeholder="" (click)="picker.open()" (dateChange)="onDateChange($event)"
                    style="background-color: transparent !important; border: none;"  [value]="defaultDate">
             <mat-datepicker #picker [startAt]="defaultDate"></mat-datepicker>
           </mat-form-field>

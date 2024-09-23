@@ -57,6 +57,12 @@ import { UploadPopupComponent } from './upload-popup/upload-popup.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
 import { ScoutProfileTabComponent } from './tabs/scout-profile-tab/scout-profile-tab.component';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
+import { ScoutPlayerViewPopupComponent } from './tabs/scout-player-view-popup/scout-player-view-popup.component';
+import { ClubProfileTabComponent } from './tabs/club-profile-tab/club-profile-tab.component';
+import { TeamsTabComponent } from './tabs/teams-tab/teams-tab.component';
+import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component';
+import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sight-popup.component';
+import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-talent-popup.component';
 
   
 @NgModule({
@@ -96,7 +102,13 @@ import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
     UploadPopupComponent,
     PortfolioTabComponent,
     ScoutProfileTabComponent,
-    HistoryTabComponent
+    HistoryTabComponent,
+    ScoutPlayerViewPopupComponent,
+    ClubProfileTabComponent,
+    TeamsTabComponent,
+    SightingTabComponent,
+    CreateSightPopupComponent,
+    InviteTalentPopupComponent
   ],
   imports: [
     CommonModule,

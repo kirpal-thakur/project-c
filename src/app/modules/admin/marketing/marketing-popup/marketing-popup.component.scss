@@ -62,8 +62,9 @@ font-size: 13px;
     font-weight: 400;
 }
 ngx-editor {
-    height: 25vh; /* Set the height you want */
-    display: block; /* Ensure it behaves like a block element */
+    height: 25vh; 
+    display: block; 
+    
 }
 
 ::ng-deep .mat-mdc-select-panel{
@@ -75,4 +76,20 @@ ngx-editor {
     padding: 0.5rem 3rem;
 }
 
+.NgxEditor__Wrapper{
+    border: 0 !important;
+}
+ 
+.mat-mdc-select-arrow-wrapper{
+    display: none !important;
+  }
+
+  .dropdown-icon {
+    position: absolute;
+    right: 5px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
 
