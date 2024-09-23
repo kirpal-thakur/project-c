@@ -88,3 +88,49 @@ text-align: left;
 .del-icon-margin{
   margin: 0 5px 0 2px;
 }
+button.add_potos-btn {
+  border: none;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.gallery-new_image img {
+  width: 100%;
+}
+.gallery-all_images{
+  gap: 10px;
+}
+
+.gallery-new_image svg{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  padding: 6px;
+  background: #0000009c;
+}
+.gallery-new_image svg path{
+  fill: #fff ;
+}
+.ten-columns > .col-lg-2 {
+  width: 20%;
+}
+.gallery-all_images .ten-columns .col-lg-2 {
+  padding: 5px !important;
+  position: relative;
+}
+@media (max-width:768px) {
+  .ten-columns > .col-lg-2{
+    width: 100%;
+  }
+  .gallery-all_images  .ten-columns{
+    flex-direction: column;
+    row-gap: 10px;
+    margin: auto;
+  }
+  .gallery-all_images .ten-columns .col-lg-2 {
+    padding: 0px !important;
+  }
+}

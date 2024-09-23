@@ -1,252 +1,128 @@
-<form id="userForm" #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
-  <div class="row">
-    <!-- First Name -->
-    <div class="form-group col-lg-6">
-      <label for="firstName">First Name:</label>
-      <input
-        type="text"
-        id="firstName"
-        name="firstName"
-        required
-        [(ngModel)]="user.first_name"
-        #firstName="ngModel"
-      />
-      <div *ngIf="userForm.submitted && firstName.invalid" class="error">
-        <small *ngIf="firstName.errors?.['required']">First Name is required.</small>
-      </div>
+<div class="dialog-container">
+  <div class="personal_edit">
+    <div class="dialog-header m-auto">
+      <h2>Edit User Personal Details</h2>
     </div>
-
-    <!-- Last Name -->
-    <div class="form-group col-lg-6">
-      <label for="lastName">Last Name:</label>
-      <input
-        type="text"
-        id="lastName"
-        name="lastName"
-        required
-        [(ngModel)]="user.last_name"
-        #lastName="ngModel"
-      />
-      <div *ngIf="userForm.submitted && lastName.invalid" class="error">
-        <small *ngIf="lastName.errors?.['required']">Last Name is required.</small>
-      </div>
+    <div class="close_buttons">
+      <button class="close-btn" (click)="onCancel()">X</button>
     </div>
   </div>
+  <hr>
+  <div class="dialog-content">
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+      <div class="row">
+        <!-- First Name -->
+        <div class="form-group col-lg-6">
+          <label for="first_name">First Name:</label>
+          <input type="text" id="first_name" name="first_name" [(ngModel)]="firstName" required>
+        </div>
 
-  <div class="row">
-    <!-- Current Club -->
-    <div class="form-group col-lg-6">
-      <label for="currentClub">Current Club:</label>
-      <select
-        id="currentClub"
-        [(ngModel)]="selectedClub"
-        name="currentClub"
-        required
-        #currentClub="ngModel"
-      >
-        <option *ngFor="let team of teams" [value]="team.id">
-          {{ team.club_name }}
-        </option>
-      </select>
-      <div *ngIf="userForm.submitted && currentClub.invalid" class="error">
-        <small *ngIf="currentClub.errors?.['required']">Current Club is required.</small>
-      </div>
-    </div>
-
-    <!-- Nationality -->
-    <div class="form-group col-lg-6">
-      <label for="nationality">Nationality:</label>
-      <select
-        id="nationality"
-        [(ngModel)]="user.nationality"
-        name="nationality"
-        required
-        #nationality="ngModel"
-      >
-        <option *ngFor="let country of countries" [value]="country">
-          {{ country }}
-        </option>
-      </select>
-      <div *ngIf="userForm.submitted && nationality.invalid" class="error">
-        <small *ngIf="nationality.errors?.['required']">Nationality is required.</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- Date of Birth -->
-    <div class="form-group col-lg-6">
-      <label for="dateOfBirth">Date of Birth:</label>
-      <input
-        type="date"
-        id="dateOfBirth"
-        name="dateOfBirth"
-        required
-        [(ngModel)]="user.meta.date_of_birth"
-        #dateOfBirth="ngModel"
-      />
-      <div *ngIf="userForm.submitted && dateOfBirth.invalid" class="error">
-        <small *ngIf="dateOfBirth.errors?.['required']">Date of Birth is required.</small>
-      </div>
-    </div>
-
-    <!-- Place of Birth -->
-    <div class="form-group col-lg-6">
-      <label for="placeOfBirth">Place of Birth:</label>
-      <input
-        type="text"
-        id="placeOfBirth"
-        name="placeOfBirth"
-        required
-        [(ngModel)]="user.meta.place_of_birth"
-        #placeOfBirth="ngModel"
-      />
-      <div *ngIf="userForm.submitted && placeOfBirth.invalid" class="error">
-        <small *ngIf="placeOfBirth.errors?.['required']">Place of Birth is required.</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <!-- Height -->
-    <div class="form-group col-lg-6 d-flex align-items-center">
-      <div class="col-lg-7 gap_inputs">
-        <label for="height">Height:</label>
-        <input
-          type="number"
-          id="height"
-          name="height"
-          required
-          [(ngModel)]="user.meta.height"
-          #height="ngModel"
-        />
-        <div *ngIf="userForm.submitted && height.invalid" class="error">
-          <small *ngIf="height.errors?.['required']">Height is required.</small>
+        <!-- Last Name -->
+        <div class="form-group col-lg-6">
+          <label for="last_name">Last Name:</label>
+          <input type="text" id="last_name" name="last_name" [(ngModel)]="lastName" required>
         </div>
       </div>
-      <div class="col-lg-5">
-        <label for="heightUnit">Select Unit</label>
-        <select
-          name="heightUnit"
-          id="heightUnit"
-          required
-          [(ngModel)]="user.meta.height_unit"
-          #heightUnit="ngModel"
-        >
-          <option value="cm">Centimeters</option>
-          <option value="in">Inches</option>
-        </select>
-        <div *ngIf="userForm.submitted && heightUnit.invalid" class="error">
-          <small *ngIf="heightUnit.errors?.['required']">Height unit is required.</small>
+
+      <div class="row">
+        <!-- Current Club -->
+        <div class="form-group col-lg-6">
+          <label for="currentClub">Current Club:</label>
+          <select id="currentClub" name="currentClub" [(ngModel)]="currentClub" required>
+            <option *ngFor="let team of teams; let last = last" 
+                    [value]="team.id" 
+                    [selected]="team.id === currentClub || last && !currentClub">
+              {{ team.club_name ?? team.last_name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Nationality -->
+        <div class="form-group col-lg-6">
+          <label for="nationality">Nationality:</label>
+          <select id="nationality" name="nationality" [(ngModel)]="user.nationality" required>
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+          </select>
         </div>
       </div>
-    </div>
 
-    <!-- Weight -->
-    <div class="form-group col-lg-6 d-flex align-items-center">
-      <div class="col-lg-7 gap_inputs">
-        <label for="weight">Weight:</label>
-        <input
-          type="number"
-          id="weight"
-          name="weight"
-          required
-          [(ngModel)]="user.meta.weight"
-          #weight="ngModel"
-        />
-        <div *ngIf="userForm.submitted && weight.invalid" class="error">
-          <small *ngIf="weight.errors?.['required']">Weight is required.</small>
+      <div class="row">
+        <!-- Date of Birth -->
+        <div class="form-group col-lg-6">
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="dateOfBirth" required>
+        </div>
+
+        <!-- Place of Birth -->
+        <div class="form-group col-lg-6">
+          <label for="placeOfBirth">Place of Birth:</label>
+          <input type="text" id="placeOfBirth" name="placeOfBirth" [(ngModel)]="placeOfBirth" required>
         </div>
       </div>
-      <div class="col-lg-5">
-        <label for="weightUnit">Select Unit</label>
-        <select
-          name="weightUnit"
-          id="weightUnit"
-          required
-          [(ngModel)]="user.meta.weight_unit"
-          #weightUnit="ngModel"
-        >
-          <option value="kg">Kilograms</option>
-          <option value="lb">Pounds</option>
-        </select>
-        <div *ngIf="userForm.submitted && weightUnit.invalid" class="error">
-          <small *ngIf="weightUnit.errors?.['required']">Weight unit is required.</small>
+
+      <div class="row">
+        <!-- Height -->
+        <div class="form-group col-lg-6 d-flex align-items-center">
+          <div class="col-lg-7 gap_inputs">
+            <label for="height">Height:</label>
+            <input type="number" id="height" name="height" [(ngModel)]="height" placeholder="Enter value" required>
+          </div>
+          <div class="col-lg-5 ">
+            <label for="heightUnit">Select Unit</label>
+            <select name="heightUnit" id="heightUnit" [(ngModel)]="heightUnit" required>
+              <option value="cm">Centimeters</option>
+              <option value="in">Inches</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Weight -->
+        <div class="form-group col-lg-6 d-flex align-items-center">
+          <div class="col-lg-7 gap_inputs">
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" [(ngModel)]="weight" placeholder="Enter value" required>
+          </div>
+          <div class="col-lg-5">
+            <label for="weightUnit">Select Unit</label>
+            <select name="weightUnit" id="weightUnit" [(ngModel)]="weightUnit" required>
+              <option value="kg">Kilograms</option>
+              <option value="lb">Pounds</option>
+            </select>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <!-- Contract Dates -->
-    <div class="form-group col-lg-9">
-      <label for="contractStart">Contract Start:</label>
-      <input
-        type="number"
-        class="mb-3"
-        id="contractStart"
-        name="contractStart"
-        required
-        [(ngModel)]="user.meta.contract_start"
-        #contractStart="ngModel"
-      />
-      <div *ngIf="userForm.submitted && contractStart.invalid" class="error">
-        <small *ngIf="contractStart.errors?.['required']">Contract start date is required.</small>
+      <div class="row">
+        <!-- Contract Dates -->
+        <div class="form-group col-lg-9">
+          <label for="contractStart">Contract Start</label>
+          <input type="number" id="contractStart" name="contractStart" [(ngModel)]="contractStart" required>
+          <label for="contractEnd">Contract End</label>
+          <input type="number" id="contractEnd" name="contractEnd" [(ngModel)]="contractEnd" required>
+        </div>
       </div>
 
-      <label for="contractEnd">Contract End:</label>
-      <input
-        type="number"
-        id="contractEnd"
-        name="contractEnd"
-        required
-        [(ngModel)]="user.meta.contract_end"
-        #contractEnd="ngModel"
-      />
-      <div *ngIf="userForm.submitted && contractEnd.invalid" class="error">
-        <small *ngIf="contractEnd.errors?.['required']">Contract end date is required.</small>
-      </div>
-    </div>
-  </div>
+      <div class="row">
+        <!-- League Level -->
+        <div class="form-group col-lg-6">
+          <label for="leagueLevel">League Level:</label>
+          <input type="text" id="leagueLevel" name="leagueLevel" [(ngModel)]="leagueLevel" required>
+        </div>
 
-  <div class="row">
-    <!-- League Level -->
-    <div class="form-group col-lg-6">
-      <label for="leagueLevel">League Level:</label>
-      <input
-        type="text"
-        id="league_level"
-        name="league_level"
-        required
-        [(ngModel)]="user.meta.league_level"
-        #leagueLevel="ngModel"
-      />
-      <div *ngIf="userForm.submitted && leagueLevel.invalid" class="error">
-        <small *ngIf="leagueLevel.errors?.['required']">League level is required.</small>
+        <!-- Dominant Foot -->
+        <div class="form-group col-lg-6">
+          <label for="dominantFoot">Dominant Foot:</label>
+          <select id="dominantFoot" name="dominantFoot" [(ngModel)]="dominantFoot" required>
+            <option value="Right">Right</option>
+            <option value="Left">Left</option>
+          </select>
+        </div>
       </div>
-    </div>
 
-    <!-- Dominant Foot -->
-    <div class="form-group col-lg-6">
-      <label for="dominantFoot">Dominant Foot:</label>
-      <select
-        id="dominantFoot"
-        [(ngModel)]="user.foot"
-        name="foot"
-        required
-        #dominantFoot="ngModel"
-      >
-        <option value="Right">Right</option>
-        <option value="Left">Left</option>
-      </select>
-      <div *ngIf="userForm.submitted && dominantFoot.invalid" class="error">
-        <small *ngIf="dominantFoot.errors?.['required']">Dominant foot is required.</small>
+      <div class="dialog-actions align-items-center d-flex justify-content-between">
+        <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
+        <button class="save-btn" type="submit">Save</button>
       </div>
-    </div>
+    </form>
   </div>
-
-  <div class="dialog-actions align-items-center d-flex justify-content-between">
-    <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
-    <button type="submit" class="save-btn">Save</button>
-  </div>
-</form>
+</div>

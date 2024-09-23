@@ -32,6 +32,38 @@ export class DashboardComponent implements OnInit {
     
   }
 
+  
+  openEditDialog() {
+    console.log('User saved');
+
+    const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
+      width: '800px',
+      data: {
+        first_name: 'John',
+        last_name: 'Doe',
+        current_club: 'FC Thun U21',
+        nationality: 'Swiss',
+        date_of_birth: '2004-04-21',
+        place_of_birth: 'Zurich',
+        height: 180,
+        weight: 75,
+        contract_start: '2017-05-08',
+        contract_end: '2025-05-08',
+        league_level: 'Professional',
+        foot: 'Right'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User saved:', result);
+        // Handle the save result (e.g., update the user details)
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+  
   getUserProfile(userId:any){
     try {
       this.talentService.getProfileData(userId).subscribe((response)=>{
@@ -98,38 +130,7 @@ export class DashboardComponent implements OnInit {
     return age;
   }
 
-  openEditDialog() {
-    console.log('User saved');
 
-    const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
-      width: '800px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-      } else {
-        console.log('User canceled the edit');
-      }
-    });
-  }
-
-  
   switchTab(tab: string){
     this.activeTab = tab;
   }

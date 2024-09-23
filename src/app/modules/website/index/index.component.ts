@@ -177,8 +177,7 @@ export class IndexComponent implements OnInit{
           const token = response.data.token;
           const userData = response.data.user_data;
         
-          console.log(userData,"check user data index ")
-
+          console.log("check user data index ",userData)
 
           localStorage.setItem('authToken', token);
         
@@ -208,7 +207,12 @@ export class IndexComponent implements OnInit{
             if (modal) {
               modal.hide();
             }
-            this.router.navigate(['/admin/dashboard']);
+            
+            if(userData.role==4){
+              this.router.navigate(['/talent/dashboard']);
+            }else{
+              this.router.navigate(['/admin/dashboard']);
+            }
             // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
             console.error('Failed to save token to local storage.');
