@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { TalentService } from '../../../../services/talent.service';
+import { EditPerformanceDetailsComponent } from '../../edit-performance-details/edit-performance-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'talent-performance-tab',
@@ -26,7 +28,7 @@ export class PerformanceTabComponent {
 
   // from_date:2021-01-01
   //   to_date:2022-01-01
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService,  private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {      
@@ -36,6 +38,39 @@ export class PerformanceTabComponent {
     });
     this.getAllTeams();
   }
+
+  
+  openEditDialog() {
+    console.log('User saved');
+
+    const dialogRef = this.dialog.open(EditPerformanceDetailsComponent, {
+      width: '800px',
+      data: {
+        first_name: 'John',
+        last_name: 'Doe',
+        current_club: 'FC Thun U21',
+        nationality: 'Swiss',
+        date_of_birth: '2004-04-21',
+        place_of_birth: 'Zurich',
+        height: 180,
+        weight: 75,
+        contract_start: '2017-05-08',
+        contract_end: '2025-05-08',
+        league_level: 'Professional',
+        foot: 'Right'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User saved:', result);
+        // Handle the save result (e.g., update the user details)
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+
 
   getUserPerformance(userId:any){
     try {

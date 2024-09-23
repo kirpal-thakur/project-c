@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { UserService } from '../../../services/user.service';
-import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { TalentService } from '../../../services/talent.service';
+
 
 @Component({
   selector: 'talent-favorites',
@@ -22,12 +23,13 @@ export class FavoritesComponent {
   selectedIds: number[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   keyword:any = "";
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router, public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       console.log(params.id)
-      this.userId = params.id;
+      // this.userId = params.id;
+      this.userId = 59;
       this.getUserFavorites();
     });
   }
@@ -84,7 +86,7 @@ export class FavoritesComponent {
   }
 
   navigate(slug:string, id:Number): void {
-    let pageRoute = 'admin/'+slug.toLowerCase();
+    let pageRoute = '/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
 

@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <!-- Right column: Form for editing player details -->
+    <div class="col-md-12 p-0">
+      <div  class="personal_edit">
+        <div  class="dialog-header m-auto">
+          <h2 >Edit Performace Details</h2>
+        </div>
+        
+        <div class="close_buttons">
+          <button class="close-btn"  (click)="onCancel()">X</button>
+          </div>
+      </div>
+      <hr>
+      <form class="general_form">
+        <div class="row">
+          <div class="form-group col-lg-6">
+            <label for="team" class="form-label">Team</label>
+              <select class="form-select" id="team">
+                <option selected>FC Thun</option>
+                <option value="yes">FC Thun</option>
+                <option value="no">FC Thun</option>
+              </select>
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="matches" class="form-label">Matches</label>
+              <input type="text" id="matches">
+          </div>        
+        </div>
+        
+        <div class="row">
+          <div class="form-group col-lg-6">
+            <label for="goals" class="form-label">Goals</label>
+              <input type="text" id="goals">
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="Coach" class="form-label">Coach during debut</label>
+              <input type="text" id="Coach">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-lg-6">
+            <label for="saison" class="form-label">Saison</label>
+              <select class="form-select" id="saison">
+                <option selected>23/24</option>
+                <option value="yes">24/25</option>
+                <option value="no">25/26</option>
+              </select>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="form-group col-lg-10 ">
+            <div class="col-lg-4 p-0 ">
+              <label for="form-date" class="form-label">Form-Upto</label>
+              <div class="date-imputs d-flex align-items-center">
+                <input type="date" name="form-date" class="form-upto_date ">
+              <input type="date" name="form-date" class="form-upto_date-2">
+              </div>
+            </div>
+            <!-- <div class="col-lg-4 p-0">
+              <input type="date" name="form-date" id="form-date">
+            </div> -->
+          </div>
+        </div>
+        <div class="dialog-actions align-items-center d-flex justify-content-between">
+          <button class="cancel-btn" (click)="onCancel()">Cancel</button>
+          <button class="save-btn" (click)="onSave()">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

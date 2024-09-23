@@ -28,8 +28,10 @@ import { PerformanceTabComponent } from './tabs/performance-tab/performance-tab.
 import { TransfersTabComponent } from './tabs/transfers-tab/transfers-tab.component';
 import { GalleryTabComponent } from './tabs/gallery-tab/gallery-tab.component';
 import { UploadPopupComponent } from './upload-popup/upload-popup.component';
-import { ChatTabComponent } from './tabs/chat-tab/chat-tab.component';
 import { EditPersonalDetailsComponent } from './edit-personal-details/edit-personal-details.component';
+import { MessagePopupComponent } from './message-popup/message-popup.component';
+import { MembershipComponent } from './membership/membership.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -44,8 +46,9 @@ import { EditPersonalDetailsComponent } from './edit-personal-details/edit-perso
     TransfersTabComponent,
     GalleryTabComponent,
     UploadPopupComponent,
-    ChatTabComponent,
-    EditPersonalDetailsComponent
+    EditPersonalDetailsComponent,
+    MessagePopupComponent,
+    MembershipComponent
   ],
   imports: [
     CommonModule,
@@ -66,6 +69,8 @@ import { EditPersonalDetailsComponent } from './edit-personal-details/edit-perso
     MatInputModule,
     ReactiveFormsModule,
     MatTabsModule,
+    MatTableModule,
+    MatToolbarModule,
     MatTableModule,
     MatPaginator,
     NgxEditorModule
