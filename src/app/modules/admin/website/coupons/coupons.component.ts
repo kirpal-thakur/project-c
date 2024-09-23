@@ -1,0 +1,235 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {MatTableModule,MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { CouponService } from '../../../../services/coupon.service';
+@Component({
+  selector: 'app-coupons',
+  templateUrl: './coupons.component.html',
+  styleUrl: './coupons.component.scss'
+})
+export class CouponsComponent {
+
+  coupons:any = [];
+  displayedColumns: string[] = ['#','Name', 'Discount', 'Type', 'Code','Uses','Status','Deactivate', 'Edit','Remove'];
+  
+  checkboxIds: string[] = [];
+  allSelected: boolean = false;
+  userId: any; 
+  newStatus: any;
+  isLoading = false;
+  filterValue: string = '';
+  filterDialogRef:any = ""
+  idsToProceed: any = [];
+  selectedIds:any = [];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private couponService: CouponService, public dialog: MatDialog) {}
+
+  ngOnInit(): void {
+    this.isLoading = true;
+     this.getCoupons();
+  }
+
+  getCoupons() {
+    let params:any = {};
+    // params.offset = page;
+    params.search = this.filterValue;
+    // params.limit  = pageSize;  
+    
+    try {
+     this.couponService.getCoupons(params).subscribe((response)=>{
+      if (response && response.status && response.data && response.data.coupons) {
+        this.coupons = response.data.coupons; 
+        // this.paginator.length = response.data.totalCount;
+        this.isLoading = false;
+      } else {
+        this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+      });     
+    } catch (error) {
+      this.isLoading = false;
+      console.error('Error fetching coupons:', error);
+    }
+  }
+
+
+  applyFilter(filterValue:any) {
+    this.filterValue = filterValue.target?.value.trim().toLowerCase();
+    if(this.filterValue.length >= 3){
+      this.getCoupons();
+     } else if(this.filterValue.length == 0){
+      this.getCoupons();
+     }
+  }
+
+  onCheckboxChange(item: any) {
+    const index = this.selectedIds.indexOf(item.id);
+    if (index === -1) {
+      this.selectedIds.push(item.id);
+    } else {
+      this.selectedIds.splice(index, 1);
+    }
+  }
+
+  selectAllCoupons() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedIds = this.coupons.map((coupon:any) => coupon.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedIds);
+  }
+
+  deactivateCoupon(couponId:any){
+    let params = {id:[couponId]};
+    
+    this.showMatDialog('Coupon deactivated successfully.', 'display');
+    let index = this.coupons.findIndex((x:any) => x.id == couponId);
+    // console.log(index);
+    this.coupons[index].status = 'expired';
+    this.couponService.expireCoupons(params).subscribe(
+      response => {
+        if(response.status){
+        
+        }else{
+         
+        }
+      },
+      error => {
+        console.error('Error deactivating coupon:', error);
+      }
+    );
+  }
+  editCoupon(element:any){
+    // const dialogRef = this.dialog.open(CoupenCodePopupComponent,{
+    //   height: '598px',
+    //   width: '600px',
+    //   panelClass: 'cutam-cupen'
+   
+    
+    // });
+  }
+
+
+  createCoupon(){
+
+  }
+
+  bulkPublish(): any{
+    if(this.selectedIds.length == 0){
+      this.showMatDialog('Select coupon(s) first.', 'display');
+      return false;
+    }
+
+    let params = {id:this.selectedIds};
+    this.couponService.publishCoupons(params).subscribe(
+      response => {
+        if(response.status){
+          this.getCoupons();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Coupon(s) published successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in publishing coupons. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error publishing coupon:', error);
+      }
+    );
+
+  }
+
+  bulkDraft(): any {
+    if(this.selectedIds.length == 0){
+      this.showMatDialog('Select coupon(s) first.', 'display');
+      return false;
+    }
+
+    let params = {id:this.selectedIds};
+    this.couponService.draftCoupons(params).subscribe(
+      response => {
+        if(response.status){
+          this.getCoupons();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Coupon(s) drafted successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in drafting coupons. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error drafted coupon:', error);
+      }
+    );
+  }
+
+  confirmDeletion():any {
+    if(this.selectedIds.length == 0){
+      this.showMatDialog('Select coupon(s) first.', 'display');
+      return false;
+    }
+    this.idsToProceed = this.selectedIds;
+    this.showDeleteConfirmationPopup();
+  }
+
+  showDeleteConfirmationPopup(){
+    this.showMatDialog("", "delete-coupon-confirmation");
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteCoupons();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  deleteCoupons():any {
+
+    let params = {id:this.idsToProceed};
+    this.couponService.deleteCoupons(params).subscribe(
+      response => {
+        if(response.status){
+          this.getCoupons();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Coupon(s) deleted successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in removing coupons. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error deleting coupon:', error); 
+      }
+    );
+  }
+
+  confirmSingleDeletion(couponId:any){
+    this.idsToProceed = [couponId];
+    this.showMatDialog("", "delete-coupon-confirmation");
+  }
+}

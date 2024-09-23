@@ -37,7 +37,7 @@ import { FavoritesTabComponent } from './tabs/favorites-tab/favorites-tab.compon
 import { PurchaseTabComponent } from './tabs/purchase-tab/purchase-tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CoupenCodePopupComponent } from './website/coupen/coupenCode-popup.component';
-import { AdvertisingPopupComponent } from './website/advertising/advertising-popup.component';
+import { AdvertisingPopupComponent } from './website/advertising1/advertising-popup.component';
 import { NgxEditorModule  } from 'ngx-editor';
 import { ChatTabComponent } from './tabs/chat-tab/chat-tab.component';
 import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detail.component';
@@ -63,6 +63,10 @@ import { TeamsTabComponent } from './tabs/teams-tab/teams-tab.component';
 import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component';
 import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sight-popup.component';
 import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-talent-popup.component';
+import { WebPagesComponent } from './website/web-pages/web-pages.component';
+import { BlogComponent } from './website/blog/blog.component';
+import { CouponsComponent } from './website/coupons/coupons.component';
+import { AdvertisingComponent } from './website/advertising/advertising.component';
 
   
 @NgModule({
@@ -108,7 +112,11 @@ import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-ta
     TeamsTabComponent,
     SightingTabComponent,
     CreateSightPopupComponent,
-    InviteTalentPopupComponent
+    InviteTalentPopupComponent,
+    WebPagesComponent,
+    BlogComponent,
+    CouponsComponent,
+    AdvertisingComponent
   ],
   imports: [
     CommonModule,
