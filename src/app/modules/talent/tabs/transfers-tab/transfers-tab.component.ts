@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { TalentService } from '../../../../services/talent.service';
 
 @Component({
   selector: 'talent-transfers-tab',
@@ -22,13 +23,13 @@ export class TransfersTabComponent {
     date_of_transfer: ""
   }
   seasons:any = [];
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       console.log(params.id)
       this.userId = params.id;
-      this.getUserTransfers(this.userId);
+      this.getUserTransfers();
     });
     this.getSeasonsOptions();
     this.getAllTeams();
@@ -43,9 +44,10 @@ export class TransfersTabComponent {
       this.seasons.push(year);
     }
   }
-  getUserTransfers(userId:any){
+
+  getUserTransfers(){
     try {
-      this.userService.getTransferData(userId).subscribe((response)=>{
+      this.userService.getTransferData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userTransfers = response.data.transferDetail;
           // this.isLoading = false;
@@ -61,7 +63,7 @@ export class TransfersTabComponent {
   }
 
   getAllTeams(){
-    this.userService.getAllTeams().subscribe((response)=>{
+    this.userService.getTeams().subscribe((response)=>{
       if (response && response.status && response.data && response.data.teams) {
         this.teams = response.data.teams;
         console.log(this.teams)
@@ -84,15 +86,15 @@ export class TransfersTabComponent {
     console.log(this.dataTOBeUpdated);
   }
 
-  updateTransfer(transferId:any){
-    this.userService.updateTransfer(transferId, this.dataTOBeUpdated).subscribe((response)=>{
-      // console.log(response)
-      this.editableId = "";
-      if(response.status){
-        this.getUserTransfers(this.userId);
-      }
-    }); 
-  }
+  // updateTransfer(transferId:any){
+  //   this.userService.updateTransfer(transferId, this.dataTOBeUpdated).subscribe((response)=>{
+  //     // console.log(response)
+  //     this.editableId = "";
+  //     if(response.status){
+  //       this.getUserTransfers(this.userId);
+  //     }
+  //   }); 
+  // }
 
   onSelectChange(event: Event, key:string): void {
     const selectElement = event.target as HTMLSelectElement;

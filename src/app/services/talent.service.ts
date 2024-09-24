@@ -33,6 +33,16 @@ export class TalentService {
   getTeams(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
   }
+  
+  getCoverImg(): Observable<any> {    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}` // Include authorization token
+  });
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
+      `${this.apiUrl}user/get-cover-image`
+    );
+  }
 
   // Method to update user profile  
   updateUserProfile(formData: FormData): Observable<any> {
@@ -49,6 +59,11 @@ export class TalentService {
     );
   }
 
+  getTransferData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}player/get-transfer-detail`
+    );
+  }
   
   getCountries(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
@@ -56,11 +71,22 @@ export class TalentService {
     );
   }
   
-  getFavoritesData(userId:any, params:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-favorites`    );
-  }
+  // getFavoritesData(userId:any, params:any): Observable<any> {
+  //   return this.http.get<{ status: boolean, message: string, data: { } }>(
+  //     `${this.apiUrl}get-favorites`    );
+  // }
 
+  getFavoritesData(params: any): Observable<any> {
+    // Construct HttpParams object
+    let queryParams = new HttpParams()
+      .set('offset', params.offset || 0)
+      .set('limit', params.limit || 10)
+      .set('search', params.search || '');
+
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}get-favorites`, { params: queryParams }
+    );
+  }
   
   removeFavorites(params: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -69,6 +95,50 @@ export class TalentService {
     });
 
     return this.http.post<any>(`${this.apiUrl2}delete-favorites`, params, { headers });
+  }
+
+  getPurchaseData(pageNumber: number, pageSize: number): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/get-purchase-history`, {
+        params: {
+          page: pageNumber.toString(),
+          limit: pageSize.toString()
+        }
+      }
+    );
+  }
+    
+  uploadCoverImage(userId:any, formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/upload-cover-image/${userId}`, formdata, { headers });
+  }
+
+  deleteCoverImage(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/delete-cover-image/${userId}`, {headers}
+    );
+  }
+
+  uploadGalleryImages(userId:any, formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/upload-gallery-image/${userId}`, formdata, { headers });
+  }
+
+  deleteGalleryImage(params:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}user/delete-gallery-file`, params, { headers });
   }
 
 }

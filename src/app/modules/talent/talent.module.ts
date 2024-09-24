@@ -32,6 +32,8 @@ import { EditPersonalDetailsComponent } from './edit-personal-details/edit-perso
 import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
+import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     UploadPopupComponent,
     EditPersonalDetailsComponent,
     MessagePopupComponent,
-    MembershipComponent
+    MembershipComponent,
+    PlayerProfileComponent,
+    PerformanceAnalysisTabComponent
   ],
   imports: [
     CommonModule,

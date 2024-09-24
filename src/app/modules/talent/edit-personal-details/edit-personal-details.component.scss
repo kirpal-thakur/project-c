@@ -38,7 +38,15 @@
     margin-bottom: 5px;
     font-weight: 500;
   }
-  
+  .start_bate{
+    border-radius: 10px 0px 0px 10px !important;
+    border: 1px solid #bbb7b7;
+  }
+  .end_bate{
+    border-radius: 0px 10px 10px 0px !important;
+    border-left: none !important;
+    border: 1px solid #bbb7b7;
+  }
   .form-group input, .form-group select {
     width:100%;
     padding: 14px;
@@ -46,7 +54,9 @@
     border: 1px solid #bbb7b7;
     border-radius: 10px;
   }
-  
+  .date_inputs input{
+    width: 48%;
+  }
   .dialog-actions {
     margin-top: 20px;
     padding: 0px 20px 20px 20px;

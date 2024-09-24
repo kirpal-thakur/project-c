@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.userId = this.loggedInUser.id;
     this.route.params.subscribe(() => {
       this.getUserProfile(this.userId);
+      this.getCoverImg();
       this.activeTab = 'profile';
     });
     
@@ -87,6 +88,25 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+
+  getCoverImg(){
+    try {
+      this.talentService.getCoverImg().subscribe((response)=>{
+        if (response && response.status && response.data && response.data.user_data) {
+          
+            this.coverImage = response.data.user_data.cover_image_path;
+          
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });     
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+  }
+  
 
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{

@@ -14,6 +14,7 @@ export class GalleryTabComponent {
   
   userId: any = '';
   userImages: any = [];
+  userVideos: any = [];
   imageBaseUrl: any = "";
   selectedFile: any = '';
   defaultCoverImage:any = "./media/palyers.png";
@@ -26,7 +27,7 @@ export class GalleryTabComponent {
     this.route.params.subscribe((params:any) => {
       // console.log(params.id)
       this.userId = params.id;
-      this.getGalleryData(this.userId)
+      this.getGalleryData()
     });
     
     if(this.coverImage == ""){
@@ -34,15 +35,14 @@ export class GalleryTabComponent {
     }
   }
 
-  getGalleryData(userId:any){
+  getGalleryData(){
     try {
-      this.userService.getGalleryData(userId).subscribe((response)=>{
+      this.talentService.getGalleryData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userImages = response.data.images; 
+          this.userVideos = response.data.videos; 
           this.imageBaseUrl = response.data.file_path;
-          // this.isLoading = false;
         } else {
-          // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
@@ -63,7 +63,7 @@ export class GalleryTabComponent {
         const formdata = new FormData();
         formdata.append("cover_image", this.selectedFile);
 
-        this.userService.uploadCoverImage(this.userId, formdata).subscribe((response)=>{
+        this.talentService.uploadCoverImage(this.userId, formdata).subscribe((response)=>{
           if (response && response.status) {
             this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
@@ -82,7 +82,7 @@ export class GalleryTabComponent {
 
   deleteCoverImage(){
     try {
-      this.userService.deleteCoverImage(this.userId).subscribe((response)=>{
+      this.talentService.deleteCoverImage(this.userId).subscribe((response)=>{
         if (response && response.status) {
           setTimeout(() => {
             this.coverImage = './media/palyers.png';
@@ -126,11 +126,10 @@ export class GalleryTabComponent {
     this.openedMenuId = id;
   }
 
-  deleteImage(id:any){
-    
+  deleteImage(id:any){    
     try {
       let params = {id: [id]};
-      this.userService.deleteGalleryImage(params).subscribe((response)=>{
+      this.talentService.deleteGalleryImage(params).subscribe((response)=>{
         if (response && response.status) {
           let index = this.userImages.findIndex((x:any) => x.id == id)
           this.userImages.splice(index, 1);
@@ -169,10 +168,6 @@ export class GalleryTabComponent {
      .catch(error => {
        console.error('There was an error downloading the file:', error);
      });
-  }
-
-  
-   
- 
+  } 
 
 }
