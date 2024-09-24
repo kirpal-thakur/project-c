@@ -7,40 +7,40 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CouponService {
+export class AdvertisementService {
     private apiUrl;
     constructor(private http: HttpClient) {
         this.apiUrl = environment?.apiUrl;
     
     }
-    getCoupons(params:any): Observable<{ status: boolean, message: string, data: any }> {
+    getAdvertisements(params:any): Observable<{ status: boolean, message: string, data: any }> {
         return this.http.get<{ status: boolean, message: string, data: any }>(
-            `${this.apiUrl}admin/get-coupons`, {params}
+            `${this.apiUrl}admin/get-advertisements`, {params}
           );
     }
 
-    addPopups(record: any): Observable<any> {
+    /*addPopups(record: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}admin/add-coupon`, record);
     }
     // Method to update an existing record
     updatePopups(id: number, record: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}admin/edit-coupon/${id}`, record);
-    }
+    }*/
 
     // Method to delete a record by IDs
-    deleteCoupons(params: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/delete-coupon`, params);
+    deleteAdvertisements(params: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/delete-advertisement`, params);
     }
 
-    publishCoupons(params: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/publish-coupon`, params);
+    publishAdvertisements(params: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/publish-advertisement`, params);
     }
 
-    draftCoupons(params: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/draft-coupon`, params);
+    draftAdvertisements(params: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/draft-advertisement`, params);
     }
 
-    expireCoupons(params: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/expire-coupon`, params);
+    expireAdvertisements(params: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/expire-advertisement`, params);
     }
 }

@@ -1,12 +1,15 @@
 import { Component, inject,ViewChild } from '@angular/core';
 import {  MatDialog } from '@angular/material/dialog';
-import { TemplatePopupComponent } from './template-popup/template-popup.component'; 
+import {  MatDialogRef} from '@angular/material/dialog';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
-import { TemplateService } from '../../../services/template.service';
-import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { environment } from '../../../../environments/environment';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { TemplatePopupComponent } from './template-popup/template-popup.component'; 
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { TemplateService } from '../../../services/template.service';
+
 @Component({
   selector: 'app-templates',
   templateUrl: './templates.component.html',
@@ -16,75 +19,45 @@ export class TemplatesComponent {
   displayedColumns: string[] = ['#','Name', 'For', 'Language','Created Date - Time','Edit','Remove'];
   isLoading= false;
   templates: any = [];
+  checkboxIds: string[] = [];
   allSelected: boolean = false;
-  selectedTemplatesIds: number[] = [];
+  selectedIds: number[] = [];  
   filterValue: string = '';
-
-  constructor(public dialog: MatDialog,private tempalateApi: TemplateService,) {}
+  idsToDelete: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(public dialog: MatDialog,private tempalateApi: TemplateService) {}
   ngOnInit(): void {
-    this.fetchTemplates();
+    this.getTemplates();
   }
-  
-  showRole(id:number){
-    return environment.roles.filter(role =>
-      role.id == id
-    ).map(role =>
-      role.role
-    );
-  }
-  onCheckboxChange(template: any) {
-    const index = this.selectedTemplatesIds.indexOf(template.id);
-    if (index === -1) {
-      this.selectedTemplatesIds.push(template.id);
-    } else {
-      this.selectedTemplatesIds.splice(index, 1);
-    }
-  }
-  deleteSelected(){
-    const templateIds = {
-      id: this.selectedTemplatesIds,
-    };
-    this.tempalateApi.deleteEmailTemplate(templateIds).subscribe(result => {
-      this.isLoading = true;
-      if (result && result.status) {
-        this.isLoading = false;
-          this.fetchTemplates();
-      } else {
-        this.isLoading = false;
-        console.error('Invalid API response structure:', result);
-      }
-     });
-  }
-  selectAllTemplates() {
-    this.allSelected = !this.allSelected;
-    if (this.allSelected) {
-      this.selectedTemplatesIds = this.templates.map((template:any) => template.id);
-    } else {
-      this.selectedTemplatesIds = [];
-    }
-    console.log('Selected user IDs:', this.selectedTemplatesIds);
-  }
-  async fetchTemplates(): Promise<void> {
+
+  async getTemplates(): Promise<void> {
+
+    const page = this.paginator ? this.paginator.pageIndex*10 : 0;
+    const pageSize = this.paginator ? this.paginator.pageSize : 10;
+    // const sortOrder = this.sort ? this.sort.direction : 'asc';
+    // const sortField = this.sort ? this.sort.active : '';
+
+    let params:any = {};
+    params.offset = page;
+    params.search = this.filterValue;
+    params.limit  = pageSize;
+    params.orderBy = "id";
+    params.order = "desc";
+
     try {
       this.isLoading = true;
-      const page = this.paginator ? this.paginator.pageIndex+10 : 0;
-      const pageSize = this.paginator ? this.paginator.pageSize : 10;
-      const sortOrder = this.sort ? this.sort.direction : 'asc';
-      const sortField = this.sort ? this.sort.active : '';
-  
-     this.tempalateApi.getTemplates(page, pageSize,this.filterValue).subscribe((response)=>{
+      this.tempalateApi.getTemplates(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.emailTemplates) {
-        //this.templates = [];
         this.templates = response.data.emailTemplates;
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
         
       } else {
-        this.isLoading = false;
         this.templates = [];
+        this.paginator.length = 0;
+        this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
       });     
@@ -94,92 +67,123 @@ export class TemplatesComponent {
     }
   }
 
+  createTemplate(){
+    console.log('Edit user button clicked!');
+    const dialogRef = this.dialog.open(TemplatePopupComponent,{
+      height: '537px',
+      width: '600px',
+    });
+  }
+
   applyFilter(filterValue:any) {
     this.filterValue = filterValue.target?.value.trim().toLowerCase();
     if(this.filterValue.length >= 3){
-      this.fetchTemplates();
-     } else if(this.filterValue.length == 0){
-      this.fetchTemplates();
-     }
-   
+      this.getTemplates();
+    } else if(this.filterValue.length == 0){
+      this.getTemplates();
+    }
   }
-  addTemplate(){
-    const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '568px',
-      width: '600px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result && result?.action !='remove'){
-          delete result.data.id;
-          this.tempalateApi.addEmailTemplate(result.data).subscribe(result => {
-            if (result && result.status) {
-                this.fetchTemplates();
-            } else {
-              this.isLoading = false;
-              console.error('Invalid API response structure:', result);
-            }
-           });
+
+  showFiltersPopup(){
+    alert('show filters popup')
+    //   this.dialog.open(FilterPopupComponrnt,{
+    //     height: '450px',
+    //     width: '300px',
+    //     position: {
+    //       right: '30px',
+    //       top:'150px'
+    //     }
+    //   })
+  }
+
+  onPageChange() {
+    this.getTemplates();
+  }
+
+  onCheckboxChange(popup: any) {
+    const index = this.selectedIds.indexOf(popup.id);
+    if (index === -1) {
+      this.selectedIds.push(popup.id);
+    } else {
+      this.selectedIds.splice(index, 1);
+    }
+  }
+
+  selectAllPopups() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedIds = this.templates.map((popup:any) => popup.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedIds);
+  }
+
+  confirmDeletion():any {
+    if(this.selectedIds.length == 0){
+      this.showMessage('Select template(s) first.');
+      return false;
+    }
+    this.idsToDelete = this.selectedIds;
+    this.showDeleteConfirmationPopup();
+  }
+
+  showDeleteConfirmationPopup(){
+    this.showMatDialog("", "template-delete-confirmation");
+  }
+
+
+  deleteTemplates():any {
+
+    let params = {id:this.idsToDelete};
+    this.tempalateApi.deleteEmailTemplate(params).subscribe(
+      response => {
+        this.getTemplates();
+        this.selectedIds = [];
+        this.allSelected = false;
+        // console.log('Popups deleted successfully:', response);
+        this.showMessage('Template(s) deleted successfully!');
+      },
+      error => {
+        console.error('Error deleting template:', error);
+        this.showMessage('Error deleting template. Please try again.');
       }
-
-    });
+    );
   }
 
-  removeTemplate(tempalateId: any){
-    const templateIds = {
-      id: [tempalateId],
-    };
-      this.tempalateApi.deleteEmailTemplate(templateIds).subscribe(result => {
-        if (result && result.status) {
-            this.fetchTemplates();
-        } else {
-          this.isLoading = false;
-          console.error('Invalid API response structure:', result);
-        }
-       });
+  showMessage(message:string){
+    this.showMatDialog(message, 'display');
   }
-  onPageChange(){
-    this.fetchTemplates();
-  }
-  editTemplate(tempalateData: any){
-    const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '600px',
-      width: '600px',
-      data: tempalateData
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result && result?.action !='remove'){
-        console.log('result',result)
-        if(result.id != 0){
-          this.tempalateApi.updateEmailTemplate(result.data.id, result.data).subscribe(result => {
-            if (result && result.status) {
-                this.fetchTemplates();
-            } else {
-              this.isLoading = false;
-              console.error('Invalid API response structure:', result);
-            }
-           });
-        }else{
-          this.tempalateApi.addEmailTemplate(result.data).subscribe(result => {
-            if (result && result.status) {
-                this.fetchTemplates();
-            } else {
-              this.isLoading = false;
-              console.error('Invalid API response structure:', result);
-            }
-           });
-        }
-      }
 
-    });
-  }
-  editfilter(){
-    this.dialog.open(FilterPopupComponrnt,{
-      height: '600px',
-      width: '600px',
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
       position: {
-        right: '30px',
         top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
       }
     })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteTemplates();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  editTemplate(id:number){
+
+  }
+  
+  confirmSingleDeletion(id:any){
+    this.idsToDelete = [id];
+    this.showMatDialog("", "template-delete-confirmation");
   }
 }
+   

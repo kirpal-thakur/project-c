@@ -14,13 +14,14 @@ export class TemplateService {
         this.apiUrl = environment?.apiUrl;
     
     }
-    getTemplates(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: any }> {
-        const params = new HttpParams()
-        .set('offset',pageIndex)
-        .set('search',filter)
-        .set('limit', pageSize)
-        .set('orderBy', 'id')
-        .set('order', 'desc');
+    getTemplates(data:any): Observable<{ status: boolean, message: string, data: any }> {
+        let params = new HttpParams();
+        // Loop through the queryParams object and set each parameter
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                params = params.set(key, data[key]);
+            }
+        }
         return this.http.get<{ status: boolean, message: string, data: any }>(
             `${this.apiUrl}admin/get-email-templates`, { params }
           );
@@ -35,7 +36,7 @@ export class TemplateService {
     }
 
     // Method to delete a record by IDs
-    deleteEmailTemplate(ids: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/delete-email-template`, ids);
+    deleteEmailTemplate(params: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/delete-email-template`, params);
     }
 }

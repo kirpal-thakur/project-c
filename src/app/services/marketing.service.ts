@@ -26,6 +26,13 @@ export class MarketingService {
         );
     }
 
+    getRolePaymentTypes(): Observable<{ status: boolean, message: string, data: any }> {
+        
+        return this.http.get<{ status: boolean, message: string, data: any }>(
+            `${this.apiUrl}admin/get-role-payment-types`
+        );
+    }
+
     addPopups(record: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}admin/add-system-popup`, record);
     }
@@ -36,7 +43,6 @@ export class MarketingService {
 
     // Method to delete a record by IDs
     deletePopups(params: any): Observable<any> {
-        
         return this.http.post<any>(`${this.apiUrl}admin/delete-system-popup`, params);
     }
 }

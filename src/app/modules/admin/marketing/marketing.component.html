@@ -139,7 +139,7 @@
             </ng-container>
             <ng-container matColumnDef="For">
               <th mat-header-cell *matHeaderCellDef> For </th>
-              <td mat-cell *matCellDef="let element">  {{ element.popupfor }}</td>
+              <td mat-cell *matCellDef="let element">  {{ getRoleTypes(element.popupfor) }}</td>
             </ng-container>
             <ng-container matColumnDef="Language">
               <th mat-header-cell *matHeaderCellDef> Language </th>

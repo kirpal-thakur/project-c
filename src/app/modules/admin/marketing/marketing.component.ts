@@ -71,6 +71,16 @@ export class MarketingComponent {
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
       height: '537px',
       width: '600px',
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "popupAdded"){
+          this.showMessage('Popup created successfully!');
+          this.getSystemPopups();
+        }
+      //  console.log('Dialog result:', result);
+      }
     });
   }
 
@@ -183,12 +193,46 @@ export class MarketingComponent {
       role.role
     );
   }
-  editPopup(id:number){
+  editPopup(data:any){
+    
+    const dialogRef = this.dialog.open(MarketingPopupComponent,{
+      height: '537px',
+      width: '600px',
+      data: data
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "popupUpdated"){
+          this.showMessage('Popup updated successfully!');
+          this.getSystemPopups();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
 
   }
   
   confirmSingleDeletion(id:any){
     this.idsToDelete = [id];
     this.showMatDialog("", "popup-delete-confirmation");
+  }
+
+  getRoleTypes(data:any){
+    data = JSON.parse(data);
+    let result = "";
+    for(let row of data){
+
+      if(row.user_role){
+        let type = '';
+        if(row.payment_type == "Paid"){
+          type = '(P)';
+        }else if(row.payment_type == "Free"){
+          type = '(F)';
+        }
+        result += row.user_role+type+', '
+      }
+    }
+    return result.slice(0, -2);
   }
 }
