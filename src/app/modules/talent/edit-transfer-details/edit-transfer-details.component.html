@@ -1,0 +1,30 @@
+<div class="dialog-content">
+    <h2>Edit Transfer Details</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="team_from">Team From</label>
+        <input id="team_from"  name="team_from" required />
+      </div>
+  
+      <div>
+        <label for="team_to">Team To</label>
+        <input id="team_to"  name="team_to" required />
+      </div>
+  
+      <div>
+        <label for="session">Session</label>
+        <input id="session"  name="session" required />
+      </div>
+  
+      <div>
+        <label for="date_of_transfer">Date of Transfer</label>
+        <input type="date" id="date_of_transfer"  name="date_of_transfer" required />
+      </div>
+  
+      <div class="dialog-actions">
+        <button type="submit">Submit</button>
+        <button type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  

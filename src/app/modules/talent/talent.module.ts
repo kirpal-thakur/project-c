@@ -32,6 +32,12 @@ import { EditPersonalDetailsComponent } from './edit-personal-details/edit-perso
 import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
+import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
+import { ExploreComponent } from './explore/explore.component';
+import { PlanComponent } from './plan/plan.component';
+import { CountriesComponent } from './countries/countries.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +54,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     UploadPopupComponent,
     EditPersonalDetailsComponent,
     MessagePopupComponent,
-    MembershipComponent
+    MembershipComponent,
+    PlayerProfileComponent,
+    PerformanceAnalysisTabComponent,
+    ExploreComponent,
+    PlanComponent,
+    CountriesComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +85,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule
+    NgxEditorModule,
   ]
 })
 export class TalentModule { }

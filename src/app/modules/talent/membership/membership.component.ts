@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../../services/user.service';
+import { TalentService } from '../../../services/talent.service';
 
 @Component({
   selector: 'app-membership',
@@ -8,7 +11,17 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './membership.component.scss'
 })
 export class MembershipComponent {
-  selectedIds: number[] = []; // Initialize selectedIds array
+  
+  userId: any = '';
+  userPurchases: any = [];
+  // imageBaseUrl: any = "";
+  allSelected: boolean = false;
+  idsToDownload: any = [];
+  selectedIds: number[] = [];
+  
+  totalItems: number = 0; // Total number of items for pagination
+  pageSize: number = 10; // Number of items per page
+  currentPage: number = 1; // Current page index
 
   plans = [
     { id: 1, name: 'Basic', price: 9.99, features: ['Feature 1', 'Feature 2'] },
@@ -23,4 +36,114 @@ export class MembershipComponent {
   subscribe(plan: any) {
     console.log(`Subscribed to: ${plan.name}`);
   }
+  
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+    constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router) { }
+  
+
+    ngOnInit(): void {
+
+      this.route.params.subscribe((params:any) => {
+        console.log(params.id)
+        this.userId = params.id;
+        this.getUserPurchases()
+      });
+    }
+  
+    // Fetch purchases from API with pagination parameters
+    getUserPurchases(): void {
+      const pageNumber = this.currentPage;
+      const pageSize = this.pageSize;
+  
+      this.userService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
+        if (response && response.status && response.data) {
+          this.userPurchases = response.data.purchaseHistory;
+          this.totalItems = response.data.totalItems; // Assuming API returns the total number of purchases
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      }, error => {
+        console.error('Error fetching user purchases:', error);
+      });
+    }
+  
+    // Event triggered when paginator changes
+    onPageChange(event: any): void {
+      this.currentPage = event.pageIndex;
+      this.pageSize = event.pageSize;
+      this.getUserPurchases(); // Fetch new data when page changes
+    }
+
+  onCheckboxChange(user: any) {
+    const index = this.selectedIds.indexOf(user.id);
+    if (index === -1) {
+      this.selectedIds.push(user.id);
+    } else {
+      this.selectedIds.splice(index, 1);
+    }
+  }
+
+  selectAllCheckboxes() {
+    console.log('p', this.allSelected)
+    this.allSelected = !this.allSelected;
+    console.log('a', this.allSelected)
+    if (this.allSelected) {
+      this.selectedIds = this.userPurchases.map((fav:any) => fav.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected favorite IDs:', this.selectedIds);
+  }
+
+  async downloadInvoice(invoideId:any, invoiceUrl:any){
+     // use the fetch/blob method because single download isn't working 
+    fetch(invoiceUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob(); // Convert the response to a Blob object
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'invoice-'+invoideId+'.pdf'; // Set the filename for download
+        document.body.appendChild(anchor);
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(anchor);
+      })
+      .catch(error => {
+        console.error('There was an error downloading the file:', error);
+      });
+  }
+
+  downloadAll():any{
+
+    if(this.selectedIds.length == 0){
+      return false;
+    }
+    this.selectedIds = this.userPurchases.map((fav:any) => fav.id);
+
+    const allLinksToDownload = this.selectedIds.map(id => {
+      // Find the user object by matching the id
+      const purchase = this.userPurchases.find((purchase:any) => purchase.id === id);
+      
+      // Return the image link if the user is found, otherwise return null or undefined
+      return purchase ? purchase.invoice_file_path : null;
+    });
+    this.downloadAllFiles(allLinksToDownload);
+  }
+
+  async downloadAllFiles(allLinksToDownload:any) {
+    // Loop over each file URL and trigger the download sequentially
+    for (const [index, fileUrl] of allLinksToDownload.entries()) {
+      // Call downloadFile with each URL and a custom filename
+      await this.downloadInvoice(index+1, fileUrl);
+    }
+  }
+
+
 }

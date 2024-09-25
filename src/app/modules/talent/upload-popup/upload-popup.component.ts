@@ -3,6 +3,7 @@ import {
   MatDialogRef,MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
+import { TalentService } from '../../../services/talent.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class UploadPopupComponent {
   userId: any = '';
   uploadedFiles:any = [];
   uploadResponse:any = [];
-  constructor(private userService: UserService, public dialogRef : MatDialogRef<UploadPopupComponent>,
+  constructor(private userService: TalentService, public dialogRef : MatDialogRef<UploadPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userId = data.userId;
   }
@@ -78,7 +79,7 @@ export class UploadPopupComponent {
     console.log('formdata')
     console.log(formdata)
 
-    this.userService.uploadGalleryImages(this.userId, formdata).subscribe((response)=>{
+    this.userService.uploadGalleryImages(formdata).subscribe((response)=>{
       console.log(response)
       response.forEach((row:any) => {
         console.log(row);
@@ -88,13 +89,6 @@ export class UploadPopupComponent {
         }
 
       });
-      // if (response && response.status) {
-        
-        // this.isLoading = false;
-      // } else {
-        // this.isLoading = false;
-        // console.error('Invalid API response structure:', response);
-      // }
     });
   }
 

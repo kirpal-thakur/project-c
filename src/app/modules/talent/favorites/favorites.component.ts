@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
+import { PlayerProfileComponent } from '../player-profile/player-profile.component';
 
 
 @Component({
@@ -34,47 +35,48 @@ export class FavoritesComponent {
     });
   }
 
-  getUserFavorites(){
+  getUserFavorites() {
     try {
-      const page = this.paginator ? this.paginator.pageIndex*10 : 0;
+      // Set pagination parameters
+      const page = this.paginator ? this.paginator.pageIndex * 10 : 0;
       const pageSize = this.paginator ? this.paginator.pageSize : 10;
-    
-      let params:any = {};
-      params.offset = page;
-      params.search = this.keyword;
-      params.limit  = pageSize;
-
-      this.userService.getFavoritesData(this.userId, params).subscribe((response)=>{
+  
+      // Prepare query parameters
+      let params: any = {
+        offset: page,
+        limit: pageSize,
+        search: this.keyword // Search keyword
+      };
+  
+      // Make the API request with query parameters
+      this.userService.getFavoritesData(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.userFavorites = response.data[0].favorites;
           this.totalFavorites = response.data[0].totalCount;
           this.paginator.length = response.data[0].totalCount;
-          // this.isLoading = false;
         } else {
-          // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
+  
 
   onPageChange() {
     this.getUserFavorites();
   }
 
-  search(filterValue:any) {
-   
+  search(filterValue:any) {   
     this.keyword = filterValue.target?.value.trim().toLowerCase();
     if(this.keyword.length >= 3){
       this.getUserFavorites();
      } else if(this.keyword.length == 0){
       this.getUserFavorites();
-     }
-   
+    }   
   }
+    
 
   onCheckboxChange(user: any) {
     const index = this.selectedIds.indexOf(user.id);
@@ -91,9 +93,9 @@ export class FavoritesComponent {
   }
 
   selectAllFavorites() {
-    console.log('p', this.allSelected)
+    
     this.allSelected = !this.allSelected;
-    console.log('a', this.allSelected)
+    
     if (this.allSelected) {
       this.selectedIds = this.userFavorites.map((fav:any) => fav.id);
     } else {
@@ -115,6 +117,38 @@ export class FavoritesComponent {
     this.showMatDialog("", "delete-favorite-confirmation");
   }
 
+  
+  openViewProfile(userId:any) {
+    console.log('User saved');
+
+    const dialogRef = this.dialog.open(PlayerProfileComponent, {
+      width: '800px',
+      data: {
+        first_name: 'John',
+        last_name: 'Doe',
+        current_club: 'FC Thun U21',
+        nationality: 'Swiss',
+        date_of_birth: '2004-04-21',
+        place_of_birth: 'Zurich',
+        height: 180,
+        weight: 75,
+        contract_start: '2017-05-08',
+        contract_end: '2025-05-08',
+        league_level: 'Professional',
+        foot: 'Right'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User saved:', result);
+        // Handle the save result (e.g., update the user details)
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+  
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',

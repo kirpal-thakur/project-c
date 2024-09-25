@@ -55,7 +55,7 @@ export class ProfileTabComponent {
     console.log('User saved');
 
     const dialogRef = this.dialog.open(EditGeneralDetailsComponent, {
-      width: '800px',
+      width: '850px',
       data: {
         first_name: 'John',
         last_name: 'Doe',
@@ -116,7 +116,6 @@ export class ProfileTabComponent {
     // Function to get the main position from the array
   getMainPosition() {
     this.positions = JSON.parse(this.userData.positions);
-
     const mainPosition = this.positions.find((pos : any) => pos.main_position === 1);
     return mainPosition ? mainPosition.position_name : null;
   }
