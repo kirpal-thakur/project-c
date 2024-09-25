@@ -1,9 +1,8 @@
 <div class="p-0 code-parent">
   <div class="bg-0C3453 p-4">
-    <h6 class=" code-text text-center " >
-      New Coupon
-     </h6>
-     <div (click)="close()" class="close-img mb-1" >
+    <h6 class=" code-text text-center" *ngIf="this.data.action == 'create'">New Coupon</h6>
+    <h6 class=" code-text text-center" *ngIf="this.data.action == 'update'">Edit Coupon</h6>
+    <div (click)="close()" class="close-img mb-1" >
     </div>
   </div>
 
@@ -16,13 +15,13 @@
    </p>
    <button class="custom-button">
      <label>
-       <input class="form-check-input " type="radio" name="options" value="option1"  >
+       <input class="form-check-input" type="radio" name="options" [(ngModel)]="type" value="amount">
        $ Discount
      </label>
    </button>
    <button class="custom-button ms-3 ">
      <label>
-       <input  class="form-check-input " type="radio" name="options" value="option1" checked>
+       <input class="form-check-input" type="radio" name="options" [(ngModel)]="type" value="percent">
        % Discount    </label>
    </button>
   </div>
@@ -30,19 +29,15 @@
   <div class="d-flex mb-3">
    <div>
    <p  class="code-text">
-     coupon Name
+     Coupon Name 
    </p>
-     <div class="cupen-btn  code-text" style="min-width: 170px;">
-       Black Friday
-     </div>
+     <input type="text" class="cupen-btn  code-text" style="min-width: 170px;" [(ngModel)]="name"/>
    </div>
    <div class="ms-3">
      <p  class="code-text">
        Coupon Code
      </p>
-       <div class="cupen-btn" style="min-width: 170px;">
-         WIN25
-       </div>
+     <input type="text" class="cupen-btn" style="min-width: 170px;" [(ngModel)]="code">
      </div>
  
   </div>
@@ -52,9 +47,7 @@
    <p  class="code-text">
      Discount
    </p>
-     <div class="cupen-btn-1" style="min-width: 170px;">
-       $  25
-     </div>
+    <input type="text" class="cupen-btn-1" style="min-width: 170px;" [(ngModel)]="discount">
    </div>
  
  <div class="mb-3">
@@ -62,16 +55,14 @@
      Valid Between
    </p>
    <div class="d-flex"> 
-     
      <div class="d-flex coupon-dateRange">
-    
        <div >   
          <div class="cupen-btn-date ">
            <!-- <svg id="users-icon"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>  May 8, 2024 -->
-           <mat-form-field class="meta-date ">
+            <mat-form-field class="meta-date ">
              <mat-label>Choose a date</mat-label>
-             <input matInput [matDatepicker]="picker1">
-             <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+             <input matInput [matDatepicker]="picker1" (dateChange)="onDateChange('start', $event)">
+              <!-- <mat-hint>MM/DD/YYYY</mat-hint>  -->
              <mat-datepicker-toggle matIconPrefix [for]="picker1" ></mat-datepicker-toggle>
              <mat-datepicker #picker1 ></mat-datepicker>
            </mat-form-field>
@@ -79,11 +70,11 @@
        </div>
        
        <div>      
-           <div class="cupen-btn-date-1 ">
+           <div class="cupen-btn-date-1" [ngClass]="{'disable-end-date': disableEndDate}">
              <!-- <svg id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>   May 8, 2024 -->
              <mat-form-field class="meta-date"> 
                <mat-label>Choose a date</mat-label>
-               <input matInput [matDatepicker]="picker2">
+               <input matInput [matDatepicker]="picker2" (dateChange)="onDateChange('end', $event)">
                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                <mat-datepicker-toggle matIconPrefix [for]="picker2"></mat-datepicker-toggle>
                <mat-datepicker #picker2></mat-datepicker>
@@ -94,42 +85,51 @@
  
      <div class="d-flex align-items-center ms-2 code-text">
        <span class="form-check align-self-center ">
+        <label for="defaultCheck1" class="form-check-label">
          <input
            type="checkbox"
            value=""
            id="defaultCheck1"
            class="form-check-input"
-         /> <label for="defaultCheck1" class="form-check-label"> </label>
-       </span> Don't set an end date
+           [(ngModel)]="noEndDate"
+           (change)="onNoEndDateChange($event)"
+         />  
+         Don't set an end date
+        </label>
+       </span> 
      </div>
- 
    </div>
- 
  </div>
  
     <div>
      <div class="d-flex align-items-center code-text">
        <span class="form-check align-self-center code-text ">
-         <input
+        <label for="defaultCheck2" class="form-check-label">
+          <input
            type="checkbox"
-           value=""
-           id="defaultCheck1"
+           value="1"
+           id="defaultCheck2"
            class="form-check-input"
-         /> <label for="defaultCheck1" class="form-check-label"> </label>
-       </span> Limit the total number of uses for this coupon
+           [(ngModel)]="isLimitedUse"
+          />  
+          Limit the total number of uses for this coupon
+        </label>
+       </span>
      </div>
-     <div class="cupen-btn-1">
-       10
-     </div>
+     <input type="text" class="cupen-btn-1" [(ngModel)]="limit">
      <div class="d-flex align-items-center code-text mt-2">
-       <span class="form-check align-self-center ">
+       <span class="form-check align-self-center">
+        <label for="defaultCheck3" class="form-check-label">
          <input
            type="checkbox"
            value=""
-           id="defaultCheck1"
+           id="defaultCheck3"
            class="form-check-input"
-         /> <label for="defaultCheck1" class="form-check-label"> </label>
-       </span> Limit to one use per customer
+           [(ngModel)]="isSingleUsePerCustomer"
+         /> 
+         Limit to one use per customer
+        </label>
+       </span> 
      </div>
     </div>
 
@@ -141,10 +141,10 @@
      <div class=" d-flex justify-content-around bg-0C3453 p-3">
 
       <div>
-        <a class="btn btn-delete text-danger ">Cancel</a>
+        <a class="btn btn-delete text-danger" (click)="close()">Cancel</a>
       </div>
       <div>
-        <a class="btn Launch px-5" >Create Coupon</a>
+        <a class="btn Launch px-5" (click)="createCoupon()">Create Coupon</a>
       </div>
 
      </div>

@@ -19,7 +19,7 @@ export class AdvertisingComponent {
   allSelected: boolean = false;
   userId: any; 
   newStatus: any;
-  isLoading = false;
+  isLoading:boolean = false;
   filterValue: string = '';
   filterDialogRef:any = ""
   idsToProceed: any = [];
@@ -30,11 +30,12 @@ export class AdvertisingComponent {
   constructor(private advertisementService: AdvertisementService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
+    
      this.getAdvertisements();
   }
 
   getAdvertisements() {
+    this.isLoading = true;
     let params:any = {};
     // params.offset = page;
     params.search = this.filterValue;

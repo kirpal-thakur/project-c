@@ -27,7 +27,7 @@
     border: 1px solid #999999;
     border-radius: 10px;
     padding: 8px 8px;
-    cursor: pointer;
+    // cursor: pointer;
     background: none;
     font-size: 13px;
   }
@@ -61,7 +61,7 @@
     border: 1px solid #999999;
     border-radius: 10px;
     padding: 8px 8px;
-    cursor: pointer;
+    // cursor: pointer;
     font-size: 13px;
     background: none;
     width: 130px;
@@ -106,4 +106,9 @@
   .form-check-input:checked + label {
     color: #E05263; /* Text color when checked */
   }
-
+  .disable-end-date{
+    opacity: 0.4;
+  }
+  .disable-end-date div, .disable-end-date button {
+      pointer-events: none;
+  }

@@ -18,7 +18,7 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 })
 export class MarketingComponent {
   displayedColumns: string[] = ['#','Name', 'For', 'Language','Display Freq','Display Location','Start Date','End Date','Status','Edit','Remove'];
-  isLoading= false;
+  isLoading:boolean = false;
   popups: any = [];
   checkboxIds: string[] = [];
   allSelected: boolean = false;
@@ -34,7 +34,7 @@ export class MarketingComponent {
   }
 
   async getSystemPopups(): Promise<void> {
-
+    this.isLoading = true;
     const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     // const sortOrder = this.sort ? this.sort.direction : 'asc';

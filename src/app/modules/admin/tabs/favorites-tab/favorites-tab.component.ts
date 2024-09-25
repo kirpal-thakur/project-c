@@ -10,10 +10,11 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: './favorites-tab.component.scss'
 })
 export class FavoritesTabComponent {
+  isLoading:boolean = false;
   userId: any = '';
   displayedColumns: string[] = ['#','Name', 'User Type', 'Location','Joined Date - Time','View Profile','Remove'];
   userFavorites: any = [];
-  totalFavorites: any = '';
+  totalFavorites: any = '0';
   allSelected: boolean = false;
   idsToDelete: any = [];
   // imageBaseUrl: any = "";
@@ -32,6 +33,8 @@ export class FavoritesTabComponent {
   }
 
   getUserFavorites(){
+
+    this.isLoading = true;
     try {
       const page = this.paginator ? this.paginator.pageIndex*10 : 0;
       const pageSize = this.paginator ? this.paginator.pageSize : 10;
@@ -46,14 +49,14 @@ export class FavoritesTabComponent {
           this.userFavorites = response.data[0].favorites;
           this.totalFavorites = response.data[0].totalCount;
           this.paginator.length = response.data[0].totalCount;
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }

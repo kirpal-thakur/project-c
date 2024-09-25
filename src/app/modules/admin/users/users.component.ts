@@ -44,6 +44,9 @@ export class UsersComponent implements OnInit {
 
 
   async fetchUsers(filterApplied:boolean = false): Promise<void> {
+
+    this.isLoading = true;
+    
     const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';

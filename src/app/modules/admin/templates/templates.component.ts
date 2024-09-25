@@ -17,7 +17,7 @@ import { TemplateService } from '../../../services/template.service';
 })
 export class TemplatesComponent {
   displayedColumns: string[] = ['#','Name', 'For', 'Language','Created Date - Time','Edit','Remove'];
-  isLoading= false;
+  isLoading:boolean = false;
   templates: any = [];
   checkboxIds: string[] = [];
   allSelected: boolean = false;
@@ -26,14 +26,19 @@ export class TemplatesComponent {
   idsToDelete: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
+  roles: any = [];
   constructor(public dialog: MatDialog,private tempalateApi: TemplateService) {}
   ngOnInit(): void {
     this.getTemplates();
+
+    let envRoles:any = environment.roles;
+    envRoles[0].id = 0;
+    envRoles[0].role = 'All';
+    this.roles = envRoles;
   }
 
   async getTemplates(): Promise<void> {
-
+    this.isLoading = true;
     const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     // const sortOrder = this.sort ? this.sort.direction : 'asc';
@@ -53,9 +58,7 @@ export class TemplatesComponent {
         this.templates = response.data.emailTemplates;
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
-        
       } else {
-        this.templates = [];
         this.paginator.length = 0;
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -68,10 +71,18 @@ export class TemplatesComponent {
   }
 
   createTemplate(){
-    console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
       height: '537px',
       width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "templateAdded"){
+          this.showMessage('Email template created successfully!');
+          this.getTemplates();
+        }
+      }
     });
   }
 
@@ -177,13 +188,31 @@ export class TemplatesComponent {
     });
   }
 
-  editTemplate(id:number){
+  editTemplate(data:any){
+    const updateDialogRef = this.dialog.open(TemplatePopupComponent,{
+      height: '537px',
+      width: '600px',
+      data: data
+    });
 
+    updateDialogRef.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "templateUpdated"){
+          this.showMessage('Email template updated successfully!');
+          this.getTemplates();
+        }
+      }
+    });
   }
   
   confirmSingleDeletion(id:any){
     this.idsToDelete = [id];
     this.showMatDialog("", "template-delete-confirmation");
+  }
+
+  getRole(id:any){
+    let row = this.roles.find((role:any) => role.id == id);
+    return row ? row.role : null;
   }
 }
    

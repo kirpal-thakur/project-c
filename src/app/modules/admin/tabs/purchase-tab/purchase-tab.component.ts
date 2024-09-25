@@ -8,6 +8,7 @@ import { UserService } from '../../../../services/user.service';
   styleUrl: './purchase-tab.component.scss'
 })
 export class PurchaseTabComponent {
+  isLoading:boolean = false;
   userId: any = '';
   userPurchases: any = [];
   // imageBaseUrl: any = "";
@@ -17,7 +18,6 @@ export class PurchaseTabComponent {
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
   
   ngOnInit(): void {
-
     this.route.params.subscribe((params:any) => {
       console.log(params.id)
       this.userId = params.id;
@@ -26,19 +26,19 @@ export class PurchaseTabComponent {
   }
 
   getUserPurchases(userId:any){
+    this.isLoading = true;
     try {
       this.userService.getPurchaseData(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userPurchases = response.data.purchaseHistory;
-          console.log(this.userPurchases) 
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error); 
     }
   }

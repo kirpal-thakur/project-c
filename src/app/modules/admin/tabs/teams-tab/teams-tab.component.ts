@@ -14,7 +14,7 @@ export class TeamsTabComponent {
   players:any = [];
   view: string = "team";
   displayedColumns: string[] = ['Player Name', 'Joining Date', 'Exit Date', 'Location','Edit'];
-  isLoading = false;
+  isLoading:boolean = false;
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router){}
 
 
@@ -26,12 +26,13 @@ export class TeamsTabComponent {
   }
 
   getClubTeams(userId:any){
+    this.isLoading = true;
     try {
       this.userService.getClubTeams(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.teams = response.data.teams;
           console.log(this.teams) 
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
@@ -45,19 +46,20 @@ export class TeamsTabComponent {
 
   getTeamPlayers(teamId:any){
     this.view = 'player';
+    this.isLoading = true;
     try {
       this.userService.getTeamPlayers(teamId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.players = response.data.players;
           console.log(this.players) 
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error);  
     }
   }

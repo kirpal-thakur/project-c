@@ -15,7 +15,7 @@ export class PortfolioTabComponent {
   userId:any = '';
   scoutPlayers:any = [];
   displayedColumns: string[] = ['Name', 'Language', 'Club', 'Contract Starts','Contract Expires', 'View', 'Delete'];
-  isLoading = false;
+  isLoading = false; 
   idToBeDeleted:any = '';
   constructor(private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog){}
 
@@ -27,18 +27,19 @@ export class PortfolioTabComponent {
   }
 
   getScoutPlayers(){
+    this.isLoading = true;
     try {
       this.userService.getScoutPlayers(this.userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.scoutPlayers = response.data.scoutPlayers;
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error); 
     }
   }
