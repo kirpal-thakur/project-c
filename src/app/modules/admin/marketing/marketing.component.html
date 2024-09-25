@@ -199,7 +199,8 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               <tr class="mat-row user-empty-tr" *matNoDataRow>
                 <td [attr.colspan]="displayedColumns.length" class="user-empty-td">
-                  <emplty-table *ngIf="!isLoading"></emplty-table>
+                  <app-loader *ngIf="isLoading"></app-loader>
+                  <div *ngIf="popups.length == 0 && !isLoading" style="text-align: center;">No records found.</div>
                 </td>
               </tr>
           </table>

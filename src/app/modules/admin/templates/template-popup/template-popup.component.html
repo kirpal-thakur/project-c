@@ -9,7 +9,7 @@
   </div>
   <hr class="m-0">
 
-  <div class="d-flex align-items-baseline py-2 bg-0C3453 px-3 template-name-input">
+  <div class="d-flex align-items-baseline py-2 bg-0C3453 px-3 template-name-input"> 
     <h4 class="text-size" style="margin-right: 5px;">Name:</h4>
     <input type="text" class="template-name-inputField" [(ngModel)]="title" >
   </div>
@@ -72,10 +72,9 @@
 
       <div class="btn-group" style="position: relative; display: inline-block;">
         <mat-select [(ngModel)]="selectedRole" class="mat-select-div">
-          <mat-option [value]="0">All</mat-option>
-        
           <ng-container *ngFor="let role of roles">
-            <mat-option *ngIf="role.id != 1" [value]="role.id">{{ role.role }}</mat-option>
+            <mat-option [value]="role.id" *ngIf="selectedRole == role.id" selected>{{ role.role }}</mat-option>
+            <mat-option [value]="role.id" *ngIf="selectedRole != role.id">{{ role.role }}</mat-option>
           </ng-container>
         </mat-select>
       
@@ -90,7 +89,8 @@
      <div class="btn-group">
         <mat-select [(ngModel)]="selectedLang" class="mat-select-div">
             @for (lang of langs; track lang) {
-              <mat-option [value]="lang.id">{{lang.language}}</mat-option>
+              <mat-option [value]="lang.id" *ngIf="selectedLang == lang.id" selected>{{lang.language}}</mat-option>
+              <mat-option [value]="lang.id" *ngIf="selectedLang != lang.id">{{lang.language}}</mat-option>
             }
           </mat-select>
           <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,7 +104,8 @@
       <div class="btn-group">
           <mat-select [(ngModel)]="selectedLocation" class="mat-select-div">
               @for (location of locations; track location) {
-                <mat-option [value]="location.id">{{location.name}}</mat-option>
+                <mat-option [value]="location.id" *ngIf="selectedLocation == location.id" selected>{{location.name}}</mat-option>
+                <mat-option [value]="location.id" *ngIf="selectedLocation != location.id">{{location.name}}</mat-option>
               }
             </mat-select>
             <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,10 +127,11 @@
         <div class=" d-flex justify-content-around bg-0C3453 p-3">
       
          <div>
-           <a class="btn btn-delete text-danger ">Delete</a>
+           <a class="btn btn-delete text-danger">Delete</a>
          </div>
          <div>
-           <a class="btn Launch px-5" >Create and Launch</a>
+           <a class="btn Launch px-5" *ngIf="!template" (click)="createTemplate()">Create and Launch</a>
+           <a class="btn Launch px-5" *ngIf="template" (click)="updateTemplate()">Update</a>
          </div>
       
         </div>

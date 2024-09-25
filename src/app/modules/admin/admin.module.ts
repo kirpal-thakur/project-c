@@ -36,7 +36,7 @@ import { PerformanceTabComponent } from './tabs/performance-tab/performance-tab.
 import { FavoritesTabComponent } from './tabs/favorites-tab/favorites-tab.component';
 import { PurchaseTabComponent } from './tabs/purchase-tab/purchase-tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
-import { CoupenCodePopupComponent } from './website/coupen/coupenCode-popup.component';
+import { CoupenPopupComponent } from './website/coupon-popup/coupon-popup.component';
 import { AdvertisingPopupComponent } from './website/advertising1/advertising-popup.component';
 import { NgxEditorModule  } from 'ngx-editor';
 import { ChatTabComponent } from './tabs/chat-tab/chat-tab.component';
@@ -67,7 +67,8 @@ import { WebPagesComponent } from './website/web-pages/web-pages.component';
 import { BlogComponent } from './website/blog/blog.component';
 import { CouponsComponent } from './website/coupons/coupons.component';
 import { AdvertisingComponent } from './website/advertising/advertising.component';
-
+import { LoaderComponent } from './loader/loader.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   
 @NgModule({
   declarations: [
@@ -91,7 +92,7 @@ import { AdvertisingComponent } from './website/advertising/advertising.componen
     FavoritesTabComponent,
     PurchaseTabComponent,
     PerformanceTabComponent,
-    CoupenCodePopupComponent,
+    CoupenPopupComponent,
     AdvertisingPopupComponent,
     ChatTabComponent,
     TeamMemberDetailComponent,
@@ -116,7 +117,8 @@ import { AdvertisingComponent } from './website/advertising/advertising.componen
     WebPagesComponent,
     BlogComponent,
     CouponsComponent,
-    AdvertisingComponent
+    AdvertisingComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -137,7 +139,8 @@ import { AdvertisingComponent } from './website/advertising/advertising.componen
     MatTabsModule ,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule
+    NgxEditorModule,
+    MatProgressSpinnerModule
   ],
   providers: [UserService]
 })

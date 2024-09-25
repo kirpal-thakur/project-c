@@ -4,22 +4,23 @@ import {
 } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
 import { environment } from '../../../../../environments/environment';
+import { TemplateService } from '../../../../services/template.service';
 @Component({
   selector: 'app-templates',
   templateUrl: './template-popup.component.html',
   styleUrl: './template-popup.component.scss'
 })
 export class TemplatePopupComponent  implements OnInit, OnDestroy  {
-  id = 0;
+  // id = 0;
   editor!: Editor;
   title:string = "";
-  selectedRole:number = 2;
-  selectedLang:number = 1;
-  selectedLocation:number = 1;
+  selectedRole:any = 0;
+  selectedLang:any = 1;
+  selectedLocation:any = 1;
   roles:any = [];
   langs:any = [];
   locations:any = [];
-
+  templateIdToEdit: any = '';
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -31,20 +32,22 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
   content: string = '';
   constructor(
     
-    public dialogRef: MatDialogRef<TemplatePopupComponent>,
+    public dialogRef: MatDialogRef<TemplatePopupComponent>, private tempalateApi: TemplateService,
     @Inject(MAT_DIALOG_DATA) public template: any
   ) {
     if(template){
-
-      this.id = template.id;
+      this.templateIdToEdit = template.id;
       this.title = template.title;
       this.content = template.content;
-      this.selectedRole = template.email_for;
-      this.selectedLang = template.language;
-      this.selectedLocation = template.location;
+      this.selectedRole = Number(template.email_for);
+      this.selectedLang = 4; //template.language;
+      this.selectedLocation = 3; //template.location;
     }
 
-    this.roles = environment.roles;
+    let envRoles:any = environment.roles;
+    envRoles[0].id = 0;
+    envRoles[0].role = 'All';
+    this.roles = envRoles;
     this.langs = environment.langs;
     this.locations = environment.domains;
   }
@@ -61,34 +64,67 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
   close(): void {
    console.log(this.editor);
     this.dialogRef.close({
-      data : {
-        id: this.id,
-        title: this.title,
-        content: this.content,
-        email_for: this.selectedRole,
-        language:this.selectedLang,
-        location:this.selectedLocation,
-        status:2
-      }
     });
   }
-  save(): void {
-    this.dialogRef.close({
-      data : {
-        id: this.id,
-        title: this.title,
-        content: this.content,
-        email_for: this.selectedRole,
-        language:this.selectedLang,
-        location:this.selectedLocation,
-        status:1
-      }
-    });
-  }
+  
   remove(): void {
     this.dialogRef.close({
       action:'remove'
     });
+  }
+
+  createTemplate():any{
+
+    if(this.title == "" || this.content == ""){
+      console.log('aborted')
+      return false;
+    }
+   
+    let params:any = {}
+    params.title = this.title;
+    params.content = this.content;
+    params.email_for = this.selectedRole;
+    params.language = this.selectedLang;
+    params.location = this.selectedLocation;
+    params.status  = 1; // 1 for active, 2 for inactive
+    
+    this.tempalateApi.addEmailTemplate(params).subscribe((response)=>{
+      if (response && response.status) {
+        this.dialogRef.close({
+          action: 'templateAdded'
+        });
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });         
+  }
+
+  updateTemplate():any{
+
+    if(this.title == "" || this.content == ""){
+      return false;
+    }
+
+    let params:any = {}
+
+    params.title = this.title;
+    params.content = this.content;
+    params.email_for = this.selectedRole;
+    params.language = this.selectedLang;
+    params.location = this.selectedLocation;
+    params.status  = 1; // 1 for active, 2 for inactive
+    
+    this.tempalateApi.updateEmailTemplate(this.templateIdToEdit, params).subscribe((response)=>{
+      if (response && response.status) {
+        this.dialogRef.close({
+          action: 'templateUpdated'
+        });
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });         
   }
 
 }

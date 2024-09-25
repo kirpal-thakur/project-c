@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { CouponService } from '../../../../services/coupon.service';
+import { CoupenPopupComponent } from '../coupon-popup/coupon-popup.component';
 @Component({
   selector: 'app-coupons',
   templateUrl: './coupons.component.html',
@@ -19,7 +20,7 @@ export class CouponsComponent {
   allSelected: boolean = false;
   userId: any; 
   newStatus: any;
-  isLoading = false;
+  isLoading:boolean = false;
   filterValue: string = '';
   filterDialogRef:any = ""
   idsToProceed: any = [];
@@ -30,11 +31,11 @@ export class CouponsComponent {
   constructor(private couponService: CouponService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-     this.getCoupons();
+    this.getCoupons();
   }
 
   getCoupons() {
+    this.isLoading = true;
     let params:any = {};
     // params.offset = page;
     params.search = this.filterValue;
@@ -107,18 +108,27 @@ export class CouponsComponent {
     );
   }
   editCoupon(element:any){
-    // const dialogRef = this.dialog.open(CoupenCodePopupComponent,{
-    //   height: '598px',
-    //   width: '600px',
-    //   panelClass: 'cutam-cupen'
-   
-    
-    // });
+    const updateCouponDialog = this.dialog.open(CoupenPopupComponent,{
+      height: '598px',
+      width: '600px',
+      panelClass: 'cutam-cupen',
+      data : {
+        action: 'update',
+        couponData: element
+      }
+    });
   }
 
 
   createCoupon(){
-
+    const createCouponDialog = this.dialog.open(CoupenPopupComponent,{
+      height: '598px',
+      width: '600px',
+      panelClass: 'cutam-cupen',
+      data : {
+        action: 'create'
+      }
+    });
   }
 
   bulkPublish(): any{

@@ -8,7 +8,7 @@ import { UserService } from '../../../../services/user.service';
   styleUrl: './history-tab.component.scss'
 })
 export class HistoryTabComponent {
-  
+  isLoading:boolean = false;
   userId:any = "";
   history: any = "";
   isEditable: boolean = false;
@@ -33,35 +33,37 @@ export class HistoryTabComponent {
   }
 
   getScoutHistory(userId:any){
+    this.isLoading = true;
     try {
       this.userService.getScoutHistory(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = response.data.company_history.meta_value; 
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
 
   getClubHistory(userId:any){
+    this.isLoading = true;
     try {
       this.userService.getClubHistory(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = response.data.club_history.meta_value; 
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }

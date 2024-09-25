@@ -10,6 +10,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   styleUrl: './transfers-tab.component.scss',
 })
 export class TransfersTabComponent {
+  isLoading:boolean = false;
   defaultDate: Date = new Date(2023, 4, 21); // May 21, 2023
   userId: any = '';
   userTransfers: any = [];
@@ -44,18 +45,19 @@ export class TransfersTabComponent {
     }
   }
   getUserTransfers(userId:any){
+    this.isLoading = true;
     try {
       this.userService.getTransferData(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userTransfers = response.data.transferDetail;
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error); 
     }
   }

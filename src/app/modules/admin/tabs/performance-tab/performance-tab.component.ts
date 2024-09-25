@@ -8,6 +8,7 @@ import { UserService } from '../../../../services/user.service';
   styleUrl: './performance-tab.component.scss'
 })
 export class PerformanceTabComponent {
+  isLoading: boolean = false;
   isEditing: boolean = false;
   userId:any = "";
   performances:any = [];
@@ -35,21 +36,22 @@ export class PerformanceTabComponent {
   }
 
   getUserPerformance(userId:any){
+
+
+    this.isLoading = true;
     try {
       this.userService.getPerformanceData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.performanceDetail) {
           this.editableId = "";
           this.performances = response.data.performanceDetail; 
-
-          console.log(this.performances)
-          // this.isLoading = false;
+          this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });     
     } catch (error) {
-      // this.isLoading = false;
+      this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }

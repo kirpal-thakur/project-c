@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CoupenCodePopupComponent } from './coupen/coupenCode-popup.component';
 import {  MatDialog } from '@angular/material/dialog';
-import { AdvertisingPopupComponent } from './advertising1/advertising-popup.component';
 
 @Component({
   selector: 'app-website',

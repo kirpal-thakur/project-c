@@ -4,7 +4,7 @@
 
     <div class="d-flex align-items-center justify-content-between" >
       <div class="d-flex align-items-center">
-        <h2 class="card-title mb-0 me-3">{{'Favorites' | translate}} ({{totalFavorites}})</h2>
+        <h2 class="card-title mb-0 me-3">{{'Favorites' | translate}} <span *ngIf="!isLoading">({{totalFavorites}})</span></h2>
       </div>
       <div class="card-search bg-072944 p-1">
         <div class="input-group d-flex align-items-center ">
@@ -212,7 +212,8 @@
       
       <tr class="mat-row user-empty-tr" *matNoDataRow>
         <td [attr.colspan]="displayedColumns.length" class="user-empty-td">
-          <!-- <emplty-table *ngIf="isLoading"></emplty-table> -->
+          <app-loader *ngIf="isLoading"></app-loader>
+          <div *ngIf="userFavorites.length == 0 && !isLoading" style="text-align: center;">No records found.</div>
         </td>
       </tr>
     </table>

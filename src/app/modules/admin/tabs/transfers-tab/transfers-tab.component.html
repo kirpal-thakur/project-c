@@ -141,6 +141,12 @@
             </svg>
         </td>
       </tr>
+      <tr *ngIf="isLoading || userTransfers.length == '0'">
+        <td colspan="5">  
+          <app-loader *ngIf="isLoading"></app-loader>
+          <div *ngIf="userTransfers.length == 0 && !isLoading" style="text-align: center;">No records found.</div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
