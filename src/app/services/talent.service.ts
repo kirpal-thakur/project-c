@@ -108,30 +108,30 @@ export class TalentService {
     );
   }
     
-  uploadCoverImage(userId:any, formdata: any): Observable<any> {
+  uploadCoverImage(formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}/upload-cover-image/${userId}`, formdata, { headers });
+    return this.http.post<any>(`${this.apiUrl2}user/upload-cover-image/`, formdata, { headers });
   }
 
-  deleteCoverImage(userId:any): Observable<any> {
+  deleteCoverImage(): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}/delete-cover-image/${userId}`, {headers}
+      `${this.apiUrl2}user/delete-cover-image/`, {headers}
     );
   }
 
-  uploadGalleryImages(userId:any, formdata: any): Observable<any> {
+  uploadGalleryImages(formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}/upload-gallery-image/${userId}`, formdata, { headers });
+    return this.http.post<any>(`${this.apiUrl2}user/upload-gallery-image/`, formdata, { headers });
   }
 
   deleteGalleryImage(params:any): Observable<any> {
@@ -141,4 +141,27 @@ export class TalentService {
     return this.http.post<any>(`${this.apiUrl2}user/delete-gallery-file`, params, { headers });
   }
 
+  updateTransferDetails(transferId: number, transferData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`, // Include authorization token
+    });
+  
+    return this.http.post<any>(
+      `${this.apiUrl2}player/edit-transfer-detail/${transferId}`, 
+      transferData, 
+      { headers }
+    );
+  }
+  
+  getPerformanceReports(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    
+    return this.http.get<any>(
+      `${this.apiUrl2}/player/get-performance-reports`, 
+      { headers }
+    );
+  }
+  
 }

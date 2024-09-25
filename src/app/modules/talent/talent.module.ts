@@ -34,6 +34,10 @@ import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
+import { ExploreComponent } from './explore/explore.component';
+import { PlanComponent } from './plan/plan.component';
+import { CountriesComponent } from './countries/countries.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,11 @@ import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab
     MessagePopupComponent,
     MembershipComponent,
     PlayerProfileComponent,
-    PerformanceAnalysisTabComponent
+    PerformanceAnalysisTabComponent,
+    ExploreComponent,
+    PlanComponent,
+    CountriesComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -77,7 +85,7 @@ import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab
     MatToolbarModule,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule
+    NgxEditorModule,
   ]
 })
 export class TalentModule { }

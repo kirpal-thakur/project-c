@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TalentService } from '../../../../services/talent.service';
+import { EditTransferDetailsComponent } from '../../edit-transfer-details/edit-transfer-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'talent-transfers-tab',
@@ -23,11 +25,10 @@ export class TransfersTabComponent {
     date_of_transfer: ""
   }
   seasons:any = [];
-  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router ,public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      console.log(params.id)
       this.userId = params.id;
       this.getUserTransfers();
     });
@@ -86,16 +87,43 @@ export class TransfersTabComponent {
     console.log(this.dataTOBeUpdated);
   }
 
-  // updateTransfer(transferId:any){
-  //   this.userService.updateTransfer(transferId, this.dataTOBeUpdated).subscribe((response)=>{
-  //     // console.log(response)
-  //     this.editableId = "";
-  //     if(response.status){
-  //       this.getUserTransfers(this.userId);
-  //     }
-  //   }); 
-  // }
-
+  openEditDialog(transfer: any) {
+    console.log('Opening edit dialog for transfer:', transfer);
+  
+    const dialogRef = this.dialog.open(EditTransferDetailsComponent, {
+      width: '800px',
+      data: {
+        team_from: transfer.team_from,
+        team_to: transfer.team_to,
+        session: transfer.session,
+        date_of_transfer: transfer.date_of_transfer
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Transfer updated:', result);
+        this.updateTransfer(transfer.id, result);
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+  
+  updateTransfer(transferId: number, updatedData: any) {
+    this.userService.updateTransferDetails(transferId, updatedData).subscribe(
+      response => {
+        console.log('Transfer updated successfully:', response);
+        // Refresh the transfers list or take other actions
+        this.getUserTransfers();
+      },
+      error => {
+        console.error('Error updating transfer:', error);
+      }
+    );
+  }
+  
+  
   onSelectChange(event: Event, key:string): void {
     const selectElement = event.target as HTMLSelectElement;
     this.updateRow(key,Number(selectElement.value));

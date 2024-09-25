@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,7 +21,9 @@ export class DashboardComponent implements OnInit {
   user: any = {};
   userNationalities: any = [];
   coverImage: any = "";
-
+  selectedFile : any;
+  
+  @Output() dataEmitter = new EventEmitter<string>();
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
@@ -29,10 +31,8 @@ export class DashboardComponent implements OnInit {
       this.getUserProfile(this.userId);
       this.getCoverImg();
       this.activeTab = 'profile';
-    });
-    
+    });    
   }
-
   
   openEditDialog() {
     console.log('User saved');
@@ -88,7 +88,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
@@ -107,6 +106,54 @@ export class DashboardComponent implements OnInit {
     }
   }
   
+  
+  onCoverFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      console.log(this.selectedFile)
+      try {
+
+        const formdata = new FormData();
+        formdata.append("cover_image", this.selectedFile);
+
+        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
+          if (response && response.status) {
+            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.dataEmitter.emit(this.coverImage); // Emitting the data
+            // this.isLoading = false;
+          } else {
+            // this.isLoading = false;
+            console.error('Invalid API response structure:', response);
+          }
+        });
+      } catch (error) {
+        // this.isLoading = false;
+        console.error('Error fetching users:', error); 
+      }
+    }
+  }
+
+  deleteCoverImage(){
+    try {
+      this.talentService.deleteCoverImage().subscribe((response)=>{
+        if (response && response.status) {
+          setTimeout(() => {
+            this.coverImage = './media/palyers.png';
+          }, 100);
+          this.dataEmitter.emit(''); // Emitting the data
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error); 
+    }
+  }
 
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{

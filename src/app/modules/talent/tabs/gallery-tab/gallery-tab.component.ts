@@ -63,7 +63,7 @@ export class GalleryTabComponent {
         const formdata = new FormData();
         formdata.append("cover_image", this.selectedFile);
 
-        this.talentService.uploadCoverImage(this.userId, formdata).subscribe((response)=>{
+        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
           if (response && response.status) {
             this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
@@ -82,7 +82,7 @@ export class GalleryTabComponent {
 
   deleteCoverImage(){
     try {
-      this.talentService.deleteCoverImage(this.userId).subscribe((response)=>{
+      this.talentService.deleteCoverImage().subscribe((response)=>{
         if (response && response.status) {
           setTimeout(() => {
             this.coverImage = './media/palyers.png';
