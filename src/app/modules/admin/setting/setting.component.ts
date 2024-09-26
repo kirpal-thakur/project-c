@@ -19,7 +19,7 @@ import {
 })
 export class SettingComponent implements OnInit {
   readonly dialog = inject(MatDialog);
-
+  tab:string = "profile";
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
@@ -65,6 +65,9 @@ export class SettingComponent implements OnInit {
       width: '500px',
   });
 }
+  switchTab(tab:any){
+    this.tab = tab;
+  }
 
 
 

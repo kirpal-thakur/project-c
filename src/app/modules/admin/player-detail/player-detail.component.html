@@ -103,7 +103,8 @@
                 <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path" class="user-img"> 
                   <div class="user-edit">
 
-                    <img src="../../../../assets/images/edit-icon.png" class="edit-profile cursor-pointer" alt="">
+                    <label for="file-upload"><img src="../../../../assets/images/edit-icon.png" class="edit-profile cursor-pointer" alt="" ></label>
+                    <input id="file-upload" (change)="onProfileImageChange($event)" accept="image/*" type="file" class="d-none" />
                     <!-- <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" class="club-icon-round" alt=""> -->
                     <div class="club-icon">
                       <img *ngIf="user.club_logo_path" src="{{user.club_logo_path}}" class="club-icon-round cursor-pointer" alt="">

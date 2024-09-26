@@ -13,7 +13,8 @@ export class GalleryTabComponent {
   
   userId: any = '';
   userImages: any = [];
-  imageBaseUrl: any = "";
+  userVideos: any = [];
+  imageBaseUrl: any = "https://api.socceryou.ch/uploads/";
   selectedFile: any = '';
   defaultCoverImage:any = "./media/palyers.png";
   openedMenuId:any = '';
@@ -39,6 +40,7 @@ export class GalleryTabComponent {
       this.userService.getGalleryData(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userImages = response.data.images; 
+          this.userVideos = response.data.videos; 
           this.imageBaseUrl = response.data.file_path;
           // this.isLoading = false;
         } else {
@@ -108,7 +110,8 @@ export class GalleryTabComponent {
         top:'150px'
       },
       data: {
-        userId: this.userId
+        userId: this.userId,
+        type: "image"
       }
     })
 
@@ -118,6 +121,30 @@ export class GalleryTabComponent {
           console.log(result.files)
          this.userImages = [...result.files, ...this.userImages];
          console.log(this.userImages)
+        }
+      }
+    });
+  }
+
+  addVideosPopup(){
+    const messageDialog = this.dialog.open(UploadPopupComponent,{
+      width: '900px',
+      // height: '300px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        userId: this.userId,
+        type: "video"
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.files.length){
+          console.log(result.files)
+         this.userVideos = [...result.files, ...this.userVideos];
+         console.log(this.userVideos)
         }
       }
     });
@@ -162,6 +189,52 @@ export class GalleryTabComponent {
        const anchor = document.createElement('a');
        anchor.href = url;
        anchor.download = image; // Set the filename for download
+       document.body.appendChild(anchor);
+       anchor.click();
+       window.URL.revokeObjectURL(url);
+       document.body.removeChild(anchor);
+     })
+     .catch(error => {
+       console.error('There was an error downloading the file:', error);
+     });
+  }
+
+  
+  deleteVideo(id:any){
+    
+    try {
+      let params = {id: [id]};
+      this.userService.deleteGalleryImage(params).subscribe((response)=>{
+        if (response && response.status) {
+          let index = this.userVideos.findIndex((x:any) => x.id == id)
+          this.userVideos.splice(index, 1);
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error); 
+    }
+  }
+
+  downloadVideo(baseUrl:any, video:any){
+
+    fetch(baseUrl+video)
+     .then(response => {
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+       return response.blob(); // Convert the response to a Blob object
+     })
+     .then(blob => {
+      this.openedMenuId = '';
+       const url = window.URL.createObjectURL(blob);
+       const anchor = document.createElement('a');
+       anchor.href = url;
+       anchor.download = video; // Set the filename for download
        document.body.appendChild(anchor);
        anchor.click();
        window.URL.revokeObjectURL(url);

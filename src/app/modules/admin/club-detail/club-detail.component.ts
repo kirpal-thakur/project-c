@@ -113,4 +113,33 @@ export class ClubDetailComponent implements OnInit {
     this.coverImage = data; // Assign the received data to a variable
     console.log('Data received from child:', data);
   }
+
+  onProfileImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      let FileToUpload = input.files[0];
+
+      console.log(FileToUpload)
+      try {
+        const formdata = new FormData();
+        formdata.append("profile_image", FileToUpload);
+
+        this.userService.uploadProfileImage(this.userId, formdata).subscribe((response)=>{
+          if (response && response.status) {
+            this.showMatDialog('Profile image updated successfully!', 'display');
+            this.user.meta.profile_image_path = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            // this.dataEmitter.emit(this.coverImage); // Emitting the data
+            // this.isLoading = false;
+          } else {
+            this.showMatDialog('Error in updating profile image!', 'display');
+            // this.isLoading = false;
+            console.error('Invalid API response structure:', response);
+          }
+        });
+      } catch (error) {
+        // this.isLoading = false;
+        console.error('Error upload image:', error); 
+      }
+    }
+  }
 }
