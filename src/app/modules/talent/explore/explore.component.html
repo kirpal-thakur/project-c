@@ -1,1 +1,48 @@
-<p>explore works!</p>
+<div class="container">
+    <div class="pagination">
+        <button (click)="previousPage()">Previous</button>
+        <span>{{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()">Next</button>
+    </div>
+</div>
+  
+<div class="page-content">
+    <div class="main-wrapper">
+      <div class="card">
+        <div class="card-header border-0">  
+          <div class="table-responsive" >
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Talents</th>
+                    <th>Country</th>
+                    <th>Position</th>
+                    <th>Age</th>
+                    <th>Foot</th>
+                    <th>Top Speed</th>
+                    <th>League</th>
+                    <th>Club</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let player of players">
+                    <td>{{ player.name }}</td>
+                    <td>{{ player.country }}</td>
+                    <td>{{ player.position }}</td>
+                    <td>{{ player.age }}</td>
+                    <td>{{ player.foot }}</td>
+                    <td>{{ player.topSpeed }} km/h</td>
+                    <td>{{ player.league }}</td>
+                    <td>{{ player.club }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  

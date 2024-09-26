@@ -102,7 +102,7 @@ export class TalentService {
       `${this.apiUrl}user/get-purchase-history`, {
         params: {
           page: pageNumber.toString(),
-          limit: pageSize.toString()
+          // limit: pageSize.toString()
         }
       }
     );

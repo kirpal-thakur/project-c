@@ -1,1 +1,60 @@
-<p>plan works!</p>
+<div class="page-content">
+  <div class="main-wrapper">
+    <div class="card subscription-plan">
+      <h2>Subscription Plans</h2>
+      <div class="row mt-4">
+        <div *ngFor="let plan of plans" class="col-lg-4">
+          <div class="subscription-switch mb-2 mx-2">
+            <label class="switch_off" (click)="toggleMonthly(plan)">Billed Monthly</label>
+            <input type="checkbox" [(ngModel)]="plan.isYearly" id="switch_{{ plan.name }}">
+            <label class="switch_on" (click)="toggleYearly(plan)">Billed Yearly</label>
+          </div>
+          
+          <div class="premium-plan_box mx-2">
+            <div class="plan_box">
+              <div class="d-flex align-items-center justify-content-between">
+                <h3>{{ plan.name }}</h3>
+                <div class="premium_button">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                    <!-- SVG Path -->
+                  </svg>
+                  <span>You have active {{ plan.name }} Plan</span>
+                </div>
+              </div>
+
+              <div class="premium-currency">
+                <h6>{{ plan.isYearly ? plan.priceYearly : plan.priceMonthly }}
+                  <sub class="premium-month_title">.-{{ plan.currency }}/{{ plan.isYearly ? 'Year' : 'Month' }}</sub>
+                </h6>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-4 quantity">
+                  <button class="minus" (click)="decreaseValue(plan)">-</button>
+                  <input class="input-box" type="number" [value]="plan.quantity" (input)="handleQuantityChange($event, plan)" [max]="maxQuantity">
+                  <button class="plus" (click)="increaseValue(plan)">+</button>
+                </div>
+                <div class="col-lg-8">
+                  <button class="choose-plan-btn" (click)="editPlanPopup(1)">Choose Plan</button>
+                </div>
+              </div>
+            </div>
+
+            <hr class="premium_list-line">
+            <div class="plan_box premium-plan-list">
+              <h3>{{ plan.name }} Includes</h3>
+              <ul class="premium_list">
+                <li *ngFor="let item of plan.includes">
+                  <label>
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>{{ item }}
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

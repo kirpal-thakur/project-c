@@ -28,9 +28,6 @@ export class FavoritesComponent {
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
-      console.log(params.id)
-      // this.userId = params.id;
-      this.userId = 59;
       this.getUserFavorites();
     });
   }

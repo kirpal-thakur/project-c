@@ -1,0 +1,35 @@
+<div class="edit-multi-country-plan container p-4 border rounded bg-light">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Edit Multi-Country Plan</h2>
+      <button class="btn-close" aria-label="Close" (click)="cancel()"></button>
+    </div>
+  
+    <div class="country-selection mb-4">
+      <h3>Select Countries</h3>
+      <select class="form-select" [(ngModel)]="selectedCountries">
+        <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+      </select>
+    </div>
+  
+    <div class="subscription-type mb-4">
+      <h3>Subscription Type</h3>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="monthly" [value]="subscriptionTypeOptions.MONTHLY" [(ngModel)]="subscriptionType">
+        <label class="form-check-label" for="monthly">Monthly</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="yearly" [value]="subscriptionTypeOptions.YEARLY" [(ngModel)]="subscriptionType">
+        <label class="form-check-label" for="yearly">Yearly</label>
+      </div>
+    </div>
+  
+    <p class="prorata-explanation mb-4">
+      {{ 'prorataExplanation' | translate }}
+    </p>
+  
+    <div class="actions d-flex justify-content-end">
+      <button class="btn btn-secondary me-2" (click)="cancel()">Cancel</button>
+      <button class="btn btn-primary" (click)="buy()">Buy Now</button>
+    </div>
+</div>
+  
