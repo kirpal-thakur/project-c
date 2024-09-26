@@ -15,9 +15,11 @@ export class UploadPopupComponent {
   userId: any = '';
   uploadedFiles:any = [];
   uploadResponse:any = [];
+  type:string = "";
   constructor(private userService: UserService, public dialogRef : MatDialogRef<UploadPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userId = data.userId;
+      this.type = data.type;
   }
 
   files: File[] = [];
@@ -65,10 +67,45 @@ export class UploadPopupComponent {
       this.files.push(files.item(i)!);
     }
 
-    this.uploadImages(this.files);
+    if(this.type == "image"){
+      this.uploadImages(this.files);
+    }else if(this.type == "video"){
+      this.uploadVideos(this.files);
+    }
+   
   }
 
   uploadImages(files:any){
+    const formdata = new FormData();
+    
+    for (let i = 0; i < files.length; i++) {
+      formdata.append("gallery_images[]", files[i]);
+    }
+
+    console.log('formdata')
+    console.log(formdata)
+
+    this.userService.uploadGalleryImages(this.userId, formdata).subscribe((response)=>{
+      console.log(response)
+      response.forEach((row:any) => {
+        console.log(row);
+        this.uploadResponse.push(row.message)
+        if(row.status){
+          this.uploadedFiles.push({id:row.data.id, file_name: row.data.uploaded_file});
+        }
+
+      });
+      // if (response && response.status) {
+        
+        // this.isLoading = false;
+      // } else {
+        // this.isLoading = false;
+        // console.error('Invalid API response structure:', response);
+      // }
+    });
+  }
+
+  uploadVideos(files:any){
     const formdata = new FormData();
     
     for (let i = 0; i < files.length; i++) {

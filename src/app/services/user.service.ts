@@ -275,5 +275,14 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/get-sightings/${id}`, {headers}
     );
-  } 
+  }
+  
+  uploadProfileImage(userId:any, formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/upload-profile-photo/${userId}`, formdata, { headers });
+  }
+  
 }

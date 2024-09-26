@@ -69,6 +69,9 @@ import { CouponsComponent } from './website/coupons/coupons.component';
 import { AdvertisingComponent } from './website/advertising/advertising.component';
 import { LoaderComponent } from './loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ProfileComponent } from './setting/profile/profile.component';
+import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
+import { TeamMembersComponent } from './setting/team-members/team-members.component';
   
 @NgModule({
   declarations: [
@@ -118,7 +121,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     BlogComponent,
     CouponsComponent,
     AdvertisingComponent,
-    LoaderComponent
+    LoaderComponent,
+    ProfileComponent,
+    ActivityLogComponent,
+    TeamMembersComponent
   ],
   imports: [
     CommonModule,
