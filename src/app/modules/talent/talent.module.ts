@@ -38,6 +38,10 @@ import { ExploreComponent } from './explore/explore.component';
 import { PlanComponent } from './plan/plan.component';
 import { CountriesComponent } from './countries/countries.component';
 import { ChatComponent } from './chat/chat.component';
+import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
+import { PaymentsPopupComponent } from './payments-popup/payments-popup.component';
+import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
+import { EditPlanComponent } from './edit-plan/edit-plan.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { ChatComponent } from './chat/chat.component';
     ExploreComponent,
     PlanComponent,
     CountriesComponent,
-    ChatComponent
+    ChatComponent,
+    ViewMembershipPopupComponent,
+    PaymentsPopupComponent,
+    EditMembershipProfileComponent,
+    EditPlanComponent
   ],
   imports: [
     CommonModule,

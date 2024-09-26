@@ -1,0 +1,35 @@
+<div class="container my-4">
+    <h1 class="mb-4">{{ 'Invoice' | translate }} #{{ plan.invoice_number }}</h1>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>{{ 'Category' | translate }}</th>
+            <th>{{ 'Plan' | translate }}</th>
+            <th>{{ 'Duration' | translate }}</th>
+            <th>{{ 'Valid until' | translate }}</th>
+            <th>{{ 'Price' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ plan.category }}</td>
+            <td>{{ plan.currency }}</td>
+            <td>{{ plan.duration }}</td>
+            <td>{{ plan.valid_until }}</td>
+            <td>{{ plan.price }} CHF</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="mt-4">
+      <p><strong>{{ 'Subtotal' | translate }}:</strong> {{ plan.subtotal }} CHF</p>
+      <p><strong>Incl. VAT 8.1%:</strong> 1.78 CHF</p>
+      <p><strong>{{ 'Total' | translate }}:</strong> {{ plan.total }} CHF</p>
+  
+      <a href="{{ plan.download_path }}" class="btn btn-primary mt-3">{{ 'Download PDF' | translate }}</a>
+    </div>
+  </div>
+  

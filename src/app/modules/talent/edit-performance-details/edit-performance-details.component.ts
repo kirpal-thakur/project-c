@@ -30,7 +30,6 @@ export class EditPerformanceDetailsComponent {
     this.dialogRef.close(this.user);
   }
 
-  
   openEditGeneralDialog() {
     console.log('User saved');
 

@@ -4,6 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { TalentService } from '../../../services/talent.service';
+import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
+import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
+import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
+import { PaymentsPopupComponent } from '../payments-popup/payments-popup.component';
 
 @Component({
   selector: 'app-membership',
@@ -28,52 +32,47 @@ export class MembershipComponent {
     { id: 2, name: 'Pro', price: 19.99, features: ['Feature 1', 'Feature 2'] },
   ];
 
-  transactions = [
-    { id: 1, date: new Date(), amount: 9.99, status: 'Completed' },
-    { id: 2, date: new Date(), amount: 19.99, status: 'Pending' },
-  ];
-
   subscribe(plan: any) {
     console.log(`Subscribed to: ${plan.name}`);
   }
-  
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
-    constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router) { }
-  
 
-    ngOnInit(): void {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-      this.route.params.subscribe((params:any) => {
-        console.log(params.id)
-        this.userId = params.id;
-        this.getUserPurchases()
-      });
-    }
-  
-    // Fetch purchases from API with pagination parameters
-    getUserPurchases(): void {
-      const pageNumber = this.currentPage;
-      const pageSize = this.pageSize;
-  
-      this.userService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
-        if (response && response.status && response.data) {
-          this.userPurchases = response.data.purchaseHistory;
-          this.totalItems = response.data.totalItems; // Assuming API returns the total number of purchases
-        } else {
-          console.error('Invalid API response:', response);
-        }
-      }, error => {
-        console.error('Error fetching user purchases:', error);
-      });
-    }
-  
-    // Event triggered when paginator changes
-    onPageChange(event: any): void {
-      this.currentPage = event.pageIndex;
-      this.pageSize = event.pageSize;
-      this.getUserPurchases(); // Fetch new data when page changes
-    }
+  constructor(private route: ActivatedRoute, private userService: TalentService, public dialog: MatDialog,private router: Router) { }
+
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params:any) => {
+      this.userId = params.id;
+      this.getUserPurchases()
+    });
+  }
+
+  // Fetch purchases from API with pagination parameters
+  getUserPurchases(): void {
+    const pageNumber = this.currentPage != 0 ? this.currentPage : 1;
+    const pageSize = this.pageSize;
+
+    this.userService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
+      if (response && response.status && response.data) {
+        this.userPurchases = response.data.purchaseHistory;
+        this.totalItems = response.data.totalCount; // Assuming API returns the total number of purchases
+        console.log(this.userPurchases)
+
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    }, error => {
+      console.error('Error fetching user purchases:', error);
+    });
+  }
+
+  // Event triggered when paginator changes
+  onPageChange(event: any): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getUserPurchases(); // Fetch new data when page changes
+  }
 
   onCheckboxChange(user: any) {
     const index = this.selectedIds.indexOf(user.id);
@@ -84,6 +83,75 @@ export class MembershipComponent {
     }
   }
 
+
+  viewMembership(id:any) {
+
+    const userPurchase = this.getSubscriptionById(id);
+    const dialogRef = this.dialog.open(ViewMembershipPopupComponent, {
+      width: '800px',
+      data: {
+        invoice_number: userPurchase.invoice_number,
+        category: userPurchase.payment_method,
+        plan: '',
+        duration: userPurchase.plan_interval,
+        valid_until: userPurchase.plan_period_end,
+        price: userPurchase.plan_amount,
+        subtotal: userPurchase.amount_paid,
+        total: userPurchase.amount_paid,
+        currency : userPurchase.amount_paid_currency,
+        downlaod_path: userPurchase.invoice_file_path,
+      }
+    });
+
+  }
+
+  editMembershipDialog(id:any) {
+
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '800px',
+      data: {
+        invoice_number: '',
+        category: '',
+        plan: '',
+        duration: '',
+        valid_until: '',
+        price: '',
+        subtotal: '',
+        total: '',
+        currency : '',
+        downlaod_path: '',
+      }
+    });
+
+  }
+
+  paymentDialog() {
+    const dialogRef = this.dialog.open(PaymentsPopupComponent, {
+      width: '800px',
+      data: {
+        cards: [
+          {
+            cardType: 'VISA',
+            cardNumber: 'Visa ending in 2255',
+            expiryDate: '09/2026',
+            isPrimary: true
+          },
+          {
+            cardType: 'VISA',
+            cardNumber: 'Visa ending in 4455',
+            expiryDate: '05/2025',
+            isPrimary: false
+          }
+        ]
+      }
+    });
+  
+    // Optionally handle dialog closing events
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog result:', result);
+    });
+  }
+  
   selectAllCheckboxes() {
     console.log('p', this.allSelected)
     this.allSelected = !this.allSelected;
@@ -145,5 +213,9 @@ export class MembershipComponent {
     }
   }
 
+
+  getSubscriptionById(id: string) {
+    return this.userPurchases.find((subscription:any) => subscription.id === id);
+  }
 
 }

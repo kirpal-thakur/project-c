@@ -103,7 +103,7 @@ export class EditPersonalDetailsComponent implements OnInit {
           this.firstName = this.user.first_name || '';
           this.lastName = this.user.last_name || '';
           this.userNationalities = JSON.parse(this.user.user_nationalities);
-          this.nationality = this.user.userNationalities[0].country_name;
+          this.nationality = this.user.userNationalities[0];
         }
       } else {
         console.error('Invalid API response structure:', response);
