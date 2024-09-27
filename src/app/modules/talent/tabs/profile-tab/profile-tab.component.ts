@@ -16,6 +16,11 @@ export class ProfileTabComponent {
   @Input() userData: any;
 
   ngOnInit(): void {
+    
+    setTimeout(() => {
+      console.log('profile tab', this.user);
+     }, 1000);
+ 
     // console.log(this.userData)
     // this.positions = JSON.parse(this.userData.positions);
     // console.log(this.positions)

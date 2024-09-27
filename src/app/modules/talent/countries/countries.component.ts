@@ -15,14 +15,11 @@ export class CountriesComponent {
   filteredImages: any[] = [];  // Fixed: explicitly set as an array
   paginatedImages: any[] = [];
 
-  constructor(
-    private talentService: TalentService,
-  ) {}
+  constructor(private talentService: TalentService) {}
 
   ngOnInit() {
     this.loadCountries();
   }
-
   
   loadCountries(): void {
     this.talentService.getCountries().subscribe(
@@ -36,5 +33,22 @@ export class CountriesComponent {
         console.error('Error fetching teams:', error);
       }
     );
+  }
+
+  selectedCountries: string[] = []; // Store selected country names here
+
+  toggleCountrySelection(country: any) {
+    const index = this.selectedCountries.indexOf(country.country_name);
+    if (index === -1) {
+      this.selectedCountries.push(country.country_name); // Select country if not selected
+    } else {
+      this.selectedCountries.splice(index, 1); // Deselect if already selected
+    }
+    console.log('countries',this.selectedCountries)
+
+  }
+
+  isSelectedCountry(country: any): boolean {
+    return this.selectedCountries.includes(country.country_name);
   }
 }

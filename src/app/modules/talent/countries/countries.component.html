@@ -1,12 +1,26 @@
 <div class="page-content">
     <div class="main-wrapper">
-        <div class="card pb-0 px-3">            
-            <!-- Image Gallery -->
-            <div class="row gallery">
-                <div class="col-md-3 mb-3 text-center d-flex align-items-center justify-content-center;" *ngFor="let country of countries">
-                    <img [src]="country.src" alt="{{country.country_name}}" class="img-thumbnail" />
-                </div>
-            </div>        
+        <div class="card pb-0 px-3">
+            
+            <!-- Subscription message -->
+            <div class="alert alert-success">
+                You have 1 more active Multi-Country subscription. Choose one country from the below list to showcase your profile in that country.
+            </div>
+        
+                <!-- Country Cards -->
+            <div class="row px-2">
+                <div class="col-md-3 mt-3" *ngFor="let country of countries">
+                    <div class="country-card h-100" [ngClass]="{'selected': isSelectedCountry(country)}" (click)="toggleCountrySelection(country)" >
+                        <img [src]="country.flag" alt="{{country.country_name}}" class="img-thumbnail"/>
+                        <div class="country-info">
+                            <h4>{{ country.country_name }}</h4>
+                            <span *ngIf="country.isDefault" class="badge badge-warning">Default</span>
+                            <span *ngIf="country.isPurchased" class="badge badge-success">Purchased</span>
+                            <span *ngIf="country.isExpiring" class="badge badge-danger">Start Expiring</span>
+                        </div>
+                    </div>
+                </div>   
+            </div>
         </div>
     </div>
 </div>

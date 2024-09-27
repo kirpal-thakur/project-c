@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {
   MatDialogRef,MAT_DIALOG_DATA
 } from '@angular/material/dialog';
+import { TalentService } from '../../../services/talent.service';
 
 @Component({
   selector: 'edit-general-details',
@@ -12,14 +13,14 @@ import {
 export class EditGeneralDetailsComponent {
   user: any;
   countries: string[] = ['United States', 'Germany', 'Canada', 'India'];
-  leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];
   
   constructor(public dialogRef : MatDialogRef<EditGeneralDetailsComponent>,public dialog: MatDialog,
+    private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
   ngOnInit(): void {
-    this.user = { ...this.data.user };
+    this.user = { ...this.data.user };    
   }
 
   onCancel(): void {
@@ -28,38 +29,21 @@ export class EditGeneralDetailsComponent {
 
   onSave(): void {
     this.dialogRef.close(this.user);
+    console.log(this.user)
   }
 
-  
-  openEditGeneralDialog() {
-    console.log('User saved');
-
-    const dialogRef = this.dialog.open(EditGeneralDetailsComponent, {
-      width: '600px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
+  loadCountries(): void {
+    this.talentService.getCountries().subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+          console.log('countries',this.countries)
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching teams:', error);
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-      } else {
-        console.log('User canceled the edit');
-      }
-    });
+    );
   }
 
 }

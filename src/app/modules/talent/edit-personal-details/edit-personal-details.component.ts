@@ -67,7 +67,6 @@ export class EditPersonalDetailsComponent implements OnInit {
     );
   }
 
-  
   loadCountries(): void {
     this.talentService.getCountries().subscribe(
       (response: any) => {
