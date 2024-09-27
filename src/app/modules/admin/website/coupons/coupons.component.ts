@@ -108,6 +108,7 @@ export class CouponsComponent {
     );
   }
   editCoupon(element:any){
+    // edit coupon not available in stripe
     const updateCouponDialog = this.dialog.open(CoupenPopupComponent,{
       height: '598px',
       width: '600px',
@@ -127,6 +128,16 @@ export class CouponsComponent {
       panelClass: 'cutam-cupen',
       data : {
         action: 'create'
+      }
+    });
+
+    createCouponDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "popupAdded"){
+          this.showMatDialog('Coupon created successfully!', 'display');
+          this.getCoupons();
+        }
+      //  console.log('Dialog result:', result);
       }
     });
   }

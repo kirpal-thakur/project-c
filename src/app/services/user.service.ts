@@ -282,7 +282,33 @@ export class UserService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}/upload-profile-photo/${userId}`, formdata, { headers });
+    return this.http.post<any>(`${this.apiUrl2}/upload-profile-image/${userId}`, formdata, { headers }); 
+  }
+
+  getAdminProfile(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}profile`, {headers}
+    );
+  }
+
+  updateAdminProfile(formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/settings/profile`, formdata, { headers }); 
+  }
+
+  updateAdminImage(formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/settings/upload-profile-image`, formdata, { headers }); 
   }
   
 }
