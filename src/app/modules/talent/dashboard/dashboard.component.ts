@@ -21,12 +21,14 @@ export class DashboardComponent implements OnInit {
   user: any = {};
   userNationalities: any = [];
   coverImage: any = "";
+  profileImage: any = "";
   selectedFile : any;
   
   @Output() dataEmitter = new EventEmitter<string>();
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
+     this.getUserProfile(this.userId);
     this.route.params.subscribe(() => {
       this.getUserProfile(this.userId);
       this.getCoverImg();
@@ -75,6 +77,7 @@ export class DashboardComponent implements OnInit {
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           if(this.user.meta && this.user.meta.cover_image_path){
             this.coverImage = this.user.meta.cover_image_path;
+            this.profileImage = this.user.meta.profile_image_path;
           }
           // this.isLoading = false;
         } else {
@@ -105,8 +108,34 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
-  
-  
+    
+  onProfileFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+
+      try {
+
+        const formdata = new FormData();
+        formdata.append("profile_image", this.selectedFile);
+
+        this.talentService.uploadProfileImage(formdata).subscribe((response)=>{
+          if (response && response.status) {
+            this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.dataEmitter.emit(this.profileImage); // Emitting the data
+            // this.isLoading = false;
+          } else {
+            // this.isLoading = false;
+            console.error('Invalid API response structure:', response);
+          }
+        });
+      } catch (error) {
+        // this.isLoading = false;
+        console.error('Error fetching users:', error); 
+      }
+    }
+  }
+
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -201,7 +230,6 @@ export class DashboardComponent implements OnInit {
   switchTab(tab: string){
     this.activeTab = tab;
   }
-
 
   deleteUser(){
     this.userService.deleteUser([this.userId]).subscribe(

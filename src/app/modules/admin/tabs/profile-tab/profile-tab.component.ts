@@ -10,9 +10,14 @@ export class ProfileTabComponent {
   userNationalities:any = [];
 
   @Input() userData: any;
-
+  constructor(){
+    console.log('coming this data',this.userData);
+  }
+  ngAfterViewInit(){
+    //console.log('coming this data',this.userData)
+  }
   ngOnInit(): void {
-    console.log(this.userData)
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {

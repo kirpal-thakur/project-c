@@ -125,6 +125,14 @@ export class TalentService {
       `${this.apiUrl2}user/delete-cover-image/`, {headers}
     );
   }
+  
+  uploadProfileImage(formdata: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}user/upload-profile-image/`, formdata, { headers });
+  }
 
   uploadGalleryImages(formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -164,4 +172,22 @@ export class TalentService {
     );
   }
   
+    /**
+   * Change password for the user.
+   * @param newPassword The new password to set.
+   * @param confirmPassword The confirmation of the new password.
+   * @returns Observable of the API response.
+   */
+    changePassword(newPassword: string, confirmPassword: string): Observable<any> {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.userToken}`,  // Add token to header
+      });
+  
+      const formData = new FormData();
+      formData.append('new_password', newPassword);
+      formData.append('new_con_password', confirmPassword);
+  
+      // POST request to the change-password API
+      return this.http.post<any>(`${this.apiUrl2}change-password`, formData, { headers });
+    }
 }

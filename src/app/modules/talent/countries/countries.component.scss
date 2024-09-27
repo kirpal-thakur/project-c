@@ -1,0 +1,25 @@
+.country-card {
+    border: 2px solid transparent;
+    text-align: center;
+    padding: 15px;
+    cursor: pointer;
+  
+    .country-info {
+      margin-top: 10px;
+    }
+  
+    img {
+      max-width: 100px;
+      margin: 10px auto;
+    }
+  
+    &.selected {
+      border-color: red;
+      background-color: #f8d7da;
+    }
+    
+    .badge {
+      margin-top: 5px;
+    }
+  }
+  

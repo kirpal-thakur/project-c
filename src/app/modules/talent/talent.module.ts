@@ -42,6 +42,8 @@ import { ViewMembershipPopupComponent } from './view-membership-popup/view-membe
 import { PaymentsPopupComponent } from './payments-popup/payments-popup.component';
 import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
 import { EditPlanComponent } from './edit-plan/edit-plan.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EditGeneralDetailsComponent } from './edit-general-details/edit-general-details.component';
 
 @NgModule({
   declarations: [
@@ -64,11 +66,13 @@ import { EditPlanComponent } from './edit-plan/edit-plan.component';
     ExploreComponent,
     PlanComponent,
     CountriesComponent,
-    ChatComponent,
     ViewMembershipPopupComponent,
     PaymentsPopupComponent,
     EditMembershipProfileComponent,
-    EditPlanComponent
+    EditPlanComponent,
+    ResetPasswordComponent,
+    EditGeneralDetailsComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -94,6 +98,7 @@ import { EditPlanComponent } from './edit-plan/edit-plan.component';
     MatTableModule,
     MatPaginator,
     NgxEditorModule,
+    
   ]
 })
 export class TalentModule { }
