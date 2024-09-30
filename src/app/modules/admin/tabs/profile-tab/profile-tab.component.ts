@@ -12,12 +12,14 @@ export class ProfileTabComponent {
   @Input() userData: any;
   constructor(){
     console.log('coming this data',this.userData);
+    
   }
   ngAfterViewInit(){
     //console.log('coming this data',this.userData)
   }
   ngOnInit(): void {
-    
+    this.user = localStorage.getItem('userData');
+    this.user = JSON.parse(this.user);
   }
 
   ngOnChanges(changes: SimpleChanges) {
