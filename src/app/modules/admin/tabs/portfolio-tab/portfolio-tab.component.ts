@@ -47,8 +47,9 @@ export class PortfolioTabComponent {
   viewScoutPlayer(playerId:any){
     const playerViewDialog = this.dialog.open(ScoutPlayerViewPopupComponent,{
       width: '1000px',
+      height: '600px',
       position: {
-        top:'80px'
+        top:'30px'
       },
       data: {
         playerId: playerId

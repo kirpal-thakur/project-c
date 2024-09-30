@@ -20,6 +20,7 @@ export class CoupenPopupComponent   {
   limit: any = ""
   isSingleUsePerCustomer: boolean = false;
   disableEndDate:boolean = false;
+  errorMsg:any = {}
   constructor(
     public dialogRef: MatDialogRef<CoupenPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private couponService: CouponService
@@ -61,7 +62,7 @@ export class CoupenPopupComponent   {
     }else if(this.type == "percent"){
       params.discount_type = 'percent_off';
     }
-    params.discount = this.discount;
+    params.discount = Number(this.discount);
     
     params.valid_from = this.startDate;
 
@@ -81,14 +82,16 @@ export class CoupenPopupComponent   {
       params.limit_per_user = 1;
     }
 
-    console.log(params)
+    // console.log(params)
     
     this.couponService.addPopups(params).subscribe(
       response => {
         if(response.status){
-          
+          this.dialogRef.close({
+            action: 'popupAdded'
+          });
         }else{
-          
+          this.errorMsg = response.data.error
         }
       },
       error => {

@@ -145,7 +145,7 @@ export class MarketingPopupComponent {
       }
     });         
   }
-
+ 
   updatePopup():any{
 
     if(this.title == "" || this.selectedRole == "" || this.selectedLang == "" || this.selectedLocation == "" || this.startDate == "" || this.endDate == "" || this.selectedFrequency == "" || this.html == ""){

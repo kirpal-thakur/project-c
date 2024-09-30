@@ -40,14 +40,19 @@
             </div> -->
             <div class="setting-media">
               <label for="file-upload" class="custom-file-upload">
-                <img src="../../../assets/images/1.jpg" alt="" />
-                <span class="setting-edit">
+                <img src="{{image}}" alt="" />
+                <span class="setting-edit" *ngIf="!imageLoading">
                   Click to <br>
                   Change Photo
                   <br>
                 </span>
+                <span class="setting-edit" *ngIf="imageLoading">
+                  Uploading <br>
+                  Image...
+                  <br>
+                </span>
               </label>
-              <input id="file-upload" type="file" class="setting-media-2" style="display: none;" />
+              <input id="file-upload" type="file" class="setting-media-2" style="display: none;" (change)="onProfileImageChange($event)" accept="image/*" />
             </div>
           </div>
           <div class="col-lg-8">
@@ -127,7 +132,14 @@
                 </div>
                 <div class="mb-3">
                   <label for="stateSelect" class="form-label">State</label>
-                  <select
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="stateInput"
+                    placeholder="State"
+                    [(ngModel)]="state"
+                  />
+                  <!-- <select
                     class="form-select"
                     aria-label="Default select example"
                     [(ngModel)]="state"
@@ -136,7 +148,7 @@
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
-                  </select>
+                  </select> -->
                 </div>
               </div>
               <div class="col-lg-6">
@@ -162,7 +174,7 @@
                 </div>
               </div>
               <div class="setting-btn">
-                <a href="javascript:void(0);" class="btn btn-primary">Save</a>
+                <a href="javascript:void(0);" class="btn btn-primary" (click)="updateAdminProfile()">Save</a>
               </div>
             </div>
           </div>
