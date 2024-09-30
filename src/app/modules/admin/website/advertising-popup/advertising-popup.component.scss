@@ -17,10 +17,11 @@
   border: 1px solid #999999;
   border-radius: 4px;
   padding: 6px 8px;
-  cursor: pointer;
+  cursor: text !important;
   font-size: 13px;
   background: none;
   width: 150px;
+  min-width: 180px !important;
 }
 
 .cupen-btn-date{
@@ -118,4 +119,24 @@
     display: flex;
     column-gap: 160px; 
     bottom: -40px;
+}
+
+
+.cdk-overlay-pane{
+  min-width:180px !important;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 5px; 
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.disable-end-date{
+  opacity: 0.4;
+}
+.disable-end-date div, .disable-end-date button {
+    pointer-events: none;
 }

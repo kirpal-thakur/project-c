@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { AdvertisementService } from '../../../../services/advertisement.service';
+import { AdvertisingPopupComponent } from '../advertising-popup/advertising-popup.component';
 @Component({
   selector: 'app-advertising',
   templateUrl: './advertising.component.html',
@@ -88,21 +89,47 @@ export class AdvertisingComponent {
   }
 
   editAdvertisement(element:any){
-    // const dialogRef = this.dialog.open(AdvertisingPopupComponent,{
-    //   height: '500px',
-    //   width: '600px',
-    //   panelClass: 'cutam-cupen'
-    //   // position: {
-    //   //   top:'75px',
-    //   //   left:'340px'
-    //   // }
-    
-    // });
+    const updateAdDialog = this.dialog.open(AdvertisingPopupComponent,{
+      height: '598px',
+      width: '600px',
+      panelClass: 'cutam-cupen',
+      data : {
+        action: 'update',
+        ad: element
+      }
+    });
+
+    updateAdDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "updated"){
+          this.showMatDialog('Advertisement updated successfully!', 'display');
+          this.getAdvertisements();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
   }
 
 
   createAdvertisement(){
+    const createAdDialog = this.dialog.open(AdvertisingPopupComponent,{
+      height: '598px',
+      width: '600px',
+      panelClass: 'cutam-cupen',
+      data : {
+        action: 'create'
+      }
+    });
 
+    createAdDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "added"){
+          this.showMatDialog('Advertisement created successfully!', 'display');
+          this.getAdvertisements();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
   }
 
   viewCoupon(element:any){

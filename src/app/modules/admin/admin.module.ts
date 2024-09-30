@@ -37,7 +37,7 @@ import { FavoritesTabComponent } from './tabs/favorites-tab/favorites-tab.compon
 import { PurchaseTabComponent } from './tabs/purchase-tab/purchase-tab.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CoupenPopupComponent } from './website/coupon-popup/coupon-popup.component';
-import { AdvertisingPopupComponent } from './website/advertising1/advertising-popup.component';
+import { AdvertisingPopupComponent } from './website/advertising-popup/advertising-popup.component';
 import { NgxEditorModule  } from 'ngx-editor';
 import { ChatTabComponent } from './tabs/chat-tab/chat-tab.component';
 import { TeamMemberDetailComponent } from './setting/teamMember/teamMember.detail.component';
