@@ -15,18 +15,17 @@ export class ProfileTabComponent {
 
   @Input() userData: any;
 
-  ngOnInit(): void {
-    
-    setTimeout(() => {
-      console.log('profile tab', this.user);
-     }, 1000);
- 
-    // console.log(this.userData)
-    // this.positions = JSON.parse(this.userData.positions);
-    // console.log(this.positions)
+  constructor( public dialog: MatDialog) { 
+    // If you want to load the user data from localStorage during initialization
   }
 
-  constructor( public dialog: MatDialog) { }
+  ngOnInit(): void {
+    this.user = this.userData;
+    setTimeout(() => {
+      console.log('profile tab', this.user);
+    }, 1000);
+    
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userData']) {
@@ -57,24 +56,10 @@ export class ProfileTabComponent {
 
   
   openEditGeneralDialog() {
-    console.log('User saved');
 
     const dialogRef = this.dialog.open(EditGeneralDetailsComponent, {
       width: '850px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
+      data: { user: this.user }  // Corrected data passing      
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -108,14 +93,14 @@ export class ProfileTabComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-      } else {
-        console.log('User canceled the edit');
-      }
-    });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      console.log('User saved:', result);
+      // Handle the save result (e.g., update the user details)
+    } else {
+      console.log('User canceled the edit');
+    }
+  });
   }
 
     // Function to get the main position from the array

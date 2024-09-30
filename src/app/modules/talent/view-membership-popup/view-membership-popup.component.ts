@@ -18,4 +18,8 @@ export class ViewMembershipPopupComponent {
     console.log(this.plan)
   }
 
+  onCancel(): void {
+    console.log("Popup closed");
+    this.dialogRef.close();  
+  }
 }

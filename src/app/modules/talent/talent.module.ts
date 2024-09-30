@@ -44,6 +44,9 @@ import { EditMembershipProfileComponent } from './edit-membership-profile/edit-m
 import { EditPlanComponent } from './edit-plan/edit-plan.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditGeneralDetailsComponent } from './edit-general-details/edit-general-details.component';
+import { SettingComponent } from './setting/setting.component';
+import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
+import { AppSettingComponent } from './setting/app-setting/app-setting.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +75,10 @@ import { EditGeneralDetailsComponent } from './edit-general-details/edit-general
     EditPlanComponent,
     ResetPasswordComponent,
     EditGeneralDetailsComponent,
-    ChatComponent
+    ChatComponent,
+    SettingComponent,
+    ActivityLogComponent,
+    AppSettingComponent
   ],
   imports: [
     CommonModule,

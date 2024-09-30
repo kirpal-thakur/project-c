@@ -57,8 +57,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       (response: any) => {
         if (response && response.status) {
           this.teams = response.data.clubs;
-    console.log(this.teams)
-
+          console.log(this.teams)
         }
       },
       (error: any) => {

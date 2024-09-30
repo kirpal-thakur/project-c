@@ -2,6 +2,12 @@
   position: relative;
   background: #0C3453;
   font-family: "Libre Franklin", sans-serif !important;
+  .form-select {
+    background: none; /* Removes the background */
+    color: #ffffff; /* Ensures the text color is visible on a dark background */
+    border: 1px solid #ffffff; /* Optional: White border to match dark theme */
+  }
+  
 }
 ul,
 p , h1 ,h2 ,h3,h4,h5,h6{
@@ -1870,11 +1876,16 @@ background-color: #072944;
 .dark-theme .table-striped tbody tr:nth-child(even) {
   background-color: #0C3453 !important; 
 }
-
 .dark-theme .table-striped thead th {
   background-color: #0C3453; 
 }
-
+.dark-theme .table-striped.explore-table thead th{
+  background-color: #072944 !important; 
+}
+.dark-theme .table-striped.explore-table thead th select{
+  background-color: #072944 !important; 
+  background-color: #0C3453 !important; 
+}
 .dark-theme .custom-size, .custom-size-calendar .mat-mdc-text-field-wrapper{
   background-color: #0C3453;
   color: #ffffff;
@@ -2062,3 +2073,38 @@ background-color: #072944;
 }
 
 // new changes css Start
+
+.dark-theme .edit_button button{
+  border-color: #fff !important;
+}
+.dark-theme .edit_button span {
+  color: #ffffff !important;
+}
+.dark-theme .edit_button svg path{
+  fill: #fff !important;
+}
+.dark-theme .general_titels h2 {
+  color: #ffffff !important;
+}
+.dark-theme .user-details-left .bg-color.card-bg,.dark-theme .image-gallery.bg-color,.dark-theme .nav-tabs_box,.dark-theme .general_details {
+  border-color: #1F4360 !important;
+}
+.dark-theme .email_box input{
+background: none !important;
+color: rgba(255, 255, 255, 0.5) !important;
+}
+.dark-theme .password_box input{
+  background: none !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  }
+.dark-theme .personal_edit{
+  color: #fff;
+}
+.dark-theme .password-wrapper input{
+  background: #0C3453 !important;
+  border-color: #1F4360 !important;
+}
+.dark-theme .form-group input{
+  background: inherit !important;
+  color: #fff !important;
+}

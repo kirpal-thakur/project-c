@@ -148,12 +148,12 @@
     margin-right: 14px;
   }
   .email_box input {
-    background: #fff !important;
+    background: #fff ;
     border: none;
     outline: none;
   }
   .password_box input {
-    background: #fff !important;
+    background: #fff ;
     border: none;
     outline: none;
   }
@@ -184,8 +184,11 @@
   }
   .card-bg{
     border-radius: 0px 0px 10px 10px;
-    border: 1px solid #E7E7E7;
     border-top: none;
+  }
+  
+  .dark-theme .card-bg{
+    border-color: #1F4360 !important;
   }
   .image-gallery{
     border-radius: 10px;

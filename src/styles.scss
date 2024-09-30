@@ -1456,7 +1456,7 @@ margin: auto;
 }
 
 .email_box input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px white inset !important; /* Change 'white' to your background color */
+  -webkit-box-shadow: 0 0 0 30px inset !important; /* Change 'white' to your background color */
   -webkit-text-fill-color: #000 !important; /* Text color inside the input */
 }
 

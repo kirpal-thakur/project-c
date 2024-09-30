@@ -30,7 +30,6 @@ export class DashboardComponent implements OnInit {
     this.userId = this.loggedInUser.id;
      this.getUserProfile(this.userId);
     this.route.params.subscribe(() => {
-      this.getUserProfile(this.userId);
       this.getCoverImg();
       this.activeTab = 'profile';
     });    
@@ -65,6 +64,8 @@ export class DashboardComponent implements OnInit {
         console.log('User canceled the edit');
       }
     });
+    this.getUserProfile(this.userId);
+
   }
   
   getUserProfile(userId:any){
@@ -94,10 +95,8 @@ export class DashboardComponent implements OnInit {
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
-        if (response && response.status && response.data && response.data.user_data) {
-          
-            this.coverImage = response.data.user_data.cover_image_path;
-          
+        if (response && response.status && response.data && response.data.userData) {          
+            this.coverImage = response.data.userData.cover_image_path;          
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
