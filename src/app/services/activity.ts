@@ -10,14 +10,13 @@ import { environment } from '../../environments/environment';
 export class ActivityService {
     private apiUrl;
     constructor(private http: HttpClient) {
-        this.apiUrl = environment?.apiUrl;
-    
+        this.apiUrl = environment?.apiUrl;    
     }
 
     getActivity(params:any): Observable<{ status: boolean, message: string, data: any }> {
         return this.http.get<{ status: boolean, message: string, data: any }>(
             `${this.apiUrl}get-activity`, {params}
-          );
+        );
     }
 
     deleteActivity(params: any): Observable<any> {

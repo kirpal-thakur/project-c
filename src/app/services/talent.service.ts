@@ -53,6 +53,15 @@ export class TalentService {
       return this.http.post(`${this.apiUrl}user/update-profile`, formData, { headers });
   }
   
+  // Method to update user profile  
+  updateGeneralProfile(formData: FormData): Observable<any> {
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
+
+      return this.http.post(`${this.apiUrl}player/update-general-info`, formData, { headers });
+  }
+  
   getPerformanceData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}player/get-performance-detail`
@@ -85,6 +94,18 @@ export class TalentService {
 
     return this.http.get<{ status: boolean, message: string, data: {} }>(
       `${this.apiUrl}get-favorites`, { params: queryParams }
+    );
+  }
+  
+  getExploresData(params: any): Observable<any> {
+    // Construct HttpParams object
+    let queryParams = new HttpParams()
+      .set('offset', params.offset || 0)
+      .set('limit', params.limit || 10)
+      .set('search', params.search || '');
+
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}users-frontend`, { params: queryParams }
     );
   }
   
@@ -189,5 +210,17 @@ export class TalentService {
   
       // POST request to the change-password API
       return this.http.post<any>(`${this.apiUrl2}change-password`, formData, { headers });
+    }
+
+    
+    getPositions(): Observable<any> {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.userToken}`
+      });
+      
+      return this.http.get<any>(
+        `${this.apiUrl2}/get-positions`, 
+        { headers }
+      );
     }
 }

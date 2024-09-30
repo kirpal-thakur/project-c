@@ -20,6 +20,9 @@ export class FavoritesComponent {
   totalFavorites: any = '';
   allSelected: boolean = false;
   idsToDelete: any = [];
+  totalItems: number = 0; // Total number of items for pagination
+  pageSize: number = 10; // Number of items per page
+  currentPage: number = 1; // Current page index
   // imageBaseUrl: any = "";
   selectedIds: number[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;

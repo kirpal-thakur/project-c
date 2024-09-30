@@ -83,9 +83,7 @@ export class MembershipComponent {
     }
   }
 
-
   viewMembership(id:any) {
-
     const userPurchase = this.getSubscriptionById(id);
     const dialogRef = this.dialog.open(ViewMembershipPopupComponent, {
       width: '800px',
@@ -99,10 +97,9 @@ export class MembershipComponent {
         subtotal: userPurchase.amount_paid,
         total: userPurchase.amount_paid,
         currency : userPurchase.amount_paid_currency,
-        downlaod_path: userPurchase.invoice_file_path,
+        download_path: userPurchase.invoice_file_path,
       }
     });
-
   }
 
   editMembershipDialog(id:any) {

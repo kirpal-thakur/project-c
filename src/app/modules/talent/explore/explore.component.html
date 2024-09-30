@@ -1,48 +1,272 @@
 <div class="container">
-    <div class="pagination">
-        <button (click)="previousPage()">Previous</button>
-        <span>{{ currentPage }} of {{ totalPages }}</span>
-        <button (click)="nextPage()">Next</button>
-    </div>
+  <div class="pagination">
+    <button (click)="previousPage()">Previous</button>
+    <span>{{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()">Next</button>
+  </div>
 </div>
-  
+
 <div class="page-content">
-    <div class="main-wrapper">
-      <div class="card">
-        <div class="card-header border-0">  
-          <div class="table-responsive" >
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Talents</th>
-                    <th>Country</th>
-                    <th>Position</th>
-                    <th>Age</th>
-                    <th>Foot</th>
-                    <th>Top Speed</th>
-                    <th>League</th>
-                    <th>Club</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let player of players">
-                    <td>{{ player.name }}</td>
-                    <td>{{ player.country }}</td>
-                    <td>{{ player.position }}</td>
-                    <td>{{ player.age }}</td>
-                    <td>{{ player.foot }}</td>
-                    <td>{{ player.topSpeed }} km/h</td>
-                    <td>{{ player.league }}</td>
-                    <td>{{ player.club }}</td>
-                  </tr>
-                </tbody>
-              </table>
+  <div class="main-wrapper">
+    <div class="card">
+      <div class="card-header border-0 py-0">
+        <div class="table-responsive">
+          <table class="table table-striped explore-table">
+            <thead>
+              <tr class="explore-inputs">
+                <th>
+                  <div class="form-group">
+                    <select id="talents" class="form-select">
+                      <option selected="">Talents</option>
+                      <option value="forward">Talents-1</option>
+                      <option value="midfielder">Talents-2</option>
+                      <option value="defender">Talents-3</option>
+                      <option value="goalkeeper">Talents-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="country" class="form-select">
+                      <option selected="">Country</option>
+                      <option value="forward">Country-1</option>
+                      <option value="midfielder">Country-2</option>
+                      <option value="defender">Country-3</option>
+                      <option value="goalkeeper">Country-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="position" class="form-select">
+                      <option selected="">Position</option>
+                      <option value="forward">Position-1</option>
+                      <option value="midfielder">Position-2</option>
+                      <option value="defender">Position-3</option>
+                      <option value="goalkeeper">Position-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="age" class="form-select">
+                      <option selected="">Age</option>
+                      <option value="forward">Age-1</option>
+                      <option value="midfielder">Age-2</option>
+                      <option value="defender">Age-3</option>
+                      <option value="goalkeeper">Age-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="foot" class="form-select">
+                      <option selected="">Foot</option>
+                      <option value="forward">Foot-1</option>
+                      <option value="midfielder">Foot-2</option>
+                      <option value="defender">Foot-3</option>
+                      <option value="goalkeeper">Foot-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="top-speed" class="form-select">
+                      <option selected="">Top Speed</option>
+                      <option value="forward">Top Speed-1</option>
+                      <option value="midfielder">Top Speed-2</option>
+                      <option value="defender">Top Speed-3</option>
+                      <option value="goalkeeper">Top Speed-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="league" class="form-select">
+                      <option selected="">League</option>
+                      <option value="forward">League-1</option>
+                      <option value="midfielder">League-2</option>
+                      <option value="defender">League-3</option>
+                      <option value="goalkeeper">League-4</option>
+                    </select>
+                  </div>
+                </th>
+                <th>
+                  <div class="form-group">
+                    <select id="club" class="form-select">
+                      <option selected="">Club</option>
+                      <option value="forward">Club-1</option>
+                      <option value="midfielder">Club-2</option>
+                      <option value="defender">Club-3</option>
+                      <option value="goalkeeper">Club-4</option>
+                    </select>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="explore-chip d-flex align-items-center">
+          <div class="chip">
+            <span>Locathion:Switzerland</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
           </div>
+          <div class="chip">
+            <span>Pos: Goalkeeper, Center back</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Age: 15, 16</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Foot: Left, Right</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Top Speed: 20-25 km/h</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>League: Challenge League</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Club: FC Thun</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Club: FC Thun</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+          <div class="chip">
+            <span>Club: FC Thun</span>
+            <span>
+              <button class="explore-chip_cut">
+                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                  <path
+                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
+                  </path>
+                </svg>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="explore-box_images mt-3">
+          <div class="row plyer-iamge-list ">
+            <div class="col-lg-2"  *ngFor="let player of players">
+              <div class="image_box">
+                <div class="player_img">
+                  <img [src]="player.meta.profile_image_path" alt="player-image">
+                </div>
+                <div class="player-names">
+                  <a href="#">{{player.first_name}}</a>
+                </div>
+                <div class="player-team-logo">
+                  <div class="team-logo-bg">
+                  </div>
+                  <img src="{{getNationality(player.user_nationalities)}}" alt="team-logo">
+                </div>
+                <div class="flag_box">
+                  <img src="{{getNationality(player.user_nationalities)}}" >
+                  <hr>
+                  <span>
+                    <svg width="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M5 27.5C4.64583 27.5 4.34917 27.38 4.11 27.14C3.87083 26.9 3.75083 26.6033 3.75 26.25V21.25C3.75 20.5625 3.995 19.9742 4.485 19.485C4.975 18.9958 5.56333 18.7508 6.25 18.75H23.75C24.4375 18.75 25.0263 18.995 25.5163 19.485C26.0063 19.975 26.2508 20.5633 26.25 21.25V26.25C26.25 26.6042 26.13 26.9012 25.89 27.1412C25.65 27.3812 25.3533 27.5008 25 27.5H5ZM6.25 16.25V12.5C6.25 11.8125 6.495 11.2242 6.985 10.735C7.475 10.2458 8.06333 10.0008 8.75 10H13.75V8.1875C13.375 7.9375 13.0729 7.63542 12.8438 7.28125C12.6146 6.92708 12.5 6.5 12.5 6C12.5 5.6875 12.5625 5.38 12.6875 5.0775C12.8125 4.775 13 4.49917 13.25 4.25L15 2.5L16.75 4.25C17 4.5 17.1875 4.77583 17.3125 5.0775C17.4375 5.37917 17.5 5.68667 17.5 6C17.5 6.5 17.3854 6.92708 17.1562 7.28125C16.9271 7.63542 16.625 7.9375 16.25 8.1875V10H21.25C21.9375 10 22.5263 10.2446 23.0163 10.7337C23.5063 11.2229 23.7508 11.8117 23.75 12.5V16.25H6.25Z"
+                        fill="#023A4A"></path>
+                      <path
+                        d="M6.25 16.25V12.5C6.25 11.8125 6.495 11.2242 6.985 10.735C7.475 10.2458 8.06333 10.0008 8.75 10H13.75V8.1875C13.375 7.9375 13.0729 7.63542 12.8438 7.28125C12.6146 6.92708 12.5 6.5 12.5 6C12.5 5.6875 12.5625 5.38 12.6875 5.0775C12.8125 4.775 13 4.49917 13.25 4.25L15 2.5L16.75 4.25C17 4.5 17.1875 4.77583 17.3125 5.0775C17.4375 5.37917 17.5 5.68667 17.5 6C17.5 6.5 17.3854 6.92708 17.1562 7.28125C16.9271 7.63542 16.625 7.9375 16.25 8.1875V10H21.25C21.9375 10 22.5263 10.2446 23.0163 10.7337C23.5063 11.2229 23.7508 11.8117 23.75 12.5V16.25H6.25Z"
+                        fill="#6FB95D"></path>
+                    </svg>
+                  </span>
+                  <span class="player-age">2004</span>
+                </div>
+                <div class="boosted-box">
+                  Boosted
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="result-page-slider ">
+          <p>Result per page</p>
+          
+                  <!-- Add the paginator -->
+          <mat-paginator [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 15, 20]"
+            (page)="onPageChange($event)">
+          </mat-paginator>
         </div>
       </div>
     </div>
   </div>
-  
-  
-  
-  
+</div>
+
+
+

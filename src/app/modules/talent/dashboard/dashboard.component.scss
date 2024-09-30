@@ -247,7 +247,13 @@
   right: 5px;
  
 }
-
+.light-theme .bg-color{
+  background: #fff !important;
+  border: 1px solid #1F4360 !important;
+}
+.light-theme .general_details.bg-color{
+  border: 1px solid #1F4360 !important;
+}
 .club-icon-round{
   width: 30px;
   border-radius: 50%;
@@ -256,7 +262,9 @@
 .border-end, .border-bottom, .border-top{
   border-color: #E7E7E7 ;
 }
-
+.dark-theme h6.title_2 {
+  color: #fff !important;
+}
 .profile-tab-content{
   color: #787878 ;
 }
@@ -308,6 +316,7 @@
 margin-left: 10px;
 font-size: 16px;
 font-weight: 800;
+color: #000;
 }
 .edit_image-2 {
   background: #fff;
@@ -420,12 +429,11 @@ font-weight: 800;
   margin-right: 14px;
 }
 .email_box input {
-  background: #fff !important;
   border: none;
   outline: none;
+  background: inherit !important;
 }
 .password_box input {
-  background: #fff !important;
   border: none;
   outline: none;
 }
@@ -456,12 +464,15 @@ input.password {
 }
 .card-bg{
   border-radius: 0px 0px 10px 10px;
-  border: 1px solid #E7E7E7;
-  border-top: none;
 }
-.image-gallery{
+.user-details-left .bg-color.card-bg{
+    border: 1px solid #E7E7E7;
+    border-top: none;
+  }
+
+.image-gallery.bg-color{
   border-radius: 10px;
-  border: 1px solid #E7E7E7;
+  border: 1px solid #E7E7E7 ;
 }
 .nav-tabs_box{
   border-radius: 10px;
@@ -470,7 +481,7 @@ input.password {
 }
 .general_details{
   border-radius: 10px;
-
+    border: 1px solid #ffffff ;
 }
 .email_box label {
   color: #9d9b9b;
@@ -486,6 +497,7 @@ input.password {
   position: absolute;
   bottom: 16px;
   left: 16px;
+  color: #000;
 }
 .boost_profile span {
   font-size: 14px;

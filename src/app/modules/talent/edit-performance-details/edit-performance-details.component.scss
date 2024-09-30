@@ -1,5 +1,4 @@
 .dialog-container {
-  background: white;
   border-radius: 4px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -93,11 +92,11 @@ font-weight: 700;
 }
 .form-upto_date-2{
   border-left: none !important;
-  border-radius: 0px 4px 4px 0px !important;
+  border-radius: 0px 10px 10px 0px !important;
 }
 .form-upto_date{
   border-right: 1px solid #bbb7b7;
-  border-radius: 4px 0px 0px 4px !important;
+  border-radius: 10px 0px 0px 10px !important;
 }
 .cancel-btn {
   background: none;
