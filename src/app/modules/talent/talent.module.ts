@@ -47,6 +47,7 @@ import { EditGeneralDetailsComponent } from './edit-general-details/edit-general
 import { SettingComponent } from './setting/setting.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
+import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AppSettingComponent } from './setting/app-setting/app-setting.component
     ChatComponent,
     SettingComponent,
     ActivityLogComponent,
-    AppSettingComponent
+    AppSettingComponent,
+    ChatPopupComponent
   ],
   imports: [
     CommonModule,

@@ -132,6 +132,10 @@
     position: absolute;
     top: 0;
 }
+.mat-mdc-paginator-page-size {
+    display: flex !important;
+}
+
 @media (max-width:1024px) {
     .explore-table{
         width: 100%;
@@ -149,3 +153,4 @@
        
     }
 }
+
