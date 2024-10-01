@@ -60,12 +60,13 @@ export class DashboardComponent implements OnInit {
       if (result) {
         console.log('User saved:', result);
         // Handle the save result (e.g., update the user details)
+
+    		this.getUserProfile(this.userId);
+
       } else {
         console.log('User canceled the edit');
       }
     });
-    this.getUserProfile(this.userId);
-
   }
   
   getUserProfile(userId:any){

@@ -63,7 +63,6 @@ export class FavoritesComponent {
     }
   }
   
-
   onPageChange() {
     this.getUserFavorites();
   }

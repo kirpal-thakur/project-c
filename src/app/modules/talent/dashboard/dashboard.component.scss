@@ -433,6 +433,9 @@ color: #000;
   outline: none;
   background: inherit !important;
 }
+.bg-color{
+  background: #fff;
+}
 .password_box input {
   border: none;
   outline: none;
@@ -481,7 +484,7 @@ input.password {
 }
 .general_details{
   border-radius: 10px;
-    border: 1px solid #ffffff ;
+    border: 1px solid #E7E7E7 ;
 }
 .email_box label {
   color: #9d9b9b;
@@ -502,6 +505,9 @@ input.password {
 .boost_profile span {
   font-size: 14px;
   font-weight: 600;
+}
+.user-details-left .user-media {
+  border: 1px solid #E7E7E7;
 }
 .boost_profile{
   background: #fff;
