@@ -17,7 +17,7 @@ export class PaymentsPopupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.plans = this.data.cards; // No need to spread since it's an array
+    this.plans = this.data.cards; // Initialize the plans array with the data passed into the dialog
     console.log(this.plans);
   }
 
@@ -41,7 +41,12 @@ export class PaymentsPopupComponent implements OnInit {
     // Logic to add a new payment method
     console.log('Adding new payment method');
   }
+
   closeDialog(): void {
     this.dialogRef.close();  // Closes the dialog
+  }
+
+  togglePrimary(payment:any){
+
   }
 }

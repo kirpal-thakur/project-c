@@ -25,25 +25,31 @@ export class ChatComponent  {
     if (userDataString) {
       this.userData = JSON.parse(userDataString);
       this.user = {
-          id: this.userData.id,
-          name: this.userData.first_name,
-          email: this.userData.username,
-          photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-          welcomeMessage: "Hi!",
-          role:(this.userData.role == '1') ? "hidden" : "default"
-      } 
+        id: this.userData.id,
+        name: this.userData.first_name,
+        email: this.userData.username,
+        photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+        welcomeMessage: "Hi!",
+        role: (this.userData.role == '1') ? "hidden" : "default"
+      };
+      
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
-      chatbox.mount(document.getElementById('talkjs-container'));
+  
+      // Defer mounting chatbox until next event loop cycle
+      setTimeout(() => {
+        chatbox.mount(document.getElementById('talkjs-container'));
+      }, 0);
     }
   }
   
+
   async createGroup() {
     if (this.groupName && this.groupId && this.users.length > 0) {
 
       const session = await this.talkService.init(this.user);
       const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
-       this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
+        this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
       const inbox = session.createInbox({
         selected: conversation
       });
@@ -62,7 +68,6 @@ export class ChatComponent  {
 
     inbox.mount(document.getElementById('talkjs-container'));
   }
-
 
   editinbox() {
     this.users = [];

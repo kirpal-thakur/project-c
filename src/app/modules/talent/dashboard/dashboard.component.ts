@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   
   @Output() dataEmitter = new EventEmitter<string>();
   ngOnInit(): void {
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
      this.getUserProfile(this.userId);

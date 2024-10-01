@@ -1,16 +1,18 @@
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { LiveAnnouncer} from '@angular/cdk/a11y';
+import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, Inject,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import { UserService } from '../../../../services/user.service';
+
 @Component({
   selector: 'app-chat-popup',
   templateUrl: './chat-popup.component.html',
   styleUrls: ['./chat-popup.component.scss']
 })
+
 export class ChatPopupComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly announcer = inject(LiveAnnouncer);
@@ -23,29 +25,16 @@ export class ChatPopupComponent {
     private userService: UserService,
     public dialogRef: MatDialogRef<ChatPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
-   // this.fetchUsers();
-  }
-  ngOnInit(): void {
-    
-  }
+  ) {}
+
+  ngOnInit(): void {    }
  
-  async fetchUsers(): Promise<void> {
-     /* try {
-          const response: any = await this.userService.getUsers().toPromise();
-          if (response && response.status && response.data && response.data.userData) {
-              this.allUsers = response.data.userData;
-            } else {
-            console.error('Invalid API response structure:', response);
-          }
-        } catch (error) {
-          console.error('Error fetching users:', error);
-        }
-    */
-  }
+  async fetchUsers(): Promise<void> {  }
+
   close() {
     this.dialogRef.close();
   }
+
   startChat(){
     this.dialogRef.close({ data: this.users });
   }
@@ -82,5 +71,4 @@ export class ChatPopupComponent {
     }
   }
  
-    
 }

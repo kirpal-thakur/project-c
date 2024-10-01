@@ -26,8 +26,6 @@ export class PerformanceTabComponent {
   }
   loggedInUser:any = localStorage.getItem('userData');
 
-  // from_date:2021-01-01
-  //   to_date:2022-01-01
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   
   ngOnInit(): void {
@@ -40,31 +38,16 @@ export class PerformanceTabComponent {
   }
 
   
-  openEditDialog() {
-    console.log('User saved');
-
+  openEditDialog(performance:any) {
+    
     const dialogRef = this.dialog.open(EditPerformanceDetailsComponent, {
       width: '800px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
+      data: { performance : performance , teams : this.teams}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
+        this.getUserPerformance(this.userId);
       } else {
         console.log('User canceled the edit');
       }
@@ -93,7 +76,7 @@ export class PerformanceTabComponent {
   }
 
   getAllTeams(){
-    this.userService.getAllTeams().subscribe((response)=>{
+    this.userService.getClubTeams(this.loggedInUser.club_id).subscribe((response)=>{
       if (response && response.status && response.data && response.data.teams) {
         this.teams = response.data.teams;
       }
