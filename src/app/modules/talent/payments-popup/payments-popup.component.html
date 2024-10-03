@@ -1,17 +1,18 @@
 <div class="payment-methods container">
-    <!-- Close button at the top-right -->
-    <div class="d-flex  justify-content-between mb-4">
-      
+  <!-- Close button at the top-right -->
+  <div class="d-flex  justify-content-between mb-4">
+
     <div class="payment-titles">
       <h2 class="mb-2">Payment Methods</h2>
-    <p>Choose your preferred payment method for making future payments.</p>
+      <p>Choose your preferred payment method for making future payments.</p>
     </div>
     <div class="close-btns">
       <button type="button" class="btn-close close-button" aria-label="Close" (click)="closeDialog()"></button>
 
     </div>
-    </div>
-  
+  </div>
+
+  <div class="overflow-card">
     <div class="payment-method primary-card card p-3 mb-3" *ngFor="let payment of plans">
       <div class="card-details d-flex justify-content-between align-items-center">
         <div class="d-flex gap-3">
@@ -23,21 +24,22 @@
             <span class="d-block">Expiry: {{ payment.expiryDate }}</span>
           </div>
         </div>
-    
+  
         <!-- Checkbox for each payment -->
         <span class="badge round">
-          <input type="checkbox" [checked]="payment.isPrimary" (change)="togglePrimary(payment)" name="checkbox" id="checkbox-{{payment.cardNumber}}" />
+          <input type="checkbox" [checked]="payment.isPrimary" (change)="togglePrimary(payment)" name="checkbox"
+            id="checkbox-{{payment.cardNumber}}" />
           <label for="checkbox-{{payment.cardNumber}}"></label>
         </span>
       </div>
-    
+  
       <div class="actions mt-3 d-flex align-items-center justify-content-between">
         <div class="primary_card-title">
           <a href="#">Primary Card</a>
         </div>
         <div class="pament-method_buttons">
-          <button class="btn me-2" (click)="removePayment(payment)">Remove</button>
-        <button class="btn " (click)="updatePayment(payment)">Update</button>
+          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">Remove</button>
+          <button class="btn " (click)="updatePayment(payment)">Update</button>
         </div>
       </div>
     </div>
@@ -45,5 +47,5 @@
     <div class=" text-justify">
       <button class="btn" (click)="addNewPaymentMethod()">+Add New Payment Method</button>
     </div>
+  </div>
 </div>
-  

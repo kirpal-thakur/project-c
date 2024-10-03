@@ -43,7 +43,7 @@ export class PerformanceTabComponent {
 
   
   openEditDialog(performance:any) {
-    
+
     const dialogRef = this.dialog.open(EditPerformanceDetailsComponent, {
       width: '800px',
       data: { performance : performance , teams : this.teams}
@@ -154,6 +154,7 @@ export class PerformanceTabComponent {
     }
   }
 
+  
   savePerformance(performanceId:any){
 
     // let index = this.performances.findIndex((x:any) => x.id == performanceId);

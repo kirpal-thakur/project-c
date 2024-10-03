@@ -114,3 +114,41 @@ span.social_heddig {
     font-size: 20px;
     font-weight: 600;
 }
+.overflow-card{
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding:0px 20px 0px 20px;
+}
+.mat-mdc-dialog-surface{
+  overflow: hidden !important;
+}
+.overflow-card::-webkit-scrollbar {
+  width: 6px;
+}
+.overflow-card::-webkit-scrollbar-thumb {
+  background: rgb(228, 228, 228); 
+  border-radius: 10px;
+}
+@media (max-width:1440px) {
+  .market_input-gap{
+    padding: 0 !important;
+  }
+}
+@media (max-width:1024px) {
+  .form-group {
+    padding: 0px 26px;
+}
+}
+@media(max-width:768px){
+  .mobile-input{
+    width: 50% !important;
+  }
+  .speed_inputs{
+    gap: 10px;
+     padding-right: 26px !important; 
+}
+.general_form {
+  padding: 0px 0px 20px 0px;
+}
+}

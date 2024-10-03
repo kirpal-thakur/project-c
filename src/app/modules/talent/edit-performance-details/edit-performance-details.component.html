@@ -12,8 +12,8 @@
           </div>
       </div>
       <hr>
-      <form  class="general_form" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-        
+     <div class="overflow-card">
+      <form class="general_form" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">        
         <div class="row">
           <div class="form-group col-lg-6">
             <label for="team" class="form-label">Team</label>
@@ -62,6 +62,9 @@
                 <input type="date" name="to_date" class="form-upto_date-2" [(ngModel)]="performance.to_date" required>
               </div>
             </div>
+            <!-- <div class="col-lg-4 p-0">
+              <input type="date" name="form-date" id="form-date">
+            </div> -->
           </div>
         </div>
 
@@ -70,6 +73,7 @@
           <button class="save-btn" type="submit">Save</button>
         </div>
       </form>
+     </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, SimpleChanges } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
@@ -27,6 +27,14 @@ export class EditPerformanceDetailsComponent {
     console.log('teams:', this.teams);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['teams']) {
+      // Update the user object with the latest userData
+      this.teams = changes['teams'].currentValue;
+  
+    }
+  }
+ 
   onCancel(): void {
     this.dialogRef.close();
   }

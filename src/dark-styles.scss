@@ -2105,13 +2105,16 @@ color: rgba(255, 255, 255, 0.5) !important;
   background: #0C3453 !important;
   border-color: #1F4360 !important;
 }
-.dark-theme .form-group input,select{
-  background: inherit !important;
+.dark-theme .form-group input,.dark-theme .form-group select{
+  background: #1F4360 !important;
   color: #fff !important;
 }
-.dark-theme .form-group select{
-  color: #fff !important;
+.dark-theme .form-group option{
+  background: #1F4360 !important;
 }
+// .dark-theme .form-group select{
+//   color: #fff !important;
+// }
 .dark-theme  .bg-color{
   background: #072944 !important;
 }
@@ -2137,4 +2140,27 @@ color: rgba(255, 255, 255, 0.5) !important;
 }
 .dark-theme .card-billing {
   color: rgb(255, 255, 255) !important;
+}
+.dark-theme .payment-titles h2{
+  color: #fff !important;
+}
+.dark-theme .payment-titles p{
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.dark-theme .visa-titles span{
+  color: #000 !important;
+}
+.dark-theme .boosted-profile,.dark-theme .stats h3 {
+  color: #fff !important;
+}
+.dark-theme .table-bg {
+  background: #1F4360 !important;
+}
+.dark-theme .table-bg:hover {
+  background: #1d3e59  !important;
+  border:1px solid #1d3e59 !important;
+}
+.dark-theme .table-bg-2 { 
+  background: #072944 !important;
+  border:1px solid #072944 !important;
 }

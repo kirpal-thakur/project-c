@@ -84,3 +84,33 @@
     margin-left: 68px;
 
 }
+.overflow-card{
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:0px 20px 0px 20px;
+  }
+  .mat-mdc-dialog-surface{
+    overflow: hidden !important;
+  }
+  .overflow-card::-webkit-scrollbar {
+    width: 6px;
+  }
+  .overflow-card::-webkit-scrollbar-thumb {
+    background: rgb(228, 228, 228); 
+    border-radius: 10px;
+  }
+  @media (max-width:600px) {
+    button.btn.me-2.remove-btn {
+        margin: 0 !important;
+    }
+    .pament-method_buttons {
+        text-align: end;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+    .primary_card-title a {
+        margin-left: 0px;
+    }
+  }

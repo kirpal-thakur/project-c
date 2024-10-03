@@ -62,7 +62,7 @@ export class ProfileTabComponent {
   openEditGeneralDialog() {
 
     const dialogRef = this.dialog.open(EditGeneralDetailsComponent, {
-      width: '850px',
+      width: '870px',
       data: { user: this.user }  // Corrected data passing      
     });
 
