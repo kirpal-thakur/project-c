@@ -26,9 +26,7 @@
     
         <!-- Checkbox for each payment -->
         <span class="badge round">
-          <input type="checkbox" [checked]="payment.isPrimary" 
-          (change)="togglePrimary(payment)" 
-          name="checkbox" id="checkbox-{{payment.cardNumber}}" />
+          <input type="checkbox" [checked]="payment.isPrimary" (change)="togglePrimary(payment)" name="checkbox" id="checkbox-{{payment.cardNumber}}" />
           <label for="checkbox-{{payment.cardNumber}}"></label>
         </span>
       </div>

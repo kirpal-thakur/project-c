@@ -1,0 +1,36 @@
+.delete-confirmation-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .delete-confirmation-modal h2 {
+    margin-bottom: 10px;
+  }
+  
+  .delete-confirmation-modal p {
+    margin-bottom: 20px;
+  }
+  
+  .delete-button, .cancel-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    margin-right: 10px;
+    background-color: red;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+  }

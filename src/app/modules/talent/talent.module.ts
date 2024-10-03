@@ -49,6 +49,10 @@ import { ActivityLogComponent } from './setting/activity-log/activity-log.compon
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
 import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
 import { EditPerformanceDetailsComponent } from './edit-performance-details/edit-performance-details.component';
+import { AddPerformanceComponent } from './tabs/performance-tab/add-performance/add-performance.component';
+import { DeletePopupComponent } from './delete-popup/delete-popup.component';
+import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
+import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +86,11 @@ import { EditPerformanceDetailsComponent } from './edit-performance-details/edit
     ActivityLogComponent,
     AppSettingComponent,
     ChatPopupComponent,
-    EditPerformanceDetailsComponent
+    EditPerformanceDetailsComponent,
+    AddPerformanceComponent,
+    DeletePopupComponent,
+    EditTransferDetailsComponent,
+    AddTransferComponent
   ],
   imports: [
     CommonModule,

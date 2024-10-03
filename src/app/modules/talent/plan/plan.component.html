@@ -2,7 +2,7 @@
   <div class="main-wrapper">
     <div class="card subscription-plan">
       <h2>Subscription Plans</h2>
-      <div class="row mt-4">
+      <div class="row mt-4 premium-box">
         <div *ngFor="let plan of plans" class="col-lg-4">
           <div class="subscription-switch mb-2 mx-2">
             <label class="switch_off" (click)="toggleMonthly(plan)">Billed Monthly</label>
@@ -12,7 +12,7 @@
           
           <div class="premium-plan_box mx-2">
             <div class="plan_box">
-              <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center justify-content-between premium-gap">
                 <h3>{{ plan.name }}</h3>
                 <div class="premium_button">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -28,7 +28,7 @@
                 </h6>
               </div>
 
-              <div class="row">
+              <div class="row plus_button">
                 <div class="col-lg-4 quantity">
                   <button class="minus" (click)="decreaseValue(plan)">-</button>
                   <input class="input-box" type="number" [value]="plan.quantity" (input)="handleQuantityChange($event, plan)" [max]="maxQuantity">

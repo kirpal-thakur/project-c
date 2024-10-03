@@ -17,6 +17,8 @@
         <div class="row">
           <div class="form-group col-lg-6">
             <label for="team" class="form-label">Team</label>
+            <!-- <input type="number" id="team" name="team_id" [(ngModel)]="performance.team_id" required> -->
+
             <select id="team" name="team" [(ngModel)]="performance.team" required>
               <option *ngFor="let team of teams" [value]="team.id">
                 {{ team.team_name }}
@@ -42,12 +44,12 @@
 
         <div class="row">
           <div class="form-group col-lg-6">
-            <label for="sesson" class="form-label">Season</label>
-            <select class="form-select" id="sesson" name="season" [(ngModel)]="performance.season" required>
-              <option value="23/24">23/24</option>
-              <option value="24/25">24/25</option>
-              <option value="25/26">25/26</option>
-            </select>
+            <label for="session" class="form-label">Session</label>
+            <input class="form-select" type="text" id="session" name="session" [(ngModel)]="performance.session" required>
+          </div>
+          <div class="form-group col-lg-6">
+            <label for="player_age" class="form-label">Player Age</label>
+            <input type="text" id="player_age" name="player_age" [(ngModel)]="performance.player_age" required>
           </div>
         </div>
 
@@ -56,8 +58,8 @@
             <div class="col-lg-4 p-0">
               <label for="form-date" class="form-label">Form-Upto</label>
               <div class="date-imputs d-flex align-items-center">
-                <input type="date" name="formStartDate" class="form-upto_date" [(ngModel)]="performance.formStartDate" required>
-                <input type="date" name="formEndDate" class="form-upto_date-2" [(ngModel)]="performance.formEndDate" required>
+                <input type="date" name="from_date" class="form-upto_date" [(ngModel)]="performance.from_date" required>
+                <input type="date" name="to_date" class="form-upto_date-2" [(ngModel)]="performance.to_date" required>
               </div>
             </div>
           </div>

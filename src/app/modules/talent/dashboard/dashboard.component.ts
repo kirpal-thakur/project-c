@@ -23,10 +23,10 @@ export class DashboardComponent implements OnInit {
   coverImage: any = "";
   profileImage: any = "";
   selectedFile : any;
-  
+  teams : any;
   @Output() dataEmitter = new EventEmitter<string>();
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
      this.getUserProfile(this.userId);
@@ -34,11 +34,10 @@ export class DashboardComponent implements OnInit {
       this.getCoverImg();
       this.activeTab = 'profile';
     });    
+    this.getAllTeams();
   }
   
   openEditDialog() {
-    console.log('User saved');
-
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
       data: {
@@ -207,6 +206,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  
+  getAllTeams(){
+    this.talentService.getTeams().subscribe((data) => {
+      this.teams = data;
+    });
+  }
   
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string

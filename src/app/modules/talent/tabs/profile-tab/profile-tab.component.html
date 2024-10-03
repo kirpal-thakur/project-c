@@ -31,7 +31,7 @@
         </div>
         <div class="general_details">            
             <h6 class="details_2"> {{ 'Last Change' | translate}}</h6>
-            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">€{{user.meta.market_value_last_updated |date:'MMM d, y'}} </h5>
+            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">{{user.meta.market_value_last_updated |date:'MMM d, y'}} </h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta.market_value_last_updated">NA</h5>
         </div>
     </div>

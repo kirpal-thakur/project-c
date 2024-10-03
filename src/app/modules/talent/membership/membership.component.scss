@@ -94,3 +94,67 @@ button.premium-edit_btn {
 .table_slide{
   color: #8e8e8e;
 }
+
+@media (max-width:1024px) and (min-width:769px) {
+  button.premium-subscription_btn{
+    font-size: 12px ;
+  }
+  button.premium-edit_btn{
+    font-size: 14px;
+  }
+  .premium-card h5 {
+    font-size: 18px;
+  }
+  .premium-card h6 {
+    font-size: 26px;
+
+  }
+  .premium-card {
+    background: #75bb63;
+    padding: 30px 15px 15px 15px;
+    border-radius: 10px;
+    border: 1px solid #9d0808;
+  }
+  button.payments-btn {
+    font-size: 14px;
+  }
+}
+@media (max-width:768px) {
+  .premium-card_box{
+    row-gap: 20px;
+  }
+  button.payments-btn {
+    font-size: 16px;
+  }
+}
+@media (max-width:600px){
+  .page-content .card-header {
+    padding: 10px 18px ;
+  }
+  .card-title{
+    margin-right: 0 !important;
+  }
+  .transaction_box{
+    display: block !important;
+  }
+  .transaction_box .card-title{
+    margin-bottom: 10px !important;
+  }
+  button.premium-subscription_btn{
+    font-size: 12px ;
+  }
+  button.premium-edit_btn{
+    font-size: 14px;
+  }
+  .premium-card h5 {
+    font-size: 18px;
+  }
+  .premium-card h6 {
+    font-size: 26px;
+
+  }
+  button.payments-btn {
+    padding: 14px 22px;
+    font-size: 14px;
+}
+}

@@ -1,19 +1,19 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { TalentService } from '../../../../../services/talent.service';
 import { NgForm } from '@angular/forms';
-import { TalentService } from '../../../services/talent.service';
 
 @Component({
-  selector: 'app-edit-transfer-details',
-  templateUrl: './edit-transfer-details.component.html',
-  styleUrls: ['./edit-transfer-details.component.scss']
+  selector: 'app-add-transfer',
+  templateUrl: './add-transfer.component.html',
+  styleUrl: './add-transfer.component.scss'
 })
-export class EditTransferDetailsComponent {
+export class AddTransferComponent {
   teams: any;  // Assume you get this data from a service
   transfer: any;  // Assume you get this data from a service
 
   constructor(
-    public dialogRef: MatDialogRef<EditTransferDetailsComponent>,
+    public dialogRef: MatDialogRef<AddTransferComponent>,
     private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -36,7 +36,7 @@ export class EditTransferDetailsComponent {
       // You can prepare myForm data here, but we are directly using the myForm values in this case
       console.log('myForm submitted:', myForm.value);
 
-      this.talentService.updateTransfer(this.transfer.id,myForm.value).subscribe(
+      this.talentService.addTransfer(myForm.value).subscribe(
         (response: any) => {
           console.log('myForm submitted successfully:', response);
           this.dialogRef.close(response.data);

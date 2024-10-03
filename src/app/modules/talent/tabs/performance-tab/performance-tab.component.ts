@@ -4,6 +4,8 @@ import { UserService } from '../../../../services/user.service';
 import { TalentService } from '../../../../services/talent.service';
 import { EditPerformanceDetailsComponent } from '../../edit-performance-details/edit-performance-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AddPerformanceComponent } from './add-performance/add-performance.component';
+import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 
 @Component({
   selector: 'talent-performance-tab',
@@ -26,6 +28,8 @@ export class PerformanceTabComponent {
   }
   loggedInUser:any = localStorage.getItem('userData');
 
+  // from_date:2021-01-01
+  //   to_date:2022-01-01
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   
   ngOnInit(): void {
@@ -54,7 +58,59 @@ export class PerformanceTabComponent {
     });
   }
 
+  openAddDialog() {
+    
+    const dialogRef = this.dialog.open(AddPerformanceComponent, {
+      width: '800px',
+      data: { performance : {
+          "team_id": "",
+          "matches": "",
+          "goals": "",
+          "coach": "",
+          "session": "",
+          "from_date": "0000-00-00",
+          "to_date": "0000-00-00"
+      } , teams : this.teams}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getUserPerformance(this.userId);
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+
+  openDeleteDialog(id:any) {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteUserPerformance(id);
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
+  }
+  
+  deleteUserPerformance(id: string): void {
+    // Call your service to delete the user performance by ID
+    this.talentService.deletePerformance(id).subscribe(
+      (response: any) => {
+        console.log('Performance deleted successfully');
+        // Optionally refresh the list or handle success
+        this.getUserPerformance(this.userId);        
+      },
+      (error: any) => {
+        console.error('Error deleting performance:', error);
+      }
+    );
+  }
+  
   getUserPerformance(userId:any){
     try {
       this.talentService.getPerformanceData().subscribe((response)=>{
@@ -75,11 +131,10 @@ export class PerformanceTabComponent {
     }
   }
 
+
   getAllTeams(){
-    this.userService.getClubTeams(this.loggedInUser.club_id).subscribe((response)=>{
-      if (response && response.status && response.data && response.data.teams) {
-        this.teams = response.data.teams;
-      }
+    this.talentService.getTeams().subscribe((data) => {
+      this.teams = data;
     });
   }
 
@@ -99,7 +154,6 @@ export class PerformanceTabComponent {
     }
   }
 
-  
   savePerformance(performanceId:any){
 
     // let index = this.performances.findIndex((x:any) => x.id == performanceId);
@@ -131,5 +185,40 @@ export class PerformanceTabComponent {
   updateRow(key:any, value:any){
     this.dataTOBeUpdated[key] = value;
   }
+
+  calculateDateRange(performance_detail: any): string {
+
+    const fromDate = new Date(performance_detail.from_date);
+    const toDate = performance_detail.to_date === '0000-00-00'
+      ? new Date() // Current date for "Present"
+      : new Date(performance_detail.to_date);
+  
+    let years = toDate.getFullYear() - fromDate.getFullYear();
+    let months = toDate.getMonth() - fromDate.getMonth();
+  
+    // Adjust if the month difference is negative
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+  
+    const displayYears = years;
+    const displayMonths = months;
+  
+    // Format the date strings
+    const fromDateString = fromDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+    const toDateString = performance_detail.to_date === '0000-00-00' 
+      ? 'Present' 
+      : toDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+  
+    let dateRange = `${fromDateString} - ${toDateString}`;
+  
+    if (displayYears > 0 || displayMonths > 0) {
+      dateRange += ` (${displayYears} yr ${displayMonths} mos)`;
+    }
+  
+    return dateRange;
+  }
+  
 }
 

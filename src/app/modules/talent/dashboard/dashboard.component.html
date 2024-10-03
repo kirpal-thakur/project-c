@@ -45,8 +45,8 @@
               </div>
 
               <div class="bg-color card-bg">
-                <div class="user-info pt-3 row align-items-center justify-content-between p-3">
-                <div class="col-lg-9 d-flex align-items-center">
+                <div class="user-info pt-3 row align-items-center justify-content-between p-3 responsive-name">
+                <div class="col-lg-9 d-flex align-items-center plyer-name-box">
                   <h6  class="user-info-name">
                     {{ user.first_name }} {{ user.last_name }}
                   </h6>
@@ -56,7 +56,7 @@
                     <img src="../../../assets/images/rejected.png" alt="" class="user-rejected-icon" *ngIf="user.status == '3'" />
                   </div>
                 </div>
-                  <div class="col-lg-3 p-0 edit_button">
+                  <div class="col-lg-3 p-0 edit_button responsive-edit_btn">
                     <button (click)="openEditDialog()">
                       <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
@@ -150,7 +150,7 @@
                   </div>
                   <div class="col-lg-6 ">
                     <div class="row align-items-center">
-                      <div class="col-lg-3 text-end team-badge_image">
+                      <div class="col-lg-3 team-badge_image">
                         <svg width="36" height="36" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_2958_4755786)">
                           <path d="M18.6656 6.3763V6.66797H13.2211C12.9943 6.66797 12.8079 6.59505 12.6621 6.44922C12.5163 6.30338 12.4434 6.11704 12.4434 5.89019V0.445745H12.735C13.0591 0.445745 13.3346 0.559172 13.5614 0.786024L18.3253 5.54991C18.5522 5.77676 18.6656 6.05223 18.6656 6.3763ZM13.9989 17.3138L21.9225 9.4388L25.2281 12.7444L17.3531 20.668H13.9989V17.3138ZM27.6586 8.5638C27.8855 8.82306 27.9989 9.12283 27.9989 9.46311C27.9989 9.80338 27.8855 10.087 27.6586 10.3138L26.2975 11.6749L22.992 8.36936L24.3531 7.00825C24.5799 6.78139 24.8635 6.66797 25.2038 6.66797C25.5441 6.66797 25.8438 6.78139 26.1031 7.00825L27.6586 8.5638Z" fill="#6FB95D"/>
@@ -263,7 +263,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="row w-100 m-auto image_gallery-box mt-2">
+              <div class="d-flex w-100 m-auto image_gallery-box mt-2">
                 <div class="col-lg-4 gallery_images ">
                   <img src="./media/palyers.png" alt="">
                 </div>

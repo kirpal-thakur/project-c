@@ -23,17 +23,21 @@ export class ProfileTabComponent {
     this.user = this.userData;
     setTimeout(() => {
       console.log('profile tab', this.user);
-    }, 1000);
-    
+    }, 1000);    
   }
-
+  
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userData']) {
-      if(changes['userData'].currentValue.user_nationalities){
-        this.userNationalities = JSON.parse(this.userData.user_nationalities);
+      // Update the user object with the latest userData
+      this.user = changes['userData'].currentValue;
+  
+      // Check if user_nationalities exist and parse it
+      if (this.user && this.user.user_nationalities) {
+        this.userNationalities = JSON.parse(this.user.user_nationalities);
       }
     }
   }
+ 
 
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string

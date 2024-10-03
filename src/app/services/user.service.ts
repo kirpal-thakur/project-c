@@ -126,7 +126,7 @@ export class UserService {
 
   getAllTeams(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}/get-teams`
+      `${this.apiUrl}get-teams`
     );
   }
 
