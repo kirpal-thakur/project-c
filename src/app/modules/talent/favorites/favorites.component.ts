@@ -76,6 +76,10 @@ export class FavoritesComponent {
     }   
   }
     
+  navigate(slug:string, id:Number): void {
+    let pageRoute = '/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
+  }
 
   onCheckboxChange(user: any) {
     const index = this.selectedIds.indexOf(user.id);
@@ -84,11 +88,6 @@ export class FavoritesComponent {
     } else {
       this.selectedIds.splice(index, 1);
     }
-  }
-
-  navigate(slug:string, id:Number): void {
-    let pageRoute = '/'+slug.toLowerCase();
-    this.router.navigate([pageRoute, id]);
   }
 
   selectAllFavorites() {
@@ -151,7 +150,6 @@ export class FavoritesComponent {
         if(result.action == "delete-confirmed"){
           this.deleteFavorites();
         }
-      //  console.log('Dialog result:', result);
       }
     });
   }

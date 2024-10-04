@@ -241,21 +241,15 @@ export class TalentService {
     return this.http.post<any>(`${this.apiUrl2}/player/add-performance-detail`, params, { headers });
   }
 
-  deletePerformance(performanceId: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');  // Get the token from localStorage
+  deletePerformance(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${userToken}`
+      'Authorization': `Bearer ${this.userToken}`
     });
-  
-    // Pass the headers and params to the DELETE request
-    const options = {
-      headers: headers
-    };
-  
-    // Make sure you use DELETE, not GET
-    return this.http.get<any>(`${this.apiUrl2}player/delete-performance-detail/${performanceId}`, options);
+
+    return this.http.post<any>(`${this.apiUrl2}player/delete-performance-report`, params, { headers });
   }
-  
+
   updateTransfer(transferId:any, params: any): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
@@ -317,4 +311,17 @@ export class TalentService {
       { headers }
     );
   }
+
+  // Download reports (assuming backend supports this feature)
+  downloadReports(reportIds: string[]): Observable<any> {
+    let params = new HttpParams();
+    reportIds.forEach(id => {
+      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    return this.http.get(`${this.apiUrl2}download-reports`, { params, responseType: 'blob' });
+  }
+
+
+
 }

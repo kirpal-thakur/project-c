@@ -53,6 +53,7 @@ import { AddPerformanceComponent } from './tabs/performance-tab/add-performance/
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
 import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
+import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-tran
     AddPerformanceComponent,
     DeletePopupComponent,
     EditTransferDetailsComponent,
-    AddTransferComponent
+    AddTransferComponent,
+    AddPerfomanceReportComponent
   ],
   imports: [
     CommonModule,

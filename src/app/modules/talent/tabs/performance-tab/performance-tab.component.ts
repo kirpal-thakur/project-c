@@ -85,6 +85,7 @@ export class PerformanceTabComponent {
   openDeleteDialog(id:any) {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
+      minWidth: '400px', // Add min-width here
     });
   
     dialogRef.afterClosed().subscribe(result => {

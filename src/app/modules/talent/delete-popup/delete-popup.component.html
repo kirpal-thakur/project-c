@@ -1,10 +1,11 @@
-<div class="delete-confirmation-modal">
-    <h2>Delete Information</h2>
-    <p>Once information is deleted, it can't be undone. Do you want to delete?</p>
+<div class="delete-confirmation-modal bg-color">  
+    <div class="close_buttons text-end">
+        <button class="close-btn" (click)="cancel()">X</button>
+    </div>
+    <h2 class="delete-confirmation">Once information is deleted, it can’t be undone. Do you want to delete?</h2>   
     
     <div class="dialog-actions">
-      <button class="delete-button" (click)="confirmDelete()">Delete</button>
-      <button class="cancel-button" (click)="cancel()">Cancel</button>
+      <button class="confirmation_delete-button" (click)="confirmDelete()">Delete</button>
     </div>
 </div>
   
