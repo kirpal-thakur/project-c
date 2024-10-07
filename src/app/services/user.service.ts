@@ -310,5 +310,52 @@ export class UserService {
     });
     return this.http.post<any>(`${this.apiUrl2}/settings/upload-profile-image`, formdata, { headers }); 
   }
+
+  getCountries(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-countries`, {headers}
+    );
+  }
+  getPositions(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-positions`, {headers}
+    );
+  }
+
+  getClubsForPlayer(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-clubs-list`, {headers}
+    );
+  }
+
+  updateUser(userId:any, params:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}/update-profile/${userId}`, params, { headers }); 
+  }
+
+  getRepresentators(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-representators/${userId}`, {headers}
+    );
+  }
   
 }

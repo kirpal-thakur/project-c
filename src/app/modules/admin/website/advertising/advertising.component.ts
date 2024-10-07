@@ -132,8 +132,16 @@ export class AdvertisingComponent {
     });
   }
 
-  viewCoupon(element:any){
-
+  viewAdvertisement(element:any){
+    const viewAdDialog = this.dialog.open(AdvertisingPopupComponent,{
+      height: '598px',
+      width: '600px',
+      panelClass: 'cutam-cupen',
+      data : {
+        action: 'view',
+        ad: element
+      }
+    });
   }
 
   bulkPublish(): any{
@@ -247,5 +255,7 @@ export class AdvertisingComponent {
     this.idsToProceed = [couponId];
     this.showMatDialog("", "delete-advertisement-confirmation");
   }
+
+  
 }
 

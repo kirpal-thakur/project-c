@@ -72,6 +72,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ProfileComponent } from './setting/profile/profile.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { TeamMembersComponent } from './setting/team-members/team-members.component';
+import { UserEditPopupComponent } from './user-edit-popup/user-edit-popup.component';
   
 @NgModule({
   declarations: [
@@ -124,7 +125,8 @@ import { TeamMembersComponent } from './setting/team-members/team-members.compon
     LoaderComponent,
     ProfileComponent,
     ActivityLogComponent,
-    TeamMembersComponent
+    TeamMembersComponent,
+    UserEditPopupComponent
   ],
   imports: [
     CommonModule,

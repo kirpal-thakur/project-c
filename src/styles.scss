@@ -1461,3 +1461,12 @@ margin: auto;
 }
 
 // new changes CSS End
+
+
+.custom-size-calendar.player-popup-field .mat-mdc-text-field-wrapper {
+  height: 21.5px;
+  padding: 0px 0px 0px 0px !important;
+  border: none;
+  background-color: #fff;
+  margin-top: -2px;
+}
