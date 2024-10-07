@@ -17,8 +17,7 @@ export class ProfileTabComponent {
   @Input() userData: any;
 
   constructor( public dialog: MatDialog) { 
-    // If you want to load the user data from localStorage during initialization
-    
+    // If you want to load the user data from localStorage during initialization    
   }
 
   ngOnInit(): void {
@@ -98,14 +97,14 @@ export class ProfileTabComponent {
       }
     });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('User saved:', result);
-      // Handle the save result (e.g., update the user details)
-    } else {
-      console.log('User canceled the edit');
-    }
-  });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User saved:', result);
+        // Handle the save result (e.g., update the user details)
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
   }
 
     // Function to get the main position from the array

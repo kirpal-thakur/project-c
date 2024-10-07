@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrl: './app-setting.component.scss'
 })
 export class AppSettingComponent {
+  loggedInUser:any = localStorage.getItem('userData');
+  
+  constructor(){}
+
+  ngOnInit(){
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+  }
+
 
 }

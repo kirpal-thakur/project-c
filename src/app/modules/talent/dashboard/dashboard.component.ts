@@ -25,16 +25,29 @@ export class DashboardComponent implements OnInit {
   profileImage: any = "";
   selectedFile : any;
   teams : any;
+  highlights : any;
+  userImages: any = [];
+  userVideos: any = [];
+  imageBaseUrl : any;
+  defaultCoverImage:any = "./media/palyers.png";
+
   @Output() dataEmitter = new EventEmitter<string>();
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-     this.getUserProfile(this.userId);
+    this.getUserProfile(this.userId);
+    this.getHighlightsData();
+    this.getGalleryData();
+    
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
     });    
+    
+    if(this.coverImage == ""){
+      this.coverImage = this.defaultCoverImage;
+    }
     this.getAllTeams();
   }
   
@@ -74,11 +87,33 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
       width: '800px',
       data: {
+          images: this.userImages ,
+          videos: this.userVideos , 
+          url: this.imageBaseUrl 
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
     });
+
+  }
+
+  
+  getGalleryData(){
+    try {
+      this.talentService.getGalleryData().subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.userImages = response.data.images; 
+          this.userVideos = response.data.videos; 
+          this.imageBaseUrl = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
   }
   
   getUserProfile(userId:any){
@@ -89,10 +124,30 @@ export class DashboardComponent implements OnInit {
           console.log('user:', this.user);
 
           this.userNationalities = JSON.parse(this.user.user_nationalities);
-          if(this.user.meta && this.user.meta.cover_image_path){
-            this.coverImage = this.user.meta.cover_image_path;
+          if(this.user.meta.profile_image_path ){
             this.profileImage = this.user.meta.profile_image_path;
           }
+          if(this.user.meta.cover_image_path){
+            this.coverImage = this.user.meta.cover_image_path;
+          }
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });     
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+  }
+  
+
+  getHighlightsData(){
+    try {
+      this.talentService.getHighlightsData().subscribe((response)=>{
+        if (response && response.status && response.data && response.data.images) {
+          this.highlights = response.data; 
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
@@ -216,7 +271,6 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
   
   getAllTeams(){
     this.talentService.getTeams().subscribe((data) => {

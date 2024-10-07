@@ -31,6 +31,12 @@ export class TalentService {
     );
   }
 
+  getHighlightsData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-gallery-highlights`
+    );
+  }
+
   // Fetch teams and store globally
   getTeams(): Observable<any> {
     if (this.teams.length) {

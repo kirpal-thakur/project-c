@@ -37,14 +37,13 @@ export class ActivityLogComponent {
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
-
     
     let params:any = {};
     params.offset = page;
     params.limit  = pageSize;
 
     try {
-     this.activityService.getActivity(params).subscribe((response)=>{
+      this.activityService.getActivity(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.userData) {
         this.activities = response.data.userData; 
         this.paginator.length = response.data.totalCount;
