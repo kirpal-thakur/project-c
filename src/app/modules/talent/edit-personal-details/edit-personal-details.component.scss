@@ -98,3 +98,30 @@
   border-radius: 10px 0px 0px 10px !important;
   width: 50% !important;
 }
+
+.overflow-card{
+  max-height: 80vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding:0px 20px 0px 20px;
+}
+.mat-mdc-dialog-surface{
+  overflow: hidden !important;
+}
+.overflow-card::-webkit-scrollbar {
+  width: 6px;
+}
+.overflow-card::-webkit-scrollbar-thumb {
+  background: rgb(228, 228, 228); 
+  border-radius: 10px;
+}
+
+@media(max-width:768px){
+  .mobile-input{
+    width: 50% !important;
+  }
+  .form-group {
+    margin-bottom: 26px;
+    padding: 0px 26px;
+}
+}

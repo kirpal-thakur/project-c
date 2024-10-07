@@ -6,6 +6,8 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
+import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
+import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,21 +25,34 @@ export class DashboardComponent implements OnInit {
   coverImage: any = "";
   profileImage: any = "";
   selectedFile : any;
-  
+  teams : any;
+  highlights : any;
+  userImages: any = [];
+  userVideos: any = [];
+  imageBaseUrl : any;
+  defaultCoverImage:any = "./media/palyers.png";
+
   @Output() dataEmitter = new EventEmitter<string>();
+
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-     this.getUserProfile(this.userId);
+    this.getUserProfile(this.userId);
+    this.getHighlightsData();
+    this.getGalleryData();
+    
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
     });    
+    
+    if(this.coverImage == ""){
+      this.coverImage = this.defaultCoverImage;
+    }
+    this.getAllTeams();
   }
   
   openEditDialog() {
-    console.log('User saved');
-
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
       data: {
@@ -60,12 +75,46 @@ export class DashboardComponent implements OnInit {
       if (result) {
         console.log('User saved:', result);
         // Handle the save result (e.g., update the user details)
+
+    		this.getUserProfile(this.userId);
+
       } else {
         console.log('User canceled the edit');
       }
     });
-    this.getUserProfile(this.userId);
+  }
+  
+  openHighlight() {
+    const dialogRef = this.dialog.open(EditHighlightsComponent, {
+      width: '800px',
+      data: {
+          images: this.userImages ,
+          videos: this.userVideos , 
+          url: this.imageBaseUrl 
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+    });
+
+  }
+
+  
+  getGalleryData(){
+    try {
+      this.talentService.getGalleryData().subscribe((response)=>{
+        if (response && response.status && response.data) {
+          this.userImages = response.data.images; 
+          this.userVideos = response.data.videos; 
+          this.imageBaseUrl = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
   }
   
   getUserProfile(userId:any){
@@ -76,10 +125,30 @@ export class DashboardComponent implements OnInit {
           console.log('user:', this.user);
 
           this.userNationalities = JSON.parse(this.user.user_nationalities);
-          if(this.user.meta && this.user.meta.cover_image_path){
-            this.coverImage = this.user.meta.cover_image_path;
+          if(this.user.meta.profile_image_path ){
             this.profileImage = this.user.meta.profile_image_path;
           }
+          if(this.user.meta.cover_image_path){
+            this.coverImage = this.user.meta.cover_image_path;
+          }
+          // this.isLoading = false;
+        } else {
+          // this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
+      });     
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+  }
+  
+
+  getHighlightsData(){
+    try {
+      this.talentService.getHighlightsData().subscribe((response)=>{
+        if (response && response.status && response.data && response.data.images) {
+          this.highlights = response.data; 
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
@@ -140,7 +209,6 @@ export class DashboardComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
 
-      console.log(this.selectedFile)
       try {
 
         const formdata = new FormData();
@@ -183,6 +251,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  
+  openDeleteDialog() {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteCoverImage();
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
+  }
+  
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
@@ -204,7 +288,12 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
+  
+  getAllTeams(){
+    this.talentService.getTeams().subscribe((data) => {
+      this.teams = data;
+    });
+  }
   
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string

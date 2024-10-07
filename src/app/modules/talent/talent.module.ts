@@ -47,6 +47,14 @@ import { EditGeneralDetailsComponent } from './edit-general-details/edit-general
 import { SettingComponent } from './setting/setting.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
+import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
+import { EditPerformanceDetailsComponent } from './edit-performance-details/edit-performance-details.component';
+import { AddPerformanceComponent } from './tabs/performance-tab/add-performance/add-performance.component';
+import { DeletePopupComponent } from './delete-popup/delete-popup.component';
+import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
+import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
+import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
+import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +86,15 @@ import { AppSettingComponent } from './setting/app-setting/app-setting.component
     ChatComponent,
     SettingComponent,
     ActivityLogComponent,
-    AppSettingComponent
+    AppSettingComponent,
+    ChatPopupComponent,
+    EditPerformanceDetailsComponent,
+    AddPerformanceComponent,
+    DeletePopupComponent,
+    EditTransferDetailsComponent,
+    AddTransferComponent,
+    AddPerfomanceReportComponent,
+    EditHighlightsComponent
   ],
   imports: [
     CommonModule,
@@ -103,8 +119,7 @@ import { AppSettingComponent } from './setting/app-setting/app-setting.component
     MatToolbarModule,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule,
-    
+    NgxEditorModule,    
   ]
 })
 export class TalentModule { }

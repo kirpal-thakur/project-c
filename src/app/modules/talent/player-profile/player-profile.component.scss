@@ -13,8 +13,8 @@
     margin-left: auto;
     text-align: end;
 }
-.player-profile{
-    padding: 20px;
+.close_buttons {
+    padding:20px 20px 0px 20px;
 }
 .player-title h6 {
     font-weight: 600;
@@ -75,5 +75,24 @@
     margin-top: 56px;
     margin-bottom: 30px;
 }
-
-
+.overflow-card{
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:0px 20px 0px 20px;
+}
+.mat-mdc-dialog-surface{
+    overflow: hidden !important;
+}
+.overflow-card::-webkit-scrollbar {
+    width: 6px;
+  }
+.overflow-card::-webkit-scrollbar-thumb {
+    background: rgb(228, 228, 228); 
+    border-radius: 10px;
+  }
+@media (max-width:425px) {
+    .player-elton{
+        margin-top: 20px;
+    }
+}

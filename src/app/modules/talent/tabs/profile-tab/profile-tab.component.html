@@ -31,7 +31,7 @@
         </div>
         <div class="general_details">            
             <h6 class="details_2"> {{ 'Last Change' | translate}}</h6>
-            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">€{{user.meta.market_value_last_updated |date:'MMM d, y'}} </h5>
+            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">{{user.meta.market_value_last_updated |date:'MMM d, y'}} </h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta.market_value_last_updated">NA</h5>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="col-lg-6 d-flex flex-column justify-content-between">
             <div class="main-position">
                 <h6 class="details_2"> {{ 'Main-position' | translate}}</h6>
-                <h5 class="details-1">{{getMainPosition()}}</h5>
+                <h5 class="details-1">{{position}}</h5>
             </div>
             <div class="main-position">
             <h6 class="details_2"> {{ 'Other-position(s)' | translate}}</h6>
@@ -64,7 +64,7 @@
                         </svg>
                     </span>
                     <span>
-                        www.facebook.com/{{userData.meta.sm_facebook}}
+                        www.facebook.com/{{userData?.meta?.sm_facebook}}
                     </span>
                 </div>
                 <div class="social_icons">
@@ -75,7 +75,7 @@
                             <path d="M15.4412 3.9707C15.8089 3.9707 16.103 4.26482 16.103 4.63247C16.103 5.00011 15.8089 5.29423 15.4412 5.29423C15.0736 5.29423 14.7794 5.00011 14.7794 4.63247C14.7059 4.26482 15 3.9707 15.4412 3.9707Z" />
                             </svg>
                     </span>
-                    <span>www.instagram.com/{{userData.meta.sm_instagram}}</span>
+                    <span>www.instagram.com/{{userData?.meta?.sm_instagram}}</span>
                 </div>
             </div>
         </div>

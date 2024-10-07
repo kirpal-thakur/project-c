@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
+import { Observable, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class TalentService {
   private apiUrl: string;
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
+  public teams: any[] = [];
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
@@ -29,8 +31,41 @@ export class TalentService {
     );
   }
 
-  // Fetch teams
+  getHighlightsData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-gallery-highlights`
+    );
+  }
+
+  // Fetch teams and store globally
   getTeams(): Observable<any> {
+    if (this.teams.length) {
+      // If teams are already fetched, return them as an Observable
+      return of(this.teams);
+    } else {
+      // Fetch teams from the API, store in global variable
+      return this.http.get(`${this.apiUrl2}get-teams`).pipe(
+        tap((response: any) => {
+          if (response && response.status) {
+            this.teams = response.data.teams; // Store teams globally
+          }
+        }),
+        catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully
+      );
+    }
+  }
+
+
+  // Error handling method
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`); // Log error to console
+      return of(result as T); // Return an empty result
+    };
+  }
+  
+  // Fetch teams
+  getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
   }
   
@@ -77,6 +112,12 @@ export class TalentService {
   getCountries(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-countries`
+    );
+  }
+  
+  getDomains(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-domains`
     );
   }
   
@@ -193,34 +234,118 @@ export class TalentService {
     );
   }
   
-    /**
+  updatePerformance(performanceId:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
+  }
+
+  uploadReport(params: any): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+  
+    return this.http.post<any>(`${this.apiUrl2}player/upload-performance-report`, params, {
+      headers: headers,
+      reportProgress: true,  // This enables progress tracking
+      observe: 'events',     // This allows us to observe the full event stream, including upload progress
+    });
+  }
+ 
+
+  addPerformance(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/player/add-performance-detail`, params, { headers });
+  }
+
+  deletePerformance(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}player/delete-performance-report`, params, { headers });
+  }
+
+  updateTransfer(transferId:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/player/edit-transfer-detail/${transferId}`, params, { headers });
+  }
+
+  addTransfer(params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/player/add-transfer-detail/`, params, { headers });
+  }
+
+  deleteTransfer(id: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');  // Get the token from localStorage
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${userToken}`
+    });
+  
+    // Pass the headers and params to the DELETE request
+    const options = {
+      headers: headers
+    };
+  
+    // Make sure you use DELETE, not GET
+    return this.http.get<any>(`${this.apiUrl2}player/delete-transfer-detail/${id}`, options);
+  }
+  
+  /**
    * Change password for the user.
    * @param newPassword The new password to set.
    * @param confirmPassword The confirmation of the new password.
    * @returns Observable of the API response.
    */
-    changePassword(newPassword: string, confirmPassword: string): Observable<any> {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.userToken}`,  // Add token to header
-      });
-  
-      const formData = new FormData();
-      formData.append('new_password', newPassword);
-      formData.append('new_con_password', confirmPassword);
-  
-      // POST request to the change-password API
-      return this.http.post<any>(`${this.apiUrl2}change-password`, formData, { headers });
-    }
+  changePassword(newPassword: string, confirmPassword: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`,  // Add token to header
+    });
 
+    const formData = new FormData();
+    formData.append('new_password', newPassword);
+    formData.append('new_con_password', confirmPassword);
+
+    // POST request to the change-password API
+    return this.http.post<any>(`${this.apiUrl2}change-password`, formData, { headers });
+  }
+
+  
+  getPositions(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
     
-    getPositions(): Observable<any> {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.userToken}`
-      });
-      
-      return this.http.get<any>(
-        `${this.apiUrl2}/get-positions`, 
-        { headers }
-      );
-    }
+    return this.http.get<any>(
+      `${this.apiUrl2}/get-positions`, 
+      { headers }
+    );
+  }
+
+  // Download reports (assuming backend supports this feature)
+  downloadReports(reportIds: string[]): Observable<any> {
+    let params = new HttpParams();
+    reportIds.forEach(id => {
+      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    return this.http.get(`${this.apiUrl2}download-reports`, { params, responseType: 'blob' });
+  }
+
+
+
 }

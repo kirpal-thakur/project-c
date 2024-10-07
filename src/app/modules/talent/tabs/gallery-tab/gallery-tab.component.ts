@@ -4,6 +4,7 @@ import { UserService } from '../../../../services/user.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
+import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 
 @Component({
   selector: 'talent-gallery-tab',
@@ -145,6 +146,22 @@ export class GalleryTabComponent {
     }
   }
 
+  
+  openDeleteDialog(id:any) {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteImage(id);
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
+  }
+  
   downloadImage(baseUrl:any, image:any){
 
     fetch(baseUrl+image)

@@ -1,132 +1,97 @@
-
-import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../services/user.service';
+import { Component, inject } from '@angular/core';
 import Talk from 'talkjs';
+import { MatDialog } from '@angular/material/dialog';
+import { TalkService } from '../../../services/talkjs.service';
+import { ChatPopupComponent } from './chat-popup/chat-popup.component';
 
 @Component({
   selector: 'talent-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
-  userData: any;
-  otherUsers: any;
-  constructor(private userService: UserService){
-
-  }
-  ngOnInit(): void {
-
-    Talk.ready.then(() => {
-      const me = new Talk.User({
-        id: "sebastian",
-        name: "Sebastian",
-        email: "sebastian@example.com",
+export class ChatComponent  {
+  readonly dialog = inject(MatDialog);
+  userData:any;
+  groupName: string = '';
+  groupId: string = '';
+  users: { id: string; name: string; email: string; photoUrl: string }[] = [];
+  newUser : { id: string; name: string; email: string; photoUrl: string }[] = [];
+  createdGroups: { groupId: string, groupName: string }[] = [];
+  user:any = {};
+  constructor(private talkService : TalkService) {}
+  
+  async ngOnInit() {
+    const userDataString = localStorage.getItem('userData');
+    if (userDataString) {
+      this.userData = JSON.parse(userDataString);
+      this.user = {
+        id: this.userData.id,
+        name: this.userData.first_name,
+        email: this.userData.username,
         photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
         welcomeMessage: "Hi!",
-      });
+        role: (this.userData.role == '1') ? "hidden" : "default"
+      };
+      
+      const session = await this.talkService.init(this.user);
+      const chatbox = session.createInbox();
+  
+      // Defer mounting chatbox until next event loop cycle
+      setTimeout(() => {
+        chatbox.mount(document.getElementById('talkjs-container'));
+      }, 0);
+    }
+  }
+  
 
-      const other = new Talk.User({
-        id: "taylor",
-        name: "Taylor",
-        email: "taylor@example.com",
-        photoUrl: "https://talkjs.com/new-web/avatar-8.jpg",
-        welcomeMessage: "Hello, I'm Taylor. Nice to meet you too!",
-      });
-      const other1 = new Talk.User({
-        id: "smith",
-        name: "smith",
-        email: "smith@example.com",
-        photoUrl: "https://talkjs.com/new-web/avatar-8.jpg",
-        welcomeMessage: "Hello, I'm smith. Nice to meet you too!",
-      });
-      const other3 = new Talk.User({
-        id: "test",
-        name: "test",
-        email: "test@example.com",
-        photoUrl: "https://talkjs.com/new-web/avatar-8.jpg",
-        welcomeMessage: "Hello, I'm test. Nice to meet you too!",
-      });
+  async createGroup() {
+    if (this.groupName && this.groupId && this.users.length > 0) {
 
-      const session = new Talk.Session({
-        appId: "tmI75KXB",
-        me: me,
-      });
-
-
-      const conversation = session.getOrCreateConversation(Talk.oneOnOneId(me, other3));
-      conversation.setParticipant(me);
-      conversation.setParticipant(other);
-      conversation.setParticipant(other1);
-      conversation.setParticipant(other3);
-
+      const session = await this.talkService.init(this.user);
+      const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
+        this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
       const inbox = session.createInbox({
-        showChatHeader: true
+        selected: conversation
       });
 
-      // const inbox = session.createInbox();
-      inbox.select(conversation);
-      inbox.mount(document.getElementById("talkjs-container"));
-    })
-
-
-    .catch((error) => {
-      console.error('TalkJS initialization error:', error);
-    });
+      inbox.mount(document.getElementById('talkjs-container'));
+    }
   }
 
-  async fetchUsers(): Promise<void> {
-    const userDataString = localStorage.getItem('userData');
-        try {
+  async openGroup(groupId: string) {
+    const session = await this.talkService.init(this.user);
+    const conversation = this.talkService.getOrCreateConversation(groupId);
 
-         /*  const response: any = await this.userService.getUsers().toPromise();
-          if (response && response.status && response.data && response.data.userData) {
-            Talk.ready.then(() => {
-            if (userDataString) {
-            this.userData = JSON.parse(userDataString);
-            const me = new Talk.User({
-              id: this.userData.id,
-              name: this.userData.first_name,
-              email: this.userData.username,
+    const inbox = session.createInbox({
+      selected: conversation
+    });
+
+    inbox.mount(document.getElementById('talkjs-container'));
+  }
+
+  editinbox() {
+    this.users = [];
+    this.dialog.open(ChatPopupComponent, {
+      height: '450px',
+      width: '40vw',
+    })
+    .afterClosed()
+      .subscribe(users => {
+        console.log('first users',users);
+        for(let user of users.data){
+            this.users.push({
+              id: user.id,
+              name: user.first_name,
+              email: user.username,
               photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-              welcomeMessage: "Hi!",
-            });
-
-            const session = new Talk.Session({
-              appId: "tHcyGZjg",
-              me: me,
-            });
-            let conversation;
-            for (let user of response.data.userData) {
-              let other = new Talk.User({
-                id: user.id,
-                name: user.first_name,
-                email: user.username,
-                photoUrl: "https://talkjs.com/new-web/avatar-8.jpg",
-                welcomeMessage: "Hello, I'm Taylor. Nice to meet you too!",
-              });
-              conversation = session.getOrCreateConversation(Talk.oneOnOneId(me, other));
-              conversation.setParticipant(me);
-              conversation.setParticipant(other);
-             }
-             const inbox = session.createInbox({
-               showChatHeader: true
-             });
-            inbox.select(conversation);
-             // const inbox = session.createInbox();
-             inbox.mount(document.getElementById("talkjs-container"));
-            //end here
-            }
-              }).catch((error) => {
-                console.error('TalkJS initialization error:', error);
-              });
-            } else {
-            console.error('Invalid API response structure:', response);
-          } */
-
-
-        } catch (error) {
-          console.error('Error fetching users:', error);
+            })
         }
-
+        console.log('last users',this.users);
+        const groupId = this.userData.id+"-"+ Date.now();
+        const groupName = this.userData.first_name+ "-" + Date.now();
+        this.groupName = groupName;
+        this.groupId   = groupId;
+        this.createGroup();
+      });
   }
 }

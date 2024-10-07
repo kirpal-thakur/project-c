@@ -5,12 +5,10 @@
         <div class="row">
           <div class="col-lg-3 border-end p-0 card_box-1">
             <div class="user-details-left col-lg-12">
-              <div class="user-media">
-                <img [src]="profileImage" alt="" *ngIf="user.meta && user.meta.profile_image_path"
-                  class="user-img mt-1" />
+              <div class="user-media text-center">
+                <img [src]="profileImage" alt="" *ngIf="user.meta && user.meta.profile_image_path"class=" mt-1" />
+                <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path" class="" />
 
-                <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path"
-                  class="user-img" />
                 <div class="user-edit">
                   <label for="profile-upload">
                     <div class="edit-profile cursor-pointer" >
@@ -45,8 +43,8 @@
               </div>
 
               <div class="bg-color card-bg">
-                <div class="user-info pt-3 row align-items-center justify-content-between p-3">
-                <div class="col-lg-9 d-flex align-items-center">
+                <div class="user-info pt-3 row align-items-center justify-content-between p-3 responsive-name">
+                <div class="col-lg-9 d-flex align-items-center plyer-name-box">
                   <h6  class="user-info-name">
                     {{ user.first_name }} {{ user.last_name }}
                   </h6>
@@ -56,7 +54,7 @@
                     <img src="../../../assets/images/rejected.png" alt="" class="user-rejected-icon" *ngIf="user.status == '3'" />
                   </div>
                 </div>
-                  <div class="col-lg-3 p-0 edit_button">
+                  <div class="col-lg-3 p-0 edit_button responsive-edit_btn">
                     <button (click)="openEditDialog()">
                       <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
@@ -102,7 +100,7 @@
                   <div class="col-lg-6">
                     <div class="row align-items-center">
                       <div class="col-lg-3 team-badge_image">
-                        <img src="assets\images\team-badge.png" alt="" />
+                        <img src="https://api.socceryou.ch/uploads/logos/{{user?.meta?.place_of_birth}}.svg" alt="" />
                       </div>
                       <div class=" col-lg-9 p-0 team-badge_content">
                         <h6 class="title_2"> {{"Place of birth" | translate }}</h6>
@@ -150,7 +148,7 @@
                   </div>
                   <div class="col-lg-6 ">
                     <div class="row align-items-center">
-                      <div class="col-lg-3 text-end team-badge_image">
+                      <div class="col-lg-3 team-badge_image">
                         <svg width="36" height="36" viewBox="0 0 28 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_2958_4755786)">
                           <path d="M18.6656 6.3763V6.66797H13.2211C12.9943 6.66797 12.8079 6.59505 12.6621 6.44922C12.5163 6.30338 12.4434 6.11704 12.4434 5.89019V0.445745H12.735C13.0591 0.445745 13.3346 0.559172 13.5614 0.786024L18.3253 5.54991C18.5522 5.77676 18.6656 6.05223 18.6656 6.3763ZM13.9989 17.3138L21.9225 9.4388L25.2281 12.7444L17.3531 20.668H13.9989V17.3138ZM27.6586 8.5638C27.8855 8.82306 27.9989 9.12283 27.9989 9.46311C27.9989 9.80338 27.8855 10.087 27.6586 10.3138L26.2975 11.6749L22.992 8.36936L24.3531 7.00825C24.5799 6.78139 24.8635 6.66797 25.2038 6.66797C25.5441 6.66797 25.8438 6.78139 26.1031 7.00825L27.6586 8.5638Z" fill="#6FB95D"/>
@@ -256,31 +254,22 @@
                   <h2>HIGHLIGHTS</h2>
                   <p>Feature up to 6 photos/videos.</p>
                 </div>
-                <div class="settings">
+                <div class="settings cursor-pointer" (click)="openHighlight()">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path
                       d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4 .6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" />
                   </svg>
                 </div>
               </div>
-              <div class="row w-100 m-auto image_gallery-box mt-2">
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
+              <div class="d-flex w-100 m-auto image_gallery-box mt-2">
+                <div class="col-lg-4 gallery_images" *ngFor="let image of highlights?.images">
+                  <img [src]="highlights.file_path + image.file_name" alt="">
                 </div>
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
-                </div>
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
-                </div>
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
-                </div>
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
-                </div>
-                <div class="col-lg-4 gallery_images ">
-                  <img src="./media/palyers.png" alt="">
+              
+              </div>
+              <div class="d-flex w-100 m-auto image_gallery-box mt-2">
+                <div class="col-lg-4 gallery_images " *ngFor="let video of highlights?.videos">
+                  <video [src]="highlights.file_path + video.file_name" autoplay></video>
                 </div>
               </div>
             </div>
@@ -289,6 +278,8 @@
           <div class="col-lg-9">
             <div class="players_image">
               <img [src]="coverImage" alt="Cover Image" />
+              <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!coverImage" class="" />
+
               <div class="edit-photo d-flex align-items-center">
                 <div class="edit_image-2 ">                  
                   <label for="file-upload" class="cursor-pointer">
@@ -300,84 +291,84 @@
                   </label>
                 </div>
                 <input id="file-upload" (change)="onCoverFileChange($event)" accept="image/*" type="file" class="d-none" />
-                <svg class="delete_image cursor-pointer"  (click)="deleteCoverImage()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <svg class="delete_image cursor-pointer"  (click)="openDeleteDialog()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                   <path
                     d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.7 23.7 0 0 0 -21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0 -16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z" />
                 </svg>
               </div>
             </div>
-           <div class="bg-color mt-4 nav-tabs_box">
-            <ul class="nav nav-tabs user-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="switchTab('profile')" [ngClass]="{ active: activeTab == 'profile' }"
-                  id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                  type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
-                  <svg id="users-icon" width="24" height="23" viewBox="0 0 24 23" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M12 0.125C14.0599 0.125 15.974 0.644531 17.7422 1.68359C19.4557 2.6862 20.8138 4.04427 21.8164 5.75781C22.8555 7.52604 23.375 9.4401 23.375 11.5C23.375 13.5599 22.8555 15.474 21.8164 17.2422C20.8138 18.9557 19.4557 20.3138 17.7422 21.3164C15.974 22.3555 14.0599 22.875 12 22.875C9.9401 22.875 8.02604 22.3555 6.25781 21.3164C4.54427 20.3138 3.1862 18.9557 2.18359 17.2422C1.14453 15.474 0.625 13.5599 0.625 11.5C0.625 9.4401 1.14453 7.52604 2.18359 5.75781C3.1862 4.04427 4.54427 2.6862 6.25781 1.68359C8.02604 0.644531 9.9401 0.125 12 0.125ZM12 1.875C10.25 1.875 8.6276 2.3125 7.13281 3.1875C5.69271 4.04427 4.54427 5.19271 3.6875 6.63281C2.8125 8.1276 2.375 9.75 2.375 11.5C2.375 13.25 2.8125 14.8724 3.6875 16.3672C4.54427 17.8073 5.69271 18.9557 7.13281 19.8125C8.6276 20.6875 10.25 21.125 12 21.125C13.75 21.125 15.3724 20.6875 16.8672 19.8125C18.3073 18.9557 19.4557 17.8073 20.3125 16.3672C21.1875 14.8724 21.625 13.25 21.625 11.5C21.625 9.75 21.1875 8.1276 20.3125 6.63281C19.4557 5.19271 18.3073 4.04427 16.8672 3.1875C15.3724 2.3125 13.75 1.875 12 1.875ZM12 4.5C12.7839 4.5 13.513 4.70052 14.1875 5.10156C14.862 5.48438 15.3906 6.01302 15.7734 6.6875C16.1745 7.36198 16.375 8.09115 16.375 8.875C16.375 9.51302 16.2383 10.1237 15.9648 10.707C15.6914 11.2721 15.3086 11.7643 14.8164 12.1836C15.819 12.694 16.6211 13.4414 17.2227 14.4258C17.8242 15.3919 18.125 16.4583 18.125 17.625H16.375C16.375 16.8229 16.1745 16.0938 15.7734 15.4375C15.3906 14.763 14.862 14.2344 14.1875 13.8516C13.5312 13.4505 12.8021 13.25 12 13.25C11.1979 13.25 10.4596 13.4505 9.78516 13.8516C9.12891 14.2344 8.60026 14.763 8.19922 15.4375C7.81641 16.0938 7.625 16.8229 7.625 17.625H5.875C5.875 16.4583 6.17578 15.3919 6.77734 14.4258C7.37891 13.4414 8.18099 12.694 9.18359 12.1836C8.69141 11.7643 8.30859 11.2721 8.03516 10.707C7.76172 10.1237 7.625 9.51302 7.625 8.875C7.625 8.09115 7.81641 7.36198 8.19922 6.6875C8.60026 6.01302 9.13802 5.48438 9.8125 5.10156C10.487 4.70052 11.2161 4.5 12 4.5ZM12 6.25C11.2708 6.25 10.651 6.50521 10.1406 7.01562C9.63021 7.52604 9.375 8.14583 9.375 8.875C9.375 9.60417 9.63021 10.224 10.1406 10.7344C10.651 11.2448 11.2708 11.5 12 11.5C12.7292 11.5 13.349 11.2448 13.8594 10.7344C14.3698 10.224 14.625 9.60417 14.625 8.875C14.625 8.14583 14.3698 7.52604 13.8594 7.01562C13.349 6.50521 12.7292 6.25 12 6.25Z"
-                      fill="#023A4A" />
-                  </svg>
-                  {{ "Profile" | translate }}
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="switchTab('performance')"
-                  [ngClass]="{ active: activeTab == 'performance' }" id="profile-tab" data-bs-toggle="tab"
-                  id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
-                  aria-controls="profile-tab-pane" aria-selected="false">
-                  <svg id="users-icon" width="24" height="21" viewBox="0 0 24 21" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
-                      fill="#023A4A" />
-                  </svg>
-                  {{ "Performance" | translate }}
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link"  (click)="switchTab('performance-analysis')"
-                  [ngClass]="{ active: activeTab == 'performance-analysis' }" id="profile-tab" data-bs-toggle="tab"
-                  id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
-                  aria-controls="profile-tab-pane" aria-selected="false">
-                  <svg id="users-icon" width="24" height="21" viewBox="0 0 24 21" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
-                      fill="#023A4A" />
-                  </svg>
-                  {{ "Performance Analysis" | translate }}
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link transfer" (click)="switchTab('transfers')"
-                  [ngClass]="{ active: activeTab == 'transfers' }" id="contact-tab" data-bs-toggle="tab"
-                  data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
-                  aria-selected="false">
-                  <svg id="users-icon" width="24" height="25" viewBox="0 0 24 25" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M17.4141 0.496094L23.293 6.375L17.4141 12.2539L16.1836 10.9961L19.9297 7.25H1.5V5.5H19.9297L16.1836 1.75391L17.4141 0.496094ZM6.58594 12.7461L7.81641 14.0039L4.07031 17.75H22.5V19.5H4.07031L7.81641 23.2461L6.58594 24.5039L0.707031 18.625L6.58594 12.7461Z"
-                      fill="#023A4A" />
-                  </svg>
-                  {{ "Transfers" | translate }}
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{ active: activeTab == 'gallery' }"
-                  id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
-                  type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
-                  <svg id="users-icon" width="26" height="21" viewBox="0 0 26 21" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
-                      fill="#023A4A" />
-                  </svg>
-                  {{ "Gallery" | translate }}
-                </button>
-              </li>
-            </ul>
-           </div>
+            <div class="bg-color mt-4 nav-tabs_box ">
+              <ul class="nav nav-tabs user-tabs " id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('profile')" [ngClass]="{ active: activeTab == 'profile' }"
+                    id="home-tab manage-button" id="manage-button" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                    type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                    <svg id="users-icon" width="24" height="23" viewBox="0 0 24 23" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M12 0.125C14.0599 0.125 15.974 0.644531 17.7422 1.68359C19.4557 2.6862 20.8138 4.04427 21.8164 5.75781C22.8555 7.52604 23.375 9.4401 23.375 11.5C23.375 13.5599 22.8555 15.474 21.8164 17.2422C20.8138 18.9557 19.4557 20.3138 17.7422 21.3164C15.974 22.3555 14.0599 22.875 12 22.875C9.9401 22.875 8.02604 22.3555 6.25781 21.3164C4.54427 20.3138 3.1862 18.9557 2.18359 17.2422C1.14453 15.474 0.625 13.5599 0.625 11.5C0.625 9.4401 1.14453 7.52604 2.18359 5.75781C3.1862 4.04427 4.54427 2.6862 6.25781 1.68359C8.02604 0.644531 9.9401 0.125 12 0.125ZM12 1.875C10.25 1.875 8.6276 2.3125 7.13281 3.1875C5.69271 4.04427 4.54427 5.19271 3.6875 6.63281C2.8125 8.1276 2.375 9.75 2.375 11.5C2.375 13.25 2.8125 14.8724 3.6875 16.3672C4.54427 17.8073 5.69271 18.9557 7.13281 19.8125C8.6276 20.6875 10.25 21.125 12 21.125C13.75 21.125 15.3724 20.6875 16.8672 19.8125C18.3073 18.9557 19.4557 17.8073 20.3125 16.3672C21.1875 14.8724 21.625 13.25 21.625 11.5C21.625 9.75 21.1875 8.1276 20.3125 6.63281C19.4557 5.19271 18.3073 4.04427 16.8672 3.1875C15.3724 2.3125 13.75 1.875 12 1.875ZM12 4.5C12.7839 4.5 13.513 4.70052 14.1875 5.10156C14.862 5.48438 15.3906 6.01302 15.7734 6.6875C16.1745 7.36198 16.375 8.09115 16.375 8.875C16.375 9.51302 16.2383 10.1237 15.9648 10.707C15.6914 11.2721 15.3086 11.7643 14.8164 12.1836C15.819 12.694 16.6211 13.4414 17.2227 14.4258C17.8242 15.3919 18.125 16.4583 18.125 17.625H16.375C16.375 16.8229 16.1745 16.0938 15.7734 15.4375C15.3906 14.763 14.862 14.2344 14.1875 13.8516C13.5312 13.4505 12.8021 13.25 12 13.25C11.1979 13.25 10.4596 13.4505 9.78516 13.8516C9.12891 14.2344 8.60026 14.763 8.19922 15.4375C7.81641 16.0938 7.625 16.8229 7.625 17.625H5.875C5.875 16.4583 6.17578 15.3919 6.77734 14.4258C7.37891 13.4414 8.18099 12.694 9.18359 12.1836C8.69141 11.7643 8.30859 11.2721 8.03516 10.707C7.76172 10.1237 7.625 9.51302 7.625 8.875C7.625 8.09115 7.81641 7.36198 8.19922 6.6875C8.60026 6.01302 9.13802 5.48438 9.8125 5.10156C10.487 4.70052 11.2161 4.5 12 4.5ZM12 6.25C11.2708 6.25 10.651 6.50521 10.1406 7.01562C9.63021 7.52604 9.375 8.14583 9.375 8.875C9.375 9.60417 9.63021 10.224 10.1406 10.7344C10.651 11.2448 11.2708 11.5 12 11.5C12.7292 11.5 13.349 11.2448 13.8594 10.7344C14.3698 10.224 14.625 9.60417 14.625 8.875C14.625 8.14583 14.3698 7.52604 13.8594 7.01562C13.349 6.50521 12.7292 6.25 12 6.25Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Profile" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('performance')"
+                    [ngClass]="{ active: activeTab == 'performance' }" id="profile-tab" data-bs-toggle="tab"
+                    id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
+                    aria-controls="profile-tab-pane" aria-selected="false">
+                    <svg id="users-icon" width="24" height="21" viewBox="0 0 24 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Performance" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link"  (click)="switchTab('performance-analysis')"
+                    [ngClass]="{ active: activeTab == 'performance-analysis' }" id="profile-tab" data-bs-toggle="tab"
+                    id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
+                    aria-controls="profile-tab-pane" aria-selected="false">
+                    <svg id="users-icon" width="24" height="21" viewBox="0 0 24 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Performance Analysis" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link transfer" (click)="switchTab('transfers')"
+                    [ngClass]="{ active: activeTab == 'transfers' }" id="contact-tab" data-bs-toggle="tab"
+                    data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
+                    aria-selected="false">
+                    <svg id="users-icon" width="24" height="25" viewBox="0 0 24 25" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M17.4141 0.496094L23.293 6.375L17.4141 12.2539L16.1836 10.9961L19.9297 7.25H1.5V5.5H19.9297L16.1836 1.75391L17.4141 0.496094ZM6.58594 12.7461L7.81641 14.0039L4.07031 17.75H22.5V19.5H4.07031L7.81641 23.2461L6.58594 24.5039L0.707031 18.625L6.58594 12.7461Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Transfers" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{ active: activeTab == 'gallery' }"
+                    id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                    type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
+                    <svg id="users-icon" width="26" height="21" viewBox="0 0 26 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Gallery" | translate }}
+                  </button>
+                </li>
+              </ul>
+            </div>
             <div class="general_details mt-4 p-4 bg-color ">             
               <talent-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></talent-profile-tab>
               <talent-performance-tab *ngIf="activeTab == 'performance'"></talent-performance-tab>
@@ -385,7 +376,6 @@
               <talent-transfers-tab *ngIf="activeTab == 'transfers'"></talent-transfers-tab>
               <talent-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></talent-gallery-tab>
             </div>
-
           </div>
         </div>
         <talent-footer></talent-footer>

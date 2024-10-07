@@ -1,6 +1,6 @@
 <div class="gallery-parent">
   <div class="d-flex justify-content-between ">
-    <p>{{'Photos' | translate }} </p>
+    <p class="gallery-photo">{{'Photos' | translate }} </p>
     <p class="gallery-pic-upload pointer" (click)="addPhotosPopup()">{{'AddPhotos' | translate}}</p>
   </div>
   
@@ -12,7 +12,7 @@
       <img src="{{imageBaseUrl}}{{image.file_name}}" alt="" srcset="" class="img-fluid">
 
       <div class="wc_floatingMenu" [ngClass]="{ 'active': openedMenuId == image.id}">
-        <div class="wc_menuItem pointer font-14" (click)="deleteImage(image.id)">
+        <div class="wc_menuItem pointer font-14" (click)="openDeleteDialog(image.id)">
           <span>
             <svg class="del-icon-margin"  width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1.50065 14.0589C1.50065 15.0112 2.32565 15.7904 3.33398 15.7904H10.6673C11.6757 15.7904 12.5007 15.0112 12.5007 14.0589V3.66999H1.50065V14.0589ZM13.4173 1.07277H10.209L9.29232 0.207031H4.70898L3.79232 1.07277H0.583984V2.80425H13.4173V1.07277Z" fill="#111418"/>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="d-flex justify-content-between mt-4">
-    <p>{{'Videos' | translate }} </p>
+    <p class="gallery-photo">{{'Videos' | translate }} </p>
     <p class="gallery-pic-upload pointer" (click)="addPhotosPopup()">{{'Add Videos' | translate}}</p>
   </div>
   

@@ -1,28 +1,51 @@
-<div class="payment-methods container my-4 position-relative">
-    <!-- Close button at the top-right -->
-    <button type="button" class="btn-close position-absolute top-0 end-0 me-3 mt-3" aria-label="Close" (click)="closeDialog()"></button>
-  
-    <h2 class="mb-3">Payment Methods</h2>
-    <p>Choose your preferred payment method for making future payments.</p>
-  
-    <div (click)="setPrimary(payment)" class="payment-method card p-3 mb-3" *ngFor="let payment of plans">
+<div class="payment-methods container">
+  <!-- Close button at the top-right -->
+  <div class="d-flex  justify-content-between mb-4">
+
+    <div class="payment-titles">
+      <h2 class="mb-2">Payment Methods</h2>
+      <p>Choose your preferred payment method for making future payments.</p>
+    </div>
+    <div class="close-btns">
+      <button type="button" class="btn-close close-button" aria-label="Close" (click)="closeDialog()"></button>
+
+    </div>
+  </div>
+
+  <div class="overflow-card">
+    <div class="payment-method primary-card card p-3 mb-3" *ngFor="let payment of plans">
       <div class="card-details d-flex justify-content-between align-items-center">
-        <div>
-          <span class="d-block">{{ payment.cardNumber }}</span>
-          <span class="d-block">Expiry: {{ payment.expiryDate }}</span>
+        <div class="d-flex gap-3">
+          <div class="visa-card">
+            <img src="assets/images/visa-icon.png" alt="visa-icon">
+          </div>
+          <div class="visa-titles">
+            <span class="d-block">{{ payment.cardNumber }}</span>
+            <span class="d-block">Expiry: {{ payment.expiryDate }}</span>
+          </div>
         </div>
-        <span *ngIf="payment.isPrimary" class="badge bg-success ms-3">Primary</span>
-        <span *ngIf="!payment.isPrimary" class="badge bg-primary ms-3">Set Primary</span>
+  
+        <!-- Checkbox for each payment -->
+        <span class="badge round">
+          <input type="checkbox" [checked]="payment.isPrimary" (change)="togglePrimary(payment)" name="checkbox"
+            id="checkbox-{{payment.cardNumber}}" />
+          <label for="checkbox-{{payment.cardNumber}}"></label>
+        </span>
       </div>
   
-      <div class="actions mt-3 text-end">
-        <button class="btn btn-outline-danger me-2" (click)="removePayment(payment)">Remove</button>
-        <button class="btn btn-outline-primary" (click)="updatePayment(payment)">Update</button>
+      <div class="actions mt-3 d-flex align-items-center justify-content-between">
+        <div class="primary_card-title">
+          <a href="#">Primary Card</a>
+        </div>
+        <div class="pament-method_buttons">
+          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">Remove</button>
+          <button class="btn " (click)="updatePayment(payment)">Update</button>
+        </div>
       </div>
     </div>
   
-    <div class="text-end">
-      <button class="btn btn-success" (click)="addNewPaymentMethod()">Add New Payment Method</button>
+    <div class=" text-justify">
+      <button class="btn" (click)="addNewPaymentMethod()">+Add New Payment Method</button>
     </div>
+  </div>
 </div>
-  

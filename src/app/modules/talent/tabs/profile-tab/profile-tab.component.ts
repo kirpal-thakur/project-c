@@ -12,28 +12,33 @@ export class ProfileTabComponent {
   user:any = {}
   userNationalities:any = [];
   positions:any = [];
+  position:any;
 
   @Input() userData: any;
 
   constructor( public dialog: MatDialog) { 
-    // If you want to load the user data from localStorage during initialization
+    // If you want to load the user data from localStorage during initialization    
   }
 
   ngOnInit(): void {
     this.user = this.userData;
     setTimeout(() => {
       console.log('profile tab', this.user);
-    }, 1000);
-    
+    }, 1000);    
   }
-
+  
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userData']) {
-      if(changes['userData'].currentValue.user_nationalities){
-        this.userNationalities = JSON.parse(this.userData.user_nationalities);
+      // Update the user object with the latest userData
+      this.user = changes['userData'].currentValue;
+  
+      // Check if user_nationalities exist and parse it
+      if (this.user && this.user.user_nationalities) {
+        this.userNationalities = JSON.parse(this.user.user_nationalities);
       }
     }
   }
+ 
 
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string
@@ -58,7 +63,7 @@ export class ProfileTabComponent {
   openEditGeneralDialog() {
 
     const dialogRef = this.dialog.open(EditGeneralDetailsComponent, {
-      width: '850px',
+      width: '870px',
       data: { user: this.user }  // Corrected data passing      
     });
 
@@ -73,7 +78,6 @@ export class ProfileTabComponent {
   }
 
   openResetDialog() {
-    console.log('User saved');
 
     const dialogRef = this.dialog.open(ResetPasswordComponent, {
       width: '600px',
@@ -93,21 +97,21 @@ export class ProfileTabComponent {
       }
     });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      console.log('User saved:', result);
-      // Handle the save result (e.g., update the user details)
-    } else {
-      console.log('User canceled the edit');
-    }
-  });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('User saved:', result);
+        // Handle the save result (e.g., update the user details)
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
   }
 
     // Function to get the main position from the array
   getMainPosition() {
     this.positions = JSON.parse(this.userData.positions);
     const mainPosition = this.positions.find((pos : any) => pos.main_position === 1);
-    return mainPosition ? mainPosition.position_name : null;
+     this.position ? mainPosition.position_name : null;
   }
   
   // Function to get other positions from the array

@@ -1,64 +1,73 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import {
-  MatDialogRef,MAT_DIALOG_DATA
-} from '@angular/material/dialog';
+import { Component, Inject, SimpleChanges } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TalentService } from '../../../services/talent.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'edit-performance-details',
   templateUrl: './edit-performance-details.component.html',
-  styleUrl: './edit-performance-details.component.scss'
+  styleUrls: ['./edit-performance-details.component.scss']
 })
 export class EditPerformanceDetailsComponent {
-  user: any;
-  countries: string[] = ['United States', 'Germany', 'Canada', 'India'];
-  leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];
-  
-  constructor(public dialogRef : MatDialogRef<EditPerformanceDetailsComponent>,public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-  }
+  performance: any = {};
+  teams: any[] = [];
+  matches : any ;
+  goals:any;
+  constructor(
+    public dialogRef: MatDialogRef<EditPerformanceDetailsComponent>,
+    private talentService: TalentService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
-    this.user = { ...this.data.user };
+    this.performance = { ...this.data.performance };
+    this.teams = { ...this.data.teams };
+    this.matches = this.performance.matches;
+    this.goals = this.performance.goals;
+    console.log('teams:', this.teams);
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['teams']) {
+      // Update the user object with the latest userData
+      this.teams = changes['teams'].currentValue;
+  
+    }
+  }
+ 
   onCancel(): void {
     this.dialogRef.close();
   }
 
-  onSave(): void {
-    this.dialogRef.close(this.user);
+  loadTeams(): void {
+    this.talentService.getTeams().subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          this.teams = response.data.clubs;
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching teams:', error);
+      }
+    );
   }
 
-  openEditGeneralDialog() {
-    console.log('User saved');
+  onSubmit(myForm: NgForm): void {
+    console.log('myForm submitted:', myForm.value);
 
-    const dialogRef = this.dialog.open(EditPerformanceDetailsComponent, {
-      width: '600px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
-    });
+    if (myForm.valid) {
+      // You can prepare myForm data here, but we are directly using the myForm values in this case
+      console.log('myForm submitted:', myForm.value);
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-      } else {
-        console.log('User canceled the edit');
-      }
-    });
+      this.talentService.updatePerformance(this.performance.id,myForm.value).subscribe(
+        (response: any) => {
+          console.log('myForm submitted successfully:', response);
+          this.dialogRef.close(response.data);
+        },
+        (error: any) => {
+          console.error('Error submitting the myForm:', error);
+        }
+      );
+    }
   }
-
 }

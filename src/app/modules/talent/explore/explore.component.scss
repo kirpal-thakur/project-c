@@ -43,7 +43,7 @@
     text-align: center;
     height: 300px;
 }
-.plyer-iamge-list .col-lg-2{
+.plyer-image-list .col-lg-2{
     width: 20% !important;
     padding: 0px 5px;
 }
@@ -51,7 +51,7 @@
     text-align: end;
 }
 
-.plyer-iamge-list{
+.plyer-image-list{
     row-gap: 10px;
     padding: 0px 5px;
 }
@@ -132,10 +132,18 @@
     position: absolute;
     top: 0;
 }
+.mat-mdc-paginator-page-size {
+    display: flex !important;
+}
+
 @media (max-width:1024px) {
     .explore-table{
         width: 100%;
     }
+    .explore-box_images .plyer-image-list .col-lg-2 {
+        width: 25% !important;
+    }
+    
 }
 @media (max-width:768px) {
     
@@ -148,4 +156,12 @@
         text-align: left;
        
     }
+    .plyer-image-list .col-lg-2 {
+        width: 100% !important;
+    }
+    .plyer-image-list {
+        row-gap: 20px;
+    }
+    
 }
+

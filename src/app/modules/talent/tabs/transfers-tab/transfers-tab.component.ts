@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { TalentService } from '../../../../services/talent.service';
 import { EditTransferDetailsComponent } from '../../edit-transfer-details/edit-transfer-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
+import { AddTransferComponent } from './add-transfer/add-transfer.component';
 
 @Component({
   selector: 'talent-transfers-tab',
@@ -25,7 +26,7 @@ export class TransfersTabComponent {
     date_of_transfer: ""
   }
   seasons:any = [];
-  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router ,public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router ,public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -48,7 +49,7 @@ export class TransfersTabComponent {
 
   getUserTransfers(){
     try {
-      this.userService.getTransferData().subscribe((response)=>{
+      this.talentService.getTransferData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userTransfers = response.data.transferDetail;
           // this.isLoading = false;
@@ -63,12 +64,10 @@ export class TransfersTabComponent {
     }
   }
 
+  
   getAllTeams(){
-    this.userService.getTeams().subscribe((response)=>{
-      if (response && response.status && response.data && response.data.teams) {
-        this.teams = response.data.teams;
-        console.log(this.teams)
-      }
+    this.talentService.getTeams().subscribe((data) => {
+      this.teams = data;
     });
   }
 
@@ -87,42 +86,79 @@ export class TransfersTabComponent {
     console.log(this.dataTOBeUpdated);
   }
 
-  openEditDialog(transfer: any) {
-    console.log('Opening edit dialog for transfer:', transfer);
-  
+  openEditDialog(transfer: any) {  
+    
     const dialogRef = this.dialog.open(EditTransferDetailsComponent, {
       width: '800px',
       data: {
-        team_from: transfer.team_from,
-        team_to: transfer.team_to,
-        session: transfer.session,
-        date_of_transfer: transfer.date_of_transfer
+        transfer : transfer,
+        teams : this.teams
       }
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Transfer updated:', result);
-        this.updateTransfer(transfer.id, result);
       } else {
         console.log('User canceled the edit');
       }
     });
   }
+
+  openAddDialog() {  
+    // Get only the first 200 teams
+    const limitedTeams = this.teams.slice(0, 100);
+    const dialogRef = this.dialog.open(AddTransferComponent, {
+      width: '800px',
+      data: {
+        transfer : {
+          "team_to": "",
+          "team_from": "",
+          "session": "",
+          "date_of_transfer": ""
+      },
+        teams : limitedTeams
+      }
+    });
   
-  updateTransfer(transferId: number, updatedData: any) {
-    this.userService.updateTransferDetails(transferId, updatedData).subscribe(
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Transfer updated:', result);
+        this.getUserTransfers();
+      } else {
+        console.log('User canceled the edit');
+      }
+    });
+  }
+
+  deleteTransfer(transferId: number) {
+    this.talentService.deleteTransfer(transferId).subscribe(
       response => {
-        console.log('Transfer updated successfully:', response);
+        console.log('Transfer Deleted successfully:', response);
         // Refresh the transfers list or take other actions
         this.getUserTransfers();
       },
       error => {
-        console.error('Error updating transfer:', error);
+        console.error('Error Deleting transfer:', error);
       }
     );
   }
   
+  
+  openDeleteDialog(id:any) {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteTransfer(id);
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
+  }
   
   onSelectChange(event: Event, key:string): void {
     const selectElement = event.target as HTMLSelectElement;

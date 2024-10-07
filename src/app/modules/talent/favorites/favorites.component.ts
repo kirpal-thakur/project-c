@@ -63,7 +63,6 @@ export class FavoritesComponent {
     }
   }
   
-
   onPageChange() {
     this.getUserFavorites();
   }
@@ -77,6 +76,10 @@ export class FavoritesComponent {
     }   
   }
     
+  navigate(slug:string, id:Number): void {
+    let pageRoute = '/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
+  }
 
   onCheckboxChange(user: any) {
     const index = this.selectedIds.indexOf(user.id);
@@ -85,11 +88,6 @@ export class FavoritesComponent {
     } else {
       this.selectedIds.splice(index, 1);
     }
-  }
-
-  navigate(slug:string, id:Number): void {
-    let pageRoute = '/'+slug.toLowerCase();
-    this.router.navigate([pageRoute, id]);
   }
 
   selectAllFavorites() {
@@ -118,25 +116,11 @@ export class FavoritesComponent {
   }
 
   
-  openViewProfile(userId:any) {
-    console.log('User saved');
+  openViewProfile(user:any) {
 
     const dialogRef = this.dialog.open(PlayerProfileComponent, {
       width: '800px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
+      data: { user :  user }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -166,7 +150,6 @@ export class FavoritesComponent {
         if(result.action == "delete-confirmed"){
           this.deleteFavorites();
         }
-      //  console.log('Dialog result:', result);
       }
     });
   }

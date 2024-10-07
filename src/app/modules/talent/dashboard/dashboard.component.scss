@@ -5,7 +5,9 @@
 .font-w400{
   font-weight: 400!important;
 }
-
+.image_gallery-box{
+  flex-wrap: wrap;
+}
 .user-details-left{
   .list-view h6{
       font-size: 12px;
@@ -106,11 +108,33 @@
 }
 
 @media (max-width:1440px) {
-  .user-info h6{
-    font-size: 20px !important;
+  // .user-info h6{
+  //   font-size: 20px !important;
+  // }
+}
+@media (max-width:1024px) and (min-width:769px) {
+  .col-lg-3.responsive-edit_btn{
+    width: 100% !important;
   }
 }
-@media (max-width:1200px) {
+@media (max-width:768px) {
+  .responsive-name{
+    display: flex;
+    flex-direction: row !important;
+    margin: auto;
+    row-gap: 10px;
+  }
+  .plyer-name-box{
+    width:fit-content !important
+  }
+  .responsive-edit_btn{
+    width: fit-content !important;
+  }
+  .image_gallery-box .col-lg-4{
+    width: 50%;
+  }
+}
+@media (max-width:1200px) and (min-width:769px) {
   .user-info {
     flex-direction: column !important;
     row-gap: 10px;
@@ -381,8 +405,10 @@ color: #000;
   font-size: 20px;
   font-weight: 400;
 }
-.gallery_images img {
-  width: -webkit-fill-available;
+.gallery_images img ,.gallery_images video {
+  width: 100%;
+  height: 116px !important;
+  object-fit: cover !important;
 }
 .settings svg {
   width: 20px;
@@ -390,6 +416,11 @@ color: #000;
 .gallery_images{
   padding: 2px;
 }
+.gallery_images img{
+  height: 116px;
+  object-fit: cover;
+}
+
 .image_gallery-box{
   row-gap: 3px;
 }
@@ -412,9 +443,9 @@ color: #000;
   font-weight: 400;
 }
 .position-image{
-  width: 100%;
-  object-fit: cover;
- max-height: 115px;
+    width: 100%;
+    object-fit: cover;
+    max-height: 115px;
 }
 .position-boxs {
   gap: 20px;
@@ -432,6 +463,9 @@ color: #000;
   border: none;
   outline: none;
   background: inherit !important;
+}
+.bg-color{
+  background: #fff;
 }
 .password_box input {
   border: none;
@@ -481,7 +515,7 @@ input.password {
 }
 .general_details{
   border-radius: 10px;
-    border: 1px solid #ffffff ;
+    border: 1px solid #E7E7E7 ;
 }
 .email_box label {
   color: #9d9b9b;
@@ -503,6 +537,9 @@ input.password {
   font-size: 14px;
   font-weight: 600;
 }
+.user-details-left .user-media {
+  border: 1px solid #E7E7E7;
+}
 .boost_profile{
   background: #fff;
   border-radius: 20px;
@@ -520,4 +557,10 @@ span.active_btn {
   border-radius: 20px;
   color: #fff;
   font-weight: 400 !important;
+}
+@media(max-width:1024px){
+  .plyer-name-box{
+    padding: 0 !important;
+  }
+  
 }
