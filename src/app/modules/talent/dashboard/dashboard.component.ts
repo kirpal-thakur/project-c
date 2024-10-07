@@ -7,6 +7,7 @@ import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
+import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -250,6 +251,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  
+  openDeleteDialog() {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteCoverImage();
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
+  }
+  
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
