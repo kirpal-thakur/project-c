@@ -19,13 +19,13 @@ export class AdvertisementService {
           );
     }
 
-    /*addPopups(record: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/add-coupon`, record);
+    createAd(record: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/add-advertisement`, record);
     }
     // Method to update an existing record
-    updatePopups(id: number, record: any): Observable<any> {
-        return this.http.post<any>(`${this.apiUrl}admin/edit-coupon/${id}`, record);
-    }*/
+    updateAd(id: any, record: any): Observable<any> {
+        return this.http.post<any>(`${this.apiUrl}admin/edit-advertisement/${id}`, record);
+    }
 
     // Method to delete a record by IDs
     deleteAdvertisements(params: any): Observable<any> {

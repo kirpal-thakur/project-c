@@ -18,44 +18,45 @@
     <p  class="code-text">
      Name
     </p>
-      <div class="cupen-btn-1  code-text">
-        puma
-      </div>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="name">
     </div>
-    <div class="ms-3">
+    <div class="ms-5">
       <p  class="code-text">
         On click redirect to url:
       </p>
-        <div class="cupen-btn-1">
-          _blank
-        </div>
+        <input class="cupen-btn-1" [(ngModel)]="redirect">
       </div>
-  
    </div>
   
    <div class="d-flex mb-3">
     <div>
-    <p  class="code-text">
-     Type
-    </p>
-    <select class="cupen-btn-1 form-select" aria-label="Default select example">
-      <option selected>Select</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+      <p  class="code-text">
+      Type
+      </p>
+      <div class="btn-group">
+          <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="type">
+            <option value="">Select</option>
+            <option *ngFor="let option of typeOptions" value="{{option}}">{{option}}</option>
+          </select>
+          <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+          </svg>
+      </div>
     </div>
-    <div class="ms-3">
+    <div class="ms-5">
       <p  class="code-text">
       Page
       </p>
-      <select class="cupen-btn-1 form-select" aria-label="Default select example">
-        <option selected>Select</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
+      <div class="btn-group">
+        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="page">
+          <option value="">Select</option>
+          <option *ngFor="let option of pageOptions" value="{{option.id}}">{{option.page}}</option>
+        </select>
+        <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+        </svg>
       </div>
+    </div>
   
    </div>
   <div class="upload-img mb-3">
@@ -73,7 +74,8 @@
     <p class="main-upload-text mb-2">
     <span class="mr-4">Dimension: 160 x 600 px</span> Files supported: JPG, GIF, PNG,  MP4
     </p>
-    <button type="button" class="btn btn-secondary upload-btn mb-2 mt-2">Choose File</button>
+    <label for="file-upload" class="btn btn-secondary upload-btn mb-2 mt-2">Choose File</label>
+    <input id="file-upload" type="file" class="setting-media-2" style="display: none;" (change)="onImageChange($event)" accept="image/*" />
     <p class="main-upload-text mb-1">
       Maximum Size: 5MB
     </p>
@@ -95,7 +97,7 @@
             <!-- <svg id="users-icon"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>  May 8, 2024 -->
             <mat-form-field class="meta-date">
               <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker1">
+              <input matInput [matDatepicker]="picker1" [(ngModel)]="startDate" (dateChange)="onDateChange('start', $event)">
               <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
               <mat-datepicker-toggle matIconPrefix [for]="picker1" ></mat-datepicker-toggle>
               <mat-datepicker #picker1 ></mat-datepicker>
@@ -104,11 +106,11 @@
         </div>
         
         <div>      
-            <div class="cupen-btn-date-1">
+            <div class="cupen-btn-date-1" [ngClass]="{'disable-end-date': disableEndDate}">
               <!-- <svg id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>   May 8, 2024 -->
               <mat-form-field class="meta-date"> 
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker2">
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="endDate" (dateChange)="onDateChange('end', $event)">
                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconPrefix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
@@ -119,12 +121,16 @@
   
       <div class="d-flex align-items-center ms-2 code-text">
         <span class="form-check align-self-center ">
-          <input
-            type="checkbox"
-            value=""
-            id="defaultCheck1"
-            class="form-check-input"
-          /> <label for="defaultCheck1" class="form-check-label"> </label>
+          <label for="defaultCheck1" class="form-check-label">
+            <input
+              type="checkbox"
+              value=""
+              id="defaultCheck1"
+              class="form-check-input"
+              [(ngModel)]="noEndDate"
+              (change)="onNoEndDateChange($event)"
+            />  
+          </label>
         </span> Don't set an end date
       </div>
   
@@ -181,18 +187,14 @@
     <p  class="code-text">
       Max Views
     </p>
-      <div class="cupen-btn-1  code-text">
-        500
-      </div>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
     </div>
     <div class="ms-3">
       <p  class="code-text">
         Max Clicks
       </p>
-        <div class="cupen-btn-1">
-          500
-        </div>
-      </div>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
+    </div>
   
    </div>
 
@@ -218,10 +220,11 @@
   <div class=" d-flex justify-content-around bg-0C3453 p-3">
 
    <div>
-     <a class="btn btn-delete text-danger ">Delete</a>
+     <a class="btn btn-delete text-danger" (click)="close()">Delete</a>
    </div>
    <div>
-     <a class="btn Launch px-5" >Create and Launch</a>
+     <a class="btn Launch px-5" *ngIf="data.action == 'create'" (click)="createAd()">Create and Launch</a>
+     <a class="btn Launch px-5" *ngIf="data.action == 'update'" (click)="updateAd()">Update</a>
    </div>
 
   </div>
