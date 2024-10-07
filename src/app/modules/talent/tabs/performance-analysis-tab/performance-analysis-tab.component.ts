@@ -8,6 +8,8 @@ interface Report {
   id: string;
   document_title: string;
   created_at: string;
+  file_name: string;
+  file_type: string;
   selected?: boolean;  // This will store the selected state of the checkbox
 }
 
@@ -17,11 +19,13 @@ interface Report {
   styleUrls: ['./performance-analysis-tab.component.scss']
 })
 export class PerformanceAnalysisTabComponent implements OnInit {
+
   reports: Report[] = [];
   errorMessage: string | null = null;
   allSelected: boolean = false;
   selectedIds: number[] = [];
   idsToDelete: any = [];
+  path: any ;
 
   constructor(private talentService: TalentService, public dialog: MatDialog) {}
 
@@ -33,6 +37,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     this.talentService.getPerformanceReports().subscribe(
       response => {
         if (response.status) {
+          this.path = response.data.uploads_path;
           this.reports = response.data.reports.map((report: Report) => ({
             ...report,
             selected: false // Initialize selected state as false
@@ -52,25 +57,39 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     this.reports.forEach(report => (report.selected = this.allSelected));
   }
 
-  // Download selected reports (You might need to adjust based on your API implementation)
-  downloadSelectedReports() {
-    const selectedReports = this.reports.filter(report => report.selected);
-    if (selectedReports.length > 0) {
-      // Assuming you have an endpoint to download reports by IDs
-      const selectedIds = selectedReports.map(report => report.id);
-      this.talentService.downloadReports(selectedIds).subscribe(
-        (response) => {
-          // Handle download logic here (e.g., downloading files)
-          console.log('Reports downloaded successfully');
-        },
-        (error) => {
-          console.error('Error downloading reports:', error);
+    // Download a single report
+    async downloadInvoice(id: any, src: any ,type : any) {
+      try {
+        const response = await fetch(src);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
-      );
-    } else {
-      console.log('No reports selected for download.');
+        const blob = await response.blob(); // Convert the response to a Blob object
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = `report-${id}.${type}`; // Set the filename for download
+        document.body.appendChild(anchor);
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(anchor);
+      } catch (error) {
+        console.error('There was an error downloading the file:', error);
+      }
     }
-  }
+  
+    // Download selected reports
+    async downloadSelectedReports() {
+      const selectedReports = this.reports.filter(report => report.selected);
+      if (selectedReports.length > 0) {
+        // Loop through each selected report and download it
+        for (const report of selectedReports) {
+          await this.downloadInvoice(report.id, this.path+report.file_name ,report.file_type);
+        }
+      } else {
+        console.log('No reports selected for download.');
+      }
+    }
 
   openAddReport() {
     const dialogRef = this.dialog.open(AddPerfomanceReportComponent, {
@@ -91,9 +110,6 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     } else {
       this.selectedIds.splice(index, 1);
     }
-  
-    console.log('Selected report IDs:', report);
-    console.log('Selected report IDs:', this.selectedIds);
   }
 
   selectAllReports() {

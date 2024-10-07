@@ -54,6 +54,7 @@ import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
 import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
 import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
+import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/ad
     DeletePopupComponent,
     EditTransferDetailsComponent,
     AddTransferComponent,
-    AddPerfomanceReportComponent
+    AddPerfomanceReportComponent,
+    EditHighlightsComponent
   ],
   imports: [
     CommonModule,
@@ -117,8 +119,7 @@ import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/ad
     MatToolbarModule,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule,
-    
+    NgxEditorModule,    
   ]
 })
 export class TalentModule { }

@@ -109,6 +109,12 @@ export class TalentService {
     );
   }
   
+  getDomains(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-domains`
+    );
+  }
+  
   // getFavoritesData(userId:any, params:any): Observable<any> {
   //   return this.http.get<{ status: boolean, message: string, data: { } }>(
   //     `${this.apiUrl}get-favorites`    );
@@ -222,15 +228,27 @@ export class TalentService {
     );
   }
   
-  
   updatePerformance(performanceId:any, params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
 
     return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
   }
+
+  uploadReport(params: any): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+  
+    return this.http.post<any>(`${this.apiUrl2}player/upload-performance-report`, params, {
+      headers: headers,
+      reportProgress: true,  // This enables progress tracking
+      observe: 'events',     // This allows us to observe the full event stream, including upload progress
+    });
+  }
+ 
 
   addPerformance(params: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');

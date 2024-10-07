@@ -6,6 +6,7 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
+import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -66,6 +67,17 @@ export class DashboardComponent implements OnInit {
       } else {
         console.log('User canceled the edit');
       }
+    });
+  }
+  
+  openHighlight() {
+    const dialogRef = this.dialog.open(EditHighlightsComponent, {
+      width: '800px',
+      data: {
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
   
@@ -141,7 +153,6 @@ export class DashboardComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
 
-      console.log(this.selectedFile)
       try {
 
         const formdata = new FormData();

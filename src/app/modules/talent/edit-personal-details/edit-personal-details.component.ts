@@ -53,7 +53,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   loadTeams(): void {
-    this.talentService.getTeams().subscribe(
+    this.talentService.getClubs().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.teams = response.data.clubs;

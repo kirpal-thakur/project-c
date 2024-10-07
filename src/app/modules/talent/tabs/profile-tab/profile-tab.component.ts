@@ -12,11 +12,13 @@ export class ProfileTabComponent {
   user:any = {}
   userNationalities:any = [];
   positions:any = [];
+  position:any;
 
   @Input() userData: any;
 
   constructor( public dialog: MatDialog) { 
     // If you want to load the user data from localStorage during initialization
+    
   }
 
   ngOnInit(): void {
@@ -77,7 +79,6 @@ export class ProfileTabComponent {
   }
 
   openResetDialog() {
-    console.log('User saved');
 
     const dialogRef = this.dialog.open(ResetPasswordComponent, {
       width: '600px',
@@ -111,7 +112,7 @@ export class ProfileTabComponent {
   getMainPosition() {
     this.positions = JSON.parse(this.userData.positions);
     const mainPosition = this.positions.find((pos : any) => pos.main_position === 1);
-    return mainPosition ? mainPosition.position_name : null;
+     this.position ? mainPosition.position_name : null;
   }
   
   // Function to get other positions from the array

@@ -11,7 +11,7 @@ export class CountriesComponent {
   selectedCategory: string = 'all';
   countriesPerPage: number = 4;
   currentPage: number = 0;
-
+  flag_path:any;
   filteredImages: any[] = [];  // Fixed: explicitly set as an array
   paginatedImages: any[] = [];
 
@@ -22,10 +22,11 @@ export class CountriesComponent {
   }
   
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.talentService.getDomains().subscribe(
       (response: any) => {
         if (response && response.status) {
-          this.countries = response.data.countries;
+          this.countries = response.data.domains;
+          this.flag_path = response.data.flag_path;
           console.log('countries',this.countries)
         }
       },
@@ -38,9 +39,9 @@ export class CountriesComponent {
   selectedCountries: string[] = []; // Store selected country names here
 
   toggleCountrySelection(country: any) {
-    const index = this.selectedCountries.indexOf(country.country_name);
+    const index = this.selectedCountries.indexOf(country.location);
     if (index === -1) {
-      this.selectedCountries.push(country.country_name); // Select country if not selected
+      this.selectedCountries.push(country.location); // Select country if not selected
     } else {
       this.selectedCountries.splice(index, 1); // Deselect if already selected
     }
@@ -49,6 +50,6 @@ export class CountriesComponent {
   }
 
   isSelectedCountry(country: any): boolean {
-    return this.selectedCountries.includes(country.country_name);
+    return this.selectedCountries.includes(country.location);
   }
 }
