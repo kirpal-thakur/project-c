@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angul
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import { UserService } from '../../../../services/user.service';
-
+import { TalentService } from '../../../../services/talent.service';
 @Component({
   selector: 'app-chat-popup',
   templateUrl: './chat-popup.component.html',
@@ -23,13 +23,31 @@ export class ChatPopupComponent {
 
   constructor(
     private userService: UserService,
+    private talentService: TalentService,
     public dialogRef: MatDialogRef<ChatPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {    }
+  ngOnInit(): void { 
+    this.fetchUsers();
+  }
  
-  async fetchUsers(): Promise<void> {  }
+  async fetchUsers(): Promise<void> {
+    try {
+      //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
+       this.talentService.getAllUses().subscribe((response)=>{
+        if (response && response.status && response.data && response.data.userData) {
+          this.allUsers = response.data.userData.users; 
+        
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        });     
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+  
+  }
 
   close() {
     this.dialogRef.close();

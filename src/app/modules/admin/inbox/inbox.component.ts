@@ -36,7 +36,7 @@ export class InboxComponent {
       chatbox.mount(document.getElementById('talkjs-container'));
     }
   }
-  async createGroup() {
+/*   async createGroup() {
     if (this.groupName && this.groupId && this.users.length > 0) {
 
       const session = await this.talkService.init(this.user);
@@ -60,7 +60,7 @@ export class InboxComponent {
 
     inbox.mount(document.getElementById('talkjs-container'));
   }
-
+ */
 
   editinbox() {
     this.users = [];
@@ -84,7 +84,7 @@ export class InboxComponent {
         const groupName = this.userData.first_name+ "-" + Date.now();
         this.groupName = groupName;
         this.groupId   = groupId;
-        this.createGroup();
+       // this.createGroup();
       });
   }
 }
