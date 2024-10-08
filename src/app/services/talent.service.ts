@@ -25,6 +25,12 @@ export class TalentService {
     );
   }
 
+  getPlans(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-packages`
+    );
+  }
+
   getGalleryData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-gallery`

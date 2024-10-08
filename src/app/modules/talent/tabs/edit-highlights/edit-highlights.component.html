@@ -40,7 +40,7 @@
                     
                     <ng-container *ngFor="let video of videos">
                         <label class="col-lg-3 player-image_box cursor-pointer">
-                            <video [src]="url + video.file_name" width="170px"></video>
+                            <video [src]="url + video.file_name" ></video>
                             <div class="round-checkbox">
                                 <input 
                                     type="checkbox" 
@@ -56,11 +56,12 @@
                 </div>
             </div>
         
-            <div class="dialog-actions align-items-center d-flex justify-content-between mt-4">
-                <button type="button" class="cancel-btn" (click)="dialogRef.close()">Cancel</button>
-                <button type="submit" class="save-btn" (click)="onSubmit()">Save</button>
-            </div>
-        </div>        
+           
+        </div>   
+        <div class="dialog-actions align-items-center d-flex justify-content-between mt-4">
+            <button type="button" class="cancel-btn" (click)="dialogRef.close()">Cancel</button>
+            <button type="submit" class="save-btn" (click)="onSubmit()">Save</button>
+        </div>     
     </div>
     
 </div>

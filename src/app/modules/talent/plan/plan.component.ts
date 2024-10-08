@@ -1,91 +1,211 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPlanComponent } from '../edit-plan/edit-plan.component';
+import { Subscription } from 'rxjs';
+
+interface Plan {
+  id: number;
+  name: string;
+  priceMonthly: number | null;
+  priceYearly: number | null;
+  currency: string;
+  isYearly: boolean;
+  quantity: number;
+  includes: string[];
+}
 
 @Component({
   selector: 'app-plan',
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.scss']
 })
-export class PlanComponent implements OnInit {
+export class PlanComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private userService: TalentService, public dialog: MatDialog,private router: Router) { }
+  plans: Plan[] = [];
+  maxQuantity: number = 10;
+  premiumPlans :any;
+  boostedPlans :any;
+  otherPlans :any;
+  selectedPlan : any;
 
-  plans = [
-    { 
-      name: 'Premium', 
-      priceMonthly: 517, 
-      priceYearly: 490, 
-      currency: 'CHF', 
-      isYearly: false, // Each plan manages its own billing period
-      quantity: 1,
-      includes: ['Talent profile', 'Export data', 'Chat with talents', 'Favorite list', 'Highlight photos/videos']
-    },
-    { 
-      name: 'Standard', 
-      priceMonthly: 350, 
-      priceYearly: 330, 
-      currency: 'CHF',
-      isYearly: false, // Billing period toggle for Standard
-      quantity: 1,
-      includes: ['Talent profile', 'Export data', 'Chat with talents', 'Favorite list', 'Highlight photos/videos']
-    },
-    { 
-      name: 'Basic', 
-      priceMonthly: 250, 
-      priceYearly: 230, 
-      currency: 'CHF',
-      isYearly: false, // Billing period toggle for Basic
-      quantity: 1,
-      includes: ['Talent profile', 'Export data', 'Chat with talents', 'Favorite list', 'Highlight photos/videos']
-    },
-  ];
+  private plansSubscription: Subscription = new Subscription();
 
+  constructor(private talentService: TalentService, public dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.fetchPlans();
+  }
+
+  ngOnDestroy() {
+    this.plansSubscription.unsubscribe(); // Clean up subscription
+  }
+
+  // fetchPlans() {
+  //   this.plansSubscription = this.talentService.getPlans().subscribe({
+  //     next: (response) => {
+  //       if (response.status && response.data.length > 0) {
+  //         const mergedPlans: Plan[] = [];
+          
+  //         response.data[0].forEach((plan: any) => {
+  //           const newPlanData: Plan = {
+  //             id: plan.id,
+  //             name: plan.package_name,
+  //             priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
+  //             priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
+  //             currency: plan.currency,
+  //             isYearly: plan.interval === "monthly",
+  //             quantity: 1,
+  //             includes: this.getIncludes(plan.package_name),
+  //           };
+
+  //           const existingPlanIndex = mergedPlans.findIndex(p => p.name === plan.package_name);
+  //           if (existingPlanIndex !== -1) {
+  //             mergedPlans[existingPlanIndex].priceMonthly =
+  //               mergedPlans[existingPlanIndex].priceMonthly || newPlanData.priceMonthly;
+  //             mergedPlans[existingPlanIndex].priceYearly =
+  //               mergedPlans[existingPlanIndex].priceYearly || newPlanData.priceYearly;
+  //           } else {
+  //             mergedPlans.push(newPlanData);
+  //           }
+  //         });
+
+  //         this.plans = mergedPlans;
+  //         console.log(this.plans); // Log the plans for debugging
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error('Failed to fetch plans', err); // Add error handling
+  //     }
+  //   });
+  // }
+
+  fetchPlans() {
+    this.plansSubscription = this.talentService.getPlans().subscribe({
+      next: (response) => {
+        if (response.status && response.data.length > 0) {
+          const premiumPlans: Plan[] = [];
+          const boostedPlans: Plan[] = [];
+          const otherPlans: Plan[] = [];
+          
+          response.data[0].forEach((plan: any) => {
+            const newPlanData: Plan = {
+              id: plan.id,
+              name: plan.package_name,
+              priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
+              priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
+              currency: plan.currency,
+              isYearly: plan.interval === "yearly",
+              quantity: 1,
+              includes: this.getIncludes(plan.package_name),
+            };
   
-  editPlanPopup(id:any) {
-
-    const dialogRef = this.dialog.open(EditPlanComponent, {
-      width: '800px',
-      data: {
-        invoice_number: '',
-        category: '',
-        plan: '',
-        duration: '',
-        valid_until: '',
-        price: '',
-        subtotal: '',
-        total: '',
-        currency : '',
-        downlaod_path: '',
+            // Categorize plans into premium, boosted, and others
+            if (plan.package_name.toLowerCase().includes('premium')) {
+              this.mergePlan(premiumPlans, newPlanData);
+            } else if (plan.package_name.toLowerCase().includes('booster')) {
+              this.mergePlan(boostedPlans, newPlanData);
+            } else {
+              this.mergePlan(otherPlans, newPlanData);
+            }
+          });
+  
+          // Assign the categorized plans to their respective variables
+          this.premiumPlans = premiumPlans;
+          this.boostedPlans = boostedPlans;
+          this.otherPlans = otherPlans;
+          this.selectedPlan = this.otherPlans[0];
+          // Log the categorized plans for debugging
+          console.log('Premium Plans:', this.premiumPlans);
+          console.log('Boosted Plans:', this.boostedPlans);
+          console.log('Other Plans:', this.otherPlans);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to fetch plans', err); // Add error handling
       }
     });
-
+  }
+  
+  /**
+   * Helper function to merge plan data if the plan already exists.
+   */
+  mergePlan(planArray: Plan[], newPlanData: Plan) {
+    const existingPlanIndex = planArray.findIndex(p => p.name === newPlanData.name);
+    if (existingPlanIndex !== -1) {
+      // Merge price details if the plan already exists in the array
+      planArray[existingPlanIndex].priceMonthly =
+        planArray[existingPlanIndex].priceMonthly || newPlanData.priceMonthly;
+      planArray[existingPlanIndex].priceYearly =
+        planArray[existingPlanIndex].priceYearly || newPlanData.priceYearly;
+    } else {
+      // Add new plan to the array
+      planArray.push(newPlanData);
+    }
+  }
+  
+  getIncludes(packageName: string): string[] {
+    switch (packageName) {
+      case 'Premium': return [
+        "The complete talent profile with all stages of his career and performance data.",
+        "Export data in excel and pdf formats.",
+        "Chat with Talents, Clubs and Scouts.",
+        "Create your favorite list.",
+        "Highlight your best photos and videos on your profile."
+      ];
+      case 'Booster': return [
+        "Jump to the top of search results.",
+        "Higher chances to get discovered.",
+        "Profile boosts help you grow your network and following faster.",
+        "You can boost your profile to reach a specific audience, such as Talents, Clubs or Scouts."
+      ];
+      default: return [ 
+        "Present your profile to clubs and leagues in other countries.",
+        "Higher chances to get hired globally.",
+        "Build your global portfolio."
+      ];
+    }
   }
 
-  maxQuantity: number = 10;
-
-  ngOnInit() {}
-
-  toggleMonthly(plan: any) {
-    plan.isYearly = false;
+  toggleBillingPlan(plan: Plan, isYearly: boolean) {
+    plan.isYearly = isYearly;
   }
 
-  toggleYearly(plan: any) {
-    plan.isYearly = true;
+  decreaseValue(plan: Plan) {
+    if (plan.quantity > 1) plan.quantity--;
   }
 
-  decreaseValue(plan: any) {
-    plan.quantity = Math.max(plan.quantity - 1, 1);
+  increaseValue(plan: Plan) {
+    if (plan.quantity < this.maxQuantity) plan.quantity++;
   }
 
-  increaseValue(plan: any) {
-    plan.quantity = Math.min(plan.quantity + 1, this.maxQuantity);
+  editPlanPopup(id: number) {
+    const dialogRef = this.dialog.open(EditPlanComponent, {
+      width: '800px',
+      data: { planId: id }
+    });
   }
 
-  handleQuantityChange(event: any, plan: any) {
-    let value = parseInt(event.target.value);
-    plan.quantity = isNaN(value) ? 1 : value;
+  handleQuantityChange(event: any, plan: Plan): void {
+    const inputValue = Number(event.target.value);
+
+    // Ensure the quantity is within valid bounds
+    if (inputValue >= 1 && inputValue <= this.maxQuantity) {
+      plan.quantity = inputValue;
+    } else if (inputValue > this.maxQuantity) {
+      plan.quantity = this.maxQuantity;  // Set to max if exceeded
+    } else {
+      plan.quantity = 1;  // Set to min if input is invalid
+    }
   }
+
+  onPlanSelect(event: Event) {
+    const selectedId = (event.target as HTMLSelectElement).value; // Cast the event target
+    const selected = this.otherPlans.find((plan:any) => plan.id === selectedId);
+  
+    if (selected) {
+      this.selectedPlan = selected;
+    }
+  }
+  
 }

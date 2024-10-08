@@ -129,17 +129,17 @@ export class GalleryTabComponent {
 
   deleteImage(id:any){    
     try {
-      let params = {id: [id]};
-      this.talentService.deleteGalleryImage(params).subscribe((response)=>{
-        if (response && response.status) {
-          let index = this.userImages.findIndex((x:any) => x.id == id)
-          this.userImages.splice(index, 1);
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });
+        let params = {id: [id]};
+        this.talentService.deleteGalleryImage(params).subscribe((response)=>{
+            if (response && response.status) {
+              let index = this.userImages.findIndex((x:any) => x.id == id)
+              this.userImages.splice(index, 1);
+              // this.isLoading = false;
+            } else {
+              // this.isLoading = false;
+              console.error('Invalid API response structure:', response);
+            }
+        });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error); 
@@ -173,14 +173,14 @@ export class GalleryTabComponent {
      })
      .then(blob => {
       this.openedMenuId = '';
-       const url = window.URL.createObjectURL(blob);
-       const anchor = document.createElement('a');
-       anchor.href = url;
-       anchor.download = image; // Set the filename for download
-       document.body.appendChild(anchor);
-       anchor.click();
-       window.URL.revokeObjectURL(url);
-       document.body.removeChild(anchor);
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = image; // Set the filename for download
+        document.body.appendChild(anchor);
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(anchor);
      })
      .catch(error => {
        console.error('There was an error downloading the file:', error);
