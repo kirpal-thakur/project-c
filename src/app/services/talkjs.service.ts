@@ -65,9 +65,18 @@ export class TalkService {
 
         });
         const conversation = this.session.getOrCreateConversation(Talk.oneOnOneId(this.user, otherUser));
+
+        const hiddenUser = new Talk.User({
+          id: 1,
+          name: 'testmails.cts@gmail.com',
+          email: 'testmails.cts@gmail.com',
+          role:'hidden'
+        });
+
+    
         conversation.setParticipant(this.user);
         conversation.setParticipant(otherUser);
-
+        conversation.setParticipant(hiddenUser);
         if (!this.inbox) {
           this.inbox = this.session.createInbox({ selected: conversation });
         } else {
@@ -111,6 +120,14 @@ export class TalkService {
       });
       conversation.setParticipant(participant);
     });
+
+    const hiddenUser = new Talk.User({
+      id: 1,
+      name: '',
+      email: 'testmails.cts@gmail.com',
+      role:'hidden'
+    });
+    conversation.setParticipant(hiddenUser);
 
     if (!this.inbox) {
       this.inbox = this.session.createInbox({ selected: conversation });

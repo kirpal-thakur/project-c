@@ -44,30 +44,6 @@ export class ChatComponent  {
   }
   
 
-  /*async createGroup() {
-    if (this.groupName && this.groupId && this.users.length > 0) {
-      const session = await this.talkService.init(this.user);
-      const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
-        this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
-      const inbox = session.createInbox({
-        selected: conversation
-      });
-
-      inbox.mount(document.getElementById('talkjs-container'));
-    }
-  }
-
-  async openGroup(groupId: string) {
-    const session = await this.talkService.init(this.user);
-    const conversation = this.talkService.getOrCreateConversation(groupId);
-
-    const inbox = session.createInbox({
-      selected: conversation
-    });
-
-    inbox.mount(document.getElementById('talkjs-container'));
-  }
-  */
 
    // Start a one-on-one chat
    startOneOnOneChat(user:any) {
@@ -80,12 +56,7 @@ export class ChatComponent  {
       });
   }
 
-    // Add participants to the group
-  /*   addGroupParticipant() {
-      this.groupParticipants.push({ id: this.newGroupUserId, name: this.newGroupUserName });
-      this.groupId = '';
-      this.newGroupUserName = '';
-    } */
+
   
     // Start a group chat
     startGroupChat() {
