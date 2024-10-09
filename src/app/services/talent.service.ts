@@ -150,6 +150,12 @@ export class TalentService {
     );
   }
   
+  getAllUses(): Observable<any> {
+    // Construct HttpParams object
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}users-frontend`
+    );
+  }
   getExploresData(params: any): Observable<any> {
     // Construct HttpParams object
     let queryParams = new HttpParams()

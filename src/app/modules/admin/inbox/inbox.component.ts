@@ -24,43 +24,48 @@ export class InboxComponent {
     if (userDataString) {
       this.userData = JSON.parse(userDataString);
       this.user = {
-          id: this.userData.id,
-          name: this.userData.first_name,
-          email: this.userData.username,
-          photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
-          welcomeMessage: "Hi!",
-          role:(this.userData.role == '1') ? "hidden" : "default"
-      } 
+        id: this.userData.id,
+        name: this.userData.first_name,
+        email: this.userData.username,
+        photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+        welcomeMessage: "Hi!",
+        role: (this.userData.role == '1') ? "hidden" : "default"
+      };
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
-      chatbox.mount(document.getElementById('talkjs-container'));
+  
+      // Defer mounting chatbox until next event loop cycle
+      setTimeout(() => {
+        chatbox.mount(document.getElementById('talkjs-container'));
+      }, 0);
     }
   }
-  async createGroup() {
-    if (this.groupName && this.groupId && this.users.length > 0) {
+  
 
-      const session = await this.talkService.init(this.user);
-      const conversation = this.talkService.createGroupConversation(this.users, this.groupId, this.groupName);
-       this.createdGroups.push({ groupId: this.groupId, groupName: this.groupName });
-      const inbox = session.createInbox({
-        selected: conversation
+
+   // Start a one-on-one chat
+   startOneOnOneChat(user:any) {
+    this.talkService.createOneOnOneConversation(user.id,user.name,user.email,user.photoUrl)
+      .then(() => {
+        this.talkService.mountChat('talkjs-container');
+      })
+      .catch(err => {
+        console.error('Error starting chat:', err);
       });
+  }
 
-      inbox.mount(document.getElementById('talkjs-container'));
+
+  
+    // Start a group chat
+    startGroupChat() {
+      this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
+        .then(() => {
+          this.talkService.mountChat('talkjs-container');
+        })
+        .catch(err => {
+          console.error('Error starting group chat:', err);
+        });
     }
-  }
-
-  async openGroup(groupId: string) {
-    const session = await this.talkService.init(this.user);
-    const conversation = this.talkService.getOrCreateConversation(groupId);
-
-    const inbox = session.createInbox({
-      selected: conversation
-    });
-
-    inbox.mount(document.getElementById('talkjs-container'));
-  }
-
 
   editinbox() {
     this.users = [];
@@ -70,7 +75,7 @@ export class InboxComponent {
     })
     .afterClosed()
       .subscribe(users => {
-        console.log('first users',users);
+        
         for(let user of users.data){
             this.users.push({
               id: user.id,
@@ -79,12 +84,13 @@ export class InboxComponent {
               photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
             })
         }
+        if(this.users.length == 1){
+          this.startOneOnOneChat(this.users[0]);
+        }else if(this.users.length > 1){
+          this.startGroupChat();
+        }
         console.log('last users',this.users);
-        const groupId = this.userData.id+"-"+ Date.now();
-        const groupName = this.userData.first_name+ "-" + Date.now();
-        this.groupName = groupName;
-        this.groupId   = groupId;
-        this.createGroup();
+        //this.createGroup();
       });
   }
 }
