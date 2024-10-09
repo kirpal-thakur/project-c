@@ -46,7 +46,7 @@
         <div class="col-lg-4 my-2 h-100">
           <div class="subscription-switch mb-2">
             <label class="switch_off" (click)="toggleBillingPlan(selectedPlan, false)">Billed Monthly</label>
-            <input type="checkbox" 
+              <input type="checkbox" 
                    [id]="selectedPlan?.id" 
                    [checked]="selectedPlan?.isYearly" 
                    (change)="toggleBillingPlan(selectedPlan, !selectedPlan?.isYearly)">

@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-payments-popup',
   templateUrl: './payments-popup.component.html',
-  styleUrls: ['./payments-popup.component.scss'] // Fixed this to be 'styleUrls'
+  styleUrls: ['./payments-popup.component.scss']
 })
 export class PaymentsPopupComponent implements OnInit {
 
@@ -12,7 +12,6 @@ export class PaymentsPopupComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<PaymentsPopupComponent>,
-    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -22,31 +21,48 @@ export class PaymentsPopupComponent implements OnInit {
   }
 
   setPrimary(payment: any) {
-    // Logic to set the payment as primary
-    this.plans.forEach(p => p.isPrimary = false); // Reset all to non-primary
-    payment.isPrimary = true; // Set the selected one as primary
+    // Unset all cards as primary
+    this.plans.forEach(p => p.is_default = false);
+    // Set the selected card as primary
+    payment.is_default = true;
+    console.log('Primary card set to:', payment);
+  }
+
+  togglePrimary(payment: any) {
+    // Set the card as primary and ensure others are unset
+    this.setPrimary(payment);
   }
 
   removePayment(payment: any) {
-    // Logic to remove the payment
-    this.plans = this.plans.filter(p => p !== payment);
+    // this.plans = this.plans.filter(p => p !== payment);
+    // console.log('Removed payment:', payment);
   }
 
   updatePayment(payment: any) {
-    // Logic to update the payment details
-    console.log('Updating payment: ', payment);
+    console.log('Updating payment:', payment);
   }
 
   addNewPaymentMethod() {
-    // Logic to add a new payment method
     console.log('Adding new payment method');
   }
 
   closeDialog(): void {
-    this.dialogRef.close();  // Closes the dialog
+    this.dialogRef.close();
   }
 
-  togglePrimary(payment:any){
-
+  // Dynamically load the image based on the card brand
+  getCardBrandImage(brand: string): string {
+    switch (brand.toLowerCase()) {
+      case 'visa':
+        return 'assets/images/visa-icon.png';
+      case 'mastercard':
+        return 'assets/images/mastercard-icon.png';
+      case 'amex':
+        return 'assets/images/amex-icon.png';
+      case 'discover':
+        return 'assets/images/discover-icon.png';
+      default:
+        return 'assets/images/default-card-icon.png'; // Fallback if brand is unknown
+    }
   }
 }

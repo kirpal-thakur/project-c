@@ -31,6 +31,12 @@ export class TalentService {
     );
   }
 
+  getCards(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-payment-methods`
+    );
+  }
+
   getGalleryData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-gallery`

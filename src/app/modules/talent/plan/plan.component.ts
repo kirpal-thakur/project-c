@@ -13,6 +13,8 @@ interface Plan {
   isYearly: boolean;
   quantity: number;
   includes: string[];
+  yearData:any,
+  monthData:any,
 }
 
 @Component({
@@ -28,6 +30,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   boostedPlans :any;
   otherPlans :any;
   selectedPlan : any;
+  userCards: any ;
 
   private plansSubscription: Subscription = new Subscription();
 
@@ -35,50 +38,12 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fetchPlans();
+    this.getUserCards();
   }
 
   ngOnDestroy() {
     this.plansSubscription.unsubscribe(); // Clean up subscription
   }
-
-  // fetchPlans() {
-  //   this.plansSubscription = this.talentService.getPlans().subscribe({
-  //     next: (response) => {
-  //       if (response.status && response.data.length > 0) {
-  //         const mergedPlans: Plan[] = [];
-          
-  //         response.data[0].forEach((plan: any) => {
-  //           const newPlanData: Plan = {
-  //             id: plan.id,
-  //             name: plan.package_name,
-  //             priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
-  //             priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
-  //             currency: plan.currency,
-  //             isYearly: plan.interval === "monthly",
-  //             quantity: 1,
-  //             includes: this.getIncludes(plan.package_name),
-  //           };
-
-  //           const existingPlanIndex = mergedPlans.findIndex(p => p.name === plan.package_name);
-  //           if (existingPlanIndex !== -1) {
-  //             mergedPlans[existingPlanIndex].priceMonthly =
-  //               mergedPlans[existingPlanIndex].priceMonthly || newPlanData.priceMonthly;
-  //             mergedPlans[existingPlanIndex].priceYearly =
-  //               mergedPlans[existingPlanIndex].priceYearly || newPlanData.priceYearly;
-  //           } else {
-  //             mergedPlans.push(newPlanData);
-  //           }
-  //         });
-
-  //         this.plans = mergedPlans;
-  //         console.log(this.plans); // Log the plans for debugging
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('Failed to fetch plans', err); // Add error handling
-  //     }
-  //   });
-  // }
 
   fetchPlans() {
     this.plansSubscription = this.talentService.getPlans().subscribe({
@@ -96,6 +61,8 @@ export class PlanComponent implements OnInit, OnDestroy {
               priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
               currency: plan.currency,
               isYearly: plan.interval === "yearly",
+              yearData: plan.interval === "yearly" ? (plan) : null,
+              monthData: plan.interval === "monthly" ? (plan) : null,
               quantity: 1,
               includes: this.getIncludes(plan.package_name),
             };
@@ -127,6 +94,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     });
   }
   
+
   /**
    * Helper function to merge plan data if the plan already exists.
    */
@@ -134,15 +102,32 @@ export class PlanComponent implements OnInit, OnDestroy {
     const existingPlanIndex = planArray.findIndex(p => p.name === newPlanData.name);
     if (existingPlanIndex !== -1) {
       // Merge price details if the plan already exists in the array
-      planArray[existingPlanIndex].priceMonthly =
-        planArray[existingPlanIndex].priceMonthly || newPlanData.priceMonthly;
-      planArray[existingPlanIndex].priceYearly =
-        planArray[existingPlanIndex].priceYearly || newPlanData.priceYearly;
+      const existingPlan = planArray[existingPlanIndex];
+      existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
+      existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
+      existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
+      existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
     } else {
       // Add new plan to the array
       planArray.push(newPlanData);
     }
   }
+  
+
+  // Fetch purchases from API with pagination parameters
+  getUserCards(): void {
+    this.talentService.getCards().subscribe(response => {
+      if (response && response.status && response.data) {
+        this.userCards = response.data.paymentMethod;
+        console.log(this.userCards)
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    }, error => {
+      console.error('Error fetching user purchases:', error);
+    });
+  }
+
   
   getIncludes(packageName: string): string[] {
     switch (packageName) {

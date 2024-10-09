@@ -57,16 +57,16 @@
     width: 12px;
 }
   
-.round input[type="checkbox"] {
+.round input[type="radio"] {
     visibility: hidden;
 }
   
-.round input[type="checkbox"]:checked + label {
+.round input[type="radio"]:checked + label {
     background-color: #66bb6a;
     border-color: #66bb6a;
 }
   
-.round input[type="checkbox"]:checked + label:after {
+.round input[type="radio"]:checked + label:after {
     opacity: 1;
 }
 .pament-method_buttons button{
