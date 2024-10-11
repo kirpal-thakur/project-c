@@ -1,0 +1,188 @@
+<div class="p-1" *ngIf="page == 'marketing'">
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">User Type</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['role']">
+          <select [(ngModel)]="selectedRoleId" class="location-filter" [class.activefilter] = "userFilters['role']" (change)="onChange($event, 'role')">
+            <option value="">Select User Type</option>
+            <option *ngFor="let role of roles" [value]="role.id" 
+                    [selected]="role.id == selectedRoleId">{{role.role_name}} - {{role.payment_type}}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Language</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['language']">
+          <select [(ngModel)]="selectedLanguageId" class="location-filter" [class.activefilter] = "userFilters['language']" (change)="onChange($event, 'language')">
+            <option value="">Select Language</option>
+            <option *ngFor="let language of languages" [value]="language.id" 
+                    [selected]="language.id == selectedLanguageId">{{ language.language }}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Display Freq</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['frequency']">
+          <select [(ngModel)]="selectedFrequency" class="location-filter" [class.activefilter] = "userFilters['frequency']" (change)="onChange($event, 'frequency')">
+            <option value="">Select Frequency</option>
+            <option *ngFor="let frequency of frequencies" [value]="frequency" 
+                    [selected]="frequency == selectedFrequency">{{ frequency }}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Display Location</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['location']">
+          <!-- <input type="radio" name="location" value="Type to search" hidden> Type to search -->
+    
+          <select [(ngModel)]="selectedLocation" class="location-filter" [class.activefilter] = "userFilters['location']" (change)="onChange($event, 'location')">
+            <option value="">Select Location</option>
+            <option *ngFor="let location of locations" [value]="location.name" 
+                    [selected]="location.name == selectedLocation">{{ location.name }}</option>
+          </select>
+        </label>
+    </div>
+    
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+      <h5 class="filter-text mb-1">Status</h5>
+      <div class="d-flex gap-3">
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'active'">
+          <input type="radio" name="userStatus" value="Active" hidden (click)="setFilter('status', 'active')"> Active
+        </label>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'inactive'">
+          <input type="radio" name="userStatus" value="Inactive" hidden (click)="setFilter('status', 'inactive')"> Inactive
+        </label>
+      </div>
+    </div>
+    <div class="filter-bottom-button">
+      <div class="filetr-child-button">
+        <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
+        <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="p-1" *ngIf="page == 'template'">
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">User Type</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['role']">
+          <select [(ngModel)]="selectedRoleId" class="location-filter" [class.activefilter] = "userFilters['role']" (change)="onChange($event, 'role')">
+            <option value="">Select User Type</option>
+            <option *ngFor="let role of roles" [value]="role.id" 
+                    [selected]="role.id == selectedRoleId">{{role.role}}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Language</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['language']">
+          <select [(ngModel)]="selectedLanguageId" class="location-filter" [class.activefilter] = "userFilters['language']" (change)="onChange($event, 'language')">
+            <option value="">Select Language</option>
+            <option *ngFor="let language of languages" [value]="language.id" 
+                    [selected]="language.id == selectedLanguageId">{{ language.language }}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="filter-bottom-button">
+      <div class="filetr-child-button">
+        <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
+        <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+      </div>
+    </div>
+</div>
+
+
+<div class="p-1" *ngIf="page == 'coupon'">
+    
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Discount Type</h5>
+        <div class="d-flex gap-3">
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['discount_type'] == 'amount_off'">
+            <input type="radio" name="discount_type" value="amount_off" hidden (click)="setFilter('discount_type', 'amount_off')"> Amount
+          </label>
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['discount_type'] == 'percent_off'">
+            <input type="radio" name="discount_type" value="percent_off" hidden (click)="setFilter('discount_type', 'percent_off')"> Percentage
+          </label>
+        </div>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Status</h5>
+        <div class="d-flex gap-3">
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'published'">
+              <input type="radio" name="status" value="published" hidden (click)="setFilter('status', 'published')"> Published
+            </label>
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'draft'">
+              <input type="radio" name="status" value="draft" hidden (click)="setFilter('status', 'draft')"> Draft
+            </label>
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'expired'">
+                <input type="radio" name="status" value="expired" hidden (click)="setFilter('status', 'expired')"> Expired
+            </label>
+        </div>
+    </div>
+
+    <div class="filter-bottom-button">
+      <div class="filetr-child-button">
+        <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
+        <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+      </div>
+    </div>
+</div>
+  
+<div class="p-1" *ngIf="page == 'advertisement'">
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Page</h5>
+        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['page_name']">
+          <select [(ngModel)]="selectedPage" class="location-filter" [class.activefilter] = "userFilters['page_name']" (change)="onChange($event, 'page_name')">
+            <option value="">Select Page</option>
+            <option *ngFor="let page of pages" [value]="page.page" 
+                    [selected]="page.page == selectedPage">{{ page.page }}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Type</h5>
+        <label class="btn btn-light filter-button" style="width:215px;" [class.activefilter] = "userFilters['type']">
+          <select [(ngModel)]="selectedtype" class="location-filter" [class.activefilter] = "userFilters['type']" (change)="onChange($event, 'type')">
+            <option value="">Select Type</option>
+            <option *ngFor="let type of types" [value]="type" 
+                    [selected]="type == selectedtype">{{ type }}</option>
+          </select>
+        </label>
+    </div>
+
+    <div class="shadow-sm p-1 mb-1 bg-body rounded">
+        <h5 class="filter-text mb-1">Status</h5>
+        <div class="d-flex gap-3">
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'published'">
+              <input type="radio" name="status" value="published" hidden (click)="setFilter('status', 'published')"> Published
+            </label>
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'draft'">
+              <input type="radio" name="status" value="draft" hidden (click)="setFilter('status', 'draft')"> Draft
+            </label>
+            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'expired'">
+                <input type="radio" name="status" value="expired" hidden (click)="setFilter('status', 'expired')"> Expired
+            </label>
+        </div>
+    </div>
+
+    <div class="filter-bottom-button">
+      <div class="filetr-child-button">
+        <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
+        <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+      </div>
+    </div>
+</div>
+  

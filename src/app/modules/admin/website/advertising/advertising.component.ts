@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { AdvertisementService } from '../../../../services/advertisement.service';
 import { AdvertisingPopupComponent } from '../advertising-popup/advertising-popup.component';
+import { CommonFilterPopupComponent } from '../../common-filter-popup/common-filter-popup.component';
 @Component({
   selector: 'app-advertising',
   templateUrl: './advertising.component.html',
@@ -25,8 +26,31 @@ export class AdvertisingComponent {
   filterDialogRef:any = ""
   idsToProceed: any = [];
   selectedIds:any = [];
+  customFilters:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  typeOptions: any = [
+    '250 x 250 - Square',
+    '200 x 200 - Small Square',
+    '468 x 60 - Banner',
+    '728 x 90 - Leaderboard',
+    '300 x 250 - Inline Rectangle',
+    '336 x 280 - Large Rectangle',
+    '120 x 600 - Skyscraper',
+    '160 x 600 - Wide Skyscraper'
+  ];
+
+  pageOptions: any = [
+    {id:1, page:'Home'},
+    {id:1, page:'Talents'},
+    {id:1, page:'Clubs & Scouts'},
+    {id:1, page:'About'},
+    {id:1, page:'Blog'},
+    {id:1, page:'Contact'},
+    {id:1, page:'Login'},
+    {id:1, page:'Sign Up'}
+  ];
 
   constructor(private advertisementService: AdvertisementService, public dialog: MatDialog) {}
 
@@ -35,12 +59,24 @@ export class AdvertisingComponent {
      this.getAdvertisements();
   }
 
-  getAdvertisements() {
+  getAdvertisements(filterApplied:boolean = false) {
     this.isLoading = true;
     let params:any = {};
     // params.offset = page;
     params.search = this.filterValue;
     // params.limit  = pageSize;  
+
+    if(this.customFilters['page_name']){
+      params = {...params, "whereClause[page_name]" : this.customFilters['page_name']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
+    if(this.customFilters['type']){
+      params = {...params, "whereClause[type]" : this.customFilters['type']};
+    }
     
     try {
      this.advertisementService.getAdvertisements(params).subscribe((response)=>{
@@ -50,6 +86,7 @@ export class AdvertisingComponent {
         this.isLoading = false;
       } else {
         this.isLoading = false;
+        this.advertisements = [];
         console.error('Invalid API response structure:', response);
       }
       });     
@@ -254,6 +291,37 @@ export class AdvertisingComponent {
   confirmSingleDeletion(couponId:any){
     this.idsToProceed = [couponId];
     this.showMatDialog("", "delete-advertisement-confirmation");
+  }
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '225px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'advertisement',
+        appliedfilters:this.customFilters,
+        pages: this.pageOptions,
+        types: this.typeOptions
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getAdvertisements(true);
   }
 
   
