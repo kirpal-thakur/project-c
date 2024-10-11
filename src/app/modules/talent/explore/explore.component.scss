@@ -35,7 +35,7 @@
     margin-left: 8px;
 }
 .image_box{
-    background: linear-gradient(135deg, #4caf50, #ff5c5c, #1e3d59);
+	background: #cdd8d6;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -43,7 +43,32 @@
     text-align: center;
     height: 300px;
 }
-.plyer-image-list .col-lg-2{
+
+.booster_box{
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: center;
+    height: 300px;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.player-image-list .col-lg-2{
     width: 20% !important;
     padding: 0px 5px;
 }
@@ -51,7 +76,7 @@
     text-align: end;
 }
 
-.plyer-image-list{
+.player-image-list{
     row-gap: 10px;
     padding: 0px 5px;
 }
@@ -93,7 +118,6 @@
     top: -84px;
     right: -87px;
     transform: rotate(43deg);
-
 }
 .player-team-logo img {
     width: 32px;
@@ -140,7 +164,7 @@
     .explore-table{
         width: 100%;
     }
-    .explore-box_images .plyer-image-list .col-lg-2 {
+    .explore-box_images .player-image-list .col-lg-2 {
         width: 25% !important;
     }
     
@@ -156,10 +180,10 @@
         text-align: left;
        
     }
-    .plyer-image-list .col-lg-2 {
+    .player-image-list .col-lg-2 {
         width: 100% !important;
     }
-    .plyer-image-list {
+    .player-image-list {
         row-gap: 20px;
     }
     
