@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { booleanAttribute, Component, Inject } from '@angular/core';
 import {
   MatDialogRef,MAT_DIALOG_DATA
 } from '@angular/material/dialog';
@@ -49,14 +49,21 @@ export class UserEditPopupComponent {
   otherPosition:any = "";
   playerClubsListing:any = [];
   playerClub: any = "";
+  playerCountries:any = [];
   footListing:any = ['Left', 'Right', 'Both'];
-
+  mainPosition:any = "";
+  internationalCountry:any = "";
+  takenBy:any = "";
+  showTeamsDropdown:boolean = false;
+  teamsLisitng:any = [];
+  playerTeam:any = "";
+  
   constructor(private userService: UserService, public dialogRef : MatDialogRef<UserDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public request: any) {
       this.data = request.data;
       this.role = request.role;
+      this.playerInfoType = request.type
       if(this.role == 'player'){
-        this.playerInfoType = request.type
         if(this.playerInfoType == "general"){
           this.getClubsForPlayer();
         }
@@ -97,15 +104,55 @@ export class UserEditPopupComponent {
     this.sm_tiktok = this.data?.meta?.sm_tiktok
     this.sm_youtube = this.data?.meta?.sm_youtube
     this.sm_vimeo = this.data?.meta?.sm_vimeo
+    this.internationalCountry = this.data.int_player_country_id
+
+    let playerNationality = this.data.user_nationalities;
+    if(playerNationality){
+      playerNationality = JSON.parse(playerNationality);
+      for(let n of playerNationality){
+        this.playerCountries.push(String(n.country_id))
+      }
+    }
+
+    let playerPositions = this.data.positions;
+    if(playerPositions){
+      playerPositions = JSON.parse(playerPositions);
+      for(let n of playerPositions){
+        if(n.main_position == '1'){
+          this.mainPosition = n.position_id
+        }
+      }
+    }
+
+    if(this.data.meta && this.data.meta.pre_club_id && this.data.meta.current_club){
+      this.playerClub = this.data.meta.current_club;
+    }else if(this.data.meta && this.data.meta.pre_club_id){
+      this.playerClub = this.data.meta.pre_club_id;
+    }    
   }
 
+  getTeamsByClub(clubId:any){
+    this.userService.getTeamsByClub(clubId).subscribe(
+      response => {
+        if(response.status){
+          this.teamsLisitng = response.data.teams;
+          this.teamsLisitng = [
+            {id:3, team_name: "ABC"}, {id:5, team_name: "XYZ"}
+          ];
+        }else{
+          this.teamsLisitng = [];
+        }
+      },
+      error => {
+        console.error('Error publishing advertisement:', error);
+      }
+    );
+  }
   getCountries(){
     this.userService.getCountries().subscribe(
       response => {
         if(response.status){
           this.countriesListing = response.data.countries;
-          
-
           if(this.data.user_nationalities){
             let nationality = JSON.parse(this.data.user_nationalities);
             let countryName = nationality[0].country_name;
@@ -154,15 +201,7 @@ export class UserEditPopupComponent {
       response => {
         if(response.status){
           this.playerClubsListing = response.data.clubs;
-          // if(this.data.user_nationalities){
-          //   let nationality = JSON.parse(this.data.user_nationalities);
-          //   let countryName = nationality[0].country_name;
-          //   let index = this.countriesListing.findIndex((x:any) => x.country_name == countryName)
-          //   if(index >= 0){
-          //     this.selectedCountry = this.countriesListing[index].id;
-          //   }
-          // }
-
+          // this.playerClub = 10;
         }else{
           
         }
@@ -247,19 +286,6 @@ export class UserEditPopupComponent {
 
   updatePlayerPersonalInfo():any{
 
-    // console.log(this.firstName)
-    // console.log(this.lastName)
-    // console.log(this.dob)
-
-    // console.log(this.foot);
-    // console.log(this.sinceInTeam);
-    // console.log(this.birthPlace);
-    
-    // console.log(this.contractUntil);
-    // console.log(this.speed);
-    // console.log(this.height);
-    // console.log(this.otherPosition);
-
     let formdata = new FormData();
 
     formdata.append('user[first_name]', this.firstName);
@@ -302,7 +328,39 @@ export class UserEditPopupComponent {
   }
 
   updatePlayerGeneralInfo():any{
+    console.log(this.playerCountries)
+    console.log(this.mainPosition)
+    console.log(this.internationalCountry)
 
+    let formdata = new FormData();
+
+
+    let index = this.playerClubsListing.findIndex((x:any) => x.id == this.playerClub)
+    if(this.playerClubsListing[index].is_taken == "yes"){
+      this.takenBy = this.playerClubsListing[index].taken_by;
+      formdata.append('user[current_club]', this.takenBy);
+      formdata.append('user[current_team]', this.playerTeam);
+    }
+
+    formdata.append('user[main_position]', this.mainPosition);
+    formdata.append('user[international_player]', this.internationalCountry);
+    formdata.append('user[nationality][]', this.playerCountries);
+    
+    
+    this.userService.updateUser(this.idToUpdate, formdata).subscribe(
+      response => {
+        if(response.status){
+          this.dialogRef.close({
+            action: 'updated'
+          });
+        }else{
+          
+        }
+      },
+      error => {
+        console.error('Error publishing advertisement:', error);
+      }
+    );
   }
 
   onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
@@ -327,5 +385,17 @@ export class UserEditPopupComponent {
 
   close(): void {
     this.dialogRef.close();
+  }
+
+  clubChange(event:any){
+
+    let index = this.playerClubsListing.findIndex((x:any) => x.id == this.playerClub)
+    if(this.playerClubsListing[index].is_taken == "yes"){
+      this.getTeamsByClub(this.playerClub);
+      this.takenBy = this.playerClubsListing[index].taken_by;
+      this.showTeamsDropdown = true;
+    }else{
+      this.showTeamsDropdown = false;
+    }
   }
 }

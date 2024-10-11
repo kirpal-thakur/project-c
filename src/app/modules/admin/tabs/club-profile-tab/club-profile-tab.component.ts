@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
+import { AddRepresentatorPopupComponent } from '../../add-representator-popup/add-representator-popup.component';
+
 
 @Component({
   selector: 'app-club-profile-tab',
@@ -16,6 +18,7 @@ export class ClubProfileTabComponent {
   representators:any = [];
   userId:any = "";
   baseUrl:any = "";
+  idsToDelete:any = "";
   @Input() userData: any;
   @Output() dataEmitter = new EventEmitter<string>();
   constructor(public dialog: MatDialog, private router: Router, private userService:UserService) { }
@@ -58,7 +61,7 @@ export class ClubProfileTabComponent {
     }else{
       return "NA";
     }
-  }
+  } 
 
   editClub(data:any){
     const dialog = this.dialog.open(UserEditPopupComponent,{
@@ -92,5 +95,94 @@ export class ClubProfileTabComponent {
         action: action
       }
     })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteRepresentator();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  addRepresentator(){
+    const dialog = this.dialog.open(AddRepresentatorPopupComponent,{
+      height: '400',
+      width: '400px',
+      data : {
+        action: 'add',
+        userId: this.userId
+      }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "added"){
+          this.getRepresentators();
+          this.showMatDialog("Invite sent successfully.",'display');
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  updateRepresentatorRole(event: Event, id:any) {
+    const target = event.target as HTMLSelectElement;
+    let newRole = target.value;
+    
+    this.userService.updateRepresentatorRole(id, {site_role:newRole}).subscribe((response)=>{
+      if (response && response.status) {
+        this.showMatDialog("Role updated successfully.",'display');
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
+
+  editRepresentator(representator:any){
+    const editDialog = this.dialog.open(AddRepresentatorPopupComponent,{
+      height: '400',
+      width: '400px',
+      data : {
+        action: 'edit',
+        userId: "",
+        representator: representator
+      }
+    });
+
+    editDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "updated"){
+          this.getRepresentators();
+          this.showMatDialog("Representator updated successfully.",'display');
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  confirmSingleDeletion(id:any){
+    this.idsToDelete = id;
+    this.showMatDialog("", "delete-representator-confirmation");
+  }
+
+  
+  deleteRepresentator():any {
+
+    this.userService.deleteRepresentator(this.idsToDelete).subscribe(
+      response => {
+        if(response.status){
+          this.getRepresentators();
+          this.showMatDialog('Representator removed successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in removing Representator. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error deleting user:', error);
+        
+      }
+    );
   }
 }

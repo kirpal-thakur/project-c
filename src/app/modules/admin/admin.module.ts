@@ -73,6 +73,7 @@ import { ProfileComponent } from './setting/profile/profile.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { TeamMembersComponent } from './setting/team-members/team-members.component';
 import { UserEditPopupComponent } from './user-edit-popup/user-edit-popup.component';
+import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
   
 @NgModule({
   declarations: [
@@ -126,7 +127,8 @@ import { UserEditPopupComponent } from './user-edit-popup/user-edit-popup.compon
     ProfileComponent,
     ActivityLogComponent,
     TeamMembersComponent,
-    UserEditPopupComponent
+    UserEditPopupComponent,
+    AddRepresentatorPopupComponent
   ],
   imports: [
     CommonModule,

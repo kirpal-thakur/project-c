@@ -36,7 +36,7 @@ export class SightingTabComponent {
   }
 
   getSightings(){
-    try {
+    try { 
       const page = this.paginator ? this.paginator.pageIndex*10 : 0;
       const pageSize = this.paginator ? this.paginator.pageSize : 10;
     

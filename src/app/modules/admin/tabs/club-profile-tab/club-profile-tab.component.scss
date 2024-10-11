@@ -69,3 +69,49 @@ td{
     border-radius:10px ;
     border: 1px solid #E5E5E5;
     }
+
+
+.custom-select {
+    min-width: 114px;
+    height: 26px;
+    width: 176px;
+}
+
+.custom-select select {
+    appearance: none;
+    width: 100%;
+    min-width: 114px;
+    height: 26px;
+    // width: 60%;
+    background-color: #caced1;
+    border: 0px solid #caced1;
+    border-radius: 0.25rem;
+    color: #148DE4;
+    cursor: pointer;
+}
+
+
+.custom-select {
+    min-width: 114px;
+    height: 26px;
+    width: 50% !important;
+    padding-left: 8px ;
+    border: 0px solid #caced1;
+    color: #148DE4;
+    cursor: pointer;
+    background-color: #23611500;
+    border-radius: 10px;
+}
+
+.custom-select:focus-visible {
+    outline: 0 !important ;
+}
+
+.custom-select:after { 
+    border-radius: 50%;
+}
+
+
+.pointer{
+    cursor: pointer;
+}

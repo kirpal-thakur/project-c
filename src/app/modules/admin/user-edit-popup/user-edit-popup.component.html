@@ -503,7 +503,7 @@
                 <div>
                     <p  class="code-text">Current Club</p>
                     <div class="btn-group">
-                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="playerClub">
+                        <select class="cupen-btn-1 form-select" aria-label="Default select example" (change)="clubChange($event)" [(ngModel)]="playerClub">
                             <option value="">Select</option>
                             <option *ngFor="let option of playerClubsListing" value="{{option.id}}">{{option.club_name}}</option>
                         </select>
@@ -514,8 +514,37 @@
                 </div>
                 <div class="ms-5">
                     <p  class="code-text">Nationality</p>
+                    <div class="btn-group main-popup-div player-country" style="position: relative; display: inline-block;">
+
+                        <mat-select multiple class="mat-select-div" [(ngModel)]="playerCountries">
+                            @for (option of countriesListing; track option) {
+                            <mat-option [value]="option.id">{{option.country_name}}</mat-option>
+                            }
+                        </mat-select>                        
+                        <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="ms-5">
+                    <p  class="code-text">Position</p>
                     <div class="btn-group">
-                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="selectedCountry">
+                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="mainPosition">
+                            <option value="">Select</option>
+                            <option *ngFor="let option of positionsListing" value="{{option.id}}">{{option.position}}</option>
+                        </select>
+                        <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex mb-3">
+                <div>
+                    <p  class="code-text">International Player</p>
+                    <div class="btn-group">
+                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="internationalCountry">
                             <option value="">Select</option>
                             <option *ngFor="let option of countriesListing" value="{{option.id}}">{{option.country_name}}</option>
                         </select>
@@ -524,19 +553,13 @@
                         </svg>
                     </div>
                 </div>
-                <div class="ms-5">
-                    <p  class="code-text">Position</p>
-                    <input class="cupen-btn-1" [(ngModel)]="designation">
-                </div>
-            </div>
 
-            <div class="d-flex mb-3">
-                <div>
-                    <p  class="code-text">International Player</p>
+                <div class="ms-5" style="display: none;" [ngClass]="{'showTeamsDropdown': showTeamsDropdown}">
+                    <p  class="code-text">Team</p>
                     <div class="btn-group">
-                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="selectedCountry">
+                        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="playerTeam">
                             <option value="">Select</option>
-                            <option *ngFor="let option of countriesListing" value="{{option.id}}">{{option.country_name}}</option>
+                            <option *ngFor="let option of teamsLisitng" value="{{option.id}}">{{option.team_name}}</option>
                         </select>
                         <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
@@ -545,7 +568,6 @@
                 </div>
             </div>
         </div>
-
         <hr class="m-0">
     
         <div class=" d-flex justify-content-around bg-0C3453 p-3">
