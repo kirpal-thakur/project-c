@@ -1165,7 +1165,7 @@ color: #ffffff !important;
 
 
 .dark-theme .mat-mdc-dialog-surface.mdc-dialog__surface {
-  background-color: #072944;
+  background-color: #0C3453;
 }
 .dark-theme .parent-popup{
 background-color: #072944;
@@ -2180,5 +2180,47 @@ color: rgba(255, 255, 255, 0.5) !important;
   fill: #fff !important;
 }
 .dark-theme .upload-titel {
+  color: #fff !important;
+}
+.dark-theme .close-btn {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+.dark-theme .messanger-selector-name ::ng-deep input::placeholder {
+  color: rgb(255, 255, 255) !important;
+}
+.dark-theme .mat-mdc-input-element::placeholder {
+  color: white !important; /* Change the color to white */
+  opacity: 0.7 !important; /* Optional: Adjust the opacity if needed */
+}
+.dark-theme .example-chip-list p{
+  color: #fff !important;
+}
+.dark-theme .user-details {
+  background: #072944 !important;
+  border-bottom: 1px solid #EBEBEB;
+  padding: 12px 20px;
+}
+.dark-theme .user-name {
+  color: #ffffff !important;
+}
+.dark-theme .users-name-list {
+  background: #072944 !important;
+  border: 1px solid #EBEBEB;
+}
+.dark-theme .select-user-name span{
+  color: #fff !important;
+}
+.dark-theme .bg-color-2{
+  background: #0C3453 !important;
+}
+.dark-theme .bg-color-2 .body-background .mat-mdc-chip {
+  background: none !important;
+}
+.dark-theme .bg-color-2 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled){
+  background: none !important;
+}
+
+.dark-theme .bg-color-2 span{
   color: #fff !important;
 }

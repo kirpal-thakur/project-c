@@ -75,7 +75,7 @@
                 <th>
                   <div class="form-group">
                     <mat-form-field appearance="fill">
-                      <mat-label>League</mat-label>
+                      <mat-label>{{'League' | translate}}</mat-label>
                       <mat-select id="league" name="league">
                         <mat-option *ngFor="let league of leagues" [value]="league.id">{{league.league_name}}</mat-option>
                       </mat-select>
@@ -85,7 +85,7 @@
                 <th>
                   <div class="form-group">
                     <mat-form-field appearance="fill">
-                      <mat-label>Club</mat-label>
+                      <mat-label>{{'Club' | translate}}</mat-label>
                       <mat-select id="club" name="club">
                         <mat-option *ngFor="let club of clubs" [value]="club.id">{{club.club_name}}</mat-option>
                       </mat-select>

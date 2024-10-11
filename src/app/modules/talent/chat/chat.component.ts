@@ -73,7 +73,7 @@ export class ChatComponent  {
     this.users = [];
     this.dialog.open(ChatPopupComponent, {
       height: '450px',
-      width: '40vw',
+      width: '760px',
     })
     .afterClosed()
       .subscribe(users => {

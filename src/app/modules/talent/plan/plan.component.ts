@@ -25,6 +25,7 @@ interface Plan {
   styleUrls: ['./plan.component.scss']
 })
 export class PlanComponent implements OnInit, OnDestroy {
+
   plans: Plan[] = [];
   maxQuantity: number = 10;
   premiumPlans: any;
@@ -101,19 +102,27 @@ export class PlanComponent implements OnInit, OnDestroy {
     });
   }
   
+
+  /**
+   * Helper function to merge plan data if the plan already exists.
+   */
   mergePlan(planArray: Plan[], newPlanData: Plan) {
     const existingPlanIndex = planArray.findIndex(p => p.name === newPlanData.name);
     if (existingPlanIndex !== -1) {
+      // Merge price details if the plan already exists in the array
       const existingPlan = planArray[existingPlanIndex];
       existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
       existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
       existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
       existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
     } else {
+      // Add new plan to the array
       planArray.push(newPlanData);
     }
   }
   
+
+  // Fetch purchases from API with pagination parameters
   getUserCards(): void {
     this.talentService.getCards().subscribe(response => {
       if (response && response.status && response.data) {
@@ -131,6 +140,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     });
   }
 
+  
   getIncludes(packageName: string): string[] {
     switch (packageName) {
       case 'Premium': return [
@@ -175,6 +185,8 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   handleQuantityChange(event: any, plan: Plan): void {
     const inputValue = Number(event.target.value);
+
+    // Ensure the quantity is within valid bounds
     if (inputValue >= 1 && inputValue <= this.maxQuantity) {
       plan.quantity = inputValue;
     } else if (inputValue > this.maxQuantity) {
@@ -192,8 +204,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       this.selectedPlan = selected;
     }
   }
-
- 
 
   async payForPlan(plan:any) {
 
@@ -223,7 +233,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     }
     
   }
-  
+
   
   async subscribeToPlan(plan: any) {
     if (!this.stripe) return;

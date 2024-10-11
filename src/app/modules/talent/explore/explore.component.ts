@@ -28,34 +28,55 @@ export class ExploreComponent implements OnInit {
   clubs : any;
   leagues : any;
 
+  // Filters
+  selectedRole: number | null = null;
+  selectedCountry: number | null = null;
+  selectedPositions: number[] = [];
+  selectedAge: number | null = null;
+  selectedFoot: string | null = null;
+  selectedTopSpeed: string | null = null;
+  selectedLeague: number | null = null;
+  selectedClub: number | null = null;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private talentService: TalentService) { }
 
   ngOnInit(): void {
-
     this.loadPositions();
     this.loadLeagues();
     this.loadClubs();
     this.loadCountries();
     this.getUserFavorites();
-
-    // Populate ageRange with numbers from 15 to 50
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
-    
   }
 
-  // Fetch user favorites with pagination
   getUserFavorites() {
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
 
+    // Collect filters
     let params: any = {
       offset: pageIndex * pageSize,
-      limit: pageSize
+      limit: pageSize,
+      role: this.selectedRole,
+      country: this.selectedCountry,
+      positions: this.selectedPositions,
+      age: this.selectedAge,
+      foot: this.selectedFoot,
+      topSpeed: this.selectedTopSpeed,
+      league: this.selectedLeague,
+      club: this.selectedClub
     };
 
-    // Call the service to get explore data
+    // Clean null or empty filters from params
+    Object.keys(params).forEach(key => {
+      if (params[key] === null || params[key] === undefined || params[key]?.length === 0) {
+        delete params[key];
+      }
+    });
+
+    // Call the service to get filtered data
     this.talentService.getExploresData(params).subscribe((response) => {
       if (response && response.status && response.data) {
         this.players = response.data.userData.users;
@@ -71,19 +92,17 @@ export class ExploreComponent implements OnInit {
     this.getUserFavorites();
   }
 
-  // Get the nationality flag (assuming userNationalities is a JSON string)
-  getNationality(userNationalities: string): string {
-    const parsedNationalities = JSON.parse(userNationalities);
-    return parsedNationalities.length > 0 ? parsedNationalities[0].flag_path : '';
+  // Apply filter function to refresh the data when filters change
+  applyFilter() {
+    this.currentPage = 0; // Reset to first page when applying new filters
+    this.getUserFavorites();
   }
 
-  
   loadCountries(): void {
     this.talentService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
-          console.log('Countries:', this.countries);
         }
       },
       (error: any) => {
@@ -97,9 +116,6 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
-          console.log('Positions:', this.positions);
-        } else {
-          console.error('No data found');
         }
       },
       (error: any) => {
@@ -113,9 +129,6 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.leagues = response.data.leagues;
-          console.log('leagues:', this.leagues);
-        } else {
-          console.error('No data found');
         }
       },
       (error: any) => {
@@ -129,15 +142,20 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.clubs = response.data.clubs;
-          console.log('clubs:', this.clubs);
-        } else {
-          console.error('No data found');
         }
       },
       (error: any) => {
         console.error('Error fetching clubs:', error);
       }
     );
+  }
+
+  
+
+  // Get the nationality flag (assuming userNationalities is a JSON string)
+  getNationality(userNationalities: string): string {
+    const parsedNationalities = JSON.parse(userNationalities);
+    return parsedNationalities.length > 0 ? parsedNationalities[0].flag_path : '';
   }
 
 }

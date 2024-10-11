@@ -113,16 +113,16 @@ export class UsersComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
-  applyFilter(filterValue:any) {
-   
+  
+  applyFilter(filterValue:any) {   
     this.filterValue = filterValue.target?.value.trim().toLowerCase();
     if(this.filterValue.length >= 3){
       this.fetchUsers();
-     } else if(this.filterValue.length == 0){
+    } else if(this.filterValue.length == 0){
       this.fetchUsers();
-     }
-   
+    }   
   }
+
   onPageChange() {
     this.fetchUsers();
   }
