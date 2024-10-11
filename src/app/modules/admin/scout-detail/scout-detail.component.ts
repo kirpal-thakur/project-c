@@ -115,6 +115,10 @@ export class ScoutDetailComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
+  handleRefreshAfterUpdate(data:any){
+    this.getUserProfile(this.userId);
+  }
+
   onProfileImageChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

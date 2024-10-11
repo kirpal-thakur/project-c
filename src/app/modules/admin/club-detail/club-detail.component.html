@@ -275,7 +275,7 @@
                     {{ 'Sighting' | translate }}</button>
                 </li>
               </ul>
-              <app-club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-club-profile-tab>
+              <app-club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" (dataEmitter)="handleRefreshAfterUpdate($event)"></app-club-profile-tab>
               <app-history-tab *ngIf="activeTab == 'history'" role="Club"></app-history-tab>
               <app-teams-tab *ngIf="activeTab == 'teams'"></app-teams-tab>
               <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>

@@ -265,7 +265,7 @@
               </li>
             </ul>
 
-            <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></app-profile-tab>
+            <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" (dataEmitter)="handleRefreshAfterUpdate($event)"></app-profile-tab>
             <app-performance-tab *ngIf="activeTab == 'performance'"></app-performance-tab>
             <app-transfers-tab *ngIf="activeTab == 'transfers'"></app-transfers-tab>
             <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>

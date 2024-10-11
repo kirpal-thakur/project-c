@@ -44,14 +44,16 @@ export class AdvertisingPopupComponent   {
   imageToUpload:any = "";
   errorMsg:any = {}
 
-
+  typeForView:any = "";
+  pageName:any = "";
+  imageUrl:any = ""
   constructor(
     public dialogRef: MatDialogRef<AdvertisingPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private advertisementService: AdvertisementService
   ) {}
 
   ngOnInit(): void {
 
-    if(this.data.action == "update"){
+    if(this.data.action == "update" || this.data.action == "view"){
       let existingRecord = this.data.ad;
       console.log(existingRecord)
       this.idToEdit = existingRecord.id;
@@ -71,6 +73,14 @@ export class AdvertisingPopupComponent   {
       }
       this.maxViews = existingRecord.views;
       this.maxClicks = existingRecord.clicks;
+
+
+      /* for view only*/
+
+      this.typeForView = this.type.split('-')[0];
+      let index = this.pageOptions.findIndex((x:any) => x.id == this.page);
+      this.pageName = this.pageOptions[index].page;
+      this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
     }
   }
 

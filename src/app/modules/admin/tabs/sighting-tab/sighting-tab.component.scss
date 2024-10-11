@@ -148,6 +148,10 @@ body {
   border-radius: 10px;
 }
 
+.container.p0{
+  padding: 0px 10px;
+  background: transparent;
+}
 .btn-primary {
   background-color: #007bff; /* Blue */
   border: none;
@@ -169,7 +173,7 @@ body {
 .btn-success {
   background-color: #28a745; /* Green */
   border: none;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 5px;
   color: white;
   font-weight: bold;

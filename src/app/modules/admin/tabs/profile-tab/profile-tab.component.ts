@@ -1,5 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { UserEditPopupComponent } from '../../user-edit-popup/user-edit-popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 @Component({
   selector: 'app-profile-tab',
   templateUrl: './profile-tab.component.html',
@@ -10,7 +12,8 @@ export class ProfileTabComponent {
   userNationalities:any = [];
 
   @Input() userData: any;
-  constructor(){
+  @Output() dataEmitter = new EventEmitter<string>();
+  constructor(public dialog: MatDialog) { 
     console.log('coming this data',this.userData);
     
   }
@@ -47,5 +50,41 @@ export class ProfileTabComponent {
     }
 
     return age;
+  }
+
+  
+  editPlayer(data:any, type:any){
+    const dialog = this.dialog.open(UserEditPopupComponent,{
+      height: '598px',
+      width: '600px',
+      data : {
+        role: 'player',
+        data:data,
+        type:type
+      }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "updated"){
+          this.dataEmitter.emit('updated');
+          this.showMatDialog("Player updated successfully.",'display');
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
   }
 }
