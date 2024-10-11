@@ -12,8 +12,9 @@
           </div>
       </div>
       <hr>
-     <div class="overflow-card">
-      <form class="general_form" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">        
+     
+      <form class="general_form" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+        <div class="overflow-card">        
         <div class="row">
           <div class="form-group col-lg-6">
             <label for="team" class="form-label">Team</label>
@@ -67,13 +68,12 @@
             </div> -->
           </div>
         </div>
-
-        <div class="dialog-actions align-items-center d-flex justify-content-between">
-          <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
-          <button class="save-btn" type="submit">Save</button>
-        </div>
+      </div>
+      <div class="dialog-actions align-items-center d-flex justify-content-between">
+        <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
+        <button class="save-btn" type="submit">Save</button>
+      </div>
       </form>
-     </div>
     </div>
   </div>
 </div>

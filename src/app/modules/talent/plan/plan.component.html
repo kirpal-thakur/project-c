@@ -24,7 +24,7 @@
               </div>
               <div class="row">
                 <div class="col-lg-12">
-                  <button class="choose-plan-btn" [disabled]="plan.quantity < 1">Choose Plan</button>
+                  <button class="choose-plan-btn" [disabled]="plan.quantity < 1" (click)="subscribeToPlan(plan)">Choose Plan</button>
                 </div>
               </div>
             </div>

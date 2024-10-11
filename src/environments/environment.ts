@@ -3,6 +3,7 @@ export const environment = {
     targetDomain: {
       domain: 'ch' 
     },
+    stripePublishableKey: 'pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a', // Your Stripe publishable key for production
     roles:[
       { role: "Admin", id: 1 },
       { role: "Club", id: 2 },

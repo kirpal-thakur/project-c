@@ -173,14 +173,14 @@ export class GalleryTabComponent {
      })
      .then(blob => {
       this.openedMenuId = '';
-        const url = window.URL.createObjectURL(blob);
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = image; // Set the filename for download
-        document.body.appendChild(anchor);
-        anchor.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(anchor);
+       const url = window.URL.createObjectURL(blob);
+       const anchor = document.createElement('a');
+       anchor.href = url;
+       anchor.download = image; // Set the filename for download
+       document.body.appendChild(anchor);
+       anchor.click();
+       window.URL.revokeObjectURL(url);
+       document.body.removeChild(anchor);
      })
      .catch(error => {
        console.error('There was an error downloading the file:', error);

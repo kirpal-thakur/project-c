@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddCardComponent } from '../membership/add-card/add-card.component';
 
 @Component({
   selector: 'app-payments-popup',
@@ -11,6 +12,7 @@ export class PaymentsPopupComponent implements OnInit {
   plans: any[] = [];
 
   constructor(
+    public dialog: MatDialog,
     public dialogRef: MatDialogRef<PaymentsPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -44,6 +46,16 @@ export class PaymentsPopupComponent implements OnInit {
 
   addNewPaymentMethod() {
     console.log('Adding new payment method');
+    
+      const dialogRef = this.dialog.open(AddCardComponent, {
+        width: '600px',
+        data: {        }
+      });
+    
+      // Optionally handle dialog closing events
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('Dialog result:', result);
+      });
   }
 
   closeDialog(): void {

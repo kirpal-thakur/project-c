@@ -83,6 +83,7 @@ span.social_heddig {
   .dialog-actions {
     margin-top: 20px;
     text-align: right;
+    padding: 0px 20px 20px 20px;
   }
   
   .cancel-btn, .save-btn {
@@ -98,9 +99,7 @@ span.social_heddig {
     font-weight: 700;
     width: 45%;
   }
-  .general_form{
-    padding: 0px 20px 20px 20px;
-  }
+
   .social_form-box{
     margin: 20px 0px;
   }
@@ -115,7 +114,7 @@ span.social_heddig {
     font-weight: 600;
 }
 .overflow-card{
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding:0px 20px 0px 20px;
@@ -148,7 +147,5 @@ span.social_heddig {
     gap: 10px;
      padding-right: 26px !important; 
 }
-.general_form {
-  padding: 0px 0px 20px 0px;
-}
+
 }

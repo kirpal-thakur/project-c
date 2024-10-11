@@ -110,10 +110,10 @@
 .mat-mdc-dialog-surface{
     overflow: hidden !important;
 }
-.overflow-card::-webkit-scrollbar {
+.upload-photos .overflow-card::-webkit-scrollbar {
     width: 6px;
 }
-.overflow-card::-webkit-scrollbar-thumb {
+.upload-photos .overflow-card::-webkit-scrollbar-thumb {
     background: rgb(228, 228, 228); 
     border-radius: 10px;
 }
