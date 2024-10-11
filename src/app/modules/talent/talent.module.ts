@@ -35,7 +35,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
 import { ExploreComponent } from './explore/explore.component';
-import { PlanComponent } from './plan/plan.component';
 import { CountriesComponent } from './countries/countries.component';
 import { ChatComponent } from './chat/chat.component';
 import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
@@ -55,6 +54,9 @@ import { EditTransferDetailsComponent } from './edit-transfer-details/edit-trans
 import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
 import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
+import { PlanComponent } from './plan/plan.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { AddCardComponent } from './membership/add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,6 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
     PlayerProfileComponent,
     PerformanceAnalysisTabComponent,
     ExploreComponent,
-    PlanComponent,
     CountriesComponent,
     ViewMembershipPopupComponent,
     PaymentsPopupComponent,
@@ -94,7 +95,9 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
     EditTransferDetailsComponent,
     AddTransferComponent,
     AddPerfomanceReportComponent,
-    EditHighlightsComponent
+    EditHighlightsComponent,
+    PlanComponent,
+    AddCardComponent
   ],
   imports: [
     CommonModule,
@@ -120,6 +123,7 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
     MatTableModule,
     MatPaginator,
     NgxEditorModule,    
+    NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })
 export class TalentModule { }

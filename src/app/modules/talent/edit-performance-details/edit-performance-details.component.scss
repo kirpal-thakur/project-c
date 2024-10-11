@@ -82,6 +82,7 @@ font-weight: 700;
 .dialog-actions {
   margin-top: 20px;
   text-align: right;
+  padding: 0px 20px 20px 20px;
 }
 
 .cancel-btn, .save-btn {
@@ -104,9 +105,7 @@ font-weight: 700;
   font-weight: 700;
   width: 45%;
 }
-.general_form{
-  padding: 0px 20px 20px 20px;
-}
+
 .social_form-box{
   margin: 20px 0px;
 }
@@ -122,7 +121,7 @@ font-weight: 700;
 }
 
 .overflow-card{
-  max-height: 80vh;
+  max-height: 60vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding:0px 20px 0px 20px;
@@ -143,9 +142,7 @@ font-weight: 700;
     margin-bottom: 26px;
     padding: 0px 26px;
 }
-.general_form {
-  padding: 0px 0px 20px 0px;
-}
+
 .mobile-input{
   width: 50% !important;
 }

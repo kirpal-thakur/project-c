@@ -17,6 +17,22 @@
     padding: 20px 20px 0px 20px;
   }
   
+.overflow-card{
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding:0px 20px 0px 20px;
+}
+.mat-mdc-dialog-surface{
+  overflow: hidden !important;
+}
+.overflow-card::-webkit-scrollbar {
+  width: 6px;
+}
+.overflow-card::-webkit-scrollbar-thumb {
+  background: rgb(228, 228, 228); 
+  border-radius: 10px;
+}
   .close-btn {
     background: none;
     font-size: 19px;
@@ -82,6 +98,7 @@
   .dialog-actions {
     margin-top: 20px;
     text-align: right;
+    padding: 0px 20px 20px 20px;
   }
   
   .cancel-btn, .save-btn {
@@ -103,9 +120,6 @@
     color: #f44336;
     font-weight: 700;
     width: 45%;
-  }
-  .general_form{
-    padding: 0px 20px 20px 20px;
   }
   .social_form-box{
     margin: 20px 0px;

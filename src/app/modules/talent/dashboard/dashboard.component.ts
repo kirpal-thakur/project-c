@@ -95,6 +95,7 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getHighlightsData()
     });
 
   }

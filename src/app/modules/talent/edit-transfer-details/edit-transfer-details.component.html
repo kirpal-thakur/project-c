@@ -1,4 +1,4 @@
-<div class="dialog-content">
+<div class="dialog-content transfer_details">
   <div class="personal_edit">
     <div class="dialog-header m-auto">
       <h2>Edit Transfer Details</h2>
@@ -8,10 +8,11 @@
     </div>
   </div>
   <hr>
-  <div class="overflow-card">
+  
     
   <form class="transfer_box" (ngSubmit)="onSubmit(transferForm)" #transferForm="ngForm">
-    <div class="row mb-4">
+    <div class="overflow-card">
+     <div class="row mb-4">
       <div class="form-group moving_select col-lg-6">
         <h2>Moving To</h2>
         <label for="team_to" class="form-label">Team</label>
@@ -43,10 +44,12 @@
         <input type="date" id="date_of_transfer" name="date_of_transfer" [(ngModel)]="data.date_of_transfer" required>        
       </div>
     </div>
-    <div class="dialog-actions align-items-center d-flex justify-content-between">
+  </div>
+    <div class="dialog-actions align-items-center d-flex justify-content-between mt-5">
       <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
       <button class="save-btn" type="submit" [disabled]="!transferForm.valid">Save</button>
     </div>
+
   </form>
-</div>
+
 </div>

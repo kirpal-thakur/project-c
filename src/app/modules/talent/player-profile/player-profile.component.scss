@@ -75,7 +75,7 @@
     margin-top: 56px;
     margin-bottom: 30px;
 }
-.overflow-card{
+.player-profile .overflow-card{
     max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
@@ -84,10 +84,10 @@
 .mat-mdc-dialog-surface{
     overflow: hidden !important;
 }
-.overflow-card::-webkit-scrollbar {
+.player-profile .overflow-card::-webkit-scrollbar {
     width: 6px;
   }
-.overflow-card::-webkit-scrollbar-thumb {
+.player-profile .overflow-card::-webkit-scrollbar-thumb {
     background: rgb(228, 228, 228); 
     border-radius: 10px;
   }

@@ -35,6 +35,8 @@
 }
 .player-image_box img{
     width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 .upload-photos{
     padding:0px 16px 16px 16px;
@@ -108,10 +110,10 @@
 .mat-mdc-dialog-surface{
     overflow: hidden !important;
 }
-.overflow-card::-webkit-scrollbar {
+.upload-photos .overflow-card::-webkit-scrollbar {
     width: 6px;
 }
-.overflow-card::-webkit-scrollbar-thumb {
+.upload-photos .overflow-card::-webkit-scrollbar-thumb {
     background: rgb(228, 228, 228); 
     border-radius: 10px;
 }
@@ -132,4 +134,11 @@
     color: white;
     font-weight: 700;
     width: 45%;
+}
+.all-videos .player-image_box video{
+   width: 170px;
+}
+.player-image_box video{
+    height: 200px !important;
+    object-fit: cover;
 }

@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../../services/user.service';
 import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
@@ -18,6 +17,7 @@ export class MembershipComponent {
   
   userId: any = '';
   userPurchases: any = [];
+  userCards: any = [];
   // imageBaseUrl: any = "";
   allSelected: boolean = false;
   idsToDownload: any = [];
@@ -38,13 +38,14 @@ export class MembershipComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private userService: TalentService, public dialog: MatDialog,private router: Router) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, public dialog: MatDialog,private router: Router) { }
 
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
-      this.getUserPurchases()
+      this.getUserPurchases();
+      this.getUserCards();
     });
   }
 
@@ -53,12 +54,27 @@ export class MembershipComponent {
     const pageNumber = this.currentPage != 0 ? this.currentPage : 1;
     const pageSize = this.pageSize;
 
-    this.userService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
+    this.talentService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
       if (response && response.status && response.data) {
         this.userPurchases = response.data.purchaseHistory;
         this.totalItems = response.data.totalCount; // Assuming API returns the total number of purchases
         console.log(this.userPurchases)
 
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    }, error => {
+      console.error('Error fetching user purchases:', error);
+    });
+  }
+
+  
+  // Fetch purchases from API with pagination parameters
+  getUserCards(): void {
+    this.talentService.getCards().subscribe(response => {
+      if (response && response.status && response.data) {
+        this.userCards = response.data.paymentMethod;
+        console.log(this.userCards)
       } else {
         console.error('Invalid API response:', response);
       }
@@ -126,20 +142,7 @@ export class MembershipComponent {
     const dialogRef = this.dialog.open(PaymentsPopupComponent, {
       width: '800px',
       data: {
-        cards: [
-          {
-            cardType: 'VISA',
-            cardNumber: 'Visa ending in 2255',
-            expiryDate: '09/2026',
-            isPrimary: true
-          },
-          {
-            cardType: 'VISA',
-            cardNumber: 'Visa ending in 4455',
-            expiryDate: '05/2025',
-            isPrimary: false
-          }
-        ]
+        cards: this.userCards
       }
     });
   

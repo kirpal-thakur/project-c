@@ -4,6 +4,7 @@ import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
+import { loadStripe, StripeCardElement, StripeElements, Stripe } from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,53 @@ export class TalentService {
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
+  private stripe!: any;
+  private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
   }
 
+  async getStripe() {
+    return await this.stripePromise;
+  }
+
+  // Initialize Stripe.js with your publishable key
+  async initializeStripe() {
+    this.stripe = await loadStripe(environment.stripePublishableKey); // Use your Stripe Publishable Key
+    return this.stripe;
+  }
+
+  // Create a payment method using Stripe.js
+  async createPaymentMethod(card: StripeCardElement) {
+    return this.stripe.createPaymentMethod({
+      type: 'card',
+      card: card,
+    });
+  }
+
+  // Call the backend to create a customer
+  createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
+    // Replace with your CodeIgniter backend API URL
+    return this.http.post('http://your-backend-url/create-customer', { email, name, paymentMethodId });
+  }
+
   getProfileData(userId: any): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
       `${this.apiUrl}profile`
+    );
+  }
+
+  getPlans(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-packages`
+    );
+  }
+
+  getCards(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-payment-methods`
     );
   }
 
@@ -67,6 +106,10 @@ export class TalentService {
   // Fetch teams
   getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
+  }
+  
+  getLeagues(): Observable<any> {
+    return this.http.get(`${this.apiUrl2}get-leagues`);
   }
   
   getCoverImg(): Observable<any> {    
@@ -138,17 +181,74 @@ export class TalentService {
     );
   }
   
-  getExploresData(params: any): Observable<any> {
+  getAllUses(): Observable<any> {
     // Construct HttpParams object
-    let queryParams = new HttpParams()
-      .set('offset', params.offset || 0)
-      .set('limit', params.limit || 10)
-      .set('search', params.search || '');
-
     return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}users-frontend`, { params: queryParams }
+      `${this.apiUrl}users-frontend`
     );
   }
+  
+  
+getExploresData(params: any): Observable<any> {
+  let queryParams = new HttpParams()
+    // Basic pagination parameters
+    .set('offset', params.offset || 0)
+    .set('limit', params.limit || 10);
+
+  // Add whereClause filters
+  if (params.whereClause) {
+    Object.keys(params.whereClause).forEach(key => {
+      const value = params.whereClause[key];
+      if (Array.isArray(value)) {
+        // If the value is an array (like for position or age), append each value
+        value.forEach(val => {
+          queryParams = queryParams.append(`whereClause[${key}][]`, val);
+        });
+      } else {
+        queryParams = queryParams.set(`whereClause[${key}]`, value);
+      }
+    });
+  }
+
+  // Add metaQuery filters
+  if (params.metaQuery && Array.isArray(params.metaQuery)) {
+    params.metaQuery.forEach((meta: any, index: number) => {
+      // Set meta_key and operator directly
+      queryParams = queryParams
+        .set(`metaQuery[${index}][meta_key]`, meta.meta_key)
+        .set(`metaQuery[${index}][operator]`, meta.operator);
+
+      // Handle meta_value separately if it's an array
+      if (Array.isArray(meta.meta_value)) {
+        meta.meta_value.forEach((value: any, valueIndex: number) => {
+          queryParams = queryParams.set(`metaQuery[${index}][meta_value][${valueIndex}]`, value);
+        });
+      } else {
+        queryParams = queryParams.set(`metaQuery[${index}][meta_value]`, meta.meta_value);
+      }
+    });
+  }
+
+  // Add ordering parameters if needed
+  if (params.orderBy) {
+    queryParams = queryParams
+      .set('orderBy', params.orderBy)
+      .set('order', params.order || 'desc');
+  }
+
+  // Add other query parameters
+  if (params.countOnly) {
+    queryParams = queryParams.set('countOnly', 'true');
+  }
+  if (params.noLimit) {
+    queryParams = queryParams.set('noLimit', 'true');
+  }
+
+  // Send the HTTP GET request
+  return this.http.get<{ status: boolean, message: string, data: {} }>(
+    `${this.apiUrl}users-frontend`, { params: queryParams }
+  );
+}
   
   removeFavorites(params: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -346,6 +446,23 @@ export class TalentService {
     return this.http.get(`${this.apiUrl2}download-reports`, { params, responseType: 'blob' });
   }
 
+  // talent.service.ts
+  subscribeToPlan(subscriptionData: { paymentMethodId: string; planId: number; }): Observable<any> {
+    return this.http.post('/api/subscribe', subscriptionData); // Adjust the endpoint as needed
+  }
 
+  toggleFeaturedFiles(reportIds: any[]): Observable<any> {
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
 
+    let params = new HttpParams();
+    reportIds.forEach(id => {
+      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    return this.http.post(`${this.apiUrl2}user/set-featured-file`, params , {headers});
+  }
+  
 }
