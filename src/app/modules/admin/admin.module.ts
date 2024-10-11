@@ -74,6 +74,7 @@ import { ActivityLogComponent } from './setting/activity-log/activity-log.compon
 import { TeamMembersComponent } from './setting/team-members/team-members.component';
 import { UserEditPopupComponent } from './user-edit-popup/user-edit-popup.component';
 import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
+import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-popup.component';
   
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { AddRepresentatorPopupComponent } from './add-representator-popup/add-re
     ActivityLogComponent,
     TeamMembersComponent,
     UserEditPopupComponent,
-    AddRepresentatorPopupComponent
+    AddRepresentatorPopupComponent,
+    CommonFilterPopupComponent
   ],
   imports: [
     CommonModule,

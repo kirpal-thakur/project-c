@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { CouponService } from '../../../../services/coupon.service';
 import { CoupenPopupComponent } from '../coupon-popup/coupon-popup.component';
+import { CommonFilterPopupComponent } from '../../common-filter-popup/common-filter-popup.component';
+
 @Component({
   selector: 'app-coupons',
   templateUrl: './coupons.component.html',
@@ -25,6 +27,7 @@ export class CouponsComponent {
   filterDialogRef:any = ""
   idsToProceed: any = [];
   selectedIds:any = [];
+  customFilters:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -34,13 +37,21 @@ export class CouponsComponent {
     this.getCoupons();
   }
 
-  getCoupons() {
+  getCoupons(filterApplied:boolean = false) {
     this.isLoading = true;
     let params:any = {};
     // params.offset = page;
     params.search = this.filterValue;
     // params.limit  = pageSize;  
     
+    if(this.customFilters['discount_type']){
+      params = {...params, "whereClause[discount_type]" : this.customFilters['discount_type']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
     try {
      this.couponService.getCoupons(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.coupons) {
@@ -49,6 +60,7 @@ export class CouponsComponent {
         this.isLoading = false;
       } else {
         this.isLoading = false;
+        this.coupons = [];
         console.error('Invalid API response structure:', response);
       }
       });     
@@ -252,5 +264,34 @@ export class CouponsComponent {
   confirmSingleDeletion(couponId:any){
     this.idsToProceed = [couponId];
     this.showMatDialog("", "delete-coupon-confirmation");
+  }
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '170px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'coupon',
+        appliedfilters:this.customFilters
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getCoupons(true);
   }
 }

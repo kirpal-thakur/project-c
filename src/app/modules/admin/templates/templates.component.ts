@@ -9,6 +9,7 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 import { TemplatePopupComponent } from './template-popup/template-popup.component'; 
 import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 import { TemplateService } from '../../../services/template.service';
+import { CommonFilterPopupComponent } from '../common-filter-popup/common-filter-popup.component';
 
 @Component({
   selector: 'app-templates',
@@ -24,9 +25,12 @@ export class TemplatesComponent {
   selectedIds: number[] = [];  
   filterValue: string = '';
   idsToDelete: any = [];
+  customFilters:any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   roles: any = [];
+  langs: any = environment.langs;
+
   constructor(public dialog: MatDialog,private tempalateApi: TemplateService) {}
   ngOnInit(): void {
     this.getTemplates();
@@ -37,7 +41,7 @@ export class TemplatesComponent {
     this.roles = envRoles;
   }
 
-  async getTemplates(): Promise<void> {
+  async getTemplates(filterApplied:boolean = false): Promise<void> {
     this.isLoading = true;
     const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
@@ -51,6 +55,20 @@ export class TemplatesComponent {
     params.orderBy = "id";
     params.order = "desc";
 
+    if(filterApplied){
+      params.offset = 0;
+      this.paginator.firstPage(); // to reset the page if user applied filter on any page except the first one
+    }
+
+    if(this.customFilters['role']){
+      params = {...params, "whereClause[role]" : this.customFilters['role']};
+    }
+
+    if(this.customFilters['language']){
+      params = {...params, "whereClause[language]" : this.customFilters['language']};
+    }
+
+    
     try {
       this.isLoading = true;
       this.tempalateApi.getTemplates(params).subscribe((response)=>{
@@ -59,6 +77,7 @@ export class TemplatesComponent {
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
       } else {
+        this.templates = [];
         this.paginator.length = 0;
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -213,6 +232,37 @@ export class TemplatesComponent {
   getRole(id:any){
     let row = this.roles.find((role:any) => role.id == id);
     return row ? row.role : null;
+  }
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '170px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'template',
+        appliedfilters:this.customFilters,
+        roles: this.roles,
+        languages: this.langs
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getTemplates(true);
   }
 }
    

@@ -1,8 +1,6 @@
 import { Component, inject,ViewChild } from '@angular/core';
-import {  MatDialog } from '@angular/material/dialog';
-import {
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MarketingPopupComponent } from './marketing-popup/marketing-popup.component';
 import { FilterPopupComponrnt } from '../filter-popup/filter-popup.component';
 import { MarketingService } from '../../../services/marketing.service';
@@ -10,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { environment } from '../../../../environments/environment';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { CommonFilterPopupComponent } from '../common-filter-popup/common-filter-popup.component';
 
 @Component({
   selector: 'app-marketing',
@@ -27,13 +26,19 @@ export class MarketingComponent {
   idsToDelete: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  customFilters:any = [];
+  rolesForFilter:any = [];
+  langs:any = environment.langs;
+  locations:any = environment.domains;
+  frequency:any = ['Once a day', 'Once a week', 'Once 2 Hrs', 'Twice a day', 'Once a month', 'One time only'];
 
   constructor(public dialog: MatDialog,private marketingApi: MarketingService) {}
   ngOnInit(): void {
     this.getSystemPopups();
+    this.getRoles();
   }
 
-  async getSystemPopups(): Promise<void> {
+  async getSystemPopups(filterApplied:boolean = false): Promise<void> {
     this.isLoading = true;
     const page = this.paginator ? this.paginator.pageIndex*10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
@@ -47,6 +52,31 @@ export class MarketingComponent {
     params.orderBy = "id";
     params.order = "desc";
 
+    if(filterApplied){
+      params.offset = 0;
+      this.paginator.firstPage(); // to reset the page if user applied filter on any page except the first one
+    }
+
+    if(this.customFilters['role']){
+      params = {...params, "whereClause[role]" : this.customFilters['role']};
+    }
+
+    if(this.customFilters['language']){
+      params = {...params, "whereClause[language]" : this.customFilters['language']};
+    }
+
+    if(this.customFilters['frequency']){
+      params = {...params, "whereClause[frequency]" : this.customFilters['frequency']};
+    }
+
+    if(this.customFilters['location']){
+      params = {...params, "whereClause[popup_location]" : this.customFilters['location']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
     try {
       this.isLoading = true;
      this.marketingApi.getSystemPopups(params).subscribe((response)=>{
@@ -56,6 +86,8 @@ export class MarketingComponent {
         this.isLoading = false;
         
       } else {
+        this.popups = [];
+        this.paginator.length = 0;
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
@@ -234,5 +266,49 @@ export class MarketingComponent {
       }
     }
     return result.slice(0, -2);
+  }
+
+  getRoles(){
+    this.marketingApi.getRolePaymentTypes().subscribe((response)=>{
+      if (response && response.status) {
+        this.rolesForFilter = response.data.userTypes;
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '340px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'marketing',
+        appliedfilters:this.customFilters,
+        roles: this.rolesForFilter,
+        languages: this.langs,
+        frequency: this.frequency,
+        locations: this.locations,
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getSystemPopups(true);
   }
 }
