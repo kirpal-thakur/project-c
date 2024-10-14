@@ -419,4 +419,24 @@ export class UserService {
     });
     return this.http.post<any>(`${this.apiUrl2}/add-representator`, params, { headers }); 
   }
+
+  exportUsers(data: any): Observable<any> {
+
+    let params = new HttpParams();  
+    // Loop through the queryParams object and set each parameter
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.set(key, data[key]);
+      }
+    }
+    
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl2}/export-users?noLimit=1`,
+      { params }
+    );
+  }
+
+  downloadExcelFile(url: string): Observable<Blob> {
+    return this.http.get(url, { responseType: 'blob' });
+  }
 }

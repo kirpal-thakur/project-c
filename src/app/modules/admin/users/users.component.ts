@@ -330,4 +330,113 @@ export class UsersComponent implements OnInit {
       }
     );
   }
+
+  exportUsers():any{
+
+    if(this.users.length == 0){
+      this.showMessage("No users to export");
+      return false;
+    }
+
+    let params:any = {};
+    params.search = this.filterValue;
+    params.orderBy = "id";
+    params.order = "desc";
+
+    if(this.customFilters['alphabetically']){
+      params.orderBy = "first_name";
+      params.order = this.customFilters['alphabetically'];
+    }
+
+    if(this.customFilters['activity']){
+      params.orderBy = "last_active";
+      params.order = "desc";
+    }
+
+    if(this.customFilters['membership']){
+      params = {...params, "whereClause[membership]" : this.customFilters['membership']};
+    }
+
+    if(this.customFilters['role']){
+      params = {...params, "whereClause[role]" : this.customFilters['role']};
+    }
+
+    if(this.customFilters['newsletter']){
+      params = {...params, "whereClause[newsletter]" : this.customFilters['newsletter']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
+    if(this.customFilters['location']){
+      params = {...params, "whereClause[user_domain]" : this.customFilters['location']};
+    }
+    
+
+    // this.showMessage("Call api");
+
+    try {
+      //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
+      this.userService.exportUsers(params).subscribe((response)=>{
+        if (response && response.status) {
+          let fileUrl = response.data.file_path;
+          let fileName = response.data.file_name;
+          this.download(fileUrl, fileName);
+        } else {
+
+        }
+      });     
+    } catch (error) {
+      // this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
+
+  }
+
+  downloadExcelFile(fileUrl:any, fileName:any){
+    this.userService.downloadExcelFile(fileUrl).subscribe(
+      (blob) => {
+        const reader = new FileReader();
+
+        // Read the blob as data URL
+        reader.onloadend = () => {
+          const link = document.createElement('a');
+          link.href = reader.result as string;
+          link.download = fileName;
+          link.click();
+        };
+
+        // Read the blob
+        reader.readAsDataURL(blob);
+      },
+      (error) => {
+        console.error('File download error:', error);
+      }
+    );
+  }
+
+  async download(fileUrl:any, fileName:any){
+    // use the fetch/blob method because single download isn't working 
+   fetch(fileUrl)
+     .then(response => {
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+       return response.blob(); // Convert the response to a Blob object
+     })
+     .then(blob => {
+       const url = window.URL.createObjectURL(blob);
+       const anchor = document.createElement('a');
+       anchor.href = url;
+       anchor.download = fileName; // Set the filename for download
+       document.body.appendChild(anchor);
+       anchor.click();
+       window.URL.revokeObjectURL(url);
+       document.body.removeChild(anchor);
+     })
+     .catch(error => {
+       console.error('There was an error downloading the file:', error);
+     });
+ }
 }

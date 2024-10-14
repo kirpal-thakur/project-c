@@ -3,7 +3,7 @@
     <div class="mb-3 club-team">Teams</div>
     <app-loader *ngIf="isLoading"></app-loader>
     <div *ngIf="teams.length == '0' && !isLoading">No teams available.</div>
-    <div *ngFor="let team of teams" (click)="getTeamPlayers(team.id) " class="box-square position-relative">
+    <div *ngFor="let team of teams" (click)="getTeamPlayers(team.id, team.team_name) " class="box-square position-relative">
         <div class="team-types">{{team.team_name}}</div> 
     </div>
 </div>
@@ -11,7 +11,10 @@
 <div class="player-view-container" *ngIf="view == 'player'">
     <div class="container"> 
       <div class="row">
-        <span class="p-3 team-type">Team-U21</span>
+        <span class="p-3 team-type" style="display: flex; align-items: center;">
+          <span class="back-link" (click)="backToTeamView();">Back</span> 
+          {{selectedTeam}}
+        </span>
         <div class="col pl-5">
           <div class="table-responsive">
             <table mat-table [dataSource]="players" class="table table-hover table-striped table-users ">
