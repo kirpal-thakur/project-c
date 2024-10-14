@@ -1,6 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -24,6 +25,7 @@ export class ExploreComponent implements OnInit {
     { role: "Talent",  id: 4 },
     { role: "League" , id: 5 }
   ];
+
   positions: any[] = [];
   countries: any;
   clubs : any;
@@ -41,7 +43,10 @@ export class ExploreComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private talentService: TalentService) { }
+  constructor(
+    private talentService: TalentService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.loadPositions();
@@ -49,13 +54,19 @@ export class ExploreComponent implements OnInit {
     this.loadClubs();
     this.loadCountries();
     this.getUserFavorites();
+
+    // Populate ageRange with numbers from 15 to 50
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
+  }
+
+  redirectUser(slug:string, id:Number): void {
+    let pageRoute = 'talent/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
   }
 
   // getUserFavorites() {
   //   const pageIndex = this.currentPage;
   //   const pageSize = this.pageSize;
-
   //   // Collect filters
   //   let params: any = {
   //     offset: pageIndex * pageSize,
@@ -87,7 +98,6 @@ export class ExploreComponent implements OnInit {
   // }
 
   // Event handler for page change in paginator
-
   getUserFavorites() {
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
@@ -171,6 +181,7 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
+          console.log('Countries:', this.countries);
         }
       },
       (error: any) => {
@@ -184,6 +195,9 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
+          console.log('Positions:', this.positions);
+        } else {
+          console.error('No data found');
         }
       },
       (error: any) => {
@@ -197,6 +211,9 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.leagues = response.data.leagues;
+          console.log('leagues:', this.leagues);
+        } else {
+          console.error('No data found');
         }
       },
       (error: any) => {
@@ -210,6 +227,9 @@ export class ExploreComponent implements OnInit {
       (response: any) => {
         if (response.status) {
           this.clubs = response.data.clubs;
+          console.log('clubs:', this.clubs);
+        } else {
+          console.error('No data found');
         }
       },
       (error: any) => {
@@ -290,38 +310,38 @@ export class ExploreComponent implements OnInit {
   }
   
   // Generic method to get names by ID
-getNameById(label: string, id: string): string {
-  switch (label) {
-    case 'Country':
-      const country = this.countries.find((count: any) => count.id === id);
-      return country ? country.country_name : id;
+  getNameById(label: string, id: string): string {
+    switch (label) {
+      case 'Country':
+        const country = this.countries.find((count: any) => count.id === id);
+        return country ? country.country_name : id;
 
-    case 'Category':
-      const role = this.roles.find((pos: any) => pos.id === id);
-      return role ? role.role : id;
+      case 'Category':
+        const role = this.roles.find((pos: any) => pos.id === id);
+        return role ? role.role : id;
 
-    case 'Pos':
-      // Handle multiple position IDs
-      const positionIds = id.split(",").map(position => position.trim());
-      const positionNames = positionIds
-        .map(posId => {
-          const position = this.positions.find(pos => pos.id === posId);
-          return position ? position.position : posId; // Use the ID if not found
-        });
-      return positionNames.join(", "); // Return a comma-separated string of positions
+      case 'Pos':
+        // Handle multiple position IDs
+        const positionIds = id.split(",").map(position => position.trim());
+        const positionNames = positionIds
+          .map(posId => {
+            const position = this.positions.find(pos => pos.id === posId);
+            return position ? position.position : posId; // Use the ID if not found
+          });
+        return positionNames.join(", "); // Return a comma-separated string of positions
 
-    case 'League':
-      const league = this.leagues.find((pos: any) => pos.id === id);
-      return league ? league.league_name : id;
+      case 'League':
+        const league = this.leagues.find((pos: any) => pos.id === id);
+        return league ? league.league_name : id;
 
-    case 'Club':
-      const club = this.clubs.find((pos: any) => pos.id === id);
-      return club ? club.club_name : id;
+      case 'Club':
+        const club = this.clubs.find((pos: any) => pos.id === id);
+        return club ? club.club_name : id;
 
-    default:
-      return id; // Return ID as fallback
+      default:
+        return id; // Return ID as fallback
+    }
   }
-}
 
   // Method to check if the label is empty
   empty(label: string): boolean {

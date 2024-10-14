@@ -10,6 +10,7 @@ import { ChatComponent } from './chat/chat.component';
 import { PlanComponent } from './plan/plan.component';
 import { CountriesComponent } from './countries/countries.component';
 import { SettingComponent } from './setting/setting.component';
+import { ViewUserComponent } from './view-user/view-user.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'plans', component: PlanComponent},
       { path: 'countries', component: CountriesComponent},
       { path: 'setting', component: SettingComponent},
+      {path: 'player/:id', component: ViewUserComponent},
     ]
   }
 ];

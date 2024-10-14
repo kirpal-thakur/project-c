@@ -2106,7 +2106,7 @@ color: rgba(255, 255, 255, 0.5) !important;
   border-color: #1F4360 !important;
 }
 .dark-theme .form-group input,.dark-theme .form-group select{
-  background: #1F4360 !important;
+  background: #0C3453  !important;
   color: #fff !important;
 }
 .dark-theme .form-group option{
@@ -2223,4 +2223,8 @@ color: rgba(255, 255, 255, 0.5) !important;
 
 .dark-theme .bg-color-2 span{
   color: #fff !important;
+}
+.dark-theme .about-event textarea{
+  background-color: #0C3453 ;
+  color: #fff;
 }

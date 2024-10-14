@@ -64,6 +64,12 @@ export class TalentService {
     );
   }
 
+  getUser(user:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/profile/${user}`
+    );
+  }
+
   getGalleryData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-gallery`
@@ -113,9 +119,9 @@ export class TalentService {
   }
   
   getCoverImg(): Observable<any> {    
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}` // Include authorization token
-  });
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
 
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
       `${this.apiUrl}user/get-cover-image`
@@ -149,6 +155,12 @@ export class TalentService {
   getTransferData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}player/get-transfer-detail`
+    );
+  }
+  
+  getViewTransferData(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-transfer-detail/${id}`
     );
   }
   
@@ -333,6 +345,7 @@ getExploresData(params: any): Observable<any> {
       { headers }
     );
   }
+
   
   updatePerformance(performanceId:any, params: any): Observable<any> {
     const headers = new HttpHeaders({
@@ -342,8 +355,16 @@ getExploresData(params: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
   }
 
-  uploadReport(params: any): Observable<any> {
+  // Update newsletter subscription
+  updateNewsletter(params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
 
+    return this.http.post<any>(`${this.apiUrl2}/user/settings/newsletter`, params, { headers });
+  }
+
+  uploadReport(params: any): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
@@ -465,4 +486,40 @@ getExploresData(params: any): Observable<any> {
     return this.http.post(`${this.apiUrl2}user/set-featured-file`, params , {headers});
   }
   
+
+  getPerformanceReportsData(id:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    
+    return this.http.get<any>(
+      `${this.apiUrl2}get-performance-reports/${id}`, 
+      { headers }
+    );
+  }
+
+  getPerformanceList(id:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    
+    return this.http.get<any>(
+      `${this.apiUrl2}get-performance-detail/${id}`, 
+      { headers }
+    );
+  }
+
+  
+  getGalleryFiles(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery/${id}`
+    );
+  }
+
+  
+  getHighlightsFiles(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery-highlights/${id}`
+    );
+  }
 }
