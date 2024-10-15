@@ -19,7 +19,6 @@ export class UserService {
   constructor(private http: HttpClient) {
     this.apiUrl = environment?.apiUrl;
     this.userToken = localStorage.getItem('authToken');
-
   }
 
   // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
@@ -96,7 +95,27 @@ export class UserService {
       `${this.apiUrl}admin/get-favorites/${userId}`, { params }
     );
   }
-
+  
+  addFavoritesData(id: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('favorite_id', id);
+    
+    return this.http.post<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}add-favorite`, 
+      formData // directly pass formData here
+    );
+  }
+  
+  removeFavoritesData(id: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('id[]', id);
+    
+    return this.http.post<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}delete-favorites`, 
+      formData // directly pass formData here
+    );
+  }
+  
   getPurchaseData(userId:any): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}admin/get-purchase-history/${userId}`
@@ -419,4 +438,18 @@ export class UserService {
     });
     return this.http.post<any>(`${this.apiUrl2}/add-representator`, params, { headers }); 
   }
+
+  // Function to export single user data by ID
+  exportSingleUser(userId: number): Observable<any> {
+    const url = `${this.apiUrl}export-single-user/${userId}`;
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      url,{headers}
+    );
+  }
+
 }

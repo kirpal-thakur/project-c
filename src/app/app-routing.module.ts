@@ -27,6 +27,14 @@ const routes: Routes = [
         (m) => m.TalentModule
       ),
     canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+  },
+  {
+    path: 'scout',
+    loadChildren: () =>
+      import('./modules/scout/scout.module').then(
+        (m) => m.ScoutModule
+      ),
+    canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
   }
 ];
 
