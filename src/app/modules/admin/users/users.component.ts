@@ -375,7 +375,7 @@ export class UsersComponent implements OnInit {
     
 
     // this.showMessage("Call api");
-
+    this.showMessage('Users will be exported shortly.');
     try {
       //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
       this.userService.exportUsers(params).subscribe((response)=>{
@@ -392,28 +392,6 @@ export class UsersComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
 
-  }
-
-  downloadExcelFile(fileUrl:any, fileName:any){
-    this.userService.downloadExcelFile(fileUrl).subscribe(
-      (blob) => {
-        const reader = new FileReader();
-
-        // Read the blob as data URL
-        reader.onloadend = () => {
-          const link = document.createElement('a');
-          link.href = reader.result as string;
-          link.download = fileName;
-          link.click();
-        };
-
-        // Read the blob
-        reader.readAsDataURL(blob);
-      },
-      (error) => {
-        console.error('File download error:', error);
-      }
-    );
   }
 
   async download(fileUrl:any, fileName:any){
@@ -438,5 +416,5 @@ export class UsersComponent implements OnInit {
      .catch(error => {
        console.error('There was an error downloading the file:', error);
      });
- }
+  }
 }

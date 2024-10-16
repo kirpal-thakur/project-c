@@ -267,14 +267,23 @@ export class UserService {
     );
   } 
 
-  getSightings(id:any): Observable<any> {
+  getSightings(id:any, params:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}/get-sightings/${id}`, {headers}
+      `${this.apiUrl2}/get-sightings/${id}`, {params}
     );
+  }
+
+  getSingleSighting(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-sighting/${id}`);
   }
   
   uploadProfileImage(userId:any, formdata: any): Observable<any> {
@@ -436,7 +445,54 @@ export class UserService {
     );
   }
 
-  downloadExcelFile(url: string): Observable<Blob> {
-    return this.http.get(url, { responseType: 'blob' });
+  exportSingleUser(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<any>(
+      `${this.apiUrl}/export-single-user/${userId}`, {headers}
+    );
+  }
+
+  deleteSightings(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/delete-sighting`, params, { headers });
+  }
+
+  deleteAttachment(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/delete-sighting-attachment/${id}`, {headers}
+    );
+  }
+
+  getAllPlayers(): Observable<any> {
+    const params = new HttpParams()
+      .set('whereClause[role]',4)
+      .set('noLimit', true)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}admin/users`,
+      { params }
+    );
+  }
+
+  addSight(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting/${id}`, params, { headers });
   }
 }
