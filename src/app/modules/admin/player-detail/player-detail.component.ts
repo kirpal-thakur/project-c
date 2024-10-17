@@ -17,6 +17,7 @@ export class PlayerDetailComponent implements OnInit {
   user: any = {};
   // userNationalities: any = [];
   coverImage: any = "";
+  paginationData:any = {};
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -32,6 +33,7 @@ export class PlayerDetailComponent implements OnInit {
       this.userService.getProfileData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.user_data) {
           this.user = response.data.user_data; 
+          this.paginationData = response.data.pagination;
           // this.userNationalities = JSON.parse(this.user.user_nationalities);
           if(this.user.meta && this.user.meta.cover_image_path){
             this.coverImage = this.user.meta.cover_image_path;
@@ -144,6 +146,64 @@ export class PlayerDetailComponent implements OnInit {
         // this.isLoading = false;
         console.error('Error upload image:', error); 
       }
+    }
+  }
+
+  exportUser(){
+    this.userService.exportSingleUser(this.userId).subscribe((response)=>{
+      if (response && response.status) {
+        let fileUrl = response.data.file_path;
+        let fileName = response.data.file_name;
+        this.download(fileUrl, fileName);
+      } else {
+        
+      }
+    });
+  }
+
+  download(fileUrl:any, fileName:any){
+    // use the fetch/blob method because single download isn't working 
+   fetch(fileUrl)
+     .then(response => {
+       if (!response.ok) {
+         throw new Error('Network response was not ok');
+       }
+       return response.blob(); // Convert the response to a Blob object
+     })
+     .then(blob => {
+       const url = window.URL.createObjectURL(blob);
+       const anchor = document.createElement('a');
+       anchor.href = url;
+       anchor.download = fileName; // Set the filename for download
+       document.body.appendChild(anchor);
+       anchor.click();
+       window.URL.revokeObjectURL(url);
+       document.body.removeChild(anchor);
+     })
+     .catch(error => {
+       console.error('There was an error downloading the file:', error);
+     });
+  }
+
+  paginate(type:any){    
+    if(type == 'next'){
+      let slug = this.getRoleById(this.paginationData.next.role);
+      let id = this.paginationData.next.id;
+      this.router.navigate(['admin/'+slug, id]);
+    }else if(type == 'prev'){
+      let slug = this.getRoleById(this.paginationData.prev.role);
+      let id = this.paginationData.prev.id;
+      this.router.navigate(['admin/'+slug, id]);
+    } 
+  }
+
+  getRoleById(roleId:any):any {
+    if(roleId == "2"){
+      return 'club';
+    }else if(roleId == "3"){
+      return 'scout';
+    }else if(roleId == "4"){
+      return 'player';
     }
   }
 }

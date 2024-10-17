@@ -8,7 +8,15 @@
 .Favorite-parent{
     padding: 15px 20px ;
 }
-
+.invite-talent-btn{
+  background: #6FB95D;
+  color: #fff;
+  padding: 7px 24px;
+  border: none ;
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 700;
+}
 @media(max-width: 425px){
  .btn-outline-white {
    padding: 5px;
@@ -141,17 +149,56 @@ input:focus {
 body {
   font-family: Arial, sans-serif;
 }
-
-.container {
-  background-color: #f0f0f0;
-  padding: 30px;
-  border-radius: 10px;
+.sighting-bg{
+  background-color: #F8F8F8;
 }
-
-.container.p0{
-  padding: 0px 10px;
-  background: transparent;
+.edit_button button {
+  border: 1px solid #918f8f;
+  background: no-repeat;
+  padding: 5px 8px;
+  border-radius: 4px;
 }
+.edit_button button svg{
+  margin-right: 4px;
+}
+.inquire-btn{
+  padding: 6px 24px !important;
+  border-radius: 10px !important;
+}
+.text-size{
+  font-size: 20px;
+}
+.event-text{
+  font-size: 14px;
+}
+.attachment_box{
+  border: 1px solid #EFEFEF;
+  padding: 7px;
+}
+.attachment_box span{
+  font-size: 14px;
+margin-left: 6px;
+color: #111418;
+font-weight: 500;
+}
+.upload-btn{
+color: #787878;
+font-weight: 400;
+font-size: 14px;
+border: 1px solid #D9D9D9;
+border-radius: 5px;
+padding: 4px 8px;
+margin-top: 20px;
+}
+.space-box{
+  padding: 0px 11px;
+}
+// .container {
+//   background-color: #f0f0f0;
+//   padding: 30px;
+//   border-radius: 10px;
+// }
+
 .btn-primary {
   background-color: #007bff; /* Blue */
   border: none;
@@ -173,7 +220,7 @@ body {
 .btn-success {
   background-color: #28a745; /* Green */
   border: none;
-  padding: 5px 20px;
+  padding: 10px 20px;
   border-radius: 5px;
   color: white;
   font-weight: bold;
@@ -200,3 +247,70 @@ body {
 .bg-236115{
   background-color:#236115;
 }
+.invited-image{
+  border-left: 1px solid #E7E7E7;
+  padding-left: 6px;
+  margin-left: 10px;
+}
+.invited-image h2{
+  color: #787878;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 8px;
+
+}
+.invited-image_box img{
+  object-fit: cover;
+  border-radius: 50px;
+}
+.invited-image_box{
+  width: fit-content;
+  position: relative;
+}
+.invited-image_box {
+  display: flex;
+  align-items: center;
+}
+
+.invited-image_box img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; 
+  position: relative;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.invited-img-1 {
+  z-index: 4; 
+}
+
+.invited-img-2 {
+  margin-left: -15px; 
+  z-index: 3; 
+}
+
+.invited-img-3 {
+  margin-left: -15px; 
+  z-index: 2; 
+}
+
+.invited-img-4 {
+  margin-left: -15px; 
+  z-index: 1; 
+}
+
+.pointer{
+  cursor: pointer;
+}
+.back-link1{
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 12px;
+  margin-top: 1px;
+  background: #6FB95D;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 0px 5px;
+  letter-spacing: .3px;
+}
+

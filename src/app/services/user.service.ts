@@ -286,14 +286,23 @@ export class UserService {
     );
   } 
 
-  getSightings(id:any): Observable<any> {
+  getSightings(id:any, params:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}/get-sightings/${id}`, {headers}
+      `${this.apiUrl2}/get-sightings/${id}`, {params}
     );
+  }
+
+  getSingleSighting(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}/get-sighting/${id}`);
   }
   
   uploadProfileImage(userId:any, formdata: any): Observable<any> {
@@ -439,17 +448,70 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl2}/add-representator`, params, { headers }); 
   }
 
-  // Function to export single user data by ID
-  exportSingleUser(userId: number): Observable<any> {
-    const url = `${this.apiUrl}export-single-user/${userId}`;
+  exportUsers(data: any): Observable<any> {
+
+    let params = new HttpParams();  
+    // Loop through the queryParams object and set each parameter
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        params = params.set(key, data[key]);
+      }
+    }
     
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl2}/export-users?noLimit=1`,
+      { params }
+    );
+  }
+
+  exportSingleUser(userId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<any>(
+      `${this.apiUrl}/export-single-user/${userId}`, {headers}
+    );
+  }
+
+  deleteSightings(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
 
+    return this.http.post<any>(`${this.apiUrl2}/delete-sighting`, params, { headers });
+  }
+
+  deleteAttachment(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      url,{headers}
+      `${this.apiUrl2}/delete-sighting-attachment/${id}`, {headers}
     );
   }
 
+  getAllPlayers(): Observable<any> {
+    const params = new HttpParams()
+      .set('whereClause[role]',4)
+      .set('noLimit', true)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}admin/users`,
+      { params }
+    );
+  }
+
+  addSight(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting/${id}`, params, { headers });
+  }
 }

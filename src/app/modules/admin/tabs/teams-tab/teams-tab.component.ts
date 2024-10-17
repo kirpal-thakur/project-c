@@ -15,6 +15,7 @@ export class TeamsTabComponent {
   view: string = "team";
   displayedColumns: string[] = ['Player Name', 'Joining Date', 'Exit Date', 'Location','Edit'];
   isLoading:boolean = false;
+  selectedTeam:any = "";
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router){}
 
 
@@ -44,7 +45,8 @@ export class TeamsTabComponent {
     }
   }
 
-  getTeamPlayers(teamId:any){
+  getTeamPlayers(teamId:any, teamName:any){
+    this.selectedTeam = teamName;
     this.view = 'player';
     this.isLoading = true;
     try {
@@ -62,6 +64,11 @@ export class TeamsTabComponent {
       this.isLoading = false;
       console.error('Error fetching users:', error);  
     }
+  }
+
+  backToTeamView(){
+    this.view = 'team';
+    this.players = [];
   }
 
   navigate(playerId:any){
