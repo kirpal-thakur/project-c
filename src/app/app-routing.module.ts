@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { NonAuthGuard } from './services/non.guard';
+import { SuccessComponent } from './modules/shared/success/success.component';
+import { CancelComponent } from './modules/shared/cancel/cancel.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,9 @@ const routes: Routes = [
         (m) => m.ScoutModule
       ),
     canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
-  }
+  },
+  { path: 'success', component: SuccessComponent },
+  { path: 'cancel', component: CancelComponent },
 ];
 
 @NgModule({

@@ -49,12 +49,12 @@
                        </button>
                     </span>
                     <span class="icon-bg">             
-                      <button *ngIf="isFavorite" (click)="removeFromFavorites(user.id)">
+                      <button *ngIf="!isFavorite" (click)="addToFavorites(user.id)">
                         <svg  width="22" height="22" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0.25 0.75H13.75V18L7 12.9375L0.25 18V0.75ZM1.75 2.25V15L7 11.0625L12.25 15V2.25H1.75Z" fill="#FF0000"/> <!-- Filled favorite icon -->
+                          <path d="M0.25 0.75H13.75V18L7 12.9375L0.25 18V0.75ZM1.75 2.25V15L7 11.0625L12.25 15V2.25H1.75Z" fill="#000"/> <!-- Filled favorite icon -->
                         </svg>  
                       </button>       
-                      <button  *ngIf="!isFavorite"  (click)="addToFavorites(user.id)" class="fgkd">
+                      <button  *ngIf="isFavorite"  (click)="removeFromFavorites(user.id)" class="fgkd">
                         <svg width="22" height="22" 
                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M0 512V48C0 21.5 21.5 0 48 0h288c26.5 0 48 21.5 48 48v464L192 400 0 512z"/></svg>
                       </button>
@@ -85,7 +85,6 @@
                     </div>
                   </div>
                     <div class="col-lg-3 p-0 edit_button responsive-edit_btn">
-
                     </div>
                     <!-- <small>{{user.role_name}}</small> -->
                   </div>

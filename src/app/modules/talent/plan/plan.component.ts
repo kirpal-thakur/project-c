@@ -44,8 +44,26 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.fetchPlans();
-    this.getUserCards();
+    // this.getUserCards();
     this.stripe = await this.talentService.getStripe();
+  }
+  
+  async redirectToCheckout(planId: string) {
+    console.log(planId)
+    const stripe = await this.stripe;
+
+    stripe?.redirectToCheckout({
+      lineItems: [{ price: planId, quantity: 1 }],  // Ensure 'price' is a valid string
+      mode: 'subscription',
+      successUrl: window.location.origin + '/success',
+      cancelUrl: window.location.origin + '/cancel',
+    }).then((result: any) => {
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    }).catch((error: any) => {
+      console.error('Stripe Checkout Error:', error);
+    });
   }
 
   ngOnDestroy() {

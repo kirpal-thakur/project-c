@@ -55,14 +55,12 @@ import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-tran
 import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
-import { NgxStripeModule } from 'ngx-stripe';
 import { AddCardComponent } from './membership/add-card/add-card.component';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { PerformanceDetailsComponent } from './view-user/tabs/performance-details/performance-details.component';
 import { GeneralDetailsComponent } from './view-user/tabs/general-details/general-details.component';
 import { TransferDetailsComponent } from './view-user/tabs/transfer-details/transfer-details.component';
 import { GalleryComponent } from './view-user/tabs/gallery/gallery.component';
-import { environment } from '../../../environments/environment';
 import { PerformanceReportComponent } from './view-user/tabs/performance-report/performance-report.component';
 
 @NgModule({
@@ -136,7 +134,6 @@ import { PerformanceReportComponent } from './view-user/tabs/performance-report/
     MatTableModule,
     MatPaginator,
     NgxEditorModule,    
-    NgxStripeModule.forRoot(environment.stripePublishableKey)
   ]
 })
 export class TalentModule { }

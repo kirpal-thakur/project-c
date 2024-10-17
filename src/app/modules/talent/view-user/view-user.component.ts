@@ -62,7 +62,7 @@ export class ViewUserComponent implements OnInit {
           this.coverImage = this.user.meta.cover_image_path || this.coverImage;
 
           // Set isFavorite status based on user data or API response
-          this.isFavorite = this.user.is_favorite; // Assuming API returns this
+          this.isFavorite = this.user.marked_favorite; // Assuming API returns this
         } else {
           console.error('Invalid API response structure:', response);
         }

@@ -13,7 +13,7 @@
     width: 58px;
     background: gainsboro;
     -webkit-appearance: none;
-    height: 32px;
+    height: 31px;
     background: #ccc;
     outline: none;
     border-radius: 30px;
@@ -22,7 +22,7 @@
 }
 .subscription-switch input[type="checkbox"]:checked{
     background:#329b1a;
-    }
+}
 
   
 .subscription-switch input[type="checkbox"]:before{
@@ -36,16 +36,16 @@
     border-radius: 50%;
     top: 6px;
     transform: scale(1.1);transition: 0.5s;
-    }
+}
     
 .subscription-switch input[type="checkbox"]:checked:before{
     left:30px;
-    }
-    .subscription-plan h2 {
-        font-size: 20px;
-        color: #707070;
-        font-weight: 600;
-    }
+}
+.subscription-plan h2 {
+    font-size: 20px;
+    color: #707070;
+    font-weight: 600;
+}
 .subscription-plan{
     padding: 15px 20px;
     background: #ebffeb;
@@ -129,7 +129,7 @@ sub.premium-month_title {
     text-decoration: line-through;
   }
   
-  .premium_list li.checked::before {
+.premium_list li.checked::before {
     content: '';
     position: absolute;
     border-color: #fff;
@@ -140,61 +140,61 @@ sub.premium-month_title {
     transform: rotate(45deg);
     height: 15px;
     width: 7px;
-  }
+}
+    
+.premium_list label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 17px;
+    color: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
   
-  .premium_list label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 20px;
-      cursor: pointer;
-      font-size: 17px;
-      color: #fff;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-  }
-  
-  .premium_list label input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-  }
+.premium_list label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
 
-  .premium_list label .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 24px;
-      width: 24px;
-      border: 1px solid #2196F3;
-      border-radius: 50%
-  }
-  
-  .premium_list label:hover input ~ .checkmark {
-      background-color: #ccc;
-  }
-  
-  .premium_list label input:checked ~ .checkmark {
-      background-color: #fff;
-      border: 1px solid #2196F3;
-  }
-  
-  .premium_list label .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-  }
-  
-  .premium_list label input:checked ~ .checkmark:after {
-      display: block;
-  }
-  .premium_list {
+.premium_list label .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border: 1px solid #2196F3;
+    border-radius: 50%
+}
+
+.premium_list label:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.premium_list label input:checked ~ .checkmark {
+    background-color: #fff;
+    border: 1px solid #2196F3;
+}
+
+.premium_list label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.premium_list label input:checked ~ .checkmark:after {
+    display: block;
+}
+.premium_list {
     list-style: none;
     padding: 0;
 }
-  .premium_list label .checkmark:after {
+.premium_list label .checkmark:after {
     left: 9px;
     top: 5px;
     width: 6px;
@@ -204,10 +204,9 @@ sub.premium-month_title {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
-  
+}
 
-  .quantity {
+.quantity {
     display: flex;
     background: rgb(96, 182, 110);
     background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
@@ -215,9 +214,9 @@ sub.premium-month_title {
     overflow: hidden;
     border: 1px solid #2a822a;
     justify-content: space-between;
-  }
-  
-  .quantity button {
+}
+
+.quantity button {
     background: none;
     color: #044a0f;
     border: none;
@@ -227,9 +226,9 @@ sub.premium-month_title {
     height: auto;
     text-align: center;
     transition: background-color 0.2s;
-  }
-  
-  .input-box {
+}
+
+.input-box {
     width: 40px;
     text-align: center;
     border: none;
@@ -238,18 +237,18 @@ sub.premium-month_title {
     font-size: 16px;
     outline: none;
     background: none;
-  }
+}
   
-  .input-box::-webkit-inner-spin-button,
-  .input-box::-webkit-outer-spin-button {
+.input-box::-webkit-inner-spin-button,
+.input-box::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-  
-  .input-box[type="number"] {
+}
+
+.input-box[type="number"] {
     -moz-appearance: textfield;
-  }
-  .premium-gap{
+}
+.premium-gap{
     gap: 10px;
 }
 .multi-country-select option{
@@ -287,6 +286,5 @@ sub.premium-month_title {
     }
     .multi-country-select{
         row-gap: 10px;
-    }
-    
+    }    
 }

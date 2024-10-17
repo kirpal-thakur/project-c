@@ -15,35 +15,16 @@ export class TalentService {
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
   private stripe!: any;
-  private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
+  stripePromise: Promise<Stripe | null>;
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
+    this.stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
   }
 
   async getStripe() {
     return await this.stripePromise;
-  }
-
-  // Initialize Stripe.js with your publishable key
-  async initializeStripe() {
-    this.stripe = await loadStripe(environment.stripePublishableKey); // Use your Stripe Publishable Key
-    return this.stripe;
-  }
-
-  // Create a payment method using Stripe.js
-  async createPaymentMethod(card: StripeCardElement) {
-    return this.stripe.createPaymentMethod({
-      type: 'card',
-      card: card,
-    });
-  }
-
-  // Call the backend to create a customer
-  createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
-    // Replace with your CodeIgniter backend API URL
-    return this.http.post('http://your-backend-url/create-customer', { email, name, paymentMethodId });
   }
 
   getProfileData(userId: any): Observable<any> {
