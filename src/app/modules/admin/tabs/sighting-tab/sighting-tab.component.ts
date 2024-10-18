@@ -6,6 +6,7 @@ import { CreateSightPopupComponent } from '../create-sight-popup/create-sight-po
 import { MatPaginator } from '@angular/material/paginator';
 import { InviteTalentPopupComponent } from '../invite-talent-popup/invite-talent-popup.component';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { UploadAttachmentComponent } from '../upload-attachment/upload-attachment.component';
 @Component({
   selector: 'app-sighting-tab',
   templateUrl: './sighting-tab.component.html',
@@ -32,6 +33,7 @@ export class SightingTabComponent {
   playersInvitedFirstFour: any = [];
   
   attachments:any = [];
+  viewSightId:any = "";
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, public dialog: MatDialog) { }
   
   ngOnInit(): void {
@@ -193,10 +195,56 @@ export class SightingTabComponent {
     });
   }
 
+  editSight(sightData:any, playersInvited:any){
+    const editDialog = this.dialog.open(CreateSightPopupComponent,{
+      width: '750px',
+      position: {
+        top:'70px'
+      },
+      data: {
+        clubId: this.userId,
+        sightData: sightData,
+        invitees: playersInvited
+      }
+    })
+
+    editDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "updated"){
+          this.viewSight(result.id);
+          this.showMatDialog("Sighting updated successfully", 'display');
+        }
+         console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  uploadAttachment(){
+    const uploadDialog = this.dialog.open(UploadAttachmentComponent,{
+      width: '650px',
+      position: {
+        top:'70px'
+      },
+      data: {
+        id: this.viewSightId
+      }
+    })
+
+    uploadDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "added"){
+          this.viewSight(result.id);
+          this.showMatDialog("Attachment(s) added successfully", 'display');
+        }
+        //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
   viewSight(id:any){
     this.view = 'detail';
     this.isLoading = true;
-
+    this.viewSightId = id;
     this.userService.getSingleSighting(id).subscribe((response)=>{
       if (response && response.status && response.data) {
         this.sightingData = response.data.sighting;
@@ -211,7 +259,7 @@ export class SightingTabComponent {
     });
   }
 
-  inviteTalentsPopup(){
+  inviteTalentsPopup(eventName:any){
     const inviteDialog = this.dialog.open(InviteTalentPopupComponent,{
       width: '700px',
       height:'530px',
@@ -219,11 +267,38 @@ export class SightingTabComponent {
         top:'70px'
       },
       data: {
-        
+        action: "inviteUsers",
+        data: eventName,
+        sightId: this.viewSightId
       }
     })
 
     inviteDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        console.log(result)
+        if(result.action == "added"){
+          this.viewSight(result.id);
+          this.showMatDialog("Players invited successfully", 'display')
+        }
+         console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  viewInvitees(players:any){
+    const inviteesDialog = this.dialog.open(InviteTalentPopupComponent,{
+      width: '700px',
+      height:'530px',
+      position: {
+        top:'70px'
+      },
+      data: {
+        action: "showInvitedUsers",
+        data: players
+      }
+    })
+
+    inviteesDialog.afterClosed().subscribe(result => {
       if (result !== undefined) {
          console.log('Dialog result:', result);
       }
@@ -313,5 +388,13 @@ export class SightingTabComponent {
         
       }
     );
+  }
+
+  getImageUrl(url:any){
+    if(url){
+      return url;
+    }else{
+      return "../../../../../assets/images/1.jpg";
+    }
   }
 }

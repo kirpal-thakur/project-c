@@ -373,7 +373,7 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}/get-club-teams/${clubId}`, {headers}
+      `${this.apiUrl}get-club-teams/${clubId}`, {headers}
     );
   }
 
@@ -494,5 +494,32 @@ export class UserService {
     });
 
     return this.http.post<any>(`${this.apiUrl2}/add-sighting/${id}`, params, { headers });
+  }
+
+  updateSight(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/edit-sighting-detail/${id}`, params, { headers });
+  }
+
+  uploadSightAttachment(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting-attachments/${id}`, params, { headers });
+  }
+
+  sendSightingInvite(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting-invites/${id}`, params, { headers });
   }
 }

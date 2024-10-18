@@ -75,7 +75,9 @@ import { TeamMembersComponent } from './setting/team-members/team-members.compon
 import { UserEditPopupComponent } from './user-edit-popup/user-edit-popup.component';
 import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
 import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-popup.component';
-  
+import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
+import { NgxDatepickerModule } from '@handylib/ngx-datepicker';
+
 @NgModule({
   declarations: [
     IndexComponent,
@@ -130,7 +132,8 @@ import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-
     TeamMembersComponent,
     UserEditPopupComponent,
     AddRepresentatorPopupComponent,
-    CommonFilterPopupComponent
+    CommonFilterPopupComponent,
+    UploadAttachmentComponent
   ],
   imports: [
     CommonModule,
@@ -152,7 +155,8 @@ import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-
     MatTableModule,
     MatPaginator,
     NgxEditorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxDatepickerModule
   ],
   providers: [UserService]
 })

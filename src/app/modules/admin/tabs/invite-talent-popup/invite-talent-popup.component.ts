@@ -19,28 +19,38 @@ export class InviteTalentPopupComponent {
   users:any = [];
   allUsers:any = [];
   @ViewChild("userInput") userInput!: ElementRef;
-
+  action:any = "";
+  invitedUsers:any = [];
+  eventName:any = "";
+  sightId:any = "";
   constructor(
     private userService: UserService,
     private talentService: TalentService,
     public dialogRef: MatDialogRef<InviteTalentPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+    console.log(data);
+    this.action = data.action;
+    if(this.action == "showInvitedUsers"){
+      this.invitedUsers = data.data
+    }else if(this.action == "inviteUsers"){
+      this.eventName = data.data;
+      this.sightId = data.sightId;
+    }
+  }
 
-  ngOnInit(): void { 
-    this.fetchUsers();
+  ngOnInit(): void {
+    this.fetchPlayers();
   }
  
-  async fetchUsers(): Promise<void> {
+  async fetchPlayers(): Promise<void> {
     try {
-      //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
-       this.talentService.getAllUses().subscribe((response)=>{
+      this.userService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
-          this.allUsers = response.data.userData.users; 
-        
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
+          this.allUsers = response.data.userData; 
+          } else {
+            console.error('Invalid API response structure:', response);
+          }
         });     
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -52,8 +62,31 @@ export class InviteTalentPopupComponent {
     this.dialogRef.close();
   }
 
-  startChat(){
-    this.dialogRef.close({ data: this.users });
+  sendInvite(){
+    const formData = new FormData();  
+    this.users.map(function(user:any) {
+      formData.append('invites[]', user.id);
+    });
+
+    this.userService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
+      if (response && response.status) {
+        this.dialogRef.close({
+          action: 'added',
+          id: this.sightId
+        });
+      
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });     
+  }
+
+  onKeyPress(event: any){
+    let keyword = event.target.value;
+    console.log(keyword); // You can use this to see the current input value
+
+    this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  && 
+      user.first_name.toLowerCase().indexOf(keyword.toLowerCase()) != -1);
   }
 
   onClickOutside() {

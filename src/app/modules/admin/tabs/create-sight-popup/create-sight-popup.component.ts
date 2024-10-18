@@ -23,8 +23,8 @@ export class CreateSightPopupComponent implements AfterViewInit {
   allUsers:any = [];
   hideInviteeOverlay: boolean = true;
   @ViewChild("userInput") userInput!: ElementRef;
-  defaultDate: Date = new Date();
-
+  defaultDate:any = "";
+  idToBeUpdate: any = "";
   eventName:any = "";
   managerName:any = "";
   date:any = "";
@@ -34,6 +34,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
   about:any = "";
   bannerFile:any = "";
   clubId:any = '';
+  dateTime:any = "";
   attachmentRows:any = [{
     title: "",
     file: ""
@@ -42,21 +43,42 @@ export class CreateSightPopupComponent implements AfterViewInit {
   constructor(public dialogRef : MatDialogRef<CreateSightPopupComponent>, public userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      this.clubId = data.clubId
+      this.clubId = data.clubId;
+
+      if(data.sightData){
+        this.eventName = data.sightData.event_name;
+        this.managerName = data.sightData.manager_name;
+        this.date = data.sightData.event_date;
+        this.dateTime = this.reverseDateFormat(data.sightData.event_date, data.sightData.event_time);
+        this.address = data.sightData.address;
+        this.zipcode = data.sightData.zipcode;
+        this.city = data.sightData.city;
+        this.about = data.sightData.about_event;
+        this.idToBeUpdate = data.sightData.id;
+      }
   }
   ngAfterViewInit() {
   }
 
   // triggerFileInput(): void {
   //   this.fileInputElement.nativeElement.click();  
-  // }
+  // } 
 
   ngOnInit(): void {
     try {
        this.userService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
           this.allUsers = response.data.userData; 
-          console.log(this.allUsers)
+          if(this.data.invitees){
+            let tempInvitees:any = [];
+            this.data.invitees.map((i:any) => {
+              let index = this.allUsers.findIndex((x:any) => i.user_id == x.id);
+              if(index >= 0){
+                tempInvitees.push(this.allUsers[index]);
+              }
+            })
+            this.users = tempInvitees;
+          }
         } else {
           console.error('Invalid API response structure:', response); 
         }
@@ -157,60 +179,54 @@ export class CreateSightPopupComponent implements AfterViewInit {
     this.hideInviteeOverlay = true;
   }
 
-  onDateChange(event: MatDatepickerInputEvent<Date>): void {
+  /*onDateChange(event: any): void {
+    
     const selectedDate = event.value;
-    let date = this.formatDate(selectedDate);
-    this.date = date;
+    console.log(event)
+    console.log(selectedDate)
+    // let date = this.formatDate(selectedDate);
+    // this.date = date;
+  }*/
+
+  formatDate(dateTime:any) {
+    const year = dateTime.getFullYear();
+    const month = String(dateTime.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(dateTime.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
-  formatDate(date:any) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+  reverseDateFormat(date:any, time:any){
+
+    let dateArr = date.split('-');
+
+    return `${dateArr[1]}-${dateArr[2]}-${dateArr[0]} ${time}`;
+  }
+
+  getDateTimeFormat(dateTimeString:any){
+    let arr = dateTimeString.split(' ');
+    let dateArr = arr[0].split('-');
+
+    const formattedDate = `${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`;
+    const formattedTime = `${arr[1]} ${arr[2]}`;
+    return {
+      date: formattedDate,
+      time: formattedTime
+    }; 
   }
 
   createSight(){
 
-    let invitees:any = [];
-
-    
-    
-    console.log(invitees)
-    // let attachments:any = [];
-    // this.attachmentRows.map(function(attachment:any) {
-    //   let row:any = []
-    //   row['title'] = attachment.title;
-    //   row['file'] = attachment.file;
-    //   attachments.push(row);
-    // });
-
-    // console.log(attachments);
-    /*let params:any = {};
-
-    params.event_name = this.eventName;
-    params.manager_name = this.managerName;
-    params.event_date = this.dateTime;
-    params.event_time = this.dateTime;
-    params.address = this.address;
-    params.zipcode = this.zipcode;
-    params.city = this.city;
-    params.about_event = this.about;
-    params.banner = this.bannerFile;
-    params.attachment = this.attachmentRows;
-    params.invites = invitees;*/
-
     const formData = new FormData();
+    let { date, time } = this.getDateTimeFormat(this.dateTime);
     formData.append('event_name', this.eventName);
     formData.append('manager_name', this.managerName);
-    formData.append('event_date', this.date);
-    formData.append('event_time', "10:20 AM");
+    formData.append('event_date', date);
+    formData.append('event_time', time);
     formData.append('address', this.address);
     formData.append('zipcode', this.zipcode);
     formData.append('city', this.city);
     formData.append('about_event', this.about);
     formData.append('banner', this.bannerFile);
-    // formData.append('invites', invitees);
 
     this.attachmentRows.map(function(attachment:any, index:any) {
       formData.append('attachments['+index+'][title]', attachment.title);
@@ -227,6 +243,50 @@ export class CreateSightPopupComponent implements AfterViewInit {
        if (response && response.status) {
          this.dialogRef.close({
           action: 'added'
+         })
+       } else {
+         console.error('Invalid API response structure:', response); 
+       }
+     });     
+   } catch (error) {
+     console.error('Error:', error);
+   }
+
+  }
+
+
+  updateSight(){
+
+    const formData = new FormData();
+    formData.append('event_name', this.eventName);
+    formData.append('manager_name', this.managerName);
+    formData.append('event_date', this.date);
+    formData.append('event_time', "10:20 AM");
+    formData.append('address', this.address);
+    formData.append('zipcode', this.zipcode);
+    formData.append('city', this.city);
+    formData.append('about_event', this.about);
+
+    if(this.bannerFile != ""){
+      formData.append('banner', this.bannerFile);
+    }
+    
+    // this.attachmentRows.map(function(attachment:any, index:any) {
+    //   formData.append('attachments['+index+'][title]', attachment.title);
+    //   formData.append('attachments['+index+'][file]', attachment.file);
+    // });
+
+    this.users.map(function(user:any) {
+      formData.append('invites[]', user.id);
+    });
+    
+    try {
+      this.userService.updateSight(this.idToBeUpdate, formData).subscribe((response)=>{
+        console.log(response)
+       if (response && response.status) {
+         this.dialogRef.close({
+          action: 'updated',
+          id: this.idToBeUpdate
          })
        } else {
          console.error('Invalid API response structure:', response); 
