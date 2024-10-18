@@ -4,7 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditPlanComponent } from '../edit-plan/edit-plan.component';
 import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
+import { environment } from '../../../../environments/environment';
 import { StripeService } from 'ngx-stripe';
+import { PaymentService } from '../../../services/payment.service';
 
 interface Plan {
   id: number;
@@ -35,17 +37,42 @@ export class PlanComponent implements OnInit, OnDestroy {
   userCards: any;
   defaultCard: any; // Variable to hold the default card
   stripe:any;
-  
+  loggedInUser:any = localStorage.getItem('userData');
 
   private plansSubscription: Subscription = new Subscription();
-  stripePromise = loadStripe('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a'); // Your Stripe public key
+  stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
 
-  constructor(private talentService: TalentService, public dialog: MatDialog) {}
+  constructor(private talentService: TalentService, private stripeService:PaymentService, public dialog: MatDialog) {}
 
   async ngOnInit() {
     this.fetchPlans();
-    this.getUserCards();
-    this.stripe = await this.talentService.getStripe();
+    // this.getUserCards();
+    this.stripe = await this.stripeService.getStripe();
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+
+  }
+  
+  async redirectToCheckout(planId: string) {
+    console.log(planId)
+    const stripe = await this.stripe;
+
+    stripe?.redirectToCheckout({
+      lineItems: [{ price: planId, quantity: 1 }],  // Ensure 'price' is a valid string
+      mode: 'subscription',
+      successUrl: window.location.origin + '/success',
+      cancelUrl: window.location.origin + '/cancel',
+      customerEmail: this.loggedInUser.email,
+      metadata: {
+        clientReferenceId: String(this.loggedInUser.id)
+      },
+      // Convert the user ID to a string
+    }).then((result: any) => {
+      if (result.error) {
+        console.error(result.error.message);
+      }
+    }).catch((error: any) => {
+      console.error('Stripe Checkout Error:', error);
+    });
   }
 
   ngOnDestroy() {
@@ -176,10 +203,10 @@ export class PlanComponent implements OnInit, OnDestroy {
     if (plan.quantity < this.maxQuantity) plan.quantity++;
   }
 
-  editPlanPopup(id: number) {
+  editPlanPopup(plans:any,) {
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
-      data: { planId: id }
+      data: { plans: plans }
     });
   }
 

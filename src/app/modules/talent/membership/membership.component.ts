@@ -68,7 +68,6 @@ export class MembershipComponent {
     });
   }
 
-  
   // Fetch purchases from API with pagination parameters
   getUserCards(): void {
     this.talentService.getCards().subscribe(response => {

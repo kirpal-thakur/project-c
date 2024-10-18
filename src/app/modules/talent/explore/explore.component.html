@@ -8,7 +8,7 @@
               <tr class="explore-inputs">
                 <!-- Talent Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{ 'Talent' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedRole" (selectionChange)="applyFilter()" id="roles" name="role">
@@ -20,7 +20,7 @@
         
                 <!-- Country Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{ 'Country' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedCountry" (selectionChange)="applyFilter()" id="country" name="country">
@@ -32,7 +32,7 @@
         
                 <!-- Position Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'Position' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedPositions" (selectionChange)="applyFilter()" id="position" name="position" multiple>
@@ -44,7 +44,7 @@
         
                 <!-- Age Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'Age' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedAge" (selectionChange)="applyFilter()" id="age" name="age" multiple>
@@ -56,7 +56,7 @@
         
                 <!-- Foot Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'Foot' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedFoot" (selectionChange)="applyFilter()" id="foot" name="foot" multiple>
@@ -70,7 +70,7 @@
         
                 <!-- Top Speed Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'Top Speed' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedTopSpeed" (selectionChange)="applyFilter()" id="top-speed" name="topSpeed">
@@ -86,7 +86,7 @@
         
                 <!-- League Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'League' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedLeague" (selectionChange)="applyFilter()" id="league" name="league">
@@ -98,7 +98,7 @@
         
                 <!-- Club Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'Club' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedClub" (selectionChange)="applyFilter()" id="club" name="club">
@@ -142,115 +142,18 @@
                 </button>
               </span>
             </div>
-          </div>
-          
-          <!-- <div class="chip">
-            <span>Pos: Goalkeeper, Center back</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Age: 15, 16</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Foot: Left, Right</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Top Speed: 20-25 km/h</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>League: Challenge League</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Club: FC Thun</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Club: FC Thun</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div>
-          <div class="chip">
-            <span>Club: FC Thun</span>
-            <span>
-              <button class="explore-chip_cut">
-                <svg width="13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                  <path
-                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                  </path>
-                </svg>
-              </button>
-            </span>
-          </div> -->
+          </div>          
         </div>
 
         <div class="explore-box_images mt-3">
           <div class="row player-image-list ">
             <div class="col-lg-2"  *ngFor="let player of players">
-              <div class="image_box"  [ngClass]="{'booster_box': player.package_name=='booster'}">
+              <div class="image_box pointer"  [ngClass]="{'booster_box': player.package_name=='booster'}" >
                 <div class="player_img">
                   <img [src]="player.meta.profile_image_path" alt="player-image">
                 </div>
-                <div class="player-names">
-                  <a href="#">{{player.first_name}}</a>
+                <div class="player-names cursor-pointer" (click)="redirectUser(player.role_name, player.id)">
+                  <a >{{player.first_name}}</a>
                 </div>
                 <div class="player-team-logo">
                   <div class="team-logo-bg">

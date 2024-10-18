@@ -35,7 +35,7 @@
     margin-left: 8px;
 }
 .image_box{
-	background: #cdd8d6;
+    background: #CACACA;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -159,6 +159,15 @@
 .mat-mdc-paginator-page-size {
     display: flex !important;
 }
+.explore-all_input mat-form-field .mat-mdc-form-field-infix{
+    width: 100% !important;
+}
+.explore-all_input mat-form-field{
+    width: 100%;
+}
+.explore-all_input .mat-mdc-form-field-infix{
+    width: 100% !important;
+  }
 
 @media (max-width:1024px) {
     .explore-table{
