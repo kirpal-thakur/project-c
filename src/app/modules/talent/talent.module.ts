@@ -56,12 +56,6 @@ import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/ad
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
-import { ViewUserComponent } from './view-user/view-user.component';
-import { PerformanceDetailsComponent } from './view-user/tabs/performance-details/performance-details.component';
-import { GeneralDetailsComponent } from './view-user/tabs/general-details/general-details.component';
-import { TransferDetailsComponent } from './view-user/tabs/transfer-details/transfer-details.component';
-import { GalleryComponent } from './view-user/tabs/gallery/gallery.component';
-import { PerformanceReportComponent } from './view-user/tabs/performance-report/performance-report.component';
 
 @NgModule({
   declarations: [
@@ -103,12 +97,6 @@ import { PerformanceReportComponent } from './view-user/tabs/performance-report/
     EditHighlightsComponent,
     PlanComponent,
     AddCardComponent,
-    ViewUserComponent,
-    PerformanceDetailsComponent,
-    GeneralDetailsComponent,
-    TransferDetailsComponent,
-    GalleryComponent,
-    PerformanceReportComponent
   ],
   imports: [
     CommonModule,

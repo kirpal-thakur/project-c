@@ -1,4 +1,4 @@
-import { Component, Input, Output ,EventEmitter} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../../services/user.service';
 import { TalentService } from '../../../../../services/talent.service';
@@ -51,4 +51,3 @@ export class GalleryComponent {
   }
 
 }
-

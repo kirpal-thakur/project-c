@@ -1,15 +1,15 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { MatDialog } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-view-user',
-  templateUrl: './view-user.component.html',
-  styleUrls: ['./view-user.component.scss']
+  selector: 'app-view-profile',
+  templateUrl: './view-profile.component.html',
+  styleUrl: './view-profile.component.scss'
 })
-export class ViewUserComponent implements OnInit {
+export class ViewProfileComponent implements OnInit {
   loggedInUser: any = localStorage.getItem('userData');
   activeTab: string = 'profile';
   userId: any;

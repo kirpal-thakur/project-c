@@ -23,8 +23,7 @@
 .subscription-switch input[type="checkbox"]:checked{
     background:#329b1a;
 }
-
-  
+ 
 .subscription-switch input[type="checkbox"]:before{
     content: '';
     position: absolute;
@@ -40,6 +39,16 @@
     
 .subscription-switch input[type="checkbox"]:checked:before{
     left:30px;
+}
+.choose-plan-select {
+    width: 100%;
+    padding: 11px 8px;
+    border: none;
+    border: 1px solid #2a822a;
+    color: #fff;
+    border-radius: 6px;
+    background: rgb(96, 182, 110);
+    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
 }
 .subscription-plan h2 {
     font-size: 20px;
@@ -166,8 +175,8 @@ sub.premium-month_title {
     position: absolute;
     top: 0;
     left: 0;
-    height: 24px;
-    width: 24px;
+    height: 25px;
+    width: 26px;
     border: 1px solid #2196F3;
     border-radius: 50%
 }

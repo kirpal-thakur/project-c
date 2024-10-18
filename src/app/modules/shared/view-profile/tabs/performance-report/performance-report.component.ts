@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './performance-report.component.html',
   styleUrl: './performance-report.component.scss'
 })
-export class PerformanceReportComponent implements OnInit {
+export class PerformanceReportComponent  implements OnInit {
 
   reports: Report[] = [];
   errorMessage: string | null = null;

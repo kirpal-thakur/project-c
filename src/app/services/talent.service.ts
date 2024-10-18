@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
-import { loadStripe, StripeCardElement, StripeElements, Stripe } from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +13,10 @@ export class TalentService {
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
-  private stripe!: any;
-  stripePromise: Promise<Stripe | null>;
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
-    this.stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
-  }
-
-  async getStripe() {
-    return await this.stripePromise;
   }
 
   getProfileData(userId: any): Observable<any> {

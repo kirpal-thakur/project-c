@@ -26,8 +26,6 @@ export class PerformanceDetailsComponent {
   }
   loggedInUser:any = localStorage.getItem('userData');
 
-  // from_date:2021-01-01
-  //   to_date:2022-01-01
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog) { }
   
   ngOnInit(): void {
@@ -68,13 +66,17 @@ export class PerformanceDetailsComponent {
   updateRow(key:any, value:any){
     this.dataTOBeUpdated[key] = value;
   }
-
+  
   calculateDateRange(performance_detail: any): string {
-
     const fromDate = new Date(performance_detail.from_date);
     const toDate = performance_detail.to_date === '0000-00-00'
       ? new Date() // Current date for "Present"
       : new Date(performance_detail.to_date);
+  
+    // Check if fromDate or toDate is invalid
+    if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
+      return '-'; // Return '-' if either date is invalid
+    }
   
     let years = toDate.getFullYear() - fromDate.getFullYear();
     let months = toDate.getMonth() - fromDate.getMonth();
@@ -104,4 +106,5 @@ export class PerformanceDetailsComponent {
   }
   
 }
+
 

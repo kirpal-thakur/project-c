@@ -60,7 +60,7 @@ export class ExploreComponent implements OnInit {
   }
 
   redirectUser(slug:string, id:Number): void {
-    let pageRoute = 'talent/'+slug.toLowerCase();
+    let pageRoute = 'view/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
 

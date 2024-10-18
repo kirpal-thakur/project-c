@@ -189,11 +189,15 @@ export class PerformanceTabComponent {
   }
 
   calculateDateRange(performance_detail: any): string {
-
     const fromDate = new Date(performance_detail.from_date);
     const toDate = performance_detail.to_date === '0000-00-00'
       ? new Date() // Current date for "Present"
       : new Date(performance_detail.to_date);
+  
+    // Check if fromDate or toDate is invalid
+    // if (isNaN(fromDate.getTime()) || isNaN(toDate.getTime())) {
+    //   return '-'; // Return '-' if either date is invalid
+    // }
   
     let years = toDate.getFullYear() - fromDate.getFullYear();
     let months = toDate.getMonth() - fromDate.getMonth();
@@ -213,7 +217,7 @@ export class PerformanceTabComponent {
       ? 'Present' 
       : toDate.toLocaleString('default', { month: 'long', year: 'numeric' });
   
-    let dateRange = `${fromDateString} - ${toDateString}`;
+    let dateRange = `${fromDateString ?? '-'} - ${toDateString ?? '-'}`;
   
     if (displayYears > 0 || displayMonths > 0) {
       dateRange += ` (${displayYears} yr ${displayMonths} mos)`;
@@ -221,6 +225,7 @@ export class PerformanceTabComponent {
   
     return dateRange;
   }
+  
   
 }
 

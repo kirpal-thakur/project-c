@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TalentService } from '../../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -86,4 +85,5 @@ export class TransferDetailsComponent {
     return `${year}-${month}-${day}`;
   }
 }
+
 
