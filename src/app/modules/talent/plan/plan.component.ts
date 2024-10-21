@@ -5,7 +5,6 @@ import { EditPlanComponent } from '../edit-plan/edit-plan.component';
 import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../../../environments/environment';
-import { StripeService } from 'ngx-stripe';
 import { PaymentService } from '../../../services/payment.service';
 
 interface Plan {
@@ -39,42 +38,100 @@ export class PlanComponent implements OnInit, OnDestroy {
   stripe:any;
   loggedInUser:any = localStorage.getItem('userData');
 
+  // Loader flags
+  isLoadingPlans: boolean = false;
+  isLoadingCheckout: boolean = false;
+  isLoadingCards: boolean = false;
+
   private plansSubscription: Subscription = new Subscription();
   stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
 
-  constructor(private talentService: TalentService, private stripeService:PaymentService, public dialog: MatDialog) {}
+  constructor(private talentService: TalentService, private stripeService: PaymentService, public dialog: MatDialog) {}
 
   async ngOnInit() {
+    this.isLoadingPlans = true; // Start loading plans
     this.fetchPlans();
     // this.getUserCards();
     this.stripe = await this.stripeService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser);
-
   }
   
   async redirectToCheckout(planId: string) {
-    console.log(planId)
-    const stripe = await this.stripe;
-
-    stripe?.redirectToCheckout({
-      lineItems: [{ price: planId, quantity: 1 }],  // Ensure 'price' is a valid string
-      mode: 'subscription',
-      successUrl: window.location.origin + '/success',
-      cancelUrl: window.location.origin + '/cancel',
-      customerEmail: this.loggedInUser.email,
-      metadata: {
-        clientReferenceId: String(this.loggedInUser.id)
-      },
-      // Convert the user ID to a string
-    }).then((result: any) => {
-      if (result.error) {
-        console.error(result.error.message);
+    this.isLoadingCheckout = true; // Start loader for checkout
+    try {
+      
+      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
+      
+      if (response && response.data.payment_intent.id) {
+        const stripe = await this.stripe;
+        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+      } else {
+        console.error('Failed to create checkout session', response);
       }
-    }).catch((error: any) => {
-      console.error('Stripe Checkout Error:', error);
-    });
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    } finally {
+      this.isLoadingCheckout = false; // Stop loader for checkout
+    }
   }
 
+  async subscribeToPlan(customerId: string, priceId: string) {
+    if (!this.stripe) return;
+
+    try {
+      const { error, setupIntent } = await this.stripe.confirmSetup({
+        clientSecret: 'setup_intent_client_secret', // Use your SetupIntent client secret from backend
+        payment_method: customerId,
+      });
+
+      if (error) {
+        console.error('Subscription failed:', error.message);
+      } else {
+        console.log('Subscription successful:', setupIntent);
+        // Inform your backend to listen for webhook events regarding this subscription
+      }
+    } catch (err) {
+      console.error('Error subscribing:', err);
+    }
+  }
+  
+  // async payWithDefaultCard(planId: string) {
+  //   if (!this.defaultCard) {
+  //     console.error('No default card available');
+  //     return;
+  //   }
+  
+  //   this.isLoadingCheckout = true;
+  
+  //   try {
+  //     // Call the backend to create a PaymentIntent with the saved card
+  //     const response = await this.stripeService.createPaymentWithSavedCard(this.defaultCard.id, planId).toPromise();
+  
+  //     if (response && response.payment_intent) {
+  //       const { payment_intent } = response;
+  
+  //       // Confirm the payment intent using Stripe.js
+  //       const stripe = await this.stripe;
+  //       const result = await stripe.confirmCardPayment(payment_intent.client_secret, {
+  //         payment_method: this.defaultCard.id
+  //       });
+  
+  //       if (result.error) {
+  //         console.error('Payment failed:', result.error);
+  //       } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+  //         console.log('Payment successful!');
+  //         // Handle successful payment here
+  //       }
+  //     } else {
+  //       console.error('Failed to create PaymentIntent', response);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error processing payment with default card:', error);
+  //   } finally {
+  //     this.isLoadingCheckout = false;
+  //   }
+  // }
+  
   ngOnDestroy() {
     this.plansSubscription.unsubscribe(); // Clean up subscription
   }
@@ -101,7 +158,6 @@ export class PlanComponent implements OnInit, OnDestroy {
               includes: this.getIncludes(plan.package_name),
             };
 
-            // Categorize plans into premium, boosted, and others
             if (plan.package_name.toLowerCase().includes('premium')) {
               this.mergePlan(premiumPlans, newPlanData);
             } else if (plan.package_name.toLowerCase().includes('booster')) {
@@ -111,20 +167,17 @@ export class PlanComponent implements OnInit, OnDestroy {
             }
           });
 
-          // Assign the categorized plans to their respective variables
           this.premiumPlans = premiumPlans;
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
           this.selectedPlan = this.otherPlans[0];
-
-          // Log the categorized plans for debugging
-          console.log('Premium Plans:', this.premiumPlans);
-          console.log('Boosted Plans:', this.boostedPlans);
-          console.log('Other Plans:', this.otherPlans);
         }
       },
       error: (err) => {
-        console.error('Failed to fetch plans', err); // Add error handling
+        console.error('Failed to fetch plans', err);
+      },
+      complete: () => {
+        this.isLoadingPlans = false; // Stop loader for plans
       }
     });
   }
@@ -151,19 +204,18 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   // Fetch purchases from API with pagination parameters
   getUserCards(): void {
+    this.isLoadingCards = true; // Start loading cards
     this.talentService.getCards().subscribe(response => {
       if (response && response.status && response.data) {
         this.userCards = response.data.paymentMethod;
-        console.log(this.userCards);
-
-        // Identify the default card
         this.defaultCard = this.userCards.find((card: any) => card.is_default === "1");
-        console.log('Default Card:', this.defaultCard); // Log the default card
       } else {
         console.error('Invalid API response:', response);
       }
+      this.isLoadingCards = false; // Stop loading cards
     }, error => {
       console.error('Error fetching user purchases:', error);
+      this.isLoadingCards = false; // Stop loading cards on error
     });
   }
 
@@ -206,7 +258,10 @@ export class PlanComponent implements OnInit, OnDestroy {
   editPlanPopup(plans:any,) {
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
-      data: { plans: plans }
+      data: { 
+        plans: plans ,
+        selectedPlan :this.selectedPlan
+      }
     });
   }
 
@@ -261,24 +316,4 @@ export class PlanComponent implements OnInit, OnDestroy {
     
   }
 
-  
-  async subscribeToPlan(plan: any) {
-    if (!this.stripe) return;
-
-    try {
-      const { error, setupIntent } = await this.stripe.confirmSetup({
-        clientSecret: 'sk_test_51PVE08Ru80loAFQX8xPJUrsLF8NVU0r2l5UXZD6XelM7JKK63aUPvjDtIwqa7aEHFPb66cs6yhgQNDVI7sxInMMT00T2UDPvky', // Use your SetupIntent client secret from backend
-        payment_method: this.defaultCard.stripe_payment_method_id,
-      });
-
-      if (error) {
-        console.error('Subscription failed:', error.message);
-      } else {
-        console.log('Subscription successful:', setupIntent);
-        // Inform your backend to listen for webhook events regarding this subscription
-      }
-    } catch (err) {
-      console.error('Error subscribing:', err);
-    }
-  }
 }
