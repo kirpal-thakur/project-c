@@ -51,7 +51,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.isLoadingPlans = true; // Start loading plans
     this.fetchPlans();
-    // this.getUserCards();
+    this.getUserCards();
     this.stripe = await this.stripeService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser);
   }
@@ -60,7 +60,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.isLoadingCheckout = true; // Start loader for checkout
     try {
       
-      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
+      const response = await this.stripeService.createCheckoutSession(planId,this.defaultCard.id).toPromise();
       
       if (response && response.data.payment_intent.id) {
         const stripe = await this.stripe;
@@ -209,6 +209,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       if (response && response.status && response.data) {
         this.userCards = response.data.paymentMethod;
         this.defaultCard = this.userCards.find((card: any) => card.is_default === "1");
+        // console.log('Card:', this.defaultCard);
       } else {
         console.error('Invalid API response:', response);
       }
@@ -260,7 +261,8 @@ export class PlanComponent implements OnInit, OnDestroy {
       width: '800px',
       data: { 
         plans: plans ,
-        selectedPlan :this.selectedPlan
+        selectedPlan :this.selectedPlan,
+        defaultCard : this.defaultCard ,
       }
     });
   }

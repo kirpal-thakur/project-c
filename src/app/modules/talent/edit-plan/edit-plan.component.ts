@@ -17,6 +17,7 @@ export class EditPlanComponent implements OnInit {
   stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
   stripe: any;
   isYearly = false; // Subscription type
+  defaultCard: any=null; // Variable to hold the default card
 
   @Output() buys: EventEmitter<any> = new EventEmitter();
 
@@ -31,8 +32,8 @@ export class EditPlanComponent implements OnInit {
     // If this.data.plans is an array, assign it directly
     this.countries = Array.isArray(this.data.plans) ? this.data.plans : Object.values(this.data.plans);
     this.selectedPlan =this.data.selectedPlan;
+    this.defaultCard = this.data.defaultCard;
     this.stripe = await this.stripeService.getStripe();
-    console.log(this.selectedPlan);
   }
 
 
@@ -40,7 +41,7 @@ export class EditPlanComponent implements OnInit {
     
     try {
       // Call the backend to create the checkout session
-      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
+      const response = await this.stripeService.createCheckoutSession(planId,this.defaultCard?.id).toPromise();
   
       if (response && response.data.payment_intent.id) {
         // Redirect to Stripe Checkout with the session ID

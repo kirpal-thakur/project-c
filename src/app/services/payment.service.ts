@@ -25,7 +25,7 @@ export class PaymentService {
     return await this.stripePromise;
   }
 
-  createCheckoutSession(planId: string): Observable<any> {    
+  createCheckoutSession(planId: string,id:any=null): Observable<any> {    
     const successUrl = window.location.origin + '/success'; // Define your success URL
     const cancelUrl = window.location.origin + '/cancel'; // Define your cancel URL
     // Sending successUrl and cancelUrl as query parameters
