@@ -24,7 +24,7 @@ export const environment = {
       { name:'Switzerland', slug: "ch", id: 1 },
       { name:'German', slug: "de", id: 2 },
       { name:'Italy', slug: "it", id: 3 },
-      { name:'Frensh Republic', slug: "fr", id: 4 },
+      { name:'French Republic', slug: "fr", id: 4 },
       { name:'England', slug: "uk", id: 5 },
       { name:'Spain', slug: "es", id: 6 },
       { name:'Portugal', slug: "pt", id: 7 },

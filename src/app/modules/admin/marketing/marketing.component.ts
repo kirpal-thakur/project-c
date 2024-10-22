@@ -84,7 +84,6 @@ export class MarketingComponent {
         this.popups = response.data.popups;
         this.paginator.length = response.data.totalCount;
         this.isLoading = false;
-        
       } else {
         this.popups = [];
         this.paginator.length = 0;

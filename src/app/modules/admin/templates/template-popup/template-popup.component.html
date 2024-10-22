@@ -127,7 +127,7 @@
         <div class=" d-flex justify-content-around bg-0C3453 p-3">
       
          <div>
-           <a class="btn btn-delete text-danger">Delete</a>
+           <a class="btn btn-delete text-danger" (click)="close()">Cancel</a>
          </div>
          <div>
            <a class="btn Launch px-5" *ngIf="!template" (click)="createTemplate()">Create and Launch</a>
