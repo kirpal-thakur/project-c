@@ -18,6 +18,8 @@ interface Report {
   templateUrl: './performance-analysis-tab.component.html',
   styleUrls: ['./performance-analysis-tab.component.scss']
 })
+
+
 export class PerformanceAnalysisTabComponent implements OnInit {
 
   reports: Report[] = [];

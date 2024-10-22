@@ -1,4 +1,4 @@
-import { Component, Inject, Output, EventEmitter, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Output, EventEmitter, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { PaymentService } from '../../../services/payment.service';
@@ -11,51 +11,56 @@ import { loadStripe } from '@stripe/stripe-js';
   styleUrls: ['./edit-plan.component.scss']
 })
 export class EditPlanComponent implements OnInit {
-  countries: any[] = []; // Assuming this is fetched from the backend
-  selectedCountries: any[] = []; // Dynamically updated
-  selectedPlan: any;
+  countries: any[] = []; // Array to hold country plans
+  selectedCountries: any[] = []; // Holds the selected countries
+  selectedPlan: any = {}; // Selected country plan details
   stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
-  stripe:any;
-  isYearly=false;
-  
+  stripe: any;
+  isYearly = false; // Subscription type
+  defaultCard: any=null; // Variable to hold the default card
+
   @Output() buys: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public dialogRef: MatDialogRef<EditPlanComponent>,
     public talentService: TalentService,
-    private stripeService:PaymentService,
+    private stripeService: PaymentService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   async ngOnInit() {
-    this.countries = { ...this.data.plans };      
-    console.log(this.countries) 
-    // this.getUserCards();
+    // If this.data.plans is an array, assign it directly
+    this.countries = Array.isArray(this.data.plans) ? this.data.plans : Object.values(this.data.plans);
+    this.selectedPlan =this.data.selectedPlan;
+    this.defaultCard = this.data.defaultCard;
     this.stripe = await this.stripeService.getStripe();
   }
-  
-  async redirectToCheckout(planId: string) {
-    console.log(planId)
-    const stripe = await this.stripe;
 
-    stripe?.redirectToCheckout({
-      lineItems: [{ price: planId, quantity: 1 }],  // Ensure 'price' is a valid string
-      mode: 'subscription',
-      successUrl: window.location.origin + '/success',
-      cancelUrl: window.location.origin + '/cancel',
-    }).then((result: any) => {
-      if (result.error) {
-        console.error(result.error.message);
+
+  async redirectToCheckout(planId: string) {
+    
+    try {
+      // Call the backend to create the checkout session
+      const response = await this.stripeService.createCheckoutSession(planId,this.defaultCard?.id).toPromise();
+  
+      if (response && response.data.payment_intent.id) {
+        // Redirect to Stripe Checkout with the session ID
+        const stripe = await this.stripe;
+        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+      } else {
+        console.error('Failed to create checkout session', response);
       }
-    }).catch((error: any) => {
-      console.error('Stripe Checkout Error:', error);
-    });
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
   }
 
   onCountrySelect(event: any) {
-    const selectedCountry = this.countries.find(c => c.id === event.target.value);
-    if (selectedCountry && !this.selectedCountries.includes(selectedCountry)) {
-      this.selectedCountries.push(selectedCountry);
+    const selectedCountryId = event.target.value;
+    this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
+
+    if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
+      this.selectedCountries.push(this.selectedPlan);
     }
   }
 
@@ -64,26 +69,20 @@ export class EditPlanComponent implements OnInit {
   }
 
   buyNow() {
-    this.dialogRef.close(); // Optionally close the dialog
+    if (this.selectedPlan) {
+      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; // Choose the right price ID based on the selected plan
+      this.redirectToCheckout(planId);
+    } else {
+      console.error('No country plan selected');
+    }
+    // this.dialogRef.close(); // Optionally close the dialog
   }
 
   cancel(): void {
     this.dialogRef.close();
   }
-
   
-  onPlanSelect(event: Event) {
-    const selectedId = (event.target as HTMLSelectElement).value;
-    const selected = this.countries.find((plan: any) => plan.id === selectedId);
-  
-    if (selected) {
-      this.selectedPlan = selected;
-    }
+  toggleBillingPlan(isYearly: boolean) {
+    this.isYearly = isYearly; // Toggle between monthly and yearly
   }
-
-  
-  toggleBillingPlan(plan:any, isYearly: boolean) {
-    plan.isYearly = isYearly;
-  }
-
 }

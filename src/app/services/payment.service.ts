@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +11,13 @@ import { loadStripe, Stripe } from '@stripe/stripe-js';
 export class PaymentService {
 
   public teams: any[] = [];
+  private apiUrl: string;
+  private userToken: string | null;
   stripePromise: Promise<Stripe | null>;
 
-  constructor() {
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
+    this.userToken = localStorage.getItem('authToken');
     this.stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
   }
 
@@ -19,23 +25,10 @@ export class PaymentService {
     return await this.stripePromise;
   }
 
-  async createPaymentIntent(amount: number): Promise<any> {
-    const response = await fetch('https://api.stripe.com/v1/payment_intents', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer YOUR_SECRET_KEY`, // Replace with your Stripe secret key
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        'amount': amount.toString(),
-        'currency': 'usd', // Change to your desired currency
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to create PaymentIntent');
-    }
-
-    return response.json();
+  createCheckoutSession(planId: string,id:any=null): Observable<any> {    
+    const successUrl = window.location.origin + '/success'; // Define your success URL
+    const cancelUrl = window.location.origin + '/cancel'; // Define your cancel URL
+    // Sending successUrl and cancelUrl as query parameters
+    return this.http.get(`${this.apiUrl}create-payment-intent/${planId}?successUrl=${encodeURIComponent(successUrl)}&cancelUrl=${encodeURIComponent(cancelUrl)}`);
   }
 }

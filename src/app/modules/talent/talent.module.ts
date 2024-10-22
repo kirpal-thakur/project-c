@@ -56,6 +56,7 @@ import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/ad
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { AddCardComponent } from './membership/add-card/add-card.component';
     EditHighlightsComponent,
     PlanComponent,
     AddCardComponent,
+    AddCountryComponent,
   ],
   imports: [
     CommonModule,
