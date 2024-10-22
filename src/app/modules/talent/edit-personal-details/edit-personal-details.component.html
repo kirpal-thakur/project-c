@@ -1,0 +1,245 @@
+<div class="dialog-container">
+  <div class="personal_edit">
+    <div class="dialog-header m-auto">
+      <h2>Edit User Personal Details</h2>
+    </div>
+    <div class="close_buttons">
+      <button class="close-btn" (click)="onCancel()">X</button>
+    </div>
+  </div>
+  <hr>
+  
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="overflow-card">
+      <div class="row">
+        <!-- First Name -->
+        <div class="form-group col-lg-6">
+          <label for="first_name">First Name:</label>
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            [(ngModel)]="firstName"
+            #firstNameField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            First Name is required.
+          </div>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group col-lg-6">
+          <label for="last_name">Last Name:</label>
+          <input
+            type="text"
+            id="last_name"
+            name="last_name"
+            [(ngModel)]="lastName"
+            #lastNameField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Last Name is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Current Club -->
+        <div class="form-group col-lg-6">
+          <label for="currentClub">Current Club:</label>
+          <select
+            id="currentClub"
+            name="currentClub"
+            [(ngModel)]="currentClub"
+            #currentClubField="ngModel"
+            required
+          >
+            <option *ngFor="let team of teams; let last = last" [value]="team.id" [selected]="team.id === currentClub || last && !currentClub">
+              {{ team.club_name ?? team.last_name }}
+            </option>
+          </select>
+          <!-- Validation message -->
+          <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Current Club is required.
+          </div>
+        </div>
+
+        <!-- Nationality -->
+        <div class="form-group col-lg-6">
+          <label for="nationality">Nationality:</label>
+          <select
+            id="nationality"
+            name="nationality"
+            [(ngModel)]="user.nationality"
+            #nationalityField="ngModel"
+            required
+          >
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+          </select>
+          <!-- Validation message -->
+          <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Nationality is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Date of Birth -->
+        <div class="form-group col-lg-6">
+          <label for="dateOfBirth">Date of Birth:</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            [(ngModel)]="dateOfBirth"
+            #dobField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Date of Birth is required.
+          </div>
+        </div>
+
+        <!-- Place of Birth -->
+        <div class="form-group col-lg-6">
+          <label for="placeOfBirth">Place of Birth:</label>
+          <input
+            type="text"
+            id="placeOfBirth"
+            name="placeOfBirth"
+            [(ngModel)]="placeOfBirth"
+            #placeOfBirthField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Place of Birth is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Height -->
+        <div class="form-group col-lg-6">
+          <label for="height">Height (cm):</label>
+          <input
+            type="number"
+            id="height"
+            name="height"
+            [(ngModel)]="height"
+            #heightField="ngModel"
+            placeholder="Enter value"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Height is required.
+          </div>
+        </div>
+
+        <!-- Weight -->
+        <div class="form-group col-lg-6">
+          <label for="weight">Weight (kgs):</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            [(ngModel)]="weight"
+            #weightField="ngModel"
+            placeholder="Enter value"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Weight is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Contract Start Date -->
+        <div class="form-group col-lg-6">
+          <label for="contractStart">Contract Start Date:</label>
+          <input
+            type="date"
+            id="contractStart"
+            name="contractStart"
+            [(ngModel)]="contractStart"
+            #contractStartField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="contractStartField.invalid && (contractStartField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Contract Start Date is required.
+          </div>
+        </div>
+      
+        <!-- Contract End Date -->
+        <div class="form-group col-lg-6">
+          <label for="contractEnd">Contract End Date:</label>
+          <input
+            type="date"
+            id="contractEnd"
+            name="contractEnd"
+            [(ngModel)]="contractEnd"
+            #contractEndField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="contractEndField.invalid && (contractEndField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Contract End Date is required.
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <!-- League Level -->
+        <div class="form-group col-lg-6">
+          <label for="leagueLevel">League Level:</label>
+          <input
+            type="text"
+            id="leagueLevel"
+            name="leagueLevel"
+            [(ngModel)]="leagueLevel"
+            #leagueLevelField="ngModel"
+            required
+          />
+          <!-- Validation message -->
+          <div *ngIf="leagueLevelField.invalid && (leagueLevelField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            League Level is required.
+          </div>
+        </div>
+      
+        <!-- Dominant Foot -->
+        <div class="form-group col-lg-6">
+          <label for="dominantFoot">Dominant Foot:</label>
+          <select
+            id="dominantFoot"
+            name="dominantFoot"
+            [(ngModel)]="dominantFoot"
+            #dominantFootField="ngModel"
+            required
+          >
+            <option value="Right">Right</option>
+            <option value="Left">Left</option>
+            <option value="Both">Both</option>
+          </select>
+          <!-- Validation message -->
+          <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+            Dominant Foot is required.
+          </div>
+        </div>
+      </div>
+            
+    </div>
+    <div class="dialog-actions align-items-center d-flex justify-content-between">
+      <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
+      <button class="save-btn" type="submit">Save</button>
+    </div>
+  </form>
+</div>

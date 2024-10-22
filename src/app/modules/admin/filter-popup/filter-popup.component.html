@@ -1,0 +1,91 @@
+<div class="p-1">
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">Alphabetically</h5>
+    <div class="d-flex gap-3">
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['alphabetically'] == 'asc'">
+        <input type="radio" name="alphabetically" value="A-Z" hidden (click)="setFilter('alphabetically', 'asc')"> A-Z
+      </label>
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['alphabetically'] == 'desc'">
+        <input type="radio" name="alphabetically" value="Z-A" hidden (click)="setFilter('alphabetically', 'desc')"> Z-A
+      </label>
+    </div>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">Membership</h5>
+    <div class="d-flex gap-3">
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['membership'] == 'free'">
+        <input type="radio" name="membership" value="Free" hidden (click)="setFilter('membership', 'free')"> Free
+      </label>
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['membership'] == 'paid'">
+        <input type="radio" name="membership" value="Premium" hidden (click)="setFilter('membership', 'paid')"> Premium
+      </label>
+
+
+    </div>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">Activity</h5>
+    <div>
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['activity'] == 'Recent Login'">
+        <input type="radio" name="activity" value="Recent Login" hidden  (click)="setFilter('activity', 'Recent Login')"> Recent Login
+      </label>
+    </div>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">User Type</h5>
+    <div class="d-flex gap-3">
+      <label class="btn btn-light filter-button-2" [class.activefilter] = "userFilters['role'] == '4'">
+        <input type="radio" name="userType" value="Talent" hidden (click)="setFilter('role', '4')"> Talent
+      </label>
+      <label class="btn btn-light filter-button-2" [class.activefilter] = "userFilters['role'] == '2'">
+        <input type="radio" name="userType" value="Club" hidden (click)="setFilter('role', '2')"> Club
+      </label>
+      <label class="btn btn-light filter-button-2" [class.activefilter] = "userFilters['role'] == '3'">
+        <input type="radio" name="userType" value="Scout" hidden (click)="setFilter('role', '3')"> Scout
+      </label>
+    </div>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">Newsletter Subscription</h5>
+    <div class="d-flex gap-3">
+      <label class="btn btn-light filter-button-2" [class.activefilter] = "userFilters['newsletter'] == '1'">
+        <input type="radio" name="newsletterSubscription" value="Yes" hidden (click)="setFilter('newsletter', '1')"> Yes
+      </label>
+      <label class="btn btn-light filter-button-2" [class.activefilter] = "userFilters['newsletter'] == '0'">
+        <input type="radio" name="newsletterSubscription" value="No" hidden (click)="setFilter('newsletter', '0')"> No
+      </label>
+    </div>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">Location</h5>
+    <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['location']">
+      <!-- <input type="radio" name="location" value="Type to search" hidden> Type to search -->
+
+      <select [(ngModel)]="selectedLocation" class="location-filter" [class.activefilter] = "userFilters['location']" (change)="onLocationChange($event)">
+        <option value="">Select Location</option>
+        <option *ngFor="let location of locations" [value]="location.id" 
+                [selected]="location.id == selectedLocation">{{ location.location }}</option>
+      </select>
+    </label>
+  </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+    <h5 class="filter-text mb-1">User Status</h5>
+    <div class="d-flex gap-3">
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == '2'">
+        <input type="radio" name="userStatus" value="Approved" hidden (click)="setFilter('status', '2')"> Approved
+      </label>
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == '1'">
+        <input type="radio" name="userStatus" value="Pending" hidden (click)="setFilter('status', '1')"> Pending
+      </label>
+      <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == '3'">
+        <input type="radio" name="userStatus" value="Rejected" hidden (click)="setFilter('status', '3')"> Rejected
+      </label>
+    </div>
+  </div>
+  <div class="filter-bottom-button">
+    <div class="filetr-child-button">
+      <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
+      <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<!-- src/app/success/success.component.html -->
+<div *ngIf="showPopup" class="popup-overlay">
+    <div class="popup-content p-5">
+        <h2>Success!</h2>
+        <h5 class="py-3">Your subscription was successful.</h5>
+        <button (click)="closePopup()">Close</button>
+    </div>
+</div>

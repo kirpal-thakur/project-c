@@ -1,0 +1,71 @@
+<div class="card mb-3">
+    <div class="card-header border-0">
+      <div>
+        <h6 class="card-title">Team Members</h6>
+        <p>Invite or manage your organisation’s memebers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div
+      class="card-header d-flex align-items-center justify-content-between"
+    >
+      <h4 class="card-title">Team</h4>
+      <a><small><i class="fa-solid fa-plus plus-color me-1 "></i></small> <span class="Addmember" (click)="addRepresentator()">Add member</span></a
+      >
+    </div>
+    <div class="card-body px-3 py-2" >
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let representator of representators">
+            <td>
+              <div style="display: flex; align-items: center;">
+                <img src="../../../assets/images/1.jpg" alt="" class="table_img"/>
+                <span style="margin-left:15px;"> 
+                    <span style="display: block;">{{representator.first_name}} {{representator.last_name}}</span> 
+                    <span style="display: block;">{{representator.email}} </span>
+                </span>
+              </div>                        
+            </td>
+            <td>
+              <span class="bg_pending" *ngIf="representator.status == '1'">Invited</span>
+              <span class="bg_success" *ngIf="representator.status == '2'">Active</span>
+              <span class="bg_secondary" *ngIf="representator.status == '3'">Inactive</span>
+            </td>
+
+            <td>
+              <select class="custom-select custom-select-wrapper" (change)="updateRepresentatorRole($event, representator.id)">
+
+                <option value="admin-access" *ngIf="representator.permission != null && representator.permission != 'admin-access'">Admin</option>
+                <option value="admin-access" *ngIf="representator.permission == null || representator.permission == 'admin-access'" selected>Admin</option>
+                
+                <option value="view-only" *ngIf="representator.permission != 'view-only'">View-Only</option>
+                <option value="view-only" *ngIf="representator.permission == 'view-only'" selected>View-Only</option>
+                
+                <option value="editor" *ngIf="representator.permission != 'editor'">Editor</option>
+                <option value="editor" *ngIf="representator.permission == 'editor'" selected>Editor</option>
+                
+                <option value="transfer-ownership" *ngIf="representator.permission != 'transfer-ownership'">Transfer Ownership</option>
+                <option value="transfer-ownership" *ngIf="representator.permission == 'transfer-ownership'" selected>Transfer Ownership</option>
+                
+              </select>
+            </td>
+            <td class="c_pointer">
+              <svg  (click)="confirmSingleDeletion(representator.id)" id="users-icon"
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.49967 17.0589C5.49967 18.0112 6.32467 18.7904 7.33301 18.7904H14.6663C15.6747 18.7904 16.4997 18.0112 16.4997 17.0589V6.66999H5.49967V17.0589ZM17.4163 4.07277H14.208L13.2913 3.20703H8.70801L7.79134 4.07277H4.58301V5.80425H17.4163V4.07277Z"
+                  fill="#787878"
+                />
+              </svg>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
