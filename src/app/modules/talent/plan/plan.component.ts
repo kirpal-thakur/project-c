@@ -37,7 +37,9 @@ export class PlanComponent implements OnInit, OnDestroy {
   defaultCard: any; // Variable to hold the default card
   stripe:any;
   loggedInUser:any = localStorage.getItem('userData');
-
+  premium : any =[];
+  country: any=[];
+  booster: any=[];
   // Loader flags
   isLoadingPlans: boolean = false;
   isLoadingCheckout: boolean = false;
@@ -50,6 +52,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.isLoadingPlans = true; // Start loading plans
+    this.getUserPlans();
     this.fetchPlans();
     this.getUserCards();
     this.stripe = await this.stripeService.getStripe();
@@ -57,6 +60,13 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
   
   async redirectToCheckout(planId: string) {
+    
+    // Check if the planId already exists in selectedCountries with the same interval
+    if(this.premium[0].package_id == planId) {
+      alert('You have already have this plan with the same billing interval.');
+      return; // Stop further execution if the plan is already selected
+    }
+    
     this.isLoadingCheckout = true; // Start loader for checkout
     try {
       
@@ -94,44 +104,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('Error subscribing:', err);
     }
   }
-  
-  // async payWithDefaultCard(planId: string) {
-  //   if (!this.defaultCard) {
-  //     console.error('No default card available');
-  //     return;
-  //   }
-  
-  //   this.isLoadingCheckout = true;
-  
-  //   try {
-  //     // Call the backend to create a PaymentIntent with the saved card
-  //     const response = await this.stripeService.createPaymentWithSavedCard(this.defaultCard.id, planId).toPromise();
-  
-  //     if (response && response.payment_intent) {
-  //       const { payment_intent } = response;
-  
-  //       // Confirm the payment intent using Stripe.js
-  //       const stripe = await this.stripe;
-  //       const result = await stripe.confirmCardPayment(payment_intent.client_secret, {
-  //         payment_method: this.defaultCard.id
-  //       });
-  
-  //       if (result.error) {
-  //         console.error('Payment failed:', result.error);
-  //       } else if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-  //         console.log('Payment successful!');
-  //         // Handle successful payment here
-  //       }
-  //     } else {
-  //       console.error('Failed to create PaymentIntent', response);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error processing payment with default card:', error);
-  //   } finally {
-  //     this.isLoadingCheckout = false;
-  //   }
-  // }
-  
+    
   ngOnDestroy() {
     this.plansSubscription.unsubscribe(); // Clean up subscription
   }
@@ -170,6 +143,8 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.premiumPlans = premiumPlans;
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
+          this.premiumPlans.isYearly = this.premium.interval == 'yearly'? true : false;
+          this.boostedPlans.isYearly = this.booster.interval == 'yearly'? true : false;
           this.selectedPlan = this.otherPlans[0];
         }
       },
@@ -182,7 +157,6 @@ export class PlanComponent implements OnInit, OnDestroy {
     });
   }
   
-
   /**
    * Helper function to merge plan data if the plan already exists.
    */
@@ -256,13 +230,14 @@ export class PlanComponent implements OnInit, OnDestroy {
     if (plan.quantity < this.maxQuantity) plan.quantity++;
   }
 
-  editPlanPopup(plans:any,) {
+  editPlanPopup(plans:any,country:any) {
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
       data: { 
         plans: plans ,
         selectedPlan :this.selectedPlan,
         defaultCard : this.defaultCard ,
+        country : country ,
       }
     });
   }
@@ -316,6 +291,29 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('Error during subscription:', error);
     }
     
+  }
+
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+    this.talentService.getUserPlans().subscribe(
+      response => {
+        if (response?.status && response?.data) {
+          const userPlans = response.data.packages;
+
+          // Use optional chaining and nullish coalescing to handle undefined/null
+          this.premium = Array.isArray(userPlans?.premium) && userPlans.premium.length > 0 ? userPlans.premium : [];
+          this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
+          this.country = userPlans?.country || ''; // Default to empty string if country is undefined
+
+          console.log('userPlans', userPlans);
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      error => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
   }
 
 }
