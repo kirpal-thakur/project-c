@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { Editor } from 'ngx-editor';
 import { environment } from '../../../../../environments/environment';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -10,6 +11,10 @@ import { MarketingService } from '../../../../services/marketing.service';
   styleUrls: ['./marketing-popup.component.scss']
 })
 export class MarketingPopupComponent {
+
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
+
   editor!: Editor;
   html = '';
   // selectedRole:number = 2;
@@ -39,6 +44,10 @@ export class MarketingPopupComponent {
   }
 
   ngOnInit(): void {
+
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale());
+    
     this.editor = new Editor();
 
     this.marketingApi.getRolePaymentTypes().subscribe((response)=>{

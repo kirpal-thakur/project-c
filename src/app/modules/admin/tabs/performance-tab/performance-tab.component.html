@@ -84,7 +84,7 @@
           <td>
             <span *ngIf="editableId != performance.id">{{performance.player_age}}</span>
           
-            <input *ngIf="editableId == performance.id" type="text" value="{{performance.player_age + ' Year'}}" class="form-control performance-dark-bg year-input " (input)="onInputChange($event, 'player_age')"> <span id="Player-age-year" *ngIf="editableId != performance.id"> &nbsp;Year</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.player_age}}" class="form-control performance-dark-bg year-input" (input)="onInputChange($event, 'player_age')" /> <span id="Player-age-year" *ngIf="editableId != performance.id"> &nbsp;Year</span>
           </td>
           
           <td class="d-flex justify-content-center ">

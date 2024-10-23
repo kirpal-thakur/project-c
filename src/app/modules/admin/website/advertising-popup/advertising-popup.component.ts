@@ -1,5 +1,6 @@
-import { Component, Inject,  } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AdvertisementService } from '../../../../services/advertisement.service';
 @Component({
@@ -8,6 +9,9 @@ import { AdvertisementService } from '../../../../services/advertisement.service
   styleUrl: './advertising-popup.component.scss'
 })
 export class AdvertisingPopupComponent   {
+
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
 
   typeOptions: any = [
               '250 x 250 - Square',
@@ -53,6 +57,9 @@ export class AdvertisingPopupComponent   {
 
   ngOnInit(): void {
 
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale());
+    
     if(this.data.action == "update" || this.data.action == "view"){
       let existingRecord = this.data.ad;
       console.log(existingRecord)

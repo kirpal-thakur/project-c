@@ -77,6 +77,7 @@ import { AddRepresentatorPopupComponent } from './add-representator-popup/add-re
 import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-popup.component';
 import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
 import { NgxDatepickerModule } from '@handylib/ngx-datepicker';
+import { InviteScoutTalentPopupComponent } from './tabs/invite-scout-talent-popup/invite-scout-talent-popup.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { NgxDatepickerModule } from '@handylib/ngx-datepicker';
     UserEditPopupComponent,
     AddRepresentatorPopupComponent,
     CommonFilterPopupComponent,
-    UploadAttachmentComponent
+    UploadAttachmentComponent,
+    InviteScoutTalentPopupComponent
   ],
   imports: [
     CommonModule,

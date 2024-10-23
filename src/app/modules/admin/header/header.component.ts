@@ -3,7 +3,7 @@ import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import { UserService } from '../../../services/user.service';
 interface Notification {
   image: string;
   title: string;
@@ -18,11 +18,34 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
-
+  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
+  loggedInUser:any = localStorage.getItem('userData');
+  profileImgUrl: any = "";
   lang:string = '';
 
  ngOnInit() {
+
+  this.userService.adminImageUrl.subscribe(newUrl => {
+    console.log(newUrl)
+    if(newUrl == 'default'){
+      if(this.loggedInUser.profile_image_path){
+        this.profileImgUrl = this.loggedInUser.profile_image_path;
+      }else{
+        this.profileImgUrl = "../../../assets/images/1.jpg";
+      }
+    }else{
+      this.profileImgUrl = newUrl;
+    }
+  });
+
+  this.loggedInUser = JSON.parse(this.loggedInUser);
+  console.log(this.loggedInUser)
+  if(this.loggedInUser.profile_image_path){
+    this.profileImgUrl = this.loggedInUser.profile_image_path;
+  }else{
+    this.profileImgUrl = "../../../assets/images/1.jpg";
+  }
+  
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
   }

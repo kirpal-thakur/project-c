@@ -24,7 +24,7 @@ export class PerformanceTabComponent {
   }
   // from_date:2021-01-01
   //   to_date:2022-01-01
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { } 
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -98,6 +98,7 @@ export class PerformanceTabComponent {
       // console.log(response)
       // this.editableId = "";
       if(response.status){
+        this.performances = [];
         this.getUserPerformance(this.userId);
       }
     }); 

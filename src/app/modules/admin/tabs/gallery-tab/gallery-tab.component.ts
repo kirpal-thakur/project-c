@@ -16,7 +16,8 @@ export class GalleryTabComponent {
   userVideos: any = [];
   imageBaseUrl: any = "https://api.socceryou.ch/uploads/";
   selectedFile: any = '';
-  defaultCoverImage:any = "./media/palyers.png";
+  // defaultCoverImage:any = "./media/palyers.png";
+  defaultCoverImage:any = "../../../../assets/images/palyers.png";
   openedMenuId:any = '';
   @Input() coverImage: string = '';  // Define an input property
   @Output() dataEmitter = new EventEmitter<string>();

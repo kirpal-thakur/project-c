@@ -5,6 +5,7 @@ import { Observable  } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,16 @@ export class UserService {
   private userToken;
   private apiUrl2 = 'https://api.socceryou.ch/api/admin';
   
+  private adminImageUrlSource = new BehaviorSubject<string>('default');
+  adminImageUrl = this.adminImageUrlSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment?.apiUrl;
     this.userToken = localStorage.getItem('authToken');
+  }
+
+  changeImageUrl(newUrl: string) {
+    this.adminImageUrlSource.next(newUrl);
   }
 
   // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
@@ -540,5 +547,14 @@ export class UserService {
     });
 
     return this.http.post<any>(`${this.apiUrl2}/add-sighting-invites/${id}`, params, { headers });
+  }
+
+  sendScoutPortfolioInvite(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-scout-player/${id}`, params, { headers });
   }
 }
