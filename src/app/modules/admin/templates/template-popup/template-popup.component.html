@@ -13,6 +13,7 @@
     <h4 class="text-size" style="margin-right: 5px;">Name:</h4>
     <input type="text" class="template-name-inputField" [(ngModel)]="title" >
   </div>
+  <div *ngIf="errorMsg.title" class="error-msg" style="padding-left:60px;">{{errorMsg.title}}</div>
 
   <hr class="m-0">
 
@@ -121,6 +122,7 @@
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor [editor]="editor" [(ngModel)]="content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <div *ngIf="errorMsg.content" class="error-msg" style="padding-left:20px;">{{errorMsg.content}}</div>
       </div>
       
       <div>

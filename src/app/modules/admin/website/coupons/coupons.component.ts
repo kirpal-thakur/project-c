@@ -120,16 +120,19 @@ export class CouponsComponent {
     );
   }
   editCoupon(element:any){
+
+    this.showMatDialog('Edit coupon is not allowed at the moment!', 'display');
     // edit coupon not available in stripe
-    const updateCouponDialog = this.dialog.open(CoupenPopupComponent,{
-      height: '598px',
-      width: '600px',
-      panelClass: 'cutam-cupen',
-      data : {
-        action: 'update',
-        couponData: element
-      }
-    });
+    
+    // const updateCouponDialog = this.dialog.open(CoupenPopupComponent,{
+    //   height: '598px',
+    //   width: '600px',
+    //   panelClass: 'cutam-cupen',
+    //   data : {
+    //     action: 'update',
+    //     couponData: element
+    //   }
+    // });
   }
 
 

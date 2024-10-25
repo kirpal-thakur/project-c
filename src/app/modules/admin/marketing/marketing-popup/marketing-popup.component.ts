@@ -36,12 +36,14 @@ export class MarketingPopupComponent {
   frequency:any = ['Once a day', 'Once a week', 'Once 2 Hrs', 'Twice a day', 'Once a month', 'One time only'];
   startDate:any = "";
   endDate:any = "";
+  error:boolean = false
+  errorMsg:any = {}
   constructor(
     public dialogRef: MatDialogRef<MarketingPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private marketingApi: MarketingService
   ) {
 
-  }
+  } 
 
   ngOnInit(): void {
 
@@ -120,9 +122,30 @@ export class MarketingPopupComponent {
     return `${year}-${month}-${day}`;
   }
 
+  validateForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.title == ""){
+      this.error = true;
+      this.errorMsg.title = "Title is required";
+    }
+    if(this.html == "" || this.html == "<p></p>"){
+      this.error = true;
+      this.errorMsg.html = "Content is required";
+    }
+    if(this.startDate == "" || this.endDate == ""){
+      this.error = true;
+      this.errorMsg.dateRange = "Date range is required";
+    }
+    return this.error;
+  }
+
   createPopup():any{
 
-    if(this.title == "" || this.selectedRole == "" || this.selectedLang == "" || this.selectedLocation == "" || this.startDate == "" || this.endDate == "" || this.selectedFrequency == "" || this.html == ""){
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
 
@@ -157,7 +180,8 @@ export class MarketingPopupComponent {
  
   updatePopup():any{
 
-    if(this.title == "" || this.selectedRole == "" || this.selectedLang == "" || this.selectedLocation == "" || this.startDate == "" || this.endDate == "" || this.selectedFrequency == "" || this.html == ""){
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
 

@@ -21,7 +21,8 @@ export class CoupenPopupComponent   {
   limit: any = ""
   isSingleUsePerCustomer: boolean = false;
   disableEndDate:boolean = false;
-  errorMsg:any = {};
+  error:boolean = false
+  errorMsg:any = {}
 
   private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
   private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
@@ -34,7 +35,7 @@ export class CoupenPopupComponent   {
   ngOnInit(): void {
 
     this._locale.set('fr');
-    this._adapter.setLocale(this._locale());
+    this._adapter.setLocale(this._locale()); 
 
     if(this.data.action == "update"){
 
@@ -62,7 +63,45 @@ export class CoupenPopupComponent   {
     this.dialogRef.close();
   } 
 
-  createCoupon(){
+  validateCouponForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.type == ""){
+      this.error = true;
+      this.errorMsg.type = "Type is required";
+    }
+    if(this.name == ""){
+      this.error = true;
+      this.errorMsg.name = "Name is required";
+    }
+    if(this.code == ""){
+      this.error = true;
+      this.errorMsg.code = "Code is required";
+    }
+    if(this.discount == ""){
+      this.error = true;
+      this.errorMsg.discount = "Discount is required";
+    }
+    if(this.startDate == ""){
+      this.error = true;
+      this.errorMsg.startDate = "Start date is required";
+    }
+    if(this.isLimitedUse && this.limit == ""){
+      this.error = true;
+      this.errorMsg.limit = "Limit is required";
+    }
+    return this.error;
+
+  }
+
+  createCoupon():any{
+
+    let validForm:any = this.validateCouponForm();
+    if(validForm){
+      return false;
+    }
 
     let params:any = {}
     params.title = this.name;

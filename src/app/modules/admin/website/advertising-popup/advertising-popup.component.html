@@ -20,12 +20,14 @@
      Name
     </p>
       <input class="cupen-btn-1 code-text" [(ngModel)]="name">
+      <div *ngIf="errorMsg.name" class="error-msg">{{errorMsg.name}}</div>
     </div>
     <div class="ms-5">
       <p  class="code-text">
         On click redirect to url:
       </p>
         <input class="cupen-btn-1" [(ngModel)]="redirect">
+        <div *ngIf="errorMsg.redirect" class="error-msg">{{errorMsg.redirect}}</div>
       </div>
    </div>
   
@@ -43,6 +45,7 @@
             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
           </svg>
       </div>
+      <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
     </div>
     <div class="ms-5">
       <p  class="code-text">
@@ -57,6 +60,7 @@
           <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
         </svg>
       </div>
+      <div *ngIf="errorMsg.page" class="error-msg">{{errorMsg.page}}</div>
     </div>
   
    </div>
@@ -189,12 +193,14 @@
       Max Views
     </p>
       <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
+      <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
     </div>
     <div class="ms-3">
       <p  class="code-text">
         Max Clicks
       </p>
       <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
+      <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
     </div>
   
    </div>
