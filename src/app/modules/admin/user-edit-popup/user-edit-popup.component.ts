@@ -311,10 +311,10 @@ export class UserEditPopupComponent {
 
     formdata.append('user[contract_end]', this.contractUntil);
     formdata.append('user[top_speed]', this.speed);
-    formdata.append('user[top_speed_unit]', '');
+    formdata.append('user[top_speed_unit]', 'KM/h');
     formdata.append('user[height]', this.height);
-    formdata.append('user[height_unit]', '');
-    formdata.append('user[other_position]', this.otherPosition);
+    formdata.append('user[height_unit]', 'cm');
+    formdata.append('user[other_position][]', this.otherPosition);
 
     formdata.append('user[sm_x]', this.sm_x);
     formdata.append('user[sm_facebook]', this.sm_facebook);
@@ -332,7 +332,7 @@ export class UserEditPopupComponent {
             action: 'updated'
           });
         }else{
-          
+          alert(response.message);
         }
       },
       error => {
@@ -375,7 +375,7 @@ export class UserEditPopupComponent {
             action: 'updated'
           });
         }else{
-          
+          alert(response.message);
         }
       },
       error => {

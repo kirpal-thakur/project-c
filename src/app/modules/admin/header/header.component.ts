@@ -4,6 +4,8 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
+import { environment } from '../../../../environments/environment';
+
 interface Notification {
   image: string;
   title: string;
@@ -22,7 +24,7 @@ export class HeaderComponent {
   loggedInUser:any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang:string = '';
-
+  domains: any = environment.domains;
  ngOnInit() {
 
   this.userService.adminImageUrl.subscribe(newUrl => {
