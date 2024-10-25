@@ -254,6 +254,12 @@ getExploresData(params: any): Observable<any> {
       }
     );
   }
+
+  getUserPlans(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/get-active-packages`
+    );
+  }
     
   uploadCoverImage(formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');

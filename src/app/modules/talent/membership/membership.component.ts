@@ -18,33 +18,26 @@ export class MembershipComponent {
   userId: any = '';
   userPurchases: any = [];
   userCards: any = [];
-  // imageBaseUrl: any = "";
+  userPlans: any = [];
   allSelected: boolean = false;
   idsToDownload: any = [];
-  selectedIds: number[] = [];
-  
+  selectedIds: number[] = [];  
   totalItems: number = 0; // Total number of items for pagination
   pageSize: number = 10; // Number of items per page
   currentPage: number = 1; // Current page index
-
-  plans = [
-    { id: 1, name: 'Basic', price: 9.99, features: ['Feature 1', 'Feature 2'] },
-    { id: 2, name: 'Pro', price: 19.99, features: ['Feature 1', 'Feature 2'] },
-  ];
-
-  subscribe(plan: any) {
-    console.log(`Subscribed to: ${plan.name}`);
-  }
+  premium : any =[];
+  country: any=[];
+  booster: any=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private route: ActivatedRoute, private talentService: TalentService, public dialog: MatDialog,private router: Router) { }
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
       this.getUserPurchases();
+      this.getUserPlans();
       this.getUserCards();
     });
   }
@@ -59,13 +52,32 @@ export class MembershipComponent {
         this.userPurchases = response.data.purchaseHistory;
         this.totalItems = response.data.totalCount; // Assuming API returns the total number of purchases
         console.log(this.userPurchases)
-
       } else {
         console.error('Invalid API response:', response);
       }
     }, error => {
       console.error('Error fetching user purchases:', error);
     });
+  }
+
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+
+    this.talentService.getUserPlans().subscribe(response => {
+      if (response && response.status && response.data) {
+        this.userPlans = response.data.packages;
+        this.premium = this.userPlans.premium[0];
+        this.booster = this.userPlans.booster[0];
+        this.country = this.userPlans.country;
+        this.country.count = this.userPlans.country.length;
+        console.log('userPlans',this.userPlans)
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    }, error => {
+      console.error('Error fetching user purchases:', error);
+    });
+
   }
 
   // Fetch purchases from API with pagination parameters
@@ -201,7 +213,9 @@ export class MembershipComponent {
       // Return the image link if the user is found, otherwise return null or undefined
       return purchase ? purchase.invoice_file_path : null;
     });
+    
     this.downloadAllFiles(allLinksToDownload);
+
   }
 
   async downloadAllFiles(allLinksToDownload:any) {
