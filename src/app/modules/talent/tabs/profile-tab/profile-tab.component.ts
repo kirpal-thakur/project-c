@@ -99,7 +99,7 @@ export class ProfileTabComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('User saved:', result);
+        console.log('User saved:', this.userData);
         // Handle the save result (e.g., update the user details)
       } else {
         console.log('User canceled the edit');

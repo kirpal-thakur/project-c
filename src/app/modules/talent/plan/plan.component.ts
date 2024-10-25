@@ -62,7 +62,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   async redirectToCheckout(planId: string) {
     
     // Check if the planId already exists in selectedCountries with the same interval
-    if(this.premium[0].package_id == planId) {
+    if(this.premium.length > 0 && this.premium[0].package_id == planId) {
       alert('You have already have this plan with the same billing interval.');
       return; // Stop further execution if the plan is already selected
     }
@@ -70,7 +70,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.isLoadingCheckout = true; // Start loader for checkout
     try {
       
-      const response = await this.stripeService.createCheckoutSession(planId,this.defaultCard.id).toPromise();
+      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
       
       if (response && response.data.payment_intent.id) {
         const stripe = await this.stripe;
@@ -121,12 +121,12 @@ export class PlanComponent implements OnInit, OnDestroy {
             const newPlanData: Plan = {
               id: plan.id,
               name: plan.package_name,
-              priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
-              priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
+              priceMonthly: plan.interval === "monthly" || plan.interval === "daily" ? parseFloat(plan.price) : null,
+              priceYearly: plan.interval === "yearly" || plan.interval === "weekly"  ? parseFloat(plan.price) : null,
               currency: plan.currency,
-              isYearly: plan.interval === "yearly",
-              yearData: plan.interval === "yearly" ? (plan) : null,
-              monthData: plan.interval === "monthly" ? (plan) : null,
+              isYearly: plan.interval === "yearly" || plan.interval === "weekly" ,
+              yearData: plan.interval === "yearly" || plan.interval === "weekly"  ? (plan) : null,
+              monthData: plan.interval === "monthly" || plan.interval === "daily" ? (plan) : null,
               quantity: 1,
               includes: this.getIncludes(plan.package_name),
             };

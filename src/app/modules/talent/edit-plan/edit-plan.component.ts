@@ -70,7 +70,8 @@ export class EditPlanComponent implements OnInit {
 
   buyNow() {
     if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; // Choose the right price ID based on the selected plan
+      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; 
+      // Choose the right price ID based on the selected plan
       this.redirectToCheckout(planId);
     } else {
       console.error('No country plan selected');
@@ -86,9 +87,7 @@ export class EditPlanComponent implements OnInit {
     this.isYearly = isYearly; // Toggle between monthly and yearly
   }
 
-  cancelPlan(item:any):void{
-
-  }
+  cancelPlan(item:any):void{}
 
   isPlanAlreadySelected(): boolean {
     return this.selectedCountries.some(country => 
