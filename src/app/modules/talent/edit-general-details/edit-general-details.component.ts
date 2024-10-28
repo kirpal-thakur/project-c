@@ -31,7 +31,12 @@ export class EditGeneralDetailsComponent {
   social_youtube: string = '';
   speed_unit: string = '';
   top_speed: number = 0;
-
+  sm_x:any = "";
+  sm_facebook:any = "";
+  sm_instagram:any = "";
+  sm_youtube:any = "";
+  sm_tiktok:any = "";
+  sm_vimeo:any = "";
   currencies = [
     { code: 'USD', symbol: '$' },
     { code: 'EUR', symbol: '€' },

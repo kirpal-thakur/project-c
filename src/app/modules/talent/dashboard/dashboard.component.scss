@@ -373,8 +373,12 @@ color: #000;
   font-size: 18px;
   font-weight: 700; 
 }
+.dashboard-icons svg{
+  max-width: 36px;
+}
 .team-badge_image img {
-  width: 36px;
+  width: 100%;
+  max-width: 36px;
 }
 .title_2{
     font-size: 14px;
