@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
-import { TalentService } from '../../../../services/talent.service';
+import { ScoutService } from '../../../../services/scout.service';
 import { EditPerformanceDetailsComponent } from '../../edit-performance-details/edit-performance-details.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerformanceComponent } from './add-performance/add-performance.component';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 
 @Component({
-  selector: 'talent-performance-tab',
+  selector: 'scout-performance-tab',
   templateUrl: './performance-tab.component.html',
   styleUrl: './performance-tab.component.scss'
 })
@@ -30,7 +30,7 @@ export class PerformanceTabComponent {
 
   // from_date:2021-01-01
   //   to_date:2022-01-01
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService,private scoutService: ScoutService, public dialog: MatDialog, private router: Router) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {      
@@ -100,7 +100,7 @@ export class PerformanceTabComponent {
   
   deleteUserPerformance(id: string): void {
     // Call your service to delete the user performance by ID
-    this.talentService.deletePerformance(id).subscribe(
+    this.scoutService.deletePerformance(id).subscribe(
       (response: any) => {
         console.log('Performance deleted successfully');
         // Optionally refresh the list or handle success
@@ -114,7 +114,7 @@ export class PerformanceTabComponent {
   
   getUserPerformance(userId:any){
     try {
-      this.talentService.getPerformanceData().subscribe((response)=>{
+      this.scoutService.getPerformanceData().subscribe((response)=>{
         if (response && response.status && response.data && response.data.performanceDetail) {
           this.editableId = "";
           this.performances = response.data.performanceDetail; 
@@ -134,7 +134,7 @@ export class PerformanceTabComponent {
 
 
   getAllTeams(){
-    this.talentService.getTeams().subscribe((data) => {
+    this.scoutService.getTeams().subscribe((data) => {
       this.teams = data;
     });
   }

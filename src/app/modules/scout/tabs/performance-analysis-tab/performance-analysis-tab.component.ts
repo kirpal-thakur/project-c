@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'; 
-import { TalentService } from '../../../../services/talent.service';
+import { ScoutService } from '../../../../services/scout.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerfomanceReportComponent } from './add-perfomance-report/add-perfomance-report.component';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
@@ -14,7 +14,7 @@ interface Report {
 }
 
 @Component({
-  selector: 'talent-performance-analysis',
+  selector: 'scout-performance-analysis',
   templateUrl: './performance-analysis-tab.component.html',
   styleUrls: ['./performance-analysis-tab.component.scss']
 })
@@ -27,14 +27,14 @@ export class PerformanceAnalysisTabComponent implements OnInit {
   idsToDelete: any = [];
   path: any ;
 
-  constructor(private talentService: TalentService, public dialog: MatDialog) {}
+  constructor(private scoutService: ScoutService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadReports();
   }
 
   loadReports() {
-    this.talentService.getPerformanceReports().subscribe(
+    this.scoutService.getPerformanceReports().subscribe(
       response => {
         if (response.status) {
           this.path = response.data.uploads_path;
@@ -135,7 +135,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     let params :any = {id:this.selectedIds};
     if (confirm('Are you sure you want to delete the selected reports?')) {
       
-      this.talentService.deletePerformance(params).subscribe(
+      this.scoutService.deletePerformance(params).subscribe(
         (response) => {
           if (response.status) {
             this.loadReports();

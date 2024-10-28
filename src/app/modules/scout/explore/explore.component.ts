@@ -1,7 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { TalentService } from '../../../services/talent.service';
+import { ScoutService } from '../../../services/scout.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
@@ -41,7 +40,7 @@ export class ExploreComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private talentService: TalentService) { }
+  constructor(private scoutService: ScoutService) { }
 
   ngOnInit(): void {
     this.loadPositions();
@@ -78,7 +77,7 @@ export class ExploreComponent implements OnInit {
   //   });
 
   //   // Call the service to get filtered data
-  //   this.talentService.getExploresData(params).subscribe((response) => {
+  //   this.scoutService.getExploresData(params).subscribe((response) => {
   //     if (response && response.status && response.data) {
   //       this.players = response.data.userData.users;
   //       this.totalItems = response.data.userData.totalCount;
@@ -146,7 +145,7 @@ export class ExploreComponent implements OnInit {
     });
   
     // Call the service to get filtered data
-    this.talentService.getExploresData(params).subscribe((response) => {
+    this.scoutService.getExploresData(params).subscribe((response) => {
       if (response && response.status && response.data) {
         this.players = response.data.userData.users;
         this.totalItems = response.data.userData.totalCount;
@@ -167,7 +166,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.scoutService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
@@ -180,7 +179,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadPositions(): void {
-    this.talentService.getPositions().subscribe(
+    this.scoutService.getPositions().subscribe(
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
@@ -193,7 +192,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadLeagues(): void {
-    this.talentService.getLeagues().subscribe(
+    this.scoutService.getLeagues().subscribe(
       (response: any) => {
         if (response.status) {
           this.leagues = response.data.leagues;
@@ -206,7 +205,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadClubs(): void {
-    this.talentService.getClubs().subscribe(
+    this.scoutService.getClubs().subscribe(
       (response: any) => {
         if (response.status) {
           this.clubs = response.data.clubs;

@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { TalentService } from '../../../../services/talent.service';
+import { ScoutService } from '../../../../services/scout.service';
 import { EditTransferDetailsComponent } from '../../edit-transfer-details/edit-transfer-details.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 import { AddTransferComponent } from './add-transfer/add-transfer.component';
 
 @Component({
-  selector: 'talent-transfers-tab',
+  selector: 'scout-transfers-tab',
   templateUrl: './transfers-tab.component.html',
   styleUrl: './transfers-tab.component.scss',
 })
@@ -26,7 +26,7 @@ export class TransfersTabComponent {
     date_of_transfer: ""
   }
   seasons:any = [];
-  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router ,public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private scoutService: ScoutService, private router: Router ,public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -49,7 +49,7 @@ export class TransfersTabComponent {
 
   getUserTransfers(){
     try {
-      this.talentService.getTransferData().subscribe((response)=>{
+      this.scoutService.getTransferData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userTransfers = response.data.transferDetail;
           // this.isLoading = false;
@@ -66,7 +66,7 @@ export class TransfersTabComponent {
 
   
   getAllTeams(){
-    this.talentService.getTeams().subscribe((data) => {
+    this.scoutService.getTeams().subscribe((data) => {
       this.teams = data;
     });
   }
@@ -132,7 +132,7 @@ export class TransfersTabComponent {
   }
 
   deleteTransfer(transferId: number) {
-    this.talentService.deleteTransfer(transferId).subscribe(
+    this.scoutService.deleteTransfer(transferId).subscribe(
       response => {
         console.log('Transfer Deleted successfully:', response);
         // Refresh the transfers list or take other actions

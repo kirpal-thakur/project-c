@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 // import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
 
 @Component({
-  selector: 'talent-profile-tab',
+  selector: 'scout-profile-tab',
   templateUrl: './profile-tab.component.html',
   styleUrl: './profile-tab.component.scss'
 })
