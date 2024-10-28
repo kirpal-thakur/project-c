@@ -30,6 +30,9 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
   content: string = '';
+  error:boolean = false
+  errorMsg:any = {}
+
   constructor(
     
     public dialogRef: MatDialogRef<TemplatePopupComponent>, private tempalateApi: TemplateService,
@@ -73,10 +76,26 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     });
   }
 
+  validateForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.title == ""){
+      this.error = true;
+      this.errorMsg.title = "Title is required";
+    }
+    if(this.content == "" || this.content == "<p></p>"){
+      this.error = true;
+      this.errorMsg.content = "Content is required";
+    }
+    return this.error;
+  }
+
   createTemplate():any{
 
-    if(this.title == "" || this.content == ""){
-      console.log('aborted')
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
    
@@ -102,7 +121,8 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
 
   updateTemplate():any{
 
-    if(this.title == "" || this.content == ""){
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
 

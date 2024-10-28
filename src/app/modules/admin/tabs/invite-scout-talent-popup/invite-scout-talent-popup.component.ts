@@ -8,11 +8,11 @@ import { TalentService } from '../../../../services/talent.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
-  selector: 'app-invite-talent-popup',
-  templateUrl: './invite-talent-popup.component.html',
-  styleUrl: './invite-talent-popup.component.scss'
+  selector: 'app-invite-scout-talent-popup',
+  templateUrl: './invite-scout-talent-popup.component.html',
+  styleUrl: './invite-scout-talent-popup.component.scss'
 })
-export class InviteTalentPopupComponent {
+export class InviteScoutTalentPopupComponent {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly announcer = inject(LiveAnnouncer);
   filteredUsers:any = [];
@@ -22,21 +22,15 @@ export class InviteTalentPopupComponent {
   action:any = "";
   invitedUsers:any = [];
   eventName:any = "";
-  sightId:any = "";
+  scoutId:any = "";
   constructor(
     private userService: UserService,
     private talentService: TalentService,
-    public dialogRef: MatDialogRef<InviteTalentPopupComponent>,
+    public dialogRef: MatDialogRef<InviteScoutTalentPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data);
-    this.action = data.action;
-    if(this.action == "showInvitedUsers"){
-      this.invitedUsers = data.data
-    }else if(this.action == "inviteUsers"){
-      this.eventName = data.data;
-      this.sightId = data.sightId;
-    }
+    this.scoutId = data.scoutId;
   }
 
   ngOnInit(): void {
@@ -64,17 +58,18 @@ export class InviteTalentPopupComponent {
 
   sendInvite(){
     const formData = new FormData();  
+    let x= 0;
     this.users.map(function(user:any) {
-      formData.append('invites[]', user.id);
+      formData.append('players['+x+'][player_id]', user.id);
+      x++;
     });
 
-    this.userService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
+    this.userService.sendScoutPortfolioInvite(this.scoutId, formData).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added',
-          id: this.sightId
+          id: this.scoutId
         });
-      
       } else {
         console.error('Invalid API response structure:', response);
       }

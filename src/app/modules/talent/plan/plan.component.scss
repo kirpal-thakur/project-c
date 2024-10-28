@@ -263,6 +263,36 @@ sub.premium-month_title {
 .multi-country-select option{
     color: #000;
 }
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+.choose-plan-btn:disabled {
+    background-color: #ccc; /* Gray color for disabled state */
+    color: #e9e3e3; /* Text color when disabled */
+    cursor: not-allowed;
+    opacity: 0.8; /* Reduced opacity for the fade effect */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+  
 @media (max-width:1024px) and (min-width:769px) {
     .premium-plan_box{
         margin: 0 !important;

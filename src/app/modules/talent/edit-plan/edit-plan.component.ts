@@ -17,6 +17,7 @@ export class EditPlanComponent implements OnInit {
   stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
   stripe: any;
   isYearly = false; // Subscription type
+  defaultCard: any=null; // Variable to hold the default card
 
   @Output() buys: EventEmitter<any> = new EventEmitter();
 
@@ -31,16 +32,16 @@ export class EditPlanComponent implements OnInit {
     // If this.data.plans is an array, assign it directly
     this.countries = Array.isArray(this.data.plans) ? this.data.plans : Object.values(this.data.plans);
     this.selectedPlan =this.data.selectedPlan;
+    this.defaultCard = this.data.defaultCard;
+    this.selectedCountries = this.data.country;
     this.stripe = await this.stripeService.getStripe();
-    console.log(this.selectedPlan);
   }
 
-
   async redirectToCheckout(planId: string) {
-    
+
     try {
       // Call the backend to create the checkout session
-      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
+      const response = await this.stripeService.createCheckoutSession(planId, this.defaultCard?.id).toPromise();
   
       if (response && response.data.payment_intent.id) {
         // Redirect to Stripe Checkout with the session ID
@@ -53,14 +54,14 @@ export class EditPlanComponent implements OnInit {
       console.error('Error creating Stripe Checkout session:', error);
     }
   }
-
+  
   onCountrySelect(event: any) {
     const selectedCountryId = event.target.value;
     this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
 
-    if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
-      this.selectedCountries.push(this.selectedPlan);
-    }
+    // if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
+    //   this.selectedCountries.push(this.selectedPlan);
+    // }
   }
 
   removeCountry(country: any) {
@@ -69,7 +70,8 @@ export class EditPlanComponent implements OnInit {
 
   buyNow() {
     if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; // Choose the right price ID based on the selected plan
+      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; 
+      // Choose the right price ID based on the selected plan
       this.redirectToCheckout(planId);
     } else {
       console.error('No country plan selected');
@@ -84,4 +86,18 @@ export class EditPlanComponent implements OnInit {
   toggleBillingPlan(isYearly: boolean) {
     this.isYearly = isYearly; // Toggle between monthly and yearly
   }
+
+  cancelPlan(item:any):void{}
+
+  isPlanAlreadySelected(): boolean {
+    return this.selectedCountries.some(country => 
+      country.package_id === this.selectedPlan?.id && 
+      (
+        (this.isYearly && country.interval === 'yearly') || 
+        (!this.isYearly && country.interval === 'monthly')
+      )
+    );
+  }
+   
+  
 }

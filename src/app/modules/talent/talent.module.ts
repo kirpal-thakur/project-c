@@ -57,6 +57,7 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
 import { AddCountryComponent } from './countries/add-country/add-country.component';
+import { UpdateCountryPlanComponent } from './update-country-plan/update-country-plan.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +100,7 @@ import { AddCountryComponent } from './countries/add-country/add-country.compone
     PlanComponent,
     AddCardComponent,
     AddCountryComponent,
+    UpdateCountryPlanComponent,
   ],
   imports: [
     CommonModule,

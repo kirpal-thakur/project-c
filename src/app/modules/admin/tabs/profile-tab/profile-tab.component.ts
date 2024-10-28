@@ -87,4 +87,13 @@ export class ProfileTabComponent {
       }
     })
   }
+
+  getPosition(positions:any){
+    // console.log(positions)
+    if(positions){
+      let pos = JSON.parse(positions);
+      let mainPos:any = pos.find((pos:any) => pos.main_position == 1);
+      return mainPos ? mainPos.position_name : null;
+    }
+  }
 }

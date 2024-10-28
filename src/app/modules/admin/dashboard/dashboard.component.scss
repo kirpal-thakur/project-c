@@ -288,3 +288,8 @@ tbody td:first-child {
 .pointer{
   cursor: pointer;
 }
+
+.dropdown-item.active, .dropdown-item:active{
+  color: var(--bs-dropdown-link-color);
+  background-color: transparent;
+}

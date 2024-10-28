@@ -46,6 +46,9 @@
                 </svg>
   
                 {{ 'ExportXLS' | translate }}</a>
+
+                <a *ngIf="activeTab == 'portfolio'" class="btn btn-outline-white btn-success btn-sm web-create-bg" style="color:#ffffff;" (click)="inviteTalent()">    
+                  {{ 'Add New Talent' | translate }}</a>
             </div>
             <div class="d-flex align-items-center">
               <div class="paging-data" style="margin-right: 10px;">

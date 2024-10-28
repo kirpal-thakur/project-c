@@ -21,6 +21,9 @@ export class AddRepresentatorPopupComponent {
   lastName:any = "";
   designation:any = "";
   idToUpdate:any = "";
+  error:boolean = false
+  errorMsg:any = {}
+
   constructor(private userService: UserService,private route: ActivatedRoute, public dialogRef : MatDialogRef<AddRepresentatorPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     
@@ -28,8 +31,12 @@ export class AddRepresentatorPopupComponent {
 
       if(data.action == "edit"){
         this.idToUpdate = data.representator.id; 
-        this.firstName = data.representator.first_name;
-        this.lastName = data.representator.last_name;
+        if(data.representator.first_name){
+          this.firstName = data.representator.first_name;
+        }
+        if(data.representator.last_name){
+          this.lastName = data.representator.last_name;
+        }
         this.designation = this.getMetaValue(data.representator?.meta, 'designation');
       }
   }
@@ -52,9 +59,51 @@ export class AddRepresentatorPopupComponent {
     this.dialogRef.close();
   }
 
+  validateInviteForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.email == ""){
+      this.error = true;
+      this.errorMsg.email = "Email is required";
+    }else if(!this.validEmail(this.email)){
+      this.error = true;
+      this.errorMsg.email = "Enter valid email";
+    }
+    if(this.role == ""){
+      this.error = true;
+      this.errorMsg.role = "Role is required";
+    }
+    return this.error;
+  }
+
+  validateUpdateForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.firstName == ""){
+      this.error = true;
+      this.errorMsg.firstName = "First name is required";
+    }
+    if(this.lastName == ""){
+      this.error = true;
+      this.errorMsg.lastName = "Last name is required";
+    }
+    return this.error;
+
+  }
+
+  validEmail(email:any) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  }
+
   sendInvite():any {
 
-    if(this.email == "" || this.role == ""){
+    let validForm:any = this.validateInviteForm();
+    if(validForm){
       return false;
     }
     
@@ -73,8 +122,10 @@ export class AddRepresentatorPopupComponent {
   }
 
   updateRepresentator():any{
-    if(this.firstName == "" || this.lastName == "" || this.designation == ""){
-      return false
+
+    let validForm:any = this.validateUpdateForm();
+    if(validForm){
+      return false;
     }
 
     let formdata = new FormData();
@@ -96,7 +147,8 @@ export class AddRepresentatorPopupComponent {
 
   sendAdminInvite():any {
 
-    if(this.email == "" || this.role == ""){
+    let validForm:any = this.validateInviteForm();
+    if(validForm){
       return false;
     }
     

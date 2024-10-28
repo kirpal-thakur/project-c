@@ -12,7 +12,7 @@ interface Notification {
 }
 
 @Component({
-  selector: 'talent-header',
+  selector: 'shared-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
