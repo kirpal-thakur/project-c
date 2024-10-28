@@ -4,7 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditPlanComponent } from '../edit-plan/edit-plan.component';
 import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
-import { StripeService } from 'ngx-stripe';
+import { environment } from '../../../../environments/environment';
+import { PaymentService } from '../../../services/payment.service';
 
 interface Plan {
   id: number;
@@ -35,19 +36,75 @@ export class PlanComponent implements OnInit, OnDestroy {
   userCards: any;
   defaultCard: any; // Variable to hold the default card
   stripe:any;
-  
+  loggedInUser:any = localStorage.getItem('userData');
+  premium : any =[];
+  country: any=[];
+  booster: any=[];
+  // Loader flags
+  isLoadingPlans: boolean = false;
+  isLoadingCheckout: boolean = false;
+  isLoadingCards: boolean = false;
 
   private plansSubscription: Subscription = new Subscription();
-  stripePromise = loadStripe('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a'); // Your Stripe public key
+  stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
 
-  constructor(private talentService: TalentService, public dialog: MatDialog) {}
+  constructor(private talentService: TalentService, private stripeService: PaymentService, public dialog: MatDialog) {}
 
   async ngOnInit() {
+    this.isLoadingPlans = true; // Start loading plans
+    this.getUserPlans();
     this.fetchPlans();
     this.getUserCards();
-    this.stripe = await this.talentService.getStripe();
+    this.stripe = await this.stripeService.getStripe();
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+  }
+  
+  async redirectToCheckout(planId: string) {
+    
+    // Check if the planId already exists in selectedCountries with the same interval
+    if(this.premium.length > 0 && this.premium[0].package_id == planId) {
+      alert('You have already have this plan with the same billing interval.');
+      return; // Stop further execution if the plan is already selected
+    }
+    
+    this.isLoadingCheckout = true; // Start loader for checkout
+    try {
+      
+      const response = await this.stripeService.createCheckoutSession(planId).toPromise();
+      
+      if (response && response.data.payment_intent.id) {
+        const stripe = await this.stripe;
+        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    } finally {
+      this.isLoadingCheckout = false; // Stop loader for checkout
+    }
   }
 
+  async subscribeToPlan(customerId: string, priceId: string) {
+    if (!this.stripe) return;
+
+    try {
+      const { error, setupIntent } = await this.stripe.confirmSetup({
+        clientSecret: 'setup_intent_client_secret', // Use your SetupIntent client secret from backend
+        payment_method: customerId,
+      });
+
+      if (error) {
+        console.error('Subscription failed:', error.message);
+      } else {
+        console.log('Subscription successful:', setupIntent);
+        // Inform your backend to listen for webhook events regarding this subscription
+      }
+    } catch (err) {
+      console.error('Error subscribing:', err);
+    }
+  }
+    
   ngOnDestroy() {
     this.plansSubscription.unsubscribe(); // Clean up subscription
   }
@@ -64,17 +121,16 @@ export class PlanComponent implements OnInit, OnDestroy {
             const newPlanData: Plan = {
               id: plan.id,
               name: plan.package_name,
-              priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
-              priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
+              priceMonthly: plan.interval === "monthly" || plan.interval === "daily" ? parseFloat(plan.price) : null,
+              priceYearly: plan.interval === "yearly" || plan.interval === "weekly"  ? parseFloat(plan.price) : null,
               currency: plan.currency,
-              isYearly: plan.interval === "yearly",
-              yearData: plan.interval === "yearly" ? (plan) : null,
-              monthData: plan.interval === "monthly" ? (plan) : null,
+              isYearly: plan.interval === "yearly" || plan.interval === "weekly" ,
+              yearData: plan.interval === "yearly" || plan.interval === "weekly"  ? (plan) : null,
+              monthData: plan.interval === "monthly" || plan.interval === "daily" ? (plan) : null,
               quantity: 1,
               includes: this.getIncludes(plan.package_name),
             };
 
-            // Categorize plans into premium, boosted, and others
             if (plan.package_name.toLowerCase().includes('premium')) {
               this.mergePlan(premiumPlans, newPlanData);
             } else if (plan.package_name.toLowerCase().includes('booster')) {
@@ -84,25 +140,23 @@ export class PlanComponent implements OnInit, OnDestroy {
             }
           });
 
-          // Assign the categorized plans to their respective variables
           this.premiumPlans = premiumPlans;
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
+          this.premiumPlans.isYearly = this.premium.interval == 'yearly'? true : false;
+          this.boostedPlans.isYearly = this.booster.interval == 'yearly'? true : false;
           this.selectedPlan = this.otherPlans[0];
-
-          // Log the categorized plans for debugging
-          console.log('Premium Plans:', this.premiumPlans);
-          console.log('Boosted Plans:', this.boostedPlans);
-          console.log('Other Plans:', this.otherPlans);
         }
       },
       error: (err) => {
-        console.error('Failed to fetch plans', err); // Add error handling
+        console.error('Failed to fetch plans', err);
+      },
+      complete: () => {
+        this.isLoadingPlans = false; // Stop loader for plans
       }
     });
   }
   
-
   /**
    * Helper function to merge plan data if the plan already exists.
    */
@@ -124,19 +178,19 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   // Fetch purchases from API with pagination parameters
   getUserCards(): void {
+    this.isLoadingCards = true; // Start loading cards
     this.talentService.getCards().subscribe(response => {
       if (response && response.status && response.data) {
         this.userCards = response.data.paymentMethod;
-        console.log(this.userCards);
-
-        // Identify the default card
         this.defaultCard = this.userCards.find((card: any) => card.is_default === "1");
-        console.log('Default Card:', this.defaultCard); // Log the default card
+        // console.log('Card:', this.defaultCard);
       } else {
         console.error('Invalid API response:', response);
       }
+      this.isLoadingCards = false; // Stop loading cards
     }, error => {
       console.error('Error fetching user purchases:', error);
+      this.isLoadingCards = false; // Stop loading cards on error
     });
   }
 
@@ -176,10 +230,15 @@ export class PlanComponent implements OnInit, OnDestroy {
     if (plan.quantity < this.maxQuantity) plan.quantity++;
   }
 
-  editPlanPopup(id: number) {
+  editPlanPopup(plans:any,country:any) {
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
-      data: { planId: id }
+      data: { 
+        plans: plans ,
+        selectedPlan :this.selectedPlan,
+        defaultCard : this.defaultCard ,
+        country : country ,
+      }
     });
   }
 
@@ -234,24 +293,27 @@ export class PlanComponent implements OnInit, OnDestroy {
     
   }
 
-  
-  async subscribeToPlan(plan: any) {
-    if (!this.stripe) return;
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+    this.talentService.getUserPlans().subscribe(
+      response => {
+        if (response?.status && response?.data) {
+          const userPlans = response.data.packages;
 
-    try {
-      const { error, setupIntent } = await this.stripe.confirmSetup({
-        clientSecret: 'sk_test_51PVE08Ru80loAFQX8xPJUrsLF8NVU0r2l5UXZD6XelM7JKK63aUPvjDtIwqa7aEHFPb66cs6yhgQNDVI7sxInMMT00T2UDPvky', // Use your SetupIntent client secret from backend
-        payment_method: this.defaultCard.stripe_payment_method_id,
-      });
+          // Use optional chaining and nullish coalescing to handle undefined/null
+          this.premium = Array.isArray(userPlans?.premium) && userPlans.premium.length > 0 ? userPlans.premium : [];
+          this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
+          this.country = userPlans?.country || ''; // Default to empty string if country is undefined
 
-      if (error) {
-        console.error('Subscription failed:', error.message);
-      } else {
-        console.log('Subscription successful:', setupIntent);
-        // Inform your backend to listen for webhook events regarding this subscription
+          console.log('userPlans', userPlans);
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      error => {
+        console.error('Error fetching user purchases:', error);
       }
-    } catch (err) {
-      console.error('Error subscribing:', err);
-    }
+    );
   }
+
 }

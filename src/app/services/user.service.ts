@@ -5,6 +5,7 @@ import { Observable  } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,16 @@ export class UserService {
   private userToken;
   private apiUrl2 = 'https://api.socceryou.ch/api/admin';
   
+  private adminImageUrlSource = new BehaviorSubject<string>('default');
+  adminImageUrl = this.adminImageUrlSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment?.apiUrl;
     this.userToken = localStorage.getItem('authToken');
+  }
 
+  changeImageUrl(newUrl: string) {
+    this.adminImageUrlSource.next(newUrl);
   }
 
   // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
@@ -96,7 +102,27 @@ export class UserService {
       `${this.apiUrl}admin/get-favorites/${userId}`, { params }
     );
   }
-
+  
+  addFavoritesData(id: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('favorite_id', id);
+    
+    return this.http.post<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}add-favorite`, 
+      formData // directly pass formData here
+    );
+  }
+  
+  removeFavoritesData(id: any): Observable<any> {
+    const formData = new FormData();
+    formData.append('id[]', id);
+    
+    return this.http.post<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}delete-favorites`, 
+      formData // directly pass formData here
+    );
+  }
+  
   getPurchaseData(userId:any): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}admin/get-purchase-history/${userId}`
@@ -373,7 +399,7 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}/get-club-teams/${clubId}`, {headers}
+      `${this.apiUrl}get-club-teams/${clubId}`, {headers}
     );
   }
 
@@ -494,5 +520,41 @@ export class UserService {
     });
 
     return this.http.post<any>(`${this.apiUrl2}/add-sighting/${id}`, params, { headers });
+  }
+
+  updateSight(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/edit-sighting-detail/${id}`, params, { headers });
+  }
+
+  uploadSightAttachment(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting-attachments/${id}`, params, { headers });
+  }
+
+  sendSightingInvite(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-sighting-invites/${id}`, params, { headers });
+  }
+
+  sendScoutPortfolioInvite(id:any, params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}/add-scout-player/${id}`, params, { headers });
   }
 }

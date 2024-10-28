@@ -55,8 +55,9 @@ import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-tran
 import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
-import { NgxStripeModule } from 'ngx-stripe';
 import { AddCardComponent } from './membership/add-card/add-card.component';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
+import { UpdateCountryPlanComponent } from './update-country-plan/update-country-plan.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,9 @@ import { AddCardComponent } from './membership/add-card/add-card.component';
     AddPerfomanceReportComponent,
     EditHighlightsComponent,
     PlanComponent,
-    AddCardComponent
+    AddCardComponent,
+    AddCountryComponent,
+    UpdateCountryPlanComponent,
   ],
   imports: [
     CommonModule,
@@ -123,7 +126,6 @@ import { AddCardComponent } from './membership/add-card/add-card.component';
     MatTableModule,
     MatPaginator,
     NgxEditorModule,    
-    NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })
 export class TalentModule { }

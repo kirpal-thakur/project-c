@@ -258,7 +258,6 @@ export class DashboardComponent implements OnInit {
     // const dialogRef = this.dialog.open(DeletePopupComponent, {
     //   width: '600px',
     // });
-
     // dialogRef.afterClosed().subscribe(result => {
     //   if (result) {
     //     // If result is true, proceed with deletion logic
@@ -308,7 +307,6 @@ export class DashboardComponent implements OnInit {
     // Adjust the age if the current date is before the birthday
     const monthDifference = today.getMonth() - birthDate.getMonth();
     const dayDifference = today.getDate() - birthDate.getDate();
-
     if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
       age--;
     }

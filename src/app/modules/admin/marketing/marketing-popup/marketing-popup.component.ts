@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { Editor } from 'ngx-editor';
 import { environment } from '../../../../../environments/environment';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -10,6 +11,10 @@ import { MarketingService } from '../../../../services/marketing.service';
   styleUrls: ['./marketing-popup.component.scss']
 })
 export class MarketingPopupComponent {
+
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
+
   editor!: Editor;
   html = '';
   // selectedRole:number = 2;
@@ -31,14 +36,20 @@ export class MarketingPopupComponent {
   frequency:any = ['Once a day', 'Once a week', 'Once 2 Hrs', 'Twice a day', 'Once a month', 'One time only'];
   startDate:any = "";
   endDate:any = "";
+  error:boolean = false
+  errorMsg:any = {}
   constructor(
     public dialogRef: MatDialogRef<MarketingPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private marketingApi: MarketingService
   ) {
 
-  }
+  } 
 
   ngOnInit(): void {
+
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale());
+    
     this.editor = new Editor();
 
     this.marketingApi.getRolePaymentTypes().subscribe((response)=>{
@@ -111,9 +122,30 @@ export class MarketingPopupComponent {
     return `${year}-${month}-${day}`;
   }
 
+  validateForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.title == ""){
+      this.error = true;
+      this.errorMsg.title = "Title is required";
+    }
+    if(this.html == "" || this.html == "<p></p>"){
+      this.error = true;
+      this.errorMsg.html = "Content is required";
+    }
+    if(this.startDate == "" || this.endDate == ""){
+      this.error = true;
+      this.errorMsg.dateRange = "Date range is required";
+    }
+    return this.error;
+  }
+
   createPopup():any{
 
-    if(this.title == "" || this.selectedRole == "" || this.selectedLang == "" || this.selectedLocation == "" || this.startDate == "" || this.endDate == "" || this.selectedFrequency == "" || this.html == ""){
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
 
@@ -148,7 +180,8 @@ export class MarketingPopupComponent {
  
   updatePopup():any{
 
-    if(this.title == "" || this.selectedRole == "" || this.selectedLang == "" || this.selectedLocation == "" || this.startDate == "" || this.endDate == "" || this.selectedFrequency == "" || this.html == ""){
+    let validForm:any = this.validateForm();
+    if(validForm){
       return false;
     }
 

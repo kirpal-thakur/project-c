@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
-import { loadStripe, StripeCardElement, StripeElements, Stripe } from '@stripe/stripe-js';
 
 @Injectable({
   providedIn: 'root'
@@ -14,36 +13,10 @@ export class TalentService {
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
-  private stripe!: any;
-  private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
-  }
-
-  async getStripe() {
-    return await this.stripePromise;
-  }
-
-  // Initialize Stripe.js with your publishable key
-  async initializeStripe() {
-    this.stripe = await loadStripe(environment.stripePublishableKey); // Use your Stripe Publishable Key
-    return this.stripe;
-  }
-
-  // Create a payment method using Stripe.js
-  async createPaymentMethod(card: StripeCardElement) {
-    return this.stripe.createPaymentMethod({
-      type: 'card',
-      card: card,
-    });
-  }
-
-  // Call the backend to create a customer
-  createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
-    // Replace with your CodeIgniter backend API URL
-    return this.http.post('http://your-backend-url/create-customer', { email, name, paymentMethodId });
   }
 
   getProfileData(userId: any): Observable<any> {
@@ -61,6 +34,12 @@ export class TalentService {
   getCards(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-payment-methods`
+    );
+  }
+
+  getUser(user:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/profile/${user}`
     );
   }
 
@@ -113,9 +92,9 @@ export class TalentService {
   }
   
   getCoverImg(): Observable<any> {    
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}` // Include authorization token
-  });
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
 
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
       `${this.apiUrl}user/get-cover-image`
@@ -149,6 +128,12 @@ export class TalentService {
   getTransferData(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}player/get-transfer-detail`
+    );
+  }
+  
+  getViewTransferData(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-transfer-detail/${id}`
     );
   }
   
@@ -269,6 +254,12 @@ getExploresData(params: any): Observable<any> {
       }
     );
   }
+
+  getUserPlans(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/get-active-packages`
+    );
+  }
     
   uploadCoverImage(formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -333,6 +324,7 @@ getExploresData(params: any): Observable<any> {
       { headers }
     );
   }
+
   
   updatePerformance(performanceId:any, params: any): Observable<any> {
     const headers = new HttpHeaders({
@@ -342,8 +334,16 @@ getExploresData(params: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
   }
 
-  uploadReport(params: any): Observable<any> {
+  // Update newsletter subscription
+  updateNewsletter(params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
 
+    return this.http.post<any>(`${this.apiUrl2}/user/settings/newsletter`, params, { headers });
+  }
+
+  uploadReport(params: any): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
@@ -465,4 +465,40 @@ getExploresData(params: any): Observable<any> {
     return this.http.post(`${this.apiUrl2}user/set-featured-file`, params , {headers});
   }
   
+
+  getPerformanceReportsData(id:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    
+    return this.http.get<any>(
+      `${this.apiUrl2}get-performance-reports/${id}`, 
+      { headers }
+    );
+  }
+
+  getPerformanceList(id:any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    
+    return this.http.get<any>(
+      `${this.apiUrl2}get-performance-detail/${id}`, 
+      { headers }
+    );
+  }
+
+  
+  getGalleryFiles(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery/${id}`
+    );
+  }
+
+  
+  getHighlightsFiles(id:any): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery-highlights/${id}`
+    );
+  }
 }

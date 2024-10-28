@@ -58,16 +58,16 @@ export class ChatComponent  {
 
 
   
-    // Start a group chat
-    startGroupChat() {
-      this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
-        .then(() => {
-          this.talkService.mountChat('talkjs-container');
-        })
-        .catch(err => {
-          console.error('Error starting group chat:', err);
-        });
-    }
+  // Start a group chat
+  startGroupChat() {
+    this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
+      .then(() => {
+        this.talkService.mountChat('talkjs-container');
+      })
+      .catch(err => {
+        console.error('Error starting group chat:', err);
+      });
+  }
 
   editinbox() {
     this.users = [];

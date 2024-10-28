@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { CouponService } from '../../../../services/coupon.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 @Component({
@@ -8,8 +9,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   styleUrl: './coupon-popup.component.scss'
 })
 export class CoupenPopupComponent   {
-  startDate: any = new Date();
-  endDate: any = new Date();
+  startDate: any = "";
+  endDate: any = ""; 
   type: any = "";
   name: any = "";
   code: any = "";
@@ -20,13 +21,22 @@ export class CoupenPopupComponent   {
   limit: any = ""
   isSingleUsePerCustomer: boolean = false;
   disableEndDate:boolean = false;
+  error:boolean = false
   errorMsg:any = {}
+
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
+
   constructor(
     public dialogRef: MatDialogRef<CoupenPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private couponService: CouponService
   ) {}
 
   ngOnInit(): void {
+
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale()); 
+
     if(this.data.action == "update"){
 
       let existingRecord = this.data.couponData;
@@ -43,7 +53,8 @@ export class CoupenPopupComponent   {
       this.isLimitedUse = existingRecord.is_limit;
       this.limit = existingRecord.limit;
       this.isSingleUsePerCustomer = existingRecord.limit_per_user;
-
+      this.startDate = existingRecord.valid_from;
+      this.endDate = existingRecord.valid_to;
     }
   }
 
@@ -52,7 +63,45 @@ export class CoupenPopupComponent   {
     this.dialogRef.close();
   } 
 
-  createCoupon(){
+  validateCouponForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.type == ""){
+      this.error = true;
+      this.errorMsg.type = "Type is required";
+    }
+    if(this.name == ""){
+      this.error = true;
+      this.errorMsg.name = "Name is required";
+    }
+    if(this.code == ""){
+      this.error = true;
+      this.errorMsg.code = "Code is required";
+    }
+    if(this.discount == ""){
+      this.error = true;
+      this.errorMsg.discount = "Discount is required";
+    }
+    if(this.startDate == ""){
+      this.error = true;
+      this.errorMsg.startDate = "Start date is required";
+    }
+    if(this.isLimitedUse && this.limit == ""){
+      this.error = true;
+      this.errorMsg.limit = "Limit is required";
+    }
+    return this.error;
+
+  }
+
+  createCoupon():any{
+
+    let validForm:any = this.validateCouponForm();
+    if(validForm){
+      return false;
+    }
 
     let params:any = {}
     params.title = this.name;

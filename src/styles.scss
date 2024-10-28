@@ -121,6 +121,27 @@ button.btn.btn-secondary.dropdown-toggle {
 .custom-size-calendar .mat-mdc-form-field-infix {
   padding: 0 !important;
 }
+.explore-all_input .mat-mdc-form-field-infix{
+  width: 100% !important;
+}
+.explore-all_input .mdc-text-field--filled .mdc-line-ripple::before{
+  border-bottom: none !important;
+}
+.light-theme .explore-all_input .mat-mdc-text-field-wrapper {
+  background: #fff !important;
+  border: 1px solid #999999;
+  border-radius: 10px;
+}
+.dark-theme .explore-all_input .mat-mdc-text-field-wrapper {
+  background: #0C3453 !important;
+  color: #fff !important;
+  border: 1px solid #1F4360;
+  border-radius: 10px;
+}
+.light-theme .explore-all_input .mat-mdc-text-field-wrapper:hover {
+  background: #fff !important;
+}
+
 .custom-size-calendar .mat-mdc-text-field-wrapper {
   height: 42px;
   padding: 10px 11px !important;
@@ -1505,4 +1526,11 @@ margin: auto;
   border: 1px solid #999999;
   background-color: #ffffff !important;
   border-radius: 10px !important;
+}
+
+
+.error-msg{
+  color: #cd2122;
+  font-size: 13px;
+  margin-top: 1px;
 }

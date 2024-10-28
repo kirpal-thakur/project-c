@@ -63,3 +63,37 @@ pointer-events: none;
   
 
 
+
+
+.autocomplete-wrap {
+    width: 250px;
+}
+
+.autocomplete-wrap input{
+    width: 100%;
+}
+.suggestion-wrap{
+    background: #ffffff;
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    
+}
+
+.suggestion-wrap div{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+}
+.suggestion-wrap div:hover{
+    cursor: pointer;
+}   
+
+.suggestion-wrap div img{
+    margin-right:10px;
+    width:20px
+}

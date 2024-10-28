@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCountryComponent } from './add-country/add-country.component';
 
 @Component({
   selector: 'app-countries',
@@ -15,7 +17,7 @@ export class CountriesComponent {
   filteredImages: any[] = [];  // Fixed: explicitly set as an array
   paginatedImages: any[] = [];
 
-  constructor(private talentService: TalentService) {}
+  constructor(private talentService: TalentService ,public dialog: MatDialog)  {}
 
   ngOnInit() {
     this.loadCountries();
@@ -45,8 +47,17 @@ export class CountriesComponent {
     } else {
       this.selectedCountries.splice(index, 1); // Deselect if already selected
     }
-    console.log('countries',this.selectedCountries)
+    // console.log('countries',this.selectedCountries)
+    this.addCountryPopup(country);
+  }
 
+  addCountryPopup(country:any){
+    const dialogRef = this.dialog.open(AddCountryComponent, {
+      width: '600px',
+      data: { 
+        country: country ,
+      }
+    });
   }
 
   isSelectedCountry(country: any): boolean {

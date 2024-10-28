@@ -41,13 +41,15 @@
       </div>
       <div class="col-lg-4 px-2">
         <label for="date-select" class="code-text">Date</label>
-        <div class="cupen-btn1 sighting-cal" style="min-width: 170px;">
+        <div class="cupen-btn sighting-cal" style="min-width: 170px;">
+          <input type="text" datetimepicker placeholder="Select date & time" [format]="'MM-DD-YYYY hh:mm A'" [(ngModel)]="dateTime">
+
           <!-- <input type="date" id="date-select" class="custom-date-input code-text"> -->
-          <mat-form-field class="custom-size-calendar h-auto create-sight" appearance="fill">
+          <!-- <mat-form-field class="custom-size-calendar h-auto create-sight" appearance="fill">
             <input matInput [matDatepicker]="picker" placeholder="" (click)="picker.open()" (dateChange)="onDateChange($event)"
                    style="background-color: transparent !important; border: none;"  [value]="defaultDate">
             <mat-datepicker #picker [startAt]="defaultDate"></mat-datepicker>
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
       </div>
 
@@ -99,7 +101,7 @@
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                         [matChipInputFor]="chipGrid"
                         (focus)="callListApi(userInput)"
-                        (keyup)="onKeyPress($event)"
+                        (keyup)="onKeyPress($event)" 
                       />
                     </mat-chip-grid>
                     
@@ -257,6 +259,7 @@
   </div>
   <div class="dialog-actions align-items-center d-flex justify-content-between mt-5">
     <button type="button" class="cancel-btn" (click)="close()">Cancel</button>
-    <button type="submit" class="create-btn" (click)="createSight()">Create Sighting</button>
+    <button type="submit" class="create-btn" *ngIf="!data.sightData" (click)="createSight()">Create Sighting</button>
+    <button type="submit" class="create-btn" *ngIf="data.sightData" (click)="updateSight()">Save</button>
   </div>
 </div>

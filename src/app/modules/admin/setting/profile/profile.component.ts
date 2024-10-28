@@ -30,7 +30,6 @@ export class ProfileComponent {
 
   }
   ngOnInit(): void {
-
     this.userService.getAdminProfile().subscribe((response)=>{
       if (response && response.status) {
 
@@ -72,6 +71,13 @@ export class ProfileComponent {
         if (response && response.status) {        
           // this.isLoading = false;
           this.imageLoading = false;
+          let newImageUrl = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+          let localData:any = localStorage.getItem('userData');
+          localData = JSON.parse(localData);
+          localData.profile_image_path = newImageUrl;
+          localData = JSON.stringify(localData);
+          localStorage.setItem('userData', localData);
+          this.userService.changeImageUrl(newImageUrl);
           this.showMatDialog("Profile image updated successfully!", 'display')
         } else {
           // this.isLoading = false;

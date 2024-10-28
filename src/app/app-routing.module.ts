@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
 import { NonAuthGuard } from './services/non.guard';
+import { SuccessComponent } from './modules/shared/success/success.component';
+import { CancelComponent } from './modules/shared/cancel/cancel.component';
+import { ViewProfileComponent } from './modules/shared/view-profile/view-profile.component';
 
 const routes: Routes = [
   {

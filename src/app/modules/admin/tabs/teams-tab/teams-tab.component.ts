@@ -31,11 +31,15 @@ export class TeamsTabComponent {
     try {
       this.userService.getClubTeams(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
-          this.teams = response.data.teams;
-          console.log(this.teams) 
+          if(response.data.length){
+            this.teams = response.data.teams;
+          }else{
+            this.teams = [];
+          }
           this.isLoading = false;
         } else {
-          // this.isLoading = false;
+          this.teams = [];
+          this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
       });

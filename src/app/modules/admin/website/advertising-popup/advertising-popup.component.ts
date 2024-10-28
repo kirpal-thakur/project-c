@@ -1,5 +1,6 @@
-import { Component, Inject,  } from '@angular/core';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AdvertisementService } from '../../../../services/advertisement.service';
 @Component({
@@ -9,6 +10,9 @@ import { AdvertisementService } from '../../../../services/advertisement.service
 })
 export class AdvertisingPopupComponent   {
 
+  private readonly _adapter = inject<DateAdapter<unknown, unknown>>(DateAdapter);
+  private readonly _locale = signal(inject<unknown>(MAT_DATE_LOCALE)); 
+  
   typeOptions: any = [
               '250 x 250 - Square',
               '200 x 200 - Small Square',
@@ -42,6 +46,7 @@ export class AdvertisingPopupComponent   {
   maxViews:any = "";
   maxClicks:any = "";  
   imageToUpload:any = "";
+  error:boolean = false
   errorMsg:any = {}
 
   typeForView:any = "";
@@ -53,6 +58,9 @@ export class AdvertisingPopupComponent   {
 
   ngOnInit(): void {
 
+    this._locale.set('fr');
+    this._adapter.setLocale(this._locale()); 
+    
     if(this.data.action == "update" || this.data.action == "view"){
       let existingRecord = this.data.ad;
       console.log(existingRecord)
@@ -146,8 +154,50 @@ export class AdvertisingPopupComponent   {
     }
   }
 
-  createAd(){
 
+  validateAdvertisementForm(){
+
+    this.error = false;
+    this.errorMsg = {};
+    
+    if(this.name == ""){
+      this.error = true;
+      this.errorMsg.name = "Name is required";
+    }
+    if(this.redirect == ""){
+      this.error = true;
+      this.errorMsg.redirect = "Redirect url is required";
+    }
+    
+    if(this.type == ""){
+      this.error = true;
+      this.errorMsg.type = "Type is required";
+    }
+    
+    if(this.page == ""){
+      this.error = true;
+      this.errorMsg.page = "Page is required";
+    }
+    
+    if(this.maxViews == ""){
+      this.error = true;
+      this.errorMsg.maxViews = "Max views is required";
+    }
+    
+    if(this.maxClicks == ""){      
+      this.error = true;
+      this.errorMsg.maxClicks = "Max clicks is required";
+    }
+    return this.error;
+
+  }
+
+  createAd():any {
+
+    let validForm:any = this.validateAdvertisementForm();
+    if(validForm){
+      return false;
+    }
     let formdata = new FormData();
     if(this.imageToUpload != ""){
       formdata.append("featured_image", this.imageToUpload);
@@ -183,9 +233,12 @@ export class AdvertisingPopupComponent   {
     );
   }
 
-  updateAd(){
+  updateAd():any {
     
-    
+    let validForm:any = this.validateAdvertisementForm();
+    if(validForm){
+      return false;
+    }
     let formdata = new FormData();
     if(this.imageToUpload != ""){
       formdata.append("featured_image", this.imageToUpload);

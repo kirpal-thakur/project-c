@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
-
+import { InviteScoutTalentPopupComponent } from '../tabs/invite-scout-talent-popup/invite-scout-talent-popup.component';
 @Component({
   selector: 'app-scout-detail',
   templateUrl: './scout-detail.component.html',
@@ -206,5 +206,29 @@ export class ScoutDetailComponent implements OnInit {
     }else if(roleId == "4"){
       return 'player';
     }
+  }
+
+  inviteTalent(){
+    const inviteDialog = this.dialog.open(InviteScoutTalentPopupComponent,{
+      width: '600px',
+      height:'450px',
+      position: {
+        top:'70px'
+      },
+      data: {
+        scoutId: this.userId
+      }
+    })
+
+    inviteDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        console.log(result)
+        if(result.action == "added"){
+          // this.viewSight(result.id);
+          this.showMatDialog("Players invited successfully", 'display')
+        }
+         console.log('Dialog result:', result);
+      }
+    });
   }
 }

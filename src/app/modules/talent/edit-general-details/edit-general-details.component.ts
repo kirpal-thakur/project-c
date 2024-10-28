@@ -83,29 +83,8 @@ export class EditGeneralDetailsComponent {
     this.speed_unit = this.user.meta.top_speed_unit || '';
     this.top_speed = this.user.meta.top_speed || 0;
 
-    // Log the assigned values to the console
-    this.logAssignedValues();
   }
 
-  logAssignedValues(): void {
-    console.log({
-      contract_start: this.contract_start,
-      currency: this.currency,
-      international_player: this.international_player,
-      last_change: this.last_change,
-      main_position: this.main_position,
-      market_value: this.market_value,
-      other_positions: this.other_positions,
-      social_facebook: this.social_facebook,
-      social_instagram: this.social_instagram,
-      social_tiktok: this.social_tiktok,
-      social_vimeo: this.social_vimeo,
-      social_x: this.social_x,
-      social_youtube: this.social_youtube,
-      speed_unit: this.speed_unit,
-      top_speed: this.top_speed
-    });
-  }
 
   onCancel(): void {
     this.dialogRef.close();
