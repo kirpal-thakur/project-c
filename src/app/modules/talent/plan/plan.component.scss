@@ -281,12 +281,6 @@ sub.premium-month_title {
     animation: spin 1s linear infinite;
 }
 
-.choose-plan-btn:disabled {
-    background-color: #ccc; /* Gray color for disabled state */
-    color: #e9e3e3; /* Text color when disabled */
-    cursor: not-allowed;
-    opacity: 0.8; /* Reduced opacity for the fade effect */
-}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

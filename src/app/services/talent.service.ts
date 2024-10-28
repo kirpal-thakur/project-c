@@ -236,7 +236,6 @@ getExploresData(params: any): Observable<any> {
 }
   
   removeFavorites(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
@@ -501,4 +500,5 @@ getExploresData(params: any): Observable<any> {
       `${this.apiUrl}get-gallery-highlights/${id}`
     );
   }
+
 }

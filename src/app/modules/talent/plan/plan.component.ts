@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../../../environments/environment';
 import { PaymentService } from '../../../services/payment.service';
+import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 
 interface Plan {
   id: number;
@@ -218,9 +219,9 @@ export class PlanComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleBillingPlan(plan: Plan, isYearly: boolean) {
-    plan.isYearly = isYearly;
-  }
+  // toggleBillingPlan(plan: Plan, isYearly: boolean) {
+  //   plan.isYearly = isYearly;
+  // }
 
   decreaseValue(plan: Plan) {
     if (plan.quantity > 1) plan.quantity--;
@@ -303,6 +304,15 @@ export class PlanComponent implements OnInit, OnDestroy {
           // Use optional chaining and nullish coalescing to handle undefined/null
           this.premium = Array.isArray(userPlans?.premium) && userPlans.premium.length > 0 ? userPlans.premium : [];
           this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
+
+          // Assign the last index of premium and booster arrays
+          const lastPremium = this.premium.length > 0 ? this.premium[this.premium.length - 1] : null;
+          const lastBooster = this.booster.length > 0 ? this.booster[this.booster.length - 1] : null;
+
+          // Alternatively, you can assign them directly to properties of the class if needed
+          this.premium = lastPremium; // Assuming you have a class property lastPremium
+          this.booster = lastBooster; // Assuming you have a class property lastBooster
+
           this.country = userPlans?.country || ''; // Default to empty string if country is undefined
 
           console.log('userPlans', userPlans);
@@ -316,4 +326,40 @@ export class PlanComponent implements OnInit, OnDestroy {
     );
   }
 
+
+  toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
+    if (plan.isYearly === isYearly) {
+      return; // No change needed
+    }
+  
+    const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
+      width: '600px', // Make dialog slightly wider for readability
+      data: {
+        message: `Are you sure you want to switch to ${isYearly ? 'Yearly' : 'Monthly'} billing for the ${plan.name} plan?`
+      },
+      disableClose: true // Force the user to make a choice
+    });
+  
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        const newPackageId = isYearly ? plan.yearData.id : plan.monthData.id;
+        this.stripeService.upgradeSubscription(subscribeId.id, newPackageId)
+          .subscribe({
+            next: (response) => {
+              if (response?.status) {
+                plan.isYearly = isYearly; // Update the plan status
+                alert('Your plan has been updated successfully.');
+              } else {
+                console.error('Subscription update failed:', response.message);
+                alert('Failed to update your subscription. Please try again.');
+              }
+            },
+            error: (error) => {
+              console.error('Error during subscription update:', error);
+              alert('An error occurred. Please try again later.');
+            }
+          });
+      }
+    });
+  }
 }

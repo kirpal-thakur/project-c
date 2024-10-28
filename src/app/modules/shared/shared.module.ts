@@ -29,6 +29,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxEditorModule } from 'ngx-editor';
+import { MessagePopupComponent } from './message-popup/message-popup.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { NgxEditorModule } from 'ngx-editor';
     PerformanceReportComponent,
     TransferDetailsComponent,   
     HeaderComponent,
-    FooterComponent 
+    FooterComponent ,
+    MessagePopupComponent
   ],
   imports: [
     CommonModule,
