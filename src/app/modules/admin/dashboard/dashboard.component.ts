@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DashboardService } from '../../../services/dashboard.service';
 import { ViewportScroller } from '@angular/common';
-
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   chart2!: Chart;
   chart3!: Chart;
   chart4!: Chart;
+  domains: any = environment.domains;
   newRegistrations:any = [];
   chartData:any = [];
   activeLanguage: string = '';
@@ -328,6 +329,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     let text = " days ago";
     if(daysAgo == 1){
       text = " day ago";
+    }else if(daysAgo == 0){
+      return "Today";
     }
     return daysAgo+text;
   }

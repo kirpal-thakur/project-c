@@ -89,3 +89,9 @@
     width: 27px;
   }
 }
+
+
+.dropdown-item.active, .dropdown-item:active{
+  color: var(--bs-dropdown-link-color);
+  background-color: transparent;
+}

@@ -13,6 +13,7 @@
                 <div>
                     <p  class="code-text">Email</p>
                     <input class="cupen-btn-1 code-text" style="width:100%;" [(ngModel)]="email">
+                    <div *ngIf="errorMsg.email" class="error-msg">{{errorMsg.email}}</div>
                 </div>
             </div>
             <div class="d-flex1 mb-3">
@@ -30,6 +31,7 @@
                             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
                         </svg>
                     </div>
+                    <div *ngIf="errorMsg.role" class="error-msg">{{errorMsg.role}}</div>
                 </div>
             </div>
         </div>
@@ -40,12 +42,14 @@
                 <div>
                     <p  class="code-text">First Name</p>
                     <input class="cupen-btn-1 code-text" style="width:100%;" [(ngModel)]="firstName">
+                    <div *ngIf="errorMsg.firstName" class="error-msg">{{errorMsg.firstName}}</div>
                 </div>
             </div>
             <div class="d-flex1 mb-3">
                 <div>
                     <p  class="code-text">Last Name</p>
                     <input class="cupen-btn-1 code-text" style="width:100%;" [(ngModel)]="lastName">
+                    <div *ngIf="errorMsg.lastName" class="error-msg">{{errorMsg.lastName}}</div>
                 </div>
             </div>
             <div class="d-flex1 mb-3">
@@ -61,6 +65,7 @@
                 <div>
                     <p  class="code-text">Email</p>
                     <input class="cupen-btn-1 code-text" style="width:100%;" [(ngModel)]="email">
+                    <div *ngIf="errorMsg.email" class="error-msg">{{errorMsg.email}}</div>
                 </div>
             </div>
             <div class="d-flex1 mb-3">
@@ -78,6 +83,7 @@
                             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
                         </svg>
                     </div>
+                    <div *ngIf="errorMsg.role" class="error-msg">{{errorMsg.role}}</div>
                 </div>
             </div>
         </div>

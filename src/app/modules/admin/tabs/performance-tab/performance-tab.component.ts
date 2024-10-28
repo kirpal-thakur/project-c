@@ -14,6 +14,7 @@ export class PerformanceTabComponent {
   performances:any = [];
   editableId: string = "";
   teams:any = [];
+  filteredTeams:any = [];
   dataTOBeUpdated:any = {
     coach: "",
     team_id: "",
@@ -22,9 +23,11 @@ export class PerformanceTabComponent {
     session: "",
     player_age: ""
   }
+
+  inputValue:any = "";
   // from_date:2021-01-01
   //   to_date:2022-01-01
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { } 
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -66,6 +69,7 @@ export class PerformanceTabComponent {
 
   editPerformance(performanceId:any){
     console.log(performanceId)
+    this.inputValue = "";
     this.editableId = performanceId;
     let index = this.performances.findIndex((x:any) => x.id == performanceId);
     let currentRow = this.performances[index];
@@ -98,6 +102,7 @@ export class PerformanceTabComponent {
       // console.log(response)
       // this.editableId = "";
       if(response.status){
+        this.performances = [];
         this.getUserPerformance(this.userId);
       }
     }); 
@@ -115,6 +120,23 @@ export class PerformanceTabComponent {
 
   updateRow(key:any, value:any){
     this.dataTOBeUpdated[key] = value;
+  }
+
+  suggestTeams(event: Event): void {
+    let inputElement = event.target as HTMLInputElement;
+    let keyword = inputElement.value;
+
+    if(keyword == ""){
+      this.filteredTeams = [];
+    }else{
+      this.filteredTeams = this.teams.filter((item:any) => item.team_name.toLowerCase().indexOf(keyword.toLowerCase()) === 0);
+    } 
+  }
+
+  selectTeam(teamId:any, name:any, country:any){
+    this.inputValue = name+", "+country;
+    this.updateRow('team_id',teamId);
+    this.filteredTeams = [];
   }
 }
 

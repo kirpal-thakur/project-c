@@ -13,6 +13,7 @@
         <h4 class="text-size">Name: &nbsp;</h4>
         <input type="text" class="template-name-inputField" [(ngModel)]="title" style="border: none;width: 500px;outline: none;">
     </div>
+    <div *ngIf="errorMsg.title" class="error-msg" style="padding-left:15px;">{{errorMsg.title}}</div>
 
     <hr class="m-0">
 
@@ -93,11 +94,11 @@
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle> 
             </mat-form-field>
-
+            <div *ngIf="errorMsg.dateRange" class="error-msg" style="padding-left:15px;margin-bottom: 10px;">{{errorMsg.dateRange}}</div>
            <!-- <p class="text-size">01-04-2024  to  30-04-2024</p> -->
 
 
-        </div>
+        </div> 
         <div class="d-flex align-items-center">
             <h4 class="text-size fw-bold"> Display Freq: </h4>
             <div class="btn-group">
@@ -110,7 +111,7 @@
                   <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
                 </svg>
             </div>
-        </div>    
+        </div>   
     </div>
 
     <hr class="m-0 ">
@@ -119,12 +120,13 @@
     <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
         <ngx-editor [editor]="editor" [(ngModel)]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <div *ngIf="errorMsg.html" class="error-msg" style="padding-left:20px;">{{errorMsg.html}}</div>
     </div>
     <div>
       <div class=" d-flex justify-content-around bg-0C3453 p-3">
     
        <div>
-         <a class="btn btn-delete text-danger ">Delete</a>
+         <a class="btn btn-delete text-danger" (click)="close()">Cancel</a>
        </div>
        <div>
          <a class="btn Launch px-5" (click)="createPopup()" *ngIf="!data">Create and Launch</a>

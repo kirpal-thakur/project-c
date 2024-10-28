@@ -14,15 +14,16 @@
         <div class="team-details">
             <p>{{ 'CurrentClub' | translate}}</p>
             <h6>
-                <img *ngIf="userData.club_logo_path" src="{{userData.club_logo_path}}" class="fc-club-img" alt=""> 
-                {{userData?.current_club_name |translate }}
-                <img src="../../../../assets/images/flag.svg" class="fc-img  style-1" alt=""></h6>
+                <img *ngIf="userData.pre_current_club_logo_path" src="{{userData.pre_current_club_logo_path}}" class="fc-club-img" alt=""> 
+                {{userData?.pre_current_club_name |translate }}
+                <img *ngIf="userData.pre_current_club_country_path" src="{{userData.pre_current_club_country_path}}" class="fc-img  style-1" alt=""></h6>
         </div>
         </div>
         <div class="col-lg-3">
         <div class="team-details">
             <p> {{ 'League level ' | translate }}</p>
-            <h6>{{ userData?.league_name | translate }}</h6>
+            <h6 *ngIf="userData.league_name">{{ userData.league_name | translate }}</h6>
+            <h6 *ngIf="!userData.league_name">NA</h6>
         </div>
         </div>
         <div class="col-lg-3">
@@ -37,7 +38,8 @@
         <div class="col-lg-3">
         <div class="team-details">
             <p> {{ 'Position' | translate}}</p>
-            <h6> {{userData?.meta?.main_position | translate}}</h6>
+            <h6 *ngIf="userData.positions">{{ getPosition(userData.positions) }}</h6>
+            <h6 *ngIf="!userData.positions">NA</h6>
         </div>
         </div>
         <div class="col-lg-3 mt-3">

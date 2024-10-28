@@ -133,3 +133,12 @@
   font-weight: 500;
   font-family: Libre Franklin, sans-serif !important;
 }
+
+.pointer{
+  cursor: pointer;
+}
+
+
+.dropdown-toggle:after{
+  display: none !important;
+}

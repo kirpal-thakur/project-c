@@ -28,20 +28,18 @@
                 <img src="{{performance.country_flag_path}}" width="26" height="26" alt=""> 
               </span>
             </div>
-              <!-- <select class="form-control performance-dark-bg" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
-                <ng-container *ngFor="let team of teams">
-                  <option *ngIf="team.id == performance.team_id" selected [value]="team.id">
-                    {{team.team_name}}, {{team.country_name}}
-                  </option>
-
-                  <option *ngIf="team.id != performance.team_id" [value]="team.id">
-                    {{team.team_name}}, {{team.country_name}}
-                  </option>
-                </ng-container>
-              </select> -->
-
               <div *ngIf="editableId == performance.id" class="select-wrapper perfermance-team-country mt-1">
-                <select class="form-control performance-dark-bg h-auto py-1 px-2" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
+
+                <div class="autocomplete-wrap">
+                  <input type="text" class="form-control performance-dark-bg coach-debt-input" (input)="suggestTeams($event)" [(ngModel)]="inputValue">
+                  <div class="suggestion-wrap" *ngIf="filteredTeams.length">
+                    <div *ngFor="let team of filteredTeams" (click)="selectTeam(team.id, team.team_name, team.country_name)">
+                      <img *ngIf="team.team_club_logo_path" src="{{team.team_club_logo_path}}"> 
+                      {{team.team_name}}, {{team.country_name}}</div>
+                  </div>
+                </div>
+
+                <!--<select class="form-control performance-dark-bg h-auto py-1 px-2" *ngIf="editableId == performance.id" (change)="onSelectChange($event)">
                   <ng-container *ngFor="let team of teams">
                     <option *ngIf="team.id == performance.team_id" selected [value]="team.id">
                       {{team.team_name}}, {{team.country_name}}
@@ -55,7 +53,9 @@
                 
                 <svg class="dropdown-icon" width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M10 1L5.5 6L1 1" stroke="#111418" stroke-width="2" stroke-linecap="round"/>
-                </svg>
+                </svg>-->
+
+
               </div>
               
            
@@ -84,7 +84,7 @@
           <td>
             <span *ngIf="editableId != performance.id">{{performance.player_age}}</span>
           
-            <input *ngIf="editableId == performance.id" type="text" value="{{performance.player_age + ' Year'}}" class="form-control performance-dark-bg year-input " (input)="onInputChange($event, 'player_age')"> <span id="Player-age-year" *ngIf="editableId != performance.id"> &nbsp;Year</span>
+            <input *ngIf="editableId == performance.id" type="text" value="{{performance.player_age}}" class="form-control performance-dark-bg year-input" (input)="onInputChange($event, 'player_age')" /> <span id="Player-age-year" *ngIf="editableId != performance.id"> &nbsp;Year</span>
           </td>
           
           <td class="d-flex justify-content-center ">
