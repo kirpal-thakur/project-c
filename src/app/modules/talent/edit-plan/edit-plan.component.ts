@@ -1,9 +1,10 @@
 import { Component, Inject, Output, EventEmitter, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { PaymentService } from '../../../services/payment.service';
 import { environment } from '../../../../environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
+import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 
 @Component({
   selector: 'app-edit-plan',
@@ -25,6 +26,8 @@ export class EditPlanComponent implements OnInit {
     public dialogRef: MatDialogRef<EditPlanComponent>,
     public talentService: TalentService,
     private stripeService: PaymentService,
+    private paymentService:PaymentService
+    , public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -70,9 +73,10 @@ export class EditPlanComponent implements OnInit {
 
   buyNow() {
     if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.priceYearly : this.selectedPlan.priceMonthly; 
+      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
+      
       // Choose the right price ID based on the selected plan
-      this.redirectToCheckout(planId);
+      this.redirectToCheckout(planId.id);
     } else {
       console.error('No country plan selected');
     }
@@ -100,4 +104,68 @@ export class EditPlanComponent implements OnInit {
   }
    
   
+  confirmAndCancelSubscription(subscriptionId: string): void {
+    console.log(subscriptionId);
+    // return
+    const dialogRef = this.dialog.open(MessagePopupComponent, {
+      width: '600px',
+      data: {
+        action: 'delete-confirmation',
+        message: 'Are you sure you want to cancel this subscription? This action cannot be undone.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed') {
+        this.cancelSubscription(subscriptionId);
+        this.getUserPlans;
+      }
+    });
+  }
+
+  private cancelSubscription(subscriptionId: string): void {
+    this.paymentService.cancelSubscription(subscriptionId).subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          // Open the MessagePopupComponent with a success message
+          this.dialog.open(MessagePopupComponent, {
+            width: '600px',
+            data: {
+              action: 'display',
+              message: 'Subscription canceled successfully.'
+            }
+          });
+          console.log('Subscription canceled successfully:', response);
+        } else {
+          console.error('Failed to cancel subscription', response);
+        }
+      },
+      error => {
+        console.error('Error cancelling subscription:', error);
+      }
+    );
+  }
+
+  
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+    this.talentService.getUserPlans().subscribe(
+      response => {
+        if (response?.status && response?.data) {
+          const userPlans = response.data.packages;
+
+          this.selectedCountries = userPlans?.country || ''; // Default to empty string if country is undefined
+
+          console.log('userPlans', userPlans);
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      error => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
+  }
+
+
 }

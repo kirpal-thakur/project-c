@@ -41,6 +41,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   premium : any =[];
   country: any=[];
   booster: any=[];
+  demo: any=[];
   // Loader flags
   isLoadingPlans: boolean = false;
   isLoadingCheckout: boolean = false;
@@ -144,8 +145,8 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.premiumPlans = premiumPlans;
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
-          this.premiumPlans.isYearly = this.premium.interval == 'yearly'? true : false;
-          this.boostedPlans.isYearly = this.booster.interval == 'yearly'? true : false;
+          this.premiumPlans.isYearly = this.premium && this.premium.interval == 'yearly'? true : false;
+          this.boostedPlans.isYearly = this.booster && this.booster.interval == 'yearly'? true : false;
           this.selectedPlan = this.otherPlans[0];
         }
       },
@@ -303,11 +304,13 @@ export class PlanComponent implements OnInit, OnDestroy {
 
           // Use optional chaining and nullish coalescing to handle undefined/null
           this.premium = Array.isArray(userPlans?.premium) && userPlans.premium.length > 0 ? userPlans.premium : [];
+          this.demo = Array.isArray(userPlans?.demo) && userPlans.demo.length > 0 ? userPlans.demo : [];
           this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
 
           // Assign the last index of premium and booster arrays
           this.premium = this.premium.length > 0 ? this.premium[0] : null;
           this.booster = this.booster.length > 0 ? this.booster[0] : null;
+          this.demo = this.demo.length > 0 ? this.demo[0] : null;
 
           this.country = userPlans?.country || ''; // Default to empty string if country is undefined
 

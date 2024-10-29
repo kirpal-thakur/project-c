@@ -228,10 +228,15 @@ getExploresData(params: any): Observable<any> {
   if (params.noLimit) {
     queryParams = queryParams.set('noLimit', 'true');
   }
+  
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.userToken}`
+  });
 
-  // Send the HTTP GET request
+  // Send the HTTP GET request with both params and headers
   return this.http.get<{ status: boolean, message: string, data: {} }>(
-    `${this.apiUrl}users-frontend`, { params: queryParams }
+    `${this.apiUrl}users-frontend`, 
+    { params: queryParams, headers } // Combine params and headers here
   );
 }
   

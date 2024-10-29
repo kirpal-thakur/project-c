@@ -180,7 +180,7 @@ export class MembershipComponent {
   }
 
   async downloadInvoice(invoideId:any, invoiceUrl:any){
-     // use the fetch/blob method because single download isn't working 
+    // use the fetch/blob method because single download isn't working 
     fetch(invoiceUrl)
       .then(response => {
         if (!response.ok) {
@@ -200,7 +200,7 @@ export class MembershipComponent {
       })
       .catch(error => {
         console.error('There was an error downloading the file:', error);
-      });
+    });
   }
 
   downloadAll():any{
