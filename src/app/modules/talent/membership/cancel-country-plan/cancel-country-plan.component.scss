@@ -68,3 +68,10 @@
 .confirm-btn:not(:disabled):hover {
     background-color: #e04a4a;
 }
+
+.already-canceled-message {
+    font-size: 1rem;
+    color: #777777;
+    margin-top: 20px;
+    font-weight: 500;
+}
