@@ -306,12 +306,8 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
 
           // Assign the last index of premium and booster arrays
-          const lastPremium = this.premium.length > 0 ? this.premium[this.premium.length - 1] : null;
-          const lastBooster = this.booster.length > 0 ? this.booster[this.booster.length - 1] : null;
-
-          // Alternatively, you can assign them directly to properties of the class if needed
-          this.premium = lastPremium; // Assuming you have a class property lastPremium
-          this.booster = lastBooster; // Assuming you have a class property lastBooster
+          this.premium = this.premium.length > 0 ? this.premium[0] : null;
+          this.booster = this.booster.length > 0 ? this.booster[0] : null;
 
           this.country = userPlans?.country || ''; // Default to empty string if country is undefined
 
@@ -328,7 +324,13 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
   toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
-    if (plan.isYearly === isYearly) {
+
+    if (subscribeId.stripe_cancel_at !== null) {
+        alert('This plan has already been cancelled and cannot be upgraded.');
+        return;
+    }
+  
+    if (plan.isYearly === isYearly ) {
       return; // No change needed
     }
   

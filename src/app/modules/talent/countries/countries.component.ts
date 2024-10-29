@@ -16,8 +16,9 @@ export class CountriesComponent {
   flag_path:any;
   filteredImages: any[] = [];  // Fixed: explicitly set as an array
   paginatedImages: any[] = [];
+  defaultCountry : any;
 
-  constructor(private talentService: TalentService ,public dialog: MatDialog)  {}
+  constructor( private talentService: TalentService ,public dialog: MatDialog)  {}
 
   ngOnInit() {
     this.loadCountries();

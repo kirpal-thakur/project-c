@@ -106,6 +106,7 @@
                             <th scope="col">{{'Date' | translate}}</th>
                             <th scope="col">{{'VoucherCode' | translate}}</th>
                             <th scope="col">{{'Amount' | translate}}</th>
+                            <th scope="col">{{'Interval' | translate}}</th>
                             <th scope="col" class="text-center">{{'View' | translate}}</th>
                             <th scope="col" class="text-center">{{'Download' | translate}}</th>
                           </tr>
@@ -125,6 +126,10 @@
                             <td>
                               <span *ngIf="purchase.amount_paid">{{purchase.amount_paid}} {{purchase.amount_paid_currency}}</span>
                               <span *ngIf="!purchase.amount_paid">-</span>
+                            </td>
+                            
+                            <td>
+                              <span >{{(purchase && purchase.interval == 'yearly') ? 'Yearly' : 'Monthly'}}</span>
                             </td>
                             
                             <td class="text-center">
