@@ -17,10 +17,17 @@ export class CountriesComponent {
   filteredImages: any[] = [];  // Fixed: explicitly set as an array
   paginatedImages: any[] = [];
   defaultCountry : any;
+  loggedInUser:any = localStorage.getItem('userData');
+  premium : any =[];
+  country: any=[];
+  booster: any=[];
+  demo: any=[];
 
   constructor( private talentService: TalentService ,public dialog: MatDialog)  {}
 
   ngOnInit() {
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+    console.log(this.loggedInUser)
     this.loadCountries();
   }
   
@@ -63,5 +70,36 @@ export class CountriesComponent {
 
   isSelectedCountry(country: any): boolean {
     return this.selectedCountries.includes(country.location);
+  }
+
+  
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+    this.talentService.getUserPlans().subscribe(
+      response => {
+        if (response?.status && response?.data) {
+          const userPlans = response.data.packages;
+
+          // Use optional chaining and nullish coalescing to handle undefined/null
+          this.premium = Array.isArray(userPlans?.premium) && userPlans.premium.length > 0 ? userPlans.premium : [];
+          this.demo = Array.isArray(userPlans?.demo) && userPlans.demo.length > 0 ? userPlans.demo : [];
+          this.booster = Array.isArray(userPlans?.booster) && userPlans.booster.length > 0 ? userPlans.booster : [];
+
+          // Assign the last index of premium and booster arrays
+          this.premium = this.premium.length > 0 ? this.premium[0] : null;
+          this.booster = this.booster.length > 0 ? this.booster[0] : null;
+          this.demo = this.demo.length > 0 ? this.demo[0] : null;
+
+          this.country = userPlans?.country || ''; // Default to empty string if country is undefined
+
+          console.log('userPlans', userPlans);
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      error => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
   }
 }

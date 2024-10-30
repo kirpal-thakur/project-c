@@ -5,6 +5,7 @@ import { PaymentService } from '../../../services/payment.service';
 import { environment } from '../../../../environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
+import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 
 @Component({
   selector: 'app-edit-plan',
@@ -71,17 +72,78 @@ export class EditPlanComponent implements OnInit {
     this.selectedCountries = this.selectedCountries.filter(c => c.id !== country.id);
   }
 
-  buyNow() {
-    if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
-      
-      // Choose the right price ID based on the selected plan
-      this.redirectToCheckout(planId.id);
-    } else {
-      console.error('No country plan selected');
-    }
-    // this.dialogRef.close(); // Optionally close the dialog
+buyNow() {
+  if (this.isPlanAlreadySelected()) {
+    // Show a warning message to the user
+    this.dialog.open(MessagePopupComponent, {
+      width: '600px',
+      data: {
+        action: 'display',
+        message: 'You already have a subscription for this plan with a different interval. Please cancel it before selecting a new interval.'
+      }
+    });
+    return; // Prevent further action
   }
+
+  console.log(this.selectedPlan)
+  
+  if (this.selectedPlan) {
+    const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
+
+    if(this.isYearly){
+
+      if(this.selectedPlan?.monthData?.is_package_active == 'active'){
+
+        // Choose the right price ID based on the selected plan
+        this.updatePlan(planId,this.isYearly,null);
+
+      }else{
+        this.redirectToCheckout(planId.id);
+        // console.log('fhjdkh')
+
+      }
+
+    }else{
+
+      if(this.selectedPlan?.yearData?.is_package_active == 'active'){
+
+        // Choose the right price ID based on the selected plan
+        this.updatePlan(planId,this.isYearly,null);
+
+      }else{
+        this.redirectToCheckout(planId.id);
+        // console.log('gah')
+
+      }
+    }
+  } else {
+    console.error('No country plan selected');
+  }
+}
+
+updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
+  if (plan?.is_package_active == 'active') {
+    alert('This plan has already Subscribed.');
+    return;
+  }
+
+  if (plan.isYearly === isYearly) {
+    alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
+    return;
+  }
+
+  const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
+    data: { plan, isYearly }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === 'confirmed') {
+      console.log(`Plan toggled to ${isYearly ? 'yearly' : 'monthly'}`);
+    }
+  });
+}
+
+
 
   cancel(): void {
     this.dialogRef.close();

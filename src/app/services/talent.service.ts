@@ -31,6 +31,18 @@ export class TalentService {
     );
   }
 
+  getPackages(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+  
+    // Send the HTTP GET request with both params and headers
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-packages`,
+      {  headers } // Combine params and headers here
+    );
+  }
+
   getCards(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-payment-methods`
@@ -324,7 +336,7 @@ getExploresData(params: any): Observable<any> {
     });
     
     return this.http.get<any>(
-      `${this.apiUrl2}/player/get-performance-reports`, 
+      `${this.apiUrl2}player/get-performance-reports`, 
       { headers }
     );
   }
@@ -335,7 +347,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-performance-detail/${performanceId}`, params, { headers });
   }
 
   // Update newsletter subscription
@@ -344,7 +356,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/user/settings/newsletter`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}user/settings/newsletter`, params, { headers });
   }
 
   uploadReport(params: any): Observable<any> {
@@ -366,7 +378,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-performance-detail`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-performance-detail`, params, { headers });
   }
 
   deletePerformance(params: any): Observable<any> {
@@ -383,7 +395,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-transfer-detail/${transferId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-transfer-detail/${transferId}`, params, { headers });
   }
 
   addTransfer(params: any): Observable<any> {
@@ -391,7 +403,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-transfer-detail/`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-transfer-detail/`, params, { headers });
   }
 
   deleteTransfer(id: any): Observable<any> {
