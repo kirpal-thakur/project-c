@@ -72,78 +72,104 @@ export class EditPlanComponent implements OnInit {
     this.selectedCountries = this.selectedCountries.filter(c => c.id !== country.id);
   }
 
-buyNow() {
-  if (this.isPlanAlreadySelected()) {
-    // Show a warning message to the user
-    this.dialog.open(MessagePopupComponent, {
-      width: '600px',
-      data: {
-        action: 'display',
-        message: 'You already have a subscription for this plan with a different interval. Please cancel it before selecting a new interval.'
+  buyNow() {
+    if (this.isPlanAlreadySelected()) {
+      // Show a warning message to the user
+      this.dialog.open(MessagePopupComponent, {
+        width: '600px',
+        data: {
+          action: 'display',
+          message: 'You already have a subscription for this plan with a different interval. Please cancel it before selecting a new interval.'
+        }
+      });
+      return; // Prevent further action
+    }
+
+     
+    let oldPlan = this.selectedCountries.filter(c => c.package_name == this.selectedPlan.name);
+    oldPlan = oldPlan.length > 0 ? oldPlan[0] : null;
+    console.log(oldPlan)
+    console.log(this.selectedPlan)
+    
+    if (this.selectedPlan) {
+      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
+      const subscribeId = this.isYearly ? this.selectedPlan.monthData : this.selectedPlan.yearData; 
+
+      if(this.isYearly){
+
+        if(this.selectedPlan?.monthData?.is_package_active == 'active'){
+          this.updatePlan(planId,this.isYearly,oldPlan);
+        }else{
+          this.redirectToCheckout(planId.id);
+        }
+
+      }else{
+
+        if(this.selectedPlan?.yearData?.is_package_active == 'active'){
+
+          // Choose the right price ID based on the selected plan
+          this.updatePlan(planId,this.isYearly,oldPlan);
+
+        }else{
+          this.redirectToCheckout(planId.id);
+
+        }
+      }
+    } else {
+      console.error('No country plan selected');
+    }
+  }
+
+  updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
+    if (plan?.is_package_active == 'active') {
+      alert('This plan has already Subscribed.');
+      return;
+    }
+
+    if (plan.isYearly === isYearly) {
+      alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
+      return;
+    }
+
+    const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
+      data: { plan, isYearly }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateSubscription(subscribeId.id, plan.id);
+        console.log(plan);
+        console.log(`Plan toggled to ${isYearly ? 'yearly' : 'monthly'}`);
       }
     });
-    return; // Prevent further action
   }
 
-  console.log(this.selectedPlan)
-  
-  if (this.selectedPlan) {
-    const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
-
-    if(this.isYearly){
-
-      if(this.selectedPlan?.monthData?.is_package_active == 'active'){
-
-        // Choose the right price ID based on the selected plan
-        this.updatePlan(planId,this.isYearly,null);
-
-      }else{
-        this.redirectToCheckout(planId.id);
-        // console.log('fhjdkh')
-
+  updateSubscription(old:any,newID:any) {
+    
+    // Call the backend service to update the subscription
+    this.paymentService.upgradeSubscription(old,newID).subscribe(
+      response => {
+        if (response && response.status) {
+          // Open a message popup to inform the user of the successful update
+          this.dialog.open(MessagePopupComponent, {
+            width: '600px',
+            data: {
+              action: 'display',
+              message: 'Your subscription has been updated successfully.'
+            }
+          });
+        this.dialogRef.close();
+          
+          console.log('Subscription updated successfully:', response);
+        } else {
+          console.error('Failed to update subscription', response);
+        }
+      },
+      error => {
+        console.error('Error updating subscription:', error);
       }
-
-    }else{
-
-      if(this.selectedPlan?.yearData?.is_package_active == 'active'){
-
-        // Choose the right price ID based on the selected plan
-        this.updatePlan(planId,this.isYearly,null);
-
-      }else{
-        this.redirectToCheckout(planId.id);
-        // console.log('gah')
-
-      }
-    }
-  } else {
-    console.error('No country plan selected');
+    );
   }
-}
-
-updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
-  if (plan?.is_package_active == 'active') {
-    alert('This plan has already Subscribed.');
-    return;
-  }
-
-  if (plan.isYearly === isYearly) {
-    alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
-    return;
-  }
-
-  const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
-    data: { plan, isYearly }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result === 'confirmed') {
-      console.log(`Plan toggled to ${isYearly ? 'yearly' : 'monthly'}`);
-    }
-  });
-}
-
-
 
   cancel(): void {
     this.dialogRef.close();
@@ -157,17 +183,21 @@ updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
 
   isPlanAlreadySelected(): boolean {
     return this.selectedCountries.some(country => 
-      country.package_id === this.selectedPlan?.id && 
+      country.package_name === this.selectedPlan?.name && 
       (
         (this.isYearly && country.interval === 'yearly') || 
         (!this.isYearly && country.interval === 'monthly')
       )
     );
-  }
-   
+  } 
   
-  confirmAndCancelSubscription(subscriptionId: string): void {
-    console.log(subscriptionId);
+  confirmAndCancelSubscription(subscriptionId: string,canceled=false): void {
+    
+    if(canceled){
+      alert('subscription already cancelled')
+      return
+    }
+
     // return
     const dialogRef = this.dialog.open(MessagePopupComponent, {
       width: '600px',
@@ -198,6 +228,8 @@ updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
             }
           });
           console.log('Subscription canceled successfully:', response);
+          this.dialogRef.close();
+
         } else {
           console.error('Failed to cancel subscription', response);
         }
@@ -208,7 +240,7 @@ updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
     );
   }
 
-  
+
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
     this.talentService.getUserPlans().subscribe(

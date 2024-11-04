@@ -130,6 +130,7 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
           this.selectedPlan = this.otherPlans[0] || null;
+          
         }
       },
       error: (err) => {
@@ -234,32 +235,40 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
   toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
-    // if (subscribeId?.stripe_cancel_at !== null) {
-    //   alert('This plan has already been cancelled and cannot be upgraded.');
-    //   return;
-    // }
-  
+    // Track the original state of the billing plan
+    const originalIsYearly = plan.isYearly;
+
     if (plan.isYearly === isYearly) {
       alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
       return;
     }
-    console.log(subscribeId);
+    const planId = isYearly ? plan.yearData : plan.monthData;
+
+    console.log(planId)
+
+    if(planId.is_package_active != 'active'){
+      plan.isYearly = !originalIsYearly;
+      return
+    }
   
     const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
       data: { plan, isYearly }
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      if (result ) {
-        // const subscribeId = isYearly ? plan.monthData : plan.yearData;
-        const planId = isYearly ? plan.yearData : plan.monthData;
-
-        this.updateSubscription(subscribeId.id,planId.id)
+      if (result) {
+        this.updateSubscription(subscribeId.id, planId.id);
         console.log(plan);
         console.log(`Plan toggled to ${isYearly ? 'yearly' : 'monthly'}`);
+      } else {
+        // If the user canceled the dialog, revert the plan's billing state
+        plan.isYearly = !plan.isYearly ;
+
+        console.log(`Plan state reverted to ${originalIsYearly ? 'yearly' : 'monthly'}`);
       }
     });
   }
+  
   
   updateSubscription(old:any,newID:any) {
   
@@ -285,8 +294,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
-  
+
 
   async subscribeToPlan(customerId: string) {
     if (!this.stripe) return;
@@ -338,4 +346,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     }
   }
 
+  getActiveMultiCountryPlanCount(): number {
+    return this.country.length;
+  }
 }

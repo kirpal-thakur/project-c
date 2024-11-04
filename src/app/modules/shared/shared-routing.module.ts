@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IndexComponent } from '../talent/index/index.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { IndexComponent } from './index/index.component';
 
 const routes: Routes = [
   {

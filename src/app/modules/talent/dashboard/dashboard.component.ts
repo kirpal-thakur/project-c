@@ -31,6 +31,9 @@ export class DashboardComponent implements OnInit {
   userVideos: any = [];
   imageBaseUrl : any;
   defaultCoverImage:any = "./media/palyers.png";
+  premium : any = false;
+  booster : any = false;
+  activeDomains : any;
 
   @Output() dataEmitter = new EventEmitter<string>();
 
@@ -123,9 +126,12 @@ export class DashboardComponent implements OnInit {
       this.talentService.getProfileData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.user_data) {
           this.user = response.data.user_data; 
-          console.log('user:', this.user);
-
           this.userNationalities = JSON.parse(this.user.user_nationalities);
+
+          this.premium= this.user.active_subscriptions?.premium?.length > 0 ? true : false ;
+          this.booster= this.user.active_subscriptions?.booster?.length > 0 ? true : false;
+          this.activeDomains= this.user.active_subscriptions?.country?.length > 0 ? true : false;
+
           if(this.user.meta.profile_image_path ){
             this.profileImage = this.user.meta.profile_image_path;
           }

@@ -147,13 +147,13 @@
         <div class="explore-box_images mt-3">
           <div class="row player-image-list ">
             <div class="col-lg-2"  *ngFor="let player of players">
-              <div class="image_box"  [ngClass]="{'booster_box': player.package_name=='booster'}">
+              <div class="image_box"  [ngClass]="{'booster_box': player.package_name=='booster'}" (click)="exploreUser(player.role_name, player.id)">
                 <div class="player_img">
                   <img *ngIf="player.meta.profile_image_path" [src]="player.meta.profile_image_path" alt="player-image">
                   <img *ngIf="!player.meta.profile_image_path" src="../../../../assets/images/avatars/profile-image-1.png" alt="player-image">
                 </div>
                 <div class="player-names">
-                  <a href="#">{{player?.first_name?? 'N/A'}}</a>
+                  <a href="javascript:void(0)">{{player?.first_name?? 'N/A'}}</a>
                 </div>
                 <div class="player-team-logo">
                   <div class="team-logo-bg">

@@ -59,7 +59,7 @@ export class ExploreComponent implements OnInit {
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
   }
 
-  redirectUser(slug:string, id:Number): void {
+  exploreUser(slug:string, id:Number): void {
     let pageRoute = 'view/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }

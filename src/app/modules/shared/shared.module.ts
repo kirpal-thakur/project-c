@@ -11,8 +11,6 @@ import { PerformanceDetailsComponent } from './view-profile/tabs/performance-det
 import { PerformanceReportComponent } from './view-profile/tabs/performance-report/performance-report.component';
 import { TransferDetailsComponent } from './view-profile/tabs/transfer-details/transfer-details.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +28,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxEditorModule } from 'ngx-editor';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
+import { IndexComponent } from './index/index.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -42,9 +44,11 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
     PerformanceDetailsComponent,
     PerformanceReportComponent,
     TransferDetailsComponent,   
+    MessagePopupComponent,
+    IndexComponent,
     HeaderComponent,
-    FooterComponent ,
-    MessagePopupComponent
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

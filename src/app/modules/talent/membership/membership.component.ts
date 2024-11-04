@@ -295,4 +295,15 @@ export class MembershipComponent {
     });
   }
 
+  getActiveMultiCountryPlanCount(): number {
+    return this.country.length;
+  }
+
+  getActivePremiumCount(): number {
+    return this.premium.length;
+  }
+
+  getActiveboosterCount(): number {
+    return this.booster.length;
+  }
 }

@@ -4,13 +4,15 @@
             <div class="card-header border-0">
                 <h4 class="card-billing ">Billing</h4>
                 <div class="d-flex align-items-center justify-content-between marketing-header-bar">
-                  <div class="d-flex align-items-end justify-content-between w-100">
+                  <div class="d-flex align-items-end justify-content-between w-100 mt-2">
                     <h2 class="card-title mb-0 me-3">{{'Subscription plan' | translate}}</h2>
-                    <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button>
+                    <!-- <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button> -->
                   </div>
                 </div>
 
-                <div class="row premium-card_box mt-3">
+                
+                <div class="row premium-card_box mt-3" >
+
                     <div class="col-lg-4" *ngIf="premium">     
                       <div class="premium-card ">
                         <div class="d-flex align-items-end justify-content-between">
@@ -26,7 +28,7 @@
                               [disabled]="premium.stripe_cancel_at != null"
                               (click)="confirmAndCancelSubscription(premium.id)">
                               <div *ngIf="premium.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
-                              <div *ngIf="premium.stripe_cancel_at != null">{{ 'Subscription Cancelled' | translate }}</div>
+                              <div *ngIf="premium.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
                             </button>
                             
                         </div>
@@ -63,12 +65,13 @@
                               [disabled]="booster.stripe_cancel_at != null"
                               (click)="confirmAndCancelSubscription(booster.id)">
                               <div *ngIf="booster.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
-                              <div *ngIf="booster.stripe_cancel_at != null">{{ 'Subscription Cancelled' | translate }}</div>
+                              <div *ngIf="booster.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
                             </button>
                         </div>
                       </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
