@@ -1,0 +1,126 @@
+<div class="main">
+    <div class="main-bnr">
+        <div class="overlay"></div>
+        <div class="banner-inner py_0">
+            <div class="container">
+                <div class="about">
+                    <h2 class="cookie-text">Your Guide to</h2>
+                    <h2 class="cookie-text">SoccerYou</h2>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="adVisible[0]" class="skyscraper-left">
+            <img src="./assets/images/skyscraper - 120x600.png">
+            <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[1]" class="skyscraper-right">
+            <img src="./assets/images/skyscraper - 120x600.png">
+            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+    </div>
+
+    <div class="news-slider py_0">
+        <div class="container">
+            <div class="image-slider">
+                <div class="image-wrapper" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
+                    (touchend)="onTouchEnd($event)">
+                    <img [src]="currentImage" [alt]="images[currentImageIndex].alt" />
+                    <div class="image-text">
+                        <p class="p-text">02.02.2024</p>
+                        <h3 class="text-heading">SoccerYou</h3>
+                        <h3 class="text-heading">Launched in 10</h3>
+                        <h3 class="text-heading">Countries</h3>
+                        <button class="learn-more" [routerLink]="'/learn-more'">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="container">
+                <div class="thumbnail-scroll">
+                    <div class="slider-image">
+                        <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt"
+                            (click)="changeImage(image.src)" [class.active]="image.src === currentImage"
+                            class="thumbnail" />
+                    </div>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="latest-news py_0">
+        <div class="container">
+            <h4>Latest News</h4>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news1.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>SoccerYou Hosts Charity Tournament in Germany</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news4.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>Innovative Training Programs Launched to Boost Youth Talent</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news2.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>Legendary Midfielder Joins SoccerYou as Global Ambassador</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news5.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>Tech Meets Sport: Launch of the New Performance Analytics App</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news3.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>Behind the Scenes: Exclusive Interview with the Head Coach</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="news-box">
+                        <img src="./assets/images/news6.png">
+                        <p class="p-text">02.02.2024</p>
+                        <p>Upcoming Talent Showcase: Scouts and Clubs Gather for Annual Event</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advertisement">
+
+                <div *ngIf="adVisible[2]" class="large-rectangle">
+                    <img src="./assets/images/large rectangle - 336x280 .png">
+                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[3]" class="inline-rectangle">
+                    <img src="./assets/images/inline rectangle - 300x250.png">
+                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[4]" class="square">
+                    <img src="./assets/images/sqaure - 250x250.png">
+                    <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SharedModule } from './modules/shared/shared.module';
+import { WebsiteModule } from './modules/website/website.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MaterialModule,
     MatDialogModule,
+    WebsiteModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',

@@ -1,0 +1,159 @@
+<div class="main">
+    <div class="adv-player-list">
+
+        <div *ngIf="adVisible[0]" class="skyscraper-left">
+            <img src="./assets/images/skyscraper - 120x600.png">
+            <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[1]" class="skyscraper-right">
+            <img src="./assets/images/skyscraper - 120x600.png">
+            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+
+        <div class="container">
+            <div class="player-list">
+            <h1>Explore Talent and Clubs</h1>
+            <div class="tabs">
+                <button class="faq-talent-button" (click)="selectTab('talent')"
+                    [class.active]="selectedTab === 'talent'">Talent</button>
+                <button class="faq-club-button" (click)="selectTab('club')"
+                    [class.active]="selectedTab === 'club'">Club</button>
+            </div>
+
+            <div class="tab-content">
+                <div *ngIf="selectedTab === 'talent'">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of players">
+                            <div class="players">
+                                <div class="player1">
+                                    <div class="player-img">
+                                        <img [src]="player.image" alt="{{ player.name }}">
+                                    </div>
+                                    <p class="player-name7">{{ player.name }}</p>
+                                </div>
+                                <div class="corner-image7">
+                                    <img src="./assets/images/FC Thun 1.svg">
+                                </div>
+                                <div class="flag">
+                                    <div class="flag-image7">
+                                        <img src="./assets/images/flag.svg" class="flag-img">
+                                        <div class="bottom-line"></div>
+                                        <div class="flag-bottom">
+                                            <img src="./assets/images/birthday.svg" class="birthday-img">
+                                            <p class="d-o-b">2004</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination-controls">
+
+                        <div class="input-number">
+                            <label for="numberSelect">Result per page</label>
+                            <select id="numberSelect" [(ngModel)]="number" required>
+                                <option *ngFor="let num of getNumbers()" [value]="num">{{ num }}</option>
+                            </select>
+                            <!-- <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div> -->
+                        </div>
+
+
+                        <div class="pages">
+                            <button class="prev-page" (click)="prevPage()" [disabled]="currentPage === 1">
+                                <i class="fa-solid fa-angle-left"></i>
+                                <p>Back</p>
+                            </button>
+
+                            <ng-container *ngFor="let page of pagesToShow()">
+                                <button class="page-active" (click)="goToPage(page)"
+                                    [class.active]="currentPage === page">{{ page }}</button>
+                            </ng-container>
+
+                            <button class="next-page" (click)="nextPage()" [disabled]="currentPage === totalPages()">
+                                <p>Next</p> <i class="fa-solid fa-angle-right"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div *ngIf="selectedTab === 'club'">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of players">
+                            <div class="players">
+                                <div class="player1">
+                                    <div class="player-img">
+                                        <img [src]="player.image" alt="{{ player.name }}">
+                                    </div>
+                                    <p class="player-name7">{{ player.name }}</p>
+                                </div>
+                                <div class="corner-image7">
+                                    <img src="./assets/images/FC Thun 1.svg">
+                                </div>
+                                <div class="flag">
+                                    <div class="flag-image7">
+                                        <img src="./assets/images/flag.svg" class="flag-img">
+                                        <div class="bottom-line"></div>
+                                        <div class="flag-bottom">
+                                            <img src="./assets/images/birthday.svg" class="birthday-img">
+                                            <p class="d-o-b">2004</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="pagination-controls">
+                        <button class="prev-page" (click)="prevPage()" [disabled]="currentPage === 1">
+                            <i class="fa-solid fa-angle-left"></i>
+                            <p>Back</p>
+                        </button>
+
+                        <ng-container *ngFor="let page of pagesToShow()">
+                            <button class="page-active" (click)="goToPage(page)"
+                                [class.active]="currentPage === page">{{ page }}</button>
+                        </ng-container>
+
+                        <button class="next-page" (click)="nextPage()" [disabled]="currentPage === totalPages()">
+                            <p>Next</p> <i class="fa-solid fa-angle-right"></i>
+                        </button>
+
+                        <!-- <span>Page {{ currentPage }} of {{ totalPages() }}</span> -->
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="advertisement">
+
+                <div *ngIf="adVisible[2]" class="large-rectangle">
+                    <img src="./assets/images/large rectangle - 336x280 .png">
+                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[3]" class="inline-rectangle">
+                    <img src="./assets/images/inline rectangle - 300x250.png">
+                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[4]" class="square">
+                    <img src="./assets/images/sqaure - 250x250.png">
+                    <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+            </div>
+
+            
+        </div>
+    </div>
+    
+    </div>
+</div>

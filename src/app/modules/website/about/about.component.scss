@@ -1,0 +1,708 @@
+/*--------------------------------------------------------------
+   banner
+--------------------------------------------------------------*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 35px;
+  color: white;
+}
+
+h4 {
+  font-size: 30px;
+}
+
+h5 {
+  font-size: 22px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.py_0 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+body {
+  background-color: #fff;
+}
+
+
+.main-bnr {
+  position: relative;
+  z-index: 1;
+}
+
+.bnr-media {
+  position: relative;
+}
+
+.bnr-media img {
+  width: 100%;
+}
+
+.form-select:focus {
+  border-color: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.overlay {
+  position: absolute;
+  height: auto;
+  // background-color: #000;
+}
+
+.overlay {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.main-bnr {
+  background-image: url("../../../../assets/images/About-us-banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 375px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-transparent {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+}
+
+.about-text {
+  font-size: 45px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  filter: brightness(0) invert(1);
+  text-transform: uppercase;
+
+}
+
+/*--------------------------------------------------------------
+#  Banner
+--------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------------
+#  about -content
+--------------------------------------------------------------*/
+// .about-content{
+//     background-color: #092E01;
+// }
+.content-image img {
+  height: 343px;
+  width: 100%;
+  object-fit: cover;
+}
+mat-card.mat-mdc-card.mdc-card {
+  background-color: transparent;
+}
+
+.content-text {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 80px 95px 0 80px;
+}
+
+/*--------------------------------------------------------------
+#  about-content
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#  Countries
+--------------------------------------------------------------*/
+.countries {
+  position: relative;
+}
+// span.mat-mdc-list-item-unscoped-content.mdc-list-item__primary-text {
+//   color: white;
+//   font-size: 20px;
+// }
+.country-available {
+  color: white;
+  font-size: 35px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+mat-list-item{
+  color: white;
+  font-size: 20px;
+}
+.custom-list-item {
+  list-style-type: disc; /* or use circle, square as needed */
+  padding-left: 20px; /* Adjust spacing as needed */
+}
+
+.custom-list-item::before {
+  content: "•"; /* Adds the dot */
+  // color: #E05263; /* Set dot color */
+  font-size: 20px; /* Adjust size as needed */
+  margin-right: 10px; /* Space between dot and text */
+  display: inline-block; /* Ensures proper alignment */
+  vertical-align: middle; /* Aligns the dot with the text */
+}
+.mat-mdc-list-base {
+  display: block;
+  // background-color: #163E0D;
+  border-radius: 10px;
+  margin-top: 100px;
+  width: 330px;
+  padding: 20px 0 20px 0;
+}
+
+.country-name{
+  color: white !important;
+  font-size: 20px !important;
+  margin-left: 32px;
+  margin-bottom: 8px;
+}
+
+.map {
+  height: 750px;
+}
+
+.map img {
+  content: "";
+  position: absolute;
+  top: 5%;
+  right: 0;
+  height: 724px;
+  object-fit: cover;
+  width: 801px;
+}
+
+.country-list {
+  margin-top: 80px;
+  // background-color: #163E0D;
+  width: 311px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+// ::marker {
+//     color: #E05263;
+// }
+
+/*--------------------------------------------------------------
+# countries
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#  Club
+--------------------------------------------------------------*/
+// .club button {
+//   display: flex;
+//   height: 53px;
+//   width: 273px;
+//   border-radius: 60px;
+//   // margin-left: 5px;
+//   // margin-top: 5px;
+//   padding: 8px 20px 8px 20px;
+// }
+// .club-buttons img {
+//   width: 283px;
+//   height: 66px;
+//   object-fit: cover;
+// }
+.club-buttons img {
+  width: 283px;
+  height: 66px;
+  object-fit: cover;
+}
+
+.club-buttons {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.club .border-btn {
+  height: 63px;
+  width: 283px;
+  padding: 5px;
+  // border: 5px solid;
+  border-radius: 60px;
+  margin-top: 50px;
+  // padding: 10px 55px;
+}
+
+img.vector-img {
+  height: 30px;
+}
+
+.club h3 {
+  color: white;
+}
+
+.club {
+  // background-image: url("../../../../assets/images/player-6.jpeg");
+  /* Adjust the path based on your project structure */
+  background-size: cover;
+  background-position: center;
+  /* Center the background image */
+  height: 1087px;
+  position: relative;
+}
+
+.club_players {
+  padding-top: 24%;
+
+}
+
+.club-overlay {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  left: 0;
+  top: 0;
+}
+
+.club h4 {
+  margin-left: 33px;
+  font-size: 30px;
+}
+
+.vector-img {
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+/*--------------------------------------------------------------
+#  Club
+--------------------------------------------------------------*/
+
+// advertisement
+
+.skyscraper-left {
+  height: 600px;
+  width: 120px;
+  content: "";
+  z-index: 1;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+}
+
+.skyscraper-left img {
+  height: 600px;
+  width: 120px;
+}
+
+.skyscraper-right {
+  height: 600px;
+  width: 120px;
+  content: "";
+  z-index: 1;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+}
+
+.skyscraper-right img {
+  height: 600px;
+  width: 120px;
+}
+
+.large-rectangle {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  height: 280px;
+  width: 336px;
+}
+
+.large-rectangle img {
+  height: 280px;
+  width: 336px;
+}
+
+.inline-rectangle {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  content: "";
+  width: 300px;
+  height: 250px;
+}
+
+.inline-rectangle img {
+  width: 300px;
+  height: 250px;
+}
+
+.square {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: "";
+  width: 250px;
+  height: 250px;
+  display: flex;
+}
+
+.square img {
+  width: 250px;
+  height: 250px;
+}
+
+.advertisement {
+  position: relative;
+  height: 400px;
+}
+
+.ad-close-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 15px;
+  height: 24px;
+  width: 24px;
+  line-height: 24px;
+  z-index: 1;
+}
+.mat-mdc-icon-button .mat-icon {
+  z-index: 1;
+  position: relative;
+  left: -12px;
+  top: -11px;
+}
+
+
+.advertisement1 {
+  position: relative;
+}
+
+.leaderboard-image img {
+  width: 728px;
+  height: 90px;
+}
+.leaderboard-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.small-square-image img {
+  width: 200px;
+  height: 200px;
+}
+
+.small-square-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 200px;
+  width: 200px;
+}
+
+
+// advertisement
+
+@media (min-width: 1536px) {
+ 
+
+
+}
+@media (min-width: 2560px){
+
+}
+
+@media (max-width: 1440px) {}
+
+@media (max-width: 1199px) {}
+
+@media (max-width: 1025px) {
+  .main-bnr {
+    height: 300px;
+  }
+
+  .content-image img {
+    height: 280px;
+    width: 450px;
+    object-fit: cover;
+  }
+
+  .content-text {
+    padding: 20px;
+  }
+
+  .country-list {
+    padding: 10px;
+    margin-top: 40px;
+    width: 300px;
+  }
+
+  .map {
+    height: 470px;
+  }
+
+  .map img {
+    top: 8%;
+    /* left: 0; */
+    right: 0;
+    height: 480px;
+    width: 520px;
+  }
+
+  .club {
+    height: 600px;
+  }
+}
+
+@media (max-width: 991px) {
+  .leaderboard-club-image img, .small-sqaure-image img, .skyscraper-image img, .skyscraper-image img, .wide-skyscraper-image img, .leaderboard-image img, .banner-image img, .advertisement, .advertisement1 {
+    display: none;
+    }
+    .skyscraper-image, .wide-skyscraper-image, .leaderboard-club-image, .leaderboard-image, .small-sqaure-image{
+        display: none;
+    }
+
+  .leaderboard-club-image img,
+  .small-sqaure-image img,
+  .skyscraper-image img,
+  .skyscraper-image img,
+  .wide-skyscraper-image img,
+  .leaderboard-image img,
+  .banner-image img,
+  .advertisement,
+  .advertisement1,
+  .skyscraper-left img,
+  .skyscraper-right img {
+    display: none;
+  }
+
+  .py_0 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .main-bnr {
+    height: 250px;
+  }
+
+  .about-text {
+    font-size: 35px;
+  }
+
+  .content-image img {
+    height: 230px;
+    width: 350px;
+  }
+
+  .content-text {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .country-available {
+    font-size: 25px;
+  }
+
+  .country-name {
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: 4px;
+  }
+
+  .country-list {
+    padding: 10px;
+    width: 250px;
+  }
+
+  .map img {
+    right: 0;
+    height: 395px;
+    width: 440px;
+
+  }
+
+  .map {
+    height: 300px;
+  }
+
+  h3 {
+    font-size: 27px;
+  }
+
+  .club-buttons {
+    margin-top: 40px;
+  }
+
+  .club {
+    height: 450px;
+  }
+}
+
+@media (max-width: 767px) {
+  .content-image img {
+    height: 230px;
+    width: 100%;
+  }
+
+  .country-list {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .map {
+    height: 600px;
+    width: 100%;
+  }
+
+  .map img {
+    top: 45%;
+    height: 500px;
+    width: 620px;
+  }
+}
+
+@media (max-width: 575px) {
+  .map img {
+    height: 412px;
+    width: 430px;
+  }
+
+  .about-text {
+    font-size: 30px;
+  }
+
+  .main-bnr {
+    height: 200px;
+    padding-top: 70px;
+  }
+
+  .club-buttons img {
+    width: 170px;
+    height: 40px;
+  }
+
+  .content-image img {
+    width: 100%;
+  }
+
+  .content-text {
+    padding: 20px 0px 20px 0px;
+  }
+
+  .about-content.py_0 {
+    padding-bottom: 0;
+  }
+
+  .country-list {
+    padding: 10px 0px 10px 0px;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .map {
+    height: 400px;
+  }
+
+  .map img {
+    top: 55%;
+    height: 360px;
+    width: 100%;
+  }
+
+  h3 {
+    font-size: 26px;
+  }
+
+  .club_players {
+    margin-top: 13%;
+    margin-right: 20%;
+  }
+
+  .club {
+    height: 350px;
+  }
+
+  .club-buttons {
+    margin-top: 10px;
+  }
+
+  // .light-button img {
+  //   height: 50px;
+  //   width: 200px;
+  // }
+}
+
+@media (max-width: 400px) {
+  .about-text {
+    font-size: 25px;
+  }
+
+  .main-bnr {
+    height: 200px;
+    padding-top: 50px;
+  }
+
+  .map img {
+    height: 315px;
+  }
+
+  .map {
+    height: 340px;
+  }
+}
+
+@media (max-width: 321px) {
+  .main-bnr {
+    height: 150px;
+    padding-top: 50px;
+  }
+
+  .country-available {
+    font-size: 20px;
+  }
+
+  .countries.py_0 {
+    padding-bottom: 0;
+  }
+
+  .club_players {
+    margin-top: 13%;
+    margin-right: 10%;
+  }
+
+  h3 {
+    font-size: 25px;
+  }
+}
+
+
+
+
+
+.mat-mdc-list-item-unscoped-content{
+  color: white !important;
+  font-size: 20px !important;
+}

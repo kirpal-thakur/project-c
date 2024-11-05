@@ -1,0 +1,1717 @@
+/*--------------------------------------------------------------
+#  banner
+--------------------------------------------------------------*/
+h1 {
+    font-size: 45px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 35px;
+}
+
+h4 {
+    font-size: 22px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 18px;
+}
+
+// .main {
+//     background-color: #236115;
+// }
+
+.py_0 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.overlay {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    left: 0;
+    top: 0;
+}
+
+P {
+    font-size: 18px;
+    color: white;
+}
+
+.banner {
+    position: relative;
+    //background: url(../../../../assets/images/club-banner.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    padding-top: 100px;
+    height: 1100px;
+}
+
+.banner-data {
+    padding-top: 130px;
+}
+
+.banner-left {
+    position: absolute;
+    top: 30%;
+    left: 6%;
+    z-index: 1;
+    padding-right: 71%;
+}
+
+.banner-heading {
+    color: white;
+    font-size: 45px;
+    text-transform: uppercase;
+}
+
+.banner-heading5 {
+    color: white;
+    font-size: 22px;
+    margin-top: 20px;
+    font-weight: 400;
+}
+
+a.btn.btn-register {
+    border-radius: 20px;
+    /* padding: 10px 60px; */
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: 700;
+    height: 41px;
+    width: 278px;
+}
+
+.banner-image1 img {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    width: 297px;
+    height: 518px;
+    object-fit: cover;
+    top: 12%;
+    right: 30%;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+.banner-image2 img {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    object-fit: cover;
+    top: 61%;
+    right: 30%;
+    width: 297px;
+    height: 231px;
+    opacity: 0.4;
+}
+
+/* Add a gradient background */
+.banner-image2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background: linear-gradient(to bottom, #092E01, transparent);
+    z-index: 0;
+    /* Ensure this is behind the image */
+    border-radius: 10px;
+    /* Match the border-radius of the image */
+}
+
+.banner-image3 img {
+    content: "";
+    z-index: 1;
+    top: 12%;
+    right: 0;
+    position: absolute;
+    object-fit: cover;
+    width: 415px;
+    height: 283px;
+    border-radius: 9px;
+    margin-top: 40px;
+}
+
+.banner-image4 img {
+    content: "";
+    z-index: 1;
+    position: absolute;
+    object-fit: cover;
+    top: 43%;
+    right: 0;
+    height: 407px;
+    width: 415px;
+    opacity: 0.6;
+    /* Use a value between 0 and 1 */
+    border-radius: 10px;
+}
+
+/* Add a gradient background */
+.banner-image4::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // background: linear-gradient(to bottom, #092E01, transparent);
+    z-index: 0;
+    /* Ensure this is behind the image */
+    border-radius: 10px;
+    /* Match the border-radius of the image */
+}
+
+
+
+
+// .banner-image4 img {
+//     content: "";
+//     z-index: 1;
+//     position: absolute;
+//     object-fit: cover;
+//     top: 350px;
+//     right: -70px;
+//     height: 407px;
+//     width: 430px;
+//     opacity: 70%;
+//     border-radius: 10px;
+// }
+
+/*--------------------------------------------------------------
+#  banner
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+#  Club & scouts
+--------------------------------------------------------------*/
+// .club-scout {
+//     background-color: #092E01;
+// }
+
+.club-heading4 {
+    color: white;
+    text-align: center;
+    font-size: 35px;
+    text-transform: uppercase;
+}
+
+.club_text {
+    padding: 60px;
+    // background: radial-gradient(circle at 100% 0%, #2B4A25, transparent);
+    border-radius: 10px;
+    height: 250px;
+    margin-top: 100px;
+}
+
+.club-text1 {
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/*--------------------------------------------------------------
+#  Club & scouts
+--------------------------------------------------------------*/
+
+
+
+
+/*--------------------------------------------------------------
+#  features
+--------------------------------------------------------------*/
+.features {
+    position: relative;
+    height: 805px;
+}
+
+.feature-heading3 {
+    color: white;
+    text-align: left;
+    font-size: 35px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.accordion-item:first-of-type {
+    // background-color: #092E01;
+    color: white;
+}
+
+.accordion-body,
+.accordion-item,
+.accordion-button {
+    // background-color: #092E01;
+    color: white;
+}
+
+.accordion-item {
+    // background-color: #092E01;
+    color: white;
+    position: relative;
+}
+
+.accordion-item::after {
+    content: " ";
+    width: 515px;
+    z-index: 1;
+    height: 1px;
+    /* color: red; */
+    // position: absolute;
+    // background-color: #2B4A24;
+}
+
+.accordion-button {
+    width: 10%;
+}
+
+.accordion-button:not(.collapsed) {
+    // background-color: #092E01;
+    color: white;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after,
+.accordion-button::after {
+    filter: brightness(0) invert(1);
+}
+
+.accordion {
+    --bs-accordion-border-color: transparent;
+}
+
+.accordion-button:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.accordion-flex {
+    cursor: pointer;
+}
+
+h2.accordion-header {
+    font-size: 20px;
+    width: 100%;
+}
+
+button.btn.btn-danger {
+    // background-color: white;
+    // color: #E05263;
+    font-weight: 700;
+    // border: 1px solid #E05263;
+    border-radius: 20px;
+    width: 203px;
+    height: 41px;
+    margin-top: 30px;
+}
+
+.left-accodian {
+    padding-top: 55px;
+    padding-right: 0;
+}
+
+.feature-text {
+    font-size: 16px;
+    margin-left: 30px;
+}
+
+.accordion-item::after {
+    content: " ";
+    width: 100%;
+    z-index: 1;
+    height: 1px;
+    position: absolute;
+}
+
+.accordion-flex {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.accordion-flex img {
+    margin-right: 10px;
+}
+
+img.light-feature1,
+img.dark-feature1 {
+    width: 50px;
+    height: 34px;
+}
+
+img.light-feature3,
+img.dark-feature3 {
+    width: 35px;
+    height: 37px;
+}
+
+img.light-feature4,
+img.dark-feature4 {
+    width: 37px;
+    height: 32px;
+}
+
+img.light-feature2,
+img.dark-feature2 {
+    height: 28px;
+    width: 39px;
+}
+
+
+.button1 {
+    position: absolute;
+    z-index: 1;
+    top: 355px;
+}
+
+.button1 button {
+    height: 36px;
+    width: 163px;
+    border-radius: 20px;
+    border: none;
+    background-color: #E05263;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.button1 .mat-icon {
+    height: 19px;
+    width: 118px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    overflow: unset;
+    align-items: center;
+    margin-left: 5px;
+}
+
+// i.fa-solid.fa-xmark {
+//     font-size: 15px;
+//     text-align: center;
+//     margin-left: 6px;
+//     margin-top: 2px;
+// }
+
+.button2 {
+    position: absolute;
+    z-index: 1;
+    top: 570px;
+    left: 275px;
+}
+
+.button2 .mat-icon {
+    height: 24px;
+    width: 159px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.button2 button {
+    height: 36px;
+    width: 204px;
+    border-radius: 20px;
+    border: none;
+    background-color: #E05263;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.button3 {
+    position: absolute;
+    z-index: 1;
+    top: 420px;
+    right: 50px;
+}
+
+.button3 .mat-icon {
+    height: 24px;
+    width: 80px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.button3 button {
+    height: 36px;
+    width: 125px;
+    border-radius: 20px;
+    border: none;
+    background-color: #E05263;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.button4 {
+    position: absolute;
+    z-index: 1;
+    top: 90px;
+    right: 100px;
+}
+
+.button4 .mat-icon {
+    height: 19px;
+    width: 175px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.button4 button {
+    height: 36px;
+    width: 220px;
+    border-radius: 20px;
+    border: none;
+    background-color: #E05263;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+
+.club-offers1 img {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    top: 7%;
+    right: 22%;
+    height: 245px;
+    width: 299px;
+    object-fit: cover;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.club-offers2 img {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    right: 0;
+    top: 14%;
+    width: 293px;
+    height: 283px;
+    object-fit: cover;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.club-offers3 img {
+    position: absolute;
+    content: "";
+    z-index: 0;
+    right: 11%;
+    bottom: 33%;
+    width: 391px;
+    height: 302px;
+    object-fit: cover;
+    border: 1px solid #E5E5E5;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/*--------------------------------------------------------------
+#  features
+--------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+#  pricing
+--------------------------------------------------------------*/
+
+// .pricing {
+//     background-color: #092E01;
+// }
+
+.premium-img {
+    background-image: url(../../../../assets/images/feature-image.svg);
+    background-repeat: no-repeat;
+    height: 510px;
+    width: 330px;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.premium {
+    width: 100%;
+    height: 338px;
+    border-radius: 10px;
+    // background: radial-gradient(circle at 100% 0%, #2B4A25, transparent);
+}
+
+.premium-col-right {
+    padding-top: 50px;
+    padding-right: 50px;
+}
+
+.price-heading3 {
+    height: 35px;
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.premium-heading5 {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.premium-heading2 {
+    font-size: 40px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.premium-heading3 {
+    font-size: 60px;
+    color: white;
+}
+
+span {
+    font-size: 18px;
+}
+
+.premium-text {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.premium-text img {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    // background-color: #092E01;
+    margin-right: 10px;
+}
+
+.billed {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.billed-monthly {
+    color: #498D39;
+    position: relative;
+}
+
+
+.toggle-button.inactive {
+    background-color: gray;
+}
+
+.toggle-button {
+    content: "";
+    display: block;
+    height: 32px;
+    width: 56px;
+    border-radius: 100px;
+    position: relative;
+    top: 11px;
+    margin-left: 10px;
+    margin-right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #498D39;
+}
+
+.toggle-button.active::after {
+    transform: translateX(21px);
+    /* Moves the slider to the right */
+}
+
+.toggle-button::after {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    left: 9px;
+    bottom: 7px;
+    transition: 0.4s;
+    background-color: white;
+}
+
+.active-text {
+    opacity: 50%;
+    color: #FFFFFF;
+}
+
+/* Text color when toggle is inactive */
+.inactive-text {
+    color: white;
+    /* Color for inactive text */
+}
+
+/*--------------------------------------------------------------
+#  adv
+--------------------------------------------------------------*/
+
+.large-rectangle {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: "";
+    height: 280px;
+    width: 336px;
+}
+
+.large-rectangle img {
+    height: 280px;
+    width: 336px;
+}
+.inline-rectangle {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    content: "";
+    width: 300px;
+    height: 250px;
+}
+.inline-rectangle img {
+    width: 300px;
+    height: 250px;
+}
+.square {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    content: "";
+    width: 250px;
+    height: 250px;
+    display: flex;
+}
+.square img {
+    width: 250px;
+    height: 250px;
+}
+.advertisement{
+   position: relative;
+   height: 400px;
+}
+.skyscraper-image{
+    height: 600px;
+    width: 120px;
+    content: "";
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 20%;
+  }
+  .skyscraper-image img{
+    height: 600px;
+    width: 120px;
+  }
+  .leaderboard-image {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    height: 90px;
+    width: 728px;
+    bottom: 5%;
+    left: 50%; /* Centering */
+    transform: translateX(-50%);
+  }
+  .leaderboard-image img {
+    height: 90px;
+    width: 728px;
+  }
+  .small-sqaure-image {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    bottom: 3%;
+    left: 0;
+    height: 200px;
+    width: 200px;
+  }
+  .small-sqaure-image img {
+    height: 200px;
+    width: 200px;
+  }
+//   .advertisement1 {
+//     position: relative;
+//     height: 280px;
+// }
+
+.advertisement1 {
+    position: relative;
+    height: 280px;
+
+    &.hidden {
+        display: none; // This will hide the advertisement container
+    }
+}
+
+  .banner-image{
+    position: absolute;
+    content: "";
+    z-index: 1;
+    bottom: 3%;
+    right: 0;
+    height: 60px;
+    width: 468px;
+
+  }
+  .banner-image img{
+    height: 60px;
+    width: 468px;
+
+  }
+  .ad-close-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    z-index: 1;
+  }
+
+/*--------------------------------------------------------------
+#  adv
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+#  pricing
+--------------------------------------------------------------*/
+
+@media (min-width: 1536px){
+    .banner-image1 img {
+        right: 28%;
+    }
+    .banner-image2 img {
+        right: 28%;
+    }
+    .club-offers3 img {
+        right: 10%;
+       
+    }
+    .club-offers1 img {
+        right: 20%;
+    }
+    .banner-left {
+        left: 8%;
+        padding-right: 70.5%;
+    }
+}
+@media (min-width: 1920px) {
+    .banner-image1 img {
+        right: 23%;
+    }
+    .banner-image2 img {
+        right: 23%;
+    }
+    .club-offers3 img {
+        right: 8%;
+    }
+    .club-offers1 img {
+        right: 16%;
+    }
+    .banner-left {
+        left: 16%;
+        padding-right: 66.7%;
+    }
+}
+@media (min-width: 2560px){
+    .banner-left {
+        left: 25%;
+        padding-right: 60%;
+    }
+    .banner-image1 img {
+        right: 17%;
+    }
+    .banner-image2 img {
+        right: 17%;
+    }
+    .club-offers3 img {
+        right: 6.5%;
+    }
+    .club-offers1 img {
+        right: 12%;
+    }
+}
+
+@media (max-width: 1280px){
+    .banner-image1 img {
+        right: 34%;
+    }
+    .banner-image2 img {
+        right: 34%;
+    }
+    .club-offers3 img {
+        right: 13%;
+    }
+    .club-offers1 img {
+        right: 24%;
+    }
+}
+
+
+
+@media(max-width: 1199px) {
+
+    .banner {
+        height: 820px;
+    }
+
+    .premium-col-right {
+        padding-top: 50px;
+        padding-right: 50px;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 35px;
+    }
+
+    h4 {
+        font-size: 22px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .banner-left {
+        padding-right: 70%;
+    }
+
+    .banner-heading {
+        font-size: 35px;
+    }
+
+    .banner-image1 img {
+        width: 250px;
+        height: 430px;
+        right: 32%
+    }
+
+    .banner-image2 img {
+        width: 250px;
+        height: 190px;
+        right: 32%;
+        top: 67%;
+    }
+
+    .banner-image3 img {
+        width: 313px;
+        height: 250px;
+    }
+
+    .banner-image4 img {
+        height: 305px;
+        width: 313px;
+        top: 50%;
+    }
+
+    .button1 .mat-icon {
+        font-size: 14px;
+        width: 105px;
+    }
+
+    .button1 button {
+        width: 145px;
+    }
+
+    .button1 {
+        position: absolute;
+        z-index: 1;
+        top: 336px;
+        right: 292px;
+    }
+
+    .button4 .mat-icon {
+        width: 155px;
+        font-size: 14px;
+    }
+
+    .button3 .mat-icon {
+        width: 73px;
+        font-size: 14px;
+    }
+
+    .button2 .mat-icon {
+        width: 140px;
+        font-size: 14px;
+    }
+
+    .button4 button {
+        width: 195px;
+    }
+
+    .button2 button {
+        width: 180px;
+    }
+
+    .button2 {
+        top: 524px;
+        left: 200px;
+    }
+
+    .button3 {
+        top: 384px;
+        right: -20px;
+    }
+
+    .button4 {
+        top: 90px;
+        right: 20px;
+    }
+
+    .banner-heading5 {
+        font-size: 16px;
+    }
+
+    a.btn.btn-register {
+        font-size: 16px;
+        height: 41px;
+        width: 215px;
+    }
+
+    .club-text1 {
+        font-size: 15px;
+    }
+
+    .club_text {
+        padding: 25px;
+        height: 200px;
+        margin-top: 50px;
+    }
+
+    .accordion-item::after {
+        width: 100%;
+    }
+
+    .accordion-flex {
+        margin-top: 20px;
+        margin-top: 10px;
+    }
+
+    h2.accordion-header {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .club-offers2 img {
+        width: 220px;
+        height: 210px;
+    }
+
+    .club-offers1 img {
+        height: 196px;
+        width: 236px;
+        right: 23%
+    }
+
+    .club-offers3 img {
+        width: 300px;
+        height: 220px;
+        bottom: 21%;
+        right: 12%;
+
+
+    }
+
+    .left-accodian {
+        padding-top: 0;
+        padding-right: 20px;
+    }
+
+    .feature-text {
+        font-size: 14px;
+    }
+
+    button.btn.btn-danger {
+        width: 203px;
+        height: 36px;
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .premium-heading5 {
+        font-size: 18px;
+    }
+
+    .premium-heading2 {
+        font-size: 35px;
+    }
+
+    .premium-heading3 {
+        font-size: 50px;
+    }
+
+
+}
+
+
+@media (max-width: 991px) {
+    .leaderboard-club-image img, .small-sqaure-image img, .skyscraper-image img, .skyscraper-image img, .wide-skyscraper-image img, .leaderboard-image img, .banner-image img, .advertisement, .advertisement1 {
+        display: none;
+        }
+        .skyscraper-image, .wide-skyscraper-image, .leaderboard-club-image, .leaderboard-image, .small-sqaure-image{
+            display: none;
+        }
+    .premium {
+        height: 100%;
+        margin-bottom: 0;
+        padding-bottom: 30px;
+    }
+
+    .banner-heading {
+        font-size: 25px;
+    }
+
+    .banner-heading5 {
+        font-size: 15px;
+    }
+
+    a.btn.btn-register {
+        font-size: 15px;
+        height: 35px;
+        width: 190px;
+    }
+
+    .py_0 {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .banner-data {
+        padding-top: 100px;
+    }
+
+    .banner {
+        height: 600px;
+    }
+
+    .banner-image1 img {
+        width: 180px;
+        height: 320px;
+        border-radius: 10px;
+    }
+
+    .banner-image2 img {
+        width: 180px;
+        height: 134px;
+        opacity: 1;
+        border-radius: 10px;
+    }
+
+    .banner-image3 img {
+        width: 235px;
+        height: 175px;
+    }
+
+    .banner-image4 img {
+        height: 225px;
+        width: 235px;
+        opacity: 1;
+        border-radius: 10px;
+    }
+
+    .accordion-flex {
+        margin-top: 0;
+    }
+
+    .club_text {
+        margin-top: 0px;
+        margin-bottom: 25px;
+    }
+
+    .club-heading4 {
+        margin-bottom: 30px;
+    }
+
+    .accordion-item::after {
+        width: 100%;
+    }
+
+    .club-scout.py_0 {
+        padding-top: 30px;
+    }
+
+    .club-scouts {
+        height: 520px;
+    }
+
+    .club-offers1 img {
+        width: 288px;
+        height: 235px;
+        top: 53%;
+        right: 50%;
+    }
+
+    .club-offers2 img {
+        height: 260px;
+        width: 280px;
+        right: 11%;
+        top: 60%;
+    }
+
+    .club-offers3 img {
+        width: 350px;
+        height: 265px;
+        right: 32%;
+        bottom: 0;
+    }
+
+    .premium-img {
+        padding-top: 30px;
+        padding-left: 30px;
+        height: 300px;
+    }
+
+    .premium-col-right {
+        padding-top: 30px;
+        padding-right: 30px;
+    }
+
+    .premium-text p {
+        font-size: 14px;
+    }
+
+    .features.py_0 {
+        padding-top: 0;
+    }
+
+    .left-accodian {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .club-scout.py_0 {
+        padding-top: 190px;
+    }
+
+    .banner {
+        height: 750px;
+    }
+
+    .club-scouts {
+        height: 400px;
+    }
+
+    .club-offers1 img {
+        width: 250px;
+        height: 218px;
+    }
+
+    .club-offers2 img {
+        height: 215px;
+        width: 230px;
+    }
+
+    .club-offers3 img {
+        width: 300px;
+        height: 220px;
+    }
+    .banner-left {
+        padding-right: 0;
+        top: 15%;
+    }
+
+
+    .banner-image1 img {
+        width: 230px;
+        height: 395px;
+        border-radius: 10px;
+        top: 42%;
+        left: 0;
+    }
+
+
+
+    .banner-image2 img {
+        width: 230px;
+        height: 170px;
+        opacity: 1;
+        left: 0;
+        border-radius: 10px;
+        top: 97%;
+    
+    }
+
+    .banner-image3 img {
+        width: 395px;
+        height: 230px;
+        top: 40%;
+    }
+
+
+    .banner-image4 img {
+        height: 290px;
+        width: 395px;
+        top: 79%;
+
+    }
+
+    // .club-offers2 img {
+    //     right: 93px;
+    //     top: 45%;
+    //     width: 320px;
+    //     height: 300px;
+    // }
+    // .club-offers3 img {
+    //     width: 320px;
+    //     margin-top: 257px;
+    //     height: 250px;
+    //     margin-left: 50px;
+    // }
+    .premium {
+        height: 100%;
+    }
+
+    .premium-img {
+        height: 180px;
+        padding-left: 10px;
+    }
+
+    .banner-left {
+        margin-top: 30px;
+    }
+
+}
+
+@media (max-width: 575px) {
+
+    h1 {
+        font-size: 31px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    .banner-heading {
+        font-size: 31px;
+    }
+
+    .banner {
+        height: 700px;
+    }
+
+    .banner-image1 img {
+        width: 160px;
+        height: 280px;
+        border-radius: 10px;
+        top: 50%;
+    }
+
+    .banner-image2 img {
+        width: 160px;
+        height: 125px;
+        top: 92%;
+    }
+
+    .banner-image3 img {
+        width: 255px;
+        height: 155px;
+        top: 50%;
+    }
+
+    .banner-image4 img {
+        height: 187px;
+        width: 255px;
+        top: 77%;
+    }
+
+    .club-scout.py_0 {
+        padding-top: 120px;
+    }
+
+    .club-offers1 img {
+        width: 200px;
+        height: 165px;
+        top: 58%;
+        left: 15px;
+    }
+
+    .club-scouts {
+        height: 350px;
+    }
+
+    .club-offers2 img {
+        height: 180px;
+        width: 190px;
+        top: 65%;
+        right: 6px;
+    }
+
+    .club-offers3 img {
+        width: 270px;
+        height: 200px;
+        left: 5%;
+
+    }
+
+    .banner-left {
+        padding-right: 0;
+        top: 15%;
+    }
+
+    .billed {
+        margin-top: 30px;
+    }
+
+    .premium {
+        height: auto;
+        margin-bottom: 0px;
+    }
+
+    .premium-img {
+        padding-top: 10px;
+        padding-left: 10px;
+        height: 180px;
+    }
+
+    .premium-col-right {
+        padding-left: 10px;
+        padding-top: 20px;
+    }
+
+    .club-heading4 {
+        font-size: 25px;
+    }
+
+    .feature-heading3 {
+        font-size: 25px;
+    }
+
+}
+@media (max-width: 415px){
+    .banner-image1 img {
+        width: 155px;
+    }
+    .banner-image2 img {
+        width: 155px;
+    }
+    .banner-image3 img {
+        width: 250px;
+    }
+    .banner-image4 img {
+        width: 250px;
+    }
+    .club-offers1 img {
+        left: 10px;
+    }
+    .club-offers3 img {
+        left: 2%;
+    }
+}
+
+@media (max-width: 391px){
+    .banner-image3 img {
+        width: 235px;
+        height: 150px;
+        top: 47%;
+    }
+    .banner-image1 img {
+        width: 145px;
+        height: 260px;
+    }
+    .banner-image4 img {
+        width: 235px;
+        top: 76%;
+    }
+    .banner-image2 img {
+        width: 145px;
+        height: 110px;
+        top: 89%;
+    }
+    .club-offers1 img {
+        width: 185px;
+        height: 155px;
+        top: 60%;
+    }
+    .club-offers2 img {
+        height: 175px;
+        width: 180px;
+        top: 66%;
+    }
+    .club-offers3 img {
+        left: 7%;
+    }
+
+
+}
+
+
+@media (max-width: 376px) {
+    .banner-data {
+        padding-top: 60px;
+    }
+
+    .banner {
+        height: 650px;
+    }
+
+    .banner-image1 img {
+        width: 130px;
+        height: 230px;
+        top: 47%;
+
+    }
+
+    .banner-image2 img {
+        width: 130px;
+        height: 105px;
+        top: 84%;
+    }
+
+    .banner-image3 img {
+        width: 235px;
+        height: 140px;
+        top: 47%;
+    }
+
+    .banner-image4 img {
+        height: 170px;
+        width: 235px;
+        top: 73%;
+    }
+
+    .club-scout.py_0 {
+        padding-top: 30px;
+        padding-bottom: 0;
+    }
+
+    .club-scouts {
+        height: 280px;
+    }
+
+    .club-offers3 img {
+        width: 230px;
+        height: 160px;
+    }
+
+    .club-offers1 img {
+        width: 173px;
+        height: 146px;
+        top: 61%;
+    }
+
+    .club-offers2 img {
+        height: 155px;
+        width: 165px;
+        top: 68%;
+    }
+
+    .banner-left {
+        top: 10%;
+    }
+
+    .premium-img {
+        width: 300px;
+    }
+
+    h2.accordion-header {
+        font-size: 15px;
+    }
+
+    .premium-heading2 {
+        font-size: 25px;
+    }
+
+    .premium-heading3 {
+        font-size: 35px;
+    }
+
+    .premium-img {
+        padding-top: 30px;
+        padding-left: 10px;
+    }
+
+    .premium-col-right {
+        padding-top: 20px;
+        padding-right: 0;
+        padding-left: 10px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .toggle-button {
+        height: 23px;
+        width: 45px;
+    }
+
+    .toggle-button::after {
+        height: 15px;
+        width: 14px;
+        left: 5px;
+        bottom: 4px;
+    }
+}
+@media (max-width: 361px) {
+    .banner-image3 img {
+        width: 220px;
+    }
+    .banner-image4 img {
+        width: 220px;
+    }
+}
+@media (max-width: 345px){
+    .banner-image1 img {
+        width: 125px;
+        height: 225px;
+        top: 47%;
+    }
+    .banner-image3 img {
+        width: 210px;
+        top: 43%;
+        height: 130px;
+    }
+    .banner-image4 img {
+        width: 210px;
+        top: 71%;
+    }
+    .banner-image2 img {
+        width: 125px;
+        height: 100px;
+        top: 83%;
+    }
+    .club-offers3 img {
+        left: 9%;
+    }
+    .club-offers1 img {
+        width: 160px;
+        height: 135px;
+        top: 61%;
+    }
+    .club-offers2 img {
+        height: 150px;
+        width: 160px;
+        top: 68%;
+    }
+
+}
+
+@media (max-width: 321px) {
+    .banner-heading {
+        font-size: 25px;
+    }
+
+    .club-scout.py_0 {
+        padding-top: 0;
+    }
+
+    .banner {
+        height: 610px;
+    }
+
+    .banner-image1 img {
+        width: 120px;
+        height: 210px;
+        top: 46%;
+    }
+
+    .banner-image3 img {
+        width: 192px;
+        height: 125px;
+        top: 45%;
+    }
+    .banner-image4 img {
+        height: 160px;
+        width: 192px;
+        top: 70%;
+    }
+
+    .banner-image2 img {
+        width: 120px;
+        height: 95px;
+        top: 82%;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    .feature-heading3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .club-heading4 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .premium-text p {
+        font-size: 12px;
+    }
+
+    .club-scouts {
+        height: 240px;
+    }
+
+    .club-offers1 img {
+        width: 140px;
+        height: 116px;
+        top: 65%;
+    }
+
+    .club-offers2 img {
+        height: 130px;
+        width: 140px;
+        top: 71%;
+        right: 5%;
+    }
+
+    .club-offers3 img {
+        width: 200px;
+        height: 150px;
+        left: 1%;
+    }
+}

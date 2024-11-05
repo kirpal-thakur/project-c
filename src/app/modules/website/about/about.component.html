@@ -1,0 +1,140 @@
+<div class="main-bnr">
+  <div class="overlay"></div>
+  <div class="banner-inner py_0">
+    <div class="container">
+      <div class="about">
+        <h3 class="about-text">About Us</h3>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="adVisible[0]" class="skyscraper-left">
+    <mat-card>
+      <img src="./assets/images/skyscraper - 120x600.png" alt="Skyscraper Ad">
+      <button mat-icon-button (click)="closeAd(0)" class="ad-close-button">
+        <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+      </button>
+    </mat-card>
+  </div>
+
+  <div *ngIf="adVisible[1]" class="skyscraper-right">
+    <mat-card>
+      <img src="./assets/images/skyscraper - 120x600.png" alt="Skyscraper Ad">
+      <button mat-icon-button (click)="closeAd(1)" class="ad-close-button">
+        <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+      </button>
+    </mat-card>
+  </div>
+</div>
+
+<div class="about-content py_0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <mat-card>
+          <img src="./assets/images/about-page.png" alt="About Us" mat-card-image>
+        </mat-card>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <p class="content-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+          officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="countries py_0">
+  <div class="container">
+    <h2 class="country-available">Countries Available</h2>
+    <div class="row">
+      <div class="col-xxl-4 col-lg-6 col-md-6 col-12">
+        <mat-list>
+          <mat-list-item *ngFor="let country of countries" class="custom-list-item country-name">
+            {{ country }}
+          </mat-list-item>  
+          </mat-list>    
+      </div>
+      <div class="col-xxl-8 col-lg-6 col-md-6 col-12">
+        <div class="map">
+          <img class="light-map" src="./assets/images/map.png" alt="Light Map">
+          <img class="dark-map" src="./assets/images/dark-map.png" alt="Dark Map">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="club py_0">
+  <div class="container">
+    <div class="advertisement1">
+      <div *ngIf="adVisible[2]" class="leaderboard-image">
+        <mat-card>
+          <img src="./assets/images/leaderboard - 728x90.png" alt="Leaderboard Ad">
+          <button mat-icon-button (click)="closeAd(2)" class="ad-close-button">
+            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+          </button>
+        </mat-card>
+      </div>
+
+      <div *ngIf="adVisible[3]" class="small-square-image">
+        <mat-card>
+          <img src="./assets/images/small sqaure - 200x200.png" alt="Small Square Ad">
+          <button mat-icon-button (click)="closeAd(3)" class="ad-close-button">
+            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="club_players">
+      <h3>Platform for Football</h3>
+      <h3>Players, Clubs and Scouts.</h3>
+      <div class="club-buttons">
+        <a class="light-button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          <!-- Image inside the anchor tag -->
+          <img src="./assets/images/light-button.svg" alt="Light Button">
+        </a>
+
+        <a class="dark-button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+          <!-- Image inside the anchor tag -->
+          <img src="./assets/images/dark-button.svg" alt="Dark Button">
+        </a>
+        <!-- <img class="dark-button" src="./assets/images/dark-button.svg"> -->
+      </div>
+    </div>
+
+    <div class="advertisement">
+      <div *ngIf="adVisible[4]" class="large-rectangle">
+        <mat-card>
+          <img src="./assets/images/large rectangle - 336x280 .png" alt="Large Rectangle Ad">
+          <button mat-icon-button (click)="closeAd(4)" class="ad-close-button">
+            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+          </button>
+        </mat-card>
+      </div>
+
+      <div *ngIf="adVisible[5]" class="inline-rectangle">
+        <mat-card>
+          <img src="./assets/images/inline rectangle - 300x250.png" alt="Inline Rectangle Ad">
+          <button mat-icon-button (click)="closeAd(5)" class="ad-close-button">
+            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+          </button>
+        </mat-card>
+      </div>
+
+      <div *ngIf="adVisible[6]" class="square">
+        <mat-card>
+          <img src="./assets/images/sqaure - 250x250.png" alt="Square Ad">
+          <button mat-icon-button (click)="closeAd(6)" class="ad-close-button">
+            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
