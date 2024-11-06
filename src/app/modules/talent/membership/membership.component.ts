@@ -306,4 +306,19 @@ export class MembershipComponent {
   getActiveboosterCount(): number {
     return this.booster.length;
   }
+
+  editBooster(data:any){
+    
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '850px',
+      data: {
+      }
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result && result.action === 'delete-confirmed' && result.selectedCountryId) {
+    //     this.cancelSubscription(result.selectedCountryId);
+    //   }
+    // });
+  }
 }
