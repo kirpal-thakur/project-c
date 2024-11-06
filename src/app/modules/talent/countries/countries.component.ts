@@ -22,22 +22,31 @@ export class CountriesComponent {
   country: any=[];
   booster: any=[];
   demo: any=[];
+  userInfo : any=[];
+  filteredCountries:any;
 
   constructor( private talentService: TalentService ,public dialog: MatDialog)  {}
 
   ngOnInit() {
+    this.userInfo = localStorage.getItem('userInfo');
+    this.userInfo = JSON.parse(this.userInfo);
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     console.log(this.loggedInUser)
     this.loadCountries();
   }
   
   loadCountries(): void {
-    this.talentService.getDomains().subscribe(
+    this.talentService.getUserDomains().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.domains;
-          this.flag_path = response.data.flag_path;
+          this.flag_path = response.data.logo_path;
           console.log('countries',this.countries)
+          // Filter the countries where is_package_active == 'active'
+          this.filteredCountries = this.countries.filter((country:any) => country.is_package_active == 'active');
+          console.log('Active countries', this.filteredCountries);
+
         }
       },
       (error: any) => {
@@ -49,13 +58,9 @@ export class CountriesComponent {
   selectedCountries: string[] = []; // Store selected country names here
 
   toggleCountrySelection(country: any) {
-    const index = this.selectedCountries.indexOf(country.location);
-    if (index === -1) {
-      this.selectedCountries.push(country.location); // Select country if not selected
-    } else {
-      this.selectedCountries.splice(index, 1); // Deselect if already selected
+    if(country.is_default==1 || country.is_package_active=='active'){
+      return
     }
-    // console.log('countries',this.selectedCountries)
     this.addCountryPopup(country);
   }
 
@@ -68,10 +73,7 @@ export class CountriesComponent {
     });
   }
 
-  isSelectedCountry(country: any): boolean {
-    return this.selectedCountries.includes(country.location);
-  }
-
+  
   
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {

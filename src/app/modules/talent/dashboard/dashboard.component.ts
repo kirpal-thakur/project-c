@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
-import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 
@@ -36,6 +35,8 @@ export class DashboardComponent implements OnInit {
   activeDomains : any;
 
   @Output() dataEmitter = new EventEmitter<string>();
+  
+  loading: boolean = true;  // Add this line to track loading state
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
@@ -47,31 +48,66 @@ export class DashboardComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
-    });    
+    });
     
-    if(this.coverImage == ""){
+    if (this.coverImage == "") {
       this.coverImage = this.defaultCoverImage;
     }
     this.getAllTeams();
   }
-  
+
+  getGalleryData() {
+    this.loading = true;  // Set loading to true before making the API call
+    try {
+      this.talentService.getGalleryData().subscribe((response) => {
+        if (response && response.status && response.data) {
+          this.userImages = response.data.images;
+          this.userVideos = response.data.videos;
+          this.imageBaseUrl = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        this.loading = false;  // Set loading to false once data is loaded
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      this.loading = false;  // Set loading to false on error
+    }
+  }
+
+  getUserProfile(userId: any) {
+    this.loading = true;  // Set loading to true before making the API call
+    try {
+      this.talentService.getProfileData(userId).subscribe((response) => {
+        if (response && response.status && response.data && response.data.user_data) {
+          this.user = response.data.user_data;
+          this.userNationalities = JSON.parse(this.user.user_nationalities);
+
+          this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
+          this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
+          this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
+
+          if (this.user.meta.profile_image_path) {
+            this.profileImage = this.user.meta.profile_image_path;
+          }
+          if (this.user.meta.cover_image_path) {
+            this.coverImage = this.user.meta.cover_image_path;
+          }
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        this.loading = false;  // Set loading to false once data is loaded
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      this.loading = false;  // Set loading to false on error
+    }
+  }
+
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
+      data: this.user
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -88,6 +124,7 @@ export class DashboardComponent implements OnInit {
   }
   
   openHighlight() {
+
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
       width: '800px',
       data: {
@@ -101,55 +138,7 @@ export class DashboardComponent implements OnInit {
       this.getHighlightsData()
     });
 
-  }
-
-  
-  getGalleryData(){
-    try {
-      this.talentService.getGalleryData().subscribe((response)=>{
-        if (response && response.status && response.data) {
-          this.userImages = response.data.images; 
-          this.userVideos = response.data.videos; 
-          this.imageBaseUrl = response.data.file_path;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-      });
-    } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error);
-    }
-  }
-  
-  getUserProfile(userId:any){
-    try {
-      this.talentService.getProfileData(userId).subscribe((response)=>{
-        if (response && response.status && response.data && response.data.user_data) {
-          this.user = response.data.user_data; 
-          this.userNationalities = JSON.parse(this.user.user_nationalities);
-
-          this.premium= this.user.active_subscriptions?.premium?.length > 0 ? true : false ;
-          this.booster= this.user.active_subscriptions?.booster?.length > 0 ? true : false;
-          this.activeDomains= this.user.active_subscriptions?.country?.length > 0 ? true : false;
-
-          if(this.user.meta.profile_image_path ){
-            this.profileImage = this.user.meta.profile_image_path;
-          }
-          if(this.user.meta.cover_image_path){
-            this.coverImage = this.user.meta.cover_image_path;
-          }
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });     
-    } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error);
-    }
-  }
-  
+  }  
 
   getHighlightsData(){
     try {
@@ -343,4 +332,5 @@ export class DashboardComponent implements OnInit {
     this.coverImage = data; // Assign the received data to a variable
     console.log('Data received from child:', data);
   }
+
 }

@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-plan',
@@ -27,8 +28,9 @@ export class EditPlanComponent implements OnInit {
     public dialogRef: MatDialogRef<EditPlanComponent>,
     public talentService: TalentService,
     private stripeService: PaymentService,
-    private paymentService:PaymentService
-    , public dialog: MatDialog,
+    private paymentService:PaymentService,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -39,6 +41,7 @@ export class EditPlanComponent implements OnInit {
     this.defaultCard = this.data.defaultCard;
     this.selectedCountries = this.data.country;
     this.stripe = await this.stripeService.getStripe();
+    console.log('data',this.data,'countries',this.countries)
   }
 
   async redirectToCheckout(planId: string) {

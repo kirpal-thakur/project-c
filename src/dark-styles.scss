@@ -2247,7 +2247,10 @@ color: rgba(255, 255, 255, 0.5) !important;
 .dark-theme .paginator-container mat-paginator .mat-mdc-paginator-range-actions button{
   background: #ffffff !important;
 }
-.dark-theme .country-information p,.country-information h2{
+.dark-theme .country-information p{
+  color: #fff !important;
+}
+.dark-theme .country-information h2{
   color: #fff !important;
 }
 .dark-theme span.platform_url{

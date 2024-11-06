@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 
 @Component({
-  selector: 'app-index',
+  selector: 'talent-index',
   templateUrl: './index.component.html',
   styleUrl: './index.component.scss'
 })

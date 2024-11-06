@@ -93,12 +93,23 @@ export class TalentService {
       return of(result as T); // Return an empty result
     };
   }
-  
-  // Fetch teams
+
+  // Modified function to search clubs based on a search term
+  searchClubs(clubName: string): Observable<any> {
+    // Prepare the headers (if needed)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
+
+    // Make the GET request to the API with the query parameter
+    return this.http.get(`${this.apiUrl2}get-clubs-list?club_name=${clubName}`, { headers });
+  }
+
+  // Fetch teams (without any search term)
   getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
   }
-  
+
   getLeagues(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-leagues`);
   }
@@ -158,6 +169,12 @@ export class TalentService {
   getDomains(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-domains`
+    );
+  }
+
+  getUserDomains(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-active-domains`
     );
   }
   

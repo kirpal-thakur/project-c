@@ -24,7 +24,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert text-danger mt-2">
             First Name is required.
           </div>
         </div>
@@ -41,32 +41,40 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Last Name is required.
           </div>
         </div>
       </div>
 
       <div class="row">
+
         <!-- Current Club -->
         <div class="form-group col-lg-6">
           <label for="currentClub">Current Club:</label>
-          <select
+          <input
+            type="text"
             id="currentClub"
             name="currentClub"
             [(ngModel)]="currentClub"
             #currentClubField="ngModel"
+            (input)="onSearchClubs()"
             required
-          >
-            <option *ngFor="let team of teams; let last = last" [value]="team.id" [selected]="team.id === currentClub || last && !currentClub">
-              {{ team.club_name ?? team.last_name }}
-            </option>
-          </select>
+          />
           <!-- Validation message -->
-          <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Current Club is required.
           </div>
+        
+          <!-- Club suggestions -->
+          <ul *ngIf="filteredClubs.length > 0 && currentClub.length >= 2" class="suggestions-list">
+            <li *ngFor="let club of filteredClubs" (click)="onSelectClub(club)">
+              {{ club.club_name }}
+            </li>
+          </ul>
         </div>
+        
+
 
         <!-- Nationality -->
         <div class="form-group col-lg-6">
@@ -74,14 +82,14 @@
           <select
             id="nationality"
             name="nationality"
-            [(ngModel)]="user.nationality"
+            [(ngModel)]="nationality"
             #nationalityField="ngModel"
             required
           >
             <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
           </select>
           <!-- Validation message -->
-          <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Nationality is required.
           </div>
         </div>
@@ -100,7 +108,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Date of Birth is required.
           </div>
         </div>
@@ -117,7 +125,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Place of Birth is required.
           </div>
         </div>
@@ -137,7 +145,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Height is required.
           </div>
         </div>
@@ -155,7 +163,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Weight is required.
           </div>
         </div>
@@ -174,7 +182,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="contractStartField.invalid && (contractStartField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="contractStartField.invalid && (contractStartField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Contract Start Date is required.
           </div>
         </div>
@@ -191,7 +199,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="contractEndField.invalid && (contractEndField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="contractEndField.invalid && (contractEndField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Contract End Date is required.
           </div>
         </div>
@@ -210,7 +218,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="leagueLevelField.invalid && (leagueLevelField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="leagueLevelField.invalid && (leagueLevelField.touched || myForm.submitted)" class="alert text-danger mt-2">
             League Level is required.
           </div>
         </div>
@@ -230,7 +238,7 @@
             <option value="Both">Both</option>
           </select>
           <!-- Validation message -->
-          <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert text-danger mt-2">
             Dominant Foot is required.
           </div>
         </div>

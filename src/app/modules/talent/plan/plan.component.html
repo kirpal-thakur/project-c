@@ -168,7 +168,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-12">
-                      <button class="choose-plan-btn" [disabled]="(plan?.is_package_active=='active') " (click)="redirectToCheckout(plan.isYearly==true ? plan.yearData.id : plan.monthData.id )" >Choose Plan</button>
+                      <button class="choose-plan-btn" [disabled]="(plan?.is_package_active=='active') " (click)="addBoostPopup(plan.isYearly==true ? plan.yearData.id : plan.monthData.id )" >Choose Plan</button>
                     </div>
                   </div>
                 </div>

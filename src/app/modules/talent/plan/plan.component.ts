@@ -8,6 +8,8 @@ import { environment } from '../../../../environments/environment';
 import { PaymentService } from '../../../services/payment.service';
 import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
+import { ActivatedRoute } from '@angular/router';
+import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
 
 interface Plan {
   id: number;
@@ -55,19 +57,19 @@ export class PlanComponent implements OnInit, OnDestroy {
   constructor(
     private talentService: TalentService, 
     private paymentService: PaymentService, 
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit() {
     this.isLoadingPlans = true;
     this.getUserPlans();
-    this.fetchPlans();
-    this.getUserCards();
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
+    
   }
   
-  async redirectToCheckout(planId: string) {
+  async redirectToCheckout(planId: string,booster_audience='') {
     if (this.premium?.package_id === planId) {
       alert('You already have this plan with the same billing interval.');
       return;
@@ -75,7 +77,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     
     this.isLoadingCheckout = true;
     try {
-      const response = await this.paymentService.createCheckoutSession(planId).toPromise();
+      const response = await this.paymentService.createCheckoutSession(planId,booster_audience).toPromise();
       
       if (response?.data?.payment_intent?.id) {
         const stripe = await this.stripe;
@@ -130,6 +132,17 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.boostedPlans = boostedPlans;
           this.otherPlans = otherPlans;
           this.selectedPlan = this.otherPlans[0] || null;
+
+          this.getUserCards();
+          
+          this.route.queryParams.subscribe(params => {
+            const selectedCountryId = params['countryId'];
+
+            if(selectedCountryId){
+              this.onSelectPlan(selectedCountryId);
+              this.editPlanPopup(this.otherPlans,this.country)
+            }
+          });
           
         }
       },
@@ -223,6 +236,8 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.booster = userPlans?.booster?.[0] || null;
           this.country = userPlans?.country || '';
           console.log('userPlans', userPlans);
+          this.fetchPlans();
+
         } else {
           console.error('Invalid API response:', response);
         }
@@ -268,7 +283,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
   
   updateSubscription(old:any,newID:any) {
   
@@ -336,9 +350,34 @@ export class PlanComponent implements OnInit, OnDestroy {
     });
   }
 
+  addBoostPopup(planId:any) {
+    const dialogRef = this.dialog.open(AddBoosterComponent, {
+      width: '850px',
+      data: { 
+        id: planId ,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Selected Audience IDs received:', result);
+        // You can now use `result` which contains the selected audience IDs
+      }
+    });
+  }
 
   onPlanSelect(event: Event) {
     const selectedId = (event.target as HTMLSelectElement).value;
+    const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
+  
+    if (selected) {
+      this.selectedPlan = selected;
+    }
+  }
+
+  
+  onSelectPlan(selectedId:any) {
+    
     const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
   
     if (selected) {

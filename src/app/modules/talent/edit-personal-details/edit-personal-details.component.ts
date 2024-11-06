@@ -9,14 +9,15 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-personal-details.component.scss'],
 })
 export class EditPersonalDetailsComponent implements OnInit {
-  countries: any ;
+  countries: any;
   leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];
-  teams: any[] = [];
+  filteredClubs: any[] = [];  // To store filtered clubs based on search
   selectedClub: string = '';
   user: any = localStorage.getItem('userData');
   loggedInUser: any = localStorage.getItem('userData');
   userId: any;
-  userNationalities : any;
+  userNationalities: any;
+  
   // Declare individual properties for binding
   dateOfBirth: string = '';
   height: number = 0;
@@ -32,7 +33,9 @@ export class EditPersonalDetailsComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   nationality: string = '';
-  
+  currentClubId: any;
+  userData:any
+
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
     private talentService: TalentService,
@@ -40,10 +43,11 @@ export class EditPersonalDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userData = {...this.data};
+    
     this.user = JSON.parse(this.user);
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-    this.loadTeams();
     this.loadCountries();
     this.getUserProfile(this.userId);
   }
@@ -52,18 +56,35 @@ export class EditPersonalDetailsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  loadTeams(): void {
-    this.talentService.getClubs().subscribe(
+  
+  // Function to handle dynamic fetching of clubs based on search input
+  onSearchClubs(): void {
+    if (this.currentClub.length < 2) {
+      // Don't search until the user has typed at least 3 characters
+      this.filteredClubs = [];
+      return;
+    }
+  
+    this.talentService.searchClubs(this.currentClub).subscribe(
       (response: any) => {
-        if (response && response.status) {
-          this.teams = response.data.clubs;
-          console.log(this.teams)
+        if (response && response.data) {
+          this.filteredClubs = response.data.clubs;  // Update the list of filtered clubs based on search
+          console.log('Filtered Clubs:', this.filteredClubs);
         }
       },
       (error: any) => {
-        console.error('Error fetching teams:', error);
+        console.error('Error fetching clubs:', error);
       }
     );
+  }
+  
+
+
+  // Function to handle the selection of a club
+  onSelectClub(club: any): void {
+    this.currentClub = club.club_name;  // Set the selected club's name to the input
+    this.currentClubId = club.id;  // Set the selected club's name to the input
+    this.filteredClubs = [];  // Clear the suggestion list
   }
 
   loadCountries(): void {
@@ -71,21 +92,19 @@ export class EditPersonalDetailsComponent implements OnInit {
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
-          console.log('countries',this.countries)
         }
       },
       (error: any) => {
-        console.error('Error fetching teams:', error);
+        console.error('Error fetching countries:', error);
       }
     );
   }
 
   getUserProfile(userId: any) {
-    this.talentService.getProfileData(userId).subscribe((response: any) => {
-      if (response && response.status && response.data && response.data.user_data) {
-        this.user = response.data.user_data;
+    
+      if (this.userData ) {
+        this.user = this.userData;
 
-        // Update component properties with user data
         if (this.user.meta) {
           this.dateOfBirth = this.user.meta.date_of_birth || '';
           this.height = this.user.meta.height || 0;
@@ -104,17 +123,17 @@ export class EditPersonalDetailsComponent implements OnInit {
           this.nationality = this.userNationalities[0];
         }
       } else {
-        console.error('Invalid API response structure:', response);
+        console.error('Invalid API this.userData structure:', this.userData);
       }
-    });
+      
   }
 
   onSubmit(form: NgForm) {
+    console.log(this.nationality)
     if (form.valid) {
       const formData = new FormData();
-
-       // Append each field to FormData
-      formData.append('user[current_club]', this.currentClub);
+      
+      formData.append('user[current_club]', this.currentClubId);
       formData.append('user[date_of_birth]', this.dateOfBirth);
       formData.append('user[place_of_birth]', this.placeOfBirth);
       formData.append('user[height]', this.height.toString());
@@ -127,7 +146,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[foot]', this.dominantFoot);
       formData.append('user[first_name]', this.firstName);
       formData.append('user[last_name]', this.lastName);
-      formData.append('user[userNationalities]', this.nationality);
+      formData.append('user[nationality][]', this.nationality);
       formData.append('lang', 'en');
 
       this.talentService.updateUserProfile(formData).subscribe(
