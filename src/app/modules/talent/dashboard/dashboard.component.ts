@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   
   loading: boolean = true;  // Add this line to track loading state
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
     this.getUserProfile(this.userId);
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     if (this.coverImage == "") {
       this.coverImage = this.defaultCoverImage;
     }
-    this.getAllTeams();
+    await this.getAllTeams();
   }
 
   getGalleryData() {

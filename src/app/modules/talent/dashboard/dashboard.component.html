@@ -399,7 +399,7 @@
             </div>
             <div class="general_details mt-4 p-4 bg-color ">             
               <talent-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></talent-profile-tab>
-              <talent-performance-tab *ngIf="activeTab == 'performance'"></talent-performance-tab>
+              <talent-performance-tab *ngIf="activeTab == 'performance'" ></talent-performance-tab>
               <talent-performance-analysis *ngIf="activeTab == 'performance-analysis'"></talent-performance-analysis>
               <talent-transfers-tab *ngIf="activeTab == 'transfers'"></talent-transfers-tab>
               <talent-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></talent-gallery-tab>

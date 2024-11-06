@@ -67,17 +67,24 @@ export class TalentService {
     );
   }
 
-  // Fetch teams and store globally
+  // Fetch teams and store globally and in localStorage
   getTeams(): Observable<any> {
-    if (this.teams.length) {
-      // If teams are already fetched, return them as an Observable
+    const cachedTeams = localStorage.getItem('teams');
+
+    if (cachedTeams) {
+      // Parse and return teams from localStorage if available
+      this.teams = JSON.parse(cachedTeams);
+      return of(this.teams);
+    } else if (this.teams.length) {
+      // If teams are already fetched globally, return them
       return of(this.teams);
     } else {
-      // Fetch teams from the API, store in global variable
+      // Fetch teams from the API, store in global variable and localStorage
       return this.http.get(`${this.apiUrl2}get-teams`).pipe(
         tap((response: any) => {
           if (response && response.status) {
             this.teams = response.data.teams; // Store teams globally
+            localStorage.setItem('teams', JSON.stringify(this.teams)); // Cache in localStorage
           }
         }),
         catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully

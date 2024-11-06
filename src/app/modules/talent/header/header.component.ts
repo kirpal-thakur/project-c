@@ -3,6 +3,8 @@ import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../../services/user.service';
+import { environment } from '../../../../environments/environment';
 
 interface Notification {
   image: string;
@@ -18,11 +20,34 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
-
+  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
+  loggedInUser:any = localStorage.getItem('userData');
+  profileImgUrl: any = "";
   lang:string = '';
-
+  domains: any = environment.domains;
  ngOnInit() {
+
+  this.userService.adminImageUrl.subscribe(newUrl => {
+    console.log(newUrl)
+    if(newUrl == 'default'){
+      if(this.loggedInUser.profile_image_path){
+        this.profileImgUrl = this.loggedInUser.profile_image_path;
+      }else{
+        this.profileImgUrl = "../../../assets/images/1.jpg";
+      }
+    }else{
+      this.profileImgUrl = newUrl;
+    }
+  });
+
+  this.loggedInUser = JSON.parse(this.loggedInUser);
+  console.log(this.loggedInUser)
+  if(this.loggedInUser.profile_image_path){
+    this.profileImgUrl = this.loggedInUser.profile_image_path;
+  }else{
+    this.profileImgUrl = "../../../assets/images/1.jpg";
+  }
+  
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
   }
@@ -31,6 +56,7 @@ export class HeaderComponent {
     const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
+
   }
 
 
@@ -48,8 +74,9 @@ export class HeaderComponent {
 
   updateThemeText (){
     const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    document.getElementById('theme-text')!.textContent =this.themeText
+this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
+document.getElementById('theme-text')!.textContent =this.themeText
+
   }
 
 
