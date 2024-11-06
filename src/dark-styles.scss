@@ -2315,7 +2315,10 @@ color: #fff;
     background:#fff !important;
     padding: 12px;
   }
-  .dark-theme .country-selection label,h2{
+  .dark-theme .country-selection label,.dark-theme h2{
+    color: #fff;
+  }
+  .dark-theme mat-label{
     color: #fff;
   }
   .dark-theme .country-plan-2 p{
