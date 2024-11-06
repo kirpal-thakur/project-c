@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -160,4 +161,27 @@ export class EditPersonalDetailsComponent implements OnInit {
       );
     }
   }
+  
+  onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
+    const selectedDate = event.value;
+    let date = this.formatDate(selectedDate);
+
+    if(type == 'dob'){
+      this.dateOfBirth = date;
+    }
+    // else if(type == 'sinceInTeam'){
+    //   this.sinceInTeam = date;
+    // }
+    // else if(type == 'contractUntil'){
+    //   this.contractUntil = date;
+    // }
+  }
+
+  formatDate(date:any) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 }
