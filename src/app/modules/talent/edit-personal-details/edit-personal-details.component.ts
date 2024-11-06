@@ -120,7 +120,7 @@ export class EditPersonalDetailsComponent implements OnInit {
           this.firstName = this.user.first_name || '';
           this.lastName = this.user.last_name || '';
           this.userNationalities = JSON.parse(this.user.user_nationalities);
-          this.nationality = this.userNationalities[0];
+          this.nationality = this.userNationalities ? this.userNationalities[0] : null;
         }
       } else {
         console.error('Invalid API this.userData structure:', this.userData);

@@ -59,7 +59,7 @@
                         <p *ngIf="booster.stripe_cancel_at == null">{{ 'Renews on' | translate }} {{ booster.plan_period_end | date: 'MMM. d, yyyy' }}</p>
                         <p *ngIf="booster.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ booster.stripe_cancel_at | date: 'MMM. d, yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                            <a class="premium-edit_btn text-white"  href="/talent/plans">{{'Edit Plan' | translate}}</a>                          
+                            <a class="premium-edit_btn text-white"  (click)="editBooster(booster)">{{'Edit Plan' | translate}}</a>                          
                             <button 
                               class="premium-subscription_btn" 
                               [disabled]="booster.stripe_cancel_at != null"
