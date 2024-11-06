@@ -7,6 +7,9 @@ import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-pers
 import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { PaymentsPopupComponent } from '../payments-popup/payments-popup.component';
+import { PaymentService } from '../../../services/payment.service';
+import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
+import { CancelCountryPlanComponent } from './cancel-country-plan/cancel-country-plan.component';
 
 @Component({
   selector: 'app-membership',
@@ -31,7 +34,7 @@ export class MembershipComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private talentService: TalentService, public dialog: MatDialog,private router: Router) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -59,6 +62,7 @@ export class MembershipComponent {
       console.error('Error fetching user purchases:', error);
     });
   }
+
 
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
@@ -176,7 +180,7 @@ export class MembershipComponent {
   }
 
   async downloadInvoice(invoideId:any, invoiceUrl:any){
-     // use the fetch/blob method because single download isn't working 
+    // use the fetch/blob method because single download isn't working 
     fetch(invoiceUrl)
       .then(response => {
         if (!response.ok) {
@@ -196,7 +200,7 @@ export class MembershipComponent {
       })
       .catch(error => {
         console.error('There was an error downloading the file:', error);
-      });
+    });
   }
 
   downloadAll():any{
@@ -231,4 +235,75 @@ export class MembershipComponent {
     return this.userPurchases.find((subscription:any) => subscription.id === id);
   }
 
+
+  confirmAndCancelSubscription(subscriptionId: string): void {
+    const dialogRef = this.dialog.open(MessagePopupComponent, {
+      width: '600px',
+      data: {
+        action: 'delete-confirmation',
+        message: 'Are you sure you want to cancel this subscription? This action cannot be undone.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed') {
+        this.cancelSubscription(subscriptionId);
+      }
+    });
+  }
+
+  private cancelSubscription(subscriptionId: string): void {
+    this.paymentService.cancelSubscription(subscriptionId).subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          // Open the MessagePopupComponent with a success message
+          this.dialog.open(MessagePopupComponent, {
+            width: '600px',
+            data: {
+              action: 'display',
+              message: 'Subscription canceled successfully.'
+            }
+          });
+          console.log('Subscription canceled successfully:', response);
+          this.getUserPlans();
+
+        } else {
+          console.error('Failed to cancel subscription', response);
+          this.getUserPlans();
+
+        }
+      },
+      error => {
+        console.error('Error cancelling subscription:', error);
+      }
+    );
+  }
+
+  confirmCountryPlanCancellation(country:any) {
+    const dialogRef = this.dialog.open(CancelCountryPlanComponent, {
+      width: '600px',
+      data: {
+        action: 'select-country-cancellation',
+        countries: country // Pass the list of country plans
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed' && result.selectedCountryId) {
+        this.cancelSubscription(result.selectedCountryId);
+      }
+    });
+  }
+
+  getActiveMultiCountryPlanCount(): number {
+    return this.country.length;
+  }
+
+  getActivePremiumCount(): number {
+    return this.premium.length;
+  }
+
+  getActiveboosterCount(): number {
+    return this.booster.length;
+  }
 }

@@ -59,7 +59,7 @@ export class ExploreComponent implements OnInit {
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
   }
 
-  redirectUser(slug:string, id:Number): void {
+  exploreUser(slug:string, id:Number): void {
     let pageRoute = 'view/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
@@ -144,10 +144,10 @@ export class ExploreComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.talentService.getDomains().subscribe(
       (response: any) => {
         if (response && response.status) {
-          this.countries = response.data.countries;
+          this.countries = response.data.domains;
         }
       },
       (error: any) => {
@@ -213,19 +213,32 @@ export class ExploreComponent implements OnInit {
       filters.push({ label: 'Category', value: this.selectedRole });
     }
     if (this.selectedCountry) {
-      filters.push({ label: 'Country', value: this.selectedCountry });
+      let getCountryById = this.countries.find((val: any) => {
+        return val.id == this.selectedCountry;
+      });
+      filters.push({ label: 'Country', value: getCountryById.location });
     }
     if (this.selectedPositions) {
-      filters.push({ label: 'Pos', value: this.selectedPositions.join(', ') });
+      let positionLabel = (this.selectedPositions.length > 0) ? 'Pos' : '';
+      filters.push({ label: positionLabel, value: this.selectedPositions.join(', ') });
     }
     if (this.selectedAge) {
-      filters.push({ label: 'Age', value: this.selectedAge.join(', ') });
+      let ageLabel = (this.selectedAge.length > 0) ? 'Age' : '';
+      filters.push({ label: ageLabel, value: this.selectedAge.join(', ') });
     }
     if (this.selectedFoot) {
-      filters.push({ label: 'Foot', value: this.selectedFoot.join(', ') });
+      let footLabel = (this.selectedFoot.length > 0) ? 'Foot' : '';
+      filters.push({ label: footLabel, value: this.selectedFoot.join(', ') });
     }
     if (this.selectedTopSpeed) {
-      filters.push({ label: 'Top Speed', value: this.selectedTopSpeed });
+      let selectedTopSpeed:any = {
+        '15': '15-20 Km/hr',
+        '20': '20-25 Km/hr',
+        '25': '25-30 Km/hr',
+        '30': '30-35 Km/hr',
+        '35': '35-40 Km/hr',
+      }
+      filters.push({ label: 'Top Speed', value: selectedTopSpeed[this.selectedTopSpeed] });
     }
     if (this.selectedLeague) {
       filters.push({ label: 'League', value: this.selectedLeague });
@@ -236,7 +249,6 @@ export class ExploreComponent implements OnInit {
     // Repeat for other filters
     return filters;
   }
-  
 
   // Example method to remove a filter
   removeFilter( label: string ) {

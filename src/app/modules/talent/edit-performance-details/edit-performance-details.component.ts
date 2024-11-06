@@ -30,8 +30,7 @@ export class EditPerformanceDetailsComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['teams']) {
       // Update the user object with the latest userData
-      this.teams = changes['teams'].currentValue;
-  
+      this.teams = changes['teams'].currentValue;  
     }
   }
  

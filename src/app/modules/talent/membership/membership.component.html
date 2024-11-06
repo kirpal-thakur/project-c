@@ -4,39 +4,51 @@
             <div class="card-header border-0">
                 <h4 class="card-billing ">Billing</h4>
                 <div class="d-flex align-items-center justify-content-between marketing-header-bar">
-                  <div class="d-flex align-items-end justify-content-between w-100">
+                  <div class="d-flex align-items-end justify-content-between w-100 mt-2">
                     <h2 class="card-title mb-0 me-3">{{'Subscription plan' | translate}}</h2>
-                    <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button>
+                    <!-- <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button> -->
                   </div>
                 </div>
 
-                <div class="row premium-card_box mt-3">
+                
+                <div class="row premium-card_box mt-3" >
+
                     <div class="col-lg-4" *ngIf="premium">     
                       <div class="premium-card ">
                         <div class="d-flex align-items-end justify-content-between">
                             <h5>{{premium.package_name }}</h5>
                             <h6> {{ premium.price}}<sub class="premium-month_title">{{'.-CHF' | translate}}/{{ premium.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                        <p>{{ 'Renews on' | translate }} {{ premium.plan_period_end | date: 'MMM. d, yyyy' }}</p>
+                        <p *ngIf="premium.stripe_cancel_at == null">{{ 'Renews on' | translate }} {{ premium.plan_period_end | date: 'MMM. d, yyyy' }}</p>
+                        <p *ngIf="premium.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ premium.stripe_cancel_at | date: 'MMM. d, yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
                             <a class="premium-edit_btn text-white"  href="/talent/plans">{{'Edit Plan' | translate}}</a>
-                            <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
+                            <button 
+                              class="premium-subscription_btn" 
+                              [disabled]="premium.stripe_cancel_at != null"
+                              (click)="confirmAndCancelSubscription(premium.id)">
+                              <div *ngIf="premium.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
+                              <div *ngIf="premium.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
+                            </button>
+                            
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4" *ngIf="country.count > 0" >    
-                        <div class="premium-card ">
-                          <div class="d-flex align-items-end justify-content-between">
-                              <h5>{{'Multi Country' | translate}}</h5>
-                              <h6> {{ country[0].price}}<sub class="premium-month_title">{{'.-CHF' | translate}}/{{ country.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
-                          </div>
-                          <p>{{country.length}} {{ 'Countries Selected' | translate }}</p>
-                          <div class="d-flex align-items-center justify-content-between mt-4">
-                              <a class="premium-edit_btn text-white"  href="/talent/plans">{{'Edit Plan' | translate}}</a>                            
-                              <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
-                          </div>
+                    <div class="col-lg-4" *ngIf="country.count > 0">    
+                      <div class="premium-card">
+                        <div class="d-flex align-items-end justify-content-between">
+                          <h5>{{ 'Multi Country' | translate }}</h5>
+                          <h6> {{ country[0].price }}<sub class="premium-month_title">{{'.-CHF' | translate}}/{{ country.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                    </div>                    
+                        <p>{{ country.length }} {{ 'Countries Selected' | translate }}</p>
+                        <div class="d-flex align-items-center justify-content-between mt-4">
+                          <a class="premium-edit_btn text-white" href="/talent/plans">{{ 'Edit Plan' | translate }}</a>       
+                          <button class="premium-subscription_btn" (click)="confirmCountryPlanCancellation(country)">
+                            {{ 'Cancel subscription' | translate }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>                                      
                     
                     <div class="col-lg-4" *ngIf="booster">     
                       <div class="premium-card ">
@@ -44,14 +56,22 @@
                             <h5>{{booster.package_name }}</h5>
                             <h6> {{ booster.price}}<sub class="premium-month_title">{{'.-CHF' | translate}}/{{booster.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                        <p>{{ 'Renews on' | translate }} {{ booster.plan_period_end | date: 'MMM. d, yyyy' }}</p>
+                        <p *ngIf="booster.stripe_cancel_at == null">{{ 'Renews on' | translate }} {{ booster.plan_period_end | date: 'MMM. d, yyyy' }}</p>
+                        <p *ngIf="booster.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ booster.stripe_cancel_at | date: 'MMM. d, yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                            <button class="premium-edit_btn"  (click)="editMembershipDialog(1)">{{'Edit Plan' | translate}}</button>
-                            <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
+                            <a class="premium-edit_btn text-white"  href="/talent/plans">{{'Edit Plan' | translate}}</a>                          
+                            <button 
+                              class="premium-subscription_btn" 
+                              [disabled]="booster.stripe_cancel_at != null"
+                              (click)="confirmAndCancelSubscription(booster.id)">
+                              <div *ngIf="booster.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
+                              <div *ngIf="booster.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
+                            </button>
                         </div>
                       </div>
                     </div>
                 </div>
+                
             </div>
         </div>
 
@@ -89,6 +109,7 @@
                             <th scope="col">{{'Date' | translate}}</th>
                             <th scope="col">{{'VoucherCode' | translate}}</th>
                             <th scope="col">{{'Amount' | translate}}</th>
+                            <th scope="col">{{'Interval' | translate}}</th>
                             <th scope="col" class="text-center">{{'View' | translate}}</th>
                             <th scope="col" class="text-center">{{'Download' | translate}}</th>
                           </tr>
@@ -97,7 +118,7 @@
                           <tr *ngFor="let purchase of userPurchases">
                             <td>
                               <div class="d-flex align-items-center">
-                                <span class="main-template" style="padding-left: 15px">{{purchase.id}}</span>
+                                <span class="main-template" style="padding-left: 15px">{{purchase.package_name}}</span>
                               </div>
                             </td>
                             <td>{{ purchase.plan_period_start | date:'dd.MM.yyyy' }}</td>
@@ -108,6 +129,10 @@
                             <td>
                               <span *ngIf="purchase.amount_paid">{{purchase.amount_paid}} {{purchase.amount_paid_currency}}</span>
                               <span *ngIf="!purchase.amount_paid">-</span>
+                            </td>
+                            
+                            <td>
+                              <span >{{(purchase && purchase.interval == 'yearly') ? 'Yearly' : 'Monthly'}}</span>
                             </td>
                             
                             <td class="text-center">

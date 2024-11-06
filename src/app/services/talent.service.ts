@@ -31,6 +31,18 @@ export class TalentService {
     );
   }
 
+  getPackages(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+  
+    // Send the HTTP GET request with both params and headers
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-packages`,
+      {  headers } // Combine params and headers here
+    );
+  }
+
   getCards(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-payment-methods`
@@ -81,12 +93,23 @@ export class TalentService {
       return of(result as T); // Return an empty result
     };
   }
-  
-  // Fetch teams
+
+  // Modified function to search clubs based on a search term
+  searchClubs(clubName: string): Observable<any> {
+    // Prepare the headers (if needed)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
+
+    // Make the GET request to the API with the query parameter
+    return this.http.get(`${this.apiUrl2}get-clubs-list?club_name=${clubName}`, { headers });
+  }
+
+  // Fetch teams (without any search term)
   getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
   }
-  
+
   getLeagues(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-leagues`);
   }
@@ -146,6 +169,12 @@ export class TalentService {
   getDomains(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-domains`
+    );
+  }
+
+  getUserDomains(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-active-domains`
     );
   }
   
@@ -228,15 +257,19 @@ getExploresData(params: any): Observable<any> {
   if (params.noLimit) {
     queryParams = queryParams.set('noLimit', 'true');
   }
+  
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.userToken}`
+  });
 
-  // Send the HTTP GET request
+  // Send the HTTP GET request with both params and headers
   return this.http.get<{ status: boolean, message: string, data: {} }>(
-    `${this.apiUrl}users-frontend`, { params: queryParams }
+    `${this.apiUrl}users-frontend`, 
+    { params: queryParams, headers } // Combine params and headers here
   );
 }
   
   removeFavorites(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
@@ -320,7 +353,7 @@ getExploresData(params: any): Observable<any> {
     });
     
     return this.http.get<any>(
-      `${this.apiUrl2}/player/get-performance-reports`, 
+      `${this.apiUrl2}player/get-performance-reports`, 
       { headers }
     );
   }
@@ -331,7 +364,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-performance-detail/${performanceId}`, params, { headers });
   }
 
   // Update newsletter subscription
@@ -340,7 +373,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/user/settings/newsletter`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}user/settings/newsletter`, params, { headers });
   }
 
   uploadReport(params: any): Observable<any> {
@@ -362,7 +395,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-performance-detail`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-performance-detail`, params, { headers });
   }
 
   deletePerformance(params: any): Observable<any> {
@@ -379,7 +412,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-transfer-detail/${transferId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-transfer-detail/${transferId}`, params, { headers });
   }
 
   addTransfer(params: any): Observable<any> {
@@ -387,7 +420,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-transfer-detail/`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-transfer-detail/`, params, { headers });
   }
 
   deleteTransfer(id: any): Observable<any> {
@@ -501,4 +534,5 @@ getExploresData(params: any): Observable<any> {
       `${this.apiUrl}get-gallery-highlights/${id}`
     );
   }
+
 }

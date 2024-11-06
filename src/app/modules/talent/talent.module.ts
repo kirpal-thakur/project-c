@@ -58,6 +58,9 @@ import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
 import { AddCountryComponent } from './countries/add-country/add-country.component';
 import { UpdateCountryPlanComponent } from './update-country-plan/update-country-plan.component';
+import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
+import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
+import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +104,9 @@ import { UpdateCountryPlanComponent } from './update-country-plan/update-country
     AddCardComponent,
     AddCountryComponent,
     UpdateCountryPlanComponent,
+    CancelCountryPlanComponent,
+    UpdateConfirmationPlanComponent,
+    AddBoosterComponent
   ],
   imports: [
     CommonModule,

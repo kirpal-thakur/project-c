@@ -65,5 +65,11 @@ export class AuthService {
   }
   
 
+  getProfileData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { userData: any } }>(
+      `${this.apiUrl}/profile`
+    );
+  }
+
   
 }

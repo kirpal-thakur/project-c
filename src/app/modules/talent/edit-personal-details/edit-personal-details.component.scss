@@ -115,6 +115,24 @@
   background: rgb(228, 228, 228); 
   border-radius: 10px;
 }
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
 
 @media(max-width:768px){
   .mobile-input{
@@ -125,3 +143,4 @@
     padding: 0px 26px;
 }
 }
+
