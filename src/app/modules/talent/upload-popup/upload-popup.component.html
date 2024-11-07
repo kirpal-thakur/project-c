@@ -15,7 +15,8 @@
             <input
                 type="file"
                 (change)="onFileSelect($event)"
-                multiple
+                multiple                
+                [accept]="file === 'video' ? 'video/*' : ''"
                 hidden
                 #fileInput
             />

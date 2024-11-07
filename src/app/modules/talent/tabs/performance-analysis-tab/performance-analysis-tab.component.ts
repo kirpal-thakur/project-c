@@ -134,6 +134,9 @@ export class PerformanceAnalysisTabComponent implements OnInit {
   
   
   deleteReports() {
+    if(this.selectedIds.length <= 0){
+      return
+    }
     let params :any = {id:this.selectedIds};
     if (confirm('Are you sure you want to delete the selected reports?')) {
       

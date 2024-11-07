@@ -61,6 +61,7 @@ import { UpdateCountryPlanComponent } from './update-country-plan/update-country
 import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
 import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
 import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
+import { GeneralDetailsComponent } from './view-user/tabs/general-details/general-details.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.comp
     UpdateCountryPlanComponent,
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
-    AddBoosterComponent
+    AddBoosterComponent,
+    GeneralDetailsComponent
   ],
   imports: [
     CommonModule,

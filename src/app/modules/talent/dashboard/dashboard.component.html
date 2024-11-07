@@ -32,8 +32,9 @@
                         </label>
                         <input id="profile-upload" (change)="onProfileFileChange($event)" accept="image/*" type="file" class="d-none" />
                         <div class="club-icon">
-                          <img *ngIf="user.club_logo_path" src="{{ user.club_logo_path }}" class="club-icon-round cursor-pointer" alt="" />
-                          <img *ngIf="!user.club_logo_path" src="../../../../assets/images/default/Club-logo-default.png" class="club-icon-round cursor-pointer" alt="" />
+                          <img *ngIf="!user.pre_current_club_logo_path" src="../../../../assets/images/default/Club-logo-default.png" class="club-icon-round cursor-pointer" alt="" />
+                          <img *ngIf="user.pre_current_club_logo_path" src="{{user.pre_current_club_logo_path}}" class="club-icon-round cursor-pointer" alt="" />
+                          
                         </div>
 
                       </div>

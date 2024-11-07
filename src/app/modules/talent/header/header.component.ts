@@ -21,33 +21,15 @@ interface Notification {
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
   constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
-  loggedInUser:any = localStorage.getItem('userData');
+  loggedInUser:any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang:string = '';
   domains: any = environment.domains;
- ngOnInit() {
 
-  this.userService.adminImageUrl.subscribe(newUrl => {
-    console.log(newUrl)
-    if(newUrl == 'default'){
-      if(this.loggedInUser.profile_image_path){
-        this.profileImgUrl = this.loggedInUser.profile_image_path;
-      }else{
-        this.profileImgUrl = "../../../assets/images/1.jpg";
-      }
-    }else{
-      this.profileImgUrl = newUrl;
-    }
-  });
+  ngOnInit() {
 
-  this.loggedInUser = JSON.parse(this.loggedInUser);
-  console.log(this.loggedInUser)
-  if(this.loggedInUser.profile_image_path){
-    this.profileImgUrl = this.loggedInUser.profile_image_path;
-  }else{
-    this.profileImgUrl = "../../../assets/images/1.jpg";
-  }
-  
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+    
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
   }

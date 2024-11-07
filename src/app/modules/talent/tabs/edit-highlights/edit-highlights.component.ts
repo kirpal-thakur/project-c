@@ -51,6 +51,26 @@ export class EditHighlightsComponent {
     });
   }
 
+  
+
+  getGalleryData() {
+    try {
+      this.talentService.getGalleryData().subscribe((response) => {
+        if (response && response.status && response.data) {          
+          this.images = response.data.images;
+          this.videos = response.data.videos;
+          this.url = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      
+    }
+  }
+
   // Called when an image checkbox is toggled
   onImageSelect(event: Event, imageId: number): void {
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -150,12 +170,12 @@ export class EditHighlightsComponent {
 
     messageDialog.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        if(result.files.length){
-          console.log(result.files)
-         this.images = [...result.files, ...this.images];
-         console.log(this.images)
+        if(result.files.length){          
+          this.getGalleryData()
         }
       }
     });
   }
+
+  
 }

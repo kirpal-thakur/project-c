@@ -19,9 +19,14 @@ export class TalentService {
     this.userToken = localStorage.getItem('authToken');
   }
 
-  getProfileData(userId: any): Observable<any> {
+  getProfileData(userId: any=1): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}profile`
+      `${this.apiUrl}profile`,
+      {  headers } // Combine params and headers here
     );
   }
 
@@ -115,6 +120,15 @@ export class TalentService {
   // Fetch teams (without any search term)
   getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
+  }
+
+  getClubsForPlayer(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-clubs-list`, {headers}
+    );
   }
 
   getLeagues(): Observable<any> {

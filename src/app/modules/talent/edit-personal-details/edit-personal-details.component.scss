@@ -134,6 +134,14 @@
   background-color: #f0f0f0;
 }
 
+.position_inputs mat-select{
+  width: 100%;
+  padding: 12px 14px;
+  line-height: normal;
+  border: 1px solid #bbb7b7;
+  border-radius: 10px;
+}
+
 @media(max-width:768px){
   .mobile-input{
     width: 50% !important;

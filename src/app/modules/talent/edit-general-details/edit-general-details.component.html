@@ -19,21 +19,14 @@
           <div class="row">
             <div class="form-group col-lg-4">
               <label for="teamSince" class="form-label">In the team since</label>
-              <input type="date" class="form-control" id="teamSince" name="contract_start" [(ngModel)]="contract_start" />
+              <input type="date" class="form-control" id="teamSince" name="in_team_since" [(ngModel)]="in_team_since" />
             </div>
   
             <!-- Top speed -->
             <div class="form-group speed_inputs col-lg-4 d-flex align-items-center">
-              <div class="col-lg-6 mobile-input">
-                <label for="topSpeed" class="form-label">Top speed</label>
+              <div class="col-lg-12 mobile-input">
+                <label for="topSpeed" class="form-label">Top speed(km/h)</label>
                 <input type="text" class="form-control" id="topSpeed" name="top_speed" placeholder="Enter Value" [(ngModel)]="top_speed" />
-              </div>
-              <div class="col-lg-6 mobile-input">
-                <label for="speedUnit" class="form-label">Unit</label>
-                <select class="form-select" id="speedUnit" name="speed_unit" [(ngModel)]="speed_unit">
-                  <option value="km/h">km/h</option>
-                  <option value="m/s">m/s</option>
-                </select>
               </div>
             </div>
   
@@ -41,7 +34,7 @@
             <div class=" form-group col-lg-4">
               <label for="internationalPlayer" class="form-label">International player</label>
               <select class="form-select" id="internationalPlayer" name="international_player" [(ngModel)]="international_player">              
-                <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
+                <option *ngFor="let country of countries" [value]="country.id" [selected]="user?.meta?.international_player==country.id">{{ country.country_name }}</option>
               </select>
             </div>
           </div>
@@ -50,17 +43,9 @@
           <div class="row">
             <div class="form-group col-lg-4 ">
               <div class="d-flex market_input-gap align-items-center">
-                <div class="col-lg-6 mobile-input">
-                  <label for="marketValue" class="form-label">Market value</label>
+                <div class="col-lg-12 mobile-input">
+                  <label for="marketValue" class="form-label">Market value (EUR)</label>
                   <input type="text" class="form-control" id="marketValue" name="market_value" placeholder="Enter value" [(ngModel)]="market_value" />
-                </div>
-                <div class="col-lg-6 mobile-input">
-                  <label for="currency" class="form-label">Currency</label>
-                  <select class="form-select" id="currency" name="currency" [(ngModel)]="currency">
-                    <option  *ngFor="let currency of currencies" [value]="currency.code" selected>
-                      {{ currency.symbol }} 
-                    </option>
-                  </select>
                 </div>
               </div>
               <div class="ground-image col-lg-12 mt-5">
@@ -103,27 +88,45 @@
                 <label for="lastChange" class="form-label">Last change</label>
                 <input type="date" class="form-control" name="last_change" id="lastChange" [(ngModel)]="last_change"/>
               </div>
-      
-              <!-- Main position -->
-              <div class="position_inputs">
-                <label for="mainPosition" class="form-label">Main position</label>              
-                <select class="form-select" id="mainPosition" name="main_position" [(ngModel)]="main_position">
-                  <option value="" disabled>Select Position</option>
-                  <option *ngFor="let position of positions" [value]="position.id">{{ position.position }}</option>
-                </select>              
-              </div>
   
-              <!-- Other positions -->
+              <!-- Main Position -->
               <div class="position_inputs">
-                <label for="otherPositions" class="form-label">Other positions</label>
+                <label for="mainPosition" class="form-label">Main Position</label>
                 
-                <mat-select [(ngModel)]="other_positions" class="form-select" id="otherPositions" name="other_position" multiple>
-                  <mat-option *ngFor="let position of positions" [value]="position.id">
+                <mat-select
+                  [(ngModel)]="main_position"
+                  class="form-select"
+                  id="mainPosition"
+                  name="main_position"
+                >
+                  <mat-option
+                    *ngFor="let position of positions"
+                    [value]="position.id"
+                  >
+                    {{ position.position }}
+                  </mat-option>
+                </mat-select>
+
+              </div>
+
+              <!-- Other Positions -->
+              <div class="position_inputs">
+                <label for="otherPositions" class="form-label">Other Positions</label>
+                <mat-select
+                  [(ngModel)]="other_positions"
+                  class="form-select"
+                  id="otherPositions"
+                  name="other_position"
+                  multiple
+                >
+                  <mat-option
+                    *ngFor="let position of positions"
+                    [value]="position.id"
+                  >
                     {{ position.position }}
                   </mat-option>
                 </mat-select>
               </div>
-  
       
             </div>
           </div>
@@ -154,14 +157,14 @@
                           x.com/
                       </span>
                       <span class="platform_input">
-                          <input type="text" [(ngModel)]="sm_x">
+                        <input type="text" id="usernameX" name="social_x" [(ngModel)]="social_x" />
                       </span>
                   </div>
               </div>      
                 <div class="platform_wrapper col-lg-12 social_network">
                   <div class="single_platform">
                       <span class="platform_image">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="20" height="17" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <g clip-path="url(#clip0_3008_6583)">
                               <path d="M15.3125 0H4.6875C2.09867 0 0 2.09867 0 4.6875V15.3125C0 17.9013 2.09867 20 4.6875 20H15.3125C17.9013 20 20 17.9013 20 15.3125V4.6875C20 2.09867 17.9013 0 15.3125 0Z" fill="url(#paint0_radial_3008_6583)"/>
                               <path d="M15.3125 0H4.6875C2.09867 0 0 2.09867 0 4.6875V15.3125C0 17.9013 2.09867 20 4.6875 20H15.3125C17.9013 20 20 17.9013 20 15.3125V4.6875C20 2.09867 17.9013 0 15.3125 0Z" fill="url(#paint1_radial_3008_6583)"/>
@@ -189,14 +192,14 @@
                           instagram.com/
                       </span>
                       <span class="platform_input">
-                          <input type="text" [(ngModel)]="sm_instagram">
+                        <input type="text" id="usernameInstagram" name="social_instagram" [(ngModel)]="social_instagram" />
                       </span>
                   </div>
               </div>
               <div class="platform_wrapper col-lg-12 social_network">
                 <div class="single_platform">
                     <span class="platform_image">
-                        <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="17" height="17" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3008_6588)">
                             <path d="M21.5141 2.33958C21.3879 1.88738 21.1418 1.47512 20.8002 1.14386C20.4586 0.812593 20.0335 0.573884 19.5671 0.4515C17.8599 0 10.9888 0 10.9888 0C10.9888 0 4.11745 0.0136666 2.41022 0.465167C1.94388 0.587558 1.51874 0.82628 1.17714 1.15756C0.835539 1.48884 0.589395 1.90111 0.46322 2.35333C-0.0531788 5.29483 -0.253499 9.777 0.477399 12.6008C0.603588 13.053 0.849737 13.4653 1.19134 13.7966C1.53294 14.1278 1.95807 14.3665 2.4244 14.4889C4.13163 14.9404 11.0029 14.9404 11.0029 14.9404C11.0029 14.9404 17.874 14.9404 19.5811 14.4889C20.0475 14.3665 20.4726 14.1278 20.8142 13.7966C21.1559 13.4653 21.402 13.053 21.5282 12.6008C22.0729 9.65517 22.2407 5.17575 21.5141 2.33958Z" fill="#FF0000"/>
                             <path d="M8.80273 10.6725L14.5028 7.47103L8.80273 4.26953V10.6725Z" fill="white"/>
@@ -213,7 +216,7 @@
                         youtube.com/
                     </span>
                     <span class="platform_input">
-                        <input type="text" [(ngModel)]="sm_youtube">
+                      <input type="text" id="usernameYouTube" name="social_youtube" [(ngModel)]="social_youtube" />
                     </span>
                 </div>
             </div>
@@ -222,7 +225,7 @@
                 <div class="col-lg-12 social_network platform_wrapper ">
                   <div class="single_platform">
                       <span class="platform_image">
-                          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <svg width="17" height="17" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <g clip-path="url(#clip0_3009_6591)">
                               <path d="M17.3151 0.716797H1.68609C1.15077 0.716797 0.716797 1.15077 0.716797 1.68609V17.3151C0.716797 17.8504 1.15077 18.2844 1.68609 18.2844H17.3151C17.8504 18.2844 18.2844 17.8504 18.2844 17.3151V1.68609C18.2844 1.15077 17.8504 0.716797 17.3151 0.716797Z" fill="#3D5A98"/>
                               <path d="M12.8366 18.2829V11.48H15.1196L15.461 8.82892H12.8366V7.13673C12.8366 6.36931 13.0504 5.84532 14.1503 5.84532H15.5545V3.47032C14.8745 3.39959 14.1912 3.36589 13.5076 3.36939C11.4859 3.36939 10.0935 4.60142 10.0935 6.874V8.82892H7.81055V11.48H10.0935V18.2829H12.8366Z" fill="white"/>
@@ -238,7 +241,7 @@
                           facebook.com/
                       </span>
                       <span class="platform_input">
-                          <input type="text" [(ngModel)]="sm_facebook">
+                        <input type="text" id="usernameFacebook" name="social_facebook" [(ngModel)]="social_facebook" />
                       </span>
                   </div>
               </div>
@@ -246,7 +249,7 @@
               <div class="platform_wrapper social_network platform_wrapper">
                 <div class="single_platform ">
                     <span class="platform_image">
-                        <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="17" height="17" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3009_6594)">
                             <path d="M11.8575 6.48185C13.0249 7.31016 14.455 7.79753 15.9995 7.79753V4.84739C15.7072 4.84745 15.4157 4.81716 15.1297 4.75702V7.07921C13.5852 7.07921 12.1553 6.5919 10.9877 5.76365V11.7841C10.9877 14.7959 8.52792 17.2372 5.49392 17.2372C4.36186 17.2372 3.30961 16.8975 2.43555 16.3148C3.43317 17.3274 4.82442 17.9554 6.36355 17.9554C9.3978 17.9554 11.8576 15.5141 11.8576 12.5022V6.48185H11.8575ZM12.9306 3.50552C12.334 2.85858 11.9422 2.02251 11.8575 1.09818V0.71875H11.0332C11.2407 1.89353 11.9485 2.89718 12.9306 3.50552ZM4.35455 14.0037C4.02123 13.57 3.84105 13.0393 3.84186 12.4936C3.84186 11.1162 4.96692 9.9993 6.35498 9.9993C6.61362 9.99917 6.87074 10.0386 7.1173 10.1162V7.10006C6.82917 7.06089 6.53842 7.0442 6.2478 7.05034V9.39791C6.00113 9.32027 5.74387 9.28087 5.48511 9.2811C4.09711 9.2811 2.97211 10.3978 2.97211 11.7755C2.97211 12.7496 3.53442 13.5929 4.35455 14.0037Z" fill="#FF004F"/>
                             <path d="M10.987 5.76359C12.1547 6.59184 13.5845 7.07914 15.129 7.07914V4.75696C14.2669 4.57466 13.5037 4.12752 12.9299 3.50552C11.9477 2.89712 11.24 1.89347 11.0325 0.71875H8.86733V12.5021C8.86239 13.8758 7.73927 14.9881 6.3542 14.9881C5.53808 14.9881 4.81295 14.602 4.35377 14.0037C3.53377 13.5929 2.97139 12.7495 2.97139 11.7755C2.97139 10.398 4.09639 9.28116 5.48439 9.28116C5.75033 9.28116 6.00664 9.32225 6.24708 9.39798V7.05041C3.26633 7.11154 0.869141 9.52901 0.869141 12.5022C0.869141 13.9864 1.46608 15.3318 2.43495 16.3149C3.30902 16.8975 4.3612 17.2373 5.49333 17.2373C8.52739 17.2373 10.9871 14.7958 10.9871 11.7841L10.987 5.76359Z" fill="black"/>
@@ -263,7 +266,7 @@
                         tiktok.com/
                     </span>
                     <span class="platform_input">
-                        <input type="text" [(ngModel)]="sm_tiktok">
+                      <input type="text" id="usernameTikTok" name="social_tiktok" [(ngModel)]="social_tiktok" />
                     </span>
                 </div>
             </div>
@@ -271,7 +274,7 @@
             <div class="platform_wrapper social_network platform_wrapper">
               <div class="single_platform">
                   <span class="platform_image">
-                      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="17" height="17" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_3009_6598)">
                           <path d="M18.9908 3.70619C18.9063 5.49761 17.6144 7.95063 15.1159 11.064C12.5327 14.3162 10.3471 15.9422 8.5592 15.9422C7.45201 15.9422 6.5144 14.9521 5.74906 12.9713C5.23754 11.1557 4.7267 9.34012 4.2154 7.52452C3.64666 5.54482 3.03696 4.55368 2.38509 4.55368C2.24296 4.55368 1.74555 4.84341 0.893965 5.42048L0 4.305C0.930608 3.51356 1.85491 2.71521 2.77281 1.91002C4.0234 0.863208 4.96227 0.312751 5.58793 0.257074C7.06674 0.119531 7.97681 1.09854 8.31844 3.19433C8.6876 5.45542 8.94299 6.86185 9.0866 7.4123C9.51277 9.28818 9.98168 10.2249 10.4942 10.2249C10.8918 10.2249 11.4892 9.61664 12.2857 8.39993C13.0814 7.18285 13.5076 6.25693 13.5652 5.62088C13.6784 4.57062 13.252 4.04419 12.2857 4.04419C11.8308 4.04419 11.3619 4.14558 10.8795 4.34597C11.8132 1.38346 13.5972 -0.0553209 16.2307 0.0267599C18.1829 0.0822217 19.1032 1.3087 18.9908 3.70619Z" fill="#32B8E8"/>
                           </g>
@@ -286,7 +289,7 @@
                       vimeo.com/
                   </span>
                   <span class="platform_input">
-                      <input type="text" [(ngModel)]="sm_vimeo">
+                    <input type="text" id="usernameVimeo" name="social_vimeo" [(ngModel)]="social_vimeo"/>
                   </span>
               </div>
           </div>

@@ -3,11 +3,30 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {
+  MAT_DATE_FORMATS,
+} from "@angular/material/core";
+import { catchError, Observable, of, tap } from 'rxjs';
+
+const CUSTOM_DATE_FORMATS = {
+  parse: {
+    dateInput: { year: 'numeric', month: 'numeric', day: 'numeric' },
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',  // You can change this format to your preferred one.
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthDayA11yLabel: 'MM/DD',
+  },
+};
 
 @Component({
   selector: 'app-edit-personal-details',
   templateUrl: './edit-personal-details.component.html',
   styleUrls: ['./edit-personal-details.component.scss'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
+  ]
 })
 export class EditPersonalDetailsComponent implements OnInit {
   countries: any;
@@ -18,7 +37,8 @@ export class EditPersonalDetailsComponent implements OnInit {
   loggedInUser: any = localStorage.getItem('userData');
   userId: any;
   userNationalities: any;
-  
+  playerClub: any = "";
+
   // Declare individual properties for binding
   dateOfBirth: string = '';
   height: number = 0;
@@ -33,9 +53,11 @@ export class EditPersonalDetailsComponent implements OnInit {
   currentClub: string = '';
   firstName: string = '';
   lastName: string = '';
-  nationality: string = '';
+  nationality: string[] = [];  // Ensure nationality is initialized as an array
   currentClubId: any;
   userData:any
+  playerClubsListing:any;
+  takenBy:any;
 
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
@@ -43,21 +65,67 @@ export class EditPersonalDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
+  countriesLoaded: boolean = false;
+  profileLoaded: boolean = false;
+  
   ngOnInit(): void {
-    this.userData = {...this.data};
-    
-    this.user = JSON.parse(this.user);
-    this.loggedInUser = JSON.parse(this.loggedInUser);
+    this.userData = { ...this.data };
+  
+    this.user = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.loggedInUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.userId = this.loggedInUser.id;
-    this.loadCountries();
-    this.getUserProfile(this.userId);
+  
+    // Fetch countries first, then get user profile
+    this.loadCountries().subscribe(() => {
+      this.getUserProfile(this.userId);
+      this.getClubsForPlayer();
+    });
   }
+  
+  // After loading, mark countries as loaded and check if both are ready
+  loadCountries(): Observable<any> {
+    return this.talentService.getCountries().pipe(
+      tap((response: any) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+        }
+      }),
+      catchError(error => {
+        console.error('Error fetching countries:', error);
+        return of([]); // Return an empty array in case of an error
+      })
+    );
+  }
+  
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
   
+  getClubsForPlayer(){
+    this.talentService.getClubsForPlayer().subscribe(
+      response => {
+        if(response.status){
+          this.playerClubsListing = response.data.clubs;
+
+          //check taken by status to show teams dropdown
+
+          let index = this.playerClubsListing.findIndex((x:any) => x.id == this.data.meta.pre_club_id);
+          if(this.playerClubsListing[index]?.is_taken == "yes"){            
+            this.takenBy = this.playerClubsListing[index].taken_by;            
+          }
+          
+        }else{
+          
+        }
+      },
+      error => {
+        console.error('Error publishing advertisement:', error);
+      }
+    );
+  }
+
   // Function to handle dynamic fetching of clubs based on search input
   onSearchClubs(): void {
     if (this.currentClub.length < 2) {
@@ -88,53 +156,56 @@ export class EditPersonalDetailsComponent implements OnInit {
     this.filteredClubs = [];  // Clear the suggestion list
   }
 
-  loadCountries(): void {
-    this.talentService.getCountries().subscribe(
-      (response: any) => {
-        if (response && response.status) {
-          this.countries = response.data.countries;
-        }
-      },
-      (error: any) => {
-        console.error('Error fetching countries:', error);
-      }
-    );
-  }
-
   getUserProfile(userId: any) {
-    
-      if (this.userData ) {
-        this.user = this.userData;
+    if (this.userData) {
+      this.user = this.userData;
+  
+      if (this.user.meta) {
+        this.dateOfBirth = this.user.meta.date_of_birth || '';
+        this.height = this.user.meta.height || 0;
+        this.heightUnit = this.user.meta.height_unit || 'cm';
+        this.weight = this.user.meta.weight || 0;
+        this.weightUnit = this.user.meta.weight_unit || 'kg';
+        this.contractStart = this.user.meta.contract_start || '';
+        this.contractEnd = this.user.meta.contract_end || '';
+        this.leagueLevel = this.user.meta.league_level || '';
+        this.placeOfBirth = this.user.meta.place_of_birth || '';
+        this.dominantFoot = this.user.meta.foot || 'Right';
+        this.currentClub = this.user.pre_current_club_name || '';
+        this.firstName = this.user.first_name || '';
+        this.lastName = this.user.last_name || '';
+        this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
+        
+        // Ensure userNationalities is parsed correctly as an array of IDs only
+        this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
+        this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map((nation: any) => nation.country_id) : [];
 
-        if (this.user.meta) {
-          this.dateOfBirth = this.user.meta.date_of_birth || '';
-          this.height = this.user.meta.height || 0;
-          this.heightUnit = this.user.meta.height_unit || 'cm';
-          this.weight = this.user.meta.weight || 0;
-          this.weightUnit = this.user.meta.weight_unit || 'kg';
-          this.contractStart = this.user.meta.contract_start || '';
-          this.contractEnd = this.user.meta.contract_end || '';
-          this.leagueLevel = this.user.meta.league_level || '';
-          this.placeOfBirth = this.user.meta.place_of_birth || '';
-          this.dominantFoot = this.user.meta.foot || 'Right';
-          this.currentClub = this.user.current_club || '';
-          this.firstName = this.user.first_name || '';
-          this.lastName = this.user.last_name || '';
-          this.userNationalities = JSON.parse(this.user.user_nationalities);
-          this.nationality = this.userNationalities ? this.userNationalities[0] : null;
+        if (this.user.meta && this.user.meta.pre_club_id) {
+          this.currentClubId = this.user.meta.pre_club_id;
         }
-      } else {
-        console.error('Invalid API this.userData structure:', this.userData);
       }
-      
+    } else {
+      console.error('Invalid API this.userData structure:', this.userData);
+    }
   }
+  
 
   onSubmit(form: NgForm) {
     console.log(this.nationality)
     if (form.valid) {
       const formData = new FormData();
       
-      formData.append('user[current_club]', this.currentClubId);
+      
+      let index = this.playerClubsListing.findIndex((x:any) => x.id == this.currentClubId)
+      if(this.playerClubsListing[index]?.is_taken == "yes"){
+
+        this.takenBy = this.playerClubsListing[index].taken_by;
+        formData.append('user[pre_club_id]', this.currentClubId);
+        formData.append('user[current_club]', this.takenBy);
+      }else{
+        formData.append('user[pre_club_id]', this.currentClubId);
+      }
+
       formData.append('user[date_of_birth]', this.dateOfBirth);
       formData.append('user[place_of_birth]', this.placeOfBirth);
       formData.append('user[height]', this.height.toString());
@@ -147,7 +218,10 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[foot]', this.dominantFoot);
       formData.append('user[first_name]', this.firstName);
       formData.append('user[last_name]', this.lastName);
-      formData.append('user[nationality][]', this.nationality);
+      // Append nationality array
+      this.nationality.forEach((nation:any) => {
+        formData.append('user[nationality][]', nation);
+      });
       formData.append('lang', 'en');
 
       this.talentService.updateUserProfile(formData).subscribe(
@@ -163,18 +237,14 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
   
   onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
+
     const selectedDate = event.value;
     let date = this.formatDate(selectedDate);
 
     if(type == 'dob'){
       this.dateOfBirth = date;
     }
-    // else if(type == 'sinceInTeam'){
-    //   this.sinceInTeam = date;
-    // }
-    // else if(type == 'contractUntil'){
-    //   this.contractUntil = date;
-    // }
+
   }
 
   formatDate(date:any) {

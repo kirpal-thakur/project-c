@@ -56,6 +56,7 @@
             type="text"
             id="currentClub"
             name="currentClub"
+            placeholder="Type to Search"
             [(ngModel)]="currentClub"
             #currentClubField="ngModel"
             (input)="onSearchClubs()"
@@ -74,26 +75,30 @@
           </ul>
         </div>
         
-
-
-        <!-- Nationality -->
-        <div class="form-group col-lg-6">
-          <label for="nationality">Nationality:</label>
-          <select
+        <!-- Nationality (Updated for multiple selection) -->
+        <div class="form-group col-lg-6 position_inputs">
+          <label for="nationality" class="form-label">Nationality:</label>
+          <mat-select
+            [(ngModel)]="nationality"
+            class="form-select"
             id="nationality"
             name="nationality"
-            [(ngModel)]="nationality"
+            multiple
             #nationalityField="ngModel"
             required
           >
-            <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
-          </select>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{ country.country_name }}
+            </mat-option>
+          </mat-select>
           <!-- Validation message -->
           <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert text-danger my-0">
             Nationality is required.
           </div>
         </div>
+            
       </div>
+
 
       <div class="row">
         <!-- Date of Birth -->
