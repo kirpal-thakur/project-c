@@ -19,7 +19,24 @@
 .header-peter{
   font-size: 12px;
 }
-
+.search-area{
+  width: 66%;
+}
+@media (max-width:1440px) {
+  .search-area{
+    width: 58%;
+  }
+}
+@media (max-width: 1200px) {
+  .search-area {
+      width: 52%;
+  }
+}
+@media (max-width: 1024px) {
+  .search-area {
+      width: 42%;
+  }
+}
 @media(max-width: 768px){
   .sidebar-menu a svg{
     width: 35px;

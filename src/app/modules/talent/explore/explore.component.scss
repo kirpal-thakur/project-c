@@ -168,7 +168,12 @@
 .explore-all_input .mat-mdc-form-field-infix{
     width: 100% !important;
   }
-
+  .explore-all_input mat-label{
+    color: #111418;
+}
+.explore-all_input mat-select{
+    color: #111418;
+}
 @media (max-width:1024px) {
     .explore-table{
         width: 100%;

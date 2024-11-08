@@ -2327,7 +2327,18 @@ color: #fff;
   .dark-theme #myTabContent .card{
     background: #072944;
   }
- 
+ .dark-theme .form-group label{
+  color: #fff !important;
+ }
+ .dark-theme .form-group input::placeholder{
+  color: #fff !important;
+ }
   .dark-theme .form-group mat-select{
     color: #fff ;
+  }
+  .dark-theme .title_2{
+    color: #fff !important;
+  }
+  .dark-theme upload-box p{
+    color: #fff;
   }

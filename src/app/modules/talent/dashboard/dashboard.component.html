@@ -16,7 +16,7 @@
                 <!-- The rest of your content goes here -->
                 <div *ngIf="!loading">
                     <div class="user-media text-center">
-                      <img [src]="profileImage" alt="" *ngIf="user?.meta && user?.meta?.profile_image_path"class=" mt-1 w-100" />
+                      <img [src]="profileImage" alt="" *ngIf="user?.meta && user?.meta?.profile_image_path"class=" w-100" />
                       <img src="../../../../assets/images/default/talent-profile-default.png" alt="" *ngIf="!user?.meta || !user?.meta?.profile_image_path" class="" />
 
                       <div class="user-edit">
