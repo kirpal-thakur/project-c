@@ -90,7 +90,6 @@ export class ExploreComponent implements OnInit {
   getUserFavorites() {
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
-  
     // Construct the params object with complex whereClause and metaQuery logic
     let params: any = {
       offset: pageIndex * pageSize,
@@ -169,7 +168,7 @@ export class ExploreComponent implements OnInit {
     this.scoutService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
-          this.countries = response.data.countries;
+          this.countries = response.data.domains;
         }
       },
       (error: any) => {
@@ -182,7 +181,7 @@ export class ExploreComponent implements OnInit {
     this.scoutService.getPositions().subscribe(
       (response: any) => {
         if (response.status) {
-          this.positions = response.data.positions;
+          this.positions = response.data.positions;          
         }
       },
       (error: any) => {
@@ -229,19 +228,32 @@ export class ExploreComponent implements OnInit {
       filters.push({ label: 'Category', value: this.selectedRole });
     }
     if (this.selectedCountry) {
-      filters.push({ label: 'Country', value: this.selectedCountry });
+      let getCountryById = this.countries.find((val: any) => {
+        return val.id == this.selectedCountry;
+      });
+      filters.push({ label: 'Country', value: getCountryById.location });
     }
     if (this.selectedPositions) {
-      filters.push({ label: 'Pos', value: this.selectedPositions.join(', ') });
+      let positionLabel = (this.selectedPositions.length > 0) ? 'Pos' : '';
+      filters.push({ label: positionLabel, value: this.selectedPositions.join(', ') });
     }
     if (this.selectedAge) {
-      filters.push({ label: 'Age', value: this.selectedAge.join(', ') });
+      let ageLabel = (this.selectedAge.length > 0) ? 'Age' : '';
+      filters.push({ label: ageLabel, value: this.selectedAge.join(', ') });
     }
     if (this.selectedFoot) {
-      filters.push({ label: 'Foot', value: this.selectedFoot.join(', ') });
+      let footLabel = (this.selectedFoot.length > 0) ? 'Foot' : '';
+      filters.push({ label: footLabel, value: this.selectedFoot.join(', ') });
     }
     if (this.selectedTopSpeed) {
-      filters.push({ label: 'Top Speed', value: this.selectedTopSpeed });
+      let selectedTopSpeed:any = {
+        '15': '15-20',
+        '20': '20-25',
+        '25': '25-30',
+        '30': '30-35',
+        '35': '35-40',
+      }
+      filters.push({ label: 'Top Speed', value: selectedTopSpeed[this.selectedTopSpeed] });
     }
     if (this.selectedLeague) {
       filters.push({ label: 'League', value: this.selectedLeague });

@@ -38,6 +38,14 @@ const routes: Routes = [
         (m) => m.ScoutModule
       ),
     // canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+  },
+  {
+    path: 'club',
+    loadChildren: () =>
+      import('./modules/club/club.module').then(
+        (m) => m.ScoutModule
+      ),
+    // canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
   }
 ];
 

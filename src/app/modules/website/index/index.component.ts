@@ -216,13 +216,15 @@ export class IndexComponent implements OnInit{
             console.log(userData, 'login-user');
             if(userData.role==4){
               this.router.navigate(['/talent/dashboard']);
-            }else if(userData.role==3) {
+            }else if (userData.role==3) {
               this.router.navigate(['/scout/dashboard']);
-            }else{
-              this.router.navigate(['/admin/dashboard']);
+            }else if(userData.role==2){
+              this.router.navigate(['/club/dashboard']);
             }
+            // this.router.navigate(['/admin/dashboard']);
             // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
+            this.router.navigate(['/admin/dashboard']);
             console.error('Failed to save token to local storage.');
           }
         }

@@ -6,7 +6,7 @@
           <div class="col-lg-3 border-end p-0 card_box-1">
             <div class="user-details-left col-lg-12">
               <div class="user-media text-center">
-                <img [src]="profileImage" alt="" *ngIf="user.meta && user.meta.profile_image_path"class=" mt-1" />
+                <img [src]="profileImage" alt="" *ngIf="user.meta && user.meta.profile_image_path" class="mt-1" />
                 <img src="../../../../assets/images/1.jpg" alt="" *ngIf="!user.meta || !user.meta.profile_image_path" class="" />
 
                 <div class="user-edit">
@@ -313,6 +313,28 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('company_history')"
+                    [ngClass]="{ active: activeTab == 'company_history' }" id="profile-tab" data-bs-toggle="tab"
+                    id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
+                    aria-controls="profile-tab-pane" aria-selected="false">
+                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.5 0C12.3958 0 14.1641 0.483073 15.8047 1.44922C17.3906 2.36068 18.6484 3.60938 19.5781 5.19531C20.526 6.83594 21 8.60417 21 10.5C21 12.3958 20.526 14.1641 19.5781 15.8047C18.6484 17.3906 17.3906 18.6484 15.8047 19.5781C14.1641 20.526 12.3958 21 10.5 21C8.60417 21 6.83594 20.526 5.19531 19.5781C3.60938 18.6484 2.36068 17.3906 1.44922 15.8047C0.483073 14.1641 0 12.3958 0 10.5H1.75C1.75 12.0859 2.15104 13.5625 2.95312 14.9297C3.71875 16.2422 4.75781 17.2812 6.07031 18.0469C7.4375 18.849 8.91406 19.25 10.5 19.25C12.0859 19.25 13.5625 18.849 14.9297 18.0469C16.2422 17.2812 17.2812 16.2422 18.0469 14.9297C18.849 13.5625 19.25 12.0859 19.25 10.5C19.25 8.91406 18.849 7.4375 18.0469 6.07031C17.2812 4.75781 16.2422 3.71875 14.9297 2.95312C13.5625 2.15104 12.0859 1.75 10.5 1.75C8.91406 1.75 7.4375 2.15104 6.07031 2.95312C4.75781 3.73698 3.71875 4.79427 2.95312 6.125H6.125V7.875H0V1.75H1.75V4.67578C2.71615 3.23568 3.95573 2.10547 5.46875 1.28516C7.03646 0.428385 8.71354 0 10.5 0ZM9.625 3.5H11.375V9.625H15.75V11.375H9.625V3.5Z" fill="#023A4A"/>
+                      </svg>                      
+                    {{ "Company History" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('portfolio')"
+                    [ngClass]="{ active: activeTab == 'portfolio' }" id="profile-tab" data-bs-toggle="tab"
+                    id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
+                    aria-controls="profile-tab-pane" aria-selected="false">
+                    <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.5 0.125C12.3021 0.125 13.013 0.371094 13.6328 0.863281C14.2526 1.35547 14.6628 1.98438 14.8633 2.75H22.875V20.25H0.125V2.75H8.13672C8.33724 1.98438 8.7474 1.35547 9.36719 0.863281C9.98698 0.371094 10.6979 0.125 11.5 0.125ZM11.5 1.875C11.1536 1.875 10.8438 1.95703 10.5703 2.12109C10.3151 2.26693 10.1146 2.47656 9.96875 2.75H13.0312C12.8854 2.47656 12.6758 2.26693 12.4023 2.12109C12.1471 1.95703 11.8464 1.875 11.5 1.875ZM1.875 4.5V12.375H21.125V4.5H1.875ZM11.5 9.75C11.737 9.75 11.9375 9.84115 12.1016 10.0234C12.2839 10.1875 12.375 10.388 12.375 10.625C12.375 10.862 12.2839 11.0716 12.1016 11.2539C11.9375 11.418 11.737 11.5 11.5 11.5C11.263 11.5 11.0534 11.418 10.8711 11.2539C10.707 11.0716 10.625 10.862 10.625 10.625C10.625 10.388 10.707 10.1875 10.8711 10.0234C11.0534 9.84115 11.263 9.75 11.5 9.75ZM1.875 14.125V18.5H21.125V14.125H1.875Z" fill="#023A4A"/>
+                      </svg>                      
+                    {{ "Portfolio" | translate }}
+                  </button>
+                </li>
+                <!-- <li class="nav-item" role="presentation">
                   <button class="nav-link" (click)="switchTab('performance')"
                     [ngClass]="{ active: activeTab == 'performance' }" id="profile-tab" data-bs-toggle="tab"
                     id="manage-button" data-bs-target="#profile-tab-pane" type="button" role="tab"
@@ -353,7 +375,7 @@
                     </svg>
                     {{ "Transfers" | translate }}
                   </button>
-                </li>
+                </li> -->
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{ active: activeTab == 'gallery' }"
                     id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
@@ -369,11 +391,10 @@
                 </li>
               </ul>
             </div>
-            <div class="general_details mt-4 p-4 bg-color ">             
+            <div class="general_details mt-4 p-4 bg-color ">
               <scout-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></scout-profile-tab>
-              <scout-performance-tab *ngIf="activeTab == 'performance'"></scout-performance-tab>
-              <scout-performance-analysis *ngIf="activeTab == 'performance-analysis'"></scout-performance-analysis>
-              <scout-transfers-tab *ngIf="activeTab == 'transfers'"></scout-transfers-tab>
+              <scout-app-history-tab *ngIf="activeTab == 'company_history'" role="Scout"></scout-app-history-tab>
+              <scout-portfolio-tab *ngIf="activeTab == 'portfolio'" role="Scout"></scout-portfolio-tab>
               <scout-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></scout-gallery-tab>
             </div>
           </div>

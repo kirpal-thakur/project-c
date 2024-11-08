@@ -57,6 +57,11 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
+import { LoaderComponent } from './loader/loader.component';
+import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
+import { AddNewTalentComponent } from './tabs/portfolio-tab/add-new-talent/add-new-talent.component';
+import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edit-new-talent.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -98,6 +103,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AddPerfomanceReportComponent,
     AddCardComponent,   
     PerformanceAnalysisTabComponent,
+    HistoryTabComponent,
+    LoaderComponent,
+    PortfolioTabComponent,
+    AddNewTalentComponent,
+    EditNewTalentComponent,
     // ResetPasswordComponent,
   ],
   imports: [

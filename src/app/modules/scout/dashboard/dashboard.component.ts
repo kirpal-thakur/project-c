@@ -182,13 +182,11 @@ export class DashboardComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-
       try {
-
         const formdata = new FormData();
         formdata.append("profile_image", this.selectedFile);
-
         this.scoutService.uploadProfileImage(formdata).subscribe((response)=>{
+          console.log(response, 'update-profile-image');
           if (response && response.status) {
             this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.profileImage); // Emitting the data

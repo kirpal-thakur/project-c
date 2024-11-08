@@ -154,7 +154,8 @@ export class ScoutService {
   
   getCountries(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-countries`
+      `${this.apiUrl}get-domains`
+      // `${this.apiUrl}get-countries`
     );
   }
   
@@ -190,6 +191,10 @@ export class ScoutService {
   
   
 getExploresData(params: any): Observable<any> {
+  const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${userToken}`
+    });
   let queryParams = new HttpParams()
     // Basic pagination parameters
     .set('offset', params.offset || 0)
@@ -243,10 +248,13 @@ getExploresData(params: any): Observable<any> {
   if (params.noLimit) {
     queryParams = queryParams.set('noLimit', 'true');
   }
-
+  console.log('service', `${this.apiUrl}users-frontend`, { params: queryParams });
   // Send the HTTP GET request
   return this.http.get<{ status: boolean, message: string, data: {} }>(
-    `${this.apiUrl}users-frontend`, { params: queryParams }
+    `${this.apiUrl}users-frontend`, { 
+      headers,
+      params: queryParams,
+    },
   );
 }
   
@@ -463,6 +471,24 @@ getExploresData(params: any): Observable<any> {
     });
 
     return this.http.post(`${this.apiUrl2}user/set-featured-file`, params , {headers});
+  }
+
+  getScoutHistory(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}scout/get-company-history`, {headers}
+    );
+  }
+
+  updateScoutHistory(history:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.post<any>(`${this.apiUrl2}scout/add-company-history`, {company_history: history}, { headers });
   }
   
 }

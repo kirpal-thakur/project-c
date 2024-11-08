@@ -1,8 +1,10 @@
+import { ProfileTabComponent } from './../../talent/tabs/profile-tab/profile-tab.component';
 import { Component } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ScoutService } from '../../../services/scout.service';
 
 interface Notification {
   image: string;
@@ -12,19 +14,24 @@ interface Notification {
 }
 
 @Component({
-  selector: 'talent-header',
+  selector: 'scout-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
-
+  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService, private scoutService: ScoutService) {}
   lang:string = '';
+  getUserId:any;
 
- ngOnInit() {
+  ngOnInit() {
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
+    this.getUserId = localStorage.getItem('userData');
+    console.log(localStorage.getItem('userData'), 'user-data');
+    setTimeout(() => {
+      this.getUserProfile();
+    }, 3000);
   }
 
   ChangeLang(lang:any){
@@ -124,6 +131,11 @@ export class HeaderComponent {
 
     this.notifications = [...this.notifications, ...moreNotifications];
 
+  }
+
+  getUserProfile(){
+    console.log(this.getUserId['id'], 'get-user-id');
+    // this.scoutService.getProfileData().subscribe()
   }
 
 }

@@ -24,7 +24,7 @@
                     <mat-form-field appearance="fill">
                       <mat-label>{{ 'Country' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedCountry" (selectionChange)="applyFilter()" id="country" name="country">
-                        <mat-option *ngFor="let country of countries" [value]="country.id">{{country.country_name}}</mat-option>
+                        <mat-option *ngFor="let country of countries" [value]="country.id">{{country.location}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -247,18 +247,24 @@
             <div class="col-lg-2"  *ngFor="let player of players">
               <div class="image_box"  [ngClass]="{'booster_box': player.package_name=='booster'}">
                 <div class="player_img">
-                  <img [src]="player.meta.profile_image_path" alt="player-image">
+                  <img *ngIf="player.meta.profile_image_path" [src]="player.meta.profile_image_path" alt="player-image">
+                  <img *ngIf="!player.meta.profile_image_path" src="../../../../assets/images/avatars/profile-image-1.png" alt="player-image">
                 </div>
                 <div class="player-names">
-                  <a href="#">{{player.first_name}}</a>
+                  <a href="#">{{player.first_name ?? 'N/A'}}</a>
                 </div>
                 <div class="player-team-logo">
                   <div class="team-logo-bg">
                   </div>
-                  <img src="{{player.meta.cover_image_path}}" alt="team-logo">
+                  <img *ngIf="player.meta.cover_image_path" src="{{player.meta.cover_image_path}}" alt="team-logo">
+                  <img *ngIf="!player.meta.cover_image_path" src="../../../../assets/images/team-logo.png" alt="team-logo">
                 </div>
                 <div class="flag_box">
-                  <img src="{{getNationality(player.user_nationalities)}}" >
+                  @if (getNationality(player.user_nationalities)) {
+                    <img src="{{getNationality(player.user_nationalities)}}" >
+                  }@else{
+                    <span>--</span>
+                  }                 
                   <hr>
                   <span>
                     <svg width="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
