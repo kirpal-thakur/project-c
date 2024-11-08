@@ -121,7 +121,7 @@ export class MembershipComponent {
       data: {
         invoice_number: userPurchase.invoice_number,
         category: userPurchase.payment_method,
-        plan: '',
+        plan: userPurchase.package_name,
         duration: userPurchase.plan_interval,
         valid_until: userPurchase.plan_period_end,
         price: userPurchase.plan_amount,
@@ -129,6 +129,8 @@ export class MembershipComponent {
         total: userPurchase.amount_paid,
         currency : userPurchase.amount_paid_currency,
         download_path: userPurchase.invoice_file_path,
+        tax_percentage:userPurchase.tax_percentage,
+        tax:userPurchase.tax_amount
       }
     });
   }

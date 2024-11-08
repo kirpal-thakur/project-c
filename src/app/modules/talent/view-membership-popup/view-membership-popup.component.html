@@ -45,7 +45,7 @@
          </tr>
          <tr class="bordered-bottom">
             <td>{{ plan.category }}</td>
-            <td>{{ plan.currency }}</td>
+            <td>{{ plan.plan }}</td>
             <td>{{ plan.duration }}</td>
             <td>{{ plan.valid_until }}</td>
             <td class="text-end" >{{ plan.price }} CHF</td>
@@ -59,7 +59,7 @@
 
   <div class="bottom-details">
     <p><strong>{{ 'Subtotal' | translate }}:</strong> {{ plan.subtotal }} CHF</p>
-    <p><strong>Incl. VAT 8.1%:</strong> 1.78 CHF</p>
+    <p *ngIf="plan.tax_percentage>0"><strong>Incl. VAT {{plan.tax_percentage}}%:</strong> {{plan.tax}} CHF</p>
     <p><strong>{{ 'Total' | translate }}:</strong> {{ plan.total }} CHF</p>
 
     <div class="download-btn mt-4">
