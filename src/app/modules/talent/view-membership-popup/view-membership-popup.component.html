@@ -27,7 +27,7 @@
            </tr>
            <tr>
              <td>#{{ plan.invoice_number }}</td>
-             <td>{{ '23.09.2024' | translate }}</td>
+             <td>{{ todayDate }}</td>
            </tr>
          </thead>
  
@@ -37,14 +37,14 @@
      <table class="table table-bordered membership-data">
        <thead class="table-light">
          <tr>
-           <th>{{ 'Category' | translate }}</th>
+           <th>{{ 'Pos.' | translate }}</th>
             <th>{{ 'Plan' | translate }}</th>
            <th>{{ 'Duration' | translate }}</th>
            <th>{{ 'Valid until' | translate }}</th>
            <th class="text-end">{{ 'Price' | translate }}</th>
          </tr>
          <tr class="bordered-bottom">
-            <td>{{ plan.category }}</td>
+            <td>1</td>
             <td>{{ plan.plan }}</td>
             <td>{{ plan.duration }}</td>
             <td>{{ plan.valid_until }}</td>
