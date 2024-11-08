@@ -460,7 +460,9 @@ a.dropdown-item.ai-icon.selected {
 .sidebar_menu a:hover{
   justify-content: inherit !important;
 }
-
+html{
+  top: 0 !important;
+}
 // .sidebar_menu a:hover {
 //   background: #023A4A;
 //   width: 180px;
@@ -1533,4 +1535,9 @@ margin: auto;
   color: #cd2122;
   font-size: 13px;
   margin-top: 1px;
+}
+
+.details-1{
+  font-weight: 500 !important;
+  color: #111418;
 }

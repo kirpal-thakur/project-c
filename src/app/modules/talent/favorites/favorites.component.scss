@@ -8,7 +8,15 @@
 .Favorite-parent{
   padding: 15px 20px ;
 }
-
+.search-filter-btn{
+  border-left:1px solid #CDCDCD;
+  border-right: none;
+  border-bottom: none;
+  border-top: none;
+  color: #787878;
+  font-size: 14px;
+  font-weight: 400;
+}
 @media(max-width: 425px){
 .btn-outline-white {
  padding: 5px;
