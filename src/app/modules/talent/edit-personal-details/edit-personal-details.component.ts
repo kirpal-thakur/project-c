@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
@@ -6,8 +6,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import {
   MAT_DATE_FORMATS,
 } from "@angular/material/core";
-import { catchError, Observable, of, tap } from 'rxjs';
-
+import { catchError, Observable, of, tap,fromEvent } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { AuthService } from '../../../services/auth.service';
 const CUSTOM_DATE_FORMATS = {
   parse: {
     dateInput: { year: 'numeric', month: 'numeric', day: 'numeric' },
@@ -20,6 +21,9 @@ const CUSTOM_DATE_FORMATS = {
   },
 };
 
+// Declare google globally to avoid TypeScript errors
+declare const google: any;
+
 @Component({
   selector: 'app-edit-personal-details',
   templateUrl: './edit-personal-details.component.html',
@@ -29,6 +33,10 @@ const CUSTOM_DATE_FORMATS = {
   ]
 })
 export class EditPersonalDetailsComponent implements OnInit {
+  
+  @ViewChild('placeOfBirthInput') placeOfBirthInput!: ElementRef;
+  placeSuggestions: any[] = [];
+
   countries: any;
   leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];
   filteredClubs: any[] = [];  // To store filtered clubs based on search
@@ -62,6 +70,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
     private talentService: TalentService,
+    private authService : AuthService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -80,8 +89,54 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.getUserProfile(this.userId);
       this.getClubsForPlayer();
     });
+    
   }
   
+  ngAfterViewInit(): void {
+    this.initGooglePlacesAutocomplete();
+  }
+
+  initGooglePlacesAutocomplete(): void {
+    console.log('fhdsjk')
+    if (this.placeOfBirthInput) {
+      const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
+        types: ['(cities)'],
+        componentRestrictions: { country: 'us' }
+      });
+
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        if (place && place.address_components) {
+          this.placeOfBirth = place.formatted_address || '';
+        }
+      });
+    }
+  }
+  
+  // ngAfterViewInit(): void {
+  //   this.setupPlaceAutocomplete();
+  // }
+
+  // setupPlaceAutocomplete() {
+  //   fromEvent(this.placeOfBirthInput.nativeElement, 'input')
+  //     .pipe(
+  //       debounceTime(300),          // Wait for 300ms pause in events
+  //       distinctUntilChanged(),      // Only emit if the value has changed
+  //       switchMap((event: any) => {
+  //         const input = event.target.value;
+  //         return this.authService.getPlacePredictions(input);
+  //       })
+  //     )
+  //     .subscribe((response: any) => {
+  //       this.placeSuggestions = response.predictions || [];
+  //     });
+  // }
+
+  onSelectSuggestion(place: any): void {
+    this.placeOfBirthInput.nativeElement.value = place.description;
+    this.placeSuggestions = [];  // Clear suggestions
+  }
+
   // After loading, mark countries as loaded and check if both are ready
   loadCountries(): Observable<any> {
     return this.talentService.getCountries().pipe(

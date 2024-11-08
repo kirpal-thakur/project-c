@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
+import { TalentService } from '../../../services/talent.service';
 
 interface Notification {
   image: string;
@@ -20,15 +21,22 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
+  constructor(private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
   loggedInUser:any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang:string = '';
   domains: any = environment.domains;
+  message: string = '';
 
   ngOnInit() {
-
     this.loggedInUser = JSON.parse(this.loggedInUser);
+
+    this.profileImgUrl = this.loggedInUser.meta.profile_image_path;
+
+    this.talentService.message$.subscribe(msg => {
+      this.profileImgUrl = msg;
+    });
+    
     
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
@@ -38,9 +46,7 @@ export class HeaderComponent {
     const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
-
   }
-
 
   logout() {
     this.authService.logout();
@@ -56,9 +62,8 @@ export class HeaderComponent {
 
   updateThemeText (){
     const isDarkMode = this.themeService.isDarkMode();
-this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-document.getElementById('theme-text')!.textContent =this.themeText
-
+    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
+    document.getElementById('theme-text')!.textContent =this.themeText
   }
 
 

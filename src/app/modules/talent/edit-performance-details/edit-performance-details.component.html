@@ -20,11 +20,30 @@
             <label for="team" class="form-label">Team</label>
             <!-- <input type="number" id="team" name="team_id" [(ngModel)]="performance.team_id" required> -->
 
-            <select id="team" name="team" [(ngModel)]="performance.team" required>
+            <!-- <select id="team" name="team" [(ngModel)]="performance.team" required>
               <option *ngFor="let team of teams" [value]="team.id">
                 {{ team.team_name }}
               </option>
-            </select>
+            </select> -->
+            
+            <input
+              type="text"
+              id="currentTeam"
+              name="currentTeam"
+              placeholder="Type to Search"
+              [(ngModel)]="currentTeam"
+              #currentTeamsField="ngModel"
+              (input)="onSearchTeams()"
+              autocomplete="off"
+              required
+            />
+            
+            <!-- Club suggestions -->
+            <ul *ngIf="filterTeams.length > 0 && currentTeam.length >= 2" class="suggestions-list">
+              <li *ngFor="let team of filterTeams" (click)="onSelectTeam(team)">
+                {{ team.team_name }} - {{ team.team_type }}
+              </li>
+            </ul>
           </div>
           <div class="form-group col-lg-6">
             <label for="matches" class="form-label">Matches</label>

@@ -23,11 +23,20 @@ export class PaymentService {
     return await this.stripePromise;
   }
 
-  createCheckoutSession(planId: string,booster_audience:any=''): Observable<any> {    
+  createCheckoutSession(planId: string, booster_audience: any = ''): Observable<any> {
     const successUrl = window.location.origin + '/success'; // Define your success URL
     const cancelUrl = window.location.origin + '/cancel'; // Define your cancel URL
-    // Sending successUrl and cancelUrl as query parameters
-    return this.http.get(`${this.apiUrl}create-payment-intent/${planId}?successUrl=${encodeURIComponent(successUrl)}&cancelUrl=${encodeURIComponent(cancelUrl)}&booster_audience=${booster_audience}`);
+
+    // Define the request body with the necessary parameters
+    const body = {
+        planId: planId,
+        successUrl: successUrl,
+        cancelUrl: cancelUrl,
+        booster_audience: booster_audience
+    };
+
+    // Sending the request as a POST with the body data
+    return this.http.post(`${this.apiUrl}create-payment-intent/${planId}`, body);
   }
 
 

@@ -1534,3 +1534,11 @@ margin: auto;
   font-size: 13px;
   margin-top: 1px;
 }
+
+
+.pac-container:after {
+  background-image: none !important;
+  height: 0px;
+  padding: 0;
+  margin: 0;
+}

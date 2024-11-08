@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
 @Injectable({
@@ -13,10 +13,16 @@ export class TalentService {
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
+  private messageSource = new Subject<string>();
+  message$ = this.messageSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
+  }
+
+  updatePicOnHeader(pic: string) {
+    this.messageSource.next(pic);
   }
 
   getProfileData(userId: any=1): Observable<any> {
@@ -97,6 +103,20 @@ export class TalentService {
     }
   }
 
+  // Fetch teams and store globally and in localStorage
+  searchTeams(team:string): Observable<any> {
+
+    // Fetch teams from the API, store in global variable and localStorage
+    return this.http.get(`${this.apiUrl2}get-teams?search=${team}`).pipe(
+      tap((response: any) => {
+        if (response && response.status) {
+          this.teams = response.data.teams; // Store teams globally
+        }
+      }),
+      catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully
+    );
+
+  }
 
   // Error handling method
   private handleError<T>(operation = 'operation', result?: T) {

@@ -92,6 +92,7 @@ export class DashboardComponent implements OnInit {
 
           if (this.user.meta.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
+            this.sendMessage()
           }
           if (this.user.meta.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
@@ -190,6 +191,7 @@ export class DashboardComponent implements OnInit {
           if (response && response.status) {
             this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.profileImage); // Emitting the data
+            this.sendMessage();
             // this.isLoading = false;
           } else {
             // this.isLoading = false;
@@ -201,6 +203,10 @@ export class DashboardComponent implements OnInit {
         console.error('Error fetching users:', error); 
       }
     }
+  }
+
+  sendMessage() {
+    this.talentService.updatePicOnHeader(this.profileImage);
   }
 
   onCoverFileChange(event: Event): void {
@@ -336,4 +342,5 @@ export class DashboardComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
+  
 }

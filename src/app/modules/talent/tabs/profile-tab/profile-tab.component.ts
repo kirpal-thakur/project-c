@@ -36,6 +36,22 @@ export class ProfileTabComponent {
       if (this.user && this.user.user_nationalities) {
         this.userNationalities = JSON.parse(this.user.user_nationalities);
       }
+      
+    }
+    if (changes['user']) {
+      // Update the user object with the latest userData
+      this.user = changes['user'].currentValue;
+  
+      // Check if user_nationalities exist and parse it
+      if (this.user && this.user.user_nationalities) {
+        this.userNationalities = JSON.parse(this.user.user_nationalities);
+      }
+      
+    }
+    if (changes['mainPosition']) {
+      // Update the mainPosition object with the latest mainPositionData
+      this.mainPosition = changes['mainPosition'].currentValue;
+      
     }
     this.getMainPosition();
     this.getOtherPositions();

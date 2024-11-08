@@ -126,15 +126,22 @@
             type="text"
             id="placeOfBirth"
             name="placeOfBirth"
+            #placeOfBirthInput
             [(ngModel)]="placeOfBirth"
             #placeOfBirthField="ngModel"
             required
           />
+          <ul *ngIf="placeSuggestions.length > 0" class="suggestions-list">
+            <li *ngFor="let suggestion of placeSuggestions" (click)="onSelectSuggestion(suggestion)">
+              {{ suggestion.description }}
+            </li>
+          </ul>
           <!-- Validation message -->
           <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert text-danger my-0">
             Place of Birth is required.
           </div>
         </div>
+
       </div>
 
       <div class="row">
