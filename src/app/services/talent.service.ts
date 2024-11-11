@@ -612,4 +612,16 @@ getExploresData(params: any): Observable<any> {
     return this.http.post(`${this.apiUrl2}user/update-booster-audience`, params , {headers});
 
   }
+
+
+  validateCoupon(couponCode: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    let params = new HttpParams();
+      params = params.append('coupon_code', couponCode);  
+
+    return this.http.post(`${this.apiUrl2}user/validate-coupon`, params , {headers});
+  }
 }

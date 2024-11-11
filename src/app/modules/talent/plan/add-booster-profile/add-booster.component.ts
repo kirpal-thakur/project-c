@@ -3,6 +3,7 @@ import { environment } from '../../../../../environments/environment';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
 import { PaymentService } from '../../../../services/payment.service';
+import { CouponCodeAlertComponent } from '../../../shared/coupon-code-alert/coupon-code-alert.component';
 
 @Component({
   selector: 'add-booster',
@@ -62,13 +63,30 @@ export class AddBoosterComponent {
   }
 
   saveBoost() {
-    this.redirectToCheckout(this.id, this.selectedAudienceIds);
+    this.openCouponDialog()
   }
 
-  async redirectToCheckout(planId: string, booster_audience: number[] = []) {
+  // Open coupon dialog
+  openCouponDialog(): void {
+    const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let coupon = result;
+        this.redirectToCheckout(this.id, this.selectedAudienceIds, coupon);
+      }
+      if (result==null) {
+        this.redirectToCheckout(this.id,this.selectedAudienceIds);
+      }
+    });
+  }
+  
+  async redirectToCheckout(planId: string, booster_audience: number[] = [],coupon:any='') {
     this.isLoadingCheckout = true;
     try {
-      const response = await this.paymentService.createCheckoutSession(planId, booster_audience.join(',')).toPromise();
+      const response = await this.paymentService.createCheckoutSession(planId, booster_audience.join(','),coupon).toPromise();
       if (response?.data?.payment_intent?.id) {
         const stripe = await this.stripe;
         stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });

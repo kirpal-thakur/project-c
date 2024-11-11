@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 import { ActivatedRoute } from '@angular/router';
+import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 
 @Component({
   selector: 'app-edit-plan',
@@ -44,11 +45,11 @@ export class EditPlanComponent implements OnInit {
     console.log('data',this.data,'countries',this.countries)
   }
 
-  async redirectToCheckout(planId: string) {
+  async redirectToCheckout(planId: string,coupon:any='') {
 
     try {
       // Call the backend to create the checkout session
-      const response = await this.stripeService.createCheckoutSession(planId, this.defaultCard?.id).toPromise();
+      const response = await this.stripeService.createCheckoutSession(planId,'',coupon).toPromise();
   
       if (response && response.data.payment_intent.id) {
         // Redirect to Stripe Checkout with the session ID
@@ -74,6 +75,23 @@ export class EditPlanComponent implements OnInit {
   removeCountry(country: any) {
     this.selectedCountries = this.selectedCountries.filter(c => c.id !== country.id);
   }
+  
+  // Open coupon dialog
+  openCouponDialog(planId:any): void {
+    const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        let coupon = result;
+        this.redirectToCheckout(planId,coupon)
+      }
+      if (result==null) {
+        this.redirectToCheckout(planId);
+      }
+    });
+  }
 
   buyNow() {
     if (this.isPlanAlreadySelected()) {
@@ -88,11 +106,9 @@ export class EditPlanComponent implements OnInit {
       return; // Prevent further action
     }
 
-     
     let oldPlan = this.selectedCountries.filter(c => c.package_name == this.selectedPlan.name);
     oldPlan = oldPlan.length > 0 ? oldPlan[0] : null;
     console.log(oldPlan)
-    console.log(this.selectedPlan)
     
     if (this.selectedPlan) {
       const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
@@ -101,9 +117,13 @@ export class EditPlanComponent implements OnInit {
       if(this.isYearly){
 
         if(this.selectedPlan?.monthData?.is_package_active == 'active'){
+
           this.updatePlan(planId,this.isYearly,oldPlan);
+
         }else{
-          this.redirectToCheckout(planId.id);
+          
+          this.openCouponDialog(planId.id)
+
         }
 
       }else{
@@ -114,7 +134,8 @@ export class EditPlanComponent implements OnInit {
           this.updatePlan(planId,this.isYearly,oldPlan);
 
         }else{
-          this.redirectToCheckout(planId.id);
+
+          this.openCouponDialog(planId.id);
 
         }
       }
@@ -243,7 +264,6 @@ export class EditPlanComponent implements OnInit {
     );
   }
 
-
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
     this.talentService.getUserPlans().subscribe(
@@ -263,6 +283,5 @@ export class EditPlanComponent implements OnInit {
       }
     );
   }
-
 
 }

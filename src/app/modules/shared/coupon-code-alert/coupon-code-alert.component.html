@@ -1,29 +1,44 @@
 <div class="container p-4">
-    <!-- Dialog header -->
-    <div class="modal-header pb-2">
-      <h5 class="modal-title" id="couponModalLabel">Enter Coupon Code</h5>
-      <button type="button" class="btn-close" (click)="closeDialog()"></button>
+  <!-- Dialog header -->
+  <div class="modal-header pb-2">
+    <h5 class="modal-title" id="couponModalLabel">Enter Coupon Code</h5>
+    <button type="button" class="btn-close" (click)="closeDialog()"></button>
+  </div>
+
+  <!-- Dialog body -->
+  <div class="modal-body">
+    <!-- Form field for coupon code -->
+    <div class="mb-3">
+      <label for="couponCode" class="form-label">Coupon Code</label>
+      <input type="text" 
+             class="form-control" 
+             id="couponCode" 
+             [(ngModel)]="couponCode" 
+             (input)="onCouponInput()" 
+             placeholder="Enter your coupon code">
+      
+      <!-- Display error message if coupon is invalid -->
+      <div *ngIf="couponError" class="text-danger mt-2">
+        {{ couponError }}
+      </div>
+      
+      <!-- Display success message if coupon is valid -->
+      <div *ngIf="couponSuccess" class="text-success mt-2">
+        {{ couponSuccess }}
+      </div>
     </div>
 
-    <!-- Dialog body -->
-    <div class="modal-body">
-      <!-- Form field for coupon code -->
-      <div class="mb-3">
-        <label for="couponCode" class="form-label">Coupon Code</label>
-        <input type="text" class="form-control" id="couponCode" [(ngModel)]="couponCode" placeholder="Enter your coupon code">
-        <div *ngIf="couponError" class="text-danger mt-2">
-          Invalid Coupon Code. Please try again.
-        </div>
-      </div>
-
-      <!-- Option for users who don't have a coupon -->
-      <div class="mt-3">
-        <button class="btn btn-link" (click)="noCoupon()">I don't have a coupon, Proceed to checkout.</button>
-      </div>
-    </div>
-
-    <!-- Dialog footer -->
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success" (click)="applyCoupon()">Apply</button>
+    <!-- Option for users who don't have a coupon -->
+    <div class="mt-3">
+      <button class="btn btn-link" (click)="noCoupon()">I don't have a coupon, Proceed to checkout.</button>
     </div>
   </div>
+
+  <!-- Dialog footer -->
+  <div class="modal-footer">
+    <!-- Disable Apply button if there is an error or if the coupon code is invalid -->
+    <button type="button" class="btn btn-success" 
+            [disabled]="couponError || !couponCode.trim()"
+            (click)="applyCoupon()">Apply</button>
+  </div>
+</div>

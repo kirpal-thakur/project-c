@@ -75,18 +75,21 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   // Open coupon dialog
   openCouponDialog(planId:any): void {
-    // const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
-    //   width: '500px'
-    // });
+    const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
+      width: '500px'
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     this.isCouponApplied = true; // Show that the coupon has been applied
-    //     this.couponCode = result; // Store the coupon code entered by the user
-    //     console.log(this.couponCode);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.isCouponApplied = true; // Show that the coupon has been applied
+        this.couponCode = result; // Store the coupon code entered by the user
+        console.log(this.couponCode);
         this.redirectToCheckout(planId);
-      // }
-    // });
+      }
+      if (result==null) {
+        this.redirectToCheckout(planId);
+      }
+    });
   }
 
   // Redirect to Stripe Checkout with coupon code logic
@@ -384,7 +387,6 @@ export class PlanComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Selected Audience IDs received:', result);
-        // You can now use `result` which contains the selected audience IDs
       }
     });
   }
