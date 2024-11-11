@@ -31,7 +31,7 @@ export class MembershipComponent {
   premium : any =[];
   country: any=[];
   booster: any=[];
-
+  stats: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
@@ -42,6 +42,7 @@ export class MembershipComponent {
       this.getUserPurchases();
       this.getUserPlans();
       this.getUserCards();
+      this.getBoosterData()
     });
   }
 
@@ -135,22 +136,27 @@ export class MembershipComponent {
     });
   }
 
+  async getBoosterData(){
+    try {
+      const response = await this.talentService.getBoosterData().toPromise();
+      if (response?.data) {
+        this.stats = response.data;
+        console.log(this.stats)
+        // Ensure the selectedAudienceIds array is cleared and populated with the correct data
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
+  }
+
+
   editMembershipDialog(id:any) {
 
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
-      width: '800px',
-      data: {
-        invoice_number: '',
-        category: '',
-        plan: '',
-        duration: '',
-        valid_until: '',
-        price: '',
-        subtotal: '',
-        total: '',
-        currency : '',
-        downlaod_path: '',
-      }
+      width: '1000px',
+      data: { stats : this.stats }
     });
 
   }
@@ -312,15 +318,16 @@ export class MembershipComponent {
   editBooster(data:any){
     
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
-      width: '850px',
-      data: {
+      width: '1000px',
+      data: { stats : this.stats
       }
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result && result.action === 'delete-confirmed' && result.selectedCountryId) {
-    //     this.cancelSubscription(result.selectedCountryId);
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ) {
+        alert('Booster profile updated')
+      }
+    });
   }
+
 }

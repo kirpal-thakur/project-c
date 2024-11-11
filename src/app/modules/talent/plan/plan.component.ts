@@ -10,6 +10,7 @@ import { UpdateConfirmationPlanComponent } from '../membership/update-confirmati
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 import { ActivatedRoute } from '@angular/router';
 import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
+import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 
 interface Plan {
   id: number;
@@ -47,6 +48,9 @@ export class PlanComponent implements OnInit, OnDestroy {
   booster: any = null;
   demo: any = null;
 
+  couponCode: string = '';
+  isCouponApplied: boolean = false;
+
   isLoadingPlans: boolean = false;
   isLoadingCheckout: boolean = false;
   isLoadingCards: boolean = false;
@@ -66,22 +70,34 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.getUserPlans();
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
-    
+
   }
-  
-  async redirectToCheckout(planId: string,booster_audience='') {
-    if (this.premium?.package_id === planId) {
-      alert('You already have this plan with the same billing interval.');
-      return;
-    }
-    
+
+  // Open coupon dialog
+  openCouponDialog(planId:any): void {
+    // const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
+    //   width: '500px'
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.isCouponApplied = true; // Show that the coupon has been applied
+    //     this.couponCode = result; // Store the coupon code entered by the user
+    //     console.log(this.couponCode);
+        this.redirectToCheckout(planId);
+      // }
+    // });
+  }
+
+  // Redirect to Stripe Checkout with coupon code logic
+  async redirectToCheckout(planId: string) {
+
     this.isLoadingCheckout = true;
     try {
-      const response = await this.paymentService.createCheckoutSession(planId,booster_audience).toPromise();
-      
+      const response = await this.paymentService.createCheckoutSession(planId, '',this.couponCode).toPromise();
       if (response?.data?.payment_intent?.id) {
         const stripe = await this.stripe;
-        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+        await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
       } else {
         console.error('Failed to create checkout session', response);
       }
@@ -90,6 +106,13 @@ export class PlanComponent implements OnInit, OnDestroy {
     } finally {
       this.isLoadingCheckout = false;
     }
+  }
+
+
+  // Apply coupon logic (e.g., send to backend for validation)
+  applyCoupon(): void {
+    // You can call a service to validate the coupon and apply discounts
+    console.log('Coupon code applied:', this.couponCode);
   }
 
   ngOnDestroy() {

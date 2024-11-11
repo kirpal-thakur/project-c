@@ -21,7 +21,9 @@
 
                       <div class="user-edit">
                         <label for="profile-upload">
-                          <div class="edit-profile cursor-pointer" >
+                          <div class="edit-profile cursor-pointer"
+                          matTooltip="Upload New Profile Image" matTooltipPosition="right"
+                          >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                               <path
                                 d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z" 
@@ -47,7 +49,9 @@
                       <div class="boost_profile d-flex align-items-center" *ngIf="booster">
                         <span>Boost Profile</span>
                         <span class="active_btn">Active</span>
-                        <a href="talent/plans" class="cursor-pointer">
+                        <a href="talent/plans" class="cursor-pointer"
+                        matTooltip="Upload New Profile Image" matTooltipPosition="right"
+                        >
                           <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
                             </svg>
@@ -68,7 +72,7 @@
                         </div>
                       </div>
                         <div class="col-lg-3 p-0 edit_button responsive-edit_btn">
-                          <button (click)="openEditDialog()">
+                          <button (click)="openEditDialog()" matTooltip="Edit Personal Details" matTooltipPosition="right" >
                             <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
                               </svg>
@@ -281,7 +285,7 @@
                       <h2>HIGHLIGHTS</h2>
                       <p>Feature up to 6 photos/videos.</p>
                     </div>
-                    <div class="settings cursor-pointer" (click)="openHighlight()">
+                    <div class="settings cursor-pointer" (click)="openHighlight()" >
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path
                           d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4 .6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z" />
@@ -310,8 +314,10 @@
               <img [src]="coverImage" alt="Cover Image" />
               <img src="../../../../assets/images/bnr.jpg" alt="" *ngIf="!coverImage" class="" />
 
-              <div class="edit-photo d-flex align-items-center">
-                <div class="edit_image-2 ">                  
+              <div class="edit-photo d-flex align-items-center"
+              matTooltip="Edit Cover Image" matTooltipPosition="right"
+              >
+                <div class="edit_image-2 ">
                   <label for="file-upload" class="cursor-pointer">
                     <svg class="edit_image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">                      
                       <path

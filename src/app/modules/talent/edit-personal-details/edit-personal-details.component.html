@@ -112,11 +112,19 @@
             #dobField="ngModel"
             required
           />
+
+          <!-- <mat-form-field>
+
+            <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+            <input matInput [matDatepicker]="dp" [formControl]="date" >
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field> -->
+
           <!-- Validation message -->
           <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert text-danger my-0">
             Date of Birth is required.
           </div>
-          
+
         </div>
 
         <!-- Place of Birth -->

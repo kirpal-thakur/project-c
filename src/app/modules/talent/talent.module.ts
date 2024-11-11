@@ -39,7 +39,6 @@ import { CountriesComponent } from './countries/countries.component';
 import { ChatComponent } from './chat/chat.component';
 import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
 import { PaymentsPopupComponent } from './payments-popup/payments-popup.component';
-import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
 import { EditPlanComponent } from './edit-plan/edit-plan.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditGeneralDetailsComponent } from './edit-general-details/edit-general-details.component';
@@ -62,8 +61,27 @@ import { CancelCountryPlanComponent } from './membership/cancel-country-plan/can
 import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
 import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
 import { GeneralDetailsComponent } from './view-user/tabs/general-details/general-details.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @NgModule({
+  providers: [
+    provideMomentDateAdapter(MY_FORMATS),
+  ],
   declarations: [
     IndexComponent,
     DashboardComponent,
@@ -133,7 +151,8 @@ import { GeneralDetailsComponent } from './view-user/tabs/general-details/genera
     MatToolbarModule,
     MatTableModule,
     MatPaginator,
-    NgxEditorModule,    
+    NgxEditorModule,
+    MatTooltipModule,
   ]
 })
 export class TalentModule { }

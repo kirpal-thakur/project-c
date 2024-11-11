@@ -32,6 +32,7 @@ import { IndexComponent } from './index/index.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
+import { CouponCodeAlertComponent } from './coupon-code-alert/coupon-code-alert.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { FooterComponent } from './footer/footer.component';
     IndexComponent,
     HeaderComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    CouponCodeAlertComponent
   ],
   imports: [
     CommonModule,

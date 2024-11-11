@@ -58,7 +58,7 @@
                       <button
                         class="choose-plan-btn"
                         [disabled]="(( plan?.name==premium?.package_name ) || ( plan?.name==demo?.package_name ))"
-                        (click)="redirectToCheckout(plan.isYearly ? plan.yearData.id : plan.monthData.id)"
+                        (click)="openCouponDialog(plan.isYearly ? plan.yearData.id : plan.monthData.id)"
                       >
                         Choose Plan
                       </button>
@@ -116,7 +116,7 @@
                       <sub class="premium-month_title">.-{{ selectedPlan?.currency }}/{{ selectedPlan?.isYearly ? 'Year' : 'Month' }}</sub>
                     </h6>
                   </div>
-                  
+
                   <div class="row  multi-country-select ">
                     <div class="col-lg-12 plan-2">
                       <button class="choose-plan-btn" (click)="editPlanPopup(otherPlans,country)" >Choose Plan</button>

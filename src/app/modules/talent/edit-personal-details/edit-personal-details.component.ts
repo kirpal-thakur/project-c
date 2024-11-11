@@ -1,25 +1,20 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import {
-  MAT_DATE_FORMATS,
-} from "@angular/material/core";
 import { catchError, Observable, of, tap,fromEvent } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
-const CUSTOM_DATE_FORMATS = {
-  parse: {
-    dateInput: { year: 'numeric', month: 'numeric', day: 'numeric' },
-  },
-  display: {
-    dateInput: 'YYYY-MM-DD',  // You can change this format to your preferred one.
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthDayA11yLabel: 'MM/DD',
-  },
-};
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
 
 // Declare google globally to avoid TypeScript errors
 declare const google: any;
@@ -28,14 +23,13 @@ declare const google: any;
   selector: 'app-edit-personal-details',
   templateUrl: './edit-personal-details.component.html',
   styleUrls: ['./edit-personal-details.component.scss'],
-  providers: [
-    { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditPersonalDetailsComponent implements OnInit {
   
   @ViewChild('placeOfBirthInput') placeOfBirthInput!: ElementRef;
   placeSuggestions: any[] = [];
+  readonly date = new FormControl(moment());
 
   countries: any;
   leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];

@@ -103,6 +103,12 @@ export class TalentService {
     }
   }
 
+  getBoosterData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-booster-stats`
+    );
+  }
+
   // Fetch teams and store globally and in localStorage
   searchTeams(team:string): Observable<any> {
 
@@ -576,4 +582,34 @@ getExploresData(params: any): Observable<any> {
     );
   }
 
+  // Method to track boosted profile views
+  trackProfiles(user_id: number, profileId: any[], action: string): Observable<any> {
+
+    let params = new HttpParams();
+      params = params.append('user_id', user_id);  
+      params = params.append('action',  action);  
+      profileId.forEach(id => {
+        params = params.append('profile_viewed[]', id);  // Append each ID to the 'ids[]' query param
+      });
+      
+    // Send POST request with payload in body
+    return this.http.post<any>(`${this.apiUrl2}user/track-booster-profile`, params);
+  }
+
+  // Method to track boosted profile views
+  updateBoosterAudience(audienceIds: any[]): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    let params = new HttpParams();
+    audienceIds.forEach(id => {
+      params = params.append('booster_audience[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    // Send POST request with payload in body
+    return this.http.post(`${this.apiUrl2}user/update-booster-audience`, params , {headers});
+
+  }
 }
