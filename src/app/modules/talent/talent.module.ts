@@ -60,7 +60,6 @@ import { UpdateCountryPlanComponent } from './update-country-plan/update-country
 import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
 import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
 import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
-import { GeneralDetailsComponent } from './view-user/tabs/general-details/general-details.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
@@ -126,7 +125,6 @@ export const MY_FORMATS = {
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
     AddBoosterComponent,
-    GeneralDetailsComponent
   ],
   imports: [
     CommonModule,

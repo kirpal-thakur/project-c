@@ -113,7 +113,6 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
