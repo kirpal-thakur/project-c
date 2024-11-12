@@ -41,7 +41,7 @@
     </div>
 
     <div class="subscription-type mt-5">
-      <h2 class="mb-3">Subscription Type</h2>
+      <h2 class="mb-3">{{'Subscription Type' | translate}}</h2>
       <div class="form-check p-0">
         <input id="radio-1" class="form-check-input radio-custom" type="radio" name="isYearly"
                [value]="false" [(ngModel)]="isYearly" (change)="toggleBillingPlan(false)">
@@ -61,7 +61,7 @@
     </p>
 
     <div class="actions d-flex justify-content-end">
-      <button class="btn action-cancel" (click)="cancel()">Cancel</button>
+      <button class="btn action-cancel" (click)="cancel()">{{'Cancel' | translate}}</button>
       <button 
         class="btn buy-btn d-flex align-items-center gap-5" 
         (click)="buyNow()"
@@ -72,9 +72,9 @@
             {{ isYearly ? selectedPlan?.priceYearly : selectedPlan?.priceMonthly }} 
             -{{ selectedPlan?.currency }}/{{ isYearly ? 'Year' : 'Month' }}
           </h4>
-          <p>Total</p>
+          <p>{{'Total' | translate}}</p>
         </div> 
-        Buy Now
+        {{'Buy Now' | translate}}
       </button>
 
     </div>

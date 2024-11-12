@@ -48,13 +48,13 @@
                             <span class="player-age">{{calculateAge(loggedInUser?.meta?.date_of_birth ??'--')}}</span>
 
                         </div>
-                        <div class="boosted-box"> Boosted </div>
+                        <div class="boosted-box"> {{'Boosted' | translate}} </div>
                     </div>
 
                 </div>
 
                 <div class="profile-preview text-center mb-4">
-                    <h2 class="boosted-profile">Default profile preview</h2>
+                    <h2 class="boosted-profile">{{'Default profile preview' | translate}}</h2>
                     <div class=" profile_preview">
                         <div class="player_img player-image-bg-2">
                             <img [src]="loggedInUser?.meta?.profile_image_path" alt="player-image"

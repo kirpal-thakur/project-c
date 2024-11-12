@@ -82,7 +82,7 @@
     width: 45%;
   }
   .dialog-header h2 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
 }
 .gap_inputs{
@@ -135,6 +135,7 @@
   background-color: white;
   position: absolute;
   z-index: 1000;
+  min-width: 300px;
 }
 
 .suggestions-list li {
@@ -145,6 +146,7 @@
 .suggestions-list li:hover {
   background-color: #f0f0f0;
 }
+
 @media(max-width:768px){
   .mobile-input{
     width: 50% !important;
