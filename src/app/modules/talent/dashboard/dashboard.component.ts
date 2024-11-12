@@ -7,6 +7,7 @@ import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,10 @@ import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 })
 export class DashboardComponent implements OnInit {
   loggedInUser:any = localStorage.getItem('userData');
+  countryFlagUrl : any;
   
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+     private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -33,7 +36,7 @@ export class DashboardComponent implements OnInit {
   premium : any = false;
   booster : any = false;
   activeDomains : any;
-
+  
   @Output() dataEmitter = new EventEmitter<string>();
   
   loading: boolean = true;  // Add this line to track loading state
@@ -97,6 +100,8 @@ export class DashboardComponent implements OnInit {
           if (this.user.meta.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
+
+          this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth)
         } else {
           console.error('Invalid API response structure:', response);
         }
@@ -116,8 +121,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
+        
 
     		this.getUserProfile(this.userId);
 
@@ -255,7 +259,6 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching users:', error); 
     }
   }
-
   
   openDeleteDialog() {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
@@ -289,7 +292,6 @@ export class DashboardComponent implements OnInit {
         if(result.action == "delete-confirmed"){
           this.deleteUser();
         }
-      //  console.log('Dialog result:', result);
       }
     });
   }
@@ -319,7 +321,6 @@ export class DashboardComponent implements OnInit {
     return age;
   }
 
-
   switchTab(tab: string){
     this.activeTab = tab;
   }
@@ -328,7 +329,7 @@ export class DashboardComponent implements OnInit {
     this.userService.deleteUser([this.userId]).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
-        this.router.navigate(['/admin/users']);
+        this.router.navigate(['/talent/dashboard']);
       },
       error => {
         console.error('Error deleting user:', error);
@@ -343,4 +344,45 @@ export class DashboardComponent implements OnInit {
   }
 
   
+  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+  
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+  
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+  
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) => 
+            component.types.includes('country')
+          );
+  
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            this.getCountryFlag(country);
+            console.log("Country found:", countryComponent);
+          } else {
+            console.error("Country not found in placeOfBirth.");
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+  
+  getCountryFlag(countryCode: string): void {
+    // Using Flagpedia API for flag images
+    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+    
+    // Set the URL to an <img> element in your template or save it in a variable
+    this.countryFlagUrl = flagUrl;
+  }
 }

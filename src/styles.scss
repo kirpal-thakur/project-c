@@ -1548,3 +1548,15 @@ margin: auto;
   font-weight: 500 !important;
   color: #111418;
 }
+
+/* success-snackbar style */
+.success-snackbar {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* error-snackbar style */
+.error-snackbar {
+  background-color: #F44336;
+  color: white;
+}

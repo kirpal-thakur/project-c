@@ -19,13 +19,16 @@ export class GalleryComponent {
   defaultCoverImage:any = ".";
   openedMenuId:any = '';
   @Input() coverImage: string = '';  // Define an input property
-  @Output() dataEmitter = new EventEmitter<string>();
+    @Input() isPremium: any;
+    @Output() dataEmitter = new EventEmitter<string>();
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
-      this.getGalleryData(this.userId)
+      if(this.isPremium){
+        this.getGalleryData(this.userId)
+      }
     });
     
     if(this.coverImage == ""){
