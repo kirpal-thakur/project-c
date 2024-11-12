@@ -91,7 +91,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   initGooglePlacesAutocomplete(): void {
-    console.log('fhdsjk')
+    
     if (this.placeOfBirthInput) {
       const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
         types: ['(cities)'],
@@ -105,6 +105,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         }
       });
     }
+    
   }
   
   // ngAfterViewInit(): void {

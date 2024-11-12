@@ -153,6 +153,7 @@ export const MY_FORMATS = {
     MatPaginator,
     NgxEditorModule,
     MatTooltipModule,
+    
   ]
 })
 export class TalentModule { }

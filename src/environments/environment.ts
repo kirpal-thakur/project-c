@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
     targetDomain: {
       domain: 'ch' 
     },
