@@ -589,7 +589,6 @@
                 <div class="modal-header border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
                 <div class="modal-body">
                     <div class="logo text-center">
                         <svg class="login-logo" width="65" height="74" viewBox="0 0 65 74" fill="none"
@@ -608,6 +607,7 @@
                         <p>Enter your details below to get started.</p>
                     </div>
                     <form (submit)="register()" #registerForm="ngForm">
+                        <app-loader *ngIf="serverBusy"></app-loader>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3">

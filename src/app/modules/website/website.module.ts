@@ -37,7 +37,7 @@ import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
-
+import { LoaderComponent } from './loader/loader.component';
 
 // Import services
 import { AuthService } from '../../services/auth.service';
@@ -70,7 +70,8 @@ import { ThemeService } from '../../services/theme.service';
     PrivacyComponent,
     CookieComponent,
     ThankuComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,

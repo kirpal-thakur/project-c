@@ -26,30 +26,6 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { ValidateUserComponent } from './validateUser/validateUser.component';
 const routes: Routes = [
   { path: '', component: IndexComponent }, // Default route
-  { path: 'confirm-password', component: ConfirmPasswordComponent },
-  { path: 'header', component: HeaderComponent },
-  { path: 'footer', component: FooterComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'club', component: ClubComponent },
-  { path: 'feature', component: FeatureComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'news', component: NewsComponent },
-  { path: 'pricing', component: PricingComponent },
-  { path: 'ca', component: CaComponent },
-  { path: 'faq', component: FaqComponent },
-  { path: 'imprint', component: ImprintComponent },
-  { path: 'cookie', component: CookieComponent },
-  { path: 'terms', component: TermsComponent },
-  { path: 'privacy', component: PrivacyComponent },
-  { path: 'talent', component: TalentComponent },
-  { path: 'learn-more', component: LearnMoreComponent },
-  { path: 'player-list', component: PlayerListComponent },
-  { path: 'error', component: ErrorComponent },
-  { path: 'thank-you', component: ThankuComponent },
-  {path: 'cookie-popup', component: CookiePopupComponent},
-  {path: 'new-chat', component: NewChatComponent},
- { path: 'validate-user', component: ValidateUserComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

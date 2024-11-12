@@ -8,7 +8,7 @@ import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { CommonDataService } from '../../../services/common-data.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 
@@ -49,22 +49,17 @@ export class HeaderComponent implements OnInit {
   selectedCountry: string = '';
   selectedTeam: number | null = null;
   companyName: string = '';
-
-  countries = [
-    { code: 'US', name: 'United States' },
-    { code: 'CA', name: 'Canada' },
-    { code: 'GB', name: 'United Kingdom' },
-    { code: 'AU', name: 'Australia' },
-    { code: 'DE', name: 'Germany' },
-  ];
-
-  clubs = [
-    { id: 1, name: 'Club A' },
-    { id: 2, name: 'Club B' },
-    { id: 3, name: 'Club C' },
-    { id: 4, name: 'Club D' },
-    { id: 5, name: 'Club E' },
-  ];
+ //this is get by the domain
+ countries: Array<{ code: string; name: string }> = [];
+ clubs: Array<{ id: number; name: string }> = [];
+  //clubs
+  // clubs = [
+  //   { id: 1, name: 'Club A' },
+  //   { id: 2, name: 'Club B' },
+  //   { id: 3, name: 'Club C' },
+  //   { id: 4, name: 'Club D' },
+  //   { id: 5, name: 'Club E' },
+  // ];
 
   teams = [
     { id: 1, name: 'Team Alpha' },
@@ -98,17 +93,20 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private translateService: TranslateService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private commonDataService: CommonDataService
   ) {}
 
   isScrolled = false;
-
+  serverBusy = false;
   @HostListener('window:scroll', [])
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
   ngOnInit(): void {
+    this.getAllCountries();
+    this.getAllClubs();
     this.lang = localStorage.getItem('lang') || 'en';
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
@@ -196,6 +194,22 @@ export class HeaderComponent implements OnInit {
         } else {
           const token = response.data.token;
           const userData = response.data.user_data;
+          const userRole = userData.role;
+          let navigationRoute = '';
+          switch (userRole) {
+            case "2":
+              navigationRoute = '/club/dashboard';
+              break;
+            case "3":
+              navigationRoute = '/scout/dashboard';
+              break;
+            case "4":
+              navigationRoute = '/talent/dashboard';
+              break;
+            default:
+              navigationRoute = '/admin/dashboard';
+              break;
+          }
           localStorage.setItem('authToken', token);
           localStorage.setItem('userData', JSON.stringify(userData));
 
@@ -203,7 +217,7 @@ export class HeaderComponent implements OnInit {
           if (modal) {
             modal.hide();
           }
-          this.router.navigate(['/Admin/Dashboard']);
+          this.router.navigate([navigationRoute]);
         }
       },
       error => {
@@ -219,12 +233,13 @@ export class HeaderComponent implements OnInit {
   }
 
   register() {
+    this.serverBusy = true;
     this.registerFormSubmitted = true;
     if (!this.isFormValid()) {
+      this.serverBusy = false;
       console.error('Please fill in all required fields.');
       return;
     }
-
     const selectedLanguage = localStorage.getItem('lang') || '';
     const domain = environment.targetDomain?.domain || 'ch';
 
@@ -240,16 +255,19 @@ export class HeaderComponent implements OnInit {
       password_confirm: this.confirmPassword,
       privacy_policy: this.privacyPolicy,
       lang: selectedLanguage,
-      domain: domain
+      domain: domain,
+      club_id: this.selectedClub
     };
 
     this.authService.register(registrationData).subscribe(
       response => {
         if (response.status === true) {
+          this.serverBusy = false;
           bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
           const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
           loginModal.show();
         } else {
+          this.serverBusy = false;
           this.registerError = typeof response.message === 'object'
             ? Object.values(response.message).join(' ')
             : response.message;
@@ -280,6 +298,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isFormValid(): boolean {
+    let fieldType = ['string', 'boolean'];
     return [
       this.firstName,
       this.lastName,
@@ -288,7 +307,7 @@ export class HeaderComponent implements OnInit {
       this.password,
       this.confirmPassword,
       this.privacyPolicy
-    ].every(field => typeof field === 'string' && field.trim() !== '') &&
+    ].every(field => fieldType.includes(typeof field)) &&
     this.role > 0 && // Assuming role should be a positive number
     this.language.trim() !== '' && // Ensure language is a non-empty string
     this.newsletter && // Ensure this boolean value is checked as needed
@@ -399,5 +418,24 @@ export class HeaderComponent implements OnInit {
     this.isNavbarExpanded = false;
   }
 
+
+  getAllCountries(){
+    this.commonDataService.getAllCountries().subscribe((resp) => {
+      this.countries = resp.data.domains.map((country: any) => ({
+        code: country.domain_country_code || '',
+        name: country.location || ''
+      }));
+    });
+  }
+
+  getAllClubs(){
+    this.commonDataService.getAllClubs().subscribe((resp) => {
+      this.clubs = resp.data.clubs.map((club: any) => ({
+        id: club.id || '',
+        name: club.club_name || ''
+      }));
+      console.log(resp, 'club-resp');
+    });
+  }
 
 }
