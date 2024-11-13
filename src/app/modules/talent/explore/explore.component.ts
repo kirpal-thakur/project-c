@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -40,32 +40,98 @@ export class ExploreComponent implements OnInit {
   selectedTopSpeed: string | null = null;
   selectedLeague: number | null = null;
   selectedClub: number | null = null;
+  loggedInUser:any = localStorage.getItem('userData');
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  // Filters and UI variables (other code omitted for brevity)
+  viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
   constructor(
     private talentService: TalentService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   ngOnInit(): void {
+    
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+    
     this.loadPositions();
     this.loadLeagues();
     this.loadClubs();
     this.loadCountries();
-    this.getUserFavorites();
+    this.getUsers();
 
     // Populate ageRange with numbers from 15 to 50
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
+    // Initialize viewsTracked from sessionStorage
+    this.loadTrackedViews();
   }
 
-  redirectUser(slug:string, id:Number): void {
-    let pageRoute = 'view/'+slug.toLowerCase();
+  private loadTrackedViews() {
+    const views = sessionStorage.getItem('viewsTracked');
+    if (views) {
+      this.viewsTracked = JSON.parse(views);
+    }
+  }
+
+  private saveTrackedViews() {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
+
+
+  private trackBoostedProfileViews(players: any[]) {
+    // Collect all profile IDs that need to be tracked
+    const profilesToTrack = players
+      .filter(player => player.package_name === 'Booster')
+      .filter(profile => !this.viewsTracked[profile.id]?.viewed && this.loggedInUser.id !== profile.id)
+      .map(profile => profile.id); // Collect profile IDs into an array
+  
+    // Check if we have profiles to track
+    if (profilesToTrack.length > 0) {
+      // Send the array of profile IDs in a single API call
+      this.talentService.trackProfiles(this.loggedInUser.id, profilesToTrack, 'view').subscribe({
+        next: () => {
+          console.log(`Views tracked for profiles: ${profilesToTrack.join(', ')}`);
+          
+          // Update the local viewsTracked object
+          profilesToTrack.forEach(profileId => {
+            this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], viewed: true };
+          });
+  
+          // Save the updated viewsTracked state
+          this.saveTrackedViews();
+        },
+        error: (error) => console.error('Error tracking profile views', error)
+      });
+    }
+  }
+  
+  // Track profile click only once per session
+  private trackProfileClick(profileId: number) {
+    const id: number[] = [profileId];  // Create an array of profileId
+
+    if (!this.viewsTracked[profileId]?.clicked) {
+      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
+        next: () => {
+          console.log(`Click tracked for profile ${profileId}`);
+          this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
+          this.saveTrackedViews();  // Save the updated viewsTracked
+        },
+        error: (error) => console.error('Error tracking profile click', error)
+      });
+    }
+  }
+
+  exploreUser(slug: string, id: number): void {
+    this.trackProfileClick(id); // Track the click before navigation
+    const pageRoute = 'view/' + slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
 
   // Event handler for page change in paginator
-  getUserFavorites() {
+  getUsers() {
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
   
@@ -127,6 +193,10 @@ export class ExploreComponent implements OnInit {
       if (response && response.status && response.data) {
         this.players = response.data.userData.users;
         this.totalItems = response.data.userData.totalCount;
+
+        this.trackBoostedProfileViews(this.players);
+
+        setTimeout(() => this.cdr.detectChanges(), 0);
       }
     });
   }
@@ -134,20 +204,20 @@ export class ExploreComponent implements OnInit {
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.getUserFavorites();
+    this.getUsers();
   }
 
   // Apply filter function to refresh the data when filters change
   applyFilter() {
     this.currentPage = 0; // Reset to first page when applying new filters
-    this.getUserFavorites();
+    this.getUsers();
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.talentService.getDomains().subscribe(
       (response: any) => {
         if (response && response.status) {
-          this.countries = response.data.countries;
+          this.countries = response.data.domains;
         }
       },
       (error: any) => {
@@ -208,24 +278,38 @@ export class ExploreComponent implements OnInit {
   }
 
   getSelectedFilters() {
+
     const filters = [];
     if (this.selectedRole) {
       filters.push({ label: 'Category', value: this.selectedRole });
     }
     if (this.selectedCountry) {
-      filters.push({ label: 'Country', value: this.selectedCountry });
+      let getCountryById = this.countries.find((val: any) => {
+        return val.id == this.selectedCountry;
+      });
+      filters.push({ label: 'Country', value: getCountryById.location });
     }
     if (this.selectedPositions) {
-      filters.push({ label: 'Pos', value: this.selectedPositions.join(', ') });
+      let positionLabel = (this.selectedPositions.length > 0) ? 'Pos' : '';
+      filters.push({ label: positionLabel, value: this.selectedPositions.join(', ') });
     }
     if (this.selectedAge) {
-      filters.push({ label: 'Age', value: this.selectedAge.join(', ') });
+      let ageLabel = (this.selectedAge.length > 0) ? 'Age' : '';
+      filters.push({ label: ageLabel, value: this.selectedAge.join(', ') });
     }
     if (this.selectedFoot) {
-      filters.push({ label: 'Foot', value: this.selectedFoot.join(', ') });
+      let footLabel = (this.selectedFoot.length > 0) ? 'Foot' : '';
+      filters.push({ label: footLabel, value: this.selectedFoot.join(', ') });
     }
     if (this.selectedTopSpeed) {
-      filters.push({ label: 'Top Speed', value: this.selectedTopSpeed });
+      let selectedTopSpeed:any = {
+        '15': '15-20 Km/hr',
+        '20': '20-25 Km/hr',
+        '25': '25-30 Km/hr',
+        '30': '30-35 Km/hr',
+        '35': '35-40 Km/hr',
+      }
+      filters.push({ label: 'Top Speed', value: selectedTopSpeed[this.selectedTopSpeed] });
     }
     if (this.selectedLeague) {
       filters.push({ label: 'League', value: this.selectedLeague });
@@ -236,7 +320,6 @@ export class ExploreComponent implements OnInit {
     // Repeat for other filters
     return filters;
   }
-  
 
   // Example method to remove a filter
   removeFilter( label: string ) {
@@ -269,7 +352,7 @@ export class ExploreComponent implements OnInit {
     }
 
     // Refresh data after removing filter
-    this.getUserFavorites(); 
+    this.getUsers(); 
   }
   
   // Generic method to get names by ID

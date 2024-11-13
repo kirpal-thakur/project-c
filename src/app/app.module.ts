@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SharedModule } from './modules/shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,7 +32,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     MaterialModule,
     MatDialogModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,    
+    ToastrModule.forRoot({
+      timeOut: 3000,          
+      positionClass: 'toast-bottom-right', 
+      preventDuplicates: true, 
+    }),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

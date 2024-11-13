@@ -131,7 +131,30 @@
     width: 45%;
   }
   .dialog-header h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
   }
   
+
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  width:fit-content;
+}
+  
+  
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
+}
+  
+.suggestions-list li:hover {
+    background-color: #f0f0f0;
+}

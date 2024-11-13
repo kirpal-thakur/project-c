@@ -7,6 +7,9 @@ import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-pers
 import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { PaymentsPopupComponent } from '../payments-popup/payments-popup.component';
+import { PaymentService } from '../../../services/payment.service';
+import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
+import { CancelCountryPlanComponent } from './cancel-country-plan/cancel-country-plan.component';
 
 @Component({
   selector: 'app-membership',
@@ -28,10 +31,10 @@ export class MembershipComponent {
   premium : any =[];
   country: any=[];
   booster: any=[];
-
+  stats: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private talentService: TalentService, public dialog: MatDialog,private router: Router) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -39,6 +42,7 @@ export class MembershipComponent {
       this.getUserPurchases();
       this.getUserPlans();
       this.getUserCards();
+      this.getBoosterData()
     });
   }
 
@@ -59,6 +63,7 @@ export class MembershipComponent {
       console.error('Error fetching user purchases:', error);
     });
   }
+
 
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
@@ -117,7 +122,7 @@ export class MembershipComponent {
       data: {
         invoice_number: userPurchase.invoice_number,
         category: userPurchase.payment_method,
-        plan: '',
+        plan: userPurchase.package_name,
         duration: userPurchase.plan_interval,
         valid_until: userPurchase.plan_period_end,
         price: userPurchase.plan_amount,
@@ -125,26 +130,33 @@ export class MembershipComponent {
         total: userPurchase.amount_paid,
         currency : userPurchase.amount_paid_currency,
         download_path: userPurchase.invoice_file_path,
+        tax_percentage:userPurchase.tax_percentage,
+        tax:userPurchase.tax_amount
       }
     });
   }
 
+  async getBoosterData(){
+    try {
+      const response = await this.talentService.getBoosterData().toPromise();
+      if (response?.data) {
+        this.stats = response.data;
+        console.log(this.stats)
+        // Ensure the selectedAudienceIds array is cleared and populated with the correct data
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
+  }
+
+
   editMembershipDialog(id:any) {
 
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
-      width: '800px',
-      data: {
-        invoice_number: '',
-        category: '',
-        plan: '',
-        duration: '',
-        valid_until: '',
-        price: '',
-        subtotal: '',
-        total: '',
-        currency : '',
-        downlaod_path: '',
-      }
+      width: '1000px',
+      data: { stats : this.stats }
     });
 
   }
@@ -176,7 +188,7 @@ export class MembershipComponent {
   }
 
   async downloadInvoice(invoideId:any, invoiceUrl:any){
-     // use the fetch/blob method because single download isn't working 
+    // use the fetch/blob method because single download isn't working 
     fetch(invoiceUrl)
       .then(response => {
         if (!response.ok) {
@@ -196,7 +208,7 @@ export class MembershipComponent {
       })
       .catch(error => {
         console.error('There was an error downloading the file:', error);
-      });
+    });
   }
 
   downloadAll():any{
@@ -229,6 +241,93 @@ export class MembershipComponent {
 
   getSubscriptionById(id: string) {
     return this.userPurchases.find((subscription:any) => subscription.id === id);
+  }
+
+
+  confirmAndCancelSubscription(subscriptionId: string): void {
+    const dialogRef = this.dialog.open(MessagePopupComponent, {
+      width: '600px',
+      data: {
+        action: 'delete-confirmation',
+        message: 'Are you sure you want to cancel this subscription? This action cannot be undone.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed') {
+        this.cancelSubscription(subscriptionId);
+      }
+    });
+  }
+
+  private cancelSubscription(subscriptionId: string): void {
+    this.paymentService.cancelSubscription(subscriptionId).subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          // Open the MessagePopupComponent with a success message
+          this.dialog.open(MessagePopupComponent, {
+            width: '600px',
+            data: {
+              action: 'display',
+              message: 'Subscription canceled successfully.'
+            }
+          });
+          console.log('Subscription canceled successfully:', response);
+          this.getUserPlans();
+
+        } else {
+          console.error('Failed to cancel subscription', response);
+          this.getUserPlans();
+
+        }
+      },
+      error => {
+        console.error('Error cancelling subscription:', error);
+      }
+    );
+  }
+
+  confirmCountryPlanCancellation(country:any) {
+    const dialogRef = this.dialog.open(CancelCountryPlanComponent, {
+      width: '600px',
+      data: {
+        action: 'select-country-cancellation',
+        countries: country // Pass the list of country plans
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed' && result.selectedCountryId) {
+        this.cancelSubscription(result.selectedCountryId);
+      }
+    });
+  }
+
+  getActiveMultiCountryPlanCount(): number {
+    return this.country.length;
+  }
+
+  getActivePremiumCount(): number {
+    return this.premium.length;
+  }
+
+  getActiveboosterCount(): number {
+    return this.booster.length;
+  }
+
+  editBooster(data:any){
+    
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '1000px',
+      data: { stats : this.stats
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ) {
+        alert('Booster profile updated')
+      }
+    });
   }
 
 }

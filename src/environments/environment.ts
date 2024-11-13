@@ -1,5 +1,6 @@
 export const environment = {
     production: false,
+    googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
     targetDomain: {
       domain: 'ch' 
     },
@@ -31,7 +32,6 @@ export const environment = {
       { name:'Belgium', slug: "be", id: 8, flag: "Belgium.svg" },
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
-
     ],
 
     apiUrl:'https://api.socceryou.ch/api/'

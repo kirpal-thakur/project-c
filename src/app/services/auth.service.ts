@@ -65,5 +65,15 @@ export class AuthService {
   }
   
 
-  
+  getProfileData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { userData: any } }>(
+      `${this.apiUrl}/profile`
+    );
+  }
+
+  getPlacePredictions(input: string) {
+    const apiKey = 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs';
+    const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&types=(cities)&key=${apiKey}`;
+    return this.http.get(url);
+  }
 }

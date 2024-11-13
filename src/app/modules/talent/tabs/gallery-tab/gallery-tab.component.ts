@@ -105,10 +105,11 @@ export class GalleryTabComponent {
     const messageDialog = this.dialog.open(UploadPopupComponent,{
       width: '500px',
       position: {
-        top:'150px'
+        top:'150px',
       },
       data: {
-        userId: this.userId
+        userId: this.userId,
+        file:'video'
       }
     })
 
@@ -116,8 +117,7 @@ export class GalleryTabComponent {
       if (result !== undefined) {
         if(result.files.length){
           console.log(result.files)
-         this.userImages = [...result.files, ...this.userImages];
-         console.log(this.userImages)
+          this.getGalleryData()
         }
       }
     });

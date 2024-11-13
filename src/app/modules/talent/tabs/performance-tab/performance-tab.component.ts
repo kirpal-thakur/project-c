@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { TalentService } from '../../../../services/talent.service';
@@ -32,13 +32,13 @@ export class PerformanceTabComponent {
   //   to_date:2022-01-01
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   
-  ngOnInit(): void {
+  async ngOnInit() {
     this.route.params.subscribe((params:any) => {      
       this.loggedInUser = JSON.parse(this.loggedInUser);
       this.userId = this.loggedInUser.id;
       this.getUserPerformance(this.userId);
     });
-    this.getAllTeams();
+    await this.getAllTeams();
   }
 
   
@@ -59,7 +59,7 @@ export class PerformanceTabComponent {
   }
 
   openAddDialog() {
-    
+    console.log(this.teams)
     const dialogRef = this.dialog.open(AddPerformanceComponent, {
       width: '800px',
       data: { performance : {

@@ -209,6 +209,14 @@ export class IndexComponent implements OnInit{
             }
             
             if(userData.role==4){
+              
+              this.authService.getProfileData().subscribe((response)=>{
+                if (response && response.status && response.data && response.data.user_data) {
+                  console.log(response.data.user_data)
+                  localStorage.setItem('userInfo', JSON.stringify(response.data.user_data));
+                }
+              });
+
               this.router.navigate(['/talent/dashboard']);
             }else{
               this.router.navigate(['/admin/dashboard']);

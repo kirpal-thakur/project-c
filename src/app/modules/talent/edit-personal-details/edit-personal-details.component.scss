@@ -116,6 +116,37 @@
   border-radius: 10px;
 }
 
+
+.position_inputs mat-select{
+  width: 100%;
+  padding: 12px 14px;
+  line-height: normal;
+  border: 1px solid #bbb7b7;
+  border-radius: 10px;
+}
+/* edit-personal-details.component.scss */
+.suggestions-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  position: absolute;
+  z-index: 1000;
+  min-width: 300px;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}
+
 @media(max-width:768px){
   .mobile-input{
     width: 50% !important;
@@ -125,3 +156,4 @@
     padding: 0px 26px;
 }
 }
+

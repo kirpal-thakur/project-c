@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../../services/user.service';
 import { TalentService } from '../../../../../services/talent.service';
@@ -25,13 +25,16 @@ export class PerformanceDetailsComponent {
     player_age: ""
   }
   loggedInUser:any = localStorage.getItem('userData');
+  @Input() isPremium: any;
 
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
-      this.getUserPerformance(this.userId);
+      if(this.isPremium){
+        this.getUserPerformance(this.userId);
+      }
     });
   } 
   

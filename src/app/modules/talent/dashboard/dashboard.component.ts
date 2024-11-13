@@ -5,9 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
-import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
+import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +17,15 @@ import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 })
 export class DashboardComponent implements OnInit {
   loggedInUser:any = localStorage.getItem('userData');
+  countryFlagUrl : any;
   
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+    private userService: UserService,
+    private talentService: TalentService,    
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private router: Router
+      ) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -31,10 +39,15 @@ export class DashboardComponent implements OnInit {
   userVideos: any = [];
   imageBaseUrl : any;
   defaultCoverImage:any = "./media/palyers.png";
-
+  premium : any = false;
+  booster : any = false;
+  activeDomains : any;
+  
   @Output() dataEmitter = new EventEmitter<string>();
+  
+  loading: boolean = true;  // Add this line to track loading state
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
     this.getUserProfile(this.userId);
@@ -44,40 +57,77 @@ export class DashboardComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
-    });    
+    });
     
-    if(this.coverImage == ""){
+    if (this.coverImage == "") {
       this.coverImage = this.defaultCoverImage;
     }
-    this.getAllTeams();
+    await this.getAllTeams();
   }
-  
+
+  getGalleryData() {
+    this.loading = true;  // Set loading to true before making the API call
+    try {
+      this.talentService.getGalleryData().subscribe((response) => {
+        if (response && response.status && response.data) {
+          this.userImages = response.data.images;
+          this.userVideos = response.data.videos;
+          this.imageBaseUrl = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        this.loading = false;  // Set loading to false once data is loaded
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      this.loading = false;  // Set loading to false on error
+    }
+  }
+
+  getUserProfile(userId: any) {
+    this.loading = true;  // Set loading to true before making the API call
+    try {
+      this.talentService.getProfileData(userId).subscribe((response) => {
+        if (response && response.status && response.data && response.data.user_data) {
+          
+          localStorage.setItem('userInfo', JSON.stringify(response.data.user_data));
+
+          this.user = response.data.user_data;
+          this.userNationalities = JSON.parse(this.user.user_nationalities);
+
+          this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
+          this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
+          this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
+
+          if (this.user.meta.profile_image_path) {
+            this.profileImage = this.user.meta.profile_image_path;
+            this.sendMessage()
+          }
+          if (this.user.meta.cover_image_path) {
+            this.coverImage = this.user.meta.cover_image_path;
+          }
+
+          this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth)
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+        this.loading = false;  // Set loading to false once data is loaded
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      this.loading = false;  // Set loading to false on error
+    }
+  }
+
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
-      data: {
-        first_name: 'John',
-        last_name: 'Doe',
-        current_club: 'FC Thun U21',
-        nationality: 'Swiss',
-        date_of_birth: '2004-04-21',
-        place_of_birth: 'Zurich',
-        height: 180,
-        weight: 75,
-        contract_start: '2017-05-08',
-        contract_end: '2025-05-08',
-        league_level: 'Professional',
-        foot: 'Right'
-      }
+      data: this.user
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-
     		this.getUserProfile(this.userId);
-
       } else {
         console.log('User canceled the edit');
       }
@@ -85,6 +135,7 @@ export class DashboardComponent implements OnInit {
   }
   
   openHighlight() {
+
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
       width: '800px',
       data: {
@@ -98,52 +149,7 @@ export class DashboardComponent implements OnInit {
       this.getHighlightsData()
     });
 
-  }
-
-  
-  getGalleryData(){
-    try {
-      this.talentService.getGalleryData().subscribe((response)=>{
-        if (response && response.status && response.data) {
-          this.userImages = response.data.images; 
-          this.userVideos = response.data.videos; 
-          this.imageBaseUrl = response.data.file_path;
-        } else {
-          console.error('Invalid API response structure:', response);
-        }
-      });
-    } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error);
-    }
-  }
-  
-  getUserProfile(userId:any){
-    try {
-      this.talentService.getProfileData(userId).subscribe((response)=>{
-        if (response && response.status && response.data && response.data.user_data) {
-          this.user = response.data.user_data; 
-          console.log('user:', this.user);
-
-          this.userNationalities = JSON.parse(this.user.user_nationalities);
-          if(this.user.meta.profile_image_path ){
-            this.profileImage = this.user.meta.profile_image_path;
-          }
-          if(this.user.meta.cover_image_path){
-            this.coverImage = this.user.meta.cover_image_path;
-          }
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });     
-    } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error);
-    }
-  }
-  
+  }  
 
   getHighlightsData(){
     try {
@@ -183,86 +189,114 @@ export class DashboardComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
 
+      // Set loading state and display info toast
+      this.toastr.info('Uploading profile image...', 'Please wait');
+
       try {
+        const formData = new FormData();
+        formData.append("profile_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("profile_image", this.selectedFile);
-
-        this.talentService.uploadProfileImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.profileImage); // Emitting the data
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+        this.talentService.uploadProfileImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
+              this.toastr.success('Profile image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.error('Failed to upload profile image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading profile image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during file upload:', error);
       }
     }
   }
+
+  sendMessage() {
+    this.talentService.updatePicOnHeader(this.profileImage);
+  }
+
 
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      
+      // Set loading state and display info toast
+      this.toastr.info('Uploading cover image...', 'Please wait');
 
       try {
+        const formData = new FormData();
+        formData.append("cover_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("cover_image", this.selectedFile);
-
-        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.coverImage); // Emitting the data
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+        this.talentService.uploadCoverImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
+              this.toastr.success('Cover image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.error('Failed to upload cover image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading cover image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during cover image upload:', error);
       }
     }
   }
 
-  deleteCoverImage(){
+  deleteCoverImage(): void {
+    // Set loading state and display info toast
+    this.toastr.info('Deleting cover image...', 'Please wait');
+
     try {
-      this.talentService.deleteCoverImage().subscribe((response)=>{
-        if (response && response.status) {
-          setTimeout(() => {
-            this.coverImage = './media/palyers.png';
-          }, 100);
-          this.dataEmitter.emit(''); // Emitting the data
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });
+      this.talentService.deleteCoverImage().subscribe(
+        (response) => {
+          if (response && response.status) {
+            this.coverImage = './media/players.png';  // Reset to default image
+            this.dataEmitter.emit('');  // Emit empty string to indicate deletion
+            this.toastr.success('Cover image deleted successfully.', 'Success');
+          } else {
+            this.toastr.error('Failed to delete cover image. Please try again.', 'Delete Failed');
+            console.error('Invalid API response structure:', response);
+          }
+        },
+        (error) => {
+          this.toastr.error('An error occurred during deletion. Please try again.', 'Delete Error');
+          console.error('Error deleting cover image:', error);
+        },
+      );
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+      this.toastr.error('An unexpected error occurred. Please try again.', 'Delete Error');
+      console.error('Error during cover image deletion:', error);
     }
   }
 
-  
-  openDeleteDialog() {
+  openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // If result is true, proceed with deletion logic
+        // If the user confirms, proceed with deletion
         this.deleteCoverImage();
       } else {
+        this.toastr.info('Cover image deletion canceled.', 'Canceled');
         console.log('User canceled the delete');
       }
     });
@@ -285,7 +319,6 @@ export class DashboardComponent implements OnInit {
         if(result.action == "delete-confirmed"){
           this.deleteUser();
         }
-      //  console.log('Dialog result:', result);
       }
     });
   }
@@ -315,7 +348,6 @@ export class DashboardComponent implements OnInit {
     return age;
   }
 
-
   switchTab(tab: string){
     this.activeTab = tab;
   }
@@ -324,7 +356,7 @@ export class DashboardComponent implements OnInit {
     this.userService.deleteUser([this.userId]).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
-        this.router.navigate(['/admin/users']);
+        this.router.navigate(['/talent/dashboard']);
       },
       error => {
         console.error('Error deleting user:', error);
@@ -336,5 +368,47 @@ export class DashboardComponent implements OnInit {
   handleCoverImageData(data: string) {
     this.coverImage = data; // Assign the received data to a variable
     console.log('Data received from child:', data);
+  }
+
+  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+  
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+  
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+  
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) => 
+            component.types.includes('country')
+          );
+  
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            this.getCountryFlag(country);
+            console.log("Country found:", countryComponent);
+          } else {
+            console.error("Country not found in placeOfBirth.");
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+  
+  getCountryFlag(countryCode: string): void {
+    // Using Flagpedia API for flag images
+    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+    
+    // Set the URL to an <img> element in your template or save it in a variable
+    this.countryFlagUrl = flagUrl;
   }
 }

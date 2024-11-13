@@ -3,6 +3,8 @@ import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { TalentService } from '../../../services/talent.service';
+import { environment } from '../../../../environments/environment';
 
 interface Notification {
   image: string;
@@ -17,12 +19,24 @@ interface Notification {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  //constructor(private themeService: ThemeService) {}
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
-
+  
+  constructor(private talentService: TalentService, private themeService: ThemeService, private authService: AuthService,private translateService: TranslateService) {}
+  loggedInUser:any = localStorage.getItem('userInfo');
+  profileImgUrl: any = "";
   lang:string = '';
+  domains: any = environment.domains;
+  message: string = '';
 
- ngOnInit() {
+  ngOnInit() {
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+
+    this.profileImgUrl = this.loggedInUser.meta.profile_image_path;
+
+    this.talentService.message$.subscribe(msg => {
+      this.profileImgUrl = msg;
+    });
+    
+    
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
   }
@@ -32,7 +46,6 @@ export class HeaderComponent {
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
   }
-
 
   logout() {
     this.authService.logout();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TalentService } from '../../../../../services/talent.service';
@@ -24,11 +24,14 @@ export class TransferDetailsComponent {
   }
   seasons:any = [];
   constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router ,public dialog: MatDialog) { }
+  @Input() isPremium: any;
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
-      this.getUserTransfers(this.userId);
+      if(this.isPremium){
+        this.getUserTransfers(this.userId);
+      }
     });
     this.getSeasonsOptions();
   }

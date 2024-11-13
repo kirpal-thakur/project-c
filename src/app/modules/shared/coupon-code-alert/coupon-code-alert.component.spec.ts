@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CountriesComponent } from './countries.component';
+import { CouponCodeAlertComponent } from './coupon-code-alert.component';
 
-describe('CountriesComponent', () => {
-  let component: CountriesComponent;
-  let fixture: ComponentFixture<CountriesComponent>;
+describe('CouponCodeAlertComponent', () => {
+  let component: CouponCodeAlertComponent;
+  let fixture: ComponentFixture<CouponCodeAlertComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CountriesComponent]
+      declarations: [CouponCodeAlertComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(CountriesComponent);
+    fixture = TestBed.createComponent(CouponCodeAlertComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

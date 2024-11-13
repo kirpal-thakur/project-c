@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditPlanComponent } from './edit-plan.component';
+import { SidebarComponent } from './sidebar.component';
 
-describe('EditPlanComponent', () => {
-  let component: EditPlanComponent;
-  let fixture: ComponentFixture<EditPlanComponent>;
+describe('SidebarComponent', () => {
+  let component: SidebarComponent;
+  let fixture: ComponentFixture<SidebarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EditPlanComponent]
+      declarations: [SidebarComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EditPlanComponent);
+    fixture = TestBed.createComponent(SidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,7 @@
 <div class="dialog-container">
   <div class="personal_edit">
     <div class="dialog-header m-auto">
-      <h2>Edit User Personal Details</h2>
+      <h2>{{'Edit User Personal Details' | translate}}</h2>
     </div>
     <div class="close_buttons">
       <button class="close-btn" (click)="onCancel()">X</button>
@@ -14,7 +14,7 @@
       <div class="row">
         <!-- First Name -->
         <div class="form-group col-lg-6">
-          <label for="first_name">First Name:</label>
+          <label for="first_name">{{'First Name' | translate}}:</label>
           <input
             type="text"
             id="first_name"
@@ -24,14 +24,14 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            First Name is required.
+          <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'First Name is required.' | translate}}
           </div>
         </div>
 
         <!-- Last Name -->
         <div class="form-group col-lg-6">
-          <label for="last_name">Last Name:</label>
+          <label for="last_name">{{'Last Name' | translate}}:</label>
           <input
             type="text"
             id="last_name"
@@ -41,56 +41,69 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Last Name is required.
+          <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Last Name is required.' | translate}}
           </div>
         </div>
       </div>
 
       <div class="row">
+
         <!-- Current Club -->
         <div class="form-group col-lg-6">
-          <label for="currentClub">Current Club:</label>
-          <select
+          <label for="currentClub">{{'Current Club'}}:</label>
+          <input
+            type="text"
             id="currentClub"
             name="currentClub"
+            placeholder="Type to Search"
             [(ngModel)]="currentClub"
             #currentClubField="ngModel"
+            (input)="onSearchClubs()"
             required
-          >
-            <option *ngFor="let team of teams; let last = last" [value]="team.id" [selected]="team.id === currentClub || last && !currentClub">
-              {{ team.club_name ?? team.last_name }}
-            </option>
-          </select>
+          />
           <!-- Validation message -->
-          <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Current Club is required.
+          <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Current Club is required.' | translate}}
           </div>
+        
+          <!-- Club suggestions -->
+          <ul *ngIf="filteredClubs.length > 0 && currentClub.length >= 2" class="suggestions-list">
+            <li *ngFor="let club of filteredClubs" (click)="onSelectClub(club)">
+              {{ club.club_name }}
+            </li>
+          </ul>
         </div>
-
-        <!-- Nationality -->
-        <div class="form-group col-lg-6">
-          <label for="nationality">Nationality:</label>
-          <select
+        
+        <!-- Nationality (Updated for multiple selection) -->
+        <div class="form-group col-lg-6 position_inputs">
+          <label for="nationality" class="form-label">{{'Nationality' | translate}}:</label>
+          <mat-select
+            [(ngModel)]="nationality"
+            class="form-select"
             id="nationality"
             name="nationality"
-            [(ngModel)]="user.nationality"
+            multiple
             #nationalityField="ngModel"
             required
           >
-            <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
-          </select>
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{ country.country_name }}
+            </mat-option>
+          </mat-select>
           <!-- Validation message -->
-          <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Nationality is required.
+          <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Nationality is required.' | translate}}
           </div>
         </div>
+            
       </div>
+
 
       <div class="row">
         <!-- Date of Birth -->
         <div class="form-group col-lg-6">
-          <label for="dateOfBirth">Date of Birth:</label>
+          <label for="dateOfBirth">{{'Date of Birth' | translate}}:</label>
           <input
             type="date"
             id="dateOfBirth"
@@ -99,34 +112,43 @@
             #dobField="ngModel"
             required
           />
+
           <!-- Validation message -->
-          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Date of Birth is required.
+          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Date of Birth is required.' | translate}}
           </div>
+
         </div>
 
         <!-- Place of Birth -->
         <div class="form-group col-lg-6">
-          <label for="placeOfBirth">Place of Birth:</label>
+          <label for="placeOfBirth">{{'Place of Birth:' | translate}}</label>
           <input
             type="text"
             id="placeOfBirth"
             name="placeOfBirth"
+            #placeOfBirthInput
             [(ngModel)]="placeOfBirth"
             #placeOfBirthField="ngModel"
             required
           />
+          <ul *ngIf="placeSuggestions.length > 0" class="suggestions-list">
+            <li *ngFor="let suggestion of placeSuggestions" (click)="onSelectSuggestion(suggestion)">
+              {{ suggestion.description }}
+            </li>
+          </ul>
           <!-- Validation message -->
-          <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Place of Birth is required.
+          <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Place of Birth is required.' | translate}}
           </div>
         </div>
+
       </div>
 
       <div class="row">
         <!-- Height -->
         <div class="form-group col-lg-6">
-          <label for="height">Height (cm):</label>
+          <label for="height">{{'Height (cm)' | translate}}:</label>
           <input
             type="number"
             id="height"
@@ -137,14 +159,14 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Height is required.
+          <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Height is required.' | translate}}
           </div>
         </div>
 
         <!-- Weight -->
         <div class="form-group col-lg-6">
-          <label for="weight">Weight (kgs):</label>
+          <label for="weight">{{'Weight (kgs)' | translate}}:</label>
           <input
             type="number"
             id="weight"
@@ -155,7 +177,7 @@
             required
           />
           <!-- Validation message -->
-          <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert alert-danger mt-2">
+          <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert text-danger my-0">
             Weight is required.
           </div>
         </div>
@@ -164,60 +186,45 @@
       <div class="row">
         <!-- Contract Start Date -->
         <div class="form-group col-lg-6">
-          <label for="contractStart">Contract Start Date:</label>
+          <label for="contractStart">{{'Contract Start Date' | translate}}:</label>
           <input
             type="date"
             id="contractStart"
             name="contractStart"
             [(ngModel)]="contractStart"
-            #contractStartField="ngModel"
             required
           />
-          <!-- Validation message -->
-          <div *ngIf="contractStartField.invalid && (contractStartField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Contract Start Date is required.
-          </div>
         </div>
       
         <!-- Contract End Date -->
         <div class="form-group col-lg-6">
-          <label for="contractEnd">Contract End Date:</label>
+          <label for="contractEnd">{{'Contract End Date' | translate}}:</label>
           <input
             type="date"
             id="contractEnd"
             name="contractEnd"
             [(ngModel)]="contractEnd"
-            #contractEndField="ngModel"
             required
           />
-          <!-- Validation message -->
-          <div *ngIf="contractEndField.invalid && (contractEndField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Contract End Date is required.
-          </div>
         </div>
       </div>
       
       <div class="row">
         <!-- League Level -->
         <div class="form-group col-lg-6">
-          <label for="leagueLevel">League Level:</label>
+          <label for="leagueLevel">{{'League Level' | translate}}:</label>
           <input
             type="text"
             id="leagueLevel"
             name="leagueLevel"
             [(ngModel)]="leagueLevel"
-            #leagueLevelField="ngModel"
             required
           />
-          <!-- Validation message -->
-          <div *ngIf="leagueLevelField.invalid && (leagueLevelField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            League Level is required.
-          </div>
         </div>
       
         <!-- Dominant Foot -->
         <div class="form-group col-lg-6">
-          <label for="dominantFoot">Dominant Foot:</label>
+          <label for="dominantFoot">{{'Dominant Foot' | translate}}:</label>
           <select
             id="dominantFoot"
             name="dominantFoot"
@@ -230,16 +237,16 @@
             <option value="Both">Both</option>
           </select>
           <!-- Validation message -->
-          <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert alert-danger mt-2">
-            Dominant Foot is required.
+          <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert text-danger my-0">
+            {{'Dominant Foot is required' | translate}}.
           </div>
         </div>
       </div>
             
     </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between">
-      <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
-      <button class="save-btn" type="submit">Save</button>
+      <button class="cancel-btn" type="button" (click)="onCancel()">{{'Cancel' | translate}}</button>
+      <button class="save-btn" type="submit">{{'Save' | translate}}</button>
     </div>
   </form>
 </div>

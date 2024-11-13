@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { User } from '../modules/admin/users/user.model';
 import { environment } from '../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
 @Injectable({
@@ -13,21 +13,44 @@ export class TalentService {
   private userToken: string | null;
   private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
+  private messageSource = new Subject<string>();
+  message$ = this.messageSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
   }
 
-  getProfileData(userId: any): Observable<any> {
+  updatePicOnHeader(pic: string) {
+    this.messageSource.next(pic);
+  }
+
+  getProfileData(userId: any=1): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}profile`
+      `${this.apiUrl}profile`,
+      {  headers } // Combine params and headers here
     );
   }
 
   getPlans(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-packages`
+    );
+  }
+
+  getPackages(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+  
+    // Send the HTTP GET request with both params and headers
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-packages`,
+      {  headers } // Combine params and headers here
     );
   }
 
@@ -55,17 +78,24 @@ export class TalentService {
     );
   }
 
-  // Fetch teams and store globally
+  // Fetch teams and store globally and in localStorage
   getTeams(): Observable<any> {
-    if (this.teams.length) {
-      // If teams are already fetched, return them as an Observable
+    const cachedTeams = localStorage.getItem('teams');
+
+    if (cachedTeams) {
+      // Parse and return teams from localStorage if available
+      this.teams = JSON.parse(cachedTeams);
+      return of(this.teams);
+    } else if (this.teams.length) {
+      // If teams are already fetched globally, return them
       return of(this.teams);
     } else {
-      // Fetch teams from the API, store in global variable
+      // Fetch teams from the API, store in global variable and localStorage
       return this.http.get(`${this.apiUrl2}get-teams`).pipe(
         tap((response: any) => {
           if (response && response.status) {
             this.teams = response.data.teams; // Store teams globally
+            localStorage.setItem('teams', JSON.stringify(this.teams)); // Cache in localStorage
           }
         }),
         catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully
@@ -73,6 +103,26 @@ export class TalentService {
     }
   }
 
+  getBoosterData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-booster-stats`
+    );
+  }
+
+  // Fetch teams and store globally and in localStorage
+  searchTeams(team:string): Observable<any> {
+
+    // Fetch teams from the API, store in global variable and localStorage
+    return this.http.get(`${this.apiUrl2}get-teams?search=${team}`).pipe(
+      tap((response: any) => {
+        if (response && response.status) {
+          this.teams = response.data.teams; // Store teams globally
+        }
+      }),
+      catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully
+    );
+
+  }
 
   // Error handling method
   private handleError<T>(operation = 'operation', result?: T) {
@@ -81,12 +131,32 @@ export class TalentService {
       return of(result as T); // Return an empty result
     };
   }
-  
-  // Fetch teams
+
+  // Modified function to search clubs based on a search term
+  searchClubs(clubName: string): Observable<any> {
+    // Prepare the headers (if needed)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}` // Include authorization token
+    });
+
+    // Make the GET request to the API with the query parameter
+    return this.http.get(`${this.apiUrl2}get-clubs-list?club_name=${clubName}`, { headers });
+  }
+
+  // Fetch teams (without any search term)
   getClubs(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-clubs-list`);
   }
-  
+
+  getClubsForPlayer(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-clubs-list`, {headers}
+    );
+  }
+
   getLeagues(): Observable<any> {
     return this.http.get(`${this.apiUrl2}get-leagues`);
   }
@@ -146,6 +216,12 @@ export class TalentService {
   getDomains(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-domains`
+    );
+  }
+
+  getUserDomains(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-active-domains`
     );
   }
   
@@ -228,15 +304,19 @@ getExploresData(params: any): Observable<any> {
   if (params.noLimit) {
     queryParams = queryParams.set('noLimit', 'true');
   }
+  
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.userToken}`
+  });
 
-  // Send the HTTP GET request
+  // Send the HTTP GET request with both params and headers
   return this.http.get<{ status: boolean, message: string, data: {} }>(
-    `${this.apiUrl}users-frontend`, { params: queryParams }
+    `${this.apiUrl}users-frontend`, 
+    { params: queryParams, headers } // Combine params and headers here
   );
 }
   
   removeFavorites(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
@@ -320,7 +400,7 @@ getExploresData(params: any): Observable<any> {
     });
     
     return this.http.get<any>(
-      `${this.apiUrl2}/player/get-performance-reports`, 
+      `${this.apiUrl2}player/get-performance-reports`, 
       { headers }
     );
   }
@@ -331,7 +411,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-performance-detail/${performanceId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-performance-detail/${performanceId}`, params, { headers });
   }
 
   // Update newsletter subscription
@@ -340,7 +420,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/user/settings/newsletter`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}user/settings/newsletter`, params, { headers });
   }
 
   uploadReport(params: any): Observable<any> {
@@ -362,7 +442,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-performance-detail`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-performance-detail`, params, { headers });
   }
 
   deletePerformance(params: any): Observable<any> {
@@ -379,7 +459,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/edit-transfer-detail/${transferId}`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/edit-transfer-detail/${transferId}`, params, { headers });
   }
 
   addTransfer(params: any): Observable<any> {
@@ -387,7 +467,7 @@ getExploresData(params: any): Observable<any> {
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/player/add-transfer-detail/`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl2}player/add-transfer-detail/`, params, { headers });
   }
 
   deleteTransfer(id: any): Observable<any> {
@@ -500,5 +580,48 @@ getExploresData(params: any): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}get-gallery-highlights/${id}`
     );
+  }
+
+  // Method to track boosted profile views
+  trackProfiles(user_id: number, profileId: any[], action: string): Observable<any> {
+
+    let params = new HttpParams();
+      params = params.append('user_id', user_id);  
+      params = params.append('action',  action);  
+      profileId.forEach(id => {
+        params = params.append('profile_viewed[]', id);  // Append each ID to the 'ids[]' query param
+      });
+      
+    // Send POST request with payload in body
+    return this.http.post<any>(`${this.apiUrl2}user/track-booster-profile`, params);
+  }
+
+  // Method to track boosted profile views
+  updateBoosterAudience(audienceIds: any[]): Observable<any> {
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    let params = new HttpParams();
+    audienceIds.forEach(id => {
+      params = params.append('booster_audience[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    // Send POST request with payload in body
+    return this.http.post(`${this.apiUrl2}user/update-booster-audience`, params , {headers});
+
+  }
+
+
+  validateCoupon(couponCode: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    let params = new HttpParams();
+      params = params.append('coupon_code', couponCode);  
+
+    return this.http.post(`${this.apiUrl2}user/validate-coupon`, params , {headers});
   }
 }

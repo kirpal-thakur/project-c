@@ -2,7 +2,7 @@
 
   <div class="chat_box">
     <div class="p-3 w-100">
-      <div><h4 class="text-center mb-3 title-text">New Message</h4></div>
+      <div><h4 class="text-center mb-3 title-text">{{'New Message' | translate}}</h4></div>
       <div class="close-img" (click)="close()"></div>
     </div>
   
@@ -15,7 +15,7 @@
               <p>To:</p>
               @for (user of users; track $index) {
                 <mat-chip-row (removed)="remove(user)">
-                  <img width="20" height="20" class="img-list" src="{{user?.meta?.profile_image_path ? user?.meta?.profile_image_path :'../../../../../assets/images/1.jpg'}}">
+                  <img width="20" height="20" class="img-list" src="{{user?.meta?.profile_image_path ? user?.meta?.profile_image_path :'../../../../../assets/images/default/talent-profile-default.png'}}">
                   {{user?.first_name}}
                   <span  matChipRemove [attr.aria-label]="'remove ' + user" class="cancel-icon" > </span>
                 </mat-chip-row>
@@ -33,7 +33,7 @@
               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" class="listBox w-100 users-name-list">
                 @for (user of filteredUsers; track user) {
                   <mat-option [value]="user" class="mb-4 select-user-name">
-                    <img width="50" height="50" class="img-list " src="{{user?.meta?.profile_image_path ? user?.meta?.profile_image_path :'../../../../../assets/images/1.jpg'}}">
+                    <img width="50" height="50" class="img-list " src="{{user?.meta?.profile_image_path ? user?.meta?.profile_image_path :'../../../../../assets/images/default/talent-profile-default.png'}}">
                     {{user.first_name}}
                   </mat-option>
                 }
@@ -43,16 +43,7 @@
         </div>
       
       </div>
-      <div class="user-details d-flex align-items-center justify-content-between">
-          <div class="user-detail-list">
-            <span><img width="60" height="60" class="img-list" src="../../../../../assets/images/1.jpg"></span>
-            <span class="user-name">Lindsey Vetrovs</span>
-          </div>
-          <div class="check-user-list">
-              <input type="checkbox" checked id="user-checkbox" />
-            <label for="user-checkbox"></label>
-          </div>
-      </div>
+      
   </div>
     <div class="chat-btn">
       <button class="btn btn-success btn-sm web-create-bg w-100"(click)="startChat()"  type="button">Chat</button>

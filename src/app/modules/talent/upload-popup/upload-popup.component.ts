@@ -16,9 +16,12 @@ export class UploadPopupComponent {
   userId: any = '';
   uploadedFiles:any = [];
   uploadResponse:any = [];
+  file:any='all';
+
   constructor(private userService: TalentService, public dialogRef : MatDialogRef<UploadPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userId = data.userId;
+      this.file = data.file ? data.file : 'all';
   }
 
   files: File[] = [];
@@ -75,9 +78,6 @@ export class UploadPopupComponent {
     for (let i = 0; i < files.length; i++) {
       formdata.append("gallery_images[]", files[i]);
     }
-
-    console.log('formdata')
-    console.log(formdata)
 
     this.userService.uploadGalleryImages(formdata).subscribe((response)=>{
       console.log(response)

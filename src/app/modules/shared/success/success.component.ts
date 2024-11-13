@@ -18,7 +18,7 @@ export class SuccessComponent implements OnInit {
   }
 
   closePopup() {
-    this.router.navigate(['/talent/dashboard']); // Navigate to the specified route
+    this.router.navigate(['/talent/membership']); // Navigate to the specified route
   }
 
 }

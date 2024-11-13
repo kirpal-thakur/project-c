@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TalentService } from '../../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -16,6 +16,7 @@ export class PerformanceReportComponent  implements OnInit {
   selectedIds: number[] = [];
   userId: any = [];
   path: any ;
+  @Input() isPremium: any;
 
   constructor(private talentService: TalentService, public dialog: MatDialog,private route: ActivatedRoute ) {}
 
@@ -23,8 +24,9 @@ export class PerformanceReportComponent  implements OnInit {
     
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
-      this.loadReports(this.userId);
-      
+      if(this.isPremium){
+        this.loadReports(this.userId);      
+      }
     });
   }
 

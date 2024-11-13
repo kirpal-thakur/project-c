@@ -14,6 +14,7 @@ export class GeneralDetailsComponent {
     position:any;
   
     @Input() userData: any;
+    @Input() isPremium: any;
     
     constructor( public dialog: MatDialog) { 
       // If you want to load the user data from localStorage during initialization    
@@ -21,9 +22,6 @@ export class GeneralDetailsComponent {
   
     ngOnInit(): void {
       this.user = this.userData;
-      setTimeout(() => {
-        console.log('profile tab', this.user);
-      }, 1000);    
     }
     
     ngOnChanges(changes: SimpleChanges) {

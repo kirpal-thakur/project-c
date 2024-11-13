@@ -94,7 +94,7 @@
     border-radius: 20px;
 }
 .premium_button svg {
-    width: 18px;
+    width: 14px;
 }
 .premium_button svg path{
     fill: #000;
@@ -104,7 +104,7 @@
     border: none;
 }
 .premium_button span {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
 }
 .premium-currency h6 {
@@ -116,16 +116,26 @@ sub.premium-month_title {
     font-size: 14px;
     font-weight: 400;
 }
-.choose-plan-btn{
+
+.choose-plan-btn {
     width: 100%;
     padding: 8px;
-    border: none;
     border: 1px solid #2a822a;
     color: #fff;
     border-radius: 6px;
-    background: rgb(96, 182, 110);
-    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61 149 75) 40%);
-}
+    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
+    
+    &:disabled {
+      background: #ccc; // Light gray background
+      border-color: #aaa; // Lighter gray border
+      color: #e6e4e4; // Darker gray text
+      cursor: not-allowed; // Change cursor to indicate it's disabled
+      opacity: 0.6; // Reduce opacity for a "disabled" look
+      border-radius: 6px;
+      background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
+    }
+  }
+  
 .premium-plan-list h3{
     font-size: 20px;
     color: #fff;
@@ -281,12 +291,6 @@ sub.premium-month_title {
     animation: spin 1s linear infinite;
 }
 
-.choose-plan-btn:disabled {
-    background-color: #ccc; /* Gray color for disabled state */
-    color: #e9e3e3; /* Text color when disabled */
-    cursor: not-allowed;
-    opacity: 0.8; /* Reduced opacity for the fade effect */
-}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

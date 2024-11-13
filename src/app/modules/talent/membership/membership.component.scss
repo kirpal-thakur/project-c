@@ -19,6 +19,10 @@
     border-radius: 10px;
     font-size: 18px;
 }
+.slider-arrows mat-paginator {
+  background: none !important;
+}
+
 .page-content .card-header{
   padding: 10px 26px;
 }
@@ -54,7 +58,7 @@ button.premium-subscription_btn {
   font-weight: 500;
   border-radius: 6px;
 }
-button.premium-edit_btn {
+button.premium-edit_btn,a.premium-edit_btn {
   border: none;
   background: none;
   color: #fff;
