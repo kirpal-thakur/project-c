@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-general-details',
@@ -42,11 +43,13 @@ export class EditGeneralDetailsComponent {
   ];
   countries: any;
   user: any = localStorage.getItem('userInfo');
-
+  isLoading : boolean = false;
+  
   constructor(
     public dialogRef: MatDialogRef<EditGeneralDetailsComponent>,
     public dialog: MatDialog,
     private talentService: TalentService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -138,13 +141,14 @@ export class EditGeneralDetailsComponent {
 
   onSave(form: NgForm): void {
     this.dialogRef.close(this.user);
-    console.log(this.user);
   }
 
   onSubmit(myForm: NgForm): void {
-    console.log(myForm.value);
-    
     if (myForm.valid) {
+      // Enable loading and notify user
+      this.isLoading = true;
+      this.toastr.info('Submitting your profile...', 'Please wait');
+
       const formData = new FormData();
 
       // Append each field to FormData
@@ -155,12 +159,13 @@ export class EditGeneralDetailsComponent {
       formData.append('user[main_position]', this.main_position);
       formData.append('user[market_value]', this.market_value);
       formData.append('user[market_value_unit]', '1');
-      
-      // Append each position in other_positions as an array
+
+      // Append each position in `other_positions` as an array
       this.other_positions.forEach(position => {
-        formData.append('user[other_position][]', position); // Use [] for array
+        formData.append('user[other_position][]', position);
       });
-      
+
+      // Append social media links and additional fields
       formData.append('user[sm_facebook]', this.social_facebook);
       formData.append('user[top_speed]', this.top_speed.toString());
       formData.append('user[top_speed_unit]', 'km/h');
@@ -168,17 +173,31 @@ export class EditGeneralDetailsComponent {
       formData.append('user[sm_x]', this.social_x);
       formData.append('user[sm_vimeo]', this.social_vimeo);
       formData.append('user[sm_tiktok]', this.social_tiktok);
-      formData.append('user[sm_instagram]', this.social_instagram);      
+      formData.append('user[sm_instagram]', this.social_instagram);
       formData.append('lang', 'en');
 
+      // API call for updating profile
       this.talentService.updateGeneralProfile(formData).subscribe(
         (response: any) => {
-          this.dialogRef.close(response.data);
+          if (response?.status) {
+            this.toastr.success('Profile updated successfully!', 'Success');
+            this.dialogRef.close(response.data);
+          } else {
+            this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
+            console.error('API response error:', response);
+          }
         },
         (error: any) => {
+          this.toastr.error('Failed to submit profile. Please try again.', 'Error');
           console.error('Error submitting the form:', error);
+        },
+        () => {
+          // Disable loading state after request completion
+          this.isLoading = false;
         }
       );
+    } else {
+      this.toastr.warning('Please fill out all required fields.', 'Form Incomplete');
     }
   }
 }

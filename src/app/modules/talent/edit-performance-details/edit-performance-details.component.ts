@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'edit-performance-details',
@@ -16,10 +17,12 @@ export class EditPerformanceDetailsComponent implements OnInit {
   currentTeam: string = ''; // Initialize as empty string to avoid undefined issues
   currentTeamId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
+  isLoading : boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditPerformanceDetailsComponent>,
     private talentService: TalentService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -35,25 +38,37 @@ export class EditPerformanceDetailsComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit(myForm: NgForm): void {
-    console.log('myForm submitted:', myForm.value);
 
+  onSubmit(myForm: NgForm): void {
     if (myForm.valid) {
-      
+      this.isLoading = true; // Start loading indicator
+      this.toastr.info('Updating performance...', 'Please wait');
+
       // Add currentTeamId to the form values
       const formData = {
         ...myForm.value,
         team_id: this.currentTeamId
       };
-  
-      this.talentService.updatePerformance(this.performance.id,formData).subscribe(
+
+      this.talentService.updatePerformance(this.performance.id, formData).subscribe(
         (response: any) => {
-          this.dialogRef.close(response.data);
+          if (response?.status) {
+            this.toastr.success('Performance updated successfully!', 'Success');
+            this.dialogRef.close(response.data); // Close dialog with success data
+          } else {
+            this.toastr.error('Failed to update performance. Please try again.', 'Error');
+            console.error('Unexpected API response:', response);
+          }
+          this.isLoading = false; // Stop loading indicator
         },
         (error: any) => {
-          console.error('Error submitting the myForm:', error);
+          this.toastr.error('Error updating performance. Please try again later.', 'Error');
+          console.error('Error submitting the form:', error);
+          this.isLoading = false; // Stop loading indicator
         }
       );
+    } else {
+      this.toastr.warning('Please fill out all required fields before submitting.', 'Warning');
     }
   }
 

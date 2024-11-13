@@ -8,6 +8,7 @@ import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-pers
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,12 @@ export class DashboardComponent implements OnInit {
   countryFlagUrl : any;
   
   constructor(private route: ActivatedRoute,
-     private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+    private userService: UserService,
+    private talentService: TalentService,    
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private router: Router
+      ) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -121,10 +127,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
-
     		this.getUserProfile(this.userId);
-
       } else {
         console.log('User canceled the edit');
       }
@@ -186,25 +189,32 @@ export class DashboardComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
 
+      // Set loading state and display info toast
+      this.toastr.info('Uploading profile image...', 'Please wait');
+
       try {
+        const formData = new FormData();
+        formData.append("profile_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("profile_image", this.selectedFile);
-
-        this.talentService.uploadProfileImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.profileImage); // Emitting the data
-            this.sendMessage();
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+        this.talentService.uploadProfileImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
+              this.toastr.success('Profile image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.error('Failed to upload profile image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading profile image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during file upload:', error);
       }
     }
   }
@@ -213,63 +223,80 @@ export class DashboardComponent implements OnInit {
     this.talentService.updatePicOnHeader(this.profileImage);
   }
 
+
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      
+      // Set loading state and display info toast
+      this.toastr.info('Uploading cover image...', 'Please wait');
 
       try {
+        const formData = new FormData();
+        formData.append("cover_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("cover_image", this.selectedFile);
-
-        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.coverImage); // Emitting the data
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+        this.talentService.uploadCoverImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
+              this.toastr.success('Cover image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.error('Failed to upload cover image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading cover image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during cover image upload:', error);
       }
     }
   }
 
-  deleteCoverImage(){
+  deleteCoverImage(): void {
+    // Set loading state and display info toast
+    this.toastr.info('Deleting cover image...', 'Please wait');
+
     try {
-      this.talentService.deleteCoverImage().subscribe((response)=>{
-        if (response && response.status) {
-          setTimeout(() => {
-            this.coverImage = './media/palyers.png';
-          }, 100);
-          this.dataEmitter.emit(''); // Emitting the data
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });
+      this.talentService.deleteCoverImage().subscribe(
+        (response) => {
+          if (response && response.status) {
+            this.coverImage = './media/players.png';  // Reset to default image
+            this.dataEmitter.emit('');  // Emit empty string to indicate deletion
+            this.toastr.success('Cover image deleted successfully.', 'Success');
+          } else {
+            this.toastr.error('Failed to delete cover image. Please try again.', 'Delete Failed');
+            console.error('Invalid API response structure:', response);
+          }
+        },
+        (error) => {
+          this.toastr.error('An error occurred during deletion. Please try again.', 'Delete Error');
+          console.error('Error deleting cover image:', error);
+        },
+      );
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+      this.toastr.error('An unexpected error occurred. Please try again.', 'Delete Error');
+      console.error('Error during cover image deletion:', error);
     }
   }
-  
-  openDeleteDialog() {
+
+  openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // If result is true, proceed with deletion logic
+        // If the user confirms, proceed with deletion
         this.deleteCoverImage();
       } else {
+        this.toastr.info('Cover image deletion canceled.', 'Canceled');
         console.log('User canceled the delete');
       }
     });
@@ -343,7 +370,6 @@ export class DashboardComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
-  
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");
