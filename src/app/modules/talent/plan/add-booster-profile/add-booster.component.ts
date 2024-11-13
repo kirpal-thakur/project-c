@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { TalentService } from '../../../../services/talent.service';
 import { PaymentService } from '../../../../services/payment.service';
 import { CouponCodeAlertComponent } from '../../../shared/coupon-code-alert/coupon-code-alert.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'add-booster',
@@ -25,7 +26,7 @@ export class AddBoosterComponent {
   constructor(
     public dialogRef: MatDialogRef<AddBoosterComponent>,
     public talentService: TalentService,
-    private stripeService: PaymentService,
+    private toastr: ToastrService,
     private paymentService: PaymentService,
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -75,25 +76,32 @@ export class AddBoosterComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         let coupon = result;
+        this.toastr.info('Applying coupon code...', 'Processing');
         this.redirectToCheckout(this.id, this.selectedAudienceIds, coupon);
-      }
-      if (result==null) {
-        this.redirectToCheckout(this.id,this.selectedAudienceIds);
+      } else if (result === null) {
+        this.toastr.info('Proceeding without coupon...', 'Processing');
+        this.redirectToCheckout(this.id, this.selectedAudienceIds);
       }
     });
   }
-  
-  async redirectToCheckout(planId: string, booster_audience: number[] = [],coupon:any='') {
+
+  async redirectToCheckout(planId: string, booster_audience: number[] = [], coupon: any = '') {
     this.isLoadingCheckout = true;
+    this.toastr.info('Redirecting to checkout...', 'Processing');
+
     try {
-      const response = await this.paymentService.createCheckoutSession(planId, booster_audience.join(','),coupon).toPromise();
+      const response = await this.paymentService.createCheckoutSession(planId, booster_audience.join(','), coupon).toPromise();
+      
       if (response?.data?.payment_intent?.id) {
         const stripe = await this.stripe;
-        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+        await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+        this.toastr.success('Redirecting to Stripe checkout.', 'Success');
       } else {
+        this.toastr.error('Failed to create checkout session.', 'Error');
         console.error('Failed to create checkout session', response);
       }
     } catch (error) {
+      this.toastr.error('Error creating Stripe Checkout session. Please try again.', 'Error');
       console.error('Error creating Stripe Checkout session:', error);
     } finally {
       this.isLoadingCheckout = false;
