@@ -32,6 +32,8 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
   content: string = '';
   error:boolean = false
   errorMsg:any = {}
+  type: string = "";
+  subject: string = "";
 
   constructor(
     
@@ -105,8 +107,10 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     params.email_for = this.selectedRole;
     params.language = this.selectedLang;
     params.location = this.selectedLocation;
+    params.type = this.type;
+    params.subject = this.subject;
     params.status  = 1; // 1 for active, 2 for inactive
-    
+
     this.tempalateApi.addEmailTemplate(params).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
