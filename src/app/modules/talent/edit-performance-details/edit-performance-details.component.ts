@@ -42,7 +42,7 @@ export class EditPerformanceDetailsComponent implements OnInit {
   onSubmit(myForm: NgForm): void {
     if (myForm.valid) {
       this.isLoading = true; // Start loading indicator
-      this.toastr.info('Updating performance...', 'Please wait');
+      this.toastr.info('Updating performance...', 'Please wait', { disableTimeOut: true });
 
       // Add currentTeamId to the form values
       const formData = {
@@ -53,21 +53,25 @@ export class EditPerformanceDetailsComponent implements OnInit {
       this.talentService.updatePerformance(this.performance.id, formData).subscribe(
         (response: any) => {
           if (response?.status) {
+            this.toastr.clear();
             this.toastr.success('Performance updated successfully!', 'Success');
             this.dialogRef.close(response.data); // Close dialog with success data
           } else {
+            this.toastr.clear();
             this.toastr.error('Failed to update performance. Please try again.', 'Error');
             console.error('Unexpected API response:', response);
           }
           this.isLoading = false; // Stop loading indicator
         },
         (error: any) => {
+            this.toastr.clear();
           this.toastr.error('Error updating performance. Please try again later.', 'Error');
           console.error('Error submitting the form:', error);
           this.isLoading = false; // Stop loading indicator
         }
       );
     } else {
+            this.toastr.clear();
       this.toastr.warning('Please fill out all required fields before submitting.', 'Warning');
     }
   }

@@ -27,6 +27,13 @@ export class TemplateService {
           );
     }
 
+    getTemplateById(id: string): Observable<{ status: boolean, message: string, data: any }> {
+        
+        return this.http.get<{ status: boolean, message: string, data: any }>(
+            `${this.apiUrl}admin/get-email-template/${id}`
+        );
+    }
+    
     addEmailTemplate(record: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}admin/add-email-template`, record);
     }

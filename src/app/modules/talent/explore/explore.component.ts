@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-explore',
@@ -46,8 +47,10 @@ export class ExploreComponent implements OnInit {
 
   // Filters and UI variables (other code omitted for brevity)
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     private talentService: TalentService,
     private router: Router,
     private cdr: ChangeDetectorRef,
@@ -132,6 +135,8 @@ export class ExploreComponent implements OnInit {
 
   // Event handler for page change in paginator
   getUsers() {
+    this.isLoading = true; // Start loading
+
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
   
@@ -188,15 +193,25 @@ export class ExploreComponent implements OnInit {
       }
     });
   
-    // Call the service to get filtered data
-    this.talentService.getExploresData(params).subscribe((response) => {
-      if (response && response.status && response.data) {
-        this.players = response.data.userData.users;
-        this.totalItems = response.data.userData.totalCount;
 
-        this.trackBoostedProfileViews(this.players);
-
-        setTimeout(() => this.cdr.detectChanges(), 0);
+    // Call service to fetch filtered data
+    this.talentService.getExploresData(params).subscribe({
+      next: (response) => {
+        if (response?.status && response?.data) {
+          this.players = response.data.userData.users;
+          this.totalItems = response.data.userData.totalCount;
+          this.trackBoostedProfileViews(this.players); // Track views if necessary
+          setTimeout(() => this.cdr.detectChanges(), 0);
+        } else {
+          this.toastr.error('Failed to retrieve data. Please try again.', 'Error');
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching users:', error);
+        this.toastr.error('An error occurred while fetching data.', 'Error');
+      },
+      complete: () => {
+        this.isLoading = false; // End loading
       }
     });
   }

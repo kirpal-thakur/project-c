@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { TalentService } from '../../../../../services/talent.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-performance',
@@ -19,8 +20,10 @@ export class AddPerformanceComponent {
   currentTeam: string = ''; // Initialize as empty string to avoid undefined issues
   currentTeamId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<AddPerformanceComponent>,
     private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -51,27 +54,43 @@ export class AddPerformanceComponent {
     );
   }
 
-  onSubmit(myForm: NgForm): void {
 
+  onSubmit(myForm: NgForm): void {
     if (myForm.valid) {
+      
+      // Show loading message
+      const loadingToast = this.toastr.info('Submitting performance data...', 'Please wait', { disableTimeOut: true });
 
       // Add currentTeamId to the form values
       const formData = {
         ...myForm.value,
         team_id: this.currentTeamId
       };
-  
-      this.talentService.addPerformance(formData).subscribe(
-        (response: any) => {
-          this.dialogRef.close(response.data);
+
+      this.talentService.addPerformance(formData).subscribe({
+        next: (response: any) => {
+          // Close loading message
+          this.toastr.clear(loadingToast.toastId);
+          
+          // Show success message
+          this.toastr.success('Performance data submitted successfully!', 'Success');
+
+          this.dialogRef.close(response.data); // Close the dialog with response data
         },
-        (error: any) => {
-          console.error('Error submitting the myForm:', error);
+        error: (error: any) => {
+          // Close loading message
+          this.toastr.clear(loadingToast.toastId);
+
+          // Show error message
+          this.toastr.error('Failed to submit performance data. Please try again.', 'Error');
+          
+          console.error('Error submitting the form:', error);
         }
-      );
+      });
+    } else {
+      this.toastr.warning('Please complete the form correctly before submitting.', 'Form Incomplete');
     }
   }
-
   
   // Function to handle dynamic fetching of clubs based on search input
   onSearchTeams(): void {

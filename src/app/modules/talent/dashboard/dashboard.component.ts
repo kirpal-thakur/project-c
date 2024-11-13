@@ -190,7 +190,7 @@ export class DashboardComponent implements OnInit {
       this.selectedFile = input.files[0];
 
       // Set loading state and display info toast
-      this.toastr.info('Uploading profile image...', 'Please wait');
+      this.toastr.info('Uploading profile image...', 'Please wait', { disableTimeOut: true });
 
       try {
         const formData = new FormData();
@@ -201,18 +201,23 @@ export class DashboardComponent implements OnInit {
             if (response && response.status) {
               this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
+              this.toastr.clear();
+
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {
+              this.toastr.clear();
               this.toastr.error('Failed to upload profile image. Please try again.', 'Upload Failed');
               console.error('Invalid API response structure:', response);
             }
           },
           (error) => {
+              this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading profile image:', error);
           },
         );
       } catch (error) {
+              this.toastr.clear();
         this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
         console.error('Error during file upload:', error);
       }
@@ -230,7 +235,7 @@ export class DashboardComponent implements OnInit {
       this.selectedFile = input.files[0];
       
       // Set loading state and display info toast
-      this.toastr.info('Uploading cover image...', 'Please wait');
+      this.toastr.info('Uploading cover image...', 'Please wait', { disableTimeOut: true });
 
       try {
         const formData = new FormData();
@@ -241,18 +246,22 @@ export class DashboardComponent implements OnInit {
             if (response && response.status) {
               this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
+              this.toastr.clear();
               this.toastr.success('Cover image uploaded successfully!', 'Success');
             } else {
+              this.toastr.clear();
               this.toastr.error('Failed to upload cover image. Please try again.', 'Upload Failed');
               console.error('Invalid API response structure:', response);
             }
           },
           (error) => {
+              this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading cover image:', error);
           },
         );
       } catch (error) {
+              this.toastr.clear();
         this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
         console.error('Error during cover image upload:', error);
       }
@@ -261,7 +270,7 @@ export class DashboardComponent implements OnInit {
 
   deleteCoverImage(): void {
     // Set loading state and display info toast
-    this.toastr.info('Deleting cover image...', 'Please wait');
+    this.toastr.info('Deleting cover image...', 'Please wait', { disableTimeOut: true });
 
     try {
       this.talentService.deleteCoverImage().subscribe(
@@ -269,18 +278,22 @@ export class DashboardComponent implements OnInit {
           if (response && response.status) {
             this.coverImage = './media/players.png';  // Reset to default image
             this.dataEmitter.emit('');  // Emit empty string to indicate deletion
+              this.toastr.clear();
             this.toastr.success('Cover image deleted successfully.', 'Success');
           } else {
+              this.toastr.clear();
             this.toastr.error('Failed to delete cover image. Please try again.', 'Delete Failed');
             console.error('Invalid API response structure:', response);
           }
         },
         (error) => {
+              this.toastr.clear();
           this.toastr.error('An error occurred during deletion. Please try again.', 'Delete Error');
           console.error('Error deleting cover image:', error);
         },
       );
     } catch (error) {
+              this.toastr.clear();
       this.toastr.error('An unexpected error occurred. Please try again.', 'Delete Error');
       console.error('Error during cover image deletion:', error);
     }

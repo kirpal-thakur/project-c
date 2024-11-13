@@ -245,7 +245,7 @@ export class TalentService {
   getAllUses(): Observable<any> {
     // Construct HttpParams object
     return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}users-frontend`
+      `${this.apiUrl}users-frontend-with-login?noLimit=true`
     );
   }
   

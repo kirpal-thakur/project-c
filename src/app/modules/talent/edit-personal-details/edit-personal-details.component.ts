@@ -56,7 +56,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   currentClub: string = '';
   firstName: string = '';
   lastName: string = '';
-  nationality: string[] = [];  // Ensure nationality is initialized as an array
+  nationality: any[] = [];  // Ensure nationality is initialized as an array
   currentClubId: any;
   userData:any
   playerClubsListing:any;
@@ -87,6 +87,7 @@ export class EditPersonalDetailsComponent implements OnInit {
     
     if (this.user.meta) {
       this.dateOfBirth = this.user.meta.date_of_birth || '';
+      
       this.height = this.user.meta.height || 0;
       this.heightUnit = this.user.meta.height_unit || 'cm';
       this.weight = this.user.meta.weight || 0;
@@ -103,7 +104,10 @@ export class EditPersonalDetailsComponent implements OnInit {
       
       // Ensure userNationalities is parsed correctly as an array of IDs only
       this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
-      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map((nation: any) => nation.country_id) : [];
+      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => ({
+          id: item.country_id,
+          country_name: item.country_name,
+      })) : [];
 
       if (this.user.meta && this.user.meta.pre_club_id) {
         this.currentClubId = this.user.meta.pre_club_id;
@@ -121,7 +125,6 @@ export class EditPersonalDetailsComponent implements OnInit {
     if (this.placeOfBirthInput) {
       const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
         types: ['(cities)'],
-        componentRestrictions: { country: 'us' }
       });
 
       autocomplete.addListener('place_changed', () => {
@@ -265,7 +268,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (form.valid) {
       // Enable loading state and notify user
-      this.toastr.info('Submitting your profile...', 'Please wait');
+      this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
 
       const formData = new FormData();
       
@@ -304,9 +307,11 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.talentService.updateUserProfile(formData).subscribe(
         (response: any) => {
           if (response?.status) {
+            this.toastr.clear();
             this.toastr.success('Profile updated successfully!', 'Success');
             this.dialogRef.close(response.data);
           } else {
+            this.toastr.clear();
             this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
             console.error('API response error:', response);
           }

@@ -44,7 +44,7 @@ export class EditGeneralDetailsComponent {
   countries: any;
   user: any = localStorage.getItem('userInfo');
   isLoading : boolean = false;
-  
+
   constructor(
     public dialogRef: MatDialogRef<EditGeneralDetailsComponent>,
     public dialog: MatDialog,
@@ -147,7 +147,7 @@ export class EditGeneralDetailsComponent {
     if (myForm.valid) {
       // Enable loading and notify user
       this.isLoading = true;
-      this.toastr.info('Submitting your profile...', 'Please wait');
+      this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
 
       const formData = new FormData();
 
@@ -180,14 +180,18 @@ export class EditGeneralDetailsComponent {
       this.talentService.updateGeneralProfile(formData).subscribe(
         (response: any) => {
           if (response?.status) {
+            this.toastr.clear();
+
             this.toastr.success('Profile updated successfully!', 'Success');
             this.dialogRef.close(response.data);
           } else {
+            this.toastr.clear();
             this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
             console.error('API response error:', response);
           }
         },
         (error: any) => {
+            this.toastr.clear();
           this.toastr.error('Failed to submit profile. Please try again.', 'Error');
           console.error('Error submitting the form:', error);
         },
@@ -197,6 +201,7 @@ export class EditGeneralDetailsComponent {
         }
       );
     } else {
+            this.toastr.clear();
       this.toastr.warning('Please fill out all required fields.', 'Form Incomplete');
     }
   }
