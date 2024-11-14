@@ -3,6 +3,7 @@ import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { SocketService } from '../../../services/socket.service';
 
 interface Notification {
   image: string;
@@ -18,17 +19,42 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
+  constructor(private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
 
-  lang:string = '';
+  lang: string = '';
 
- ngOnInit() {
+  liveNotification: any[] = [];
+  showNotification: boolean = false;
+
+  ngOnInit() {
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
+
+    this.socketService.on('notification').subscribe((data) => {
+      // Create a new notification object
+      const obj = {
+        image: '../../../assets/images/1.jpg',
+        title: data.senderId,
+        content: data.message,
+        time: 'just now'
+      };
+
+      // Add the notification to the array and show the notification box
+      this.liveNotification = [obj]; // Keep only the latest notification
+      this.showNotification = true;
+
+      console.log('New notification:', data.message);
+
+      // Hide the notification after 3 seconds
+      setTimeout(() => {
+        this.liveNotification = [];
+        this.showNotification = false;
+      }, 3000); // 3000 ms = 3 seconds
+    });
   }
 
-  ChangeLang(lang:any){
-    const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
+  ChangeLang(lang: any) {
+    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
   }
@@ -46,10 +72,10 @@ export class HeaderComponent {
     this.updateThemeText()
   }
 
-  updateThemeText (){
+  updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    document.getElementById('theme-text')!.textContent =this.themeText
+    document.getElementById('theme-text')!.textContent = this.themeText
   }
 
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
+import { SocketService } from '../../../services/socket.service';
 
 interface Notification {
   image: string;
@@ -20,7 +21,7 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService) {}
+  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService, private socketService: SocketService) {}
   loggedInUser:any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang:string = '';
