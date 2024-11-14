@@ -45,8 +45,7 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     }
 
     let envRoles:any = environment.roles;
-    envRoles[0].id = 0;
-    envRoles[0].role = 'All';
+    
     this.roles = envRoles;
     this.langs = environment.langs;
     this.locations = environment.domains;

@@ -36,8 +36,7 @@ export class TemplatesComponent {
     this.getTemplates();
 
     let envRoles:any = environment.roles;
-    envRoles[0].id = 0;
-    envRoles[0].role = 'All';
+    envRoles.unshift({id: 0, role: 'All'});
     this.roles = envRoles;
   }
 
@@ -91,7 +90,7 @@ export class TemplatesComponent {
 
   createTemplate(){
     const dialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '537px',
+      height: '598px',
       width: '600px',
     });
 
@@ -209,7 +208,7 @@ export class TemplatesComponent {
 
   editTemplate(data:any){
     const updateDialogRef = this.dialog.open(TemplatePopupComponent,{
-      height: '537px',
+      height: '598px',
       width: '600px',
       data: data
     });

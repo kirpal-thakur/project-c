@@ -141,7 +141,7 @@
 
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [(ngModel)]="content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <ngx-editor [editor]="editor" class="editor-width" [(ngModel)]="content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
         <div *ngIf="errorMsg.content" class="error-msg" style="padding-left:20px;">{{errorMsg.content}}</div>
       </div>
       

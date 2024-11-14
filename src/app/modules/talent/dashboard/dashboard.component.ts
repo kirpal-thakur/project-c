@@ -9,6 +9,33 @@ import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { GuidedTourService, Orientation, OrientationConfiguration } from 'ngx-guided-tour';
+
+interface GuidedTour {
+  tourId: string;
+  steps: TourStep[];
+  useOrb?: boolean;
+  skipCallback?: (stepSkippedOn: number) => void;
+  completeCallback?: () => void;
+  minimumScreenSize?: number;
+  resizeDialog?: {
+    title?: string;
+    content: string;
+  };
+}
+
+interface TourStep {
+  selector?: string;
+  title?: string;
+  content: string;
+  orientation?: Orientation | OrientationConfiguration[];
+  action?: () => void;
+  closeAction?: () => void;
+  skipStep?: boolean;
+  scrollAdjustment?: number;
+  useHighlightPadding?: boolean;
+  highlightPadding?: number;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -24,8 +51,9 @@ export class DashboardComponent implements OnInit {
     private talentService: TalentService,    
     private toastr: ToastrService,
     public dialog: MatDialog,
-    private router: Router
-      ) { }
+    private router: Router,
+    private guidedTourService: GuidedTourService
+  ) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -65,6 +93,61 @@ export class DashboardComponent implements OnInit {
       this.coverImage = this.defaultCoverImage;
     }
     await this.getAllTeams();
+    // this.startTour();
+    
+    // Adding a slight delay to ensure elements are rendered before the tour starts
+    setTimeout(() => {
+      this.startTour();
+    }, 2000); // Adjust delay as needed
+
+  }
+
+
+  ngAfterViewInit() {
+  }
+
+  startTour() {
+    const tour: GuidedTour = {
+      tourId: 'profile-tour',
+      useOrb: true,
+      steps: [
+        {
+          selector: '.tour-profile-pics',
+          title: 'Profile Photo',
+          content: 'You can upload or edit your profile photo here.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-personal-details',
+          title: 'Personal Details',
+          content: 'Add or edit your personal details in this section.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-highlights',
+          title: 'Highlights',
+          content: 'Upload photos and videos to showcase on your profile.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-cover-photo',
+          title: 'Cover Photo',
+          content: 'Upload or edit your cover photo here.',
+          orientation: 'top',
+        },
+        {
+          selector: '.tour-general-details',
+          title: 'General Details',
+          content: 'Add or edit your general details in this section.',
+          orientation: 'right',
+        },
+      ],
+      completeCallback: () => {
+        console.log('Tour Completed!');
+      },
+    };
+
+    this.guidedTourService.startTour(tour);
   }
 
   getGalleryData() {
