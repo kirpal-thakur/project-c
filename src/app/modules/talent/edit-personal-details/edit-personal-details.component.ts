@@ -73,18 +73,16 @@ export class EditPersonalDetailsComponent implements OnInit {
   profileLoaded: boolean = false;
   
   ngOnInit(): void {
-    this.userData =this.user = { ...this.data };
+    this.userData =this.user = { ...this.data.user };
   
+    this.countries = this.data.countries;
     // this.user = JSON.parse(localStorage.getItem('userInfo') || '{}');
     this.loggedInUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.userId = this.loggedInUser.id;
-  
-    // Fetch countries first, then get user profile
-    this.loadCountries().subscribe(() => {
-      this.getUserProfile(this.userId);
-      this.getClubsForPlayer();
-    });
-    
+
+    this.getUserProfile(this.userId);
+    // this.getClubsForPlayer();
+      
     if (this.user.meta) {
       this.dateOfBirth = this.user.meta.date_of_birth || '';
       
@@ -104,11 +102,12 @@ export class EditPersonalDetailsComponent implements OnInit {
       
       // Ensure userNationalities is parsed correctly as an array of IDs only
       this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
-      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => ({
-          id: item.country_id,
-          country_name: item.country_name,
-      })) : [];
+      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => 
+           String(item.country_id)
+      ) : [];
 
+      console.log(this.nationality)
+      console.log(this.countries)
       if (this.user.meta && this.user.meta.pre_club_id) {
         this.currentClubId = this.user.meta.pre_club_id;
       }

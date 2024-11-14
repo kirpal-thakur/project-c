@@ -42,7 +42,8 @@ export class DashboardComponent implements OnInit {
   premium : any = false;
   booster : any = false;
   activeDomains : any;
-  
+  countries :  any;
+
   @Output() dataEmitter = new EventEmitter<string>();
   
   loading: boolean = true;  // Add this line to track loading state
@@ -52,6 +53,7 @@ export class DashboardComponent implements OnInit {
     this.userId = this.loggedInUser.id;
     this.getUserProfile(this.userId);
     this.getHighlightsData();
+    this.loadCountries();
     this.getGalleryData();
     
     this.route.params.subscribe(() => {
@@ -122,7 +124,7 @@ export class DashboardComponent implements OnInit {
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
-      data: this.user
+      data: {user : this.user , countries : this.countries}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -424,4 +426,16 @@ export class DashboardComponent implements OnInit {
     // Set the URL to an <img> element in your template or save it in a variable
     this.countryFlagUrl = flagUrl;
   }
+
+  
+  // After loading, mark countries as loaded and check if both are ready
+  loadCountries() {
+    return this.talentService.getCountries().subscribe(
+      (response) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+        }
+    });
+  }
+
 }

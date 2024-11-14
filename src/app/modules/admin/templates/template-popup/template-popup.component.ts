@@ -36,8 +36,7 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
   type: string = "";
   subject: string = "";
 
-  constructor(
-    
+  constructor(    
     public dialogRef: MatDialogRef<TemplatePopupComponent>, private tempalateApi: TemplateService,
     @Inject(MAT_DIALOG_DATA) public template: any
   ) {
