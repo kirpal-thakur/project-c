@@ -256,7 +256,19 @@ export class UsersComponent implements OnInit {
       }
     );
 
-    this.socketService.emit('userVerified', {senderId: '1', receiverId: '57'});
+    console.log("user ids,", this.selectedUserIds);
+
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+        let userData = JSON.parse(jsonData);
+        userId = userData.id;
+    }
+    else{
+      console.log("No data found in localStorage."); 
+    }
+
+    this.socketService.emit('userVerified', {senderId: userId, receiverIds: ['57']});
   }
 
 

@@ -33,8 +33,8 @@ export class HeaderComponent {
     this.socketService.on('notification').subscribe((data) => {
       // Create a new notification object
       const obj = {
-        image: '../../../assets/images/1.jpg',
-        title: data.senderId,
+        image: data.senderProfileImage,
+        title: data.senderName,
         content: data.message,
         time: 'just now'
       };
@@ -49,7 +49,7 @@ export class HeaderComponent {
       setTimeout(() => {
         this.liveNotification = [];
         this.showNotification = false;
-      }, 3000); // 3000 ms = 3 seconds
+      }, 7000); // 3000 ms = 3 seconds
     });
   }
 

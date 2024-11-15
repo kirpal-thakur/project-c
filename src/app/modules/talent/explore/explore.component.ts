@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-explore',
@@ -46,6 +47,7 @@ export class ExploreComponent implements OnInit {
   constructor(
     private talentService: TalentService,
     private router: Router,
+    private socketService: SocketService
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +62,19 @@ export class ExploreComponent implements OnInit {
   }
 
   redirectUser(slug:string, id:Number): void {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+        let userData = JSON.parse(jsonData);
+        userId = userData.id;
+    }
+    else{
+      console.log("No data found in localStorage."); 
+    }
+
+    console.log("idssss", userId, id);
+
+    this.socketService.emit('profileViewed', {senderId: userId, receiverId: id});
     let pageRoute = 'view/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
