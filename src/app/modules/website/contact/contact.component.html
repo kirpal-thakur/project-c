@@ -10,12 +10,12 @@
 
   <div *ngIf="adVisible[0]" class="skyscraper-left">
     <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(0)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
   <div *ngIf="adVisible[1]" class="skyscraper-right">
     <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(1)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
 </div>
@@ -87,9 +87,12 @@
                         </label>
                       </div> -->
 
-                <div class="recaptcha-image">
-                  <img src="./assets/images/recaptcha.svg">
-                </div>
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
 
               </div>
               <div class="col-lg-6 col-md-6 col-12">
@@ -238,15 +241,15 @@
       </div>
     </div>
 
-    <div  class="advertisement">
+    <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
       <div *ngIf="adVisible[2]" class="leaderboard-image">
         <img src="./assets/images/leaderboard - 728x90.png">
-        <button (click)="closeAd(2)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div *ngIf="adVisible[3]" class="small-square-image">
         <img src="./assets/images/small sqaure - 200x200.png">
-        <button (click)="closeAd(3)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+        <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
 

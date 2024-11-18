@@ -9,12 +9,12 @@
   </div>
   <div *ngIf="adVisible[0]" class="skyscraper-left">
     <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(0)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
   <div *ngIf="adVisible[1]" class="skyscraper-right">
     <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(1)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 </div>
 
@@ -89,10 +89,11 @@
       <p>Switzerland</p>
     </div>
 
-
+    <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
     <div *ngIf="adVisible[2]" class="leaderboard-image">
       <img src="./assets/images/leaderboard - 728x90.png">
-      <button (click)="closeAd(2)" class="close-button"><i class="fa-solid fa-xmark"></i></button>
+      <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     </div>
   </div>
 </div>

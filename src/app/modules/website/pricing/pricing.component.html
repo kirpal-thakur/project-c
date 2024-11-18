@@ -11,16 +11,12 @@
 
         <div *ngIf="adVisible[0]" class="skyscraper-left">
             <img src="./assets/images/skyscraper - 120x600.png">
-            <button mat-icon-button (click)="closeAd(0)" class="ad-close-button">
-                <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-              </button>
+            <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
         <div *ngIf="adVisible[1]" class="skyscraper-right">
             <img src="./assets/images/skyscraper - 120x600.png">
-            <button mat-icon-button (click)="closeAd(1)" class="ad-close-button">
-                <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-              </button>
+            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 
@@ -95,7 +91,7 @@
                                     <ul>
                                         <li>Full display of the complete talent profile with career stages and performance data.</li>
                                         <li>Download a player profile as a PDF.</li>
-                                        <li>Chat or message function to write to other registered talents and football clubs/scouts.</li>
+                                        <!-- <li>Chat or message function to write to other registered talents and football clubs/scouts.</li> -->
                                         <li>Create a favorites list of talents, football clubs, and scouts.</li>
                                         <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
                                         <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
@@ -125,7 +121,7 @@
                                         <ul>
                                             <li>Access to the complete talent profiles with detailed performance data.</li>
                                             <li>Download a player profile as a PDF.</li>
-                                            <li>Ability to contact talents through the messaging system.</li>
+                                            <!-- <li>Ability to contact talents through the messaging system.</li> -->
                                             <li>Create a favorites list of talents, football clubs and scouts.</li>
                                             <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
                                             <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
@@ -139,27 +135,23 @@
                     </div>
                 </div>
 
-                <div class="advertisement">
-                    <div *ngIf="adVisible[2]" class="large-rectangle">
+                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[3] && !adVisible[4]  && !adVisible[5]}">
+
+                    <div *ngIf="adVisible[3]" class="large-rectangle">
                         <img src="./assets/images/large rectangle - 336x280 .png">
-                        <button mat-icon-button (click)="closeAd(2)" class="ad-close-button">
-                            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-                          </button>
+                        <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
-
-                    <div *ngIf="adVisible[3]" class="inline-rectangle">
+        
+                    <div *ngIf="adVisible[4]" class="inline-rectangle">
                         <img src="./assets/images/inline rectangle - 300x250.png">
-                        <button mat-icon-button (click)="closeAd(3)" class="ad-close-button">
-                            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-                        </button>
+                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
-
-                    <div *ngIf="adVisible[4]" class="square">
+        
+                    <div *ngIf="adVisible[5]" class="square">
                         <img src="./assets/images/sqaure - 250x250.png">
-                        <button mat-icon-button (click)="closeAd(4)" class="ad-close-button">
-                            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-                        </button>
+                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
+        
                 </div>
             </div>
         </div>

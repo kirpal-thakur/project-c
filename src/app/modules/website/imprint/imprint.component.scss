@@ -175,7 +175,7 @@ a{
     content: "";
     z-index: 1;
     position: absolute;
-    left: 10px;
+    left: 0;
     top: 50%;
 }
 .skyscraper-left img{
@@ -188,7 +188,7 @@ a{
     content: "";
     z-index: 1;
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 50%;
 }
 .skyscraper-right img{
@@ -206,19 +206,7 @@ a{
     left: 50%;
     transform: translateX(-50%);
 }
-.close-button {
-    position: absolute;
-    top: -10px;
-  right: -10px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 15px;
-    height: 24px;
-    width: 24px;
-    line-height: 24px;
-    z-index: 1;
-}
+
 
   // advertisement
 

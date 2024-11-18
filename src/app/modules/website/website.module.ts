@@ -6,7 +6,7 @@ import { WebsiteRoutingModule } from './website-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon'; 
-import { NgImageSliderModule } from 'ng-image-slider';
+// import { NgImageSliderModule } from 'ng-image-slider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -38,6 +38,8 @@ import { ThankuComponent } from './thanku/thanku.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { LoaderComponent } from './loader/loader.component';
+import { ToastrModule } from 'ngx-toastr';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 // Import services
 import { AuthService } from '../../services/auth.service';
@@ -78,10 +80,11 @@ import { ThemeService } from '../../services/theme.service';
     CarouselModule,
     RouterModule,
     MatIconModule,
-    NgImageSliderModule,
+    RecaptchaModule,
+    // NgImageSliderModule,
+    ToastrModule,
     WebsiteRoutingModule,
     MatSlideToggleModule,
-    NgImageSliderModule,
     MatButtonModule,
     MatCardModule,
     MatListModule,

@@ -16,6 +16,7 @@ h3 {
     position: relative;
     text-transform: uppercase;
 }
+
 h3::after {
     position: absolute;
     content: "";
@@ -32,6 +33,7 @@ p {
     font-size: 18px;
     color: white;
     font-weight: 400;
+    // margin-bottom: 20px;
 }
 
 li {
@@ -49,10 +51,12 @@ li {
 body {
     background-color: #fff;
 }
+
 .tabs {
     margin-bottom: 20px;
     padding-top: 20px;
 }
+
 .main-bnr {
     position: relative;
     z-index: 1;
@@ -87,7 +91,7 @@ body {
 }
 
 .main {
-   // background-image: url("../../../../assets/images/faq-image.png");
+    background-image: url("../../../../assets/images/faq-image.png");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -132,10 +136,15 @@ body {
 //     padding: 15px 0px 15px 0;
 // }
 .header {
-    display: flex;                 /* Use flexbox for alignment */
-    justify-content: space-between; /* Space between title and icon */
-    align-items: center;          /* Vertically center items */
-    padding: 10px;                /* Add some padding */
+    display: flex;
+    /* Use flexbox for alignment */
+    justify-content: space-between;
+    /* Space between title and icon */
+    align-items: center;
+    /* Vertically center items */
+    padding: 10px;
+    padding-left: 0;
+    /* Add some padding */
     color: white;
 }
 
@@ -193,12 +202,15 @@ body {
 }
 
 h4 {
-    margin: 0;                    /* Remove default margin */
+    margin: 0;
+    /* Remove default margin */
 }
 
 .toggle-icon {
-    width: 30px;                  /* Set width for alignment */
-    text-align: center;           /* Center the icon */
+    width: 30px;
+    /* Set width for alignment */
+    text-align: center;
+    /* Center the icon */
     cursor: pointer;
     font-size: 40px;
     margin-left: 20px;
@@ -206,10 +218,42 @@ h4 {
 }
 
 
-.faq-content {
+// .faq-content {
+//     // padding-bottom: 20px;
+//     padding-right: 20px;
+// }
+.faq-content.faq-content-open {
     padding-bottom: 20px;
-    padding-right: 20px;
 }
+
+.faq-content {
+    max-height: 0;
+    /* Initial height of 0 for hidden state */
+    opacity: 0;
+    /* Fully transparent initially */
+    overflow: hidden;
+    /* Hide overflow to make transition smoother */
+    transform: translateY(-20px);
+    /* Start slightly above */
+    transition: max-height 0.5s ease,
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    /* Smooth transition for all properties */
+}
+
+.faq-content-open {
+    max-height: 1000px;
+    /* Large enough to reveal full content */
+    opacity: 1;
+    /* Fully visible */
+    transform: translateY(0);
+    /* Moves content down to original position */
+    transition: max-height 0.5s ease,
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    /* Same transition for consistency */
+}
+
 
 .tabs button.active {
     font-size: 20px;
@@ -218,7 +262,10 @@ h4 {
     border-radius: 8px;
     font-weight: 700;
 }
-button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
+
+button.faq-club-button,
+button.faq-talent-button,
+button.faq-scout-button {
     background-color: transparent;
     border: none;
     color: #86AA7D;
@@ -230,56 +277,48 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
 
 // advertisement
 
-.skyscraper-left{
+.skyscraper-left {
     height: 600px;
     width: 120px;
     content: "";
     z-index: 1;
     position: absolute;
-    left: 10px;
+    left: 0;
     top: 50%;
 }
-.skyscraper-left img{
+
+.skyscraper-left img {
     height: 600px;
     width: 120px;
 }
-.skyscraper-right{
+
+.skyscraper-right {
     height: 600px;
     width: 120px;
     content: "";
     z-index: 1;
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 50%;
 }
-.skyscraper-right img{
+
+.skyscraper-right img {
     height: 600px;
     width: 120px;
 }
+
 .leaderboard-image img {
     height: 90px;
     width: 728px;
-  }
-  .leaderboard-image {
+}
+
+.leaderboard-image {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
-.ad-close-button {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 15px;
-    height: 24px;
-    width: 24px;
-    line-height: 24px;
-    z-index: 1;
-  }
 
-  // advertisement
+// advertisement
 
 
 
@@ -291,7 +330,8 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
         font-size: 30px;
         margin-bottom: 30px;
     }
-    .header{
+
+    .header {
         padding: 8px 0px 8px 0;
     }
 }
@@ -300,23 +340,31 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
     .cookie-text {
         font-size: 40px;
     }
+
     .about {
         margin-top: 50px;
     }
+
     h4 {
         font-size: 18px;
     }
-    .faq-content{
+
+    .faq-content {
         font-size: 16px;
     }
-    button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
+
+    button.faq-club-button,
+    button.faq-talent-button,
+    button.faq-scout-button {
         font-size: 18px;
     }
+
     .tabs button.active {
         font-size: 18px;
         width: 110px;
         height: 36px;
     }
+
     .leaderboard-club-image img,
     .small-sqaure-image img,
     .skyscraper-image img,
@@ -325,24 +373,28 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
     .leaderboard-image img,
     .banner-image img,
     .advertisement,
-    .advertisement1, 
+    .advertisement1,
     .skyscraper-left img,
-    .skyscraper-right img{
-      display: none;
+    .skyscraper-right img {
+        display: none;
     }
-    
-        
+
+
 }
 
 @media (max-width: 767px) {}
 
 @media (max-width: 575px) {
     .header {
-        padding: 10px 0px 10px 0px ;
+        padding: 10px 0px 10px 0px;
     }
-    button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
+
+    button.faq-club-button,
+    button.faq-talent-button,
+    button.faq-scout-button {
         font-size: 16px;
     }
+
     .tabs button.active {
         width: 85px;
         margin-right: 40px;
@@ -353,9 +405,11 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
     .cookie-text {
         font-size: 35px;
     }
+
     h3 {
         font-size: 22px;
     }
+
     // button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
     //     margin-right: 50px;
     // }
@@ -364,24 +418,32 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
         margin-right: 40px;
         text-align: center;
     }
+
     h4 {
         font-size: 16px;
     }
+
     .toggle-icon {
         font-size: 30px;
     }
+
     .py_0 {
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    .faq-content{
+
+    .faq-content {
         font-size: 14px;
     }
 }
+
 @media (max-width: 415px) {
-button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
-    margin-right: 35px;
-}
+
+    button.faq-club-button,
+    button.faq-talent-button,
+    button.faq-scout-button {
+        margin-right: 35px;
+    }
 }
 
 @media (max-width: 376px) {
@@ -390,20 +452,27 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
         margin-right: 15px;
         font-size: 14px;
     }
-    button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
+
+    button.faq-club-button,
+    button.faq-talent-button,
+    button.faq-scout-button {
         margin-right: 30px;
         font-size: 14px;
     }
+
     .faq-content {
         font-size: 11px;
     }
+
     h4 {
         font-size: 14px;
     }
+
     .toggle-icon {
         font-size: 25px;
     }
 }
+
 @media (max-width: 321px) {
     .tabs button.active {
         margin-right: 20px;
@@ -411,15 +480,20 @@ button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
         height: 30px;
         width: 70px;
     }
-    button.faq-club-button, button.faq-talent-button, button.faq-scout-button {
+
+    button.faq-club-button,
+    button.faq-talent-button,
+    button.faq-scout-button {
         margin-right: 20px;
         font-size: 12px;
     }
+
     h4 {
         font-size: 12px;
     }
+
     .faq-content {
         font-size: 10px;
     }
-   
+
 }

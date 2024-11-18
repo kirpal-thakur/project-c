@@ -8,32 +8,25 @@
     </div>
   </div>
 
+  
   <div *ngIf="adVisible[0]" class="skyscraper-left">
-    <mat-card>
-      <img src="./assets/images/skyscraper - 120x600.png" alt="Skyscraper Ad">
-      <button mat-icon-button (click)="closeAd(0)" class="ad-close-button">
-        <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-      </button>
-    </mat-card>
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
   <div *ngIf="adVisible[1]" class="skyscraper-right">
-    <mat-card>
-      <img src="./assets/images/skyscraper - 120x600.png" alt="Skyscraper Ad">
-      <button mat-icon-button (click)="closeAd(1)" class="ad-close-button">
-        <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-      </button>
-    </mat-card>
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
   </div>
-</div>
+  </div>
 
 <div class="about-content py_0">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 col-md-6 col-12">
-        <mat-card>
-          <img src="./assets/images/about-page.png" alt="About Us" mat-card-image>
-        </mat-card>
+        <div class="content-image">
+          <img src="./assets/images/about-page.png" alt="About Us" >
+      </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <p class="content-text">
@@ -69,72 +62,64 @@
   </div>
   </div>
 
-<div class="club py_0">
-  <div class="container">
-    <div class="advertisement1">
-      <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <mat-card>
-          <img src="./assets/images/leaderboard - 728x90.png" alt="Leaderboard Ad">
-          <button mat-icon-button (click)="closeAd(2)" class="ad-close-button">
-            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-          </button>
-        </mat-card>
-      </div>
-
-      <div *ngIf="adVisible[3]" class="small-square-image">
-        <mat-card>
-          <img src="./assets/images/small sqaure - 200x200.png" alt="Small Square Ad">
-          <button mat-icon-button (click)="closeAd(3)" class="ad-close-button">
-            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-          </button>
-        </mat-card>
-      </div>
-    </div>
-
-    <div class="club_players">
-      <h3>Platform for Football</h3>
-      <h3>Players, Clubs and Scouts.</h3>
-      <div class="club-buttons">
-        <a class="light-button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-          <!-- Image inside the anchor tag -->
-          <img src="./assets/images/light-button.svg" alt="Light Button">
-        </a>
-
-        <a class="dark-button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-          <!-- Image inside the anchor tag -->
-          <img src="./assets/images/dark-button.svg" alt="Dark Button">
-        </a>
-        <!-- <img class="dark-button" src="./assets/images/dark-button.svg"> -->
-      </div>
-    </div>
-
-    <div class="advertisement">
-      <div *ngIf="adVisible[4]" class="large-rectangle">
-        <mat-card>
-          <img src="./assets/images/large rectangle - 336x280 .png" alt="Large Rectangle Ad">
-          <button mat-icon-button (click)="closeAd(4)" class="ad-close-button">
-            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-          </button>
-        </mat-card>
-      </div>
-
-      <div *ngIf="adVisible[5]" class="inline-rectangle">
-        <mat-card>
-          <img src="./assets/images/inline rectangle - 300x250.png" alt="Inline Rectangle Ad">
-          <button mat-icon-button (click)="closeAd(5)" class="ad-close-button">
-            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-          </button>
-        </mat-card>
-      </div>
-
-      <div *ngIf="adVisible[6]" class="square">
-        <mat-card>
-          <img src="./assets/images/sqaure - 250x250.png" alt="Square Ad">
-          <button mat-icon-button (click)="closeAd(6)" class="ad-close-button">
-            <mat-icon><i class="fa-solid fa-xmark"></i></mat-icon>
-          </button>
-        </mat-card>
+  <div class="club py_0">
+  
+    <div class="club-overlay"></div>
+  
+    <div class="container club-banner">
+  
+      <div class="container1">
+        <div class="advertisment" >
+          <div  *ngIf="adVisible[2]" class="leaderboard-club-image">
+            <img src="./assets/images/leaderboard - 728x90.png">
+            <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        
+          <div  *ngIf="adVisible[3]" class="small-sqaure-image">
+            <img src="./assets/images/small sqaure - 200x200.png">
+            <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          </div>    
+        </div>
+        </div>
+  
+      <div class="club_players">
+        <h3>Platform for Football</h3>
+        <h3>Players, Clubs and Scouts.</h3>
+        <div class="club-buttons">
+          <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <div class="button-border">
+              <div class="join-text">
+               <p> Join Now</p>
+               <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
+               <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
+              </div>
+            </div>
+          </div>
+        </div>
+  
       </div>
     </div>
   </div>
-</div>
+
+  <div class="py_1">
+    <div class="container">
+      <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+        <div *ngIf="adVisible[4]" class="large-rectangle">
+            <img src="./assets/images/large rectangle - 336x280 .png">
+            <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[5]" class="inline-rectangle">
+            <img src="./assets/images/inline rectangle - 300x250.png">
+            <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[6]" class="square">
+            <img src="./assets/images/sqaure - 250x250.png">
+            <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+    </div>
+    </div>
+  </div>
+

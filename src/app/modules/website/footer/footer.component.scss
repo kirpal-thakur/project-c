@@ -101,11 +101,15 @@ ul {
 
 
 
-
 .social-media ul li a {
   color: #fff;
   margin-right: 10px;
+  cursor: pointer;
 }
+.social-media ul li a:hover{
+  color: #e05263;
+}
+
 
 .form-check-input[type="checkbox"] {
   border-radius: 3px;
@@ -489,12 +493,17 @@ input:checked+.slider:before {
   line-height: 25px;
   margin-bottom: 12px;
 }
+li.insta-icon i, li.linkedin-icon i{
+  font-size: 25px;
+ }
 
 .social-link {
   margin-top: 40px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+
 
 .social-link li {
   margin-right: 35px;
@@ -827,7 +836,7 @@ img.ng-star-inserted {
 }
 
 .form-select {
- // background: url('../../../../assets/images/footer-vector.svg');
+  background: url('../../../../assets/images/footer-vector.svg');
   background-repeat: no-repeat;
   background-position: calc(100% - 20px) center;
   background-size: inherit;

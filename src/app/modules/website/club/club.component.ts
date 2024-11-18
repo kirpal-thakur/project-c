@@ -10,6 +10,12 @@ export class ClubComponent {
   isActive1 = true; // Premium Plan
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
+
+  activeAccordionIndex = 1;
+
+  setActiveAccordion(index: number): void {
+    this.activeAccordionIndex = index;
+  }
    
      ngOnInit() {
        // Retrieve the states from local storage
@@ -43,7 +49,6 @@ export class ClubComponent {
      premiumFeatures = [
        'The complete talent profile with all stages of his career and performance data.',
        'Export data in excel and pdf formats.',
-       'Chat with Talents, Clubs and Scouts.',
        'Create your favorite list.',
        'Highlight your best photos and videos on your profile.'
      ];

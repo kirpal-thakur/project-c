@@ -297,6 +297,7 @@ export class HeaderComponent implements OnInit {
     this.registerFormSubmitted = false;
   }
 
+  
   isFormValid(): boolean {
     let fieldType = ['string', 'boolean'];
     return [

@@ -9,13 +9,14 @@
        <img class="banner-image" src="./assets/images/slider.png">
     </div>
 
-
-    <div class="skyscraper-left">
+    <div *ngIf="adVisible[0]" class="skyscraper-left">
         <img src="./assets/images/skyscraper - 120x600.png">
+        <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="skyscraper-right">
+    <div *ngIf="adVisible[1]" class="skyscraper-right">
         <img src="./assets/images/skyscraper - 120x600.png">
+        <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
 </div>
@@ -96,9 +97,12 @@
 
 </div>
 
-<div class="leaderboard-image">
-    <img src="./assets/images/leaderboard - 728x90.png">
-  </div>
+<div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
+    <div *ngIf="adVisible[2]" class="leaderboard-image">
+      <img src="./assets/images/leaderboard - 728x90.png">
+      <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    </div>
   
 </div>
 </div>
@@ -134,18 +138,21 @@
             </div>
         </div>
 
-        <div class="advertisement">
+        <div class="advertisement1" [ngClass]="{'hidden': !adVisible[3] && !adVisible[4]  && !adVisible[5]}">
 
-            <div class="large-rectangle">
+            <div *ngIf="adVisible[3]" class="large-rectangle">
                 <img src="./assets/images/large rectangle - 336x280 .png">
+                <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <div class="inline-rectangle">
+            <div *ngIf="adVisible[4]" class="inline-rectangle">
                 <img src="./assets/images/inline rectangle - 300x250.png">
+                <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <div class="square">
+            <div *ngIf="adVisible[5]" class="square">
                 <img src="./assets/images/sqaure - 250x250.png">
+                <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
         </div>

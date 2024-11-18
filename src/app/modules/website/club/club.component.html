@@ -1,6 +1,6 @@
 <div class="main">
     <div class="banner py-0">
-        <div class="overlay"></div>
+        <div class="overlay1"></div>
         <div class="container">
             <div class="banner-data1">
                 <div class="row">
@@ -28,7 +28,7 @@
                                         <p class="player-name">Ziddane</p>
                                     </div>
                                     <div class="corner-image">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image">
@@ -50,7 +50,7 @@
                                         <p class="player-name1">Cristiano Ronaldo</p>
                                     </div>
                                     <div class="corner-image2">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image1">
@@ -72,7 +72,7 @@
                                         <!-- <p class="player-name1">Cristiano Ronaldo</p> -->
                                     </div>
                                     <div class="corner-image3">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <!-- <div class="flag">
                                         <div class="flag-image1">
@@ -97,7 +97,7 @@
                                         </p>
                                     </div>
                                     <div class="corner-image4">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image4">
@@ -119,7 +119,7 @@
                                         <p class="player-name1">Jermain Defoe</p>
                                     </div>
                                     <div class="corner-image5">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image5">
@@ -141,7 +141,7 @@
                                         <p class="player-name3">Jamie Vardy</p>
                                     </div>
                                     <div class="corner-image6">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image6">
@@ -166,7 +166,7 @@
                                         </p>
                                     </div>
                                     <div class="corner-image7">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image7">
@@ -188,7 +188,7 @@
                                         <p class="player-name8">Mohamed Salah</p>
                                     </div>
                                     <div class="corner-image8">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image8">
@@ -210,7 +210,7 @@
                                         <p class="player-name9"></p>
                                     </div>
                                     <div class="corner-image9">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image9">
@@ -237,7 +237,7 @@
                                         <p class="player-name_full_10">Bukayo Saka</p>
                                     </div>
                                     <div class="corner-image4">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image10">
@@ -261,7 +261,7 @@
                                         <p class="player-name_full_11">Adam Lallana</p>
                                     </div>
                                     <div class="corner-image5">
-                                        <img src="./assets/images/FC Thun 1.svg">
+                                        <img src="./assets/images/FC Thun 1.png">
                                     </div>
                                     <div class="flag">
                                         <div class="flag-image11">
@@ -285,12 +285,14 @@
                     <img src="./assets/images/skyscraper - 120x600.png">
                     <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-
-                <div *ngIf="adVisible[1]" class="leaderboard-image">
-                    <img src="./assets/images/leaderboard - 728x90.png">
-                    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
             </div>
+        </div>
+    </div>
+
+    <div class="advertisment" [ngClass]="{'hidden': !adVisible[1]}">
+        <div *ngIf="adVisible[1]" class="leaderboard-image">
+            <img src="./assets/images/leaderboard - 728x90.png">
+            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 
@@ -300,19 +302,22 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="club_text">
-                        <img src="./assets/images/club-group1.svg">
+                        <img class="light-images" src="./assets/images/club-group1.svg">
+                        <img class="dark-images" src="./assets/images/dark-group1.svg">
                         <p class="club-text1">Search player profiles and bookmark for future reference.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="club_text">
-                        <img src="./assets/images/club-group2.svg">
+                        <img class="light-images" src="./assets/images/club-group2.svg">
+                        <img class="dark-images" src="./assets/images/dark-group2.svg">
                         <p class="club-text1">Download talent profile in pdf format.</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="club_text">
-                        <img src="./assets/images/club-group3.svg">
+                        <img class="light-images" src="./assets/images/club-group3.svg">
+                        <img class="dark-images" src="./assets/images/dark-group3.svg">
                         <p class="club-text1">Manage potential recruits status, save time and stress during your hiring.
                         </p>
                     </div>
@@ -328,9 +333,9 @@
                     <div class="left-accordion">
                         <h3 class="feature-heading3">Features</h3>
                         <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <div class="accordion-flex" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div class="accordion-item" (click)="setActiveAccordion(1)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
                                     <img class="light-feature1" src="./assets/images/feature-img1.svg">
                                     <img class="dark-feature1" src="./assets/images/dark-club1.svg">
                                     <h2 class="accordion-header">
@@ -340,16 +345,18 @@
                                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     </button>
                                 </div>
-                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p class="feature-text">Browse a comprehensive database of football talents with detailed profiles and filtering options.</p>
+                                        <p class="feature-text">Browse a comprehensive database of football talents with
+                                            detailed profiles and filtering options.</p>
                                     </div>
                                 </div>
                             </div>
-                
-                            <div class="accordion-item">
-                                <div class="accordion-flex" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+
+                            <div class="accordion-item" (click)="setActiveAccordion(2)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
                                     <img class="light-feature2" src="./assets/images/feature-img2.svg">
                                     <img class="dark-feature2" src="./assets/images/dark-club2.svg">
                                     <h2 class="accordion-header">Detailed Player Profiles</h2>
@@ -357,57 +364,65 @@
                                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     </button>
                                 </div>
-                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p class="feature-text">View in-depth profiles of players, including statistics, achievements, and personal information.</p>
+                                        <p class="feature-text">View in-depth profiles of players, including statistics,
+                                            achievements, and personal information.</p>
                                     </div>
                                 </div>
                             </div>
-                
-                            <div class="accordion-item">
-                                <div class="accordion-flex" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                            <div class="accordion-item" (click)="setActiveAccordion(3)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
                                     <img class="light-feature3" src="./assets/images/feature-img3.svg">
                                     <img class="dark-feature3" src="./assets/images/dark-club3.svg">
                                     <h2 class="accordion-header">
                                         Highlight Videos and Match Reports
                                     </h2>
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
                                     </button>
                                 </div>
-                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p class="feature-text">Access highlight videos and match reports to stay updated on player performances.</p>
+                                        <p class="feature-text">Access highlight videos and match reports to stay
+                                            updated on player performances.</p>
                                     </div>
                                 </div>
                             </div>
-                
-                            <div class="accordion-item">
-                                <div class="accordion-flex" data-bs-toggle="collapse"
-                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+
+                            <div class="accordion-item" (click)="setActiveAccordion(4)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                    aria-expanded="false" aria-controls="collapseFour">
                                     <img class="light-feature4" src="./assets/images/feature-img4.svg">
                                     <img class="dark-feature4" src="./assets/images/dark-club4.svg">
                                     <h2 class="accordion-header">
                                         Global Networking Opportunities
                                     </h2>
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
                                     </button>
                                 </div>
-                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div id="collapseFour" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <p class="feature-text">Connect with clubs, scouts, and players from around the world for unique networking opportunities.</p>
+                                        <p class="feature-text">Connect with clubs, scouts, and players from around the
+                                            world for unique networking opportunities.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <button type="button" [routerLink]="'/feature'" class="btn btn-danger">Check all features</button> -->
                 </div>
-                
+
                 <div class="col-lg-6 col-md-12 col-12">
-                    <div class="feature-players">
+                    <div class="accordion-banner">
+                    <div class="feature-players" *ngIf="activeAccordionIndex === 1">
                         <div class="feature-player1">
                             <div class="player1">
                                 <div class="player-img">
@@ -416,7 +431,7 @@
                                 <p class="player-name1">Ziddane</p>
                             </div>
                             <div class="corner-image">
-                                <img src="./assets/images/FC Thun 1.svg">
+                                <img src="./assets/images/FC Thun 1.png">
                             </div>
                             <div class="flag">
                                 <div class="flag-image">
@@ -439,7 +454,7 @@
                                 </p>
                             </div>
                             <div class="corner-image4">
-                                <img src="./assets/images/FC Thun 1.svg">
+                                <img src="./assets/images/FC Thun 1.png">
                             </div>
                             <div class="flag">
                                 <div class="flag-image4">
@@ -462,7 +477,7 @@
                                 </p>
                             </div>
                             <div class="corner-image7">
-                                <img src="./assets/images/FC Thun 1.svg">
+                                <img src="./assets/images/FC Thun 1.png">
                             </div>
                             <div class="flag">
                                 <div class="flag-image7">
@@ -501,20 +516,77 @@
                             </button>
                         </div>
                     </div>
+
+                    <div class="club-offer" *ngIf="activeAccordionIndex === 2">
+                        <div class="club-offers1">
+                            <img class="light-images" src="./assets/images/club-scouts5.png">
+                            <img class="dark-images" src="./assets/images/dark-design5.PNG">
+                        </div>
+                         <!-- <div class="club-offers2">
+                            <img class="light-images" src="./assets/images/club-scouts6.png">
+                            <img class="dark-images" src="./assets/images/dark-design6.PNG">
+                        </div> -->
+                        <div class="club-offers3">
+                            <img class="light-images" src="./assets/images/profile-scroll.png">
+                            <img class="dark-images" src="./assets/images/dark-profile-scroll.png">
+                        </div>
+                    </div>
+
+                    <div *ngIf="activeAccordionIndex === 3">
+                        <div class="accodian-box2-images">
+                            <div class="accodian-image1">
+                                <img class="light-images" src="./assets/images/accodian1.png">
+                                <img class="dark-images" src="./assets/images/dark-accodian1.png">
+                            </div>
+                            <div class="accodian-image2">
+                                <img class="light-images" src="./assets/images/accodian2.png">
+                                <img class="dark-images" src="./assets/images/dark-accodian2.png">
+                            </div>
+                            <div class="accodian-image3">
+                                <img class="light-images" src="./assets/images/accodian3.png">
+                                <img class="dark-images" src="./assets/images/dark-accodian3.png">
+                            </div>
+    
+                        </div>
+                    </div>
+
+                    <div *ngIf="activeAccordionIndex === 4">
+                        <div class="networking-images">
+                            <div class="networking-images1">
+                                <img class="light-images" src="./assets/images/network1.png">
+                                <img class="dark-images" src="./assets/images/dark-network1.png">
+                            </div>
+                            <div class="networking-images2">
+                                <img class="light-images" src="./assets/images/network2.png">
+                                <img class="dark-images" src="./assets/images/dark-network2.png">
+                            </div>
+                            <div class="networking-images3">
+                                <img class="light-images" src="./assets/images/network3.png">
+                                <img class="dark-images" src="./assets/images/dark-network3.png">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
-            <div class="advertisement1">
-                <div *ngIf="adVisible[2]" class="small-sqaure-image">
-                    <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
-                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                <div  *ngIf="adVisible[3]" class="banner-image">
-                    <img src="./assets/images/banner - 468x60.png">
-                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-                </div>
         </div>
     </div>
+
+    <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
+        <div class="container">
+            <div class="adv">
+        <div *ngIf="adVisible[2]" class="small-sqaure-image">
+            <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
+            <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div  *ngIf="adVisible[3]" class="banner-image">
+            <img src="./assets/images/banner - 468x60.png">
+            <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        </div>
+</div>
+</div>
+
 
     <div class="pricing py_0">
         <div class="container">
@@ -622,7 +694,7 @@
 
             </div>
 
-            <div class="advertisement">
+            <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
 
                 <div *ngIf="adVisible[4]" class="large-rectangle">
                     <img src="./assets/images/large rectangle - 336x280 .png">
@@ -640,7 +712,7 @@
                     <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
-        </div>
+            </div>
         </div>
     </div>
-    </div>
+</div>

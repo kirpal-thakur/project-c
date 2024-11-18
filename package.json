@@ -1,5 +1,5 @@
 {
-  "name": "Project-c",
+  "name": "project-c",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.3.11",
+    "@angular/animations": "^17.3.12",
     "@angular/cdk": "^18.0.5",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
@@ -19,7 +19,7 @@
     "@angular/material": "^18.0.5",
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
-    "@angular/router": "^17.3.0",
+    "@angular/router": "^17.3.12",
     "@handylib/ngx-datepicker": "^1.1.6",
     "@ngx-config/core": "^9.0.0",
     "@ngx-env/core": "^16.1.3",
@@ -32,9 +32,12 @@
     "dotenv": "^16.4.5",
     "moment": "^2.30.1",
     "ng-image-slider": "^7.0.1",
+    "ng-recaptcha": "^13.2.1",
     "ngx-editor": "^17.5.4",
     "ngx-owl-carousel-o": "^18.0.0",
     "ngx-stripe": "^18.1.0",
+    "ngx-toastr": "^19.0.0",
+    "owl.carousel": "^2.3.4",
     "rxjs": "~7.8.0",
     "talkjs": "^0.22.0",
     "tslib": "^2.3.0",

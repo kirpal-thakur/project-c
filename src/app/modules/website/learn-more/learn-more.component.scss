@@ -148,7 +148,8 @@ li::before {
 
 // advertisement
 
-.skyscraper-left img{
+
+.skyscraper-left{
     height: 600px;
     width: 120px;
     content: "";
@@ -157,7 +158,11 @@ li::before {
     left: 0;
     top: 20%;
 }
-.skyscraper-right img{
+.skyscraper-left img{
+    height: 600px;
+    width: 120px;
+}
+.skyscraper-right{
     height: 600px;
     width: 120px;
     content: "";
@@ -166,37 +171,82 @@ li::before {
     right: 0;
     top: 20%;
 }
+.skyscraper-right img{
+    height: 600px;
+    width: 120px;
+}
+.large-rectangle {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: "";
+    height: 280px;
+    width: 336px;
+}
+
 .large-rectangle img {
     height: 280px;
     width: 336px;
+}
+.inline-rectangle {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    content: "";
+    width: 300px;
+    height: 250px;
 }
 .inline-rectangle img {
     width: 300px;
     height: 250px;
 }
+.square {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    content: "";
+    width: 250px;
+    height: 250px;
+    display: flex;
+}
 .square img {
     width: 250px;
     height: 250px;
 }
-.advertisement{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5%;
-    align-items: flex-end;
+.leaderboard-image {
+  position: absolute;
+  content: "";
+  z-index: 1;
+  height: 90px;
+  width: 728px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
 .leaderboard-image img {
-    height: 90px;
-    width: 728px;
-  }
-  .leaderboard-image {
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
+  height: 90px;
+  width: 728px;
 }
 
 
   // advertisement
+  @media (max-width: 1404px){
 
+    .news-box img {
+        width: 360px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .news-box {
+        width: 362px;
+    }
+    
+    
+}
 
 @media (max-width: 1281px) {
     .news-box img {

@@ -9,7 +9,8 @@ h5,
 h6 {
     font-weight: 600;
 }
-.seperter{
+
+.seperter {
     position: relative;
     display: none;
 }
@@ -30,14 +31,9 @@ h5 {
 p {
     font-size: 20px;
 }
+
 .collapse:not(.show) {
     display: block;
-}
-
-.sidebar .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures the footer is at the bottom */
 }
 
 .py_0 {
@@ -74,6 +70,7 @@ body {
     height: 40px;
     width: 100px;
 }
+
 /*--------------------------------------------------------------
 # login
 --------------------------------------------------------------*/
@@ -113,13 +110,7 @@ body {
 .login .form-control {
     margin-bottom: 10px;
 }
-.form-control:focus {
-    color: var(--bs-body-color);
-    background-color: var(--bs-body-bg);
-    border-color: transparent;
-    outline: 0;
-    box-shadow: none;
-}
+
 /*--------------------------------------------------------------
 # login
 --------------------------------------------------------------*/
@@ -136,6 +127,7 @@ body {
 .forget-password {
     padding: 10px 20px;
 }
+
 /*--------------------------------------------------------------
 # forget password
 --------------------------------------------------------------*/
@@ -174,6 +166,7 @@ body {
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
 select .form-select-box {
     padding: 10px 15px;
     border-radius: 10px;
@@ -184,12 +177,15 @@ select .form-select-box {
     background-color: white;
     margin-top: 0px;
 }
-.c-name{
+
+.c-name {
     margin-bottom: 10px;
 }
+
 input#companyName {
     margin-bottom: 10px;
 }
+
 /*--------------------------------------------------------------
 #  register
 --------------------------------------------------------------*/
@@ -412,10 +408,12 @@ a.btn-primary {
     justify-content: space-between;
     padding: 10px 0;
 }
+
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 0;
     padding-left: 0;
 }
+
 li.nav-item {
     margin-left: 20px;
 }
@@ -448,26 +446,35 @@ li.nav-item {
     width: 100%;
     height: 2px;
 }
+
 .navbar-nav .nav-link {
-    position: relative; /* For positioning the ::after element */
-    display: inline-block; /* Ensure the link has proper block behavior */
+    position: relative;
+    /* For positioning the ::after element */
+    display: inline-block;
+    /* Ensure the link has proper block behavior */
 }
 
 .navbar-nav .nav-link::after {
     content: "";
     display: block;
     position: absolute;
-    left: 0; /* Align to the left */
-    bottom: -2px; /* Position the underline below the text */
-    width: 0; /* Start with a width of 0 */
-    height: 2px; /* Thickness of the underline */
+    left: 0;
+    /* Align to the left */
+    bottom: -2px;
+    /* Position the underline below the text */
+    width: 0;
+    /* Start with a width of 0 */
+    height: 2px;
+    /* Thickness of the underline */
     // background-color: currentColor; /* Matches the text color */
-    transition: width 0.4s ease; /* Smooth transition for width */
+    transition: width 0.4s ease;
+    /* Smooth transition for width */
 }
 
 .navbar-nav .nav-link:hover::after,
 .navbar-nav .nav-link.active::after {
-    width: 100%; /* Expand to full width on hover or if active */
+    width: 100%;
+    /* Expand to full width on hover or if active */
 }
 
 
@@ -743,9 +750,9 @@ input:checked+.slider:before {
     color: #A1A1A1;
 }
 
-.form-control {
-    color: black;
-}
+// .form-control {
+//     color: black;
+// }
 
 .modal-btn .btn {
     width: 100%;
@@ -1165,16 +1172,14 @@ select.form-select.custom-select1 {
 .sidebar {
     display: none;
 }
-.register .form-select{
+
+.register .form-select {
     padding: 10px 15px;
     border-radius: 10px;
     cursor: pointer;
     width: 100%;
     height: 53px;
-    background-color: white;
-    color: black;
     filter: none;
-    border: none;
 }
 
 /*--------------------------------------------------------------
@@ -1183,14 +1188,15 @@ select.form-select.custom-select1 {
 @media (max-width: 1281px) {
     option {
         font-size: 14px;
-    }    
+    }
 }
 
 @media (max-width: 1199px) {
     .sidebar {
         display: none;
     }
-    input:checked + .slider:before {
+
+    input:checked+.slider:before {
         transform: translateX(26px);
     }
 
@@ -1221,6 +1227,7 @@ select.form-select.custom-select1 {
         height: 30px;
         margin-right: 20px;
     }
+
     li.nav-item {
         margin-left: 5px;
     }
@@ -1233,6 +1240,7 @@ select.form-select.custom-select1 {
     .login-btn {
         margin-left: 10px;
     }
+
     .navbar-nav .nav-link.active::after {
         bottom: -10px;
     }
@@ -1243,10 +1251,10 @@ select.form-select.custom-select1 {
         background-color: transparent;
         padding-bottom: 10px;
     }
-    
-option {
-    font-size: 16px;
-}
+
+    option {
+        font-size: 16px;
+    }
 
     .sidebar {
         display: block;
@@ -1257,9 +1265,17 @@ option {
         top: 0;
         left: 0;
         height: 100vh;
+        min-height: 700px;
         transform: translateY(-100%);
         transition: transform 0.5s ease;
         z-index: 1000;
+    }
+
+    .sidebar .container {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        /* Ensures the footer is at the bottom */
     }
 
     .sidebar.sidebar-expanded {
@@ -1272,7 +1288,8 @@ option {
     //     height: 100%;
     //     /* Add additional styling as needed */
     // }
-    a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    a:not([href]):not([class]),
+    a:not([href]):not([class]):hover {
         color: white;
         text-decoration: none;
     }
@@ -1312,8 +1329,9 @@ option {
     .d-flex {
         display: block !important;
     }
+
     .footer-bottom {
-        margin-top: auto; 
+        margin-top: auto;
         padding-bottom: 20px;
     }
 
@@ -1516,6 +1534,7 @@ option {
 
     .footer-bottom p {
         font-size: 18px;
+        color: white;
     }
 
     select.form-select.custom-select1.hidden {
@@ -1623,7 +1642,7 @@ option {
     //     width: 94%;
     // }
 
-    select.form-select-box{
+    select.form-select-box {
         margin-bottom: 10px;
         margin-top: 10px;
         height: 44px;
@@ -1705,6 +1724,11 @@ option {
     .logo1::before {
         width: 130px;
     }
+    // .sidebar {
+
+    //     height: 100vh;
+    //     height: 900px;
+    // }
 
 }
 
@@ -1712,6 +1736,7 @@ option {
     .register .form-select {
         height: 44px;
     }
+
     .footer-bottom p {
         font-size: 16px;
     }
@@ -1729,6 +1754,7 @@ option {
         height: 60px;
         margin-top: 10px;
     }
+
     p.mb-0 {
         font-size: 11px;
         // color: white;
@@ -2132,6 +2158,7 @@ option {
     }
 
 }
+
 @media (max-width: 415px) {
     .switch {
         width: 60px;
@@ -2140,6 +2167,7 @@ option {
         margin-left: 0;
     }
 }
+
 @media (max-width: 400px) {
 
     //   .switch {
@@ -2209,6 +2237,7 @@ option {
         font-size: 15px;
     }
 }
+
 @media (max-width: 376px) {
     .switch1 .switch {
         width: 60px;
@@ -2217,23 +2246,26 @@ option {
         margin-left: 0;
     }
 }
-@media(max-width: 361px){
+
+@media(max-width: 361px) {
     .switch1 .switch {
-      width: 60px;
-      height: 30px;
-      margin-right: 0;
-      margin-left: 0;
+        width: 60px;
+        height: 30px;
+        margin-right: 0;
+        margin-left: 0;
     }
- }
+}
 
 @media (max-width: 321px) {
-    input:checked + .slider:before {
+    input:checked+.slider:before {
         transform: translateX(21px);
     }
+
     .logo svg {
         height: 40px;
         width: 90px;
     }
+
     select.form-select-box {
         height: 33px;
         font-size: 14px;
@@ -2401,6 +2433,7 @@ option {
     .form-control {
         font-size: 12px;
     }
+
     .register .form-select {
         padding: 5px 15px;
         height: 33px;
@@ -2414,6 +2447,7 @@ option {
         font-size: 11px;
     }
 }
+
 //     .forget-password .modal-btn .btn {
 //         padding: 6px;
 //     }

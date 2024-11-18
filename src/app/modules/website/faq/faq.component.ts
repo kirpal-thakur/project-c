@@ -13,6 +13,8 @@ export class FaqComponent {
     scout: []
   };
 
+  
+
   // Sections for each tab
   talentSections = [
     {

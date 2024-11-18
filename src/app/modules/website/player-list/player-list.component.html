@@ -34,7 +34,7 @@
                                     <p class="player-name7">{{ player.name }}</p>
                                 </div>
                                 <div class="corner-image7">
-                                    <img src="./assets/images/FC Thun 1.svg">
+                                    <img src="./assets/images/FC Thun 1.png">
                                 </div>
                                 <div class="flag">
                                     <div class="flag-image7">
@@ -92,7 +92,7 @@
                                     <p class="player-name7">{{ player.name }}</p>
                                 </div>
                                 <div class="corner-image7">
-                                    <img src="./assets/images/FC Thun 1.svg">
+                                    <img src="./assets/images/FC Thun 1.png">
                                 </div>
                                 <div class="flag">
                                     <div class="flag-image7">
@@ -132,7 +132,7 @@
             </div>
 
 
-            <div class="advertisement">
+            <div class="advertisement1" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]  && !adVisible[4]}">
 
                 <div *ngIf="adVisible[2]" class="large-rectangle">
                     <img src="./assets/images/large rectangle - 336x280 .png">

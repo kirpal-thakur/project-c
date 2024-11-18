@@ -51,50 +51,47 @@
     </div>
 
 
-
-
-
     <div class="latest-news py_0">
         <div class="container">
             <h4>Latest News</h4>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div  [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news1.png">
                         <p class="p-text">02.02.2024</p>
                         <p>SoccerYou Hosts Charity Tournament in Germany</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news4.png">
                         <p class="p-text">02.02.2024</p>
                         <p>Innovative Training Programs Launched to Boost Youth Talent</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news2.png">
                         <p class="p-text">02.02.2024</p>
                         <p>Legendary Midfielder Joins SoccerYou as Global Ambassador</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news5.png">
                         <p class="p-text">02.02.2024</p>
                         <p>Tech Meets Sport: Launch of the New Performance Analytics App</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news3.png">
                         <p class="p-text">02.02.2024</p>
                         <p>Behind the Scenes: Exclusive Interview with the Head Coach</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
-                    <div class="news-box">
+                    <div [routerLink]="'/learn-more'" class="news-box">
                         <img src="./assets/images/news6.png">
                         <p class="p-text">02.02.2024</p>
                         <p>Upcoming Talent Showcase: Scouts and Clubs Gather for Annual Event</p>
@@ -102,7 +99,7 @@
                 </div>
             </div>
 
-            <div class="advertisement">
+                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]  && !adVisible[4]}">
 
                 <div *ngIf="adVisible[2]" class="large-rectangle">
                     <img src="./assets/images/large rectangle - 336x280 .png">
