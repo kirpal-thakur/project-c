@@ -2,6 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { PaymentService } from '../../../services/payment.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-membership-profile',
@@ -22,11 +23,13 @@ export class EditMembershipProfileComponent {
   loggedInUser: any = localStorage.getItem('userInfo');
   stats: any;
   selectedAudiences:any;
+  isLoading : boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditMembershipProfileComponent>,
     public talentService: TalentService,
     public dialog: MatDialog,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -73,18 +76,39 @@ export class EditMembershipProfileComponent {
     return this.selectedAudiences.filter((audience:any) => this.selectedAudienceIds.includes(audience.id));
   }
 
-  saveBoost() {    
-    try {      
-      this.talentService.updateBoosterAudience(this.selectedAudienceIds).subscribe((response) => {
-        if (response?.status) {
-          this.dialogRef.close(true);
-        } else {
-          console.error('Failed to create checkout session', response);
-        }
-      });
 
+  saveBoost(): void {
+    this.isLoading = true; // Set loading state
+
+    try {
+      // Make API call to save the booster audience
+      this.talentService.updateBoosterAudience(this.selectedAudienceIds).subscribe(
+        (response) => {
+          if (response?.status) {
+            // Success: Notify the user and close the dialog
+            this.toastr.success('Boost saved successfully!', 'Success');
+            this.dialogRef.close(true);
+          } else {
+            // Failure: Notify the user about failure
+            this.toastr.error('Failed to save boost. Please try again.', 'Error');
+            console.error('Failed to save boost', response);
+          }
+        },
+        (error) => {
+          // Error: Notify user and handle error
+          this.toastr.error('An error occurred while saving the boost. Please try again.', 'Error');
+          console.error('Error creating Checkout session:', error);
+        },
+        () => {
+          // Disable loading state after the request is complete
+          this.isLoading = false;
+        }
+      );
     } catch (error) {
-      console.error('Error creating  Checkout session:', error);
+      // Catch any unexpected errors and show a message
+      this.isLoading = false;
+      this.toastr.error('Unexpected error occurred. Please try again later.', 'Error');
+      console.error('Unexpected error during save boost:', error);
     }
   }
 

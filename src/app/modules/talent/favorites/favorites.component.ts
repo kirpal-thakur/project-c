@@ -115,7 +115,7 @@ export class FavoritesComponent {
     this.showMatDialog("", "delete-favorite-confirmation");
   }
 
-  
+
   openViewProfile(user:any) {
 
     const dialogRef = this.dialog.open(PlayerProfileComponent, {

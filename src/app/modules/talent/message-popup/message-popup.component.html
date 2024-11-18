@@ -6,16 +6,16 @@
     <div class="msg-popup-content">
         <div class="display-message" *ngIf="data.action == 'display'">{{data.message}}</div>
         <div class="display-message" *ngIf="data.action == 'delete-confirmation'">
-            Once user is deleted, it can’t be undone. <br> Do you want to delete?
+            {{'Once user is deleted, it can’t be undone.' | translate}} <br> {{'Do you want to delete?' | translate}}
 
             <div class="popup-delete-btn">
-                <span (click)="deleteConfirmed()">Delete Account</span>
+                <span (click)="deleteConfirmed()">{{'Delete Account' | translate}}</span>
             </div>
         </div>
         <div class="display-message" *ngIf="data.action == 'delete-favorite-confirmation'">
-            Are to sure to remove?
+            {{'Are to sure to remove?' | translate}}
             <div class="popup-delete-btn">
-                <span (click)="deleteConfirmed()">Remove</span>
+                <span (click)="deleteConfirmed()">{{'Remove' | translate}}</span>
             </div>
         </div>
     </div>

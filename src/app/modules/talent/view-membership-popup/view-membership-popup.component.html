@@ -48,7 +48,7 @@
             <td>{{ plan.plan }}</td>
             <td>{{ plan.duration }}</td>
             <td>{{ plan.valid_until }}</td>
-            <td class="text-end" >{{ plan.price }} CHF</td>
+            <td class="text-end" >{{ plan.price }} {{'CHF' | translate}}</td>
          </tr>
        </thead>
        
@@ -58,9 +58,9 @@
 </div>
 
   <div class="bottom-details">
-    <p><strong>{{ 'Subtotal' | translate }}:</strong> {{ plan.subtotal }} CHF</p>
-    <p *ngIf="plan.tax_percentage>0"><strong>Incl. VAT {{plan.tax_percentage}}%:</strong> {{plan.tax}} CHF</p>
-    <p><strong>{{ 'Total' | translate }}:</strong> {{ plan.total }} CHF</p>
+    <p><strong>{{ 'Subtotal' | translate }}:</strong> {{ plan.subtotal }} {{'CHF' | translate}}</p>
+    <p *ngIf="plan.tax_percentage>0"><strong>Incl. VAT {{plan.tax_percentage}}%:</strong> {{plan.tax}} {{'CHF' | translate}}</p>
+    <p><strong>{{ 'Total' | translate }}:</strong> {{ plan.total }} {{'CHF' | translate}}</p>
 
     <div class="download-btn mt-4">
       <a href="{{ plan.download_path }}" class=" pdf-download_btn ">

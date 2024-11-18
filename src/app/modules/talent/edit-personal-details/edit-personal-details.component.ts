@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment} from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 const moment = _rollupMoment || _moment;
 
@@ -55,7 +56,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   currentClub: string = '';
   firstName: string = '';
   lastName: string = '';
-  nationality: string[] = [];  // Ensure nationality is initialized as an array
+  nationality: any[] = [];  // Ensure nationality is initialized as an array
   currentClubId: any;
   userData:any
   playerClubsListing:any;
@@ -64,7 +65,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
     private talentService: TalentService,
-    private authService : AuthService,
+    private toastr : ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -72,17 +73,45 @@ export class EditPersonalDetailsComponent implements OnInit {
   profileLoaded: boolean = false;
   
   ngOnInit(): void {
-    this.userData = { ...this.data };
+    this.userData =this.user = { ...this.data.user };
   
-    this.user = JSON.parse(localStorage.getItem('userData') || '{}');
+    this.countries = this.data.countries;
+    // this.user = JSON.parse(localStorage.getItem('userInfo') || '{}');
     this.loggedInUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.userId = this.loggedInUser.id;
-  
-    // Fetch countries first, then get user profile
-    this.loadCountries().subscribe(() => {
-      this.getUserProfile(this.userId);
-      this.getClubsForPlayer();
-    });
+
+    this.getUserProfile(this.userId);
+    // this.getClubsForPlayer();
+      
+    if (this.user.meta) {
+      this.dateOfBirth = this.user.meta.date_of_birth || '';
+      
+      this.height = this.user.meta.height || 0;
+      this.heightUnit = this.user.meta.height_unit || 'cm';
+      this.weight = this.user.meta.weight || 0;
+      this.weightUnit = this.user.meta.weight_unit || 'kg';
+      this.contractStart = this.user.meta.contract_start || '';
+      this.contractEnd = this.user.meta.contract_end || '';
+      this.leagueLevel = this.user.meta.league_level || '';
+      this.placeOfBirth = this.user.meta.place_of_birth || '';
+      this.dominantFoot = this.user.meta.foot || 'Right';
+      this.currentClub = this.user.pre_current_club_name || '';
+      this.firstName = this.user.first_name || '';
+      this.lastName = this.user.last_name || '';
+      this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
+      
+      // Ensure userNationalities is parsed correctly as an array of IDs only
+      this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
+      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => 
+           String(item.country_id)
+      ) : [];
+
+      console.log(this.nationality)
+      console.log(this.countries)
+      if (this.user.meta && this.user.meta.pre_club_id) {
+        this.currentClubId = this.user.meta.pre_club_id;
+      }
+    }
     
   }
   
@@ -95,7 +124,6 @@ export class EditPersonalDetailsComponent implements OnInit {
     if (this.placeOfBirthInput) {
       const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
         types: ['(cities)'],
-        componentRestrictions: { country: 'us' }
       });
 
       autocomplete.addListener('place_changed', () => {
@@ -146,12 +174,10 @@ export class EditPersonalDetailsComponent implements OnInit {
       })
     );
   }
-  
 
   onCancel(): void {
     this.dialogRef.close();
   }
-
   
   getClubsForPlayer(){
     this.talentService.getClubsForPlayer().subscribe(
@@ -197,8 +223,6 @@ export class EditPersonalDetailsComponent implements OnInit {
     );
   }
   
-
-
   // Function to handle the selection of a club
   onSelectClub(club: any): void {
     this.currentClub = club.club_name;  // Set the selected club's name to the input
@@ -239,23 +263,25 @@ export class EditPersonalDetailsComponent implements OnInit {
     }
   }
   
-
+  
   onSubmit(form: NgForm) {
-    console.log(this.nationality)
     if (form.valid) {
+      // Enable loading state and notify user
+      this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
+
       const formData = new FormData();
       
-      
-      let index = this.playerClubsListing.findIndex((x:any) => x.id == this.currentClubId)
-      if(this.playerClubsListing[index]?.is_taken == "yes"){
-
+      // Handling the `current_club` and `pre_club_id`
+      let index = this.playerClubsListing.findIndex((x: any) => x.id === this.currentClubId);
+      if (this.playerClubsListing[index]?.is_taken === "yes") {
         this.takenBy = this.playerClubsListing[index].taken_by;
         formData.append('user[pre_club_id]', this.currentClubId);
         formData.append('user[current_club]', this.takenBy);
-      }else{
+      } else {
         formData.append('user[pre_club_id]', this.currentClubId);
       }
 
+      // Append remaining form fields
       formData.append('user[date_of_birth]', this.dateOfBirth);
       formData.append('user[place_of_birth]', this.placeOfBirth);
       formData.append('user[height]', this.height.toString());
@@ -268,21 +294,34 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[foot]', this.dominantFoot);
       formData.append('user[first_name]', this.firstName);
       formData.append('user[last_name]', this.lastName);
+
       // Append nationality array
-      this.nationality.forEach((nation:any) => {
+      this.nationality.forEach((nation: any) => {
         formData.append('user[nationality][]', nation);
       });
+
       formData.append('lang', 'en');
 
+      // API call for submitting form data
       this.talentService.updateUserProfile(formData).subscribe(
         (response: any) => {
-          console.log('Form submitted successfully:', response);
-          this.dialogRef.close(response.data);
+          if (response?.status) {
+            this.toastr.clear();
+            this.toastr.success('Profile updated successfully!', 'Success');
+            this.dialogRef.close(response.data);
+          } else {
+            this.toastr.clear();
+            this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
+            console.error('API response error:', response);
+          }
         },
         (error: any) => {
+          this.toastr.error('Failed to submit profile. Please try again.', 'Error');
           console.error('Error submitting the form:', error);
-        }
+        },
       );
+    } else {
+      this.toastr.warning('Please fill out all required fields.', 'Form Incomplete');
     }
   }
   

@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-transfer',
@@ -18,8 +19,10 @@ export class AddTransferComponent {
   teamFromId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
   filterTeamsFrom: any[] = []; // Initialize as empty array to avoid undefined issues
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<AddTransferComponent>,
     private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -37,29 +40,33 @@ export class AddTransferComponent {
   }
   
   onSubmit(myForm: NgForm): void {
-    console.log('myForm submitted:', myForm.value);
 
     if (myForm.valid) {
-
-      // Add currentTeamId to the form values
       const formData = {
         ...myForm.value,
         team_to: this.teamToId,
         team_from: this.teamFromId
       };
 
-      this.talentService.addTransfer(formData).subscribe(
-        (response: any) => {
-          console.log('myForm submitted successfully:', response);
-          this.dialogRef.close(response.data);
+      // Show loading notification
+      const loadingToast = this.toastr.info('Submitting transfer...', 'Please wait', { disableTimeOut: true });
+
+      this.talentService.addTransfer(formData).subscribe({
+        next: (response: any) => {
+          this.toastr.clear(loadingToast.toastId); // Clear loading notification
+          this.toastr.success('Transfer added successfully!', 'Success'); // Show success notification
+          console.log('Form submitted successfully:', response);
+          this.dialogRef.close(response.data); // Close dialog and return response data
         },
-        (error: any) => {
-          console.error('Error submitting the myForm:', error);
+        error: (error: any) => {
+          this.toastr.clear(loadingToast.toastId); // Clear loading notification
+          this.toastr.error('Failed to submit transfer. Please try again.', 'Error'); // Show error notification
+          console.error('Error submitting form:', error);
         }
-      );
+      });
     }
   }
-    
+
   // Function to handle dynamic fetching of clubs based on search input
   onSearchTeams(): void {
 

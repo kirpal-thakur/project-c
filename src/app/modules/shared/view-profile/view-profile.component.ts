@@ -11,7 +11,7 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './view-profile.component.scss'
 })
 export class ViewProfileComponent implements OnInit {
-  loggedInUser: any = localStorage.getItem('userData');
+  loggedInUser: any = localStorage.getItem('userInfo');
   activeTab: string = 'profile';
   userId: any;
   user: any = {};
@@ -40,6 +40,7 @@ export class ViewProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(this.loggedInUser);
     this.route.params.subscribe((params: any) => {
       this.userId = params.id;
       this.getUser(this.userId);
@@ -56,11 +57,13 @@ export class ViewProfileComponent implements OnInit {
       this.talentService.getUser(userId).subscribe((response) => {
         if (response && response.status && response.data && response.data.user_data) {
           this.user = response.data.user_data;
-          this.isPremium = this.user?.active_subscriptions?.premium.length>0 ? true : false ;
+          this.isPremium = this.loggedInUser?.active_subscriptions?.premium.length>0 ? true : false ;
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.profileImage = this.user.meta.profile_image_path || this.profileImage;
           this.coverImage = this.user.meta.cover_image_path || this.coverImage;
-          this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          if(this.user?.meta?.place_of_birth){
+            this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          }
 
           // Set isFavorite status based on user data or API response
           this.isFavorite = this.user.marked_favorite; // Assuming API returns this

@@ -14,6 +14,7 @@ export class CouponCodeAlertComponent implements OnInit {
   couponCode: string = '';
   couponError: string = '';
   couponSuccess: string = '';
+  couponApplied: boolean = false; // To track if coupon was successfully applied
   private couponInputSubject = new Subject<string>(); // Subject to debounce user input
 
   constructor(
@@ -23,11 +24,12 @@ export class CouponCodeAlertComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Listen to the debounced input
+    // Listen to the debounced input (not used for validation anymore)
     this.couponInputSubject.pipe(
       debounceTime(500) // 500ms delay for API call after typing stops
     ).subscribe((code) => {
-      this.validateCoupon(code); // Validate coupon only after debounce
+      // Validate coupon if needed
+      // this.validateCoupon(code);
     });
   }
 
@@ -35,27 +37,27 @@ export class CouponCodeAlertComponent implements OnInit {
   onCouponInput(): void {
     this.couponError = ''; // Clear previous errors
     this.couponSuccess = ''; // Clear previous success message
-    this.couponInputSubject.next(this.couponCode.trim()); // Emit current value
   }
 
-  // Validate coupon by calling the API
-  private validateCoupon(code: string): void {
-    // No need to validate empty codes
-    if (!code) {
-      this.couponError = '';
-      this.couponSuccess = '';
+  // Validate coupon by calling the API on Apply button click
+  applyCoupon(): void {
+    // If the couponCode is valid, validate it
+    if (!this.couponCode.trim()) {
+      this.couponError = 'Please enter a coupon code.';
       return;
     }
 
     // Call API to validate coupon
-    this.talentService.validateCoupon(code).subscribe(
+    this.talentService.validateCoupon(this.couponCode).subscribe(
       (response) => {
         if (response.status) {
           this.couponSuccess = 'Coupon code applied successfully!';
           this.couponError = ''; // Clear error if valid
+          this.couponApplied = true; // Mark coupon as applied
         } else {
           this.couponError = 'Invalid Coupon Code. Please try again.';
           this.couponSuccess = ''; // Clear success message if invalid
+          this.couponApplied = false;
         }
       },
       (error) => {
@@ -67,17 +69,14 @@ export class CouponCodeAlertComponent implements OnInit {
         }
         this.couponSuccess = ''; // Clear success message on error
         console.error('Coupon validation error:', error);
+        this.couponApplied = false; // In case of error, set coupon as not applied
       }
     );
   }
 
-  // Apply coupon after validating
-  applyCoupon(): void {
-    if (!this.couponError && this.couponCode.trim()) {
-      this.dialogRef.close(this.couponCode); // Close with valid coupon code
-    } else {
-      this.couponError = 'Please enter a valid coupon code.';
-    }
+  // Proceed to checkout without coupon or after applying it
+  proceedToCheckout(): void {
+    this.dialogRef.close(this.couponCode); // Close the dialog with the coupon code (if applied) or null
   }
 
   // Close dialog without a coupon

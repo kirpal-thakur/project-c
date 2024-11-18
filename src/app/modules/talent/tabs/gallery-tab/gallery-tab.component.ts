@@ -5,6 +5,7 @@ import { UploadPopupComponent } from '../../upload-popup/upload-popup.component'
 import { MatDialog } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'talent-gallery-tab',
@@ -22,7 +23,14 @@ export class GalleryTabComponent {
   openedMenuId:any = '';
   @Input() coverImage: string = '';  // Define an input property
   @Output() dataEmitter = new EventEmitter<string>();
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog) { }
+  
+  isLoading: boolean = false;
+
+  constructor(
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private talentService: TalentService,
+    public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -127,22 +135,32 @@ export class GalleryTabComponent {
     this.openedMenuId = id;
   }
 
-  deleteImage(id:any){    
+  deleteImage(id: any) {
     try {
-        let params = {id: [id]};
-        this.talentService.deleteGalleryImage(params).subscribe((response)=>{
-            if (response && response.status) {
-              let index = this.userImages.findIndex((x:any) => x.id == id)
-              this.userImages.splice(index, 1);
-              // this.isLoading = false;
-            } else {
-              // this.isLoading = false;
-              console.error('Invalid API response structure:', response);
-            }
-        });
+      const loadingToast = this.toastr.info('Deleting image...', 'Please wait', { disableTimeOut: true });
+      let params = { id: [id] };
+  
+      this.talentService.deleteGalleryImage(params).subscribe({
+        next: (response) => {
+          this.toastr.clear(loadingToast.toastId);
+          if (response && response.status) {
+            const index = this.userImages.findIndex((x: any) => x.id === id);
+            this.userImages.splice(index, 1);
+            this.toastr.success('Image deleted successfully!', 'Delete Success');
+          } else {
+            this.toastr.error('Failed to delete image.', 'Delete Failed');
+            console.error('Invalid API response structure:', response);
+          }
+        },
+        error: (error) => {
+          this.toastr.clear(loadingToast.toastId);
+          this.toastr.error('An error occurred while deleting the image.', 'Error');
+          console.error('Error deleting image:', error);
+        }
+      });
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+      this.toastr.error('An error occurred. Please try again.', 'Unexpected Error');
+      console.error('Unexpected error:', error);
     }
   }
 

@@ -8,6 +8,7 @@ import { MessagePopupComponent } from '../../shared/message-popup/message-popup.
 import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 import { ActivatedRoute } from '@angular/router';
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-plan',
@@ -15,6 +16,7 @@ import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-
   styleUrls: ['./edit-plan.component.scss']
 })
 export class EditPlanComponent implements OnInit {
+  
   countries: any[] = []; // Array to hold country plans
   selectedCountries: any[] = []; // Holds the selected countries
   selectedPlan: any = {}; // Selected country plan details
@@ -32,6 +34,7 @@ export class EditPlanComponent implements OnInit {
     private paymentService:PaymentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -45,49 +48,36 @@ export class EditPlanComponent implements OnInit {
     console.log('data',this.data,'countries',this.countries)
   }
 
-  async redirectToCheckout(planId: string,coupon:any='') {
+
+  async redirectToCheckout(planId: string, coupon: any = '') {
+    this.toastr.info('Redirecting to checkout, please wait...', 'Processing', { timeOut: 2000 });
 
     try {
-      // Call the backend to create the checkout session
-      const response = await this.stripeService.createCheckoutSession(planId,'',coupon).toPromise();
-  
+      const response = await this.stripeService.createCheckoutSession(planId, '', coupon).toPromise();
+
       if (response && response.data.payment_intent.id) {
-        // Redirect to Stripe Checkout with the session ID
         const stripe = await this.stripe;
-        stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+        await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+        this.toastr.success('Redirecting to Stripe Checkout', 'Success');
       } else {
+        this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
       }
     } catch (error) {
+      this.toastr.error('Error creating Stripe Checkout session. Please try again later.', 'Error');
       console.error('Error creating Stripe Checkout session:', error);
     }
   }
-  
-  onCountrySelect(event: any) {
-    const selectedCountryId = event.target.value;
-    this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
 
-    // if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
-    //   this.selectedCountries.push(this.selectedPlan);
-    // }
-  }
-
-  removeCountry(country: any) {
-    this.selectedCountries = this.selectedCountries.filter(c => c.id !== country.id);
-  }
-  
-  // Open coupon dialog
-  openCouponDialog(planId:any): void {
-    const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
-      width: '500px'
-    });
+  openCouponDialog(planId: any): void {
+    const dialogRef = this.dialog.open(CouponCodeAlertComponent, { width: '500px' });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        let coupon = result;
-        this.redirectToCheckout(planId,coupon)
-      }
-      if (result==null) {
+        const coupon = result;
+        this.toastr.info('Applying coupon, please wait...', 'Processing');
+        this.redirectToCheckout(planId, coupon);
+      } else if (result === null) {
         this.redirectToCheckout(planId);
       }
     });
@@ -95,7 +85,7 @@ export class EditPlanComponent implements OnInit {
 
   buyNow() {
     if (this.isPlanAlreadySelected()) {
-      // Show a warning message to the user
+      this.toastr.warning('You already have a subscription for this plan with a different interval.', 'Warning');
       this.dialog.open(MessagePopupComponent, {
         width: '600px',
         data: {
@@ -103,55 +93,42 @@ export class EditPlanComponent implements OnInit {
           message: 'You already have a subscription for this plan with a different interval. Please cancel it before selecting a new interval.'
         }
       });
-      return; // Prevent further action
+      return;
     }
 
-    let oldPlan = this.selectedCountries.filter(c => c.package_name == this.selectedPlan.name);
-    oldPlan = oldPlan.length > 0 ? oldPlan[0] : null;
-    console.log(oldPlan)
+    const oldPlan = this.selectedCountries.find(c => c.package_name === this.selectedPlan.name) || null;
     
     if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData; 
-      const subscribeId = this.isYearly ? this.selectedPlan.monthData : this.selectedPlan.yearData; 
+      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData;
+      const subscribeId = this.isYearly ? this.selectedPlan.monthData : this.selectedPlan.yearData;
 
-      if(this.isYearly){
-
-        if(this.selectedPlan?.monthData?.is_package_active == 'active'){
-
-          this.updatePlan(planId,this.isYearly,oldPlan);
-
-        }else{
-          
-          this.openCouponDialog(planId.id)
-
-        }
-
-      }else{
-
-        if(this.selectedPlan?.yearData?.is_package_active == 'active'){
-
-          // Choose the right price ID based on the selected plan
-          this.updatePlan(planId,this.isYearly,oldPlan);
-
-        }else{
-
+      if (this.isYearly) {
+        if (this.selectedPlan?.monthData?.is_package_active === 'active') {
+          this.updatePlan(planId, this.isYearly, oldPlan);
+        } else {
           this.openCouponDialog(planId.id);
-
+        }
+      } else {
+        if (this.selectedPlan?.yearData?.is_package_active === 'active') {
+          this.updatePlan(planId, this.isYearly, oldPlan);
+        } else {
+          this.openCouponDialog(planId.id);
         }
       }
     } else {
+      this.toastr.error('No country plan selected', 'Error');
       console.error('No country plan selected');
     }
   }
-
-  updatePlan(plan:any, isYearly: boolean, subscribeId: any): void {
-    if (plan?.is_package_active == 'active') {
-      alert('This plan has already Subscribed.');
+  
+  updatePlan(plan: any, isYearly: boolean, subscribeId: any): void {
+    if (plan?.is_package_active === 'active') {
+      this.toastr.warning('This plan has already been subscribed.', 'Warning');
       return;
     }
 
     if (plan.isYearly === isYearly) {
-      alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
+      this.toastr.info(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`, 'Info');
       return;
     }
 
@@ -168,13 +145,14 @@ export class EditPlanComponent implements OnInit {
     });
   }
 
-  updateSubscription(old:any,newID:any) {
-    
+  updateSubscription(oldSubscriptionId: any, newPlanId: any): void {
+    this.toastr.info('Updating subscription, please wait...', 'Updating');
+
     // Call the backend service to update the subscription
-    this.paymentService.upgradeSubscription(old,newID).subscribe(
+    this.paymentService.upgradeSubscription(oldSubscriptionId, newPlanId).subscribe(
       response => {
         if (response && response.status) {
-          // Open a message popup to inform the user of the successful update
+          this.toastr.success('Your subscription has been updated successfully.', 'Success');
           this.dialog.open(MessagePopupComponent, {
             width: '600px',
             data: {
@@ -182,14 +160,15 @@ export class EditPlanComponent implements OnInit {
               message: 'Your subscription has been updated successfully.'
             }
           });
-        this.dialogRef.close();
-          
+
           console.log('Subscription updated successfully:', response);
         } else {
+          this.toastr.error('Failed to update subscription. Please try again.', 'Error');
           console.error('Failed to update subscription', response);
         }
       },
       error => {
+        this.toastr.error('Error updating subscription. Please try again later.', 'Error');
         console.error('Error updating subscription:', error);
       }
     );
@@ -215,14 +194,13 @@ export class EditPlanComponent implements OnInit {
     );
   } 
   
-  confirmAndCancelSubscription(subscriptionId: string,canceled=false): void {
-    
-    if(canceled){
-      alert('subscription already cancelled')
-      return
+  
+  confirmAndCancelSubscription(subscriptionId: string, canceled = false): void {
+    if (canceled) {
+      this.toastr.warning('Subscription is already canceled.', 'Warning');
+      return;
     }
 
-    // return
     const dialogRef = this.dialog.open(MessagePopupComponent, {
       width: '600px',
       data: {
@@ -233,8 +211,8 @@ export class EditPlanComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.action === 'delete-confirmed') {
+        this.toastr.info('Cancelling subscription, please wait...', 'Processing');
         this.cancelSubscription(subscriptionId);
-        this.getUserPlans;
       }
     });
   }
@@ -243,7 +221,7 @@ export class EditPlanComponent implements OnInit {
     this.paymentService.cancelSubscription(subscriptionId).subscribe(
       (response: any) => {
         if (response && response.status) {
-          // Open the MessagePopupComponent with a success message
+          this.toastr.success('Subscription canceled successfully.', 'Success');
           this.dialog.open(MessagePopupComponent, {
             width: '600px',
             data: {
@@ -252,13 +230,13 @@ export class EditPlanComponent implements OnInit {
             }
           });
           console.log('Subscription canceled successfully:', response);
-          this.dialogRef.close();
-
         } else {
+          this.toastr.error('Failed to cancel subscription. Please try again.', 'Error');
           console.error('Failed to cancel subscription', response);
         }
       },
       error => {
+        this.toastr.error('Error cancelling subscription. Please try again later.', 'Error');
         console.error('Error cancelling subscription:', error);
       }
     );
@@ -283,5 +261,19 @@ export class EditPlanComponent implements OnInit {
       }
     );
   }
+
+  onCountrySelect(event: any) {
+    const selectedCountryId = event.target.value;
+    this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
+
+    // if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
+    //   this.selectedCountries.push(this.selectedPlan);
+    // }
+  }
+
+  removeCountry(country: any) {
+    this.selectedCountries = this.selectedCountries.filter(c => c.id !== country.id);
+  }
+  
 
 }

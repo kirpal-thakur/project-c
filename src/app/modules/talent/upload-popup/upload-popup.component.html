@@ -11,7 +11,7 @@
             (dragleave)="onDragLeave($event)"
             (drop)="onFileDropped($event)"
         >
-            <p>Drag and drop your files here or click to upload</p>
+            <p>{{'Drag and drop your files here or click to upload' | translate}}</p>
             <input
                 type="file"
                 (change)="onFileSelect($event)"
@@ -20,7 +20,7 @@
                 hidden
                 #fileInput
             />
-            <button type="button" (click)="fileInput.click()">Upload Files</button>
+            <button type="button" (click)="fileInput.click()">{{'Upload Files' | translate}}</button>
         </div>
 
         <div class="file-list">

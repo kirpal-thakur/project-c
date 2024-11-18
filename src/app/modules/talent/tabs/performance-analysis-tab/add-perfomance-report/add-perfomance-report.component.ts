@@ -2,6 +2,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../../../services/talent.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-perfomance-report',
@@ -12,8 +13,10 @@ export class AddPerfomanceReportComponent {
   selectedFile: File | null = null;
   uploadProgress: number = 0;
   documentTitle: string = '';
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<AddPerfomanceReportComponent>,
     public dialog: MatDialog,
     private talentService: TalentService,
@@ -64,7 +67,7 @@ export class AddPerfomanceReportComponent {
     }
   }
   
-  
+
   // Upload the performance report
   uploadPerformanceReport() {
     if (this.selectedFile) {
@@ -72,17 +75,30 @@ export class AddPerfomanceReportComponent {
       formData.append('report', this.selectedFile);
       formData.append('document_title', this.documentTitle);
 
-      this.talentService.uploadReport(formData).subscribe(
-        response => {
+      // Show loading message
+      const loadingToast = this.toastr.info('Uploading report...', 'Please wait', { disableTimeOut: true });
+
+      this.talentService.uploadReport(formData).subscribe({
+        next: (response) => {
           console.log('Upload successful:', response);
+          
+          // Close loading toaster, then show success message
+          this.toastr.clear(loadingToast.toastId);
+          this.toastr.success('Report uploaded successfully!', 'Success');
+          
           this.dialogRef.close(true); // Close the dialog and return success
         },
-        error => {
+        error: (error) => {
           console.error('Error uploading report:', error);
+          
+          // Close loading toaster, then show error message
+          this.toastr.clear(loadingToast.toastId);
+          this.toastr.error('Failed to upload report. Please try again.', 'Error');
         }
-      );
+      });
     } else {
-      console.log('No file selected for upload.');
+      this.toastr.warning('No file selected for upload.', 'Warning');
     }
   }
+  
 }

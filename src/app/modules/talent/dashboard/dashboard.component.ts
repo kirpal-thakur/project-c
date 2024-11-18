@@ -8,6 +8,34 @@ import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-pers
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+import { GuidedTourService, Orientation, OrientationConfiguration } from 'ngx-guided-tour';
+
+interface GuidedTour {
+  tourId: string;
+  steps: TourStep[];
+  useOrb?: boolean;
+  skipCallback?: (stepSkippedOn: number) => void;
+  completeCallback?: () => void;
+  minimumScreenSize?: number;
+  resizeDialog?: {
+    title?: string;
+    content: string;
+  };
+}
+
+interface TourStep {
+  selector?: string;
+  title?: string;
+  content: string;
+  orientation?: Orientation | OrientationConfiguration[];
+  action?: () => void;
+  closeAction?: () => void;
+  skipStep?: boolean;
+  scrollAdjustment?: number;
+  useHighlightPadding?: boolean;
+  highlightPadding?: number;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +47,13 @@ export class DashboardComponent implements OnInit {
   countryFlagUrl : any;
   
   constructor(private route: ActivatedRoute,
-     private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+    private userService: UserService,
+    private talentService: TalentService,    
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    private router: Router,
+    private guidedTourService: GuidedTourService
+  ) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -36,7 +70,8 @@ export class DashboardComponent implements OnInit {
   premium : any = false;
   booster : any = false;
   activeDomains : any;
-  
+  countries :  any;
+
   @Output() dataEmitter = new EventEmitter<string>();
   
   loading: boolean = true;  // Add this line to track loading state
@@ -46,6 +81,7 @@ export class DashboardComponent implements OnInit {
     this.userId = this.loggedInUser.id;
     this.getUserProfile(this.userId);
     this.getHighlightsData();
+    this.loadCountries();
     this.getGalleryData();
     
     this.route.params.subscribe(() => {
@@ -57,6 +93,61 @@ export class DashboardComponent implements OnInit {
       this.coverImage = this.defaultCoverImage;
     }
     await this.getAllTeams();
+    // this.startTour();
+    
+    // Adding a slight delay to ensure elements are rendered before the tour starts
+    setTimeout(() => {
+      this.startTour();
+    }, 2000); // Adjust delay as needed
+
+  }
+
+
+  ngAfterViewInit() {
+  }
+
+  startTour() {
+    const tour: GuidedTour = {
+      tourId: 'profile-tour',
+      useOrb: true,
+      steps: [
+        {
+          selector: '.tour-profile-pics',
+          title: 'Profile Photo',
+          content: 'You can upload or edit your profile photo here.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-personal-details',
+          title: 'Personal Details',
+          content: 'Add or edit your personal details in this section.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-highlights',
+          title: 'Highlights',
+          content: 'Upload photos and videos to showcase on your profile.',
+          orientation: 'right',
+        },
+        {
+          selector: '.tour-cover-photo',
+          title: 'Cover Photo',
+          content: 'Upload or edit your cover photo here.',
+          orientation: 'top',
+        },
+        {
+          selector: '.tour-general-details',
+          title: 'General Details',
+          content: 'Add or edit your general details in this section.',
+          orientation: 'right',
+        },
+      ],
+      completeCallback: () => {
+        console.log('Tour Completed!');
+      },
+    };
+
+    this.guidedTourService.startTour(tour);
   }
 
   getGalleryData() {
@@ -116,15 +207,12 @@ export class DashboardComponent implements OnInit {
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
-      data: this.user
+      data: {user : this.user , countries : this.countries}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        
-
     		this.getUserProfile(this.userId);
-
       } else {
         console.log('User canceled the edit');
       }
@@ -186,25 +274,37 @@ export class DashboardComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
 
+      // Set loading state and display info toast
+      this.toastr.info('Uploading profile image...', 'Please wait', { disableTimeOut: true });
+
       try {
+        const formData = new FormData();
+        formData.append("profile_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("profile_image", this.selectedFile);
+        this.talentService.uploadProfileImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
+              this.toastr.clear();
 
-        this.talentService.uploadProfileImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.profileImage); // Emitting the data
-            this.sendMessage();
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+              this.toastr.success('Profile image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.clear();
+              this.toastr.error('Failed to upload profile image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+              this.toastr.clear();
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading profile image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+              this.toastr.clear();
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during file upload:', error);
       }
     }
   }
@@ -213,63 +313,88 @@ export class DashboardComponent implements OnInit {
     this.talentService.updatePicOnHeader(this.profileImage);
   }
 
+
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      
+      // Set loading state and display info toast
+      this.toastr.info('Uploading cover image...', 'Please wait', { disableTimeOut: true });
 
       try {
+        const formData = new FormData();
+        formData.append("cover_image", this.selectedFile);
 
-        const formdata = new FormData();
-        formdata.append("cover_image", this.selectedFile);
-
-        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
-          if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
-            this.dataEmitter.emit(this.coverImage); // Emitting the data
-            // this.isLoading = false;
-          } else {
-            // this.isLoading = false;
-            console.error('Invalid API response structure:', response);
-          }
-        });
+        this.talentService.uploadCoverImage(formData).subscribe(
+          (response) => {
+            if (response && response.status) {
+              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
+              this.toastr.clear();
+              this.toastr.success('Cover image uploaded successfully!', 'Success');
+            } else {
+              this.toastr.clear();
+              this.toastr.error('Failed to upload cover image. Please try again.', 'Upload Failed');
+              console.error('Invalid API response structure:', response);
+            }
+          },
+          (error) => {
+              this.toastr.clear();
+            this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
+            console.error('Error uploading cover image:', error);
+          },
+        );
       } catch (error) {
-        // this.isLoading = false;
-        console.error('Error fetching users:', error); 
+              this.toastr.clear();
+        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+        console.error('Error during cover image upload:', error);
       }
     }
   }
 
-  deleteCoverImage(){
+  deleteCoverImage(): void {
+    // Set loading state and display info toast
+    this.toastr.info('Deleting cover image...', 'Please wait', { disableTimeOut: true });
+
     try {
-      this.talentService.deleteCoverImage().subscribe((response)=>{
-        if (response && response.status) {
-          setTimeout(() => {
-            this.coverImage = './media/palyers.png';
-          }, 100);
-          this.dataEmitter.emit(''); // Emitting the data
-          // this.isLoading = false;
-        } else {
-          // this.isLoading = false;
-          console.error('Invalid API response structure:', response);
-        }
-      });
+      this.talentService.deleteCoverImage().subscribe(
+        (response) => {
+          if (response && response.status) {
+            this.coverImage = './media/players.png';  // Reset to default image
+            this.dataEmitter.emit('');  // Emit empty string to indicate deletion
+              this.toastr.clear();
+            this.toastr.success('Cover image deleted successfully.', 'Success');
+          } else {
+              this.toastr.clear();
+            this.toastr.error('Failed to delete cover image. Please try again.', 'Delete Failed');
+            console.error('Invalid API response structure:', response);
+          }
+        },
+        (error) => {
+              this.toastr.clear();
+          this.toastr.error('An error occurred during deletion. Please try again.', 'Delete Error');
+          console.error('Error deleting cover image:', error);
+        },
+      );
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+              this.toastr.clear();
+      this.toastr.error('An unexpected error occurred. Please try again.', 'Delete Error');
+      console.error('Error during cover image deletion:', error);
     }
   }
-  
-  openDeleteDialog() {
+
+  openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
     });
-  
-    dialogRef.afterClosed().subscribe(result => {
+
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // If result is true, proceed with deletion logic
+        // If the user confirms, proceed with deletion
         this.deleteCoverImage();
       } else {
+        this.toastr.info('Cover image deletion canceled.', 'Canceled');
         console.log('User canceled the delete');
       }
     });
@@ -343,7 +468,6 @@ export class DashboardComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
-  
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");
@@ -385,4 +509,16 @@ export class DashboardComponent implements OnInit {
     // Set the URL to an <img> element in your template or save it in a variable
     this.countryFlagUrl = flagUrl;
   }
+
+  
+  // After loading, mark countries as loaded and check if both are ready
+  loadCountries() {
+    return this.talentService.getCountries().subscribe(
+      (response) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+        }
+    });
+  }
+
 }

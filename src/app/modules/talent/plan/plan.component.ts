@@ -11,6 +11,8 @@ import { MessagePopupComponent } from '../../shared/message-popup/message-popup.
 import { ActivatedRoute } from '@angular/router';
 import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 interface Plan {
   id: number;
@@ -62,7 +64,8 @@ export class PlanComponent implements OnInit, OnDestroy {
     private talentService: TalentService, 
     private paymentService: PaymentService, 
     public dialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   async ngOnInit() {
@@ -75,6 +78,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   // Open coupon dialog
   openCouponDialog(planId:any): void {
+
     const dialogRef = this.dialog.open(CouponCodeAlertComponent, {
       width: '500px'
     });
@@ -94,22 +98,32 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   // Redirect to Stripe Checkout with coupon code logic
   async redirectToCheckout(planId: string) {
-
     this.isLoadingCheckout = true;
+    this.toastr.info('Redirecting to payment...', 'Loading', { timeOut: 3000 });
+  
     try {
-      const response = await this.paymentService.createCheckoutSession(planId, '',this.couponCode).toPromise();
+      const response = await this.paymentService.createCheckoutSession(planId, '', this.couponCode).toPromise();
+  
       if (response?.data?.payment_intent?.id) {
+        // Show success message after redirection attempt
+        this.toastr.success('Redirected to Stripe Checkout successfully.', 'Success');
+
         const stripe = await this.stripe;
         await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
+  
       } else {
+        this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
       }
     } catch (error) {
+      // Show error message if API call fails
+      this.toastr.error('Error creating Stripe Checkout session. Please try again later.', 'Error');
       console.error('Error creating Stripe Checkout session:', error);
     } finally {
       this.isLoadingCheckout = false;
     }
   }
+  
 
 
   // Apply coupon logic (e.g., send to backend for validation)
@@ -276,20 +290,18 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
   toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
-    // Track the original state of the billing plan
     const originalIsYearly = plan.isYearly;
 
     if (plan.isYearly === isYearly) {
-      alert(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
+      this.toastr.info(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
       return;
     }
+
     const planId = isYearly ? plan.yearData : plan.monthData;
 
-    console.log(planId)
-
-    if(planId.is_package_active != 'active'){
+    if (planId.is_package_active !== 'active') {
       plan.isYearly = !originalIsYearly;
-      return
+      return;
     }
   
     const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
@@ -299,37 +311,27 @@ export class PlanComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.updateSubscription(subscribeId.id, planId.id);
-        console.log(plan);
-        console.log(`Plan toggled to ${isYearly ? 'yearly' : 'monthly'}`);
       } else {
-        // If the user canceled the dialog, revert the plan's billing state
-        plan.isYearly = !plan.isYearly ;
-
-        console.log(`Plan state reverted to ${originalIsYearly ? 'yearly' : 'monthly'}`);
+        plan.isYearly = originalIsYearly;  
+        // Revert to the original state
+        // this.toastr.info(`Plan state reverted to ${originalIsYearly ? 'yearly' : 'monthly'}`);
       }
     });
   }
-  
-  updateSubscription(old:any,newID:any) {
-  
-    // Call the backend service to update the subscription
-    this.paymentService.upgradeSubscription(old,newID).subscribe(
+
+  updateSubscription(oldId: any, newId: any) {
+    this.paymentService.upgradeSubscription(oldId, newId).subscribe(
       response => {
         if (response && response.status) {
-          // Open a message popup to inform the user of the successful update
-          this.dialog.open(MessagePopupComponent, {
-            width: '600px',
-            data: {
-              action: 'display',
-              message: 'Your subscription has been updated successfully.'
-            }
-          });
+          this.toastr.success('Your subscription has been updated successfully.');
           console.log('Subscription updated successfully:', response);
         } else {
+          this.toastr.error('Failed to update subscription. Please try again.');
           console.error('Failed to update subscription', response);
         }
       },
       error => {
+        this.toastr.error('Error updating subscription. Please try again later.');
         console.error('Error updating subscription:', error);
       }
     );

@@ -30,26 +30,22 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
   content: string = '';
+  isLoading:boolean = false
   error:boolean = false
   errorMsg:any = {}
+  type: string = "";
+  subject: string = "";
 
-  constructor(
-    
+  constructor(    
     public dialogRef: MatDialogRef<TemplatePopupComponent>, private tempalateApi: TemplateService,
     @Inject(MAT_DIALOG_DATA) public template: any
   ) {
     if(template){
-      this.templateIdToEdit = template.id;
-      this.title = template.title;
-      this.content = template.content;
-      this.selectedRole = Number(template.email_for);
-      this.selectedLang = 4; //template.language;
-      this.selectedLocation = 3; //template.location;
+      this.getTemplates(template.id)
     }
 
     let envRoles:any = environment.roles;
-    envRoles[0].id = 0;
-    envRoles[0].role = 'All';
+    
     this.roles = envRoles;
     this.langs = environment.langs;
     this.locations = environment.domains;
@@ -57,7 +53,6 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
 
   ngOnInit(): void {
     this.editor = new Editor();
-
   }
 
   ngOnDestroy(): void {
@@ -89,7 +84,48 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
       this.error = true;
       this.errorMsg.content = "Content is required";
     }
+    if(this.type == ""){
+      this.error = true;
+      this.errorMsg.type = "Type is required";
+    }
+    if(this.subject == ""){
+      this.error = true;
+      this.errorMsg.subject = "Subject is required";
+    }
     return this.error;
+  }
+
+  
+  async getTemplates(id:any): Promise<void> {
+    this.isLoading = true;
+
+    try {
+      this.isLoading = true;
+      this.tempalateApi.getTemplateById(id).subscribe((response)=>{
+      if (response && response.status && response.data && response.data.emailTemplate) {
+        
+        this.template = response.data.emailTemplate;
+        // console.log(this.template)
+        this.templateIdToEdit = this.template.id;
+        this.title = this.template.title;
+        this.content = this.template.content;
+        this.selectedRole = Number(this.template.email_for);
+        this.selectedLang = Number(this.template.language);
+        this.selectedLocation = Number(this.template.location);
+        
+        this.type = this.template.type;
+        this.subject = this.template.subject
+        this.isLoading = false;
+      } else {
+        this.template = [];
+        this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+      });     
+    } catch (error) {
+      this.isLoading = false;
+      console.error('Error fetching users:', error);
+    }
   }
 
   createTemplate():any{
@@ -105,7 +141,9 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     params.email_for = this.selectedRole;
     params.language = this.selectedLang;
     params.location = this.selectedLocation;
-    params.status  = 1; // 1 for active, 2 for inactive
+    params.type = this.type;
+    params.subject = this.subject;
+    params.status  = 1; // 1 for active, 2 for inactive    
     
     this.tempalateApi.addEmailTemplate(params).subscribe((response)=>{
       if (response && response.status) {
@@ -134,6 +172,8 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     params.language = this.selectedLang;
     params.location = this.selectedLocation;
     params.status  = 1; // 1 for active, 2 for inactive
+    params.subject = this.subject;
+    params.type = this.type;
     
     this.tempalateApi.updateEmailTemplate(this.templateIdToEdit, params).subscribe((response)=>{
       if (response && response.status) {

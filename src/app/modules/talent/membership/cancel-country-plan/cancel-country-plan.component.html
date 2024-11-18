@@ -3,7 +3,7 @@
         <img src="../../../assets/images/close-icon-circle.png" alt="Close" (click)="close()" />
     </div>
     <div class="msg-popup-content p-4">
-        <h5 class="popup-title">Select Country Plan to Cancel</h5>
+        <h5 class="popup-title">{{'Select Country Plan to Cancel' | translate}}</h5>
         <div *ngIf="data.countries && data.countries.length > 0">
             <div class="country-option" *ngFor="let country of data.countries">
                 <label class="country-label">
@@ -20,7 +20,7 @@
                 </label>
             </div>
             <button class="confirm-btn" [disabled]="!selectedCountryId" (click)="confirmSelection()">
-                Confirm Cancellation
+                {{'Confirm Cancellation' | translate}}
             </button>
         </div>
     </div>

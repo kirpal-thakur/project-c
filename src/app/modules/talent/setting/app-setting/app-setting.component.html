@@ -1,7 +1,7 @@
 <div class="card mb-3">
   <div class="card-header border-0">
     <div>
-      <h6 class="card-title">App Setting</h6>
+      <h6 class="card-title">{{'App Setting' | translate}}</h6>
       <p>{{'Customize Your experience' | translate}}</p>
     </div>
   </div>
@@ -15,13 +15,13 @@
   </div>
   <div class="card-body">
     <div class="permission-item d-flex align-items-center justify-content-between">
-      <label for="newsletter" class="mb-0"><b>Newsletter</b></label>
+      <label for="newsletter" class="mb-0"><b>{{'Newsletter' | translate}}</b></label>
       <label class="switch">
         <!-- Add the (change) event listener to handle newsletter toggle -->
         <input type="checkbox" id="newsletter" name="newsletter" [checked]="loggedInUser.newsletter == 1" (change)="onNewsletterChange($event)">
         <span class="slider round"></span>
       </label>
     </div>
-    <p>Receive our monthly newsletter for industry updates.</p>
+    <p>{{'Receive our monthly newsletter for industry updates.' | translate}}</p>
   </div>
 </div>

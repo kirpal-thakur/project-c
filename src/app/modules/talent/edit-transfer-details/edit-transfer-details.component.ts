@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NgForm } from '@angular/forms';
 import { TalentService } from '../../../services/talent.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-transfer-details',
@@ -18,8 +19,10 @@ export class EditTransferDetailsComponent {
   teamFromId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
   filterTeamsFrom: any[] = []; // Initialize as empty array to avoid undefined issues
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<EditTransferDetailsComponent>,
     private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -37,33 +40,43 @@ export class EditTransferDetailsComponent {
   }
   
   onSubmit(myForm: NgForm): void {
-    console.log('myForm submitted:', myForm.value);
-
     if (myForm.valid) {
-      
-      // Add currentTeamId to the form values
+      this.isLoading = true; // Start loading indicator
+      this.toastr.info('Updating transfer information...', 'Please wait', { disableTimeOut: true });
+
+      // Prepare formData with additional properties
       const formData = {
         ...myForm.value,
         team_to: this.teamToId,
         team_from: this.teamFromId
       };
 
-      // You can prepare myForm data here, but we are directly using the myForm values in this case
-      console.log('myForm submitted:',formData);
-
-      this.talentService.updateTransfer(this.transfer.id,formData).subscribe(
+      this.talentService.updateTransfer(this.transfer.id, formData).subscribe(
         (response: any) => {
-          console.log('myForm submitted successfully:', response);
-          this.dialogRef.close(response.data);
+          if (response?.status) {
+            this.toastr.clear();
+            this.toastr.success('Transfer information updated successfully!', 'Success');
+            this.dialogRef.close(response.data); // Close dialog and pass data
+          } else {
+            this.toastr.clear();
+            this.toastr.error('Failed to update transfer. Please try again.', 'Error');
+            console.error('Unexpected API response:', response);
+          }
+          this.isLoading = false; // Stop loading indicator
         },
         (error: any) => {
-          console.error('Error submitting the myForm:', error);
+            this.toastr.clear();
+          this.toastr.error('Error updating transfer. Please try again later.', 'Error');
+          console.error('Error submitting the form:', error);
+          this.isLoading = false; // Stop loading indicator
         }
       );
+    } else {
+      this.toastr.clear();
+      this.toastr.warning('Please complete all required fields before submitting.', 'Warning');
     }
   }
 
-  
   // Function to handle dynamic fetching of clubs based on search input
   onSearchTeams(): void {
 
