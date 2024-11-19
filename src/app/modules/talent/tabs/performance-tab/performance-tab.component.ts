@@ -27,6 +27,7 @@ export class PerformanceTabComponent {
     player_age: ""
   }
   loggedInUser:any = localStorage.getItem('userData');
+  @Input() isPremium: any;
 
   // from_date:2021-01-01
   //   to_date:2022-01-01

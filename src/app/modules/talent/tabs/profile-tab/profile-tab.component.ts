@@ -18,6 +18,7 @@ export class ProfileTabComponent {
   otherPositions : any;
 
   @Input() userData: any;
+  @Input() isPremium: any;
 
   constructor( public dialog: MatDialog,private talentService: TalentService) { 
     // If you want to load the user data from localStorage during initialization    

@@ -23,7 +23,8 @@ export class GalleryTabComponent {
   openedMenuId:any = '';
   @Input() coverImage: string = '';  // Define an input property
   @Output() dataEmitter = new EventEmitter<string>();
-  
+  @Input() isPremium: any;
+
   isLoading: boolean = false;
 
   constructor(
