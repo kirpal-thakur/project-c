@@ -177,6 +177,16 @@
 }
 
 }
+@media (max-width: 600px) {
+  .team-logos .col-lg-3,.team-logos .col-lg-9{
+    width: fit-content;
+    gap: 20px;
+  }
+  .team-logos{
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 20px;
+  }
+}
 @media(max-width: 425px){
   .btn-outline-white {
     padding: 3px;

@@ -778,6 +778,7 @@ left: unset;
   overflow: auto;
   position: relative;
   background-color: #fff;
+  
 }
 
 .canvas {
@@ -1104,7 +1105,7 @@ margin: auto;
   }
   .page-content{
     padding: 0px 20px;
-    width: 100%;
+    width: 100% !important;
   }
   .right-sidebar{
     display: none;
@@ -1164,7 +1165,18 @@ margin: auto;
 
   
 }
+
+
 @media (max-width: 550px) {
+  .dialog-actions{
+    flex-direction: column;
+    gap: 20px;
+  
+  }
+  .dialog-actions button{
+   width: 100% !important;
+    
+  }
 }
 
 @media(max-width: 425px){
