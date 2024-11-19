@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, Input, OnInit } from '@angular/core'; 
 import { TalentService } from '../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerfomanceReportComponent } from './add-perfomance-report/add-perfomance-report.component';
@@ -28,6 +28,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
   selectedIds: number[] = [];
   idsToDelete: any = [];
   path: any ;
+  @Input() isPremium: any;
 
   constructor(private talentService: TalentService, public dialog: MatDialog) {}
 

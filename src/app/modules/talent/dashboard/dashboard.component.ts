@@ -9,33 +9,8 @@ import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { GuidedTourService, Orientation, OrientationConfiguration } from 'ngx-guided-tour';
-
-interface GuidedTour {
-  tourId: string;
-  steps: TourStep[];
-  useOrb?: boolean;
-  skipCallback?: (stepSkippedOn: number) => void;
-  completeCallback?: () => void;
-  minimumScreenSize?: number;
-  resizeDialog?: {
-    title?: string;
-    content: string;
-  };
-}
-
-interface TourStep {
-  selector?: string;
-  title?: string;
-  content: string;
-  orientation?: Orientation | OrientationConfiguration[];
-  action?: () => void;
-  closeAction?: () => void;
-  skipStep?: boolean;
-  scrollAdjustment?: number;
-  useHighlightPadding?: boolean;
-  highlightPadding?: number;
-}
+import introJs from 'intro.js';
+import 'intro.js/introjs.css'; // Import the styles for Intro.js
 
 @Component({
   selector: 'app-dashboard',
@@ -52,7 +27,6 @@ export class DashboardComponent implements OnInit {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private guidedTourService: GuidedTourService
   ) { }
   activeTab: string = 'profile';
   userId: any ;
@@ -71,6 +45,7 @@ export class DashboardComponent implements OnInit {
   booster : any = false;
   activeDomains : any;
   countries :  any;
+  isPremium: any = false;
 
   @Output() dataEmitter = new EventEmitter<string>();
   
@@ -79,6 +54,8 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
+    
+    // Adding a slight delay to ensure elements are rendered before the tour starts
     this.getUserProfile(this.userId);
     this.getHighlightsData();
     this.loadCountries();
@@ -93,61 +70,65 @@ export class DashboardComponent implements OnInit {
       this.coverImage = this.defaultCoverImage;
     }
     await this.getAllTeams();
-    // this.startTour();
     
-    // Adding a slight delay to ensure elements are rendered before the tour starts
-    setTimeout(() => {
-      this.startTour();
-    }, 2000); // Adjust delay as needed
-
+    
+    // Check if the tour should be shown
+    const showTour = localStorage.getItem('showTour');
+    if (showTour !== 'false') {        
+      setTimeout(() => {
+        this.startIntroTour(); // Start the tour after a slight delay
+      }, 2000);
+    }
+    
   }
-
 
   ngAfterViewInit() {
   }
 
-  startTour() {
-    const tour: GuidedTour = {
-      tourId: 'profile-tour',
-      useOrb: true,
+
+  /**
+   * Starts the Intro.js tour.
+   */
+  startIntroTour():void {
+    const intro = introJs();
+
+    intro.setOptions({
       steps: [
         {
-          selector: '.tour-profile-pics',
-          title: 'Profile Photo',
-          content: 'You can upload or edit your profile photo here.',
-          orientation: 'right',
+          element: '.tour-profile-pics',
+          intro: 'You can upload or edit your profile photo here.',
+          position: 'right',
         },
         {
-          selector: '.tour-personal-details',
-          title: 'Personal Details',
-          content: 'Add or edit your personal details in this section.',
-          orientation: 'right',
+          element: '.tour-personal-details',
+          intro: 'Add or edit your personal details in this section.',
+          position: 'right',
         },
         {
-          selector: '.tour-highlights',
-          title: 'Highlights',
-          content: 'Upload photos and videos to showcase on your profile.',
-          orientation: 'right',
+          element: '.tour-highlights',
+          intro: 'Upload photos and videos to showcase on your profile.',
+          position: 'right',
         },
         {
-          selector: '.tour-cover-photo',
+          element: '.tour-cover-photo',
           title: 'Cover Photo',
-          content: 'Upload or edit your cover photo here.',
-          orientation: 'top',
+          intro: 'Upload or edit your cover photo here.',
+          position: 'top',
         },
         {
-          selector: '.tour-general-details',
+          element: '.tour-general-details',
           title: 'General Details',
-          content: 'Add or edit your general details in this section.',
-          orientation: 'right',
-        },
+          intro: 'Add or edit your general details in this section.',
+          position: 'right',
+        }
       ],
-      completeCallback: () => {
-        console.log('Tour Completed!');
-      },
-    };
+      showBullets: false, // Optional: Disable bullets for a cleaner UI
+      showProgress: false, // Optional: Show progress bar
+      scrollToElement: true, // Automatically scroll to elements
+    });
 
-    this.guidedTourService.startTour(tour);
+    intro.setOption("dontShowAgain", true).start();
+
   }
 
   getGalleryData() {
@@ -179,7 +160,7 @@ export class DashboardComponent implements OnInit {
 
           this.user = response.data.user_data;
           this.userNationalities = JSON.parse(this.user.user_nationalities);
-
+          this.isPremium = this.user?.active_subscriptions?.premium.length>0 ? true : false ;
           this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
           this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;

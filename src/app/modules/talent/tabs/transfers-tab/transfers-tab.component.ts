@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -26,6 +26,8 @@ export class TransfersTabComponent {
     date_of_transfer: ""
   }
   seasons:any = [];
+  @Input() isPremium: any;
+
   constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router ,public dialog: MatDialog) { }
   
   ngOnInit(): void {
