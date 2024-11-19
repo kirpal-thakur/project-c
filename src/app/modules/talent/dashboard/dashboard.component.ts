@@ -92,31 +92,31 @@ export class DashboardComponent implements OnInit {
         {
           element: '.edit-profile',
           intro: '<h6>Profile Photo</h6>Upload your best headshot ',
-          position: 'right',
+          // position: 'right',
           tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-personal-details',
           intro: '<h6>Personal Details</h6>Add your personal details here',
-          position: 'right',
+          // position: 'right',
           tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-highlights',
           intro: '<h6>Highlights</h6>Upload photos and videos to highlight on your profile',
-          position: 'right',
+          // position: 'right',
           tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-cover-photo',
           intro: '<h6>Cover Photo</h6>Upload your cover photo',
-          position: 'top',
+          // position: 'top',
           tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-general-details',
           intro: '<h6>General Details</h6>Add your other profile details here',
-          position: 'right',
+          // position: 'right',
           tooltipClass: 'custom-tooltip', // Custom class for this step
         }
       ],
