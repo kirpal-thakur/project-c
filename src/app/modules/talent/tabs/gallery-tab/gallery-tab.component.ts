@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../../services/user.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
