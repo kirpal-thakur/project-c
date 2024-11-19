@@ -30,7 +30,7 @@ export class HeaderComponent {
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
 
-    this.socketService.on('notification').subscribe((data) => {
+    this.socketService.on('notification').subscribe((data) => { 
       // Create a new notification object
       const obj = {
         image: data.senderProfileImage,

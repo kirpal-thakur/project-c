@@ -34,14 +34,16 @@ export class UserDetailPopupComponent {
         userId = userData.id;
     }
     else{
-      console.log("No data found in localStorage."); 
+      console.log("No data found in localStorage.");
     }
 
+    const receiverIds = [this.user.id];
+
     if(this.selectedOption==="3"){
-      this.socketService.emit("userRejected", {senderId: userId, receiverIds: ['57']});
+      this.socketService.emit("userRejected", {senderId: userId, receiverIds});
     }
     else{
-      this.socketService.emit("userVerified", {senderId: userId, receiverIds: ['57']});
+      this.socketService.emit("userVerified", {senderId: userId, receiverIds});
     }
 
     this.dialogRef.close({user: this.user.id, status: this.selectedOption});
