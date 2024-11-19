@@ -64,6 +64,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
 import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
+import { LightboxModule } from 'ngx-lightbox';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -154,6 +155,7 @@ export const MY_FORMATS = {
     MatPaginator,
     NgxEditorModule,
     MatTooltipModule,
+    LightboxModule,
     GuidedTourModule
   ]
 })

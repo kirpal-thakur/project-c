@@ -101,7 +101,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/dark-styles.scss"
+              "src/dark-styles.scss",
+              "node_modules/ngx-lightbox/lightbox.css"
             ],
             "scripts": []
           }

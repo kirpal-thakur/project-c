@@ -71,15 +71,9 @@ export class DashboardComponent implements OnInit {
     }
     await this.getAllTeams();
     
-    
-    // Check if the tour should be shown
-    const showTour = localStorage.getItem('showTour');
-    if (showTour !== 'false') {        
-      setTimeout(() => {
-        this.startIntroTour(); // Start the tour after a slight delay
-      }, 2000);
-    }
-    
+    setTimeout(() => {
+      this.startIntroTour(); // Start the tour after a slight delay
+    }, 2000);
   }
 
   ngAfterViewInit() {
@@ -89,37 +83,41 @@ export class DashboardComponent implements OnInit {
   /**
    * Starts the Intro.js tour.
    */
-  startIntroTour():void {
+  startIntroTour() {
     const intro = introJs();
+    intro.setOption("dontShowAgain", true).start();
 
     intro.setOptions({
       steps: [
         {
-          element: '.tour-profile-pics',
-          intro: 'You can upload or edit your profile photo here.',
+          element: '.edit-profile',
+          intro: '<h6>Profile Photo</h6>Upload your best headshot ',
           position: 'right',
+          tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-personal-details',
-          intro: 'Add or edit your personal details in this section.',
+          intro: '<h6>Personal Details</h6>Add your personal details here',
           position: 'right',
+          tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-highlights',
-          intro: 'Upload photos and videos to showcase on your profile.',
+          intro: '<h6>Highlights</h6>Upload photos and videos to highlight on your profile',
           position: 'right',
+          tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-cover-photo',
-          title: 'Cover Photo',
-          intro: 'Upload or edit your cover photo here.',
+          intro: '<h6>Cover Photo</h6>Upload your cover photo',
           position: 'top',
+          tooltipClass: 'custom-tooltip', // Custom class for this step
         },
         {
           element: '.tour-general-details',
-          title: 'General Details',
-          intro: 'Add or edit your general details in this section.',
+          intro: '<h6>General Details</h6>Add your other profile details here',
           position: 'right',
+          tooltipClass: 'custom-tooltip', // Custom class for this step
         }
       ],
       showBullets: false, // Optional: Disable bullets for a cleaner UI
@@ -127,8 +125,8 @@ export class DashboardComponent implements OnInit {
       scrollToElement: true, // Automatically scroll to elements
     });
 
-    intro.setOption("dontShowAgain", true).start();
-
+    intro.setOption("prevLabel", "Previous");
+    intro.start(); // Start the tour
   }
 
   getGalleryData() {

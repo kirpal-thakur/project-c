@@ -1573,3 +1573,47 @@ ngx-guided-tour {
       }
   }
 }
+
+// new code 
+/* Scoped styles for Intro.js in component.scss */
+::ng-deep .custom-tooltip {
+  background-color: unset !important;
+  color: #000 !important;
+  border-radius: 10px !important;
+  box-shadow: none !important;
+  // top: -60px !important;
+}
+
+::ng-deep .custom-tooltip .introjs-arrow {
+  border-color: #ffc107 transparent transparent transparent !important;
+}
+
+::ng-deep .introjs-tooltiptext{
+  background-color: #ffc107 !important;
+  border-radius: 5px !important;
+}
+
+::ng-deep .introjs-button{
+  border-color: #ffffffbd !important;
+  background-color: unset !important;
+  color: #ffffffbd !important;
+  text-shadow: none;
+}
+::ng-deep .introjs-tooltipbuttons{
+  border-color: #ffffffbd !important;
+  background-color: unset !important;
+  color: #ffffffbd !important;
+  text-shadow: none;
+  margin-top: 10px;
+  display: flex;
+  justify-content: right;
+  border-top: unset !important;
+}
+::ng-deep .introjs-helperLayer{
+  box-shadow: rgb(33 33 33 / 0%) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px !important;
+}
+
+::ng-deep .introjs-dontShowAgain label{
+  background: unset !important;
+  color: #fff !important;
+}
