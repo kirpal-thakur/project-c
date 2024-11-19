@@ -183,7 +183,9 @@
     background-image: url('../../../../../assets/images/players-2.jpg');
     height: 200px;
 }
-
+.main-performance_card{
+    overflow: auto;
+}
 .pointer{
     cursor: pointer;
 }
