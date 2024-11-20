@@ -21,10 +21,10 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService, private socketService: SocketService) {}
-  loggedInUser:any = localStorage.getItem('userData');
+  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
+  loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
-  lang:string = '';
+  lang: string = '';
   domains: any = environment.domains;
 
   liveNotification: any[] = [];
@@ -32,50 +32,67 @@ export class HeaderComponent {
   notificationCount: number = 0;
   isShowAllNotification : boolean = false;
 
- ngOnInit() {
+  ngOnInit() {
+    this.socketService.on('notification').subscribe((data) => {
+      this.notificationCount += 1;
+      // Create a new notification object
+      const obj = {
+        image: data.senderProfileImage,
+        title: data.senderName,
+        content: data.message,
+        time: 'just now'
+      };
 
-  this.socketService.on('notification').subscribe((data) => {
-    this.notificationCount +=1;
-    // Create a new notification object
-    const obj = {
-      image: data.senderProfileImage,
-      title: data.senderName,
-      content: data.message,
-      time: 'just now'
-    };
+      // Add the notification to the array and show the notification box
+      this.liveNotification.push(obj); // Keep only the latest notification
+      this.showNotification = true;
+    });
+    this.userService.adminImageUrl.subscribe((newUrl) => {
+      console.log(newUrl)
+      if (newUrl == 'default') {
+        if (this.loggedInUser.profile_image_path) {
+          this.profileImgUrl = this.loggedInUser.profile_image_path;
+        } else {
+          this.profileImgUrl = "../../../assets/images/1.jpg";
+        }
+      }
 
-    // Add the notification to the array and show the notification box
-    this.liveNotification.push(obj); // Keep only the latest notification
-    this.showNotification = true;
-  });
-
-  this.userService.adminImageUrl.subscribe(newUrl => {
-    console.log(newUrl)
-    if(newUrl == 'default'){
-      if(this.loggedInUser.profile_image_path){
+      this.loggedInUser = JSON.parse(this.loggedInUser);
+      console.log(this.loggedInUser)
+      if (this.loggedInUser.profile_image_path) {
         this.profileImgUrl = this.loggedInUser.profile_image_path;
-      }else{
+      } else {
         this.profileImgUrl = "../../../assets/images/1.jpg";
       }
-    }else{
-      this.profileImgUrl = newUrl;
-    }
-  });
 
-  this.loggedInUser = JSON.parse(this.loggedInUser);
-  console.log(this.loggedInUser)
-  if(this.loggedInUser.profile_image_path){
-    this.profileImgUrl = this.loggedInUser.profile_image_path;
-  }else{
-    this.profileImgUrl = "../../../assets/images/1.jpg";
-  }
-  
-    this.lang = localStorage.getItem('lang') || 'en'
-    this.updateThemeText();
-  }
+      this.lang = localStorage.getItem('lang') || 'en'
+      this.updateThemeText();
 
-  ChangeLang(lang:any){
-    const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
+      this.socketService.on('notification').subscribe((data) => {
+        // Create a new notification object
+        const obj = {
+          image: data.senderProfileImage,
+          title: data.senderName,
+          content: data.message,
+          time: 'just now'
+        };
+
+        // Add the notification to the array and show the notification box
+        this.liveNotification = [obj]; // Keep only the latest notification
+        this.showNotification = true;
+
+        console.log('New notification:', data.message);
+
+        // Hide the notification after 3 seconds
+        setTimeout(() => {
+          this.liveNotification = [];
+          this.showNotification = false;
+        }, 7000); // 3000 ms = 3 seconds
+      });
+    });
+  }
+  ChangeLang(lang: any) {
+    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
 
@@ -94,10 +111,10 @@ export class HeaderComponent {
     this.updateThemeText()
   }
 
-  updateThemeText (){
+  updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
-this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-document.getElementById('theme-text')!.textContent =this.themeText
+    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
+    document.getElementById('theme-text')!.textContent = this.themeText
 
   }
 

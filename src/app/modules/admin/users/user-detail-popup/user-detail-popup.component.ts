@@ -3,6 +3,7 @@ import {
   MatDialogRef,MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { SocketService } from '../../../../services/socket.service';
 
 @Component({
   selector: 'app-user-detail-popup',
@@ -13,7 +14,7 @@ export class UserDetailPopupComponent {
   updatedData: any;
   selectedOption: any = "";
  
-  constructor(private router: Router,
+  constructor(private router: Router, private socketService: SocketService,
     public dialogRef : MatDialogRef<UserDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public user: any) {
     console.log('edit user', user); 
@@ -24,6 +25,27 @@ export class UserDetailPopupComponent {
   }
 
   save() {
+    console.log("event is", this.selectedOption, typeof(this.selectedOption));
+
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+        let userData = JSON.parse(jsonData);
+        userId = userData.id;
+    }
+    else{
+      console.log("No data found in localStorage.");
+    }
+
+    const receiverIds = [this.user.id];
+
+    if(this.selectedOption==="3"){
+      this.socketService.emit("userRejected", {senderId: userId, receiverIds});
+    }
+    else{
+      this.socketService.emit("userVerified", {senderId: userId, receiverIds});
+    }
+
     this.dialogRef.close({user: this.user.id, status: this.selectedOption});
   }
 

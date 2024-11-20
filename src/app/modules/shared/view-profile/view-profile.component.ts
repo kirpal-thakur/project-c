@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -34,7 +35,8 @@ export class ViewProfileComponent implements OnInit {
     private userService: UserService,
     private talentService: TalentService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private socketService: SocketService
   ) {}
 
   ngOnInit(): void {
@@ -136,11 +138,22 @@ export class ViewProfileComponent implements OnInit {
 
   addToFavorites(userId: number) {
 
+    let jsonData = localStorage.getItem("userData");
+    let myUserId: any;
+    if (jsonData) {
+        let userData = JSON.parse(jsonData);
+        myUserId = userData.id;
+    }
+    else{
+      console.log("No data found in localStorage."); 
+    }
+
     try {
       this.userService.addFavoritesData(userId).subscribe((response) => {
         if (response && response.status && response.data) {
           this.isFavorite = true; // Mark as favorite
-          console.log(userId)
+          console.log(userId);
+          this.socketService.emit('addToFav', {senderId: myUserId, receiverId: userId});
 
         } else {
           console.error('Invalid API response structure:', response);

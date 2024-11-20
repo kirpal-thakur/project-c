@@ -69,10 +69,8 @@ export class ExploreComponent implements OnInit {
         userId = userData.id;
     }
     else{
-      console.log("No data found in localStorage."); 
+      console.log("No data found in localStorage.");
     }
-
-    console.log("idssss", userId, id);
 
     this.socketService.emit('profileViewed', {senderId: userId, receiverId: id});
     let pageRoute = 'view/'+slug.toLowerCase();
