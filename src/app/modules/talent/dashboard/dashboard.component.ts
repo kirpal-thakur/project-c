@@ -17,8 +17,12 @@ import { Lightbox } from 'ngx-lightbox';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+
 })
 export class DashboardComponent implements OnInit {
+  lightboxIsOpen: boolean = false; // Track the state of the lightbox
+  mainImage: { src: string } = { src: '' }; // Current main image source
+  album: any[] = []; // Array for album images
   loggedInUser:any = localStorage.getItem('userData');
   countryFlagUrl : any;
   
@@ -199,6 +203,7 @@ export class DashboardComponent implements OnInit {
           this.user = response.data.user_data;
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.StartTour = this.user?.show_tour == 1 ? true : false ;
+          console.log('fdg',this.user?.show_tour)
           
           if(this.StartTour){            
             setTimeout(() => {
@@ -279,22 +284,33 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
-
   openImage(index: number): void {
-   
-    // Open image at the provided index in the lightbox
-    const album = this.highlights.images.map((image:any) => ({
+    // Create album array with images' full paths
+    this.album = this.highlights.images.map((image: any) => ({
       src: this.highlights.file_path + image.file_name,
-      caption: image.file_name,
-      thumb: this.highlights.file_path + image.file_name
     }));
-    
-    this.lightbox.open(album, index); // Open the lightbox at the given image index
-
+  
+    // Set the main image to be the one clicked
+    this.mainImage = { src: this.album[index].src };
+  
+    // Open the lightbox
+    this.lightboxIsOpen = true;
   }
-
+  
   closeLightbox(): void {
-    this.lightbox.close(); // Close the lightbox
+    // Close the lightbox
+    this.lightboxIsOpen = false;
+  }
+  
+  navigateImage(direction: 'prev' | 'next'): void {
+    // Get current image index
+    const currentIndex = this.album.findIndex(image => image.src === this.mainImage.src);
+  
+    // Handle edge cases (first and last image)
+    const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
+  
+    // Update main image and handle potential wrapping
+    this.mainImage = { src: this.album[newIndex].src };
   }
 
   getCoverImg(){
