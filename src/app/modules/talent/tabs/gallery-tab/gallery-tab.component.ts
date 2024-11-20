@@ -109,7 +109,7 @@ export class GalleryTabComponent {
     }
   }
 
-  addPhotosPopup(){
+  addPhotosPopup(type:string='all'){
     const messageDialog = this.dialog.open(UploadPopupComponent,{
       width: '500px',
       position: {
@@ -117,7 +117,7 @@ export class GalleryTabComponent {
       },
       data: {
         userId: this.userId,
-        file:'video'
+        file:type
       }
     })
 

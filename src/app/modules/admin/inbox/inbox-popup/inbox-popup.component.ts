@@ -31,7 +31,7 @@ export class InboxPopupComponent {
   }
  
   async fetchUsers(): Promise<void> {
-     /*   try {
+    /*   try {
           const response: any = await this.userService.getUsers().toPromise();
           if (response && response.status && response.data && response.data.userData) {
               this.allUsers = response.data.userData;
@@ -41,7 +41,7 @@ export class InboxPopupComponent {
         } catch (error) {
           console.error('Error fetching users:', error);
         }
- */
+    */
   }
   close() {
     this.dialogRef.close();

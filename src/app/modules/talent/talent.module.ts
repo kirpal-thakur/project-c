@@ -128,7 +128,7 @@ export const MY_FORMATS = {
     UpdateCountryPlanComponent,
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
-    AddBoosterComponent,
+    AddBoosterComponent
   ],
   imports: [
     CommonModule,
@@ -156,7 +156,7 @@ export const MY_FORMATS = {
     NgxEditorModule,
     MatTooltipModule,
     LightboxModule,
-    GuidedTourModule
+    GuidedTourModule,
   ]
 })
 export class TalentModule { }

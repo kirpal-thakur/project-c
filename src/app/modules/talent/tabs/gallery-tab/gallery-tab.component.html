@@ -1,5 +1,5 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium">
+<div class="unlock_page" *ngIf="!isPremium && isPremium">
   <div class="gallery-parent">
     <div class="d-flex justify-content-between ">
       <p class="gallery-photo">{{'Photos' | translate }} </p>
@@ -42,7 +42,7 @@
   </div> 
 </div>
 
-<div class="gallery-parent"  *ngIf="isPremium">
+<div class="gallery-parent"  >
   <div class="d-flex justify-content-between ">
     <p class="gallery-photo">{{'Photos' | translate }} </p>
     <p class="gallery-pic-upload pointer" (click)="addPhotosPopup()">{{'AddPhotos' | translate}}</p>
@@ -86,7 +86,7 @@
 
   <div class="d-flex justify-content-between mt-4">
     <p class="gallery-photo">{{'Videos' | translate }} </p>
-    <p class="gallery-pic-upload pointer" (click)="addPhotosPopup()">{{'Add Videos' | translate}}</p>
+    <p class="gallery-pic-upload pointer" (click)="addPhotosPopup('video')">{{'Add Videos' | translate}}</p>
   </div>
   
   <div class="row mt-3">
