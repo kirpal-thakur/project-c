@@ -112,3 +112,64 @@
   .disable-end-date div, .disable-end-date button {
       pointer-events: none;
   }
+  .cutam-cupen .mat-mdc-dialog-surface{
+    overflow: hidden !important;
+  }
+  ::ng-deep .cutam-cupen .mat-mdc-dialog-surface{
+    overflow-y: hidden !important;
+  }
+  .create-new_popup{
+    max-height: 54vh;
+    overflow: auto;
+  }
+  @media (max-width: 600px) {
+    .create-new_btn{
+      flex-direction: column;
+      gap: 16px;
+    }
+    .create-new_btn input{
+      width: 100%;
+    }
+    .create-new_btn .ms-3{
+      margin: 0 !important;
+    }
+    .calender-inputs-box{
+      flex-direction: column;
+      gap: 10px;
+    }
+    .coupon-dateRange{
+      flex-direction: column;
+      gap: 16px;
+    }
+    .coupon-dateRange .cupen-btn-date{
+      border-radius: 10px;
+    }
+    .coupon-dateRange mat-form-field{
+      width: 100%;
+    }
+    .coupon-dateRange .cupen-btn-date-1{
+      border-left: 1px solid #999999 !important;
+      border-radius: 10px !important;
+    }
+    .cupen-btn-1{
+      width: 100%;
+    }
+    .btn{
+      font-size: 14px;
+      padding-right: 2rem !important;
+      padding-left: 2rem !important;
+    }
+  }
+  @media (max-width: 360px) {
+    .discount-btn button{
+        width: 100%;
+        
+      }
+      .discount-btn .custom-button{
+        margin-top: 10px;
+      }
+      .discount-btn .custom-button.ms-3{
+        margin-left: 0px !important;
+       
+      }
+    }

@@ -1151,10 +1151,7 @@ margin: auto;
     width: 100% !important;
     padding: 0px 10px !important;
   }
-  .sidebar_menu {
-    position: relative;
-     top: 15px;
-}
+
 
   .main-wrapper {
     top: 75px;
@@ -1237,6 +1234,13 @@ margin: auto;
     width: 10rem !important;
     border-radius: 20px !important;
   }
+  .logo-box{
+    text-align: center;
+  }
+  .sidebar_menu {
+    position: relative;
+     top: 15px;
+}
 }
 // Inbox Pop Up
 .body-background .mdc-text-field--filled:not(.mdc-text-field--disabled) {

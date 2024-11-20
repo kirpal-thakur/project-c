@@ -26,7 +26,14 @@
     height: 35px;
   }
 }
-
+@media (max-width:600px) {
+  .dashboard-title{
+    display: none;
+  }
+  .input-group.search-area{
+    display: none;
+  }
+}
 @media(max-width: 425px){
 .sidebar-menu a svg{
   width: 27px;

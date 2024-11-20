@@ -157,3 +157,42 @@
   margin-left: 12px;
   margin-right: 12px;
 }
+
+@media (max-width: 600px) {
+  .add-banners{
+    flex-direction: column;
+    gap: 16px;
+  }
+  .add-banners input,.add-banners .btn-group,.add-banners .btn-group select {
+    width: 100%;
+  }
+  .add-banners .ms-5,.add-banners .ms-3{
+    margin-left: 0px !important;
+  }
+  .calender-inputs-box{
+    flex-direction: column;
+    gap: 10px;
+  }
+  .coupon-dateRange{
+    flex-direction: column;
+    gap: 16px;
+  }
+  .coupon-dateRange .cupen-btn-date{
+    border-radius: 10px;
+  }
+  .coupon-dateRange mat-form-field{
+    width: 100%;
+  }
+  .coupon-dateRange .cupen-btn-date-1{
+    border-left: 1px solid #999999 !important;
+    border-radius: 10px !important;
+  }
+  .cupen-btn-1{
+    width: 100%;
+  }
+  .btn{
+    font-size: 14px;
+    padding-right: 2rem !important;
+    padding-left: 2rem !important;
+  }
+}
