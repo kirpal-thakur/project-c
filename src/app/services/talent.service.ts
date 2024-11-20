@@ -624,4 +624,22 @@ getExploresData(params: any): Observable<any> {
 
     return this.http.post(`${this.apiUrl2}user/validate-coupon`, params , {headers});
   }
+
+
+  updateShowTour(userId: number, showTour: number): Observable<any> {
+    // const url = `https://alerts.socceryou.ch/update_showTour?userId=${userId}&showTour=${showTour}`;
+    // return this.http.get<any>(url);
+
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    let params = new HttpParams();
+      params = params.append('user[show_tour]', showTour);  
+
+    // Send POST request with payload in body
+    
+    return this.http.post(`${this.apiUrl}player/update-general-info`, params , {headers});
+  }
 }

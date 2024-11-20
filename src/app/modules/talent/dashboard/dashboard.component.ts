@@ -11,13 +11,18 @@ import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
+import { Lightbox } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+
 })
 export class DashboardComponent implements OnInit {
+  lightboxIsOpen: boolean = false; // Track the state of the lightbox
+  mainImage: { src: string } = { src: '' }; // Current main image source
+  album: any[] = []; // Array for album images
   loggedInUser:any = localStorage.getItem('userData');
   countryFlagUrl : any;
   
@@ -27,6 +32,7 @@ export class DashboardComponent implements OnInit {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
+    private lightbox: Lightbox
   ) { }
   activeTab: string = 'profile';
   userId: any ;
@@ -46,7 +52,7 @@ export class DashboardComponent implements OnInit {
   activeDomains : any;
   countries :  any;
   isPremium: any = false;
-
+  StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
   
   loading: boolean = true;  // Add this line to track loading state
@@ -71,62 +77,99 @@ export class DashboardComponent implements OnInit {
     }
     await this.getAllTeams();
     
-    setTimeout(() => {
-      this.startIntroTour(); // Start the tour after a slight delay
-    }, 2000);
   }
 
   ngAfterViewInit() {
   }
 
-
-  /**
-   * Starts the Intro.js tour.
-   */
   startIntroTour() {
+    
     const intro = introJs();
-    intro.setOption("dontShowAgain", true).start();
-
+  
     intro.setOptions({
       steps: [
         {
           element: '.edit-profile',
-          intro: '<h6>Profile Photo</h6>Upload your best headshot ',
-          // position: 'right',
-          tooltipClass: 'custom-tooltip', // Custom class for this step
+          intro: `<div><h6>Profile Photo</h6>Upload your best headshot.</div>`,
+          tooltipClass: 'custom-tooltip',
         },
         {
           element: '.tour-personal-details',
-          intro: '<h6>Personal Details</h6>Add your personal details here',
-          // position: 'right',
-          tooltipClass: 'custom-tooltip', // Custom class for this step
+          intro: `<div><h6>Personal Details</h6>Add your personal details here.</div>`,
+          tooltipClass: 'custom-tooltip',
         },
         {
           element: '.tour-highlights',
-          intro: '<h6>Highlights</h6>Upload photos and videos to highlight on your profile',
-          // position: 'right',
-          tooltipClass: 'custom-tooltip', // Custom class for this step
+          intro: `<div><h6>Highlights</h6>Upload photos and videos to highlight on your profile.</div>`,
+          tooltipClass: 'custom-tooltip',
         },
         {
           element: '.tour-cover-photo',
-          intro: '<h6>Cover Photo</h6>Upload your cover photo',
-          // position: 'top',
-          tooltipClass: 'custom-tooltip', // Custom class for this step
+          intro: `<div><h6>Cover Photo</h6>Upload your cover photo.</div>`,
+          tooltipClass: 'custom-tooltip',
         },
         {
           element: '.tour-general-details',
-          intro: '<h6>General Details</h6>Add your other profile details here',
-          // position: 'right',
-          tooltipClass: 'custom-tooltip', // Custom class for this step
-        }
+          intro: `<div><h6>General Details</h6>Add your other profile details here.</div>`,
+          tooltipClass: 'custom-tooltip',
+        },
       ],
-      showBullets: false, // Optional: Disable bullets for a cleaner UI
-      showProgress: false, // Optional: Show progress bar
-      scrollToElement: true, // Automatically scroll to elements
+      showBullets: false,
+      showProgress: false,
+      scrollToElement: true,
+      prevLabel: 'Previous',
+      nextLabel: 'Next',
+      doneLabel: 'Finish',
+      tooltipPosition: 'auto',
     });
-
-    intro.setOption("prevLabel", "Previous");
-    intro.start(); // Start the tour
+  
+    // Add the "Don't show again" checkbox dynamically
+    intro.onafterchange(() => {
+      const tooltip = document.querySelector('.introjs-tooltip') as HTMLElement;
+  
+      if (tooltip) {
+        let footerCheckbox = tooltip.querySelector('.dont-show-checkbox');
+        if (!footerCheckbox) {
+          footerCheckbox = document.createElement('div');
+          footerCheckbox.className = 'dont-show-checkbox';
+          footerCheckbox.innerHTML = `
+            <label style="font-size: 12px; display: flex; align-items: center; margin-bottom: 5px; color: white;">
+              <input type="checkbox" id="dontShowAgain" style="margin-right: 5px;" />
+              Don't show it again
+            </label>`;
+          tooltip.appendChild(footerCheckbox); // Add the checkbox to the tooltip footer
+        }
+      }
+    });
+  
+    // Handle when the tour finishes
+    intro.oncomplete(() => this.handleTourExit());
+  
+    // Handle when the tour is exited manually
+    // intro.onexit(() => this.handleTourExit());
+  
+    intro.start();
+  }
+  
+  // Centralized handling of "Don't show again" logic
+  handleTourExit() {
+    const checkbox = document.getElementById('dontShowAgain') as HTMLInputElement;
+    const dontShowAgain = checkbox?.checked || false;
+  
+    // Call the API to update showTour (replace with your API call logic)
+    this.updateShowTour(dontShowAgain ? 0 : 1);
+  }
+  
+  updateShowTour(showTour: number) {
+    this.talentService.updateShowTour(this.userId, showTour).subscribe(
+      () => {
+          console.log('Tour preferences updated successfully!');
+      },
+      (error) => {
+        console.error('Error updating tour preferences:', error);
+        this.toastr.error('An error occurred while updating tour preferences.');
+      }
+    );
   }
 
   getGalleryData() {
@@ -149,7 +192,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getUserProfile(userId: any) {
-    this.loading = true;  // Set loading to true before making the API call
+    this.loading = true;  
+    // Set loading to true before making the API call
     try {
       this.talentService.getProfileData(userId).subscribe((response) => {
         if (response && response.status && response.data && response.data.user_data) {
@@ -158,6 +202,15 @@ export class DashboardComponent implements OnInit {
 
           this.user = response.data.user_data;
           this.userNationalities = JSON.parse(this.user.user_nationalities);
+          this.StartTour = this.user?.show_tour == 1 ? true : false ;
+          console.log('fdg',this.user?.show_tour)
+          
+          if(this.StartTour){            
+            setTimeout(() => {
+              this.startIntroTour(); // Start the tour after a slight delay
+            }, 2500);
+          }
+
           this.isPremium = this.user?.active_subscriptions?.premium.length>0 ? true : false ;
           this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
@@ -230,6 +283,34 @@ export class DashboardComponent implements OnInit {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
+  }
+  openImage(index: number): void {
+    // Create album array with images' full paths
+    this.album = this.highlights.images.map((image: any) => ({
+      src: this.highlights.file_path + image.file_name,
+    }));
+  
+    // Set the main image to be the one clicked
+    this.mainImage = { src: this.album[index].src };
+  
+    // Open the lightbox
+    this.lightboxIsOpen = true;
+  }
+  
+  closeLightbox(): void {
+    // Close the lightbox
+    this.lightboxIsOpen = false;
+  }
+  
+  navigateImage(direction: 'prev' | 'next'): void {
+    // Get current image index
+    const currentIndex = this.album.findIndex(image => image.src === this.mainImage.src);
+  
+    // Handle edge cases (first and last image)
+    const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
+  
+    // Update main image and handle potential wrapping
+    this.mainImage = { src: this.album[newIndex].src };
   }
 
   getCoverImg(){

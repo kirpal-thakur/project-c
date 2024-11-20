@@ -986,10 +986,10 @@
   right: 40px;
 }
 .edit_image-2 span{
-margin-left: 10px;
-font-size: 14px;
-font-weight: 700;
-color: #000;
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
 }
 .edit_image-2 {
   background: #fff;
@@ -1223,169 +1223,6 @@ span.active_btn {
     font-size: 18px;
   }
 }
-// .tour-tooltip {
-//   background-color: #ffffff;
-//   border-radius: 8px;
-//   padding: 12px 16px;
-//   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-// }
-
-// .tour-tooltip .title {
-//   font-weight: bold;
-//   font-size: 16px;
-//   color: #333333;
-// }
-
-// .tour-tooltip .content {
-//   font-size: 14px;
-//   color: #666666;
-//   margin-top: 8px;
-// }
-
-// .tour-tooltip button {
-//   background: none;
-//   border: none;
-//   color: #0066cc;
-//   cursor: pointer;
-//   font-weight: bold;
-// }
-
-// .tour-tooltip button:hover {
-//   color: #004a99;
-//   text-decoration: underline;
-// }
-$tour-zindex: 1081 !default;
-$tour-step-color: #ffffff !default;
-$tour-text-color: #231f1f !default;
-$tour-next-button-color: #007bff !default;
-$tour-next-button-hover: #0069d9 !default;
-$tour-back-button-color: #007bff !default;
-$tour-next-text-color: #ffffff !default;
-$tour-next-text-hover: #ffffff !default;
-$tour-skip-link-color: #5e5e5e !default;
-$tour-orb-color: #625aff !default;
-$tour-shadow-color: #4c4c4c !default;
-
-body.tour-open {
-    overflow: hidden;
-}
-
-@mixin tour-triangle($direction, $color: currentColor, $size: 1rem) {
-
-    @if not index(top right bottom left, $direction) {
-        @error 'Direction must be either `top`, `right`, `bottom` or `left`.';
-    }
-
-    $opposite-direction: top;
-
-    @if $direction==top {
-        $opposite-direction: bottom;
-    }
-
-    @if $direction==bottom {
-        $opposite-direction: top;
-    }
-
-    @if $direction==right {
-        $opposite-direction: left;
-    }
-
-    @if $direction==left {
-        $opposite-direction: right;
-    }
-
-    width: 0;
-    height: 0;
-    content: '';
-    z-index: 2;
-    border-#{$opposite-direction}: $size solid $color;
-    $perpendicular-borders: $size solid transparent;
-    @if $direction==top or $direction==bottom {
-        border-left: $perpendicular-borders;
-        border-right: $perpendicular-borders;
-    }
-    @else if $direction==right or $direction==left {
-        border-bottom: $perpendicular-borders;
-        border-top: $perpendicular-borders;
-    }
-}
-
-ngx-guided-tour {
-    .guided-tour-user-input-mask {
-        z-index: $tour-zindex;
-    }
-
-    .guided-tour-spotlight-overlay {
-        z-index: $tour-zindex + 1;
-    }
-
-    .tour-orb {
-        z-index: $tour-zindex - 2;
-        background-color: $tour-orb-color;
-        box-shadow: 0 0 0.3rem 0.1rem $tour-orb-color;
-
-        .tour-orb-ring {
-            &::after {
-                border: 1rem solid $tour-orb-color;
-                box-shadow: 0 0 0.1rem 0.1rem $tour-orb-color;
-            }
-        }
-    }
-
-    .tour-step {
-        z-index: $tour-zindex + 2;
-
-        &.tour-bottom, &.tour-bottom-right, &.tour-bottom-left {
-            .tour-arrow::before {
-                @include tour-triangle(top, $tour-step-color);
-            }
-        }
-
-        &.tour-top, &.tour-top-right, &.tour-top-left {
-            .tour-arrow::before {
-                @include tour-triangle(bottom, $tour-step-color);
-            }
-        }
-
-        &.tour-left {
-            .tour-arrow::before {
-                @include tour-triangle(right, $tour-step-color);
-            }
-        }
-
-        &.tour-right {
-            .tour-arrow::before {
-                @include tour-triangle(left, $tour-step-color);
-            }
-        }
-
-        .tour-block {
-            color: $tour-text-color;
-            background-color: $tour-step-color;
-            box-shadow: 0 0.4rem 0.6rem $tour-shadow-color;
-        }
-
-        .tour-buttons {
-            button.skip-button {
-                color: $tour-skip-link-color;
-            }
-
-            .back-button {
-                color: $tour-back-button-color;
-            }
-
-            .next-button {
-                background-color: $tour-next-button-color;
-                color: $tour-next-text-color;
-                &:hover {
-                    background-color: $tour-next-button-hover;
-                    color: $tour-next-text-hover;
-                }
-            }
-        }
-    }
-
-}
 
 // new code 
 /* Scoped styles for Intro.js in component.scss */
@@ -1405,6 +1242,9 @@ ngx-guided-tour {
   width: 40px;
   height: 40px;
 }
+::ng-deep .introjs-tooltip-header {
+  z-index: -1;
+}
 ::ng-deep a.introjs-skipbutton:hover {
   color: #fff;
 }
@@ -1415,7 +1255,7 @@ ngx-guided-tour {
 ::ng-deep .introjs-tooltiptext{
   background-color: #ffc107 !important;
   border-radius: 5px !important;
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 15px;
   padding: 16px 20px;
 }
@@ -1452,4 +1292,107 @@ ngx-guided-tour {
 ::ng-deep .introjs-dontShowAgain label{
   background: unset !important;
   color: #fff !important;
+}
+
+
+.lightbox {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 90%;
+  margin: auto;
+}
+
+::ng-deep .lb-outerContainer {
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+}
+
+::ng-deep .lb-image {
+  border-radius: 8px;
+}
+
+::ng-deep .lb-dataContainer {
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+::ng-deep .lb-close {
+  background: none;
+  color: #fff;
+  font-size: 1.5rem;
+}
+/* Lightbox container styling */
+::ng-deep .lightbox-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* Ensures it's on top of other elements */
+  background-color: rgba(0, 0, 0, 0.85); /* Background overlay */
+  padding: 15px;
+  border-radius: 10px; /* Rounded corners */
+}
+
+/* Image styling */
+::ng-deep .lightbox-image {
+  max-width: 90%; /* Limit size of the image */
+  max-height: 80%; /* Maintain aspect ratio */
+  margin: 0 auto;
+  display: block;
+  border-radius: 8px; /* Optional: rounded corners */
+}
+
+/* Close button styling */
+::ng-deep .lightbox-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+::ng-deep .lightbox-close-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+::ng-deep .lightbox-container {
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+::ng-deep .lightbox-close-btn {
+  font-size: 24px;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+::ng-deep img.thumbnail-image {
+height: 100% !important;
+width:  100% !important;
+}
+
+::ng-deep img.main-image{
+  width: 100% !important;
+}
+
+::ng-deep .thumbnails-container{
+  display: flex !important;
 }

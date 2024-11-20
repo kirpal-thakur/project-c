@@ -274,8 +274,8 @@
               
 
               <!-- unlock page  -->
-              <div class="unlock_page" *ngIf="!isPremium">
-                <div class="col-lg-12 image-gallery mt-4 bg-color p-3 favourite_images">
+              <div class="unlock_page" *ngIf="!isPremium && isPremium">
+                <div class="col-lg-12 image-gallery mt-4 tour-highlights bg-color p-3 favourite_images">
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="Feature_images">
                       <h2>HIGHLIGHTS</h2>
@@ -323,7 +323,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-12 image-gallery mt-4 bg-color p-3 tour-highlights"  *ngIf="isPremium">
+              <div class="col-lg-12 image-gallery mt-4 bg-color p-3 tour-highlights"  >
 
                 <!-- Add a loader in your template -->
                 <div *ngIf="loading" class="loader-container py-5">
@@ -346,11 +346,28 @@
                     </div>
                   </div>
                   <div class="d-flex w-100 m-auto image_gallery-box mt-2">
-                    <div class="col-lg-4 gallery_images" *ngFor="let image of highlights?.images">
-                      <img [src]="highlights.file_path + image.file_name" alt="">
+                    <div class="col-lg-4 gallery_images" *ngFor="let image of highlights?.images let i = index">
+                      <img [src]="highlights.file_path + image.file_name" alt="" (click)="openImage(i)">
                     </div>
-                  
                   </div>
+                  <!-- Lightbox Modal (main image + thumbnails) -->
+                  <div *ngIf="lightboxIsOpen" class="lightbox-container">
+                    <div class="main-image-container">
+                      <img [src]="mainImage.src" alt="Main Image" class="main-image">
+                    </div>
+                    <div class="lightbox-navigation">
+                      <button (click)="navigateImage('prev')">&laquo;</button>
+                      <button (click)="navigateImage('next')">&raquo;</button>
+                    </div>
+                    <div class="thumbnails-container">
+                      <div class="thumbnail" *ngFor="let image of album; let i = index">
+                        <img [src]="image.src" alt="Thumbnail" class="thumbnail-image" (click)="openImage(i)">
+                      </div>
+                    </div>
+
+                    <button class="close-btn" (click)="closeLightbox()">X</button>
+                  </div>
+
                   <div class="d-flex w-100 m-auto image_gallery-box mt-2">
                     <div class="col-lg-4 gallery_images " *ngFor="let video of highlights?.videos">
                       <video [src]="highlights.file_path + video.file_name" autoplay></video>

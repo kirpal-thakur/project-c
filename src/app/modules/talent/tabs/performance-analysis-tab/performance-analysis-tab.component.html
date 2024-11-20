@@ -1,5 +1,5 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium">
+<div class="unlock_page" *ngIf="!isPremium && isPremium">
   <div class="card bg-color">
     <div class="card-header border-0">
       <div class="table-responsive">
@@ -52,7 +52,7 @@
   </div> 
 </div>
 
-<div class="card bg-color" *ngIf="isPremium">
+<div class="card bg-color" >
   <div class="card-header border-0">
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
