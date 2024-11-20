@@ -3,6 +3,7 @@ import Talk from 'talkjs';
 import { InboxPopupComponent } from './inbox-popup/inbox-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TalkService } from '../../../services/talkjs.service';
+import { SocketService } from '../../../services/socket.service';
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
@@ -17,7 +18,8 @@ export class InboxComponent {
   newUser : { id: string; name: string; email: string; photoUrl: string }[] = [];
   createdGroups: { groupId: string, groupName: string }[] = [];
   user:any = {};
-  constructor(private talkService : TalkService) {}
+  receiverUser:any = {};
+  constructor(private talkService : TalkService, private socketService: SocketService) {}
   
   async ngOnInit() {
     const userDataString = localStorage.getItem('userData');
@@ -33,7 +35,10 @@ export class InboxComponent {
       };
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
-  
+
+      session.on("message", () => {
+        this.socketService.emit('sendMessage', {senderId: this.user.id, receiverIds: [this.receiverUser.id]});
+      });
       // Defer mounting chatbox until next event loop cycle
       setTimeout(() => {
         chatbox.mount(document.getElementById('talkjs-container'));
@@ -45,6 +50,8 @@ export class InboxComponent {
 
    // Start a one-on-one chat
    startOneOnOneChat(user:any) {
+    this.receiverUser = user;
+    this.socketService.emit('sendMessage', {senderId: this.user.id, receiverIds: [user.id]});
     this.talkService.createOneOnOneConversation(user.id,user.name,user.email,user.photoUrl)
       .then(() => {
         this.talkService.mountChat('talkjs-container');

@@ -102,12 +102,12 @@
                 d="M26.3532 19.74C24.877 17.8785 22.3996 14.2195 22.3996 10.64C22.3996 7.09073 20.1193 3.89758 16.7996 2.72382C16.7593 1.21406 15.5183 0 14.0007 0C12.482 0 11.2422 1.21406 11.2018 2.72382C7.88101 3.89758 5.6007 7.09073 5.6007 10.64C5.6007 14.2207 3.1244 17.8785 1.64712 19.74C1.15433 20.3616 1.00197 21.1825 1.24058 21.9363C1.47354 22.6721 2.05367 23.2422 2.79288 23.4595C4.08761 23.8415 6.20997 24.2715 9.44682 24.491C10.8479 24.5851 12.3543 24.64 14.0008 24.64C15.646 24.64 17.1525 24.5851 18.5535 24.491C21.7915 24.2715 23.9128 23.8415 25.2086 23.4595C25.9478 23.2422 26.5268 22.6722 26.7598 21.9363C26.9983 21.1825 26.8449 20.3616 26.3532 19.74Z"
                 fill="#737B8B"></path>
             </svg>
-            <span class="badge light text-white bg-danger rounded-circle">3</span>
+            <span class="badge light text-white bg-danger rounded-circle">{{notificationCount}}</span>
           </a>
 
 
 
-          <div class="dropdown-menu py-0 notification-box">
+          <div class="dropdown-menu py-0 notification-box" (click)="$event.stopPropagation()"  >
 
             <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
               <h6>Notification</h6>
@@ -126,63 +126,36 @@
             </div>
 
             <div>
-              <div class="d-flex bg-light p-3 justify-content-between border-bottom">
-                <div>
-                  <img src="../../../assets/images/1.jpg" class="avatar me-2" width="40" height="40"
-                    class="rounded-circle" alt="">
-                </div>
-                <div style="padding-left: 10px;">
-                  <h6>Elton Price</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  <small>14 hours ago</small>
-                </div>
-                <span><svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                  </svg></span>
-              </div>
-              <div class="d-flex p-3 justify-content-between border-bottom">
-                <div>
-                  <img src="../../../assets/images/1.jpg" class="avatar me-2" width="40" height="40"
-                    class="rounded-circle" alt="">
-                </div>
-                <div style="padding-left: 10px;">
-                  <h6>Elton Price</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  <small>14 hours ago</small>
-                </div>
-                <span><svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                  </svg></span>
-              </div>
-
               <div id="notifications">
-                <div class="d-flex bg-light p-3 justify-content-between border-bottom"
-                  *ngFor="let notification of notifications">
-                  <div>
-                    <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
-                      alt="">
+                <div  *ngFor="let notification of liveNotification; let i = index">
+                  <div class="d-flex bg-light p-3 justify-content-between border-bottom"
+                    *ngIf="isShowAllNotification || i <= 2">
+                    <div>
+                      <img [src]="notification.image" class="avatar me-2 rounded-circle" width="40" height="40" alt="" />
+                    </div>
+                    <div style="padding-left: 10px;">
+                      <h6>{{ notification.title }}</h6>
+                      <p>{{ notification.content }}</p>
+                      <small>{{ notification.time }}</small>
+                    </div>
+                    <span>
+                      <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
+                      </svg>
+                    </span>
                   </div>
-                  <div style="padding-left: 10px;">
-                    <h6>{{ notification.title }}</h6>
-                    <p>{{ notification.content }}</p>
-                    <small>{{ notification.time }}</small>
-                  </div>
-                  <span>
-                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                    </svg>
-                  </span>
+              
+              
                 </div>
               </div>
-
-              <div class="load_more">
+              <div *ngIf="notificationCount > 3 || !isShowAllNotification" class="load_more">
                 <p (click)="loadMoreNotifications()">View all notifications</p>
               </div>
 
             </div>
           </div>
 
-          <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show" data-bs-popper="static"
+          <!-- <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show" data-bs-popper="static"
             style="z-index: 0;">
             <div id="notifications">
               <div class="d-flex bg-light p-3 justify-content-between" *ngFor="let notification of liveNotification">
@@ -202,7 +175,7 @@
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </li>
         <li class="nav-item mx-2 dropdown country_dropdown" (change)="ChangeLang($event)">

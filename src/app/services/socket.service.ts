@@ -2,13 +2,15 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
   private socket: Socket;
-  private readonly socketUrl: string = 'https://alerts.socceryou.ch/'; // Replace with your backend URL
+  // private readonly socketUrl: string = 'https://alerts.socceryou.ch/'; // Replace with your backend URL
+  private readonly socketUrl: string = environment.socketUrl; // Replace with your backend URL
 
   constructor() {
     // Initialize the socket connection

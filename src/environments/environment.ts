@@ -34,6 +34,7 @@ export const environment = {
 
     ],
 
-    apiUrl:'https://api.socceryou.ch/api/'
+    apiUrl:'https://api.socceryou.ch/api/',
+    socketUrl:'https://alerts.socceryou.ch/'
   } as const;
   

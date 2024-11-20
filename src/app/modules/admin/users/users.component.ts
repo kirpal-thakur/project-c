@@ -267,8 +267,7 @@ export class UsersComponent implements OnInit {
     else{
       console.log("No data found in localStorage."); 
     }
-
-    this.socketService.emit('userVerified', {senderId: userId, receiverIds: ['57']});
+    this.socketService.emit('userVerified', {senderId: userId, receiverIds: this.selectedUserIds});
   }
 
 

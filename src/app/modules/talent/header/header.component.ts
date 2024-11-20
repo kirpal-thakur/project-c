@@ -25,12 +25,14 @@ export class HeaderComponent {
 
   liveNotification: any[] = [];
   showNotification: boolean = false;
+  notificationCount: number = 0;
+  isShowAllNotification : boolean = false
 
   ngOnInit() {
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
-
     this.socketService.on('notification').subscribe((data) => {
+      this.notificationCount +=1;
       // Create a new notification object
       const obj = {
         image: data.senderProfileImage,
@@ -40,16 +42,8 @@ export class HeaderComponent {
       };
 
       // Add the notification to the array and show the notification box
-      this.liveNotification = [obj]; // Keep only the latest notification
+      this.liveNotification.push(obj); // Keep only the latest notification
       this.showNotification = true;
-
-      console.log('New notification:', data.message);
-
-      // Hide the notification after 3 seconds
-      setTimeout(() => {
-        this.liveNotification = [];
-        this.showNotification = false;
-      }, 7000); // 3000 ms = 3 seconds
     });
   }
 
@@ -97,59 +91,65 @@ export class HeaderComponent {
   ];
 
   loadMoreNotifications() {
-    const moreNotifications: Notification[] = [
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '13 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '11 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '9 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '18 hours ago'
-      }
-    ];
-
-    this.notifications = [...this.notifications, ...moreNotifications];
-
+    // const moreNotifications: Notification[] = [
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '13 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '12 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '12 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '11 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '10 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '10 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '9 hours ago'
+    //   },
+    //   {
+    //     image: '../../../assets/images/1.jpg',
+    //     title: 'John Doe',
+    //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+    //     time: '18 hours ago'
+    //   }
+    // ];
+    this.isShowAllNotification = true;
+    this.liveNotification = this.liveNotification;
+    // Hide the notification after 3 seconds
+    setTimeout(() => {
+      this.liveNotification = [];
+      this.showNotification = false;
+      this.notificationCount = 0;
+      this.isShowAllNotification = false;
+    }, 5000); // 3000 ms = 3 seconds
   }
 
 }
