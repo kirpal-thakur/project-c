@@ -14,11 +14,12 @@ export class PricingComponent {
        // Retrieve the states from local storage
        const savedState1 = localStorage.getItem('toggleState1');
        const savedState2 = localStorage.getItem('toggleState2');
+       const savedState3 = localStorage.getItem('toggleState3');
    
        // Set isActive for each toggle based on the saved states or default to false
        this.isActive1 = savedState1 === 'true' ? true : false;
        this.isActive2 = savedState2 === 'true' ? true : false;
-       this.isActive3 = savedState2 === 'true' ? true : false;
+       this.isActive3 = savedState3 === 'true' ? true : false;
         this.adVisible = [true, true, true, true, true, true, true];
      }
    
@@ -33,6 +34,11 @@ export class PricingComponent {
        // Save the new state to local storage
        localStorage.setItem('toggleState2', this.isActive2.toString());
      }
+     toggle3() {
+      this.isActive3 = !this.isActive3;
+      // Save the new state to local storage
+      localStorage.setItem('toggleState3', this.isActive3.toString());
+    }
     adVisible: boolean[] = [true, true, true, true, true, true, true]; // Array to manage ad visibility
   
     closeAd(index: number) {

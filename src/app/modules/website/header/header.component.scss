@@ -565,9 +565,12 @@ button.create-account.d-block {
 //   color: #e05263;
 // }
 
-.navbar-brand img {
-    width: 190px;
-}
+ .navbar-brand img {
+        width: 261px;
+        height: 116px;
+        object-fit: cover;
+    }
+
 
 .banner-content svg {
     width: 600px;
@@ -1208,7 +1211,9 @@ select.form-select.custom-select1 {
 
 
     .navbar-brand img {
-        width: 150px;
+        width: 160px;
+        height: 70px;
+
     }
 
     .coustom-select .form-select {
@@ -1381,12 +1386,12 @@ select.form-select.custom-select1 {
         height: 60px;
     }
 
-    .logo1 {
-        // width: 250px;
-        /* Adjust width of the logo image */
-        height: auto;
-        /* Maintain aspect ratio */
-    }
+    // .logo1 {
+    //     // width: 250px;
+    //     /* Adjust width of the logo image */
+    //     height: auto;
+    //     /* Maintain aspect ratio */
+    // }
 
     .logo1 {
         position: relative;
@@ -1394,6 +1399,7 @@ select.form-select.custom-select1 {
         display: flex;
         margin-left: auto;
         margin-right: auto;
+        top: 5px;
     }
 
     .navbar-collapse {
@@ -1534,7 +1540,6 @@ select.form-select.custom-select1 {
 
     .footer-bottom p {
         font-size: 18px;
-        color: white;
     }
 
     select.form-select.custom-select1.hidden {
@@ -1658,10 +1663,6 @@ select.form-select.custom-select1 {
         margin-left: 84px;
     }
 
-    .navbar-brand img {
-        width: 130px;
-    }
-
     .banner-content svg {
         width: 300px;
     }
@@ -1724,17 +1725,16 @@ select.form-select.custom-select1 {
     .logo1::before {
         width: 130px;
     }
-    // .sidebar {
-
-    //     height: 100vh;
-    //     height: 900px;
-    // }
 
 }
 
 @media (max-width: 575px) {
     .register .form-select {
         height: 44px;
+    }
+    .navbar-brand img {
+        width: 130px;
+        height: 58px;
     }
 
     .footer-bottom p {
@@ -1837,13 +1837,6 @@ select.form-select.custom-select1 {
         font-size: 15px;
         margin-top: 10px;
         margin-bottom: 10px;
-    }
-
-    .logo1 {
-        // width: 250px;
-        /* Adjust width of the logo image */
-        height: auto;
-        /* Maintain aspect ratio */
     }
 
     .navbar-collapse {
@@ -2194,6 +2187,10 @@ select.form-select.custom-select1 {
         top: 33px;
         width: 51px;
     }
+    .logo1 img {
+        height: 72px;
+        width: 200px;
+    }
 
     .nav-link {
         font-size: 17px;
@@ -2245,6 +2242,10 @@ select.form-select.custom-select1 {
         margin-right: 0;
         margin-left: 0;
     }
+    .logo1 img {
+        height: 72px;
+        width: 200px;
+    }
 }
 
 @media(max-width: 361px) {
@@ -2260,7 +2261,10 @@ select.form-select.custom-select1 {
     input:checked+.slider:before {
         transform: translateX(21px);
     }
-
+    .navbar-brand img {
+        width: 115px;
+        height: 50px;
+    }
     .logo svg {
         height: 40px;
         width: 90px;
@@ -2271,7 +2275,10 @@ select.form-select.custom-select1 {
         font-size: 14px;
         padding: 0px 0px 0px 10px;
     }
-
+    .logo1 img {
+        height: 65px;
+        width: 220px;
+    }
 
     .logo h6 {
         font-size: 16px;

@@ -226,6 +226,11 @@ a {
   left: 0;
   top: 0;
 }
+.home-banner-image{
+  width: 546px;
+  height: 214px;
+  object-fit: cover;
+}
 
 .main-bnr {
   background-image: url("../../../../assets/images/bnr.jpg");
@@ -2658,6 +2663,11 @@ img.success-image {
   .joined-text h3 {
     font-size: 28px;
   }
+  .home-banner-image{
+    width: 400px;
+    height: 155px;
+    object-fit: cover;
+}
 
   .club_players {
     top: 17%;
@@ -3593,6 +3603,11 @@ img.image5 {
   .main-bnr {
     height: 50vh;
   }
+  .home-banner-image {
+    width: 260px;
+    height: 100px;
+    object-fit: cover;
+}
 
   .player-image {
     height: 200px;
@@ -4533,6 +4548,95 @@ img.image5 {
 //   margin-right: 10%;
 // }
 // }
+
+
+@media (max-width: 345px){
+.works-btn .talent-btn .btn {
+  width: 105px;
+  height: 35px;
+}
+button.btn.btn-success.active-btn .club-p {
+  width: 105px;
+  height: 33px;
+  font-size: 18px;
+}
+button.btn.btn-success.active-btn .club-s {
+  width: 160px;
+  height: 35px;
+  font-size: 18px;
+}
+.talent-img1 img {
+  width: 95px;
+  height: 165px;
+}
+img.image3 {
+  width: 215px;
+  height: 85px;
+}
+.talent-img2 img {
+  top: 175px;
+  width: 95px;
+  left: 0;
+  height: 75px;
+}
+img.image4 {
+  width: 215px;
+  height: 108px;
+  top: 115px;
+}
+.right-side img.image3 {
+  width: 215px;
+  height: 85px;
+}
+.right-side img.image5 {
+  width: 215px;
+  height: 125px;
+  top: 105px;
+}
+.message-panel img {
+  width: 165px;
+  height: 220px;
+}
+.message-panel1 img {
+  width: 140px;
+  height: 260px;
+}
+.club-offers1 img {
+  height: 120px;
+  width: 150px;
+}
+.club-offers2 img {
+  top: 46%;
+  height: 145px;
+  width: 155px;
+}
+.club-offers3 img {
+  left: 2%;
+}
+.club_member1, .club_member5, .club_member7, .club_member3 {
+  width: 95px;
+  left: 0;
+}
+.member1-image img, .member5-image img, .member7-image img, .member3-image img {
+  width: 86px;
+  height: 105px;
+}
+.club_member2 {
+  width: 95px;
+  left: 0;
+  height: 130px;
+}
+.member2-image {
+  height: 110px;
+}
+.member2-image img {
+  height: 60px;
+  width: 58px;
+}
+
+
+}
+
 @media (max-width: 321px) {
   .message-panel img {
     width: 160px;

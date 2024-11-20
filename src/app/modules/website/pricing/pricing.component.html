@@ -1,3 +1,5 @@
+<section class="website-code">
+<app-header></app-header>
 <div class="main">
     <div class="main-bnr">
         <div class="overlay"></div>
@@ -24,7 +26,7 @@
         <div class="container">
             <h3 class="price-heading3">Membership Plans</h3>
             <div class="row">
-                <div class="col-lg-6 col-md-12 col-12">
+                <div class="col-lg-4 col-md-12 col-12">
                     <mat-card>
                         <div class="billed">
                             <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
@@ -47,8 +49,7 @@
                         </div>
                     </mat-card>
                 </div>
-
-                <div class="col-lg-6 col-md-12 col-12">
+                <div class="col-lg-4 col-md-12 col-12">
                     <mat-card>
                         <div class="billed">
                             <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">Billed Monthly</p>
@@ -67,35 +68,60 @@
                         </div>
                     </mat-card>
                 </div>
+                <div class="col-lg-4 col-md-12 col-12">
+                    <mat-card>
+                        <div class="billed">
+                            <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">Billed Monthly</p>
+                            <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }"
+                                (click)="toggle3()"></div>
+                            <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">Billed Yearly</p>
+                        </div>
+
+                        <div class="premium">
+                            <div class="premium-img">
+                            <h2 class="premium-heading2">Boost Profile</h2>
+                            <h3 class="premium-heading3">
+                                {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month' }}</span>
+                            </h3>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
             </div>
         </div>
+
+        
 
         <div class="features py_0">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-12">
+                    <div class="col-lg-4 col-md-12 col-12">
                         <mat-card class="feature-box">
-                            <h3 class="feature-heading">Talent Features</h3>
+                            <h3 class="feature-heading">For Talents, Clubs and Scouts</h3>
                             <div class="feature-data">
+                                <div class="feature-height">
                                 <div class="free">
                                     <h4 class="free-heading">Free Features:</h4>
                                     <ul>
-                                        <li>Create a personal profile showcasing abilities, performance data, and achievements.</li>
-                                        <li>Upload photos and videos to the profile.</li>
-                                        <li>View basic profiles of coaches, managers, and scouts.</li>
+                                        <li>Full display of the complete talent profile with career stages and performance data.</li>
+                                        <li>Download a player profile as a PDF.</li>
+                                        <li>Create a favorites list of talents, football clubs and scouts.</li>
+                                        <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
+                                        <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 11.00 per country and month).</li>
                                     </ul>
                                 </div>
 
-                                <div class="premium-feature">
+                                <!-- <div class="premium-feature">
                                     <h4 class="premium-heading">Premium Features:</h4>
                                     <ul>
                                         <li>Full display of the complete talent profile with career stages and performance data.</li>
                                         <li>Download a player profile as a PDF.</li>
-                                        <!-- <li>Chat or message function to write to other registered talents and football clubs/scouts.</li> -->
+                                        <li>Chat or message function to write to other registered talents and football clubs/scouts.</li> 
                                         <li>Create a favorites list of talents, football clubs, and scouts.</li>
                                         <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
                                         <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
                                     </ul>
+                                </div> -->
                                 </div>
 
                                 <button type="button" class="btn btn-join" data-bs-toggle="modal"
@@ -103,30 +129,56 @@
                             </div>
                         </mat-card>
                     </div>
-                    <div class="col-lg-6 col-md-12 col-12">
+                    <div class="col-lg-4 col-md-12 col-12">
                         <mat-card class="right_side">
                             <div class="feature-box">
-                                <h3 class="feature-heading">Club/Scout Features</h3>
+                                <h3 class="feature-heading">For Talents and Scouts</h3>
                                 <div class="feature-data">
+                                    <div class="feature-height">
                                     <div class="free">
                                         <h4 class="free-heading">Free Features:</h4>
                                         <ul>
-                                            <li>Create a personal profile showcasing history, players and sighting information.</li>
-                                            <li>Upload photos and videos to the profile.</li>
-                                            <li>View basic talent, club and scout profiles.</li>
+                                            <li>Access to the complete talent profiles with detailed performance data.</li>
+                                            <li>Download a player profile as a PDF.</li>
+                                            <li>Create a favorites list of talents, football clubs and scouts.</li>
+                                            <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
+                                            <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 11.00 per country and month).</li>
                                         </ul>
                                     </div>
-                                    <div class="premium-feature">
+                                    <!-- <div class="premium-feature">
                                         <h4 class="premium-heading">Premium Features:</h4>
                                         <ul>
                                             <li>Access to the complete talent profiles with detailed performance data.</li>
                                             <li>Download a player profile as a PDF.</li>
-                                            <!-- <li>Ability to contact talents through the messaging system.</li> -->
+                                             <li>Ability to contact talents through the messaging system.</li>
                                             <li>Create a favorites list of talents, football clubs and scouts.</li>
                                             <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
                                             <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
                                         </ul>
+                                    </div> -->
                                     </div>
+                                    <button type="button" class="btn btn-join" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1">Join Today</button>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <mat-card class="right_side">
+                            <div class="feature-box">
+                                <h3 class="feature-heading">For Talents and Scouts</h3>
+                                <div class="feature-data">
+                                    <div class="feature-height">
+                                    <div class="free">
+                                        <h4 class="free-heading">Boost Features:</h4>
+                                        <ul>
+                                            <li>Jump to the top of search results.</li>
+                                            <li>Higher chances to get discovered.</li>
+                                            <li>Profile boosts help you grow your network and following faster.</li>
+                                            <li>You can boost your profile to reach a specific audience, such as Talents, Clubs or Scouts.</li>
+                                        </ul>
+                                    </div>
+                                </div>
                                     <button type="button" class="btn btn-join" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal1">Join Today</button>
                                 </div>
@@ -157,3 +209,5 @@
         </div>
     </div>
 </div>
+<app-footer></app-footer>
+</section>
