@@ -57,14 +57,27 @@ p {
 body {
     background-color: #fff;
 }
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 32px;
+  width: 33px;
+  left: 0px;
+  bottom: 0px;
+  transition: 0.4s;
+}
 
 .switch1 {
     display: none;
 }
+ .btn-close {
+    filter: brightness(0) invert(1);
+    background-color: transparent;
+  }
 
 .login-btn {
     font-size: 16px;
-    background-color: #E05263;
+    // background-color: #E05263;
     padding: 7px 20px;
     border-radius: 10px;
     height: 40px;
@@ -1198,9 +1211,13 @@ select.form-select.custom-select1 {
     .sidebar {
         display: none;
     }
+    .slider:before {
+        height: 28.5px;
+        width: 28.5px;
+    }
 
     input:checked+.slider:before {
-        transform: translateX(26px);
+        transform: translateX(21px);
     }
 
     .nav-link {
@@ -1651,6 +1668,10 @@ select.form-select.custom-select1 {
         margin-bottom: 10px;
         margin-top: 10px;
         height: 44px;
+    }
+    ul.social-links i {
+        font-size: 32px;
+        color: white;
     }
 
 }
@@ -2153,24 +2174,12 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 415px) {
-    .switch {
-        width: 60px;
-        height: 30px;
-        margin-right: 0;
-        margin-left: 0;
-    }
 }
 
 @media (max-width: 400px) {
 
-    //   .switch {
-    //     width: 50px;
-    //     height: 30px;
-    //     margin-right: 0;
-    //     margin-left: 0;
-    // }
     .switch1 .switch {
-        width: 60px;
+        width: 50px;
         height: 30px;
         margin-right: 0;
         margin-left: 0;
@@ -2236,12 +2245,14 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 376px) {
+    
     .switch1 .switch {
-        width: 60px;
+        width: 50px;
         height: 30px;
         margin-right: 0;
         margin-left: 0;
     }
+
     .logo1 img {
         height: 72px;
         width: 200px;
@@ -2249,12 +2260,6 @@ select.form-select.custom-select1 {
 }
 
 @media(max-width: 361px) {
-    .switch1 .switch {
-        width: 60px;
-        height: 30px;
-        margin-right: 0;
-        margin-left: 0;
-    }
 }
 
 @media (max-width: 321px) {

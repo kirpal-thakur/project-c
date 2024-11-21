@@ -22,6 +22,27 @@ h5 {
     font-size: 22px;
     font-weight: 600;
 }
+.social-icons a {
+    display: inline-block;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.social-icons a:hover {
+    transform: scale(1.1); /* Slightly enlarge the icon on hover */
+}
+
+.social-icons a:hover img {
+    filter: invert(21%) sepia(92%) saturate(361%) hue-rotate(-43deg) brightness(97%) contrast(100%);
+    /* Applying a filter to the image to simulate pink color (#E05263) */
+}
+
+.social-icons a:hover {
+    color: #E05263; /* Optional: Change the text color (if any) on hover */
+    text-decoration: none; /* Optional: Remove underline on hover */
+}
+
+
+
 
 
 li {

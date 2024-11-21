@@ -119,9 +119,9 @@
 .light-theme .website-code .light-images{
   display: block;
 }
-.light-theme .website-code button.accordion-button:hover {
-  background: transparent;
-}
+// .light-theme .website-code button.accordion-button:hover {
+//   background: transparent;
+// }
 .light-theme .website-code .member1-image img,
 .light-theme .website-code .member2-image,
 .light-theme .website-code .member3-image img,
@@ -226,18 +226,18 @@
 
 .light-theme .website-code .slider:before {
   background-color: #ccc;
-  border: 2px solid #ccc;
+  // border: 2px solid #ccc;
 }
 
-.light-theme .website-code .slider:before {
-  position: absolute;
-  content: "";
-  height: 33px;
-  width: 33px;
-  left: 0px;
-  bottom: 0px;
-  transition: 0.4s;
-}
+// .light-theme .website-code .slider:before {
+//   position: absolute;
+//   content: "";
+//   height: 33px;
+//   width: 33px;
+//   left: 0px;
+//   bottom: 0px;
+//   transition: 0.4s;
+// }
 
 .light-theme .website-code button.btn.btn-success.active-btn {
   background-image: linear-gradient(180deg, #6FB95D, #236115);
@@ -378,10 +378,16 @@
 .light-theme .website-code .banner-btn a.btn-primary {
   background-color: #E05263;
 }
+.light-theme .website-code .login-btn {
+  background-color: #E05263;
+}
 
 .light-theme .website-code .slider {
   background-color: white;
   border: 1px solid grey;
+}
+.light-theme .website-code .personalization-box.ng-star-inserted .accept, .light-theme .website-code .choice, .light-theme .website-code .accept {
+  color: white;
 }
 
 /*---------------------------------------------------------------------------------------------------------
@@ -661,10 +667,13 @@ body {
 // .light-theme .website-code #footer a.login-btn:hover, .light-theme .website-code .banner-btn a.btn-primary:hover {
 //   background: transparent;
 // }
-.light-theme .website-code button {
+.light-theme .website-code .ad-close-button {
   background-color: #E05263;
   color: white;
   border: none;
+}
+.light-theme .website-code ul.social-links i:hover {
+  color: #092E01;
 }
 
 .light-theme .website-code .faq {
@@ -759,10 +768,10 @@ a {
   transition: all 0.4s;
 }
 
-.light-theme .website-code .btn-close {
-  filter: brightness(0) invert(1);
-  background-color: transparent;
-}
+// .light-theme .website-code .btn-close {
+//   filter: brightness(0) invert(1);
+//   background-color: transparent;
+// }
 
 .light-theme .website-code .choice {
   background: linear-gradient(180deg, #6FB95D, #236115);
@@ -1290,25 +1299,25 @@ a.dropdown-item.ai-icon.selected {
   height: 0;
 }
 
-.slider.round {
-  border-radius: 34px;
-}
+// .slider.round {
+//   border-radius: 34px;
+// }
 
 
-.dark-theme a.login-btn {
-  background-color: #BDE34F;
-}
+// .dark-theme a.login-btn {
+//   background-color: #BDE34F;
+// }
 
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+// input:checked+.slider:before {
+//   -webkit-transform: translateX(26px);
+//   -ms-transform: translateX(26px);
+//   transform: translateX(26px);
+// }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+// /* Rounded sliders */
+// .slider.round {
+//   border-radius: 34px;
+// }
 
 
 .dashboard-title {
@@ -1959,12 +1968,12 @@ input:checked+.slider:before {
     height: 25px;
   }
 
-  .light-theme .website-code .slider:before {
-    height: 28px;
-    width: 28px;
-    left: 0px;
-    bottom: 0px;
-  }
+  // .light-theme .website-code .slider:before {
+  //   height: 28px;
+  //   width: 28px;
+  //   left: 0px;
+  //   bottom: 0px;
+  // }
 
   .notification_dropdown a svg {
     width: 20px;
@@ -2016,12 +2025,12 @@ input:checked+.slider:before {
     display: none;
   }
 
-  .light-theme .website-code .slider:before {
-    height: 27.5px;
-    width: 26px;
-    left: 0;
-    bottom: 0px;
-  }
+  // .light-theme .website-code .slider:before {
+  //   height: 27.5px;
+  //   width: 26px;
+  //   left: 0;
+  //   bottom: 0px;
+  // }
 
   .page-sidebar {
     width: 100%;
@@ -2098,17 +2107,17 @@ input:checked+.slider:before {
     }
   }
 
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0px;
-    right: 0px !important;
-    bottom: 1px !important;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
+  // .slider {
+  //   position: absolute;
+  //   cursor: pointer;
+  //   top: 0;
+  //   left: 0px;
+  //   right: 0px !important;
+  //   bottom: 1px !important;
+  //   background-color: #ccc;
+  //   -webkit-transition: 0.4s;
+  //   transition: 0.4s;
+  // }
 
   .search-area {
     width: 10rem !important;
@@ -2218,24 +2227,24 @@ input:checked+.slider:before {
   //   bottom: 0px;
   // }
 
-  .light-theme .website-code .slider:before {
-    height: 26.7px;
-    width: 26px;
-    left: 0px;
-    bottom: 0px;
-  }
+  // .light-theme .website-code .slider:before {
+  //   height: 26.7px;
+  //   width: 26px;
+  //   left: 0px;
+  //   bottom: 0px;
+  // }
 
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0px;
-    right: 10px !important;
-    bottom: 1px !important;
-    background-color: #ccc;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
+  // .slider {
+  //   position: absolute;
+  //   cursor: pointer;
+  //   top: 0;
+  //   left: 0px;
+  //   right: 10px !important;
+  //   bottom: 1px !important;
+  //   background-color: #ccc;
+  //   -webkit-transition: 0.4s;
+  //   transition: 0.4s;
+  // }
 
   .bg_pending {
     background: #fcbe2d;
@@ -2269,21 +2278,21 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 376px) {
-  .light-theme .website-code .slider:before {
-    height: 26.8px;
-    width: 26px;
-    left: 0px;
-    bottom: 0px;
-  }
+  // .light-theme .website-code .slider:before {
+  //   height: 26.8px;
+  //   width: 26px;
+  //   left: 0px;
+  //   bottom: 0px;
+  // }
 }
 
 @media(max-width: 321px) {
-  .light-theme .website-code .slider:before {
-    height: 26.8px;
-    width: 26px;
-    left: 0px;
-    bottom: 0px;
-  }
+  // .light-theme .website-code .slider:before {
+  //   height: 26.8px;
+  //   width: 26px;
+  //   left: 0px;
+  //   bottom: 0px;
+  // }
 
   .light-theme .website-code .check-resister.active input#ManualInput {
     /* border-color: pink; */
