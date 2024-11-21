@@ -8,17 +8,6 @@
 })
  export class SidebarComponent {
   sidebarOpen: boolean = false;
-  // notificationCount: number = 0;
-  // constructor( private socketService: SocketService) { }
-  // ngOnInit() {
-  //   this.socketService.on('notification').subscribe((data) => {
-  //     this.notificationCount +=1;
-
-  //     setTimeout(() => {
-  //       this.notificationCount = 0;
-  //     });
-  //   });
-  // }
 
  toggleState() {
   this.sidebarOpen = !this.sidebarOpen;

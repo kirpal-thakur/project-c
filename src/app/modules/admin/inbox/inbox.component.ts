@@ -36,9 +36,12 @@ export class InboxComponent {
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
 
-      session.on("message", () => {
-        this.socketService.emit('sendMessage', {senderId: this.user.id, receiverIds: [this.receiverUser.id]});
-      });
+      chatbox.onSendMessage((event) => {
+        let getReceiverIds = Object.keys(event.conversation.participants)
+          .filter(val => val != this.user.id);
+        this.socketService.emit('sendMessage', {senderId: this.user.id, receiverIds: getReceiverIds});
+    });
+
       // Defer mounting chatbox until next event loop cycle
       setTimeout(() => {
         chatbox.mount(document.getElementById('talkjs-container'));
