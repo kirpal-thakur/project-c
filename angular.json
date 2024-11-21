@@ -27,6 +27,7 @@
             "outputPath": "dist/c",
             "index": "src/index.html",
             "browser": "src/main.ts",
+            // "baseHref": "/angular/browser/",
             "polyfills": [
               "zone.js"
             ],

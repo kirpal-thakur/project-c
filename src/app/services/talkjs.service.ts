@@ -49,6 +49,7 @@ export class TalkService {
 
     // Create a one-on-one conversation
     createOneOnOneConversation(id: string, name: string, email: string, photoUrl: string): Promise<void> {
+
       return new Promise((resolve, reject) => {
         if (!this.user || !this.session) {
           reject('User is not initialized');

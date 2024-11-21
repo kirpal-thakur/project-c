@@ -34,6 +34,7 @@ export const environment = {
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
     ],
 
-    apiUrl:'https://api.socceryou.ch/api/'
+    apiUrl:'https://api.socceryou.ch/api/',
+    socketUrl:'https://alerts.socceryou.ch/'
   } as const;
   
