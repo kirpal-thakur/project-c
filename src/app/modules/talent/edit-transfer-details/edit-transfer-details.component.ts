@@ -41,10 +41,15 @@ export class EditTransferDetailsComponent {
     this.teams = this.data.teams;
     this.transfer = this.data.transfer;
     this.date_of_transfer = new FormControl(
-      this.data.date_of_transfer ? new Date(this.data.date_of_transfer) : null
+      this.transfer.date_of_transfer ? new Date(this.transfer.date_of_transfer) : null
     );
-    this.date_of_transfer.setValue(this.data.date_of_transfer ? new Date(this.data.date_of_transfer) : null);
-    console.log(this.teams)
+    this.date_of_transfer.setValue(this.transfer.date_of_transfer ? new Date(this.transfer.date_of_transfer) : null);
+    console.log('transfer',this.transfer)
+    this.teamTo = this.transfer.team_name_to ; // Set the selected team's name to the input
+    this.teamFrom =  this.transfer.team_name_from ; // Set the selected team's name to the input
+
+    this.teamToId = this.transfer.team_to;
+    this.teamFromId = this.transfer.team_from;
   }
 
   onCancel(): void {
@@ -103,9 +108,11 @@ export class EditTransferDetailsComponent {
 
     this.talentService.searchTeams(this.teamTo).subscribe(
       (response: any) => {
-        if (response && response.data) {
+        if (response && response.data && response.data.teams) {
           this.filterTeams = response.data.teams; // Update the list of filtered clubs based on search
-          console.log('Filtered teams:', this.filterTeams);
+          console.log('Filtered teams:', this.filterTeams,response.data.teams);
+        }else{
+          this.filterTeams = [];
         }
       },
       (error: any) => {
@@ -125,7 +132,7 @@ export class EditTransferDetailsComponent {
 
     this.talentService.searchTeams(this.teamFrom).subscribe(
       (response: any) => {
-        if (response && response.data) {
+        if (response && response.data && response.data.teams) {
           this.filterTeamsFrom = response.data.teams; // Update the list of filtered clubs based on search
           console.log('Filtered teams:', this.filterTeamsFrom);
         }

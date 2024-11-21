@@ -1,9 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgForm } from '@angular/forms';
 import { TalentService } from '../../../../../services/talent.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {FormControl, NgForm } from '@angular/forms';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
 import { ToastrService } from 'ngx-toastr';
-
+const moment = _rollupMoment || _moment;
 @Component({
   selector: 'app-add-performance',
   templateUrl: './add-performance.component.html',
@@ -11,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 
 export class AddPerformanceComponent {
-
+  readonly date = new FormControl(moment());
   performance: any = {};
   teams: any[] = [];
   matches : any ;
@@ -21,6 +25,8 @@ export class AddPerformanceComponent {
   currentTeamId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
   isLoading: boolean = false;
+  from_date: FormControl = new FormControl(null);
+  to_date: FormControl = new FormControl(null);
 
   constructor(
     private toastr: ToastrService,
@@ -35,6 +41,15 @@ export class AddPerformanceComponent {
     this.matches = this.performance.matches;
     this.goals = this.performance.goals;
     console.log('teams:', this.teams);
+    this.from_date = new FormControl(
+      this.performance.from_date ? new Date(this.performance.from_date) : null
+    );
+    this.to_date = new FormControl(
+      this.performance.to_date ? new Date(this.performance.to_date) : null
+    );
+    console.log('teams:', this.from_date);
+    this.from_date.setValue(this.performance.from_date ? new Date(this.performance.from_date) : null);
+    this.to_date.setValue(this.performance.to_date ? new Date(this.performance.to_date) : null);
   }
 
   onCancel(): void {
@@ -63,8 +78,16 @@ export class AddPerformanceComponent {
 
       // Add currentTeamId to the form values
       const formData = {
-        ...myForm.value,
-        team_id: this.currentTeamId
+        ...myForm.value, // Include all form values
+        team_id: this.currentTeamId, // Append the selected team ID
+        from_date: this.from_date.value // Convert FormControl value to string (if necessary)
+          ? moment(this.from_date.value).format('YYYY-MM-DD') 
+          : null,
+        to_date: this.to_date.value // Convert FormControl value to string (if necessary)
+          ? moment(this.to_date.value).format('YYYY-MM-DD') 
+          : null,
+        matches: this.matches, // Include matches
+        goals: this.goals // Include goals
       };
 
       this.talentService.addPerformance(formData).subscribe({

@@ -46,7 +46,9 @@ export class EditPerformanceDetailsComponent implements OnInit {
     this.to_date = new FormControl(
       this.performance.to_date ? new Date(this.performance.to_date) : null
     );
-    console.log('teams:', this.from_date);
+    this.currentTeam =  this.performance.team_name; // Set the selected team's name to the input
+    this.currentTeamId = this.performance.team_id;
+
     this.from_date.setValue(this.performance.from_date ? new Date(this.performance.from_date) : null);
     this.to_date.setValue(this.performance.to_date ? new Date(this.performance.to_date) : null);
   }

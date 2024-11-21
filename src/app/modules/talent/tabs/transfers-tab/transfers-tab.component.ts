@@ -100,8 +100,9 @@ export class TransfersTabComponent {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Transfer updated:', result);
+        this.getUserTransfers();
       } else {
+        this.getUserTransfers();
         console.log('User canceled the edit');
       }
     });
@@ -128,6 +129,7 @@ export class TransfersTabComponent {
         console.log('Transfer updated:', result);
         this.getUserTransfers();
       } else {
+        this.getUserTransfers();
         console.log('User canceled the edit');
       }
     });
