@@ -18,8 +18,20 @@
           <!-- In the team since -->
           <div class="row">
             <div class="form-group col-lg-4">
-              <label for="teamSince" class="form-label">{{'In the team since' | translate}}</label>
-              <input type="date" class="form-control" id="teamSince" name="in_team_since" [(ngModel)]="in_team_since" />
+            <label for="teamSince" class="form-label">{{'In the team since' | translate}}</label>
+            <div class="d-flex align-items-center justify-content-center">
+                <input
+                matInput
+                id="teamSince"
+                name="in_team_since"
+                [matDatepicker]="dp"
+                [formControl]="in_team_since"
+                placeholder="MM/DD/YYYY"
+                required
+              />
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker>
+            </div>
             </div>
   
             <!-- Top speed -->
@@ -86,7 +98,19 @@
               <!-- Last change -->
               <div class="position_inputs">
                 <label for="lastChange" class="form-label">{{'Last change' | translate}}</label>
-                <input type="date" class="form-control" name="last_change" id="lastChange" [(ngModel)]="last_change"/>
+                  <div class="d-flex align-items-center justify-content-center">
+                    <input
+                    matInput
+                    id="lastChange"
+                    name="last_change"
+                    [matDatepicker]="last_changepicker"
+                    [formControl]="last_change"
+                    placeholder="MM/DD/YYYY"
+                    required
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="last_changepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #last_changepicker></mat-datepicker>
+                </div>
               </div>
   
               <!-- Main Position -->

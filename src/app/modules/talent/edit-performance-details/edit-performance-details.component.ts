@@ -1,8 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
-import { NgForm } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {FormControl, NgForm } from '@angular/forms';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
 import { ToastrService } from 'ngx-toastr';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'edit-performance-details',
@@ -10,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-performance-details.component.scss']
 })
 export class EditPerformanceDetailsComponent implements OnInit {
+  readonly date = new FormControl(moment());
   performance: any = {};
   teams: any[] = [];
   matches: any;
@@ -18,6 +25,8 @@ export class EditPerformanceDetailsComponent implements OnInit {
   currentTeamId: any;
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
   isLoading : boolean = false;
+  from_date: FormControl = new FormControl(null);
+  to_date: FormControl = new FormControl(null);
 
   constructor(
     public dialogRef: MatDialogRef<EditPerformanceDetailsComponent>,
@@ -31,7 +40,15 @@ export class EditPerformanceDetailsComponent implements OnInit {
     this.teams = [...this.data.teams];
     this.matches = this.performance.matches;
     this.goals = this.performance.goals;
-    console.log('teams:', this.teams);
+    this.from_date = new FormControl(
+      this.performance.from_date ? new Date(this.performance.from_date) : null
+    );
+    this.to_date = new FormControl(
+      this.performance.to_date ? new Date(this.performance.to_date) : null
+    );
+    console.log('teams:', this.from_date);
+    this.from_date.setValue(this.performance.from_date ? new Date(this.performance.from_date) : null);
+    this.to_date.setValue(this.performance.to_date ? new Date(this.performance.to_date) : null);
   }
 
   onCancel(): void {
@@ -43,28 +60,36 @@ export class EditPerformanceDetailsComponent implements OnInit {
     if (myForm.valid) {
       this.isLoading = true; // Start loading indicator
       this.toastr.info('Updating performance...', 'Please wait', { disableTimeOut: true });
-
-      // Add currentTeamId to the form values
+  
+      // Prepare form data
       const formData = {
-        ...myForm.value,
-        team_id: this.currentTeamId
+        ...myForm.value, // Include all form values
+        team_id: this.currentTeamId, // Append the selected team ID
+        from_date: this.from_date.value // Convert FormControl value to string (if necessary)
+          ? moment(this.from_date.value).format('YYYY-MM-DD') 
+          : null,
+        to_date: this.to_date.value // Convert FormControl value to string (if necessary)
+          ? moment(this.to_date.value).format('YYYY-MM-DD') 
+          : null,
+        matches: this.matches, // Include matches
+        goals: this.goals // Include goals
       };
-
+  
+      // API call to update performance
       this.talentService.updatePerformance(this.performance.id, formData).subscribe(
         (response: any) => {
+          this.toastr.clear();
           if (response?.status) {
-            this.toastr.clear();
             this.toastr.success('Performance updated successfully!', 'Success');
-            this.dialogRef.close(response.data); // Close dialog with success data
+            this.dialogRef.close(response.data); // Close dialog with updated data
           } else {
-            this.toastr.clear();
             this.toastr.error('Failed to update performance. Please try again.', 'Error');
             console.error('Unexpected API response:', response);
           }
           this.isLoading = false; // Stop loading indicator
         },
         (error: any) => {
-            this.toastr.clear();
+          this.toastr.clear();
           this.toastr.error('Error updating performance. Please try again later.', 'Error');
           console.error('Error submitting the form:', error);
           this.isLoading = false; // Stop loading indicator
@@ -75,6 +100,7 @@ export class EditPerformanceDetailsComponent implements OnInit {
       this.toastr.warning('Please fill out all required fields before submitting.', 'Warning');
     }
   }
+  
 
   // Function to handle dynamic fetching of clubs based on search input
   onSearchTeams(): void {

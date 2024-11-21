@@ -68,11 +68,35 @@
 
         <div class="row mb-5">
           <div class="form-group col-lg-10">
-            <div class="col-lg-4 p-0">
+            <div class="col-lg-9 p-0">
               <label for="form-date" class="form-label">{{'Form-Upto' | translate}}</label>
               <div class="date-imputs d-flex align-items-center">
-                <input type="date" name="from_date" class="form-upto_date" [(ngModel)]="performance.from_date" required>
-                <input type="date" name="to_date" class="form-upto_date-2" [(ngModel)]="performance.to_date" required>
+                <div class="d-flex align-items-center justify-content-center">
+                  <input
+                    matInput
+                    id="from_date"
+                    name="from_date"
+                    [matDatepicker]="from_datepicker"
+                    [formControl]="from_date"
+                    placeholder="MM/DD/YYYY"
+                    required
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="from_datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #from_datepicker></mat-datepicker>
+                </div>
+                <div class="d-flex align-items-center justify-content-center">
+                  <input
+                    matInput
+                    id="to_date"
+                    name="to_date"
+                    [matDatepicker]="to_datepicker"
+                    [formControl]="to_date"
+                    placeholder="MM/DD/YYYY"
+                    required
+                  />
+                  <mat-datepicker-toggle matSuffix [for]="to_datepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #to_datepicker></mat-datepicker>
+                </div>
               </div>
             </div>
             <!-- <div class="col-lg-4 p-0">

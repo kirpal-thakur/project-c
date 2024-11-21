@@ -284,6 +284,7 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
+  
   openImage(index: number): void {
     // Create album array with images' full paths
     this.album = this.highlights.images.map((image: any) => ({
@@ -529,6 +530,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");
       return;

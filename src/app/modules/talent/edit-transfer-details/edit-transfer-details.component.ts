@@ -1,8 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NgForm } from '@angular/forms';
 import { TalentService } from '../../../services/talent.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {FormControl, NgForm } from '@angular/forms';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
 import { ToastrService } from 'ngx-toastr';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-edit-transfer-details',
@@ -20,6 +26,8 @@ export class EditTransferDetailsComponent {
   filterTeams: any[] = []; // Initialize as empty array to avoid undefined issues
   filterTeamsFrom: any[] = []; // Initialize as empty array to avoid undefined issues
   isLoading: boolean = false;
+  readonly date = new FormControl(moment());
+  date_of_transfer: FormControl = new FormControl(null);
 
   constructor(
     private toastr: ToastrService,
@@ -32,6 +40,10 @@ export class EditTransferDetailsComponent {
     // You might want to load your teams from a service here
     this.teams = this.data.teams;
     this.transfer = this.data.transfer;
+    this.date_of_transfer = new FormControl(
+      this.data.date_of_transfer ? new Date(this.data.date_of_transfer) : null
+    );
+    this.date_of_transfer.setValue(this.data.date_of_transfer ? new Date(this.data.date_of_transfer) : null);
     console.log(this.teams)
   }
 
@@ -48,7 +60,10 @@ export class EditTransferDetailsComponent {
       const formData = {
         ...myForm.value,
         team_to: this.teamToId,
-        team_from: this.teamFromId
+        team_from: this.teamFromId,
+        date_of_transfer: this.date_of_transfer.value // Convert date to string if necessary
+        ? moment(this.date_of_transfer.value).format('YYYY-MM-DD') 
+        : null,
       };
 
       this.talentService.updateTransfer(this.transfer.id, formData).subscribe(
