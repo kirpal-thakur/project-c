@@ -294,11 +294,12 @@ export class DashboardComponent implements OnInit {
     // Open dialog with the selected image
     this.dialog.open(LightboxDialogComponent, {
       width: '80%',
-      height: '80%',
+      height: '85%',
       data: {
         album: this.album,
         mainImage: { src: this.album[index].src },
       },
+      panelClass: 'lightbox-dialog'
     });
   }
   
