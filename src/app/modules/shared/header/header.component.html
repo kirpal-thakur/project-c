@@ -23,8 +23,28 @@
         </a>
       </span>
 
-      <input type="text"  name="search"  class="form-control" id="Search-text" placeholder="Search" />
-
+      <div class="search-container">
+        <input 
+          type="text" 
+          name="search" 
+          class="form-control" 
+          id="search-text" 
+          placeholder="Search"
+          (input)="onSearch()" 
+          (focus)="showSuggestions = true"
+          (blur)="hideSuggestions()"
+          [(ngModel)]="searchUser"
+        />
+        <ul *ngIf="showSuggestions" class="suggestion-box">
+          <ng-container *ngFor="let user of searchResults" >
+            <li 
+              *ngIf="user.first_name && user.last_name" 
+              (mousedown)="selectUser(user)">
+              {{ user.first_name }}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
     </div>
 
     
