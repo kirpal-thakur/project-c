@@ -430,10 +430,7 @@
     row-gap: 20px;
     padding: 12px 1.5rem 28px 1.5rem;
   }
-  .settings svg {
-    width: 20px;
-    fill: #918f8f;
-  }
+  
   .Feature_images p {
     color: #918f8f;
   }
@@ -446,9 +443,7 @@
     height: 116px !important;
     object-fit: cover !important;
   }
-  .settings svg {
-    width: 20px;
-  }
+ 
   .gallery_images{
     padding: 2px;
   }
@@ -1047,12 +1042,16 @@
   row-gap: 20px;
   padding: 12px 1.5rem 28px 1.5rem;
 }
-.settings svg {
-  width: 20px;
-  fill: #918f8f;
-}
+// .settings svg {
+//   width: 20px;
+//   fill: #918f8f;
+// }
 .Feature_images p {
   color: #918f8f;
+}
+.players_image {
+  background: #B6B6B6;
+  border-radius: 10px;
 }
 .Feature_images h2 {
   font-size: 20px;
@@ -1063,9 +1062,7 @@
   height: 116px !important;
   object-fit: cover !important;
 }
-.settings svg {
-  width: 20px;
-}
+
 .gallery_images{
   padding: 2px;
 }
@@ -1234,6 +1231,8 @@ span.active_btn {
   // top: -60px !important;
 }
 ::ng-deep a.introjs-skipbutton {
+  top: 20px;
+  right: -30px;
   color: #fff;
   font-size: 31px;
   border: 3px solid #fff;
@@ -1243,7 +1242,7 @@ span.active_btn {
   height: 40px;
 }
 ::ng-deep .introjs-tooltip-header {
-  z-index: -1;
+  z-index: 99999 !important;
 }
 ::ng-deep a.introjs-skipbutton:hover {
   color: #fff;
@@ -1284,6 +1283,7 @@ span.active_btn {
   justify-content: right;
   border-top: unset !important;
   margin-top: 0px;
+  padding-right: 0px;
 }
 ::ng-deep .introjs-helperLayer{
   box-shadow: rgb(33 33 33 / 0%) 0px 0px 1px 2px, rgba(33, 33, 33, 0.5) 0px 0px 0px 5000px !important;
@@ -1342,4 +1342,7 @@ width:  100% !important;
 
 ::ng-deep .thumbnails-container{
   display: flex !important;
+}
+::ng-deep .introjs-nextbutton{
+ margin: 0px !important;
 }

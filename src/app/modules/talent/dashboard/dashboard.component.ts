@@ -73,9 +73,6 @@ export class DashboardComponent implements OnInit {
       this.activeTab = 'profile';
     });
     
-    if (this.coverImage == "") {
-      this.coverImage = this.defaultCoverImage;
-    }
     await this.getAllTeams();
     
   }
@@ -124,24 +121,55 @@ export class DashboardComponent implements OnInit {
       tooltipPosition: 'auto',
     });
   
-    // Add the "Don't show again" checkbox dynamically
-    intro.onafterchange(() => {
-      const tooltip = document.querySelector('.introjs-tooltip') as HTMLElement;
-  
-      if (tooltip) {
-        let footerCheckbox = tooltip.querySelector('.dont-show-checkbox');
-        if (!footerCheckbox) {
-          footerCheckbox = document.createElement('div');
-          footerCheckbox.className = 'dont-show-checkbox';
-          footerCheckbox.innerHTML = `
-            <label style="font-size: 12px; display: flex; align-items: center; margin-bottom: 5px; color: white;">
-              <input type="checkbox" id="dontShowAgain" style="margin-right: 5px;" />
-              Don't show it again
-            </label>`;
-          tooltip.appendChild(footerCheckbox); // Add the checkbox to the tooltip footer
+      // Add the "Don't show again" checkbox dynamically
+      intro.onafterchange(() => {
+        const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
+      
+        if (tooltipHeader) {
+          // Check if the "close-section" already exists
+          let closeSection = tooltipHeader.querySelector('.close-section') as HTMLElement;
+          if (!closeSection) {
+            // Create the "close-section" container div
+            closeSection = document.createElement('div');
+            closeSection.className = 'close-section';
+      
+            // Apply styling to align elements
+            closeSection.style.display = 'flex';
+            closeSection.style.alignItems = 'center';
+            closeSection.style.justifyContent = 'flex-end';
+      
+            // Add the checkbox and label
+            closeSection.innerHTML = `
+              <label style="font-size: 12px; display: flex; align-items: center; margin-right: 10px; color: white;">
+                <input type="checkbox" id="dontShowAgain" style="margin-right: 5px; cursor: pointer;" />
+                Don't show it again
+              </label>
+            `;
+      
+            // Append "close-section" outside the <h1> but inside the header
+            tooltipHeader.appendChild(closeSection);
+      
+            // Add event listener to the checkbox
+            const checkbox = closeSection.querySelector('#dontShowAgain') as HTMLInputElement;
+            if (checkbox) {
+              checkbox.addEventListener('click', (event) => {
+                event.stopPropagation(); // Ensure clicks do not propagate
+                console.log('Checkbox clicked:', checkbox.checked);
+                if (checkbox.checked) {
+                  console.log('User selected "Don’t show it again"');
+                  // Save the user's preference
+                  localStorage.setItem('dontShowIntroTour', 'true');
+                } else {
+                  console.log('User unchecked "Don’t show it again"');
+                  localStorage.removeItem('dontShowIntroTour');
+                }
+              });
+            }
+          }
         }
-      }
-    });
+      });
+      
+      
   
     // Handle when the tour finishes
     intro.oncomplete(() => this.handleTourExit());
@@ -294,11 +322,12 @@ export class DashboardComponent implements OnInit {
     // Open dialog with the selected image
     this.dialog.open(LightboxDialogComponent, {
       width: '80%',
-      height: '80%',
+      height: '85%',
       data: {
         album: this.album,
         mainImage: { src: this.album[index].src },
       },
+      panelClass: 'lightbox-dialog'
     });
   }
   
@@ -434,7 +463,7 @@ export class DashboardComponent implements OnInit {
       this.talentService.deleteCoverImage().subscribe(
         (response) => {
           if (response && response.status) {
-            this.coverImage = './media/players.png';  // Reset to default image
+            this.coverImage = null;  // Indicates no value is set
             this.dataEmitter.emit('');  // Emit empty string to indicate deletion
               this.toastr.clear();
             this.toastr.success('Cover image deleted successfully.', 'Success');
