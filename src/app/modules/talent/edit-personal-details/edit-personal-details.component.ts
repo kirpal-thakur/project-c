@@ -26,6 +26,7 @@ declare const google: any;
   styleUrls: ['./edit-personal-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class EditPersonalDetailsComponent implements OnInit {
   
   @ViewChild('placeOfBirthInput') placeOfBirthInput!: ElementRef;
@@ -43,13 +44,10 @@ export class EditPersonalDetailsComponent implements OnInit {
   playerClub: any = "";
 
   // Declare individual properties for binding
-  dateOfBirth: string = '';
   height: number = 0;
   heightUnit: string = 'cm';
   weight: number = 0;
   weightUnit: string = 'kg';
-  contractStart: string = '';
-  contractEnd: string = '';
   leagueLevel: string = '';
   placeOfBirth: string = '';
   dominantFoot: string = 'Right'; // Set a default value for dominant foot
@@ -61,6 +59,10 @@ export class EditPersonalDetailsComponent implements OnInit {
   userData:any
   playerClubsListing:any;
   takenBy:any;
+
+  dateOfBirth: FormControl = new FormControl(null);  // Initialize with null or the correct date format
+  contractStart: FormControl = new FormControl(null);
+  contractEnd: FormControl = new FormControl(null);
 
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
@@ -81,23 +83,35 @@ export class EditPersonalDetailsComponent implements OnInit {
     this.userId = this.loggedInUser.id;
 
     this.getUserProfile(this.userId);
-    // this.getClubsForPlayer();
+    this.getClubsForPlayer();
       
     if (this.user.meta) {
-      this.dateOfBirth = this.user.meta.date_of_birth || '';
+      this.dateOfBirth = new FormControl(
+        this.user?.meta?.dateOfBirth ? new Date(this.user.meta.dateOfBirth) : null
+      );
+     
+      this.contractStart = new FormControl(
+        this.user?.meta?.contract_start ? new Date(this.user.meta.contract_start) : null
+      );
+      this.contractEnd = new FormControl(
+        this.user?.meta?.contract_end ? new Date(this.user.meta.contract_end) : null
+      );
       
+      console.log('user',this.contractStart)
       this.height = this.user.meta.height || 0;
       this.heightUnit = this.user.meta.height_unit || 'cm';
       this.weight = this.user.meta.weight || 0;
       this.weightUnit = this.user.meta.weight_unit || 'kg';
-      this.contractStart = this.user.meta.contract_start || '';
-      this.contractEnd = this.user.meta.contract_end || '';
       this.leagueLevel = this.user.meta.league_level || '';
       this.placeOfBirth = this.user.meta.place_of_birth || '';
       this.dominantFoot = this.user.meta.foot || 'Right';
       this.currentClub = this.user.pre_current_club_name || '';
       this.firstName = this.user.first_name || '';
       this.lastName = this.user.last_name || '';
+      this.dateOfBirth.setValue(this.user.meta.date_of_birth ? new Date(this.user.meta.date_of_birth) : null);
+      this.contractStart.setValue(this.user.meta.contract_start ? new Date(this.user.meta.contract_start) : null);
+      this.contractEnd.setValue(this.user.meta.contract_end ? new Date(this.user.meta.contract_end) : null);
+    
       this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
       
       // Ensure userNationalities is parsed correctly as an array of IDs only
@@ -106,8 +120,6 @@ export class EditPersonalDetailsComponent implements OnInit {
            String(item.country_id)
       ) : [];
 
-      console.log(this.nationality)
-      console.log(this.countries)
       if (this.user.meta && this.user.meta.pre_club_id) {
         this.currentClubId = this.user.meta.pre_club_id;
       }
@@ -185,9 +197,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         if(response.status){
           this.playerClubsListing = response.data.clubs;
 
-          //check taken by status to show teams dropdown
-
-          let index = this.playerClubsListing.findIndex((x:any) => x.id == this.data.meta.pre_club_id);
+          let index = this.playerClubsListing.findIndex((x:any) => x.id == this.user.meta.pre_club_id);
           if(this.playerClubsListing[index]?.is_taken == "yes"){            
             this.takenBy = this.playerClubsListing[index].taken_by;            
           }
@@ -282,14 +292,23 @@ export class EditPersonalDetailsComponent implements OnInit {
       }
 
       // Append remaining form fields
-      formData.append('user[date_of_birth]', this.dateOfBirth);
+      // Format dates before submission
+    const formattedDateOfBirth = moment(this.dateOfBirth.value).format('YYYY-MM-DD');
+    const formattedContractStart = moment(this.contractStart.value).format('YYYY-MM-DD');
+    const formattedContractEnd = moment(this.contractEnd.value).format('YYYY-MM-DD');
+
+    // Append formatted dates to formData
+      formData.append('user[date_of_birth]', formattedDateOfBirth);
+      formData.append('user[contract_start]', formattedContractStart);
+      formData.append('user[contract_end]', formattedContractEnd);
+      // formData.append('user[date_of_birth]', this.dateOfBirth);
       formData.append('user[place_of_birth]', this.placeOfBirth);
       formData.append('user[height]', this.height.toString());
       formData.append('user[height_unit]', this.heightUnit);
       formData.append('user[weight]', this.weight.toString());
       formData.append('user[weight_unit]', this.weightUnit);
-      formData.append('user[contract_start]', this.contractStart);
-      formData.append('user[contract_end]', this.contractEnd);
+      // formData.append('user[contract_start]', this.contractStart);
+      // formData.append('user[contract_end]', this.contractEnd);
       formData.append('user[league_level]', this.leagueLevel);
       formData.append('user[foot]', this.dominantFoot);
       formData.append('user[first_name]', this.firstName);
@@ -325,22 +344,22 @@ export class EditPersonalDetailsComponent implements OnInit {
     }
   }
   
-  onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
+  // onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
 
-    const selectedDate = event.value;
-    let date = this.formatDate(selectedDate);
+  //   const selectedDate = event.value;
+  //   let date = this.formatDate(selectedDate);
 
-    if(type == 'dob'){
-      this.dateOfBirth = date;
-    }
+  //   if(type == 'dob'){
+  //     this.dateOfBirth = date;
+  //   }
 
-  }
+  // }
 
-  formatDate(date:any) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
+  // formatDate(date:any) {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   return `${year}-${month}-${day}`;
+  // }
 
 }

@@ -104,17 +104,21 @@
         <!-- Date of Birth -->
         <div class="form-group col-lg-6">
           <label for="dateOfBirth">{{'Date of Birth' | translate}}:</label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            [(ngModel)]="dateOfBirth"
-            #dobField="ngModel"
-            required
-          />
-
+          <div class="d-flex align-items-center justify-content-center">
+            <input
+              matInput
+              id="dateOfBirth"
+              name="dateOfBirth"
+              [matDatepicker]="dp"
+              [formControl]="dateOfBirth"
+              placeholder="MM/DD/YYYY"
+              required
+            />
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </div>
           <!-- Validation message -->
-          <div *ngIf="dobField.invalid && (dobField.touched || myForm.submitted)" class="alert text-danger my-0">
+          <div *ngIf="dateOfBirth.invalid && (dateOfBirth.touched || myForm.submitted)" class="alert text-danger my-0">
             {{'Date of Birth is required.' | translate}}
           </div>
 
@@ -187,25 +191,37 @@
         <!-- Contract Start Date -->
         <div class="form-group col-lg-6">
           <label for="contractStart">{{'Contract Start Date' | translate}}:</label>
-          <input
-            type="date"
-            id="contractStart"
-            name="contractStart"
-            [(ngModel)]="contractStart"
-            required
-          />
+          <div class="d-flex align-items-center justify-content-center">
+            <input
+              matInput
+              id="contractStart"
+              name="contractStart"
+              [matDatepicker]="contractStartPicker"
+              [formControl]="contractStart"
+              placeholder="MM/DD/YYYY"
+              required
+            />
+            <mat-datepicker-toggle matSuffix [for]="contractStartPicker"></mat-datepicker-toggle>
+            <mat-datepicker #contractStartPicker></mat-datepicker>
+          </div>
         </div>
       
         <!-- Contract End Date -->
         <div class="form-group col-lg-6">
           <label for="contractEnd">{{'Contract End Date' | translate}}:</label>
-          <input
-            type="date"
-            id="contractEnd"
-            name="contractEnd"
-            [(ngModel)]="contractEnd"
-            required
-          />
+          <div class="d-flex align-items-center justify-content-center">
+            <input
+              matInput
+              id="contractEnd"
+              name="contractEnd"
+              [matDatepicker]="contractEndPicker"
+              [formControl]="contractEnd"
+              placeholder="MM/DD/YYYY"
+              required
+            />
+            <mat-datepicker-toggle matSuffix [for]="contractEndPicker"></mat-datepicker-toggle>
+            <mat-datepicker #contractEndPicker></mat-datepicker>
+          </div>
         </div>
       </div>
       

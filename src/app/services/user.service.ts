@@ -29,7 +29,7 @@ export class UserService {
   }
 
   // getUsers(pageIndex: number, pageSize: number, filter: string): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
-  getUsers(data: any): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
+  getUsers(data: any = {}): Observable<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }> {
     // const params = new HttpParams()
     //   .set('offset',pageIndex)
     //   .set('search',filter)

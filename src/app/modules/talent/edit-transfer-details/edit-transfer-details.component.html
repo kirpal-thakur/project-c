@@ -64,11 +64,24 @@
     <div class="row mt-5">
       <div class="form-group moving_select col-lg-6">        
         <label for="session" class="form-label">{{'Session' | translate}}</label>
-        <input class="form-select" type="text" id="session" name="session" [(ngModel)]="data.session" required>
+        <input class="form-select" type="text" id="session" name="session" [(ngModel)]="transfer.session" required>
       </div>
       <div class="form-group moving_select col-lg-6">
         <label for="date_of_transfer" class="form-label">{{'Date' | translate}}</label>
-        <input type="date" id="date_of_transfer" name="date_of_transfer" [(ngModel)]="data.date_of_transfer" required>        
+        <div class="d-flex align-items-center justify-content-center">
+          <input
+            matInput
+            id="date_of_transfer"
+            name="date_of_transfer"
+            [matDatepicker]="date_of_transferpicker"
+            [formControl]="date_of_transfer"
+            placeholder="MM/DD/YYYY"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="date_of_transferpicker"></mat-datepicker-toggle>
+          <mat-datepicker #date_of_transferpicker></mat-datepicker>
+        </div>
+        <!-- <input type="date" id="date_of_transfer" name="date_of_transfer" [(ngModel)]="data.date_of_transfer" required>         -->
       </div>
     </div>
   </div>

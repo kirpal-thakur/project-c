@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit, ChangeDetectorRef } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { SocketService } from '../../../services/socket.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -54,6 +55,7 @@ export class ExploreComponent implements OnInit {
     private talentService: TalentService,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private socketService: SocketService
   ) { }
 
   ngOnInit(): void {

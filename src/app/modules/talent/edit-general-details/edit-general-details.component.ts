@@ -1,9 +1,15 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
-import { NgForm } from '@angular/forms';
+import { TalentService } from '../../../services/talent.service'; 
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {FormControl, NgForm } from '@angular/forms';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
 import { ToastrService } from 'ngx-toastr';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'edit-general-details',
@@ -13,12 +19,13 @@ import { ToastrService } from 'ngx-toastr';
 export class EditGeneralDetailsComponent {
   
   positions: any[] = [];
+  readonly date = new FormControl(moment());
 
   // Define the variables here
-  in_team_since: Date | null = null;
+  in_team_since: FormControl = new FormControl(null);
   currency: string = '';
   international_player: any;
-  last_change: Date | null = null;
+  last_change: FormControl = new FormControl(null);
   main_position: string = '';
   market_value: any;
   other_positions: string[] = []; // Changed to array
@@ -44,6 +51,7 @@ export class EditGeneralDetailsComponent {
   countries: any;
   user: any = localStorage.getItem('userInfo');
   isLoading : boolean = false;
+  contractEnd: FormControl = new FormControl(null);
 
   constructor(
     public dialogRef: MatDialogRef<EditGeneralDetailsComponent>,
@@ -59,12 +67,19 @@ export class EditGeneralDetailsComponent {
   
     this.loadPositions(); // Call to load positions, which now includes setUserPositions() call inside it
     this.loadCountries();
-  
+    console.log('user',this.user)
+    this.in_team_since = new FormControl(
+      this.user?.meta?.in_team_since ? new Date(this.user?.meta?.in_team_since) : null
+    );
+    this.last_change = new FormControl(
+      this.user?.meta?.last_change ? new Date(this.user.meta.last_change) : null
+    );
     // Assign user data to component variables
-    this.in_team_since = this.user?.meta?.in_team_since || null;
+    this.in_team_since.setValue(this.user?.meta?.in_team_since ? new Date(this.user?.meta?.in_team_since) : null);
+    // this.in_team_since = this.user?.meta?.in_team_since || null;
     this.currency = this.user?.currency || '';
     this.international_player = this.user?.meta.international_player;
-    this.last_change = this.user?.meta.market_value_last_updated || null;
+    this.last_change.setValue(this.user.meta.last_change ? new Date(this.user.meta.last_change) : null);
     this.market_value = this.user?.meta.market_value || 0;
     this.social_facebook = this.user?.meta.sm_facebook || '';
     this.social_instagram = this.user?.meta.sm_instagram || '';
@@ -150,12 +165,15 @@ export class EditGeneralDetailsComponent {
       this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
 
       const formData = new FormData();
+      const formattedDin_team_since = moment(this.in_team_since.value).format('YYYY-MM-DD');
+      const formattedDlastchange = moment(this.last_change.value).format('YYYY-MM-DD');
 
       // Append each field to FormData
-      formData.append('user[in_team_since]', this.in_team_since ? this.in_team_since.toString() : '');
+      formData.append('user[in_team_since]', formattedDin_team_since);
+
       formData.append('user[currency]', this.currency);
       formData.append('user[international_player]', this.international_player ? this.international_player : '0');
-      formData.append('user[market_value_last_updated]', this.last_change ? this.last_change.toString() : '');
+      formData.append('user[last_change]', formattedDlastchange);
       formData.append('user[main_position]', this.main_position);
       formData.append('user[market_value]', this.market_value);
       formData.append('user[market_value_unit]', '1');

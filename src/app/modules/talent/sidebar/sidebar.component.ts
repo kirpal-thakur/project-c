@@ -1,4 +1,5 @@
- import { Component } from '@angular/core';
+ import { Component, OnInit} from '@angular/core';
+ import { SocketService } from '../../../services/socket.service';
 
  @Component({
    selector: 'talent-sidebar',
@@ -7,6 +8,7 @@
 })
  export class SidebarComponent {
   sidebarOpen: boolean = false;
+
  toggleState() {
   this.sidebarOpen = !this.sidebarOpen;
 

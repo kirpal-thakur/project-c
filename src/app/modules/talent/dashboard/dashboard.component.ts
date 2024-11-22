@@ -284,34 +284,58 @@ export class DashboardComponent implements OnInit {
       console.error('Error fetching users:', error);
     }
   }
-  openImage(index: number): void {
-    // Create album array with images' full paths
-    this.album = this.highlights.images.map((image: any) => ({
-      src: this.highlights.file_path + image.file_name,
-    }));
   
-    // Set the main image to be the one clicked
-    this.mainImage = { src: this.album[index].src };
+  // openImage(index: number): void {
+  //   // Create album array with images' full paths
+  //   this.album = this.highlights.images.map((image: any) => ({
+  //     src: this.highlights.file_path + image.file_name,
+  //   }));
   
-    // Open the lightbox
-    this.lightboxIsOpen = true;
-  }
+  //   // Set the main image to be the one clicked
+  //   this.mainImage = { src: this.album[index].src };
+  
+  //   // Open the lightbox
+  //   this.lightboxIsOpen = true;
+  // }
   
   closeLightbox(): void {
     // Close the lightbox
     this.lightboxIsOpen = false;
   }
   
+  openImage(index: number): void {
+    if (!this.highlights?.images?.length) {
+      console.warn("No images available to display in the lightbox.");
+      return;
+    }
+  
+    // Create album array with images' full paths
+    this.album = this.highlights.images.map((image: any) => ({
+      src: this.highlights.file_path + image.file_name,
+    }));
+  
+    // Ensure the index is within bounds
+    if (index >= 0 && index < this.album.length) {
+      this.mainImage = { src: this.album[index].src };
+      this.lightboxIsOpen = true;
+    } else {
+      console.error("Invalid index provided:", index);
+    }
+  }
+  
   navigateImage(direction: 'prev' | 'next'): void {
-    // Get current image index
+    if (!this.album || !this.mainImage) return;
+  
     const currentIndex = this.album.findIndex(image => image.src === this.mainImage.src);
+    if (currentIndex === -1) {
+      console.warn("Main image not found in the album.");
+      return;
+    }
   
-    // Handle edge cases (first and last image)
-    const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
-  
-    // Update main image and handle potential wrapping
+    const newIndex = (currentIndex + (direction === 'next' ? 1 : -1) + this.album.length) % this.album.length;
     this.mainImage = { src: this.album[newIndex].src };
   }
+  
 
   getCoverImg(){
     try {
