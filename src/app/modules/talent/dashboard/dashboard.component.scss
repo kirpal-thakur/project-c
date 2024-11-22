@@ -430,10 +430,7 @@
     row-gap: 20px;
     padding: 12px 1.5rem 28px 1.5rem;
   }
-  .settings svg {
-    width: 20px;
-    fill: #918f8f;
-  }
+  
   .Feature_images p {
     color: #918f8f;
   }
@@ -446,9 +443,7 @@
     height: 116px !important;
     object-fit: cover !important;
   }
-  .settings svg {
-    width: 20px;
-  }
+ 
   .gallery_images{
     padding: 2px;
   }
@@ -1047,12 +1042,16 @@
   row-gap: 20px;
   padding: 12px 1.5rem 28px 1.5rem;
 }
-.settings svg {
-  width: 20px;
-  fill: #918f8f;
-}
+// .settings svg {
+//   width: 20px;
+//   fill: #918f8f;
+// }
 .Feature_images p {
   color: #918f8f;
+}
+.players_image {
+  background: #B6B6B6;
+  border-radius: 10px;
 }
 .Feature_images h2 {
   font-size: 20px;
@@ -1063,9 +1062,7 @@
   height: 116px !important;
   object-fit: cover !important;
 }
-.settings svg {
-  width: 20px;
-}
+
 .gallery_images{
   padding: 2px;
 }
