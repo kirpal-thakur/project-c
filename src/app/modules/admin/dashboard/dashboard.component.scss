@@ -135,9 +135,12 @@ tbody td:first-child {
   .search-area {
     width: 9.063rem;
 }
+.table-main-header{
+  min-width:560px;
+}
 }
 @media (max-width: 600px) {
-  .table_title{
+  .table-main-header{
     min-width: 800px;
   }
   .dashboard_table-2 .table.user-dash-table{
