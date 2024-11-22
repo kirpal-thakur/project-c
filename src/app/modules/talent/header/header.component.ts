@@ -21,8 +21,10 @@ interface Notification {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  //constructor(private themeService: ThemeService) {}
-  constructor(private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService, private socketService: SocketService) {}
+  searchResults: any[] = [];
+  showSuggestions: boolean = false;
+
+  constructor(private userService: UserService, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private router: Router,private translateService: TranslateService, private socketService: SocketService) {}
   loggedInUser:any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang:string = '';
@@ -166,5 +168,34 @@ export class HeaderComponent {
     }, 5000); // 3000 ms = 3 seconds
   }
 
+
+  onSearch(query: string) {
+    if (query.trim().length === 0) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.userService.searchUser(query).subscribe(
+      (results: any[]) => {
+        this.searchResults = results;
+      },
+      (error) => {
+        console.error('Error fetching user suggestions:', error);
+      }
+    );
+  }
+
+  selectUser(user: any) {
+    console.log('User selected:', user);
+    this.searchResults = [];
+    this.showSuggestions = false;
+    // Navigate or perform actions with the selected user
+  }
+
+  hideSuggestions() {
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 200); // Delay to ensure selectUser runs before hiding suggestions
+  }
 }
 
