@@ -1,0 +1,23 @@
+<div class="lightbox-container">
+  <div class="main-image-container">
+    <img [src]="mainImage?.src" alt="Main Image" class="main-image" />
+  </div>
+  <div class="navigation-buttons">
+    <button (click)="navigateImage('prev')" class="prev-button">&laquo;</button>
+    <button (click)="navigateImage('next')" class="next-button">&raquo;</button>
+  </div>
+  <div class="thumbnails-container">
+    <div
+      class="thumbnail"
+      *ngFor="let image of album; let i = index"
+    >
+      <img
+        [src]="image.src"
+        alt="Thumbnail"
+        class="thumbnail-image"
+        (click)="openImage(i)"
+      />
+    </div>
+  </div>
+  <button class="close-btn" (click)="closeDialog()">X</button>
+</div>

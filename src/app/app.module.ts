@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
+import { LightboxDialogComponent } from './modules/talent/lightbox-dialog/lightbox-dialog.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -23,6 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    LightboxDialogComponent
   ],
   imports: [
     SharedModule,
