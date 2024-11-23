@@ -77,11 +77,8 @@ body {
 
 .login-btn {
     font-size: 16px;
-    // background-color: #E05263;
-    padding: 7px 20px;
+    padding: 10px 20px;
     border-radius: 10px;
-    height: 40px;
-    width: 100px;
 }
 
 /*--------------------------------------------------------------
@@ -154,6 +151,17 @@ body {
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 10px;
+}
+.logo-image {
+    display: flex;
+    justify-content: center;  /* Centers the image horizontally */
+    align-items: center;      /* Centers the image vertically */
+    height: 100px;            /* Optional: Adjust container height if needed */
+}
+
+.logo-image img {
+    height: 80px;             /* Image height */
+    width: 120px;              /* Image width */
 }
 
 .register .form-label {
@@ -1750,6 +1758,11 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 575px) {
+    .logo-image img {
+        height: 60px;
+        width: 70px;
+    }
+    
     .register .form-select {
         height: 44px;
     }
@@ -2151,16 +2164,16 @@ select.form-select.custom-select1 {
         margin-left: 10px;
         margin-right: 10px;
     }
-
+   
     .login .modal-btn .socail_btn {
         margin-top: 0;
     }
 
-    .login {
-        max-width: 550px;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+    // .login {
+    //     max-width: 550px;
+    //     margin-left: 20px;
+    //     margin-right: 20px;
+    // }
 
     .login .modal-btn .btn {
         margin-bottom: 0;

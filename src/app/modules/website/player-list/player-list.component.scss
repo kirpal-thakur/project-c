@@ -67,6 +67,7 @@ button.faq-club-button.active {
     justify-content: flex-end;
 }
 
+
 label {
     display: inline-block;
     font-size: 14px;
@@ -310,7 +311,7 @@ button.page-active {
     content: "";
     z-index: 2;
     position: absolute;
-    left: 10px;
+    left: 0;
     top: 10%;
 }
 .skyscraper-left img{
@@ -323,7 +324,7 @@ button.page-active {
     content: "";
     z-index: 2;
     position: absolute;
-    right: 10px;
+    right: 0;
     top: 10%;
 }
 .skyscraper-right img{
@@ -435,6 +436,7 @@ button.page-active {
 
     .player-name7 {
         width: 209px;
+        bottom: 6px;
     }
 
     .player-list {
@@ -540,9 +542,15 @@ button.page-active {
     .pagination-controls{
         display: block;
     }
+    .pages {
+        display: flex;
+        justify-content: space-between;
+    }
 
     .tabs {
+        display: flex;
         margin-bottom: 25px;
+        justify-content: space-evenly;
     }
     .input-number {
         margin-bottom: 20px;
@@ -645,6 +653,7 @@ button.page-active {
         width: 150px;
         font-size: 12px;
         height: 25px;
+        bottom: 5px;
     }
 
     .flag-image7 {

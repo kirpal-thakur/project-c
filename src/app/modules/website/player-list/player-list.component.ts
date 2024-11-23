@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 
 interface Player {
@@ -13,16 +11,11 @@ interface Player {
   styleUrls: ['./player-list.component.scss'],
 })
 export class PlayerListComponent implements OnInit {
-  selectedTab: 'talent' | 'club' = 'talent';
+  selectedTab: 'talent' | 'club' | 'scouts' = 'talent';  // Updated to include 'scouts'
   currentPage: number = 1;
-  itemsPerPage: number = 10; // Adjust items per page as needed
-  number: number = 12; // Initialize this with a default value
-
+  itemsPerPage: number = 10;
+  number: number = 12;  // Defined the 'number' property
   activeAccordionIndex = 1;
-
-  setActiveAccordion(index: number): void {
-    this.activeAccordionIndex = index;
-  }
 
   players: Player[] = [
     { name: 'Zidane', image: './assets/images/ziddane.png' },
@@ -40,25 +33,55 @@ export class PlayerListComponent implements OnInit {
     { name: 'Harry Kane', image: './assets/images/Harry Kane.png' },
     { name: 'Kasper Schmeichel', image: './assets/images/kasper.png' },
     { name: 'Elton Prince Morina', image: './assets/images/Elton Prince Morina.png' },
-    { name: 'Jamie Vardy', image: './assets/images/jammie.png' }
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png' },
   ];
 
-  adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad visibility
+  clubPlayers: Player[] = [
+    { name: 'Gabriel Jesus', image: './assets/images/Gabriel Jesus.png' },
+    { name: 'Messi', image: './assets/images/Messi.png' },
+    { name: 'Cristiano Ronaldo', image: './assets/images/cristo-ronaldo.png' },
+    { name: 'Jermain Defoe', image: './assets/images/Jermain Defoe.png' },
+    { name: 'Mohamed Salah', image: './assets/images/mohamad.png' },
+    { name: 'Bukayo Saka', image: './assets/images/Bukayo Saka.png' },
+    { name: 'Kevin De Bruyne', image: './assets/images/kevin.png' },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png' },
+    { name: 'Aaron Ramsey', image: './assets/images/aaron.png' },
+    { name: 'Adam Lallana', image: './assets/images/Adam Lallana.png' },
+    { name: 'Harry Kane', image: './assets/images/Harry Kane.png' },
+    { name: 'Kasper Schmeichel', image: './assets/images/kasper.png' },
+    { name: 'Elton Prince Morina', image: './assets/images/Elton Prince Morina.png' },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png' },
+  ];
 
-  ngOnInit() {
-    // Initialization logic here
-  }
+  scoutsPlayers: Player[] = [
+    { name: 'Messi', image: './assets/images/Messi.png' },
+    { name: 'Cristiano Ronaldo', image: './assets/images/cristo-ronaldo.png' },
+    { name: 'Jermain Defoe', image: './assets/images/Jermain Defoe.png' },
+    { name: 'Mohamed Salah', image: './assets/images/mohamad.png' },
+    { name: 'Bukayo Saka', image: './assets/images/Bukayo Saka.png' },
+    { name: 'Kevin De Bruyne', image: './assets/images/kevin.png' },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png' },
+    { name: 'Aaron Ramsey', image: './assets/images/aaron.png' },
+    { name: 'Adam Lallana', image: './assets/images/Adam Lallana.png' },
+    { name: 'Harry Kane', image: './assets/images/Harry Kane.png' },
+    { name: 'Kasper Schmeichel', image: './assets/images/kasper.png' },
+    { name: 'Elton Prince Morina', image: './assets/images/Elton Prince Morina.png' },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png' },
+  ];
 
-  selectTab(tab: 'talent' | 'club'): void {
+  adVisible: boolean[] = [true, true, true, true, true];
+
+  ngOnInit() {}
+
+  selectTab(tab: 'talent' | 'club' | 'scouts'): void {
     this.selectedTab = tab;
+    this.currentPage = 1;
   }
-  totalPages(): number {
-        return 12; // Always return 12 pages
-      }
 
-  // totalPages(): number {
-  //   return Math.ceil(this.players.length / this.itemsPerPage); // Adjust total pages based on items per page
-  // }
+  totalPages(): number {
+    return 12; // Always return 12 pages
+  }
+  
 
   pagesToShow(): number[] {
     const total = this.totalPages();
@@ -66,7 +89,6 @@ export class PlayerListComponent implements OnInit {
     let startPage = Math.max(1, this.currentPage - 2);
     let endPage = Math.min(total, startPage + 4);
 
-    // Ensure we have 5 pages in view
     if (endPage - startPage < 4) {
       startPage = Math.max(1, endPage - 4);
     }
@@ -96,12 +118,12 @@ export class PlayerListComponent implements OnInit {
     }
   }
 
-  getNumbers(): number[] {
-    return Array.from({ length: 20 }, (_, i) => i + 1);
+  closeAd(index: number) {
+    this.adVisible[index] = false;
   }
 
-  closeAd(index: number) {
-    this.adVisible[index] = false; // Set the specific ad to not visible based on index
+  getNumbers(): number[] {
+    return Array.from({ length: 20 }, (_, i) => i + 1);
   }
 
   getCurrentPlayer(): Player | null {

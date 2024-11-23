@@ -260,22 +260,66 @@ export class HeaderComponent implements OnInit {
     };
 
     this.authService.register(registrationData).subscribe(
+      // response => {
+      //   if (response.status === true) {
+      //     this.serverBusy = false;
+      //     bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
+      //     const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+      //     loginModal.show();
+      //   } else {
+      //     console.log("status is false", response);
+      //     this.serverBusy = false;
+      //     this.registerError = typeof response.message === 'object'
+      //       ? Object.values(response.message).join(' ')
+      //       : response.message;
+      //     this.registerFormSubmitted = false;
+      //   }
+      // },
+      // error => {
+      //   this.handleRegistrationError(error);
+      // }
+
       response => {
+        console.log('Registration response:', response);
         if (response.status === true) {
           this.serverBusy = false;
-          bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
+          const registerModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal1'));
+          if (registerModal) {
+            registerModal.hide();
+          }
           const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
           loginModal.show();
         } else {
-          this.serverBusy = false;
-          this.registerError = typeof response.message === 'object'
-            ? Object.values(response.message).join(' ')
-            : response.message;
-          this.registerFormSubmitted = false;
+          let errorMessage = '';
+          // Check if response.message is an object
+          if (typeof response.message === 'object') {
+            // Loop through each error message and concatenate them
+            Object.keys(response.message).forEach(key => {
+              errorMessage += response.message[key] + ' ';
+            });
+          } else {
+            errorMessage = response.message;
+          }
+          this.registerError = errorMessage.trim(); // Trim to remove any leading or trailing spaces
+          this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
         }
       },
       error => {
-        this.handleRegistrationError(error);
+        console.error('Registration failed:', error);
+        if (error && error.status === 400 && error.error && error.error.data) {
+          const errorData = error.error.data;
+          if (errorData.username) {
+            this.registerForm.controls['username'].setErrors({ usernameExists: true });
+          }
+          if (errorData.email) {
+            this.registerForm.controls['email'].setErrors({ emailExists: true });
+          }
+          this.registerError = errorData.message || 'An error occurred during registration.';
+        } else {
+          console.error('An error occurred while registering:', error);
+          this.registerError = 'An error occurred during registration. Please try again.';
+        }
+        this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
       }
     );
   }
