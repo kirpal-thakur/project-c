@@ -32,6 +32,7 @@ export class MembershipComponent {
   country: any=[];
   booster: any=[];
   stats: any;
+  exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
@@ -63,6 +64,25 @@ export class MembershipComponent {
       console.error('Error fetching user purchases:', error);
     });
   }
+
+  exportData(): void {
+    this.talentService.getExportLinkPurchaseData().subscribe(
+      (response) => {
+        if (response?.status && response?.data?.file_path) {
+          const filePath = response.data.file_path;
+
+          // Open the file path in a new tab
+          window.open(filePath, '_blank');
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      (error) => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
+  }
+
 
 
   // Fetch purchases from API with pagination parameters

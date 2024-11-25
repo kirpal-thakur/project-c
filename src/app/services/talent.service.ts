@@ -335,6 +335,11 @@ getExploresData(params: any): Observable<any> {
     );
   }
 
+  getExportLinkPurchaseData(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/export-purchase-history`    );
+  }
+
   getUserPlans(): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: any }>(
       `${this.apiUrl}user/get-active-packages`

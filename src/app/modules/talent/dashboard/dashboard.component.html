@@ -16,8 +16,8 @@
               <!-- The rest of your content goes here -->
               <div *ngIf="!loading">
                 <div class="user-media text-center ">
-                  <img [src]="profileImage" alt="" *ngIf="user?.meta && user?.meta?.profile_image_path" class="w-100" />
-                  <img src="../../../../assets/images/default/talent-profile-default.png" class="w-100" alt="" *ngIf="!user?.meta || !user?.meta?.profile_image_path" />
+                  <img [src]="profileImage" alt="" *ngIf="user?.meta && user?.meta?.profile_image_path" class="" />
+                  <img src="../../../../assets/images/default/talent-profile-default.png" class="" alt="" *ngIf="!user?.meta || !user?.meta?.profile_image_path" />
 
 
                   <div class="user-edit ">
@@ -40,7 +40,6 @@
                         class="club-icon-round cursor-pointer" alt="" />
                       <img *ngIf="user.pre_current_club_logo_path" src="{{user.pre_current_club_logo_path}}"
                         class="club-icon-round cursor-pointer" alt="" />
-
                     </div> -->
 
                   </div>
