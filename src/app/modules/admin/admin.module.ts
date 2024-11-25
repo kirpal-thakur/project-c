@@ -78,6 +78,18 @@ import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-
 import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
 import { NgxDatepickerModule } from '@handylib/ngx-datepicker';
 import { InviteScoutTalentPopupComponent } from './tabs/invite-scout-talent-popup/invite-scout-talent-popup.component';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY', // Display format for date input
+    monthYearLabel: 'MMM YYYY', // Month and year label
+    dateA11yLabel: 'DD.MM.YYYY', // Accessibility label for date
+    monthYearA11yLabel: 'MMMM YYYY', // Accessibility label for month and year
+  },
+};
 
 @NgModule({
   declarations: [
@@ -160,6 +172,9 @@ import { InviteScoutTalentPopupComponent } from './tabs/invite-scout-talent-popu
     MatProgressSpinnerModule,
     NgxDatepickerModule
   ],
-  providers: [UserService]
+  providers: [
+    UserService,
+    provideMomentDateAdapter(MY_FORMATS)
+  ]
 })
 export class AdminModule { }

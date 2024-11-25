@@ -55,13 +55,18 @@ export class InboxPopupComponent {
   }
 
   callListApi(userInput: HTMLInputElement) {
-    console.log(this.allUsers, 'get-all-users');
+    console.log( this.allUsers, 'getting-all-users');
+    const inputValue = userInput.value.toLowerCase();
     setTimeout(() => {
-      this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  && 
-      user.first_name.toLowerCase().indexOf(userInput.value.toLowerCase()) != -1
-      );
+      // this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined));
+      this.filteredUsers = this.allUsers.filter((user:any) => {
+        let makeUsernameIntoLowerCase = user.username.toLowerCase();
+        if(user.first_name !== null && user.first_name !== undefined &&  makeUsernameIntoLowerCase.includes(inputValue)){
+          return user;
+        }
+      });
     }, 2000);
-    console.log(userInput.value);
+    // console.log(userInput.value);
   }
 
   remove(user: any): void {

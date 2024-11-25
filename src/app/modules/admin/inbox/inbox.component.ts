@@ -19,6 +19,7 @@ export class InboxComponent {
   createdGroups: { groupId: string, groupName: string }[] = [];
   user:any = {};
   receiverUser:any = {};
+  private isDarkMode = false;
   constructor(private talkService : TalkService, private socketService: SocketService) {}
   
   async ngOnInit() {
@@ -35,6 +36,7 @@ export class InboxComponent {
       };
       const session = await this.talkService.init(this.user);
       const chatbox = session.createInbox();
+      
 
       chatbox.onSendMessage((event) => {
         let getReceiverIds = Object.keys(event.conversation.participants)
@@ -81,7 +83,7 @@ export class InboxComponent {
     this.users = [];
     this.dialog.open(InboxPopupComponent, {
       height: '450px',
-      width: '40vw',
+      width: '850px',
     })
     .afterClosed()
       .subscribe(users => {
@@ -103,4 +105,42 @@ export class InboxComponent {
         //this.createGroup();
       });
   }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    const chatContainer = document.getElementById('talkjs-container');
+    if (chatContainer) {
+      if (this.isDarkMode) {
+        chatContainer.classList.add('dark-theme');
+        chatContainer.classList.remove('light-theme');
+      } else {
+        chatContainer.classList.add('light-theme');
+        chatContainer.classList.remove('dark-theme');
+      }
+    }
+  }
+
+
+  toggleDarkMode(isDarkMode: boolean) {
+    alert('testing');
+    const iframe = document.querySelector('iframe[data-talkjs-container]') as HTMLIFrameElement;
+    if (iframe && iframe.contentDocument) {
+      const iframeDocument = iframe.contentDocument;
+  
+      const htmlElement = iframeDocument.documentElement;
+  
+      if (isDarkMode) {
+        htmlElement.style.setProperty('--background-color', '#1e1e1e');
+        htmlElement.style.setProperty('--text-color', '#ffffff');
+        htmlElement.style.setProperty('--message-sent-background-color', '#333333');
+        htmlElement.style.setProperty('--message-received-background-color', '#2a2a2a');
+      } else {
+        htmlElement.style.setProperty('--background-color', '#ffffff');
+        htmlElement.style.setProperty('--text-color', '#000000');
+        htmlElement.style.setProperty('--message-sent-background-color', '#e6f7ff');
+        htmlElement.style.setProperty('--message-received-background-color', '#f5f5f5');
+      }
+    }
+  }
+  
 }
