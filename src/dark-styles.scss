@@ -454,11 +454,12 @@ box-shadow: none !important;
 // }
 
 .dark-theme .sidebar_menu a:hover p {
-  background: #111418;
+  background: #BDE34F;
   padding: 10px !important; 
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  color: #4F7A9D  ;
   // transition: all 0.4s ease-in-out !important;
 
 }
@@ -466,7 +467,7 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover {
   padding: 0 10px !important;
-  background: #111418;
+  background: #BDE34F;
 }
 
 .dark-theme .sidebar_menu a.active p{
@@ -1703,11 +1704,11 @@ background-color: #072944;
 .dark-theme .my-svg-icon .my-path a.active{
  
 }
-.dark-theme .active .my-svg-icon .my-path {
-  fill: white !important ; /* Change the color of the SVG when the link is active */
-}
+// .dark-theme .active .my-svg-icon .my-path {
+//   fill: white !important ; /* Change the color of the SVG when the link is active */
+// }
 .dark-theme a:hover .my-svg-icon .my-path {
-  fill: white !important ; /* Change the color of the SVG when the link is active */
+  fill: #4F7A9D  !important ; /* Change the color of the SVG when the link is active */
 }
 .dark-theme .card-search .form-control{
   color: #ffffff !important;
@@ -2371,4 +2372,7 @@ color: #fff;
 }
 .dark-theme .navbar-expand .navbar-nav .dropdown-menu span{
   color: #fff !important;
+}
+.dark-theme .sidebar_menu a.active svg path{
+  fill: #072944 !important;
 }
