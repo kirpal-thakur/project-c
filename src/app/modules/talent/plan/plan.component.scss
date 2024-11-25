@@ -57,7 +57,15 @@
 }
 .subscription-plan{
     padding: 15px 20px;
-    background: #ebffeb;
+    background: rgb(240,255,236);
+    background: linear-gradient(180deg, rgba(240,255,236,1) 0%, rgba(255,255,255,1) 100%);
+    position: relative;
+}
+
+.football-icon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 .premium-plan_box h3 {
     font-size: 20px;
@@ -79,10 +87,16 @@
     opacity: 42%;
 }
 .premium-plan_box {
-    background: #75bb63;
+    background: #6FB95D;
     border-radius: 10px;
-    border:1px solid #9d0808;
-    height: calc(100% - 42px) 
+    border:1px solid #c2a64a;
+    height: calc(100% - 42px) ;
+    position: relative;
+}
+.premium-football_icon{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .premium_button {
     width: fit-content;
@@ -123,16 +137,18 @@ sub.premium-month_title {
     border: 1px solid #2a822a;
     color: #fff;
     border-radius: 6px;
-    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
+    background: rgb(111,185,93);
+    background: linear-gradient(180deg, rgba(111,185,93,1) 0%, rgba(35,97,21,1) 100%);
     
     &:disabled {
       background: #ccc; // Light gray background
-      border-color: #aaa; // Lighter gray border
+      border-color: #175B07 ; // Lighter gray border
       color: #e6e4e4; // Darker gray text
       cursor: not-allowed; // Change cursor to indicate it's disabled
       opacity: 0.6; // Reduce opacity for a "disabled" look
       border-radius: 6px;
-      background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
+      background: rgb(111,185,93);
+      background: linear-gradient(180deg, rgba(111,185,93,1) 0%, rgba(35,97,21,1) 100%);
     }
   }
   
