@@ -476,6 +476,7 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a.active {
   background: #BDE34F;
+  color: #4F7A9D !important;
   // padding: 5px;
 }
 
@@ -2342,3 +2343,32 @@ color: #fff;
   .dark-theme upload-box p{
     color: #fff;
   }
+  .dark-theme .sidebar_state {
+    background-color: #A5AFBA;
+}
+
+// .dark-theme .sidebar_state svg path{
+//   fill: #072944;
+// }
+.dark-theme .card-account-setting{
+  background: none !important;
+  border: 1px solid #1F4360 !important;
+}
+.dark-theme .premium-plan_box {
+  background: #BDE34F !important;
+  border: 1px solid #BDE34F !important;
+}
+.dark-theme .choose-plan-btn{
+  background: rgba(23, 91, 7, 1);
+}
+.dark-theme .premium_list label input:checked ~ .checkmark{
+  background: #072944 !important; 
+  border: 1px solid #fff !important;
+}
+.dark-theme .navbar-expand .navbar-nav .dropdown-menu{
+  background: #072944 !important;
+  color: #fff !important;
+}
+.dark-theme .navbar-expand .navbar-nav .dropdown-menu span{
+  color: #fff !important;
+}
