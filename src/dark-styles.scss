@@ -459,7 +459,7 @@ box-shadow: none !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  color: #4F7A9D  ;
+  color: #072944   ;
   // transition: all 0.4s ease-in-out !important;
 
 }
@@ -1708,7 +1708,7 @@ background-color: #072944;
 //   fill: white !important ; /* Change the color of the SVG when the link is active */
 // }
 .dark-theme a:hover .my-svg-icon .my-path {
-  fill: #4F7A9D  !important ; /* Change the color of the SVG when the link is active */
+  fill: #072944   !important ; /* Change the color of the SVG when the link is active */
 }
 .dark-theme .card-search .form-control{
   color: #ffffff !important;
@@ -2133,12 +2133,15 @@ color: rgba(255, 255, 255, 0.5) !important;
   color: #fff !important;
 }
 .dark-theme .subscription-plan{
-  background: #0C3453 !important;
-  border-color: #1F4360 !important;
-  border-top: 2px solid #1F4360 !important;
+  background: #072944 !important;
+  border-color: #072944 !important;
+  border-top: 2px solid #072944 !important;
 }
 .dark-theme .sidebar_menu li svg path {
   fill: #4F7A9D !important;
+}
+.dark-theme .sidebar_menu li a:hover svg path {
+  fill: #072944  !important;
 }
 .dark-theme .card-billing {
   color: rgb(255, 255, 255) !important;
@@ -2247,7 +2250,10 @@ color: rgba(255, 255, 255, 0.5) !important;
   background: #072944 !important;
 }
 .dark-theme .paginator-container mat-paginator .mat-mdc-paginator-range-actions button{
-  background: #ffffff !important;
+  background: #0C3453 !important;
+}
+.dark-theme .paginator-container mat-paginator .mat-mdc-paginator-range-actions button svg path{
+  fill: #ffffff !important;
 }
 .dark-theme .country-information p{
   color: #fff !important;
@@ -2346,6 +2352,8 @@ color: #fff;
   }
   .dark-theme .sidebar_state {
     background-color: #A5AFBA;
+    border: 1px solid #E4E9F1 !important;
+    border-radius:50%;
 }
 
 // .dark-theme .sidebar_state svg path{
@@ -2364,7 +2372,7 @@ color: #fff;
 }
 .dark-theme .premium_list label input:checked ~ .checkmark{
   background: #072944 !important; 
-  border: 1px solid #fff !important;
+  border: 1px solid #072944 !important;
 }
 .dark-theme .navbar-expand .navbar-nav .dropdown-menu{
   background: #072944 !important;
@@ -2375,4 +2383,13 @@ color: #fff;
 }
 .dark-theme .sidebar_menu a.active svg path{
   fill: #072944 !important;
+}
+.dark-theme .sidebar_state svg path{
+  stroke: #072944;
+}
+.dark-theme .premium_list label .checkmark:after{
+  border-color: #fff !important;
+}
+.dark-theme .football-icon svg path {
+  fill: rgba(240, 255, 236, 0.2);
 }

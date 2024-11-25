@@ -71,7 +71,7 @@ font-weight: 500;
 }
 .team-logo-bg {
 background: #E2001A;
-width: 160px;
+width: 180px;
 height: 160px;
 position: absolute;
 top: -84px;
@@ -85,8 +85,11 @@ border-radius: 4px;
 position: absolute;
 bottom: 42px;
 left: 18px;
-padding: 6px;
+padding: 6px 10px;
 text-align: center;
+}
+.image_box {
+  border-radius: 16px !important;
 }
 .boosted-box {
 background: #023A4A;
@@ -94,8 +97,8 @@ color: #fff;
 font-size: 16px;
 font-weight: 600;
 width: fit-content;
-padding: 8px;
-border-radius: 0px 0px 10px 0px;
+padding: 14px 20px;
+border-radius: 0px 0px 10px 0px ;
 position: absolute;
 top: 0;
 }
@@ -112,7 +115,7 @@ color: #559B44;
 font-weight: 600;
 }
 .player-team-logo img {
-width: 32px;
+width: 36px;
 padding: 0;
 position: absolute;
 top: 14px;
