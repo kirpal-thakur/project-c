@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
         }
       });
       
-      
+
   
     // Handle when the tour finishes
     intro.oncomplete(() => this.handleTourExit());
@@ -253,13 +253,12 @@ export class DashboardComponent implements OnInit {
 
           this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          // Use map to generate an array of flag URLs based on the userNationalities
-          this.getCountry(this.userNationalities[0].flag_path);
-
-          // After all the flag URLs are fetched, update the nationalities
-          // Promise.all(nationalityFlagPromises).then((updatedNationalities) => {
-          //   this.userNationalities = updatedNationalities;  // Update the user nationalities with flag URLs
-          // });
+          if (this.userNationalities.length) {
+            // Fetch flag details for each nationality
+            this.userNationalities.forEach((nat:any, index:any) => {
+              this.getCountry(nat.flag_path, index);
+            });
+          }
 
         }
 
@@ -271,6 +270,97 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            this.getCountryFlag(country);
+          } else {
+            console.error("Country not found in placeOfBirth.");
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
+  getCountry(placeOfBirth: string ,key : any): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
+
+            this.userNationalities[key].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
+          } else {
+            console.error("Country not found in placeOfBirth.");
+            return;
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+          return;
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
+  getCountryFlag(countryCode: string) {
+    console.log("Country found:", countryCode);
+
+    // Using Flagpedia API for flag images
+    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+
+    // Set the URL to an <img> element in your template or save it in a variable
+    this.countryFlagUrl = flagUrl;
+  }
+
+  // After loading, mark countries as loaded and check if both are ready
+  loadCountries() {
+    return this.talentService.getCountries().subscribe(
+      (response) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+        }
+    });
+  }
 
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
@@ -339,14 +429,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //   // Set the main image to be the one clicked
-  //   this.mainImage = { src: this.album[index].src };
-
-  //   // Open the lightbox
-  //   this.lightboxIsOpen = true;
-  // }
-
-
   navigateImage(direction: 'prev' | 'next'): void {
     // Get current image index
     const currentIndex = this.album.findIndex(image => image.src === this.mainImage.src);
@@ -361,7 +443,7 @@ export class DashboardComponent implements OnInit {
     // Update main image and handle potential wrapping
     this.mainImage = { src: this.album[newIndex].src };
   }
-  
+
 
   getCoverImg(){
     try {
@@ -578,96 +660,6 @@ export class DashboardComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
-  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
 
-
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
-
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
-
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            this.getCountryFlag(country);
-          } else {
-            console.error("Country not found in placeOfBirth.");
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
-
-  getCountry(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
-
-
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
-
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
-
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
-
-            this.userNationalities[0].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
-          } else {
-            console.error("Country not found in placeOfBirth.");
-            return;
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-          return;
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
-
-  getCountryFlag(countryCode: string) {
-    console.log("Country found:", countryCode);
-
-    // Using Flagpedia API for flag images
-    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
-
-    // Set the URL to an <img> element in your template or save it in a variable
-    this.countryFlagUrl = flagUrl;
-  }
-
-  // After loading, mark countries as loaded and check if both are ready
-  loadCountries() {
-    return this.talentService.getCountries().subscribe(
-      (response) => {
-        if (response && response.status) {
-          this.countries = response.data.countries;
-        }
-    });
-  }
 
 }
