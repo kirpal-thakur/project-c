@@ -137,6 +137,7 @@ export class HeaderComponent {
   ];
 
   loadMoreNotifications() {
+    
     // const moreNotifications: Notification[] = [
     //   {
     //     image: '../../../assets/images/1.jpg',
@@ -187,6 +188,10 @@ export class HeaderComponent {
     //     time: '18 hours ago'
     //   }
     // ];
+    localStorage.setItem('makeActiveTab', 'activity');
+    setTimeout(() => {
+      this.router.navigate(['/admin/setting']);
+    }, 1000);
     this.isShowAllNotification = true;
     this.liveNotification = this.liveNotification;
     // Hide the notification after 3 seconds

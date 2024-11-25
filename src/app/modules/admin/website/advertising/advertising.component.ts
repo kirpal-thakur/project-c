@@ -128,7 +128,7 @@ export class AdvertisingComponent {
   editAdvertisement(element:any){
     const updateAdDialog = this.dialog.open(AdvertisingPopupComponent,{
       height: '598px',
-      width: '600px',
+      width: '800px',
       panelClass: 'cutam-cupen',
       data : {
         action: 'update',

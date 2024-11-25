@@ -15,6 +15,7 @@ export class TeamMembersComponent {
   userId:any = "";
   baseUrl:any = "";
   idsToDelete:any = "";
+  currentUserId:string='';
 
   constructor(public dialog: MatDialog, private userService:UserService) { }
   ngOnInit(){
@@ -24,7 +25,10 @@ export class TeamMembersComponent {
   getRepresentators(){
     this.userService.getAdminRepresentators().subscribe((response)=>{
       if (response && response.status && response.data) {
+        console.log(response.data, 'get-representor');
+        this.currentUserId = response.data.currentUser.id;
         this.representators = response.data.representators;
+        this.representators.push(response.data.currentUser);
         this.baseUrl = response.data.uploads_path
       } else {
         console.error('Invalid API response structure:', response);
