@@ -11,9 +11,6 @@ import {
   ViewportRuler
 } from "./chunk-OCI52GUJ.js";
 import {
-  NG_VALUE_ACCESSOR
-} from "./chunk-KU7DBYGS.js";
-import {
   MAT_FORM_FIELD,
   MatFormField
 } from "./chunk-BUSDJVER.js";
@@ -55,6 +52,9 @@ import {
   UP_ARROW,
   hasModifierKey
 } from "./chunk-CJNMZQC3.js";
+import {
+  NG_VALUE_ACCESSOR
+} from "./chunk-KU7DBYGS.js";
 import {
   CommonModule,
   DOCUMENT
