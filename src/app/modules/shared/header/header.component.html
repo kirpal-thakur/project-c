@@ -12,8 +12,8 @@
       <span class="page-heading"> Dashboard</span>
     </div>
 
-    <div class="input-group search-area">
-      <span class="input-group-text"><a href="javascript:void(0)">
+    <label for="search-text" class="input-group search-area d-flex align-items-center">
+      <span class="input-group-text "><a href="javascript:void(0)">
         <svg id="search-icon" width="17" height="16" viewBox="0 0 17 16" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.5">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6939 11.9861C12.4237 10.826 13.6962 7.67253 12.5361 4.94269C11.3759 2.21286 8.22245 0.940375 5.49261 2.10053C2.76278 3.26068 1.49029 6.41414 2.65045 9.14398C3.8106 11.8738 6.96406 13.1463 9.6939 11.9861Z" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -23,9 +23,31 @@
         </a>
       </span>
 
-      <input type="text"  name="search"  class="form-control" id="Search-text" placeholder="Search" />
+      <div class="search-container w-75">
 
-    </div>
+        <input 
+          type="text" 
+          name="search"
+          class="form-control "
+          id="search-text" 
+          placeholder="Search"
+          (input)="onSearch()" 
+          (focus)="showSuggestions = true"
+          (blur)="hideSuggestions()"
+          [(ngModel)]="searchUser"
+          autocomplete="off"
+        />
+        <ul *ngIf="showSuggestions" class="suggestion-box">
+          <ng-container *ngFor="let user of searchResults" >
+            <li class="cursor-pointer"
+              *ngIf="user.first_name && user.last_name" 
+              (mousedown)="selectUser(user)">
+              {{ user.first_name }}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </label>
 
     
     <div class="navbarcollapse">
@@ -165,7 +187,7 @@
                   <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
                   <span class="badgewarning">Talent</span>
                   <br>
-                  <a routerLink="/talent/setting" class="header-view-profile" >View my Profile</a>
+                  <a routerLink="/talent/dashboard" class="header-view-profile" >View my Profile</a>
 
                   <a routerLink="/talent/setting" class="dropdown-item ai-icon px-0 py-2 border-bottom ">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">

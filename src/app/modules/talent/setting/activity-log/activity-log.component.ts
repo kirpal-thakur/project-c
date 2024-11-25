@@ -139,6 +139,6 @@ export class ActivityLogComponent {
 
   confirmSingleDeletion(id:any){
     this.idsToDelete = [id];
-    this.showMatDialog("", "delete-activity-confirmation");
+    this.showMatDialog("Are you sure you want to delete this Activity?", "delete-activity-confirmation");
   }
 }

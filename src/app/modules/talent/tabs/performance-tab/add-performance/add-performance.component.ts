@@ -40,14 +40,14 @@ export class AddPerformanceComponent {
     this.teams = { ...this.data.teams };
     this.matches = this.performance.matches;
     this.goals = this.performance.goals;
-    console.log('teams:', this.teams);
+
     this.from_date = new FormControl(
       this.performance.from_date ? new Date(this.performance.from_date) : null
     );
     this.to_date = new FormControl(
       this.performance.to_date ? new Date(this.performance.to_date) : null
     );
-    console.log('teams:', this.from_date);
+
     this.from_date.setValue(this.performance.from_date ? new Date(this.performance.from_date) : null);
     this.to_date.setValue(this.performance.to_date ? new Date(this.performance.to_date) : null);
   }
@@ -86,8 +86,6 @@ export class AddPerformanceComponent {
         to_date: this.to_date.value // Convert FormControl value to string (if necessary)
           ? moment(this.to_date.value).format('YYYY-MM-DD') 
           : null,
-        matches: this.matches, // Include matches
-        goals: this.goals // Include goals
       };
 
       this.talentService.addPerformance(formData).subscribe({

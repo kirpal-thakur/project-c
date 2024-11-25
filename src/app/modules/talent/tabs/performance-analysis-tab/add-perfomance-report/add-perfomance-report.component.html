@@ -27,7 +27,7 @@
             </div>
             <h2>{{'Drag and Drop files here' | translate}}</h2>
             <p>{{'Files supported: JPG, PNG, PDF' | translate}}</p>
-            <input id="reportUpload" (change)="onFileSelected($event)" accept="image/*" type="file" class="d-none" />
+            <input id="reportUpload" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png,.pdf" type="file" class="d-none" />
             <p>{{'Maximum Size: 5MB' | translate}}</p>
         </label>
 
