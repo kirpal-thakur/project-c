@@ -583,7 +583,7 @@
   span.active_btn {
     background: #236115;
     padding: 2px 8px;
-    margin: 0px 52px 0px 8px;
+    margin: 0px 45px 0px 8px;
     line-height: normal;
     border-radius: 20px;
     color: #fff;
@@ -604,10 +604,12 @@
   .favourite_images{
     min-height: 260px;
   }
-  .image-icon{
-    margin-top: 60px;
-    text-align: center;
-  }
+
+}
+
+.image-icon{
+
+  text-align: center;
 }
 
 .card-header{

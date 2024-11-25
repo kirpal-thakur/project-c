@@ -100,7 +100,7 @@
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
-  width: 100%;
+  width: 95%;
 }
 
 .suggestion-box li {
@@ -110,4 +110,8 @@
 
 .suggestion-box li:hover {
   background-color: #f0f0f0;
+}
+
+.search-area{
+  width: 60vw;
 }

@@ -18,7 +18,7 @@
       <label for="newsletter" class="mb-0"><b>{{'Newsletter' | translate}}</b></label>
       <label class="switch">
         <!-- Add the (change) event listener to handle newsletter toggle -->
-        <input type="checkbox" id="newsletter" name="newsletter" [checked]="loggedInUser.newsletter == 1" (change)="onNewsletterChange($event)">
+        <input type="checkbox" id="newsletter" name="newsletter" [checked]="loggedInUser.newsletter == 1" (change)="confirm($event)">
         <span class="slider round"></span>
       </label>
     </div>
