@@ -147,7 +147,7 @@
   "UserManagement": "Gestión de usuarios",
   "VerifyUsers": "Verificar usuarios",
     "DeleteUsers": "Eliminar usuarios",
-    "ExportXLS": "Exportar PDF",
+    "ExportXLS": "Exportar XLS",
     "UserAlreadyVerified": "Este usuario ya está verificado.",
     "ConfirmDeleteUser": "Una vez eliminado, no se puede deshacer. ¿Desea eliminar?",
     "DeleteAccount": "Eliminar cuenta",
@@ -185,7 +185,7 @@
     "AddPhotos": "Agregar fotos",
     "Season": "Temporada",
     "MovingFrom": "Mudanza de",
-    "MovingTo": "Mudanza a"
-
+    "MovingTo": "Mudanza a",
+    "ExportXLS": "Exportar XLS"
   }
 

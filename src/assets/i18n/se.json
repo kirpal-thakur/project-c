@@ -147,7 +147,7 @@
      "UserManagement": "Användarhantering",
      "VerifyUsers": "Verifiera användare",
     "DeleteUsers": "Radera användare",
-    "ExportXLS": "Exportera PDF",
+    "ExportXLS": "Exportera XLS",
     "UserAlreadyVerified": "Den här användaren är redan verifierad.",
     "ConfirmDeleteUser": "När användaren är raderad kan det inte ångras. Vill du radera?",
     "DeleteAccount": "Radera konto",
@@ -185,6 +185,7 @@
     "AddPhotos": "Lägg till foton",
     "Season": "Säsong",
     "MovingFrom": "Flyttar från",
-    "MovingTo": "Flyttar till"
+    "MovingTo": "Flyttar till",
+    "ExportPDF": "Exportera PDF"
   }
 

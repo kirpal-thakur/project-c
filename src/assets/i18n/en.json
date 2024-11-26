@@ -123,7 +123,7 @@
         "UserManagement": "User Management",
         "VerifyUsers": "Verify Users",
        "DeleteUsers": "Delete Users",
-       "ExportXLS": "Export PDF",
+       "ExportXLS": "Export XLS",
        "UserAlreadyVerified": "This user is already verified.",
        "ConfirmDeleteUser": "Once user is deleted, it can’t be undone. Do you want to delete?",
        "DeleteAccount": "Delete Account",
@@ -161,6 +161,7 @@
     "AddPhotos": "Add Photos",
     "Season": "Season",
     "MovingFrom": "Moving From",
-    "MovingTo": "Moving To"
+    "MovingTo": "Moving To",
+    "ExportPDF": "Export PDF"
     }
 

@@ -150,7 +150,7 @@
   "UserManagement": "Benutzerverwaltung",
   "VerifyUsers": "Benutzer verifizieren",
     "DeleteUsers": "Benutzer löschen",
-    "ExportXLS": "PDF exportieren",
+    "ExportXLS": "XLS exportieren",
     "UserAlreadyVerified": "Dieser Benutzer ist bereits verifiziert.",
     "ConfirmDeleteUser": "Einmal gelöscht, kann der Benutzer nicht wiederhergestellt werden. Möchten Sie löschen?",
     "DeleteAccount": "Konto löschen",
@@ -188,8 +188,8 @@
     "AddPhotos": "Fotos hinzufügen",
     "Season": "Saison",
     "MovingFrom": "Umzug von",
-    "MovingTo": "Umzug nach"
-  
+    "MovingTo": "Umzug nach",
+    "ExportPDF": "PDF exportieren"
 }
 
 
