@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
@@ -41,7 +42,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private dashboardApi:DashboardService,
     private router: Router,
     private translateService: TranslateService,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
+    private userService: UserService
   ) {
     this.getChardData();
   }
@@ -59,6 +61,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
+    this.userService.getAdminProfile().subscribe((response)=>{
+      if (response && response.status) {
+        let userData = response.data.user_data;
+        this.loggedInUser.profile_image_path = userData.meta.profile_image_path || '../../../assets/images/1.jpg';
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });
   }
 
   ngAfterViewInit() {
