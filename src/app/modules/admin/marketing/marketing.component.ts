@@ -58,7 +58,9 @@ export class MarketingComponent {
     }
 
     if(this.customFilters['role']){
-      params = {...params, "whereClause[role]" : this.customFilters['role']};
+      let getFreePaymentType = ["1","3","5"];
+      let paymentType = (getFreePaymentType.includes(this.customFilters['role'])) ? 'free' : 'paid';
+      params = {...params, "whereClause[role]" : this.customFilters['role'], "whereClause[payment_type]": paymentType};
     }
 
     if(this.customFilters['language']){
@@ -101,7 +103,7 @@ export class MarketingComponent {
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
       height: '537px',
-      width: '600px',
+      width: '800px',
     })
 
     dialogRef.afterClosed().subscribe(result => {

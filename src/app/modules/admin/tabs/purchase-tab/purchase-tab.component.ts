@@ -15,6 +15,7 @@ export class PurchaseTabComponent {
   allSelected: boolean = false;
   idsToDownload: any = [];
   selectedIds: number[] = [];
+  errorMsg:string='';
   constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
   
   ngOnInit(): void {
@@ -90,6 +91,10 @@ export class PurchaseTabComponent {
 
   downloadAll():any{
     if(this.selectedIds.length == 0){
+      this.errorMsg = "Please select at least 1 purchase";
+      setTimeout(() => {
+        this.errorMsg = '';
+      }, 1000)
       return false;
     }
 

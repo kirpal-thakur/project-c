@@ -26,8 +26,7 @@ export class FavoritesTabComponent {
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       console.log(params.id)
-      // this.userId = params.id;
-      this.userId = 59;
+      this.userId = params.id;
       this.getUserFavorites();
     });
   }
@@ -45,6 +44,7 @@ export class FavoritesTabComponent {
       params.limit  = pageSize;
 
       this.userService.getFavoritesData(this.userId, params).subscribe((response)=>{
+        console.log(response, 'get-user-favorite');
         if (response && response.status && response.data) {
           this.userFavorites = response.data[0].favorites;
           this.totalFavorites = response.data[0].totalCount;
