@@ -27,10 +27,16 @@
   padding: 10px 26px;
 }
 .premium-card {
-  background: #75bb63;
+  background: #6FB95D;
   padding: 30px 20px 20px 20px;
   border-radius: 10px;
-  border: 1px solid #9d0808;
+  border: 1px solid #C2A64A;
+  position: relative;
+}
+.premium-card_football{
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 sub.premium-month_title {
     font-size: 14px;

@@ -4,7 +4,6 @@ import { TalentRoutingModule } from './talent-routing.module';
 import { IndexComponent } from './index/index.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { FavoritesComponent } from './favorites/favorites.component';
@@ -65,18 +64,19 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
 import {GuidedTourModule, GuidedTourService} from 'ngx-guided-tour';
 import { LightboxModule } from 'ngx-lightbox';
+import { SharedModule } from '../shared/shared.module';
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
 export const MY_FORMATS = {
   parse: {
-    dateInput: 'LL',
+    dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
   },
   display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
+    dateInput: 'DD.MM.YYYY', // Display format for date input
+    monthYearLabel: 'MMM YYYY', // Month and year label
+    dateA11yLabel: 'DD.MM.YYYY', // Accessibility label for date
+    monthYearA11yLabel: 'MMMM YYYY', // Accessibility label for month and year
   },
 };
 
@@ -88,7 +88,6 @@ export const MY_FORMATS = {
   declarations: [
     IndexComponent,
     DashboardComponent,
-    HeaderComponent,
     SidebarComponent,
     FooterComponent,
     FavoritesComponent,
@@ -157,6 +156,7 @@ export const MY_FORMATS = {
     MatTooltipModule,
     LightboxModule,
     GuidedTourModule,
+    SharedModule
   ]
 })
 export class TalentModule { }

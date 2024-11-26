@@ -91,7 +91,7 @@
               </button>
             </div>
             <a class="btn btn-outline-white users-icon" (click)="verifyUsers()">
-              <svg id="users-icon"
+              <!-- <svg id="users-icon"
                 width="18"
                 height="19"
                 viewBox="0 0 18 19"
@@ -108,8 +108,13 @@
                   stroke="black"
                   stroke-width="0.5"
                 />
-              </svg>
-
+              </svg> -->
+              
+                <svg id="users-icon" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 1L2 3.55V8.7265C2 13.019 4.98375 17.0225 9 18C13.0163 17.0225 16 13.019 16 8.7265V3.55L9 1Z" fill="#787878"/>
+                  <path class="verify-icon" d="M13.1749 7.80954L13.3574 7.63087L13.1749 7.45221L12.5303 6.82133L12.3555 6.65026L12.1806 6.82125L7.51415 11.3843L5.81922 9.7294L5.64436 9.55867L5.4697 9.72961L4.82513 10.3605L4.64259 10.5391L4.82513 10.7178L7.33942 13.1787L7.51429 13.3498L7.68915 13.1787L13.1749 7.80954Z" fill="white" stroke="white" stroke-width="0.5"/>
+                  </svg>
+  
               {{ 'VerifyUsers' | translate }}</a
             >
             <a class="btn btn-outline-white" (click)="confirmDeletion()" id="users-icon"
@@ -252,6 +257,13 @@
                   <ng-container matColumnDef="Joined Date - Time">
                     <th mat-header-cell *matHeaderCellDef> Joined Date - Time
                       <!-- <small><i class="fas fa-sort"></i> </small>   -->
+                       <span class="sort-icon">
+                        
+                        <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z" fill="#111418"/>
+                          </svg>
+  
+                       </span>
                     </th>
                     <td mat-cell *matCellDef="let element"> {{ element.updated_at | date: 'MM.dd.yyyy - hh.mm a' }}</td>
                   </ng-container>

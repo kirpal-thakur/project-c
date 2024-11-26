@@ -363,7 +363,7 @@
         </div>
 
         <div class="dashboard_table-2 mt-5">
-          <div class="table_title ">
+          <div class="table_title table-main-header">
             <div class="d-flex">
               <div>
                 <p>New Registrations</p>
@@ -397,12 +397,16 @@
             <tbody>
               <tr *ngFor="let user of newRegistrations" (click)="redirectUser(user.role_name, user.id)" class="pointer">
                 <td  class="main-table ">
-                  <img
-                    src="../../../assets/images/1.jpg"
-                    alt=""
-                    class="table_img"
-                  />
-                  <span>{{user.first_name +' '+user.last_name }}</span>
+                 <div class="d-flex align-items-center">
+                  <span>
+                    <img
+                  src="../../../assets/images/1.jpg"
+                  alt=""
+                  class="table_img"
+                />
+                  </span>
+                <span>{{user.first_name +' '+user.last_name }}</span>
+                 </div>
                 </td>
                 <td>{{user.role_name}}</td>
                 <td>{{ user.language }}</td>
@@ -423,7 +427,7 @@
     </div>
 
     <div class="right-sidebar">
-      <div class="card">
+      <div class="card pt-0 ">
         <div class="card-header d-flex align-items-center justify-content-between border-0">
             <h4>{{ 'Registrations' | translate }}</h4>
             <a href="admin/users" >{{ 'View' | translate }} </a> 

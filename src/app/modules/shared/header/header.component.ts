@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
+import { UserService } from '../../../services/user.service';
 
 interface Notification {
   image: string;
@@ -20,7 +21,12 @@ interface Notification {
 })
 export class HeaderComponent {
   
-  constructor(private talentService: TalentService, private themeService: ThemeService, private authService: AuthService,private translateService: TranslateService) {}
+  searchResults: any[] = [];
+  searchUser:any;
+  showSuggestions: boolean = false;
+  viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
+
+  constructor(private userService: UserService ,private router: Router,private talentService: TalentService, private themeService: ThemeService, private authService: AuthService,private translateService: TranslateService) {}
   loggedInUser:any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang:string = '';
@@ -137,6 +143,67 @@ export class HeaderComponent {
 
     this.notifications = [...this.notifications, ...moreNotifications];
 
+  }
+
+  onSearch() {
+
+    if (this.searchUser.trim().length === 0) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.userService.searchUser(this.searchUser).subscribe((response:any)=>{
+      if (response && response.status && response.data && response.data.userData) {          
+          this.searchResults = response.data.userData;          
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });  
+
+  }
+
+  selectUser(user: any) {
+    console.log('User selected:', user);
+    this.searchResults = [];
+    this.showSuggestions = false;
+    this.searchUser = user.first_name +' '+ user.last_name
+
+    // Navigate or perform actions with the selected user
+    this.exploreUser(user.role_name,user.id)
+  }
+
+  
+  private saveTrackedViews() {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
+
+  // Track profile click only once per session
+  private trackProfileClick(profileId: number) {
+    const id: number[] = [profileId];  // Create an array of profileId
+
+    if (!this.viewsTracked[profileId]?.clicked) {
+      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
+        next: () => {
+          console.log(`Click tracked for profile ${profileId}`);
+          this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
+          this.saveTrackedViews();  // Save the updated viewsTracked
+        },
+        error: (error) => console.error('Error tracking profile click', error)
+      });
+    }
+  }
+
+  exploreUser(slug: string, id: number): void {
+    this.trackProfileClick(id); // Track the click before navigation
+    const pageRoute = 'view/' + slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
+  }
+
+  hideSuggestions() {
+    setTimeout(() => {
+      this.showSuggestions = false;
+    }, 200); // Delay to ensure selectUser runs before hiding suggestions
   }
 
 }

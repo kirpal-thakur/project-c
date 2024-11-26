@@ -73,8 +73,6 @@ export class EditPerformanceDetailsComponent implements OnInit {
         to_date: this.to_date.value // Convert FormControl value to string (if necessary)
           ? moment(this.to_date.value).format('YYYY-MM-DD') 
           : null,
-        matches: this.matches, // Include matches
-        goals: this.goals // Include goals
       };
   
       // API call to update performance

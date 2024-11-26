@@ -7,7 +7,8 @@
             </div>
             <div class="elton-btn d-flex align-items-center gap-2">
                <div class="player-elton-img ">
-                <img width="32px" height="32px" [src]="user.profile_image_path" alt="">
+                <img width="32px" height="32px" *ngIf="user.profile_image_path" [src]="user.profile_image_path" alt="">
+                <img width="32px" height="32px" *ngIf="!user.profile_image_path"   src="../../../../assets/images/default/talent-profile-default.png"  alt="">
                </div>
                 <div class="player-name_title">
                     <h6>{{user.first_name + ' ' + user.last_name}}</h6>
@@ -31,13 +32,15 @@
                     <h4 class="details_2 mb-2">{{'Current Club' | translate}}</h4>
                     <span>
                         <img 
-                          width="26px" 
+                          width="26px"
                           [src]="user.club_logo_path ? user.club_logo_path : 'assets/images/team-badge.png'" 
                           alt="">
                       </span>
                       
                     <span class="details-1">{{userData.club_name}}</span>
-                    <span><img [src]="user.club_logo_path ? user.club_logo_path : '../../../../assets/images/flag.svg'" alt=""></span>
+                    <!-- <span><img
+                        width="26px"
+                        [src]="user.club_logo_path ? user.club_logo_path : '../../../../assets/images/flag.svg'" alt=""></span> -->
                 </div>
                 <div class="col-lg-3">
                     <h4 class="details_2 mb-2">{{'League level' | translate}}</h4>
