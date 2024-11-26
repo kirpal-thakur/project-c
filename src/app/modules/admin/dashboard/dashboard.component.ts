@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DashboardService } from '../../../services/dashboard.service';
 import { ViewportScroller } from '@angular/common';
 import { environment } from '../../../../environments/environment';
+import { goToActiveLog } from '../../../../utlis';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -360,6 +361,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate([pageRoute, id]);
   }
 
+  goToSetting(){
+    goToActiveLog(this.router);
+  }
 
 }
 

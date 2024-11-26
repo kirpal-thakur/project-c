@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
-
+import { goToActiveLog } from '../../../../utlis';
 interface Notification {
   image: string;
   title: string;
@@ -203,5 +203,8 @@ export class HeaderComponent {
     }, 5000); // 3000 ms = 3 seconds
   }
 
+  accountSetting(){
+    goToActiveLog(this.router);
+  }
 }
 
