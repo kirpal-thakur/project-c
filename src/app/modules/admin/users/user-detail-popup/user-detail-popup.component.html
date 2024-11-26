@@ -1,4 +1,4 @@
-<div let user of users class="offcanvas offcanvas-end edit-canvas show">
+<div let user of users class="offcanvas offcanvas-end edit-canvas show" tabindex="-1">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasRightLabel">User Details</h5>
     <a class="close c_pointer" data-bs-dismiss="offcanvas" (click)="close()" aria-label="Close">Close</a>
@@ -16,7 +16,7 @@
       </div>
       <div class="edit-canvas-content">
         <h6>{{ user.first_name }} {{ user.last_name }}</h6>
-        <h6 class="font-w400">{{user.role_name}}</h6>
+        <h6 class="font-w400">{{(user.role_name == 'Player') ? 'Talent' : user.role_name}}</h6>
       </div>
     </div>
     <h6 (click)="closePopup(user.role_name, user.id)" class="list-view-title">View Full Profile</h6>
@@ -111,7 +111,7 @@
       </div>
     </div>
 
-    <div class="list-view mb-5">
+    <div class="list-view mb-3">
       <div class="form-check" *ngIf="user.status == '1' || user.status == '3'">
         <label class="form-check-label pointer" for="flexCheckDefault1">
           <input
@@ -136,7 +136,7 @@
       </div>
     </div>
   </div>
-  <div class="offcanvas-footer p-3 mt-4">
+  <div class="offcanvas-footer">
     <div class="d-flex align-items-center justify-content-between">
       <span class="text-danger pointer" (click)="closePopup(user.role_name, user.id)">Edit Account</span>   
       <button class="btn btn-success btn-sm web-create-bg" (click)="save()">Save</button>

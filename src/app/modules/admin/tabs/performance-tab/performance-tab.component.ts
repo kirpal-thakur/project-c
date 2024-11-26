@@ -46,7 +46,7 @@ export class PerformanceTabComponent {
       this.userService.getPerformanceData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.performanceDetail) {
           this.editableId = "";
-          this.performances = response.data.performanceDetail; 
+          this.performances = response.data.performanceDetail;
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -73,7 +73,7 @@ export class PerformanceTabComponent {
     this.editableId = performanceId;
     let index = this.performances.findIndex((x:any) => x.id == performanceId);
     let currentRow = this.performances[index];
-
+    console.log(currentRow, 'current-row');
     this.dataTOBeUpdated = {
       coach: currentRow.coach,
       team_id: currentRow.team_id,
@@ -134,6 +134,7 @@ export class PerformanceTabComponent {
   }
 
   selectTeam(teamId:any, name:any, country:any){
+    console.log(teamId, name, country, 'testing');
     this.inputValue = name+", "+country;
     this.updateRow('team_id',teamId);
     this.filteredTeams = [];

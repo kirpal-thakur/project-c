@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from
 import { UserEditPopupComponent } from '../../user-edit-popup/user-edit-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-profile-tab',
   templateUrl: './profile-tab.component.html',
@@ -10,6 +11,7 @@ import { MessagePopupComponent } from '../../message-popup/message-popup.compone
 export class ProfileTabComponent {
   user:any = {}
   userNationalities:any = [];
+  countryFlagUrl : any;
 
   @Input() userData: any;
   @Output() dataEmitter = new EventEmitter<string>();
@@ -37,7 +39,7 @@ export class ProfileTabComponent {
     // Convert the input date to a Date object if it's a string
     const birthDate = new Date(dob);
     const today = new Date();
-
+    
     // Calculate the difference in years
     let age = today.getFullYear() - birthDate.getFullYear();
 
@@ -95,5 +97,49 @@ export class ProfileTabComponent {
       let mainPos:any = pos.find((pos:any) => pos.main_position == 1);
       return mainPos ? mainPos.position_name : null;
     }
+  }
+
+  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+  
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+  
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+  
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) => 
+            component.types.includes('country')
+          );
+  
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            this.getCountryFlag(country);
+            console.log("Country found:", countryComponent);
+          } else {
+            console.error("Country not found in placeOfBirth.");
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+      return this.countryFlagUrl;
+  }
+  
+  getCountryFlag(countryCode: string): void {
+    // Using Flagpedia API for flag images
+    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+    
+    // Set the URL to an <img> element in your template or save it in a variable
+    this.countryFlagUrl = flagUrl;
+    return this.countryFlagUrl;
   }
 }
