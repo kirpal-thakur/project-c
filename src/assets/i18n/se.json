@@ -147,7 +147,7 @@
      "UserManagement": "Användarhantering",
      "VerifyUsers": "Verifiera användare",
     "DeleteUsers": "Radera användare",
-    "ExportXLS": "Exportera XLS",
+    "ExportXLS": "Exportera PDF",
     "UserAlreadyVerified": "Den här användaren är redan verifierad.",
     "ConfirmDeleteUser": "När användaren är raderad kan det inte ångras. Vill du radera?",
     "DeleteAccount": "Radera konto",

@@ -123,7 +123,7 @@
         "UserManagement": "User Management",
         "VerifyUsers": "Verify Users",
        "DeleteUsers": "Delete Users",
-       "ExportXLS": "Export XLS",
+       "ExportXLS": "Export PDF",
        "UserAlreadyVerified": "This user is already verified.",
        "ConfirmDeleteUser": "Once user is deleted, it can’t be undone. Do you want to delete?",
        "DeleteAccount": "Delete Account",

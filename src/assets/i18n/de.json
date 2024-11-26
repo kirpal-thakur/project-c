@@ -150,7 +150,7 @@
   "UserManagement": "Benutzerverwaltung",
   "VerifyUsers": "Benutzer verifizieren",
     "DeleteUsers": "Benutzer löschen",
-    "ExportXLS": "XLS exportieren",
+    "ExportXLS": "PDF exportieren",
     "UserAlreadyVerified": "Dieser Benutzer ist bereits verifiziert.",
     "ConfirmDeleteUser": "Einmal gelöscht, kann der Benutzer nicht wiederhergestellt werden. Möchten Sie löschen?",
     "DeleteAccount": "Konto löschen",
