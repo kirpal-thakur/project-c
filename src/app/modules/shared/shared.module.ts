@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
@@ -29,13 +29,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxEditorModule } from 'ngx-editor';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { IndexComponent } from './index/index.component';
-import { HeaderComponent } from './header/header.component';
+
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CouponCodeAlertComponent } from './coupon-code-alert/coupon-code-alert.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
+
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     SuccessComponent,
     CancelComponent,
@@ -47,10 +50,10 @@ import { CouponCodeAlertComponent } from './coupon-code-alert/coupon-code-alert.
     TransferDetailsComponent,   
     MessagePopupComponent,
     IndexComponent,
-    HeaderComponent,
     SidebarComponent,
     FooterComponent,
-    CouponCodeAlertComponent
+    CouponCodeAlertComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -73,6 +76,22 @@ import { CouponCodeAlertComponent } from './coupon-code-alert/coupon-code-alert.
     MatToolbarModule,
     MatPaginator,
     NgxEditorModule,    
+  ],
+  exports:[
+    SuccessComponent,
+    CancelComponent,
+    ViewProfileComponent,
+    GalleryComponent,
+    GeneralDetailsComponent,
+    PerformanceDetailsComponent,
+    PerformanceReportComponent,
+    TransferDetailsComponent,   
+    MessagePopupComponent,
+    IndexComponent,
+    SidebarComponent,
+    FooterComponent,
+    CouponCodeAlertComponent,
+    HeaderComponent
   ]
 })
 export class SharedModule { }

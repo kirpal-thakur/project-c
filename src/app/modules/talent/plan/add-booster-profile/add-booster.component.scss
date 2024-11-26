@@ -69,9 +69,13 @@
   font-size: 16px;
   font-weight: 500;
 }
+.image_box {
+  border-radius: 16px !important;
+}
+
 .team-logo-bg {
   background: #E2001A;
-  width: 160px;
+  width: 180px;
   height: 160px;
   position: absolute;
   top: -84px;
@@ -85,7 +89,7 @@
   position: absolute;
   bottom: 42px;
   left: 18px;
-  padding: 6px;
+  padding: 6px 10px;
   text-align: center;
 }
 .boosted-box {
@@ -94,7 +98,7 @@
   font-size: 16px;
   font-weight: 600;
   width: fit-content;
-  padding: 8px;
+  padding: 16px 20px;
   border-radius: 0px 0px 10px 0px;
   position: absolute;
   top: 0;
@@ -112,7 +116,7 @@
   font-weight: 600;
 }
 .player-team-logo img {
-  width: 32px;
+  width: 36px;
   padding: 0;
   position: absolute;
   top: 14px;

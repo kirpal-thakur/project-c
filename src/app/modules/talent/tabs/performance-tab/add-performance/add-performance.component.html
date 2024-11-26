@@ -47,7 +47,7 @@
             <div class="form-group col-lg-6">
               <label for="matches" class="form-label">{{'Matches' | translate}}</label>
               <input type="number" id="matches" name="matches" [(ngModel)]="performance.matches" required>
-            </div>        
+            </div>
           </div>
           
           <div class="row">
@@ -84,7 +84,7 @@
                       name="from_date"
                       [matDatepicker]="from_datepicker"
                       [formControl]="from_date"
-                      placeholder="MM/DD/YYYY"
+                      placeholder="DD.MM.YYYY"
                       required
                     />
                     <mat-datepicker-toggle matSuffix [for]="from_datepicker"></mat-datepicker-toggle>
@@ -97,7 +97,7 @@
                       name="to_date"
                       [matDatepicker]="to_datepicker"
                       [formControl]="to_date"
-                      placeholder="MM/DD/YYYY"
+                      placeholder="DD.MM.YYYY"
                       required
                     />
                     <mat-datepicker-toggle matSuffix [for]="to_datepicker"></mat-datepicker-toggle>
