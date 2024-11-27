@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 import { ToastrService } from 'ngx-toastr';
+import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 
 
 interface Plan {
@@ -49,7 +50,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   country: any = '';
   booster: any = null;
   demo: any = null;
-
+  stats:any;
   couponCode: string = '';
   isCouponApplied: boolean = false;
 
@@ -61,8 +62,8 @@ export class PlanComponent implements OnInit, OnDestroy {
   stripePromise = loadStripe(environment.stripePublishableKey);
 
   constructor(
-    private talentService: TalentService, 
-    private paymentService: PaymentService, 
+    private talentService: TalentService,
+    private paymentService: PaymentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private toastr: ToastrService
@@ -73,6 +74,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.getUserPlans();
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
+    this.getBoosterData()
   }
 
   // Open coupon dialog
@@ -99,17 +101,17 @@ export class PlanComponent implements OnInit, OnDestroy {
   async redirectToCheckout(planId: string) {
     this.isLoadingCheckout = true;
     this.toastr.info('Redirecting to payment...', 'Loading', { timeOut: 3000 });
-  
+
     try {
       const response = await this.paymentService.createCheckoutSession(planId, '', this.couponCode).toPromise();
-  
+
       if (response?.data?.payment_intent?.id) {
         // Show success message after redirection attempt
         this.toastr.success('Redirected to Stripe Checkout successfully.', 'Success');
 
         const stripe = await this.stripe;
         await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
-  
+
       } else {
         this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
@@ -122,7 +124,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       this.isLoadingCheckout = false;
     }
   }
-  
+
 
 
   // Apply coupon logic (e.g., send to backend for validation)
@@ -173,7 +175,7 @@ export class PlanComponent implements OnInit, OnDestroy {
           this.selectedPlan = this.otherPlans[0] || null;
 
           this.getUserCards();
-          
+
           this.route.queryParams.subscribe(params => {
             const selectedCountryId = params['countryId'];
 
@@ -182,7 +184,7 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.editPlanPopup(this.otherPlans,this.country)
             }
           });
-          
+
         }
       },
       error: (err) => {
@@ -247,14 +249,14 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('No default card found for payment');
       return;
     }
-  
+
     try {
       const subscriptionData = {
         paymentMethodId: this.defaultCard.stripe_payment_method_id,
         planId: plan.id,
       };
       const response = await this.talentService.subscribeToPlan(subscriptionData).toPromise();
-  
+
       if (response?.status === 'success') {
         console.log('Subscription successful!', response.subscription);
       } else {
@@ -354,7 +356,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('Error subscribing:', err);
     }
   }
-    
+
   decreaseValue(plan: Plan) {
     if (plan.quantity > 1) plan.quantity--;
   }
@@ -366,7 +368,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   editPlanPopup(plans:any,country:any) {
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
-      data: { 
+      data: {
         plans: plans ,
         selectedPlan :this.selectedPlan,
         defaultCard : this.defaultCard ,
@@ -378,7 +380,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   addBoostPopup(planId:any) {
     const dialogRef = this.dialog.open(AddBoosterComponent, {
       width: '850px',
-      data: { 
+      data: {
         id: planId ,
       }
     });
@@ -393,17 +395,17 @@ export class PlanComponent implements OnInit, OnDestroy {
   onPlanSelect(event: Event) {
     const selectedId = (event.target as HTMLSelectElement).value;
     const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
-  
+
     if (selected) {
       this.selectedPlan = selected;
     }
   }
 
-  
+
   onSelectPlan(selectedId:any) {
-    
+
     const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
-  
+
     if (selected) {
       this.selectedPlan = selected;
     }
@@ -412,4 +414,37 @@ export class PlanComponent implements OnInit, OnDestroy {
   getActiveMultiCountryPlanCount(): number {
     return this.country.length;
   }
+
+  editBooster(data:any){
+
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '1000px',
+      data: { stats : this.stats
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ) {
+        this.getBoosterData()
+        // alert('Booster profile updated')
+      }
+    });
+  }
+
+
+  async getBoosterData(){
+    try {
+      const response = await this.talentService.getBoosterData().toPromise();
+      if (response?.data) {
+        this.stats = response.data;
+        console.log(this.stats)
+        // Ensure the selectedAudienceIds array is cleared and populated with the correct data
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
+  }
+
 }

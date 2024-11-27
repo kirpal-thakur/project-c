@@ -450,13 +450,22 @@ getExploresData(params: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl2}player/add-performance-detail`, params, { headers });
   }
 
-  deletePerformance(params: any): Observable<any> {
+  deletePerformanceReport(params: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
 
     return this.http.post<any>(`${this.apiUrl2}player/delete-performance-report`, params, { headers });
+  }
+
+  deletePerformance(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.get<any>(`${this.apiUrl2}player/delete-performance-detail/${params}`,  { headers });
   }
 
   updateTransfer(transferId:any, params: any): Observable<any> {

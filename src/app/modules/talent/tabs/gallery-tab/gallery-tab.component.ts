@@ -131,8 +131,9 @@ export class GalleryTabComponent {
     });
   }
 
-  openMenu(id:any){
-    this.openedMenuId = id;
+  openMenu(imageId: string): void {
+    // Toggle the menu for the given image ID
+    this.openedMenuId = this.openedMenuId === imageId ? null : imageId;
   }
 
   deleteImage(id: any) {
@@ -164,15 +165,17 @@ export class GalleryTabComponent {
     }
   }
 
+  openDeleteDialog(id: any): void {
+    // Close the floating menu when opening the dialog
+    this.openedMenuId = null;
   
-  openDeleteDialog(id:any) {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // If result is true, proceed with deletion logic
+        // Proceed with deletion if the user confirms
         this.deleteImage(id);
       } else {
         console.log('User canceled the delete');
