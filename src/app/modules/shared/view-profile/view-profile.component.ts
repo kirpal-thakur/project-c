@@ -24,7 +24,7 @@ export class ViewProfileComponent implements OnInit {
   userImages: any = [];
   userVideos: any = [];
   imageBaseUrl: any;
-  defaultCoverImage: any = './media/palyers.png';
+  defaultCoverImage: any ;
   isFavorite: boolean = false; // Added to track favorite status
   downloadPath: any='';
   isPremium:any= false;
@@ -64,6 +64,13 @@ export class ViewProfileComponent implements OnInit {
           this.coverImage = this.user.meta.cover_image_path || this.coverImage;
           if(this.user?.meta?.place_of_birth){
             this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          }
+
+          if (this.userNationalities.length) {
+            // Fetch flag details for each nationality
+            this.userNationalities.forEach((nat:any, index:any) => {
+              this.getCountry(nat.flag_path, index);
+            });
           }
 
           // Set isFavorite status based on user data or API response
@@ -247,4 +254,43 @@ export class ViewProfileComponent implements OnInit {
     // Set the URL to an <img> element in your template or save it in a variable
     this.countryFlagUrl = flagUrl;
   }
+
+
+  getCountry(placeOfBirth: string ,key : any): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
+
+            this.userNationalities[key].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
+          } else {
+            console.error("Country not found in placeOfBirth.");
+            return;
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+          return;
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
 }

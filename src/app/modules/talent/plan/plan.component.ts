@@ -73,7 +73,6 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.getUserPlans();
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
-
   }
 
   // Open coupon dialog
@@ -143,7 +142,7 @@ export class PlanComponent implements OnInit, OnDestroy {
           const premiumPlans: Plan[] = [];
           const boostedPlans: Plan[] = [];
           const otherPlans: Plan[] = [];
-          
+
           response.data[0]?.forEach((plan: any) => {
             const newPlanData: Plan = {
               id: plan.id,
@@ -151,7 +150,7 @@ export class PlanComponent implements OnInit, OnDestroy {
               priceMonthly: plan.interval === "monthly" || plan.interval === "daily" ? parseFloat(plan.price) : null,
               priceYearly: plan.interval === "yearly" || plan.interval === "weekly"  ? parseFloat(plan.price) : null,
               currency: plan.currency,
-              isYearly: plan.interval === "yearly" || plan.interval === "weekly",
+              isYearly: (plan.is_package_active == 'active' ) ? true : false ,
               yearData: plan.interval === "yearly" || plan.interval === "weekly" ? plan : null,
               monthData: plan.interval === "monthly" || plan.interval === "daily" ? plan : null,
               quantity: 1,
@@ -292,29 +291,27 @@ export class PlanComponent implements OnInit, OnDestroy {
   toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
     const originalIsYearly = plan.isYearly;
 
-    if (plan.isYearly === isYearly) {
+    if (plan.isYearly != isYearly) {
       this.toastr.info(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
       return;
     }
 
-    const planId = isYearly ? plan.yearData : plan.monthData;
+    const newPlanId = isYearly ? plan.yearData : plan.monthData;
 
-    if (planId.is_package_active !== 'active') {
+    if (newPlanId.is_package_active == 'active') {
       plan.isYearly = !originalIsYearly;
       return;
     }
-  
+
     const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
       data: { plan, isYearly }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.updateSubscription(subscribeId.id, planId.id);
+        this.updateSubscription(subscribeId.id, newPlanId.id);
       } else {
-        plan.isYearly = originalIsYearly;  
-        // Revert to the original state
-        // this.toastr.info(`Plan state reverted to ${originalIsYearly ? 'yearly' : 'monthly'}`);
+        plan.isYearly = originalIsYearly;
       }
     });
   }

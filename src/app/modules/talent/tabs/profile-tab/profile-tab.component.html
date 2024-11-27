@@ -115,7 +115,7 @@
     <div class="d-flex justify-content-between mt-4 details_info">
         <div class="general_details">
             <h6 class="details_2">{{ 'In the team since ' | translate}}</h6>
-            <h5 class="details-1">{{user?.meta?.in_team_since | date:'MMM d, y' }}</h5>
+            <h5 class="details-1">{{user?.meta?.in_team_since | date:'dd.MM.yyyy' }}</h5>
         </div>
         <div class="general_details">            
             <h6 class="details_2"> {{ 'Top Speed' | translate}}</h6>
@@ -134,7 +134,7 @@
         </div>
         <div class="general_details">            
             <h6 class="details_2"> {{ 'Last Change' | translate}}</h6>
-            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">{{user.meta.market_value_last_updated |date:'MMM d, y'}} </h5>
+            <h5 class="details-1" *ngIf="user.meta && user.meta.market_value_last_updated">{{user.meta.market_value_last_updated |date:'dd.MM.yyyy'}} </h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta.market_value_last_updated">NA</h5>
         </div>
     </div>
@@ -172,7 +172,7 @@
                 <rect width="149" height="120" fill="white"/>
                 </clipPath>
                 </defs>
-                </svg>
+            </svg>
 
         </div>
         <div class="col-lg-6 d-flex flex-column justify-content-between">
@@ -189,8 +189,8 @@
         <div class="col-lg-6 p-3">
             <div class="main-position">
                 <h6 class="details_2">{{ 'Social Media' | translate}}</h6>
-            
-                <div class="social_icons my-2" *ngIf="userData?.meta?.sm_facebook" >
+
+                <div class="social_icons my-2" *ngIf="user?.meta?.sm_facebook" >
 
                     <span class="me-2">   
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -206,10 +206,10 @@
                         </svg>   
                     </span>
                     <span>
-                        www.facebook.com/{{userData?.meta?.sm_facebook}}
+                        www.facebook.com/{{user?.meta?.sm_facebook}}
                     </span>
                 </div>
-                <div *ngIf="userData?.meta?.sm_instagram" class="social_icons mb-1">
+                <div *ngIf="user?.meta?.sm_instagram" class="social_icons mb-1">
                     <span class="me-2">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3008_6583)">
@@ -235,11 +235,11 @@
                             </defs>
                         </svg>   
                     </span>
-                    <span>www.instagram.com/{{userData?.meta?.sm_instagram}}</span>
+                    <span>www.instagram.com/{{user?.meta?.sm_instagram}}</span>
                 </div>
-            
+
                 <!-- TikTok Link -->
-                <div *ngIf="userData?.meta?.sm_tiktok" class="social_icons mb-1">
+                <div *ngIf="user?.meta?.sm_tiktok" class="social_icons mb-1">
                     <span class="me-2">
                         
                         <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -255,11 +255,11 @@
                             </defs>
                         </svg> 
                     </span>
-                    <span>www.tiktok.com/{{userData?.meta?.sm_tiktok}}</span>
+                    <span>www.tiktok.com/{{user?.meta?.sm_tiktok}}</span>
                 </div>
-            
+
                 <!-- Vimeo Link -->
-                <div *ngIf="userData?.meta?.sm_vimeo" class="social_icons mb-1">
+                <div *ngIf="user?.meta?.sm_vimeo" class="social_icons mb-1">
                     <span class="me-2">
                         
                       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,11 +273,11 @@
                         </defs>
                     </svg> 
                     </span>
-                    <span>www.vimeo.com/{{userData?.meta?.sm_vimeo}}</span>
+                    <span>www.vimeo.com/{{user?.meta?.sm_vimeo}}</span>
                 </div>
             
                 <!-- X (formerly Twitter) Link -->
-                <div *ngIf="userData?.meta?.sm_x" class="social_icons mb-1">
+                <div *ngIf="user?.meta?.sm_x" class="social_icons mb-1">
                     <span class="me-2">
                         <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3008_6581)">
@@ -290,11 +290,11 @@
                             </defs>
                         </svg> 
                     </span>
-                    <span>www.twitter.com/{{userData?.meta?.sm_x}}</span>
+                    <span>www.twitter.com/{{user?.meta?.sm_x}}</span>
                 </div>
-            
+
                 <!-- YouTube Link -->
-                <div *ngIf="userData?.meta?.sm_youtube" class="social_icons mb-1">
+                <div *ngIf="user?.meta?.sm_youtube" class="social_icons mb-1">
                     <span class="me-2">
                         
                         <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -309,7 +309,7 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.youtube.com/{{userData?.meta?.sm_youtube}}</span>
+                    <span>www.youtube.com/{{user?.meta?.sm_youtube}}</span>
                 </div>
             </div>
             

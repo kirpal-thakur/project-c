@@ -42,7 +42,7 @@ export class HeaderComponent {
       this.profileImgUrl = msg;
     });
     
-    
+
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
   }
@@ -159,7 +159,7 @@ export class HeaderComponent {
         // this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
-    });  
+    });
 
   }
 
@@ -173,7 +173,7 @@ export class HeaderComponent {
     this.exploreUser(user.role_name,user.id)
   }
 
-  
+
   private saveTrackedViews() {
     sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
   }
