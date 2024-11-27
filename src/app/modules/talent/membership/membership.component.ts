@@ -336,7 +336,7 @@ export class MembershipComponent {
   }
 
   editBooster(data:any){
-    
+
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
       width: '1000px',
       data: { stats : this.stats
@@ -345,7 +345,7 @@ export class MembershipComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result ) {
-        alert('Booster profile updated')
+        this.getBoosterData()
       }
     });
   }

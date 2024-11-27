@@ -16,7 +16,7 @@ export class EditMembershipProfileComponent {
   @Input() audiences = [
     { role_name: "Clubs", id: 2 },
     { role_name: "Scouts", id: 3 },
-    { role_name: "Talents", id: 4 },
+    { role_name: "Player", id: 4 },
   ];     // List of all audiences
   selectedAudienceIds: number[] = []; // Store only audience IDs
   id: any;
@@ -35,21 +35,44 @@ export class EditMembershipProfileComponent {
 
   async ngOnInit() {
     this.stats = this.data.stats;
-    
+
     this.selectedAudiences = this.stats?.booster_audience;
-    // Populate selectedAudienceIds based on data
-    if (this.stats?.booster_audience?.length > 0) {
-      this.selectedAudienceIds = [];
-      this.stats.booster_audience.forEach((audience: any) => {
-        this.selectedAudienceIds.push(audience.id);
-      });
-      console.log('Pre-selected Audience IDs:', this.selectedAudienceIds);
-    }
-    
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.id = this.data.id || [];
+    // Populate pre-selected audiences from input data
+    if (this.stats?.booster_audience?.length > 0) {
+      this.selectedAudiences = this.data.stats.booster_audience;
+      this.selectedAudienceIds = this.selectedAudiences.map(
+        (audience: any) => Number(audience.target_role)
+      );
+    }
+
   }
-  
+
+  /**
+   * Updates `selectedAudiences` whenever selection changes in `mat-select`
+   */
+  updateSelectedAudiences(): void {
+    this.selectedAudiences = this.audiences.filter((audience) =>
+      this.selectedAudienceIds.includes(audience.id)
+    );
+  }
+
+  /**
+   * Removes an audience from the selection when the cross button is clicked
+   * @param audienceId - ID of the audience to remove
+   */
+  removeAudience(audienceId: number): void {
+    // Remove ID from selectedAudienceIds
+    this.selectedAudienceIds = this.selectedAudienceIds.filter(
+      (id) => id !== audienceId
+    );
+
+    // Update the displayed selected audiences
+    this.updateSelectedAudiences();
+  }
+
 
   // Apply the selected audiences filter
   applyFilter() {
@@ -125,5 +148,5 @@ export class EditMembershipProfileComponent {
 
     return age;
   }
-  
+
 }

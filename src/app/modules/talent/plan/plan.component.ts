@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 import { ToastrService } from 'ngx-toastr';
+import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 
 
 interface Plan {
@@ -49,7 +50,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   country: any = '';
   booster: any = null;
   demo: any = null;
-
+  stats:any;
   couponCode: string = '';
   isCouponApplied: boolean = false;
 
@@ -71,6 +72,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.isLoadingPlans = true;
     this.getUserPlans();
+    this.getBoosterData()
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
   }
@@ -399,7 +401,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+
   onSelectPlan(selectedId:any) {
     
     const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
@@ -412,4 +414,37 @@ export class PlanComponent implements OnInit, OnDestroy {
   getActiveMultiCountryPlanCount(): number {
     return this.country.length;
   }
+
+
+  editBooster(data:any){
+
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '1000px',
+      data: { stats : this.stats
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ) {
+        alert('Booster profile updated')
+      }
+    });
+  }
+
+
+  async getBoosterData(){
+    try {
+      const response = await this.talentService.getBoosterData().toPromise();
+      if (response?.data) {
+        this.stats = response.data;
+        console.log(this.stats)
+        // Ensure the selectedAudienceIds array is cleared and populated with the correct data
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
+  }
+
 }
