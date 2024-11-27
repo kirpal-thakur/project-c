@@ -19,8 +19,7 @@
               <div class="subscription-switch mb-2">
                 <label class="switch_off cursor-pointer" (click)="toggleBillingPlan(plan, false ,premium)">Billed Monthly</label>
                 <input class="cursor-pointer" type="checkbox" [id]="plan.id"
-                [checked]="
-                (plan.isYearly || (premium && premium.interval == 'yearly'))  && (( plan?.name == premium?.package_name) || ( plan?.name == demo?.package_name))"
+                [checked]="(plan.isYearly)"
                 [(ngModel)]="plan.isYearly"
                 (change)="toggleBillingPlan(plan, (plan.isYearly),premium)" [value]="plan.isYearly">
                 <label class="switch_on cursor-pointer" (click)="toggleBillingPlan(plan, true,premium)">

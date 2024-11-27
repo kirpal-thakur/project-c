@@ -225,7 +225,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   getIncludes(packageName: string): string[] {
     switch (packageName) {
-      case 'Premium': return ["Talent profile data", "Export data", "Chat", "Favorites", "Highlights"];
+      case 'Premium': return ["Talent profile data", "Export data", "Favorites", "Highlights"];
       case 'Booster': return ["Top search results", "Higher visibility", "Faster network growth", "Boost options"];
       default: return ["Global portfolio visibility", "Higher hiring chances", "Profile for international leagues"];
     }
