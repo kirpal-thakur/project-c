@@ -82,6 +82,7 @@ export class PerformanceTabComponent {
       session: currentRow.session,
       player_age: currentRow.player_age
     }
+    this.inputValue = currentRow.country_name;
   }
 
   

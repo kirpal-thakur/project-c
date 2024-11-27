@@ -14,6 +14,7 @@ export class ProfileTabComponent {
   countryFlagUrl : any;
 
   @Input() userData: any;
+  @Input() userCountryFlag: any;
   @Output() dataEmitter = new EventEmitter<string>();
   constructor(public dialog: MatDialog) { 
     console.log('coming this data',this.userData);
