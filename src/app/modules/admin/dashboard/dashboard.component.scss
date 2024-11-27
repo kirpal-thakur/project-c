@@ -121,7 +121,11 @@ tbody td:first-child {
   color: grey;
 }
 
-
+.user-dash-table tbody tr:hover{
+  border: none !important;
+  outline: 1px solid #236115 ;
+  border-radius: 10px;
+}
 .header-view{
   font-size: 12px;
 }
