@@ -1188,6 +1188,7 @@
     font-size: 11px;
     font-weight: 400 !important;
   }
+
   @media(max-width:1024px){
     .player-name-box{
       padding: 0 !important;
@@ -1209,3 +1210,14 @@
   .opacity-03{
     opacity: 0.3;
   }
+
+.user-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.players_image {
+  background: #B6B6B6;
+  border-radius: 10px;
+}

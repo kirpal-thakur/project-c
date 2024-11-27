@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../../../node_modules/talkjs/src/index.esnext.js"],
-  "sourcesContent": ["if (typeof window === \"undefined\") {\n  // note: this code should never be called, unless somehow the customer manages to use a bundler\n  // that doesn't read the package.json \"browser\" field.\n  throw new Error(\"[TalkJS] The TalkJS JavaScript SDK only works in browsers (and not, for example, in Node.js)\");\n}\n\n// Snippet[starts]\n(function(t,a,l,k,j,s){\ns=a.createElement(\"script\");s.async=1;s.src=\"https://cdn.talkjs.com/talk.js\";a.head.appendChild(s);k=t.Promise;\nt.Talk={v:3,ready:{then:function(f){if(k)return new k(function(r,e){l.push([f,r,e]);});l.push([f]);},catch:function(){return k&&new k();},c:l}};\n})(window,document,[]);\n// Snippet[ends]\n\nvar Talk = window.Talk;\nexport default Talk;\n"],
-  "mappings": ";;;AAAA,IAAI,OAAO,WAAW,aAAa;AAGjC,QAAM,IAAI,MAAM,8FAA8F;AAChH;AAAA,CAGC,SAAS,GAAE,GAAE,GAAE,GAAE,GAAE,GAAE;AACtB,MAAE,EAAE,cAAc,QAAQ;AAAE,IAAE,QAAM;AAAE,IAAE,MAAI;AAAiC,IAAE,KAAK,YAAY,CAAC;AAAE,MAAE,EAAE;AACvG,IAAE,OAAK,EAAC,GAAE,GAAE,OAAM,EAAC,MAAK,SAAS,GAAE;AAAC,QAAG;AAAE,aAAO,IAAI,EAAE,SAAS,GAAE,GAAE;AAAC,UAAE,KAAK,CAAC,GAAE,GAAE,CAAC,CAAC;AAAA,MAAE,CAAC;AAAE,MAAE,KAAK,CAAC,CAAC,CAAC;AAAA,EAAE,GAAE,OAAM,WAAU;AAAC,WAAO,KAAG,IAAI,EAAE;AAAA,EAAE,GAAE,GAAE,EAAC,EAAC;AAC9I,GAAG,QAAO,UAAS,CAAC,CAAC;AAGrB,IAAI,OAAO,OAAO;AAClB,IAAO,uBAAQ;",
-  "names": []
-}

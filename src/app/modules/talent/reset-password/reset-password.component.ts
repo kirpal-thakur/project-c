@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'reset-password',
@@ -12,9 +13,14 @@ export class ResetPasswordComponent {
   password: string = '';
   confirm_password: string = '';
 
+  // Variables to control password visibility
+  passwordVisible: boolean = false;
+  confirmPasswordVisible: boolean = false;
+
   constructor(
     public dialogRef: MatDialogRef<ResetPasswordComponent>,
     public talentService : TalentService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -25,35 +31,59 @@ export class ResetPasswordComponent {
   onCancel(): void {
     this.dialogRef.close(); // Close the dialog without saving
   }
-  
+
   onSave(form: NgForm): void {
-    // If form is invalid, exit early
+    // Check if the form is invalid
     if (form.invalid) {
-      console.log('Form is invalid');
+      this.toastr.error('Please complete all required fields before submitting.', 'Form Incomplete');
       return;
     }
 
     // Validate if passwords match
     if (this.password !== this.confirm_password) {
-      console.log('Passwords do not match!');
+      this.toastr.error('The passwords you entered do not match. Please try again.', 'Password Mismatch');
       return;
     }
 
+    // Show a submission progress message
+    this.toastr.info('Submitting your request...', 'Please wait', { disableTimeOut: true });
+
+    // Call the service to change the password
     this.talentService.changePassword(this.password, this.confirm_password).subscribe(
       (response) => {
-        console.log('Password changed successfully:', response);
+        // Clear any persistent loading messages
+        this.toastr.clear();
+
+        // Show success message
+        this.toastr.success('Your password has been successfully updated!', 'Success');
+
+        // Pass the updated password back to the parent component and close the dialog
+        this.dialogRef.close({ password: this.password });
       },
       (error) => {
+        // Clear the persistent loading message
+        this.toastr.clear();
+
+        // Display error message based on the type of error
+        if (error.status === 400) {
+          this.toastr.error('Invalid password format. Please check the requirements and try again.', 'Submission Failed');
+        } else if (error.status === 500) {
+          this.toastr.error('There was a problem with the server. Please try again later.', 'Server Error');
+        } else {
+          this.toastr.error('An unexpected error occurred. Please try again.', 'Submission Failed');
+        }
+
         console.error('Error changing password:', error);
       }
     );
-    
-    // Save the new password details (pass the data back to the parent component)
-    this.dialogRef.close({ password: this.password });
   }
 
+  // Toggle the visibility of the password field
   togglePasswordVisibility(inputId: string): void {
-    const inputField = document.getElementById(inputId) as HTMLInputElement;
-    inputField.type = inputField.type === 'password' ? 'text' : 'password';
+    if (inputId === 'password') {
+      this.passwordVisible = !this.passwordVisible;
+    } else if (inputId === 'confirm-password') {
+      this.confirmPasswordVisible = !this.confirmPasswordVisible;
+    }
   }
 }
