@@ -443,7 +443,7 @@ a.dropdown-item.ai-icon.selected {
   position: relative;
   display: flex;
   align-items: center;
-  // justify-content: center;
+  justify-content: center;
   padding: 10px !important;
   font-size: 14px;
   color: #fff !important;
@@ -975,15 +975,20 @@ left: unset;
   }
 }
 // --------------------- table -----------------------
+.table.user-dash-table{
+  border-collapse:collapse !important;
+}
+
 .table tbody tr:hover {
-  td.main-table-2 {
-  border-right: 1px solid #236115  !important;
-}
+  border: 1px solid #236115 !important;
+//   td.main-table-2 {
+//   border-right: 1px solid #236115  !important;
+// }
 }
 .table tbody tr:hover {
-  td.main-table {
-  border-left: 1px solid #236115  !important;
-}
+//   td.main-table {
+//   border-left: 1px solid #236115  !important;
+// }
 }
 .table tbody tr:hover {
   border: 1px solid #236115 !important;
@@ -1563,4 +1568,8 @@ margin: auto;
 .details-1{
   font-weight: 500 !important;
   color: #111418;
+}
+
+.search-area .form-control{
+  color: #000 !important;
 }

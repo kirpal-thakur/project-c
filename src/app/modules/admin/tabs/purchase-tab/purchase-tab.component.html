@@ -83,7 +83,6 @@
           <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul> -->
    </div>
-
     <a class="btn btn-outline-white ms-2 delete-text" id="users-icon" (click)="downloadAll()"
       >
       <!-- <svg
@@ -107,7 +106,7 @@
         
       {{'DownloadAll' | translate }}</a
     >
-
+    <span class="text-danger">{{errorMsg}}</span>
   </div>
 
   <!-- <div>

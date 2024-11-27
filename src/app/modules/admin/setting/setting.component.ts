@@ -1,11 +1,12 @@
 
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Renderer2, ElementRef } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ThemeService } from '../../../services/theme.service';
 import { UserService } from '../../../services/user.service';
 import {  MatDialog } from '@angular/material/dialog';
 
 import { TeamMemberDetailComponent } from './teamMember/teamMember.detail.component';
+import { Router, NavigationEnd } from '@angular/router';
 
 import {
   MatDialogRef,
@@ -24,7 +25,10 @@ export class SettingComponent implements OnInit {
     private themeService: ThemeService,
     private authService: AuthService,
     private userService: UserService,
-     ) {}
+    private router: Router,
+    private renderer: Renderer2, 
+    private el: ElementRef
+    ) {}
 
   userData: any;
   firstName: string = '';
@@ -41,6 +45,9 @@ export class SettingComponent implements OnInit {
   profileData: any;
   error: string | null = null;
 
+  previousUrl: string | null = null;
+  currentUrl: string | null = null;
+
   ngOnInit(): void {
     const userDataString = localStorage.getItem('userData');
     console.log(userDataString, "check the userdata")
@@ -55,6 +62,16 @@ export class SettingComponent implements OnInit {
       console.log('No user data found in local storage.');
     }
     // this.fetchProfileData();
+    let getActiveTab = localStorage.getItem('makeActiveTab');
+    if(getActiveTab){
+      this.switchTab(getActiveTab);
+      setTimeout(() => {
+        localStorage.removeItem('makeActiveTab');
+      }, 1000);
+    }else{
+      this.switchTab(this.tab);
+    }
+
   }
 
   editTeamMember(){
@@ -67,6 +84,7 @@ export class SettingComponent implements OnInit {
 }
   switchTab(tab:any){
     this.tab = tab;
+    this.activateTab(tab);
   }
 
 
@@ -93,4 +111,46 @@ export class SettingComponent implements OnInit {
   //   }
   //   console.log('Selected user IDs:', this.selectedUserIds);
 
+
+
+  private activateTab(tabName: string): void {
+    const tabMapping: { [key: string]: string } = {
+      profile: '#home-tab-pane',
+      activity: '#profile-tab-pane',
+      team: '#contact-tab-pane',
+    };
+
+    const targetPane = tabMapping[tabName];
+    if (!targetPane) return;
+
+    // Remove active class from all tabs and tab panes
+    const tabs = this.el.nativeElement.querySelectorAll('.nav-link');
+    const panes = this.el.nativeElement.querySelectorAll('.tab-pane');
+
+    tabs.forEach((tab: HTMLElement) => {
+      this.renderer.removeClass(tab, 'active');
+      this.renderer.setAttribute(tab, 'aria-selected', 'false');
+    });
+
+    panes.forEach((pane: HTMLElement) => {
+      this.renderer.removeClass(pane, 'show');
+      this.renderer.removeClass(pane, 'active');
+    });
+
+    // Add active class to the selected tab and pane
+    const activeTab = this.el.nativeElement.querySelector(
+      `[data-bs-target="${targetPane}"]`
+    );
+    const activePane = this.el.nativeElement.querySelector(targetPane);
+
+    if (activeTab) {
+      this.renderer.addClass(activeTab, 'active');
+      this.renderer.setAttribute(activeTab, 'aria-selected', 'true');
+    }
+
+    if (activePane) {
+      this.renderer.addClass(activePane, 'show');
+      this.renderer.addClass(activePane, 'active');
+    }
+  }
 }

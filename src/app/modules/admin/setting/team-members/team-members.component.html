@@ -28,13 +28,18 @@
               </div>                        
             </td>
             <td>
-              <span class="bg_pending" *ngIf="representator.status == '1'">Invited</span>
-              <span class="bg_success" *ngIf="representator.status == '2'">Active</span>
-              <span class="bg_secondary" *ngIf="representator.status == '3'">Inactive</span>
+              @if(currentUserId != representator.id){
+                <span class="bg_pending" *ngIf="representator.status == '1'">Invited</span>
+                <span class="bg_success" *ngIf="representator.status == '2'">Active</span>
+                <span class="bg_secondary" *ngIf="representator.status == '3'">Inactive</span>
+              }@else {
+                <span  class="bg_success" *ngIf="representator.status == '1' && currentUserId == representator.id">Active</span>
+              }
+              
             </td>
 
             <td>
-              <select class="custom-select custom-select-wrapper" (change)="updateRepresentatorRole($event, representator.id)">
+              <select class="custom-select custom-select-wrapper" *ngIf="currentUserId != representator.id" (change)="updateRepresentatorRole($event, representator.id)">
 
                 <option value="admin-access" *ngIf="representator.permission != null && representator.permission != 'admin-access'">Admin</option>
                 <option value="admin-access" *ngIf="representator.permission == null || representator.permission == 'admin-access'" selected>Admin</option>
@@ -49,9 +54,11 @@
                 <option value="transfer-ownership" *ngIf="representator.permission == 'transfer-ownership'" selected>Transfer Ownership</option>
                 
               </select>
+
+              <p *ngIf="currentUserId == representator.id">Owner</p>
             </td>
             <td class="c_pointer">
-              <svg  (click)="confirmSingleDeletion(representator.id)" id="users-icon"
+              <svg *ngIf="currentUserId != representator.id" (click)="confirmSingleDeletion(representator.id)" id="users-icon"
                 width="22"
                 height="22"
                 viewBox="0 0 22 22"

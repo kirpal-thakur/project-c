@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
-
+import { goToActiveLog } from '../../../../utlis';
 interface Notification {
   image: string;
   title: string;
@@ -48,7 +48,7 @@ export class HeaderComponent {
       this.showNotification = true;
     });
     this.userService.adminImageUrl.subscribe((newUrl) => {
-      console.log(newUrl)
+      console.log(newUrl, 'testing...', this.loggedInUser.profile_image_path)
       if (newUrl == 'default') {
         if (this.loggedInUser.profile_image_path) {
           this.profileImgUrl = this.loggedInUser.profile_image_path;
@@ -58,7 +58,6 @@ export class HeaderComponent {
       }
 
       this.loggedInUser = JSON.parse(this.loggedInUser);
-      console.log(this.loggedInUser)
       if (this.loggedInUser.profile_image_path) {
         this.profileImgUrl = this.loggedInUser.profile_image_path;
       } else {
@@ -90,6 +89,25 @@ export class HeaderComponent {
         }, 7000); // 3000 ms = 3 seconds
       });
     });
+
+    this.userService.getAdminProfile().subscribe((response)=>{
+      if (response && response.status) {
+        let userData = response.data.user_data;
+        // this.firstName = this.userData.first_name || '';
+        // this.lastName = this.userData.last_name || '';
+        // this.email = this.userData.username || '';
+        // this.contactNumber = this.userData.meta.contact_number || '';
+        // this.address = this.userData.meta.address || '';
+        // this.city = this.userData.meta.city || '';
+        // this.state = this.userData.meta.state || '';
+        // this.zipcode = this.userData.meta.zipcode || '';
+        this.profileImgUrl = userData.meta.profile_image_path || '../../../assets/images/1.jpg';
+        // this.isLoading = false;
+        
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    }); 
   }
   ChangeLang(lang: any) {
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
@@ -137,6 +155,7 @@ export class HeaderComponent {
   ];
 
   loadMoreNotifications() {
+    
     // const moreNotifications: Notification[] = [
     //   {
     //     image: '../../../assets/images/1.jpg',
@@ -187,6 +206,10 @@ export class HeaderComponent {
     //     time: '18 hours ago'
     //   }
     // ];
+    localStorage.setItem('makeActiveTab', 'activity');
+    setTimeout(() => {
+      this.router.navigate(['/admin/setting']);
+    }, 1000);
     this.isShowAllNotification = true;
     this.liveNotification = this.liveNotification;
     // Hide the notification after 3 seconds
@@ -198,5 +221,8 @@ export class HeaderComponent {
     }, 5000); // 3000 ms = 3 seconds
   }
 
+  accountSetting(){
+    goToActiveLog(this.router);
+  }
 }
 

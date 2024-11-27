@@ -19,11 +19,11 @@
                       </div>
                     </label>
                     <input id="profile-upload" (change)="onProfileFileChange($event)" accept="image/*" type="file" class="d-none" />
-                    <div class="club-icon">
-                      <img *ngIf="user.club_logo_path" src="{{ user.club_logo_path }}"
-                        class="club-icon-round cursor-pointer" alt="" />
-                    </div>
-  
+                      <div class="club-icon">
+                        <img *ngIf="user.club_logo_path" src="{{ user.club_logo_path }}"
+                          class="club-icon-round cursor-pointer" alt="" />
+                      </div>
+    
                   </div>
                   <div class="premium_button">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
