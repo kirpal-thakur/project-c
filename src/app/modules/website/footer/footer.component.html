@@ -1,0 +1,78 @@
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-12 col-12 footer-contact">
+          <div class="footer-logo">
+              <img src="./assets/images/pink-logo.png">
+         </div>
+
+          <ul class="social-link">
+            <li class="insta-icon">
+              <i class="fa-brands fa-instagram"></i>
+            </li>
+            <li class="linkedin-icon">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </li>
+           
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-4  col-12 footer-links">
+          <h4>{{ 'product' | translate }}</h4>
+          <ul>
+            <li><a [routerLink]="'/pricing'">{{ 'pricing' | translate }}</a></li>
+            <li>
+              <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal-login">
+                {{ 'signIn' | translate }}
+                  <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  </svg>
+              </a>
+          </li>
+            <li>
+              <a  data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                {{ 'createAccount' | translate }}</a>
+            </li>
+            <li><a [routerLink]="'/faq'">{{ 'faq' | translate }}</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-4  col-12 footer-links">
+          <h4>{{ 'company' | translate }}</h4>
+          <ul>
+            <li><a [routerLink]="'/talent'">{{ 'talent' | translate }}</a></li>
+            <li><a [routerLink]="'/club'">{{ 'club' | translate }}</a></li>
+            <li><a [routerLink]="'/about'">{{ 'about' | translate }}</a></li>
+            <li><a [routerLink]="'/news'">{{ 'news' | translate }}</a></li>
+            <li><a [routerLink]="'/contact'">{{ 'contact' | translate }}</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-12 footer-links">
+          <h4>{{ 'legal' | translate }}</h4>
+          <ul>
+            <li><a [routerLink]="'/imprint'">{{ 'imprint' | translate }}</a></li>
+            <li><a [routerLink]="'/privacy'">{{ 'privacy' | translate }}</a></li>
+            <li><a [routerLink]="'/terms'">{{ 'terms' | translate }}</a></li>
+            <li><a [routerLink]="'/cookie'">{{ 'cookiePolicy' | translate }}</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="select-country">
+        <a class="c-name">{{ 'selectCountry' | translate }}</a>
+        <select class="form-select" aria-label="Default select example" (change)="onCountryChange($event)">
+          <option value="" disabled selected class="countary">{{ 'selectCountry' | translate }}</option>
+          <option *ngFor="let country of countries" [value]="country.id" [selected]="country.country_name === 'England'" class="options-country">
+  {{ country.country_name }}
+</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom bgprimary">
+    <div class="text-center text-white">
+      <p class="mb-0">{{ 'copyright' | translate }}</p>
+    </div>
+  </div>
+</footer>

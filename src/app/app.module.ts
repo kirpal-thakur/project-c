@@ -15,6 +15,8 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { SharedModule } from './modules/shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { LightboxDialogComponent } from './modules/talent/lightbox-dialog/lightbox-dialog.component';
+import { WebsiteModule } from './modules/website/website.module';
+// import '../../style.scss';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -27,19 +29,20 @@ export function HttpLoaderFactory(http: HttpClient) {
     LightboxDialogComponent
   ],
   imports: [
-    SharedModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
     MatDialogModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 3000,          
-      positionClass: 'toast-bottom-right', 
-      preventDuplicates: true, 
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
     }),
+    WebsiteModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {

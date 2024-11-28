@@ -26,8 +26,8 @@ export const environment = {
       { name:'German', slug: "de", id: 2, flag: "Germany.svg" },
       { name:'Italy', slug: "it", id: 3, flag: "Italy.svg" },
       { name:'French Republic', slug: "fr", id: 4, flag: "France.svg" },
-      { name:'England', slug: "uk", id: 5, flag: "England.svg" },
-      { name:'Spain', slug: "es", id: 6, flag: "Spain.svg" },
+      { name:'United Kingdom', slug: "uk", id: 5, flag: "England.svg" },
+      { name:'Estonia, Eswatini', slug: "es", id: 6, flag: "Spain.svg" },
       { name:'Portugal', slug: "pt", id: 7, flag: "Portugal.svg" },
       { name:'Belgium', slug: "be", id: 8, flag: "Belgium.svg" },
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
@@ -35,6 +35,11 @@ export const environment = {
     ],
 
     apiUrl:'https://api.socceryou.ch/api/',
-    socketUrl:'https://alerts.socceryou.ch/'
+    socketUrl:'https://alerts.socceryou.ch/',
+    mailchimp: {
+      apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',
+      apiKey: '62a0ffa8d6e9c3d5ed7c8a09e9111b41-us17',  // Correct API key
+      listId: '7afbbb070a'
+      }
   } as const;
   
