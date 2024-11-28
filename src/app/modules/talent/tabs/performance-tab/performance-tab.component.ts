@@ -99,7 +99,7 @@ export class PerformanceTabComponent {
       }
     });
   }
-  
+
   deleteUserPerformance(id: string): void {
     console.log('deleteUserPerformance',id)
 
@@ -218,7 +218,7 @@ export class PerformanceTabComponent {
     // Format the date strings
     const fromDateString = fromDate.toLocaleString('default', { month: 'long', year: 'numeric' });
     const toDateString = performance_detail.to_date === '0000-00-00' 
-      ? 'Present' 
+      ? 'Present'
       : toDate.toLocaleString('default', { month: 'long', year: 'numeric' });
   
     let dateRange = `${fromDateString ?? '-'} - ${toDateString ?? '-'}`;

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ConfirmPasswordComponent } from './SetPassword/confirmPassword.component';
 import { ValidateUserComponent } from './validateUser/validateUser.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { ValidateUserComponent } from './validateUser/validateUser.component';
     CommonModule,
     WebsiteRoutingModule,
     FormsModule,
-    TranslateModule // Make sure to include TranslateModule here if using in this module
-
+    TranslateModule, // Make sure to include TranslateModule here if using in this module
+    MatProgressSpinnerModule
   ]
 })
 export class WebsiteModule { }

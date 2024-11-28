@@ -72,6 +72,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.isLoadingPlans = true;
     this.getUserPlans();
+    this.getBoosterData()
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
     this.getBoosterData()

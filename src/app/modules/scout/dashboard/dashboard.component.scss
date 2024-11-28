@@ -18,7 +18,7 @@
         color: #787878;
     }
   }
-  
+
   .user-text{
     color: #111418;
   }
@@ -88,7 +88,7 @@
   
   .modal-delete{
     .text-danger{
-        color:         #FD5454!important;
+        color:#FD5454!important;
         font-weight: 500;
         font-size: 16px;
     }
@@ -569,4 +569,8 @@
     }
     
   }
-  
+  .user-media img{
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }

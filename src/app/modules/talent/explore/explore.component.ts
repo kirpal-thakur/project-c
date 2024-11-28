@@ -141,7 +141,7 @@ export class ExploreComponent implements OnInit {
 
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
-  
+    console.log(this.selectedCountry, 'get-user-favorites');
     // Construct the params object with complex whereClause and metaQuery logic
     let params: any = {
       offset: pageIndex * pageSize,

@@ -16,7 +16,7 @@ export class EditMembershipProfileComponent {
   @Input() audiences = [
     { role_name: "Clubs", id: 2 },
     { role_name: "Scouts", id: 3 },
-    { role_name: "Talents", id: 4 },
+    { role_name: "Player", id: 4 },
   ];     // List of all audiences
   selectedAudienceIds: number[] = []; // Store only audience IDs
   id: any;
@@ -47,9 +47,12 @@ export class EditMembershipProfileComponent {
         (audience: any) => Number(audience.target_role)
       );
     }
+<<<<<<< HEAD
     console.log('Pre-selected Audience IDs:', this.selectedAudienceIds,'this_stats_booster_audience',this.stats?.booster_audience);
 
     console.log('audiences:', this.audiences);
+=======
+>>>>>>> 031344f40a12981ed247d546a771ea4e33045d29
 
   }
 

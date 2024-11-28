@@ -37,18 +37,16 @@ const routes: Routes = [
       import('./modules/scout/scout.module').then(
         (m) => m.ScoutModule
       ),
-    canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+    // canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
   },
-  { path: 'success', component: SuccessComponent ,canActivate: [AuthGuard]},
-  { path: 'cancel', component: CancelComponent ,canActivate: [AuthGuard]},
   {
-    path: 'view',
+    path: 'club',
     loadChildren: () =>
-      import('./modules/shared/shared.module').then(
-        (m) => m.SharedModule
-      ), 
-    canActivate: [AuthGuard]
-  },
+      import('./modules/club/club.module').then(
+        (m) => m.ScoutModule
+      ),
+    // canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+  }
 ];
 
 @NgModule({

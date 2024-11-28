@@ -28,7 +28,7 @@
 
     <!-- Option for users who don't have a coupon -->
     <div *ngIf="!couponApplied" class="mt-3">
-      <button class="btn btn-link" (click)="noCoupon()">
+      <button class="btn btn-link coupon-btn-link" (click)="noCoupon()">
         {{ "I don't have a coupon, Proceed to checkout." | translate }}
       </button>
     </div>
@@ -38,9 +38,9 @@
   <!-- Dialog footer -->
   <div class="modal-footer mt-1">
     <!-- Disable Apply button if there is an error or if the coupon code is invalid -->
-    <button *ngIf="!couponApplied" 
+    <button *ngIf="!couponApplied"
             type="button" 
-            class="btn btn-success" 
+            class="btn btn-success coupon-btn" 
             [disabled]="couponError || !couponCode.trim()" 
             (click)="applyCoupon()">
       {{ 'Check Coupon' | translate }}

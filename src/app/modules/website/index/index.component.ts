@@ -8,10 +8,10 @@ import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthGoogleService } from  '../../../services/auth-google.service';
-
+import {MatProgressSpinnerModule, ProgressSpinnerMode} from '@angular/material/progress-spinner';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
-
+import {ThemePalette} from '@angular/material/core';
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -22,7 +22,6 @@ export class IndexComponent implements OnInit{
 
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
-
 
 
  activeIndex: number = 1; // -1 means no button is active initially
@@ -67,6 +66,11 @@ export class IndexComponent implements OnInit{
   lang:string = '';
   token= '';
   tokenVerified = false;
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  spinnerValue = 100;
+
+  isFormSubmitted: boolean = false;
 
   ngOnInit(): void {
     this.lang = localStorage.getItem('lang') || 'en'
@@ -148,6 +152,7 @@ export class IndexComponent implements OnInit{
 
   login() {
     this.loginButtonClicked = true;
+    this.isFormSubmitted = true;
 
     if (!this.email || !this.password) {
       console.error('Please fill in all required fields.');
@@ -167,6 +172,7 @@ export class IndexComponent implements OnInit{
 
     this.authService.login(loginData).subscribe(
       response => {
+        this.isFormSubmitted = false;
         console.log('Login response:', response);
         if (response.status === false) {
           console.error('Login failed:', response.message);
@@ -207,7 +213,7 @@ export class IndexComponent implements OnInit{
             if (modal) {
               modal.hide();
             }
-            
+            console.log(userData, 'login-user');
             if(userData.role==4){
               
               this.authService.getProfileData().subscribe((response)=>{
@@ -218,11 +224,15 @@ export class IndexComponent implements OnInit{
               });
 
               this.router.navigate(['/talent/dashboard']);
-            }else{
-              this.router.navigate(['/admin/dashboard']);
+            }else if (userData.role==3) {
+              this.router.navigate(['/scout/dashboard']);
+            }else if(userData.role==2){
+              this.router.navigate(['/club/dashboard']);
             }
+            // this.router.navigate(['/admin/dashboard']);
             // window.location.href = `${targetDomain}/Admin/Dashboard`;
           } else {
+            this.router.navigate(['/admin/dashboard']);
             console.error('Failed to save token to local storage.');
           }
         }
