@@ -343,7 +343,7 @@ img.join-btn {
   z-index: 1;
   position: absolute;
   left: 0;
-  top: 50%;
+  top: 43%;
 }
 
 .skyscraper-left img {
@@ -358,7 +358,7 @@ img.join-btn {
   z-index: 1;
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 43%;
 }
 
 .skyscraper-right img {
@@ -473,8 +473,15 @@ img.join-btn {
     top: 2%;
 }
 }
-@media (min-width: 1536px) {}
+@media (min-width: 1536px) {
+  .skyscraper-left, .skyscraper-right {
+    top: 46%;
+}
+}
 @media (min-width: 1920px) {
+  .skyscraper-left, .skyscraper-right {
+    top: 40%;
+}
 .map {
   height: 850px;
 }

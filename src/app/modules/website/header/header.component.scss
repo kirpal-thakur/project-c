@@ -1209,6 +1209,26 @@ select.form-select.custom-select1 {
 /*--------------------------------------------------------------
 #  Club
 --------------------------------------------------------------*/
+
+@media (orientation: landscape) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: #fff; /* Optional: background color */
+    }
+
+    /* Optionally, adjust the sidebar if it's causing issues */
+    .sidebar {
+        height: 100vh;
+        overflow-y: auto; /* Ensure the sidebar scrolls if needed */
+        z-index: 1000; /* Ensure sidebar is behind the navbar */
+    }
+}
+
+
 @media (max-width: 1281px) {
     option {
         font-size: 14px;
@@ -1291,11 +1311,10 @@ select.form-select.custom-select1 {
         position: fixed;
         height: 100vh;
         width: 100%;
-        position: fixed;
         top: 0;
         left: 0;
         height: 100vh;
-        min-height: 700px;
+        // min-height: 700px;
         transform: translateY(-100%);
         transition: transform 0.5s ease;
         z-index: 1000;
@@ -1307,17 +1326,14 @@ select.form-select.custom-select1 {
         min-height: 100vh;
         /* Ensures the footer is at the bottom */
     }
+    .slider:before {
+        height: 27.5px;
+        width: 27.5px;
+    }
 
     .sidebar.sidebar-expanded {
         transform: translateY(0);
     }
-
-    // .sidebar .container {
-    //     display: flex;
-    //     flex-direction: column;
-    //     height: 100%;
-    //     /* Add additional styling as needed */
-    // }
     a:not([href]):not([class]),
     a:not([href]):not([class]):hover {
         color: white;
@@ -1403,9 +1419,6 @@ select.form-select.custom-select1 {
         color: #000;
     }
 
-    .sidebar {
-        display: block;
-    }
 
     .logo1 svg {
         height: 60px;
@@ -1775,9 +1788,9 @@ select.form-select.custom-select1 {
         font-size: 16px;
     }
 
-    .sidebar {
-        display: block;
-    }
+    // .sidebar {
+    //     display: block;
+    // }
 
     .coustom-select1 {
         margin-left: 0;

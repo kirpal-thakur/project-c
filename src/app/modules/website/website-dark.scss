@@ -7,7 +7,24 @@
 .dark-theme .website-code .navbar-nav .nav-link.active::after {
   background-color: #BDE34E;
 }
+.dark-theme .website-code h2.coming-heading
+  {
+  color: #BDE34E;
+}
+.dark-theme .website-code h2.coming-heading{
+  color: #E05263;
+}
+.dark-theme .feature-players i.fa-solid.fa-xmark {
+  color: #072944;
+}
+.dark-theme .button4 .mat-icon, .dark-theme .button1 .mat-icon, .dark-theme .button2 .mat-icon, .dark-theme .button3 .mat-icon {
+color: #072944;
+}
 
+.dark-theme .button1, .dark-theme .button2, .dark-theme .button3, .dark-theme .button4 {
+  background: #BDE34E;
+  border-radius: 20px;
+}
 
 .dark-theme .website-code .player-image {
   background: #072944;

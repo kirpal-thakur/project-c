@@ -64,7 +64,7 @@ P {
     background-size: cover;
     width: 100%;
     padding-top: 100px;
-    height: 950px;
+    height: 1000px;
 }
 
 .banner-data {
@@ -109,7 +109,7 @@ a.btn.btn-register {
     width: 297px;
     height: 518px;
     object-fit: cover;
-    top: 12%;
+    top: 15%;
     right: 30%;
     border-radius: 9px;
     margin-bottom: 20px;
@@ -145,7 +145,7 @@ a.btn.btn-register {
 .banner-image3 img {
     content: "";
     z-index: 2;
-    top: 12%;
+    top: 14%;
     right: 0;
     position: absolute;
     object-fit: cover;
@@ -306,6 +306,7 @@ a.btn.btn-register {
 .accordion {
     --bs-accordion-border-color: transparent;
 }
+
 .accordion-button:focus {
     border-color: transparent;
     box-shadow: none;
@@ -490,6 +491,7 @@ img.dark-feature2 {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
 }
+
 .bottom-line {
     height: 1px;
     background-color: #E0E0E0;
@@ -1046,7 +1048,7 @@ span {
     z-index: 2;
     position: absolute;
     left: 0;
-    top: 20%;
+    top: 16%;
 }
 
 .skyscraper-image img {
@@ -1113,11 +1115,35 @@ span {
 
 @media (min-width: 1536px) {
     .banner-image1 img {
-        right: 28%;
+        width: 340px;
+        height: 605px;
+        top: 15%;
+        right: 32%;
+    }
+
+    .banner {
+        height: 1100px;
     }
 
     .banner-image2 img {
-        right: 28%;
+        top: 72%;
+        right: 32%;
+        width: 335px;
+        height: 265px;
+    }
+
+    .banner-image3 img {
+        top: 14%;
+        right: 0;
+        width: 470px;
+        height: 325px;
+    }
+
+    .banner-image4 img {
+        top: 49%;
+        right: 0;
+        height: 430px;
+        width: 470px;
     }
 
     .club-offers3 img {
@@ -1139,6 +1165,9 @@ span {
     .banner {
         height: 1200px;
     }
+    .skyscraper-image {
+        top: 12%;
+    }
 
     .banner-image1 img {
         width: 380px;
@@ -1156,13 +1185,13 @@ span {
 
     .banner-image3 img {
         width: 550px;
-        height: 400px;
+        height: 370px;
     }
 
     .banner-image4 img {
         top: 51%;
         right: 0;
-        height: 500px;
+        height: 480px;
         width: 550px;
     }
 
@@ -1364,6 +1393,7 @@ span {
         left: 9%;
         padding-right: 65%;
     }
+
     .club-offers2 img {
         position: absolute;
         content: "";
@@ -1375,6 +1405,7 @@ span {
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
     }
+
     .club-offers1 img {
         position: absolute;
         content: "";
@@ -1387,6 +1418,7 @@ span {
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
     }
+
     .club-offers3 img {
         position: absolute;
         content: "";
@@ -1399,46 +1431,54 @@ span {
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
     }
+
     .accodian-image1 img {
-    top: 8%;
-    right: 12%;
-    height: 300px;
-    width: 390px;
-}
-.accodian-image2 img {
-    height: 200px;
-    width: 250px;
-    top: 44.5%;
-    left: 6%;
-}
-.accodian-image3 img {
-    top: 44%;
-    right: 0;
-    height: 165px;
-    width: 200px;
-}
-.networking-images1 img {
-    left: 17%;
-}
-.button4 {
-    position: absolute;
-    z-index: 1;
-    top: 4%;
-    right: 50px;
-}
-.feature-player3 {
-    top: 14%;
-}
-.button3 {
-    top: 68%;
-    right: 50px;
-}
+        top: 8%;
+        right: 12%;
+        height: 300px;
+        width: 390px;
+    }
+
+    .accodian-image2 img {
+        height: 200px;
+        width: 250px;
+        top: 44.5%;
+        left: 6%;
+    }
+
+    .accodian-image3 img {
+        top: 44%;
+        right: 0;
+        height: 165px;
+        width: 200px;
+    }
+
+    .networking-images1 img {
+        left: 17%;
+    }
+
+    .button4 {
+        position: absolute;
+        z-index: 1;
+        top: 4%;
+        right: 50px;
+    }
+
+    .feature-player3 {
+        top: 14%;
+    }
+
+    .button3 {
+        top: 68%;
+        right: 50px;
+    }
 
 }
 
 @media (max-width: 1281px) {
     .banner-image1 img {
         right: 34%;
+        top: 15%;
     }
 
 
@@ -1612,7 +1652,7 @@ span {
         font-size: 18px;
     }
 
-    .banner-left{
+    .banner-left {
         padding-right: 66%;
         left: 5%;
     }
@@ -1922,6 +1962,7 @@ span {
     .small-sqaure-image {
         display: none;
     }
+
     .banner-left {
         padding-right: 61%;
         left: 7%;
@@ -2034,6 +2075,7 @@ span {
     .left-accodian {
         padding-right: 0;
     }
+
     .club-offers1 img {
         width: 288px;
         height: 235px;
@@ -2082,12 +2124,14 @@ span {
         left: 20%;
         top: 15%;
     }
+
     .networking-images2 img {
         width: 230px;
         height: 68px;
         right: 10%;
         top: 29%;
     }
+
     .networking-images3 img {
         height: 68px;
         width: 207px;
@@ -2149,7 +2193,7 @@ span {
         right: 9%;
     }
 
-    .feature-player2{
+    .feature-player2 {
         top: 51%;
         right: 38%;
     }
@@ -2453,6 +2497,7 @@ span {
         width: 315px;
         height: 250px;
     }
+
     .banner-data {
         padding-top: 100px;
         position: relative;
@@ -2544,7 +2589,7 @@ span {
         left: 0;
     }
 
-    .feature-player1{
+    .feature-player1 {
         top: 5%;
         right: 0;
         left: 0;
@@ -2565,24 +2610,26 @@ span {
         left: 0;
     }
 
-    .button2{
+    .button2 {
         left: 71%;
         top: 97%;
     }
 
-    .button3{
+    .button3 {
         top: 78%;
         right: 5%;
     }
 
-    .button4{
+    .button4 {
         top: 6%;
         right: 11%;
     }
+
     .premium {
         height: 450px;
 
     }
+
     .premium-img {
         height: 200px;
     }
@@ -2605,6 +2652,7 @@ span {
     .banner {
         height: 700px;
     }
+
     .banner-image1 img {
         width: 150px;
         height: 265px;
@@ -2623,6 +2671,7 @@ span {
         height: 140px;
         top: 41%;
     }
+
     .banner-image4 img {
         height: 185px;
         width: 245px;
@@ -2742,38 +2791,38 @@ span {
         top: 15%;
     }
 
-    .feature-player1{
+    .feature-player1 {
         top: 15%;
         right: 0;
         left: 0;
     }
 
-    .feature-player2{
+    .feature-player2 {
         top: 50%;
         right: 35%;
     }
 
-    .feature-player3{
+    .feature-player3 {
         top: 23%;
         right: 0;
     }
 
-    .button1{
+    .button1 {
         top: 97%;
-        left: 0;
+        right: 68%;
     }
 
-    .button2{
+    .button2 {
         left: 50%;
         top: 96%;
     }
 
-    .button3{
+    .button3 {
         top: 71%;
         right: 25px;
     }
 
-    .button4{
+    .button4 {
         top: 12%;
         right: 7%;
     }
@@ -2878,6 +2927,7 @@ span {
         height: 108px;
         top: 82%;
     }
+
     .banner-image3 img {
         width: 243px;
     }
@@ -2885,12 +2935,14 @@ span {
     .banner-image4 img {
         width: 243px;
     }
+
     .club-offers2 img {
         height: 178px;
         width: 180px;
         top: 22%;
         right: 0;
     }
+
     .club-offers1 img {
         width: 195px;
         height: 165px;
@@ -2921,29 +2973,34 @@ span {
         height: 100px;
         top: 80%;
     }
+
     .club-offers1 img {
         width: 180px;
         height: 150px;
         top: 12%;
         left: 0;
     }
+
     .club-offers2 img {
         height: 170px;
         width: 175px;
         top: 26%;
         right: 0;
     }
+
     .club-offers3 img {
         width: 265px;
         height: 190px;
         left: 4%;
     }
+
     .accodian-image1 img {
         top: 15%;
         right: 15%;
         height: 210px;
         width: 275px;
     }
+
     .accodian-image2 img {
         right: 0;
         top: 52%;
@@ -2951,16 +3008,19 @@ span {
         width: 170px;
         left: 0;
     }
+
     .accodian-image3 img {
         top: 52%;
         right: 0;
         width: 150px;
         height: 120px;
     }
+
     .feature-player3 {
         top: 23%;
         right: 0;
     }
+
     .feature-player1 {
         top: 15%;
         right: 0;
@@ -3037,6 +3097,7 @@ span {
         height: 95px;
         top: 73%;
     }
+
     .banner-image3 img {
         width: 222px;
         height: 130px;
@@ -3057,18 +3118,21 @@ span {
     .club-scouts {
         height: 280px;
     }
+
     .club-offers1 img {
         width: 170px;
         height: 140px;
         top: 7%;
         left: 0;
     }
+
     .club-offers2 img {
         height: 155px;
         width: 170px;
         top: 22%;
         right: 0;
     }
+
     .club-offers3 img {
         left: 7%;
         width: 235px;
@@ -3305,24 +3369,28 @@ span {
     .banner-image4 img {
         width: 205px;
     }
+
     .club-offers2 img {
         height: 150px;
         width: 160px;
         top: 23%;
         right: 0;
     }
+
     .club-offers1 img {
         width: 165px;
         height: 135px;
         top: 8%;
         left: 0;
     }
+
     .accodian-image3 img {
         top: 50.5%;
         right: 0;
         width: 145px;
         height: 115px;
     }
+
     .accodian-image2 img {
         right: 0;
         top: 50.5%;
@@ -3355,10 +3423,12 @@ span {
         height: 95px;
         top: 71%;
     }
+
     .club-offers2 img {
         height: 140px;
         width: 150px;
     }
+
     .club-offers1 img {
         width: 163px;
         height: 135px;
@@ -3391,6 +3461,7 @@ span {
         height: 115px;
         top: 33%;
     }
+
     .banner-image4 img {
         height: 140px;
         width: 177px;
@@ -3431,24 +3502,28 @@ span {
     .features {
         height: 700px;
     }
+
     .club-offers1 img {
         width: 145px;
         height: 122px;
         top: 7%;
         left: 0;
     }
+
     .club-offers2 img {
         height: 135px;
         width: 145px;
         top: 22%;
         right: 0;
     }
+
     .club-offers3 img {
         left: 6%;
         width: 200px;
         height: 150px;
         top: 46%;
     }
+
     .accodian-image2 img {
         right: 0;
         top: 50.5%;
@@ -3456,86 +3531,118 @@ span {
         width: 145px;
         left: 0;
     }
+
     .accodian-image1 img {
         top: 11%;
         right: 16%;
         height: 160px;
         width: 210px;
     }
+
     .accodian-image3 img {
         top: 50.5%;
         right: 0;
         width: 120px;
         height: 100px;
     }
+
     .networking-images1 img {
         height: 240px;
         width: 190px;
         left: 15%;
     }
+
     .networking-images2 img {
         width: 118px;
         height: 35px;
         top: 31%;
     }
+
     .networking-images3 img {
         height: 35px;
         width: 106px;
         top: 85%;
     }
+
     .player-img img {
         height: 110px;
         width: 110px;
     }
-    .feature-player1 .player1, .feature-player2 .player2, .feature-player3 .player3 {
+
+    .feature-player1 .player1,
+    .feature-player2 .player2,
+    .feature-player3 .player3 {
         height: 118px;
         width: 118px;
     }
-    .feature-player1, .feature-player2, .feature-player3 {
+
+    .feature-player1,
+    .feature-player2,
+    .feature-player3 {
         height: 118px;
         width: 118px;
     }
-    .feature-player1 .player-name1, .feature-player2 .player-name2, .feature-player3 .player-name3 {
+
+    .feature-player1 .player-name1,
+    .feature-player2 .player-name2,
+    .feature-player3 .player-name3 {
         top: 95px;
         width: 110px;
         font-size: 9px;
         height: 20px;
         line-height: 22px;
     }
-    .feature-player2 .player2 .player-img::after, .feature-player1 .player1 .player-img::after, .feature-player3 .player3 .player-img::after {
+
+    .feature-player2 .player2 .player-img::after,
+    .feature-player1 .player1 .player-img::after,
+    .feature-player3 .player3 .player-img::after {
         bottom: 22px;
         left: 4px;
         width: 55px;
         height: 40px;
     }
+
     .feature-player2 {
         top: 46%;
         right: 34%;
     }
+
     .button1 {
         top: 97%;
         left: 0;
+        right: 63%;
     }
+    .button2 {
+        left: 50%;
+        top: 100%;
+        right: 5%;
+    }
+
     img.flag-img {
         height: 22px;
         width: 28px;
     }
+
     p.d-o-b {
         font-size: 7px;
         color: #559B44;
         font-weight: 700;
     }
+
     img.birthday-img {
         height: 9px;
         width: 11px;
     }
-    .feature-player3 .flag-image7, .feature-player2 .flag-image4, .feature-player1 .flag-image {
+
+    .feature-player3 .flag-image7,
+    .feature-player2 .flag-image4,
+    .feature-player1 .flag-image {
         width: 33px;
         height: 38px;
         top: 48px;
     }
 
-      /*----------------------------------- accodian ------------------------------- */
+    /*----------------------------------- accodian ------------------------------- */
 
 
 }

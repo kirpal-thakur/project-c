@@ -146,9 +146,12 @@
                         </label>
                       </div> -->
 
-                <div class="recaptcha-image">
-                  <img src="./assets/images/recaptcha.svg">
-                </div>
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
 
               </div>
               <div class="col-lg-6 col-md-6 col-12">
@@ -199,9 +202,12 @@
                         </label>
                       </div> -->
 
-                <div class="recaptcha-image">
-                  <img src="./assets/images/recaptcha.svg">
-                </div>
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
 
               </div>
               <div class="col-lg-6 col-md-6 col-12">

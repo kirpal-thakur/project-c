@@ -122,6 +122,7 @@ a {
   background-color: #e05263;
   border-color: #e05263;
 }
+
 // button.btn.btn-success.ng-tns-c2994145305-2 {
 //   background-color: transparent !important;
 //   color: #86AA7D !important;
@@ -226,7 +227,8 @@ a {
   left: 0;
   top: 0;
 }
-.home-banner-image{
+
+.home-banner-image {
   width: 546px;
   height: 214px;
   object-fit: cover;
@@ -237,9 +239,9 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 100vh;
+  // height: 100vh;
   display: flex;
-  min-height: 600px;
+  height: 1000px;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -608,7 +610,7 @@ li {
   z-index: 1;
   position: absolute;
   left: 0;
-  top: 20%;
+  top: 16%;
 }
 
 .skyscraper-image img {
@@ -627,7 +629,7 @@ li {
   z-index: 1;
   height: 600px;
   width: 160px;
-  top: 20%;
+  top: 16%;
   right: 0;
 }
 
@@ -1978,6 +1980,14 @@ img.success-image {
 
 
 @media (min-width: 1536px) {
+  .main-bnr {
+    height: 1100px;
+  }
+
+  // .skyscraper-image,
+  // .wide-skyscraper-image {
+  //   top: 15%;
+  // }
 
   .work-text {
     margin-bottom: 80px;
@@ -2112,6 +2122,10 @@ img.success-image {
 }
 
 @media (min-width: 1699px) {
+
+  //   .skyscraper-image, .wide-skyscraper-image {
+  //     top: 19%;
+  // }
   .talent-img1 img {
     top: 10%;
     left: 53%;
@@ -2159,6 +2173,16 @@ img.success-image {
 }
 
 @media (min-width: 1920px) {
+
+  .main-bnr {
+    height: 1200px;
+  }
+
+  .skyscraper-image,
+  .wide-skyscraper-image {
+    top: 12%;
+  }
+
   .talent-img1 img {
     top: 10%;
     left: 49%;
@@ -2305,6 +2329,11 @@ img.success-image {
 }
 
 @media (min-width: 2560px) {
+
+  .skyscraper-image,
+  .wide-skyscraper-image {
+    top: 11%;
+  }
 
   .works {
     height: 1400px;
@@ -2587,6 +2616,10 @@ img.success-image {
 
 
 @media (max-width: 1281px) {
+  .skyscraper-image {
+    top: 23%;
+  }
+
   .work-banner {
     margin-right: 23%;
   }
@@ -2660,14 +2693,22 @@ img.success-image {
 
 
 @media (max-width: 1199px) {
+  .main-bnr {
+    height: 820px;
+}
+.skyscraper-image, .wide-skyscraper-image {
+  top: 16%;
+}
+
   .joined-text h3 {
     font-size: 28px;
   }
-  .home-banner-image{
+
+  .home-banner-image {
     width: 400px;
     height: 155px;
     object-fit: cover;
-}
+  }
 
   .club_players {
     top: 17%;
@@ -3502,30 +3543,31 @@ img.success-image {
     width: 160px;
     height: 275px;
     left: 0;
-}
+  }
 
-img.image3 {
-  width: 345px;
-  height: 140px;
-}
+  img.image3 {
+    width: 345px;
+    height: 140px;
+  }
 
-img.image4 {
-  width: 345px;
-  top: 180px;
-  height: 175px;
-}
-img.image5 {
-  width: 345px;
-  height: 190px;
-  margin-top: 175px;
-}
+  img.image4 {
+    width: 345px;
+    top: 180px;
+    height: 175px;
+  }
+
+  img.image5 {
+    width: 345px;
+    height: 190px;
+    margin-top: 175px;
+  }
 
   .talent-img2 img {
     width: 160px;
     height: 125px;
     left: 0;
     top: 283px;
-}
+  }
 
   .work-text1 {
     height: 650px;
@@ -3583,7 +3625,7 @@ img.image5 {
   .right-side img.image3 {
     width: 345px;
     height: 140px;
-}
+  }
 
 
   .club-offers1 img {
@@ -3601,13 +3643,14 @@ img.image5 {
 
 @media (max-width: 575px) {
   .main-bnr {
-    height: 50vh;
-  }
+    height: 700px;
+}
+
   .home-banner-image {
     width: 260px;
     height: 100px;
     object-fit: cover;
-}
+  }
 
   .player-image {
     height: 200px;
@@ -4284,6 +4327,9 @@ img.image5 {
 }
 
 @media (max-width: 376px) {
+  .main-bnr {
+    height: 650px;
+}
   .player-name {
     width: 95%;
   }
@@ -4550,94 +4596,121 @@ img.image5 {
 // }
 
 
-@media (max-width: 345px){
-.works-btn .talent-btn .btn {
-  width: 105px;
-  height: 35px;
-}
-button.btn.btn-success.active-btn .club-p {
-  width: 105px;
-  height: 33px;
-  font-size: 18px;
-}
-button.btn.btn-success.active-btn .club-s {
-  width: 160px;
-  height: 35px;
-  font-size: 18px;
-}
-.talent-img1 img {
-  width: 95px;
-  height: 165px;
-}
-img.image3 {
-  width: 215px;
-  height: 85px;
-}
-.talent-img2 img {
-  top: 175px;
-  width: 95px;
-  left: 0;
-  height: 75px;
-}
-img.image4 {
-  width: 215px;
-  height: 108px;
-  top: 115px;
-}
-.right-side img.image3 {
-  width: 215px;
-  height: 85px;
-}
-.right-side img.image5 {
-  width: 215px;
-  height: 125px;
-  top: 105px;
-}
-.message-panel img {
-  width: 165px;
-  height: 220px;
-}
-.message-panel1 img {
-  width: 140px;
-  height: 260px;
-}
-.club-offers1 img {
-  height: 120px;
-  width: 150px;
-}
-.club-offers2 img {
-  top: 46%;
-  height: 145px;
-  width: 155px;
-}
-.club-offers3 img {
-  left: 2%;
-}
-.club_member1, .club_member5, .club_member7, .club_member3 {
-  width: 95px;
-  left: 0;
-}
-.member1-image img, .member5-image img, .member7-image img, .member3-image img {
-  width: 86px;
-  height: 105px;
-}
-.club_member2 {
-  width: 95px;
-  left: 0;
-  height: 130px;
-}
-.member2-image {
-  height: 110px;
-}
-.member2-image img {
-  height: 60px;
-  width: 58px;
-}
+@media (max-width: 345px) {
+  .works-btn .talent-btn .btn {
+    width: 105px;
+    height: 35px;
+  }
+
+  button.btn.btn-success.active-btn .club-p {
+    width: 105px;
+    height: 33px;
+    font-size: 18px;
+  }
+
+  button.btn.btn-success.active-btn .club-s {
+    width: 160px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .talent-img1 img {
+    width: 95px;
+    height: 165px;
+  }
+
+  img.image3 {
+    width: 215px;
+    height: 85px;
+  }
+
+  .talent-img2 img {
+    top: 175px;
+    width: 95px;
+    left: 0;
+    height: 75px;
+  }
+
+  img.image4 {
+    width: 215px;
+    height: 108px;
+    top: 115px;
+  }
+
+  .right-side img.image3 {
+    width: 215px;
+    height: 85px;
+  }
+
+  .right-side img.image5 {
+    width: 215px;
+    height: 125px;
+    top: 105px;
+  }
+
+  .message-panel img {
+    width: 165px;
+    height: 220px;
+  }
+
+  .message-panel1 img {
+    width: 140px;
+    height: 260px;
+  }
+
+  .club-offers1 img {
+    height: 120px;
+    width: 150px;
+  }
+
+  .club-offers2 img {
+    top: 46%;
+    height: 145px;
+    width: 155px;
+  }
+
+  .club-offers3 img {
+    left: 2%;
+  }
+
+  .club_member1,
+  .club_member5,
+  .club_member7,
+  .club_member3 {
+    width: 95px;
+    left: 0;
+  }
+
+  .member1-image img,
+  .member5-image img,
+  .member7-image img,
+  .member3-image img {
+    width: 86px;
+    height: 105px;
+  }
+
+  .club_member2 {
+    width: 95px;
+    left: 0;
+    height: 130px;
+  }
+
+  .member2-image {
+    height: 110px;
+  }
+
+  .member2-image img {
+    height: 60px;
+    width: 58px;
+  }
 
 
 }
 
 @media (max-width: 321px) {
+  .main-bnr {
+    height: 600px;
+}
   .message-panel img {
     width: 160px;
     height: 215px;

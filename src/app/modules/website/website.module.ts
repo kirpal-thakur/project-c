@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 
 
+
 import { IndexComponent } from './index/index.component';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -40,6 +41,7 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 
 // Import services
 import { AuthService } from '../../services/auth.service';
@@ -58,6 +60,7 @@ import { ThemeService } from '../../services/theme.service';
     FeatureComponent,
     NewsComponent,
     CookiePopupComponent,
+    PasswordResetLinkComponent,
     NewChatComponent,
     ContactComponent,
     ClubComponent,
