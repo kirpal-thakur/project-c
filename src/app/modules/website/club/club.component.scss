@@ -1991,7 +1991,7 @@ span {
     }
 
     .button1 {
-        right: 28%;
+        right: 67%;
     }
 
     .banner-left {
@@ -2733,43 +2733,53 @@ span {
 
 @media (max-width: 1199px) {
 
+    .banner {
+        height: 820px;
+    }
+   
+
+
     .player-member2 {
-        top: 58%;
+        top: 54%;
         right: 47%;
     }
 
     .player-member1 {
-        top: 32%;
+        top: 28%;
         right: 47%;
     }
 
     .player-member3 {
-        top: 84%;
+        top: 80%;
         right: 47%;
     }
 
     .player-member4 {
-        top: 20%;
+        top: 17%;
         right: 28%;
     }
 
     .player-member5 {
-        top: 46%;
+        top: 43%;
+        right: 28%;
+    }
+    .player-member6{
+        top: 69%;
         right: 28%;
     }
 
     .player-member9 {
-        top: 75%;
+        top: 71%;
         right: 9%;
     }
 
     .player-member8 {
-        top: 49%;
+        top: 45%;
         right: 9%;
     }
 
     .player-member7 {
-        top: 23%;
+        top: 19%;
         right: 9%;
     }
 
@@ -4844,10 +4854,17 @@ span {
         top: 28%;
         left: 96px;
     }
-
     .button1 {
+        right: 58%;
         top: 59%;
     }
+    .feature-player1 .player-img::after {
+        bottom: 22px;
+    }
+    .feature-player3 .player-img::after {
+        bottom: 24px;
+    }
+
 
     .button4 {
         top: 1%;

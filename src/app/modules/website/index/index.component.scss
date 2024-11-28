@@ -955,6 +955,7 @@ button.btn.btn-success.active-btn .club-s {
   font-size: 20px;
   padding-top: 5px;
   opacity: 75%;
+  font-weight: 400;
 }
 
 // .active-btn p{
@@ -1329,6 +1330,7 @@ img.vector-img {
   border-radius: 60px;
   // background: linear-gradient(0deg, #BDE34F, #EFFFC1);
   display: flex;
+  cursor: pointer;
   justify-content: center;
   box-shadow: inset 0px -4px 3px rgba(0, 0, 0, 0.28);
 }
