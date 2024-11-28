@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { IndexComponent } from './index/index.component';
 import { ConfirmPasswordComponent } from './SetPassword/confirmPassword.component'
 import { ValidateUserComponent } from './validateUser/validateUser.component';
+
 const routes: Routes = [
   {
     path:"",
