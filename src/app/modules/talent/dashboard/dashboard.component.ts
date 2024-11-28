@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
       this.getCoverImg();
       this.activeTab = 'profile';
     });
-    
+
     await this.getAllTeams();
     
   }

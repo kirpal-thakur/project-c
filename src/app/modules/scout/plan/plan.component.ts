@@ -26,11 +26,12 @@ interface Plan {
 })
 export class PlanComponent implements OnInit, OnDestroy {
 
-  plans: Plan[] = [];
+  // plans: Plan[] = [];
   maxQuantity: number = 10;
   premiumPlans: any;
   boostedPlans: any;
   otherPlans: any;
+  plans: any;
   selectedPlan: any;
   userCards: any;
   defaultCard: any; // Variable to hold the default card
@@ -56,44 +57,43 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.plansSubscription = this.scoutService.getPlans().subscribe({
       next: (response) => {
         if (response.status && response.data.length > 0) {
-          const premiumPlans: Plan[] = [];
-          const boostedPlans: Plan[] = [];
-          const otherPlans: Plan[] = [];
+          // const premiumPlans: Plan[] = [];
+          // const boostedPlans: Plan[] = [];
+          // const otherPlans: Plan[] = [];
           
-          response.data[0].forEach((plan: any) => {
-            const newPlanData: Plan = {
-              id: plan.id,
-              name: plan.package_name,
-              priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
-              priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
-              currency: plan.currency,
-              isYearly: plan.interval === "yearly",
-              yearData: plan.interval === "yearly" ? (plan) : null,
-              monthData: plan.interval === "monthly" ? (plan) : null,
-              quantity: 1,
-              includes: this.getIncludes(plan.package_name),
-            };
+          // response.data[0].forEach((plan: any) => {
+          //   const newPlanData: Plan = {
+          //     id: plan.id,
+          //     name: plan.package_name,
+          //     priceMonthly: plan.interval === "monthly" ? parseFloat(plan.price) : null,
+          //     priceYearly: plan.interval === "yearly" ? parseFloat(plan.price) : null,
+          //     currency: plan.currency,
+          //     isYearly: plan.interval === "yearly",
+          //     yearData: plan.interval === "yearly" ? (plan) : null,
+          //     monthData: plan.interval === "monthly" ? (plan) : null,
+          //     quantity: 1,
+          //     includes: this.getIncludes(plan.package_name),
+          //   };
 
-            // Categorize plans into premium, boosted, and others
-            if (plan.package_name.toLowerCase().includes('premium')) {
-              this.mergePlan(premiumPlans, newPlanData);
-            } else if (plan.package_name.toLowerCase().includes('booster')) {
-              this.mergePlan(boostedPlans, newPlanData);
-            } else {
-              this.mergePlan(otherPlans, newPlanData);
-            }
-          });
+          //   // Categorize plans into premium, boosted, and others
+          //   if (plan.package_name.toLowerCase().includes('premium')) {
+          //     this.mergePlan(premiumPlans, newPlanData);
+          //   } else if (plan.package_name.toLowerCase().includes('booster')) {
+          //     this.mergePlan(boostedPlans, newPlanData);
+          //   } else {
+          //     this.mergePlan(otherPlans, newPlanData);
+          //   }
+          // });
 
           // Assign the categorized plans to their respective variables
-          this.premiumPlans = premiumPlans;
-          this.boostedPlans = boostedPlans;
-          this.otherPlans = otherPlans;
-          this.selectedPlan = this.otherPlans[0];
+          // this.premiumPlans = premiumPlans;
+          // this.boostedPlans = boostedPlans;
+          // this.otherPlans = otherPlans;
+          // this.selectedPlan = this.otherPlans[0];
+          this.plans = response.data;
 
           // Log the categorized plans for debugging
-          console.log('Premium Plans:', this.premiumPlans);
-          console.log('Boosted Plans:', this.boostedPlans);
-          console.log('Other Plans:', this.otherPlans);
+          console.log('Premium Plans:', this.plans);
         }
       },
       error: (err) => {
@@ -106,20 +106,20 @@ export class PlanComponent implements OnInit, OnDestroy {
   /**
    * Helper function to merge plan data if the plan already exists.
    */
-  mergePlan(planArray: Plan[], newPlanData: Plan) {
-    const existingPlanIndex = planArray.findIndex(p => p.name === newPlanData.name);
-    if (existingPlanIndex !== -1) {
-      // Merge price details if the plan already exists in the array
-      const existingPlan = planArray[existingPlanIndex];
-      existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
-      existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
-      existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
-      existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
-    } else {
-      // Add new plan to the array
-      planArray.push(newPlanData);
-    }
-  }
+  // mergePlan(planArray: Plan[], newPlanData: Plan) {
+  //   const existingPlanIndex = planArray.findIndex(p => p.name === newPlanData.name);
+  //   if (existingPlanIndex !== -1) {
+  //     // Merge price details if the plan already exists in the array
+  //     const existingPlan = planArray[existingPlanIndex];
+  //     existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
+  //     existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
+  //     existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
+  //     existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
+  //   } else {
+  //     // Add new plan to the array
+  //     planArray.push(newPlanData);
+  //   }
+  // }
   
 
   // Fetch purchases from API with pagination parameters
