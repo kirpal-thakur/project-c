@@ -101,7 +101,6 @@ export class PerformanceTabComponent {
   }
 
   deleteUserPerformance(id: string): void {
-    console.log('deleteUserPerformance',id)
 
     // Call your service to delete the user performance by ID
     this.talentService.deletePerformance(id).subscribe(
