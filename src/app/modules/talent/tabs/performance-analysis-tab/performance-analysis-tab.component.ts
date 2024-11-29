@@ -140,7 +140,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     let params :any = {id:this.selectedIds};
     if (confirm('Are you sure you want to delete the selected reports?')) {
       
-      this.talentService.deletePerformance(params).subscribe(
+      this.talentService.deletePerformanceReport(params).subscribe(
         (response) => {
           if (response.status) {
             this.loadReports();

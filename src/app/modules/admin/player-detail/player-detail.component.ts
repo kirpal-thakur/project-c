@@ -18,6 +18,7 @@ export class PlayerDetailComponent implements OnInit {
   // userNationalities: any = [];
   coverImage: any = "";
   paginationData:any = {};
+  userCountryFlag:string = '';
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -32,7 +33,8 @@ export class PlayerDetailComponent implements OnInit {
     try {
       this.userService.getProfileData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.user_data) {
-          this.user = response.data.user_data; 
+          this.user = response.data.user_data;
+          this.userCountryFlag = JSON.parse(this.user.user_nationalities)[0].flag_path;
           this.paginationData = response.data.pagination;
           // this.userNationalities = JSON.parse(this.user.user_nationalities);
           if(this.user.meta && this.user.meta.cover_image_path){

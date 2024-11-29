@@ -1,497 +1,276 @@
-import { Component, ViewChild, ElementRef, OnInit,inject } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { ThemeService } from '../../../services/theme.service';
-import { environment } from '../../../../environments/environment';
-import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
-import { MatDialog } from '@angular/material/dialog';
-import { AuthGoogleService } from  '../../../services/auth-google.service';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
+import { trigger, transition, style, animate } from '@angular/animations';
 
-declare var bootstrap: any; // Declare bootstrap
-declare var google: any; // Declare google
+export interface ClubMember {
+  name: string;
+  image: string;
+  dob: string;
+  cornerImage?: string;
+  imageClass?: string; // Class for the main image
+  cornerImageClass?: string; // Class for the corner image
+}
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrl: './index.component.scss'
+  styleUrls: ['./index.component.scss'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }), // Start from above
+        animate('500ms ease-in', style({ opacity: 1, transform: 'translateY(0)' })) // Fade in and slide down to original position
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0, transform: 'translateY(20px)' })) // Fade out and slide up
+      ])
+    ]),
+
+    trigger('slideIn', [
+      transition(':enter', [
+        style({ opacity: 0 }), // Start with opacity 0
+        animate('500ms ease-in', style({ opacity: 1 })) // Fade in without moving
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })) // Fade out
+      ])
+    ]),
+
+    trigger('scaleIn', [
+      transition(':enter', [
+        style({ opacity: 0 }), // Start with opacity 0
+        animate('500ms ease-in', style({ opacity: 1 })) // Fade in to full opacity
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })) // Fade out
+      ])
+    ]),
+
+    trigger('rotateIn', [
+      transition(':enter', [
+        style({ opacity: 0 }), // Start with opacity 0
+        animate('500ms ease-in', style({ opacity: 1 })) // Fade in to full opacity
+      ]),
+      transition(':leave', [
+        animate('500ms ease-out', style({ opacity: 0 })) // Fade out
+      ])
+    ])
+  ]
 })
-export class IndexComponent implements OnInit{
-  private authGoogleService = inject(AuthGoogleService);
-
-  @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
-  @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
+export class IndexComponent {
+  @ViewChild('owlCarousel') owlCarousel!: ElementRef;
 
 
-
- activeIndex: number = 1; // -1 means no button is active initially
-  isVisible: boolean = true;
-  setActive(index: number): void {
-    this.activeIndex = index; // Set the activeIndex to the index of the clicked button
-    this.role = index === 1 ? 4 : index === 2 ? 2 : 3; // Update role based on activeIndex
-
-  }
-  toggleVisibility() {
-    this.isVisible = !this.isVisible;
-  }
- 
-  username: string = '';
-  password: string = '';
-  firstName: string = '';
-  lastName: string = '';
-  role: number = 4; // Initialize role to 4 (Player)
-  email: string = '';
-  language: string = '1';
-  newsletter: boolean = false;
-  userDomain: string = '1';
-  confirmPassword: string = '';
-  privacyPolicy: boolean = false;
-  loginButtonClicked: boolean = false;
-  invalidCred: string = '';
-
-  registerFormSubmitted: boolean = false;
-  registerError: string = '';
-  forgotPasswordEmail: string = '';
-  forgotPasswordMessage: string = '';
-
-  constructor(
-    private themeService: ThemeService,
-    private authService: AuthService,
-     private route: ActivatedRoute,
-      private router: Router, 
-      private translateService: TranslateService, 
-      public dialog: MatDialog
-     ) {}
-
-  lang:string = '';
-  token= '';
-  tokenVerified = false;
-
-  ngOnInit(): void {
-    this.lang = localStorage.getItem('lang') || 'en'
-      // Check if the google.accounts.id library is loaded
-      if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
-        // Initialize Google Sign-In
-        this.initializeGoogleSignIn();
-      } else {
-        // Google API script might not be loaded yet; wait for it to load
-        console.warn('Google API script is not fully loaded.');
-      }
-  this.route.queryParams.subscribe(params => {
-      this.token = params['confirm-token'] || '';
-      console.log('Magic Token:', this.token);
-
-      if (this.token) {
-        // Call authService to verify magic token
-        this.authService.magicLogin(this.token).subscribe(
-          (response: any) => {
-            console.log('Magic Login Response:', response);
-            if (response.success) {
-              this.tokenVerified = true;
-              this.openModal();
-            } else {
-              this.tokenVerified = false;
-              console.log('Token is not verified please check');
-              this.notverifyed();
-              console.log("popup is not open")
-            }
-          },
-          (error) => {
-            console.error('Error verifying token:', error);
-            this.tokenVerified = false;
-            this.notverifyed();
-          }
-        );
-      } else {
-        this.tokenVerified = false;
-        console.log('Token is not provided');
-      }
-    });
-
-    
-   
-  }
-  signInWithGoogle(){
-    this.authGoogleService.login();
-  }
-  performMagicLogin(token: string) {
-    this.authService.magicLogin(token).subscribe(
-      magicLoginResponse => {
-        console.log('Magic login response:', magicLoginResponse);
-        if (magicLoginResponse.status === true) {
-          this.openModal();
-          
-        } else {
-          console.error('Auto-login failed:', magicLoginResponse.message);
-          console.log("Token is not verified");
-        }
-      },
-      error => {
-        console.error('An error occurred during auto-login:', error);
-        // Handle error scenario if needed
-      }
-    );
-  }
-
-  ChangeLang(lang:any){
-    const selectedLanguage = lang.target.value;
-    localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage)
-  }
-
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-  }
+  players = [
+    { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
+    { name: 'Ziddane', image: './assets/images/ziddane.svg', year: '2004' },
+    { name: 'FC Thun', image: './assets/images/FC Thun 1.svg', year: '2004' },
+    { name: 'Gabriel Jesus', image: './assets/images/Gabriel Jesus.svg', year: '2004' },
+    { name: 'Eütoile Carouge FC', image: './assets/images/Eütoile Carouge FC..png', year: '2004' },
+    { name: 'Harry Kane', image: './assets/images/Harry Kane.svg', year: '2004' },
+    { name: 'Messi', image: './assets/images/Messi.svg', year: '2004' }
+  ];
 
 
-  login() {
-    this.loginButtonClicked = true;
-
-    if (!this.email || !this.password) {
-      console.error('Please fill in all required fields.');
-      return;
+  // Initialize the array of club members
+  clubMembers: ClubMember[] = [
+    {
+      name: 'Ziddane',
+      image: './assets/images/network-ziddae.svg',
+      dob: '2003',
+      cornerImage: './assets/images/Navy.svg',
+      imageClass: 'ziddane-image',
+      cornerImageClass: 'navy-corner'
+    },
+    {
+      name: 'FC Thun',
+      image: './assets/images/FC Thun 1.svg',
+      dob: '',
+      imageClass: 'fc-thun-image'
+    },
+    {
+      name: 'Ronaldinho Gaúcho',
+      image: './assets/images/Ronaldinho Gaúcho.svg',
+      dob: '2004',
+      cornerImage: './assets/images/SC Bru╠êhl SG.svg.svg',
+      imageClass: 'ronaldinho-image',
+      cornerImageClass: 'sc-bruehl-corner'
+    },
+    {
+      name: 'FC Rapperswil Jona',
+      image: './assets/images/fussball.svg',
+      dob: '',
+      imageClass: 'fc-rapperswil-image'
+    },
+    {
+      name: 'Jamie Vardy',
+      image: './assets/images/jammie.svg',
+      dob: '2003',
+      cornerImage: './assets/images/FC Wil.svg',
+      imageClass: 'jamie-vardy-image',
+      cornerImageClass: 'fc-wil-corner'
+    },
+    {
+      name: 'Eütoile Carouge FC',
+      image: './assets/images/E╠ütoile Carouge FC..png',
+      dob: '',
+      imageClass: 'eutoile-image'
+    },
+    {
+      name: 'Mohamed Salah',
+      image: './assets/images/mohamad.svg',
+      dob: '2003',
+      cornerImage: './assets/images/FC Thun 1.svg',
+      imageClass: 'mohamed-image',
+      cornerImageClass: 'fc-thun-corner'
     }
+  ];
 
-    const selectedLanguage = localStorage.getItem('lang') || '';
-    const domain = environment.targetDomain?.domain || 'ch';
-
-    const loginData = {
-      email: this.email,
-      password: this.password,
-      lang: selectedLanguage,
-      domain: domain,
-      
-    };
-
-    this.authService.login(loginData).subscribe(
-      response => {
-        console.log('Login response:', response);
-        if (response.status === false) {
-          console.error('Login failed:', response.message);
-          this.invalidCred = response.message;
-          this.showInvalidCredMessage();
-        } else {
-          console.log('Login successful.');
-          const token = response.data.token;
-          const userData = response.data.user_data;
-        
-          console.log("check user data index ",userData)
-
-          localStorage.setItem('authToken', token);
-        
-          const storedToken = localStorage.getItem('authToken');
-          localStorage.setItem('userData', JSON.stringify(userData));
-        
-          if (storedToken === token) {
-            console.log('Token successfully saved to local storage.');
-
-            this.translateService.use(selectedLanguage);
-
-            // const selectedLanguage = localStorage.getItem('lang');
-            // if (selectedLanguage) {
-            //   this.translateService.use(selectedLanguage);
-            // }
-
-            // let targetDomain = '';
-            //   if (selectedLanguage === 'en') {
-            //     targetDomain = environment.targetDomain.en;
-            //   } else if (selectedLanguage === 'de') {
-            //     targetDomain = environment.targetDomain.de;
-            //   }
-            //   console.log(targetDomain, "domain");
-            //   console.log(selectedLanguage, "check language")
-
-            let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
-            if (modal) {
-              modal.hide();
-            }
-            
-            if(userData.role==4){
-              
-              this.authService.getProfileData().subscribe((response)=>{
-                if (response && response.status && response.data && response.data.user_data) {
-                  console.log(response.data.user_data)
-                  localStorage.setItem('userInfo', JSON.stringify(response.data.user_data));
-                }
-              });
-
-              this.router.navigate(['/talent/dashboard']);
-            }else{
-              this.router.navigate(['/admin/dashboard']);
-            }
-            // window.location.href = `${targetDomain}/Admin/Dashboard`;
-          } else {
-            console.error('Failed to save token to local storage.');
-          }
-        }
+  // Owl Carousel options
+  customOptions: OwlOptions = {
+    loop: true,
+    margin: 10,
+    nav: false,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplaySpeed: 500,
+    navSpeed: 500,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 2
       },
-      error => {
-        console.error('An error occurred while logging in:', error);
+      600: {
+        items: 3
+      },
+      840: {
+        items: 4
+      },
+      1200: {
+        items: 5
+      },
+      1400: {
+        items: 7
       }
-    );
+    }
+  };
+
+  // Default selected content and category
+  selectedContent: string = 'Sign-up & Profile Creation';
+  selectedCategory: string = 'Talent'; // Default to Talent
+
+  // Manage Navbar Expansion
+  isNavbarExpanded = false;
+
+  toggleNavbar(): void {
+    this.isNavbarExpanded = !this.isNavbarExpanded;
   }
 
-  private showInvalidCredMessage() {
-    if (this.invalidCredMessage) {
-      this.invalidCredMessage.nativeElement.style.display = 'block';
+  // // Method to set the selected content
+  // showContent(content: string): void {
+  //   this.selectedContent = content;
+  // }
+
+  // Method to check if content is active
+  isActive(content: string): boolean {
+    return this.selectedContent === content;
+  }
+
+  // Method to set the selected category and reset content
+  showCategory(category: string): void {
+    this.selectedCategory = category;
+    this.resetContentForCategory(category);
+  }
+
+  // Reset content based on selected category
+  private resetContentForCategory(category: string): void {
+    if (category === 'Talent') {
+      this.selectedContent = 'Sign-up & Profile Creation';
+    } else if (category === 'Clubs & Scouts') {
+      this.selectedContent = 'Sign-up & Profile Creation'; // Default content for Clubs & Scouts
     }
   }
 
-  register() {
-    this.registerFormSubmitted = true;
-
-    if (!this.isFormValid()) {
-      console.error('Please fill in all required fields.');
-      return;
-    }
-
-    const selectedLanguage = localStorage.getItem('lang') || '';
-    const domain = environment.targetDomain?.domain || 'ch';
-
-    const registrationData = {
-      first_name: this.firstName,
-      last_name: this.lastName,
-      username: this.username,
-      role: this.role,
-      email: this.email,
-      newsletter: this.newsletter,
-      user_domain: this.userDomain,
-      password: this.password,
-      password_confirm: this.confirmPassword,
-      privacy_policy: this.privacyPolicy,
-      lang: selectedLanguage, 
-      domain: domain
-    };
-
-
-    this.authService.register(registrationData).subscribe(
-      response => {
-        console.log('Registration response:', response);
-        if (response.status === true) {
-          const registerModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal1'));
-          if (registerModal) {
-            registerModal.hide();
-          }
-          const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-          loginModal.show();
-        } else {
-          let errorMessage = '';
-          // Check if response.message is an object
-          if (typeof response.message === 'object') {
-            // Loop through each error message and concatenate them
-            Object.keys(response.message).forEach(key => {
-              errorMessage += response.message[key] + ' ';
-            });
-          } else {
-            errorMessage = response.message;
-          }
-          this.registerError = errorMessage.trim(); // Trim to remove any leading or trailing spaces
-          this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
-        }
-      },
-      error => {
-        console.error('Registration failed:', error);
-        if (error && error.status === 400 && error.error && error.error.data) {
-          const errorData = error.error.data;
-          if (errorData.username) {
-            this.registerForm.controls['username'].setErrors({ usernameExists: true });
-          }
-          if (errorData.email) {
-            this.registerForm.controls['email'].setErrors({ emailExists: true });
-          }
-          this.registerError = errorData.message || 'An error occurred during registration.';
-        } else {
-          console.error('An error occurred while registering:', error);
-          this.registerError = 'An error occurred during registration. Please try again.';
-        }
-        this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
-      }
-    );
+  // Event handlers for mouse enter and leave
+  onMouseEnter() {
+    this.owlCarousel.nativeElement.classList.add('stop-autoplay');
   }
 
-  isFormValid(): boolean {
-    return (
-      this.firstName.trim() !== '' &&
-      this.lastName.trim() !== '' &&
-      this.username.trim() !== '' &&
-      this.role !== null &&
-      this.email.trim() !== '' &&
-      this.language !== null &&
-      this.newsletter !== null &&
-      this.userDomain.trim() !== '' &&
-      this.password.trim() !== '' &&
-      this.confirmPassword.trim() !== '' &&
-      this.privacyPolicy !== false
-    );
+  onMouseLeave() {
+    this.owlCarousel.nativeElement.classList.remove('stop-autoplay');
   }
 
-  forgotPassword() {
-    if (!this.forgotPasswordEmail.trim()) {
-      console.error('Email is required for password recovery.');
-      this.forgotPasswordMessage = 'Please provide a valid email address.';
-      return;
-    }
+  onTouchStart() {
+    this.onMouseEnter(); // Stop autoplay on touch start
+  }
 
-    this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
-      response => {
-        console.log('Password recovery response:', response);
-        if (response.status === true) {
-            const magicToken = response.data.magic_link_url;
-            const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
-             console.log("Magic link URL:", magic_link_url);
-          this.authService.magicLogin(magic_link_url).subscribe(
-            magicLoginResponse => {
-              console.log('Magic login response:', magicLoginResponse);
-              if (magicLoginResponse.status === true) {
-                console.log('Auto-login successful.');
-                this.router.navigate(['/admin/dashboard']);
-              } else {
-                console.error('Auto-login failed:', magicLoginResponse.message);
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            magicLoginError => {
-              console.error('An error occurred during auto-login:', magicLoginError);
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
-        } else {
-          console.error('Password recovery failed:', response.message);
-          this.forgotPasswordMessage = response.message;
-        }
-      },
-      error => {
-        console.error('An error occurred while requesting password recovery:', error);
-        this.forgotPasswordMessage = 'An error occurred. Please try again later.';
-      }
-    );
+  onTouchEnd() {
+    this.onMouseLeave(); // Resume autoplay on touch end
   }
 
 
+  showContent(content: string): void {
+    this.selectedContent = content;
+  }
 
-
-  // forgotPassword(): void {
-  //   if (!this.forgotPasswordEmail.trim()) {
-  //     console.error('Email is required for password recovery.');
-  //     this.forgotPasswordMessage = 'Please provide a valid email address.';
-  //     return;
+  //   // Determine the ID of the target element
+  //   let elementId = '';
+  //   switch (content) {
+  //     case 'Sign-up & Profile Creation':
+  //       elementId = 'sign-up';
+  //       break;
+  //     case 'Networking & Opportunity':
+  //       elementId = 'networking';
+  //       break;
+  //     case 'Success & Progression':
+  //       elementId = 'success';
+  //       break;
   //   }
 
-  //   this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
-  //     response => {
-  //       console.log('Password recovery response:', response);
-  //       if (response.status === true && response.data.magic_link_url) {
-  //         const magicToken = response.data.magic_link_url;
-  //         const magicLinkUrl = `http://localhost:4200/Index?confirm-token=${magicToken}`;
-  //         console.log("Magic link URL:", magicLinkUrl);
+  //   // Smooth scroll to the target element over 3 seconds (3000 milliseconds)
+  //   if (elementId) {
+  //     const element = document.getElementById(elementId);
+  //     if (element) {
+  //       const startPosition = window.pageYOffset; // Current scroll position
+  //       const targetPosition = element.getBoundingClientRect().top + startPosition; // Target position
+  //       const distance = targetPosition - startPosition; // Distance to scroll
+  //       const duration = 3000; // Duration of the scroll in milliseconds (3 seconds)
+  //       let startTime: number | null = null;
 
-  //         // Redirect to magic link URL
-  //         this.router.navigateByUrl(magicLinkUrl).then(nav => {
-  //           console.log('Navigation to magic link:', nav);
-  //           if (!nav) {
-  //             console.error('Navigation to magic link failed.');
-  //             this.forgotPasswordMessage = 'Failed to navigate to magic link. Please try again.';
-  //           }
-  //         });
-  //       } else {
-  //         console.error('Password recovery failed or magic token not received:', response.message);
-  //         this.forgotPasswordMessage = response.message || 'Magic token not received. Please try again.';
-  //       }
-  //     },
-  //     error => {
-  //       console.error('An error occurred while requesting password recovery:', error);
-  //       this.forgotPasswordMessage = 'An error occurred. Please try again later.';
+  //       // Animation function
+  //       const animation = (currentTime: number) => {
+  //         if (startTime === null) startTime = currentTime;
+  //         const timeElapsed = currentTime - startTime;
+  //         const progress = Math.min(timeElapsed / duration, 1); // Normalize progress to [0, 1]
+  //         window.scrollTo(0, startPosition + distance * progress); // Scroll to current position
+
+  //         // Apply translateY effect
+  //         element.style.transform = `translateY(${(2 * progress)}px)`;
+
+  //         if (timeElapsed < duration) requestAnimationFrame(animation); // Continue animation if not finished
+  //       };
+
+  //       requestAnimationFrame(animation); // Start the animation
   //     }
-  //   );
+  //   }
   // }
-  
 
 
-  initializeGoogleSignIn(): void {
-    if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
-      // Initialize Google Sign-In
-      google.accounts.id.initialize({
-        client_id: '156115430884-qbtnhb5dlnn6fnqtj2k6vh7khol2p7e8.apps.googleusercontent.com',
-        callback: (response: any) => this.handleGoogleSignIn(response)
-      });
-      // Render Google Sign-In button in a hidden div
-      google.accounts.id.renderButton(
-        document.getElementById('googleSignInButton'),
-        {
-          theme: 'outline',
-          size: 'large',
-          promptParentId: 'googleSignInButton',
-          prompt: 'select_account'
-        }
-      );
-    } else {
-      // Google API script might not be loaded yet; wait for it to load
-      console.warn('Google API script is not fully loaded.');
-    }
-  }
+adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad visibility
 
-  handleGoogleSignIn(response: any): void {
-    const idToken = response.credential;
-    const user = this.parseJwt(idToken);
-    if (user) {
-      console.log('Google login successful:', user);
-      // Save user data or token as needed, for example:
-      localStorage.setItem('authToken', idToken);
-      console.log('Token saved in localStorage:', idToken); // <-- Logging statement
-      let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
-      if (modal) {
-        modal.hide();
-      }
-      // this.router.navigate(['/Admin/Dashboard']);
-    } else {
-      console.error('Failed to decode Google ID token');
-      this.invalidCred = 'Failed to log in with Google';
-      this.showInvalidCredMessage();
-    }
-  }
-
-  private parseJwt(token: string) {
-    try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-
-      return JSON.parse(jsonPayload);
-    } catch (error) {
-      console.error('Failed to parse JWT:', error);
-      return null;
-    }
-  }
-
-
-//   editpassword():void  {
-//     console.log("hiii ")
-//   this.dialog.open(ConfirmPasswordComponent)
-// }
-
-openModal() {
-  this.dialog.open(ConfirmPasswordComponent, {
-    width:'500px',
-    // data: { token: this.token }
-  });
-}
-notverifyed()
-{
-  this.dialog.open(ConfirmPasswordComponent, {
-    width:'500px',
-    // data: { token: this.token }
-  });
+ngOnInit() {
+  // Initially, all ads are visible
+  this.adVisible = [true, true, true, true, true];
 }
 
-checkEnterKey(event: KeyboardEvent) {
-  // Check if the Enter key is pressed
-  if (event.key === 'Enter') {
-    this.login();
-  }
+closeAd(index: number) {
+  this.adVisible[index] = false; // Set the specific ad to not visible based on index
 }
+
+
 
 }

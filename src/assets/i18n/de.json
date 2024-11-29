@@ -188,8 +188,10 @@
     "AddPhotos": "Fotos hinzufügen",
     "Season": "Saison",
     "MovingFrom": "Umzug von",
-    "MovingTo": "Umzug nach"
-  
+    "MovingTo": "Umzug nach",
+    "ExportPDF": "PDF exportieren",
+    "showcaseYourProfile": "Präsentiere dein Profil"
+
 }
 
 

@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
+import { SocketService } from '../../../services/socket.service';
 
 interface Notification {
   image: string;
@@ -20,18 +21,21 @@ interface Notification {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  
+
   searchResults: any[] = [];
-  searchUser:any;
+  searchUser: any;
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService ,private router: Router,private talentService: TalentService, private themeService: ThemeService, private authService: AuthService,private translateService: TranslateService) {}
-  loggedInUser:any = localStorage.getItem('userInfo');
+  constructor(private userService: UserService, private router: Router, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  loggedInUser: any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
-  lang:string = '';
+  lang: string = '';
   domains: any = environment.domains;
   message: string = '';
+
+  liveNotification: any[] = [];
+  showNotification: boolean = false;
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
@@ -41,14 +45,38 @@ export class HeaderComponent {
     this.talentService.message$.subscribe(msg => {
       this.profileImgUrl = msg;
     });
-    
+
 
     this.lang = localStorage.getItem('lang') || 'en'
     this.updateThemeText();
+
+    this.socketService.on('notification').subscribe((data) => {
+      // Create a new notification object
+      console.log(data);
+      const obj = {
+        image: data.senderProfileImage,
+        title: data.senderId,
+        content: data.message,
+        time: 'just now'
+      };
+
+      // Add the notification to the array and show the notification box
+      this.liveNotification = [obj]; // Keep only the latest notification
+      this.showNotification = true;
+
+      console.log('New notification:', data.message);
+
+      // Hide the notification after 3 seconds
+      setTimeout(() => {
+        this.liveNotification = [];
+        this.showNotification = false;
+      }, 5000); // 5000 ms = 5 seconds
+    });
+
   }
 
-  ChangeLang(lang:any){
-    const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
+  ChangeLang(lang: any) {
+    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
   }
@@ -65,10 +93,10 @@ export class HeaderComponent {
     this.updateThemeText()
   }
 
-  updateThemeText (){
+  updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    document.getElementById('theme-text')!.textContent =this.themeText
+    document.getElementById('theme-text')!.textContent = this.themeText
   }
 
 
@@ -152,9 +180,9 @@ export class HeaderComponent {
       return;
     }
 
-    this.userService.searchUser(this.searchUser).subscribe((response:any)=>{
-      if (response && response.status && response.data && response.data.userData) {          
-          this.searchResults = response.data.userData;          
+    this.userService.searchUser(this.searchUser).subscribe((response: any) => {
+      if (response && response.status && response.data && response.data.userData) {
+        this.searchResults = response.data.userData;
       } else {
         // this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -167,10 +195,10 @@ export class HeaderComponent {
     console.log('User selected:', user);
     this.searchResults = [];
     this.showSuggestions = false;
-    this.searchUser = user.first_name +' '+ user.last_name
+    this.searchUser = user.first_name + ' ' + user.last_name
 
     // Navigate or perform actions with the selected user
-    this.exploreUser(user.role_name,user.id)
+    this.exploreUser(user.role_name, user.id)
   }
 
 

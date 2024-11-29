@@ -1,0 +1,128 @@
+<section class="website-code">
+<app-header></app-header>
+<div class="main-bnr">
+
+  <div class="overlay"></div>
+  <div class="banner-inner py_0">
+    <div class="container">
+      <div class="about">
+        <h3 class="about-text">About Us</h3> 
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="adVisible[0]" class="skyscraper-left">
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <div *ngIf="adVisible[1]" class="skyscraper-right">
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  </div>
+
+<div class="about-content py_0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="content-image">
+          <img src="./assets/images/about-page.png" alt="About Us" >
+      </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <p class="content-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+          officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="countries py_0">
+  <div class="container">
+    <h2 class="country-available">Countries Available</h2>
+    <div class="row">
+      <div class="col-xxl-4 col-lg-6 col-md-6 col-12">
+        <mat-list>
+          <mat-list-item *ngFor="let country of countries" class="custom-list-item country-name">
+            {{ country }}
+          </mat-list-item>  
+          </mat-list>    
+      </div>
+      <div class="col-xxl-8 col-lg-6 col-md-6 col-12">
+        <div class="map">
+          <img class="light-map" src="./assets/images/map.png" alt="Light Map">
+          <img class="dark-map" src="./assets/images/dark-map.png" alt="Dark Map">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="club py_0">
+  
+    <div class="club-overlay"></div>
+  
+    <div class="container club-banner">
+  
+      <div class="container1">
+        <div class="advertisment" >
+          <div  *ngIf="adVisible[2]" class="leaderboard-club-image">
+            <img src="./assets/images/leaderboard - 728x90.png">
+            <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        
+          <div  *ngIf="adVisible[3]" class="small-sqaure-image">
+            <img src="./assets/images/small sqaure - 200x200.png">
+            <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          </div>    
+        </div>
+        </div>
+  
+      <div class="club_players">
+        <h3>Platform for Football</h3>
+        <h3>Players, Clubs and Scouts.</h3>
+        <div class="club-buttons">
+          <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <div class="button-border">
+              <div class="join-text">
+               <p> Join Now</p>
+               <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
+               <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="py_1">
+    <div class="container">
+      <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+        <div *ngIf="adVisible[4]" class="large-rectangle">
+            <img src="./assets/images/large rectangle - 336x280 .png">
+            <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[5]" class="inline-rectangle">
+            <img src="./assets/images/inline rectangle - 300x250.png">
+            <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div *ngIf="adVisible[6]" class="square">
+            <img src="./assets/images/sqaure - 250x250.png">
+            <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+    </div>
+    </div>
+  </div>
+ <app-footer></app-footer>
+</section>

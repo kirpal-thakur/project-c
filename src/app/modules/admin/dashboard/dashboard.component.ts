@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user.service';
 
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
@@ -8,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DashboardService } from '../../../services/dashboard.service';
 import { ViewportScroller } from '@angular/common';
 import { environment } from '../../../../environments/environment';
+import { goToActiveLog } from '../../../../utlis';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -40,7 +42,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private dashboardApi:DashboardService,
     private router: Router,
     private translateService: TranslateService,
-    private viewportScroller: ViewportScroller
+    private viewportScroller: ViewportScroller,
+    private userService: UserService
   ) {
     this.getChardData();
   }
@@ -58,6 +61,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.lang = localStorage.getItem('lang') || 'en';
     this.translateService.use(this.lang);
     Chart.register(...registerables);
+    this.userService.getAdminProfile().subscribe((response)=>{
+      if (response && response.status) {
+        let userData = response.data.user_data;
+        this.loggedInUser.profile_image_path = userData.meta.profile_image_path || '../../../assets/images/1.jpg';
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -360,6 +371,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate([pageRoute, id]);
   }
 
+  goToSetting(){
+    goToActiveLog(this.router);
+  }
 
 }
 

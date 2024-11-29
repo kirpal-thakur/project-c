@@ -2,12 +2,12 @@
   position: relative;
   background: #0C3453;
   font-family: "Libre Franklin", sans-serif !important;
-  .form-select {
-    background: none; /* Removes the background */
-    color: #ffffff; /* Ensures the text color is visible on a dark background */
-    border: 1px solid #ffffff; /* Optional: White border to match dark theme */
-  }
-  
+  // .form-select {
+  //   background: none; /* Removes the background */
+  //   color: #ffffff; /* Ensures the text color is visible on a dark background */
+  //   border: 1px solid #ffffff; /* Optional: White border to match dark theme */
+  // }
+
 }
 ul,
 p , h1 ,h2 ,h3,h4,h5,h6{
@@ -455,7 +455,11 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover p {
   background: #BDE34F;
-  color: #072944   ;
+  padding: 10px !important;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  color: #072944;
   // transition: all 0.4s ease-in-out !important;
 
 }
@@ -1565,7 +1569,7 @@ background-color: #072944;
   }
   .page-sidebar{
     overflow : auto;
-  } 
+  }
   .page-sidebar-inner {
     height: 67% !important;
   }
@@ -1614,7 +1618,7 @@ background-color: #072944;
 .dark-theme .NgxEditor__Content{
   background-color: #072944;
   color: white;
-  
+
 }
 
 .dark-theme .marketing-calender-field .mat-mdc-text-field-wrapper{
@@ -1639,7 +1643,7 @@ background-color: #072944;
 
 }
 
-// new changes css Start 
+// new changes css Start
 
 .dark-theme .right-sidebar .card .card-header a {
   color: #4379EE !important;
@@ -1692,7 +1696,7 @@ background-color: #072944;
 }
 .dark-theme .my-svg-icon .my-path{
   fill: #4F7A9D;
-  
+
 }
 // .dark-theme .my-svg-icon .my-path a.active{
 
@@ -1724,7 +1728,7 @@ background-color: #072944;
 //   border-top-right-radius: 10px;
 //   border-top-left-radius: 10px;
 //   background-color: #072944 !important;
-  
+
 // }
 
 .dark-theme .settings-tabs  .nav-tabs .nav-item .nav-link{
@@ -1738,7 +1742,7 @@ background-color: #072944;
 .dark-theme .profile path{
   fill: #4F7A9D !important ;
   stroke: #4F7A9D !important ;
-} 
+}
 
 .dark-theme .settings-tabs .nav-tabs .nav-link svg path {
   fill: none !important;
@@ -1746,7 +1750,7 @@ background-color: #072944;
 }
 
 .dark-theme .settings-tabs .nav-tabs  .nav-link.active svg path {
- 
+
   stroke: #ffffff !important;
 }
 .dark-theme .dropdown-activity-log {
@@ -1799,7 +1803,7 @@ background-color: #072944;
   background-color: #0C3453;
   // margin: 0 10px  ;
 }
-.dark-theme .border-end, .border-bottom, .border-top{ 
+.dark-theme .border-end, .border-bottom, .border-top{
   border-color: #1F4360 !important;
 }
 
@@ -1822,7 +1826,7 @@ background-color: #072944;
 
 .dark-theme .reject-stroke{
   stroke: #000000;
-} 
+}
 .dark-theme .export-xls svg path{
   fill: transparent !important;
   stroke: #ffffff;
@@ -1833,7 +1837,7 @@ background-color: #072944;
   position: absolute;
   height: 1px !important;
   background: #ffffff !important;
-  
+
 }
 
 .dark-theme .user-details-left .list-view p{
@@ -1869,16 +1873,16 @@ background-color: #072944;
 }
 
 .dark-theme .table-striped tbody tr:nth-child(even) {
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
 }
 .dark-theme .table-striped thead th {
-  background-color: #0C3453; 
+  background-color: #0C3453;
 }
 .dark-theme .table-striped.explore-table thead th{
-  background-color: #072944 !important; 
+  background-color: #072944 !important;
 }
 .dark-theme .table-striped.explore-table thead th select{
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
   color: #ffff !important;
   border-color: #1F4360 !important;
 }
@@ -1894,7 +1898,7 @@ background-color: #072944;
 
 .dark-theme .custom-size-calendar .mdc-text-field--filled:not(.mdc-text-field--disabled){
   color: #ffffff !important;
-} 
+}
 
 .dark-theme  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
 
@@ -1942,24 +1946,24 @@ background-color: #072944;
 
 .dark-theme .gallery-p{
   color: #ffffff;
-  
+
 }
 
 .dark-theme .upload-box svg path{
   stroke: #ffffff;
 }
-.dark-theme .gallery-upload-button{    
+.dark-theme .gallery-upload-button{
   color: #2C2C2C;
 }
 
-.dark-theme .upload-btn{    
+.dark-theme .upload-btn{
   color: #2C2C2C;
 }
 .dark-theme .upload-img svg path{
   stroke: #ffffff;
 }
 
-.dark-theme hr{    
+.dark-theme hr{
   color: #fff;
 }
 
@@ -1968,7 +1972,7 @@ background-color: #072944;
   color: #ffffff;
 }
 
- 
+
 .dark-theme .gallery-h5{
   color: #ffffff;
 }
@@ -1982,7 +1986,7 @@ background-color: #072944;
 }
 
 .dark-theme .meta-date .mat-mdc-form-field-flex{
-  background-color: #0C3453; 
+  background-color: #0C3453;
   color: #ffffff;
 }
 
@@ -2035,15 +2039,15 @@ background-color: #072944;
 }
 
 .dark-theme .tbody-scout-profile  tr:first-child {
-  border-top: 2px solid #1F4360 !important; 
+  border-top: 2px solid #1F4360 !important;
 }
 
 .dark-theme .tbody-scout-profile {
-  border-top: 2px solid #1F4360 !important; 
+  border-top: 2px solid #1F4360 !important;
 }
 
 .dark-theme .historyTextarea {
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
   border: 1px solid #072944 !important;
   color: #ffffff !important;
 }
@@ -2158,7 +2162,7 @@ color: rgba(255, 255, 255, 0.5) !important;
   background: #1d3e59  !important;
   border:1px solid #1d3e59 !important;
 }
-.dark-theme .table-bg-2 { 
+.dark-theme .table-bg-2 {
   background: #072944 !important;
   border:1px solid #072944 !important;
 }
@@ -2364,7 +2368,7 @@ color: #fff;
   background: rgba(23, 91, 7, 1);
 }
 .dark-theme .premium_list label input:checked ~ .checkmark{
-  background: #072944 !important; 
+  background: #072944 !important;
   border: 1px solid #072944 !important;
 }
 .dark-theme .navbar-expand .navbar-nav .dropdown-menu{

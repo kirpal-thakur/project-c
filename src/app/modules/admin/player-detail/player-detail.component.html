@@ -45,7 +45,7 @@
                   stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
 
-              {{ 'ExportXLS' | translate }}</a>
+              {{ 'ExportPDF' | translate }}</a>
           </div>
           <div class="d-flex align-items-center" *ngIf="paginationData.total">
             <div class="paging-data" style="margin-right: 10px;">
@@ -265,7 +265,7 @@
               </li>
             </ul>
 
-            <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" (dataEmitter)="handleRefreshAfterUpdate($event)"></app-profile-tab>
+            <app-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" [userCountryFlag]="userCountryFlag" (dataEmitter)="handleRefreshAfterUpdate($event)"></app-profile-tab>
             <app-performance-tab *ngIf="activeTab == 'performance'"></app-performance-tab>
             <app-transfers-tab *ngIf="activeTab == 'transfers'"></app-transfers-tab>
             <app-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></app-gallery-tab>
