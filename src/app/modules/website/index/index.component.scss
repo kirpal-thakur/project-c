@@ -2695,10 +2695,12 @@ img.success-image {
 @media (max-width: 1199px) {
   .main-bnr {
     height: 820px;
-}
-.skyscraper-image, .wide-skyscraper-image {
-  top: 16%;
-}
+  }
+
+  .skyscraper-image,
+  .wide-skyscraper-image {
+    top: 16%;
+  }
 
   .joined-text h3 {
     font-size: 28px;
@@ -3021,9 +3023,10 @@ img.success-image {
     margin-top: 40px;
     margin-bottom: 40px;
   }
+
   .club-banner {
     height: 600px;
-}
+  }
 
 }
 
@@ -3647,11 +3650,12 @@ img.success-image {
 @media (max-width: 575px) {
   .main-bnr {
     height: 700px;
-}
-.joined-text {
-  display: flex;
-  align-items: center;
-}
+  }
+
+  .joined-text {
+    display: flex;
+    align-items: center;
+  }
 
   .home-banner-image {
     width: 260px;
@@ -3675,8 +3679,12 @@ img.success-image {
 
   .club_players {
     position: static;
-    padding: 20px 0;
-}
+    padding: 3rem 0;
+  }
+
+  .club-banner {
+    height: 0;
+  }
 
   .club-scouts {
     margin-top: 0;
@@ -4331,9 +4339,10 @@ img.success-image {
     left: 5%;
     border-radius: 3px;
   }
+
   button.btn.btn-success.active-btn .club-s {
     width: 180px;
-}
+  }
 
 
 }
@@ -4341,20 +4350,22 @@ img.success-image {
 @media (max-width: 376px) {
   .main-bnr {
     height: 650px;
-}
+  }
+
   .player-name {
     width: 95%;
   }
-    .join-text {
-      width: 220px;
-      height: 46px;
-      padding-left: 10px;
-    }
-  
-    .button-border {
-      width: 230px;
-      height: 55px;
-    }
+
+  .join-text {
+    width: 220px;
+    height: 46px;
+    padding-left: 10px;
+  }
+
+  .button-border {
+    width: 230px;
+    height: 55px;
+  }
 
   .club h3 {
     font-size: 30px;
@@ -4679,30 +4690,40 @@ img.success-image {
 @media (max-width: 321px) {
   .main-bnr {
     height: 600px;
-}
+  }
+
   .message-panel img {
     width: 160px;
     height: 215px;
     position: static;
     margin-top: 60px;
   }
+
   .join-text {
     width: 205px;
     height: 40px;
-}
-.button-border {
-  width: 216px;
-  height: 49px;
-}
-.join-text p {
-  font-size: 20px;
-  line-height: 37px;
-}
-img.join-btn{
-  height: 14px;
-  width: 12px;
-  margin: 13px;
-}
+  }
+
+  .button-border {
+    width: 216px;
+    height: 49px;
+  }
+
+  .join-text p {
+    font-size: 20px;
+    line-height: 37px;
+  }
+
+  img.join-btn {
+    height: 14px;
+    width: 12px;
+    margin: 13px;
+  }
+
+  .club_players {
+    position: static;
+    padding: 4rem 0;
+  }
 
 
   .player-img {

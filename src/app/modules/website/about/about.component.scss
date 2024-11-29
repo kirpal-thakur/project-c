@@ -742,7 +742,11 @@ img.join-btn {
   // }
   .club_players {
     position: static;
-    padding: 20px 0;
+    padding: 3rem 0;
+  }
+
+  .club-banner {
+    height: 0;
   }
 
   .content-image img {
@@ -813,6 +817,7 @@ img.join-btn {
   .map {
     height: 340px;
   }
+
   .join-text {
     width: 220px;
     height: 46px;
@@ -829,6 +834,11 @@ img.join-btn {
   .main-bnr {
     height: 150px;
     padding-top: 50px;
+  }
+
+  .club_players {
+    position: static;
+    padding: 4rem 0;
   }
 
   .website-code {

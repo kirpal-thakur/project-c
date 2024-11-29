@@ -72,7 +72,11 @@
   border-width: 0;
   border-style: solid;
   border-color: var(--mdc-elevated-card-container-color);
-  box-shadow: var(--mdc-elevated-card-container-elevation);
+  box-shadow: none !important;
+}
+.sidebar .website-code .mb-1 {
+  color: white;
+  font-weight: 400;
 }
 
 .mdc-line-ripple::before,
