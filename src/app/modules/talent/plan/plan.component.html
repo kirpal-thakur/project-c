@@ -195,7 +195,7 @@
 
                   <div class="row  multi-country-select ">
                     <div class="col-lg-12 plan-2">
-                      <button class="choose-plan-btn" (click)="editPlanPopup(countryPlans.plan,country)" >Choose Plan</button>
+                      <button class="choose-plan-btn" (click)="editPlanPopup(countryPlans,country)" >Choose Plan</button>
                     </div>
                   </div>
                 </div>
@@ -255,7 +255,7 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-12">
-                      <button class="choose-plan-btn" [disabled]="(boostedPlans?.is_package_active=='active') " (click)="addBoostPopup(boostedPlans.isYearly==true ? boostedPlans.yearly.id : boostedPlans.monthly.id )" >{{'Choose Plan' | translate}}</button>
+                      <button class="choose-plan-btn" [disabled]="(boostedPlans?.active_plan_id != null) " (click)="addBoostPopup(boostedPlans.isYearly==true ? boostedPlans.yearly.id : boostedPlans.monthly.id )" >{{'Choose Plan' | translate}}</button>
                     </div>
                   </div>
                 </div>

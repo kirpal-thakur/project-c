@@ -175,24 +175,45 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
             } else if (key.toLowerCase().includes('country')) {
-              this.countryPlans = res[key];
-              this.countryPlans = this.countryPlans || {};
-              Object.keys(res[key]?.plans || {}).forEach((planKey) => {
-                const plan = res[key].plans[planKey];
+              this.countryPlans = res[key] || {};
+              this.countryPlans.data = this.countryPlans.data || {};
+
+              const plans = res[key]?.plans || {};
+
+              Object.keys(plans).forEach((planKey) => {
+                const plan = plans[planKey];
+
                 if (plan.location) {
-                  this.countryPlans[plan.location] = this.countryPlans[plan.location] || {};
-                  this.countryPlans[plan.location].plans = this.countryPlans[plan.location].plans || {};
-                  this.countryPlans[plan.location].plans[plan.interval] = plan;
-                  this.countryPlans[plan.location].name = plan.package_name
-                  if(plan.interval == 'monthly'){
-                    this.countryPlans[plan.location].monthPrice = plan.price
-                  }else{
-                    this.countryPlans[plan.location].yearPrice = plan.price
+                  const locationData = this.countryPlans.data[plan.location] = this.countryPlans.data[plan.location] || {};
+
+                  locationData.plans = locationData.plans || {};
+                  locationData.plans[plan.interval] = plan;
+
+                  locationData.package_name = plan.package_name;
+                  locationData.currency = plan.currency;
+
+                  if (plan.interval === 'monthly') {
+                    locationData.id = plan.id;
+                    locationData.month_package_id = plan.package_id;
+                    locationData.month_price = plan.price;
+                  } else if (plan.interval === 'yearly') {
+                    locationData.year_id = plan.id;
+                    locationData.year_package_id = plan.package_id;
+                    locationData.year_price = plan.price;
                   }
+
                   country_plans[plan.location] = plan;
                 }
               });
-              this.countryPlans.includes = ["Present your profile to clubs and leagues in other countries.", "Higher chances to get hired globally.", "Build you global portfolio."];
+
+              this.countryPlans.includes = [
+                "Present your profile to clubs and leagues in other countries.",
+                "Higher chances to get hired globally.",
+                "Build your global portfolio."
+              ];
+
+              // Uncomment if `country_plans` assignment is needed elsewhere
+              // this.countryPlans.country_plans = country_plans;
             } else if (key.toLowerCase().includes('demo')) {
               this.demoPlans = res[key];
               this.demoPlans.isYearly = res[key].active_interval=='weekly';
@@ -206,7 +227,7 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.demoPlans.currency = this.demoPlans['weekly'].currency;
             }
           });
-          console.log('country_plans',this.countryPlans)
+          console.log('country_plans',this.boostedPlans)
 
           // Set the default selected plan (first country plan or null if none exist)
           this.selectedPlan = this.countryPlans.plans[0] || null;
@@ -405,11 +426,11 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   editPlanPopup(plans:any,country:any) {
-    console.log(plans.plans)
+
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
       data: {
-        plans: plans.plans ,
+        plans: plans.data ,
         selectedPlan :this.selectedPlan,
         defaultCard : this.defaultCard ,
         country : country ,

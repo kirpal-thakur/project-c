@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
 import { goToActiveLog } from '../../../../utlis';
+
 interface Notification {
   image: string;
   title: string;

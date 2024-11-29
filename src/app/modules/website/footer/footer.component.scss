@@ -952,7 +952,7 @@ img.vector-img {
 
 #footer .footer-top .footer-links ul li a {
   cursor: pointer;
-  background: none;
+  background: transparent !important;
 }
 
 /*--------------------------------------------------------------
@@ -1333,6 +1333,11 @@ option.countary {
     margin-bottom: 0;
     font-size: 16px;
   }
+  .footer-contact img {
+    margin-bottom: 20px;
+    width: 180px;
+    height: 82px;
+}
 
   p {
     font-size: 12px;
