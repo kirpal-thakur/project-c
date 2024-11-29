@@ -1947,6 +1947,7 @@ span {
     .player-col-4 .players2 {
         width: 90px;
     }
+
 }
 
 @media (min-width: 1536px) {
@@ -1991,7 +1992,11 @@ span {
     }
 
     .button1 {
-        right: 28%;
+<<<<<<< HEAD
+        right: 67%;
+=======
+        right: 68%;
+>>>>>>> main
     }
 
     .banner-left {
@@ -2007,6 +2012,10 @@ span {
     }
     .skyscraper-image {
         top: 12%;
+    }
+    .feature-players .player-img img {
+        height: 240px;
+        width: 227px;
     }
     .player-img img {
         height: 280px;
@@ -2043,7 +2052,7 @@ span {
         height: 270px;
         width: 265px;
     }
-    .player2 .player-img img {
+    .banner .player2 .player-img img {
         height: 258px;
         width: 257px;
     }
@@ -2105,6 +2114,10 @@ span {
     .player1 {
         height: 310px;
         width: 310px;
+    }
+    .banner .player2 .player-img img {
+        height: 280px;
+        width: 302px;
     }
 
     .player10 .player-img img {
@@ -2732,44 +2745,77 @@ span {
 }
 
 @media (max-width: 1199px) {
+    .banner {
+        height: 820px;
+    }
+
+    .banner {
+        height: 820px;
+    }
+   
+
 
     .player-member2 {
-        top: 58%;
+<<<<<<< HEAD
+        top: 54%;
+=======
+        top: 53%;
+>>>>>>> main
         right: 47%;
     }
 
     .player-member1 {
-        top: 32%;
+        top: 28%;
         right: 47%;
     }
 
     .player-member3 {
-        top: 84%;
+<<<<<<< HEAD
+        top: 80%;
+=======
+        top:78%;
+>>>>>>> main
         right: 47%;
     }
 
     .player-member4 {
-        top: 20%;
+        top: 17%;
         right: 28%;
     }
 
     .player-member5 {
-        top: 46%;
+<<<<<<< HEAD
+        top: 43%;
+        right: 28%;
+    }
+    .player-member6{
+        top: 69%;
+=======
+        top: 42%;
+>>>>>>> main
         right: 28%;
     }
 
     .player-member9 {
-        top: 75%;
+<<<<<<< HEAD
+        top: 71%;
+=======
+        top: 69%;
+>>>>>>> main
         right: 9%;
     }
 
     .player-member8 {
-        top: 49%;
+<<<<<<< HEAD
+        top: 45%;
+=======
+        top: 44%;
+>>>>>>> main
         right: 9%;
     }
 
     .player-member7 {
-        top: 23%;
+        top: 19%;
         right: 9%;
     }
 
@@ -2952,7 +2998,7 @@ span {
     }
 
     .button3 {
-        top: 49%;
+        top: 69%;
         right: 10px;
     }
 
@@ -4844,10 +4890,17 @@ span {
         top: 28%;
         left: 96px;
     }
-
     .button1 {
+        right: 58%;
         top: 59%;
     }
+    .feature-player1 .player-img::after {
+        bottom: 22px;
+    }
+    .feature-player3 .player-img::after {
+        bottom: 24px;
+    }
+
 
     .button4 {
         top: 1%;

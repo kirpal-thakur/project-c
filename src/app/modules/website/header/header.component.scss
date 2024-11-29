@@ -1335,10 +1335,15 @@ select.form-select.custom-select1 {
     .sidebar.sidebar-expanded {
         transform: translateY(0);
     }
-    a:not([href]):not([class]),
+    a:not([href]):not([class]) {
+        color: white;
+        text-decoration: none;
+        cursor: pointer;
+    }
     a:not([href]):not([class]):hover {
         color: white;
         text-decoration: none;
+        cursor: pointer;
     }
 
     .logo svg {
@@ -1483,7 +1488,8 @@ select.form-select.custom-select1 {
 
     .social-links li {
         margin-bottom: 40px;
-        filter: brightness(0) invert(1);
+        // filter: brightness(0) invert(1);
+        color: white;
     }
 
     .logo1::before {
