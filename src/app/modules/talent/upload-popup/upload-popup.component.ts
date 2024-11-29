@@ -4,6 +4,7 @@ import {
 } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { TalentService } from '../../../services/talent.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,10 +16,10 @@ export class UploadPopupComponent {
 
   userId: any = '';
   uploadedFiles:any = [];
-  uploadResponse:any = [];
+  uploadResponse: { message: string; status: boolean }[] = []; // Updated type
   file:any='all';
 
-  constructor(private userService: TalentService, public dialogRef : MatDialogRef<UploadPopupComponent>,
+  constructor(private userService: TalentService, public dialogRef : MatDialogRef<UploadPopupComponent>, private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userId = data.userId;
       this.file = data.file ? data.file : 'all';
@@ -72,22 +73,31 @@ export class UploadPopupComponent {
     this.uploadImages(this.files);
   }
 
-  uploadImages(files:any){
+
+  uploadImages(files: any) {
+    const loadingToast = this.toastr.info('Please wait...', 'Uploading Photos', {
+      disableTimeOut: true, // Keep the toaster open until manually cleared
+    });
     const formdata = new FormData();
-    
+
     for (let i = 0; i < files.length; i++) {
       formdata.append("gallery_images[]", files[i]);
     }
 
-    this.userService.uploadGalleryImages(formdata).subscribe((response)=>{
-      console.log(response)
-      response.forEach((row:any) => {
-        console.log(row);
-        this.uploadResponse.push(row.message)
-        if(row.status){
-          this.uploadedFiles.push({id:row.data.id, file_name: row.data.uploaded_file});
-        }
+    this.userService.uploadGalleryImages(formdata).subscribe((response) => {
+      console.log(response);
+      response.forEach((row: any) => {
+        console.log('row', row);
+        // Add both message and status to uploadResponse array
+        this.uploadResponse.push({ message: row.message, status: row.status });
 
+        if (row.status) {
+          this.toastr.clear(loadingToast.toastId);
+          this.uploadedFiles.push({ id: row.data.id, file_name: row.data.uploaded_file });
+        } else {
+          this.toastr.clear(loadingToast.toastId);
+          this.toastr.error(row.message, 'Error');
+        }
       });
     });
   }

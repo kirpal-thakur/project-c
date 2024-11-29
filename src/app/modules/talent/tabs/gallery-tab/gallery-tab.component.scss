@@ -405,3 +405,7 @@ button.add_potos-btn {
     padding: 0px !important;
   }
 }
+
+::ng-deep .cdk-global-overlay-wrapper{
+ align-items: center !important;
+}
