@@ -267,6 +267,7 @@ img.vector-img {
 
 .club-buttons {
   margin-top: 30px;
+  cursor: pointer;
 }
 
 .club-overlay {
@@ -472,25 +473,33 @@ img.join-btn {
     height: 800px;
     width: 900px;
     top: 2%;
+  }
 }
-}
+
 @media (min-width: 1536px) {
-  .skyscraper-left, .skyscraper-right {
+
+  .skyscraper-left,
+  .skyscraper-right {
     top: 46%;
+  }
 }
-}
+
 @media (min-width: 1920px) {
-  .skyscraper-left, .skyscraper-right {
+
+  .skyscraper-left,
+  .skyscraper-right {
     top: 40%;
-}
-.map {
-  height: 850px;
-}
-.map img {
-  height: 900px;
-  width: 1100px;
-  top: 2%;
-}
+  }
+
+  .map {
+    height: 850px;
+  }
+
+  .map img {
+    height: 900px;
+    width: 1100px;
+    top: 2%;
+  }
 }
 
 @media (min-width: 2560px) {
@@ -502,9 +511,10 @@ img.join-btn {
   .advertisement1 {
     height: 330px;
   }
+
   .map[_ngcontent-ng-c3424183209] {
     height: 1100px;
-}
+  }
 
 }
 
@@ -625,7 +635,7 @@ img.join-btn {
     font-size: 16px !important;
     margin-left: 32px;
     margin-bottom: 0 !important;
-}
+  }
 
   .country-list {
     padding: 10px;
@@ -634,14 +644,16 @@ img.join-btn {
 
   .map img {
     right: 0;
+    top: 20%;
     height: 395px;
     width: 440px;
-
   }
+
   .mat-mdc-list-base {
     margin-top: 35px;
     width: 280px;
-}
+  }
+
   .map {
     height: 300px;
   }
@@ -649,23 +661,27 @@ img.join-btn {
   h3 {
     font-size: 25px;
   }
+
   .join-text p {
     font-size: 24px;
     line-height: 43px;
   }
+
   .button-border {
     width: 250px;
     height: 55px;
-}
-.join-text {
-  width: 240px;
-  height: 46px;
-}
-img.join-btn {
-  height: 17px;
-  width: 15px;
-  margin: 14px;
-}
+  }
+
+  .join-text {
+    width: 240px;
+    height: 46px;
+  }
+
+  img.join-btn {
+    height: 17px;
+    width: 15px;
+    margin: 14px;
+  }
 
   // .club-buttons {
   //   margin-top: 40px;
@@ -675,10 +691,11 @@ img.join-btn {
     height: 450px;
   }
 }
+
 @media (max-width: 885px) {
-  .club_players{
-      top: 16%;
-      left: 2%;
+  .club_players {
+    top: 16%;
+    left: 2%;
   }
 }
 
@@ -725,9 +742,13 @@ img.join-btn {
   //   height: 40px;
   // }
   .club_players {
-    margin-top: -31%;
-    margin-right: 20%;
-}
+    position: static;
+    padding: 3rem 0;
+  }
+
+  .club-banner {
+    height: 0;
+  }
 
   .content-image img {
     width: 100%;
@@ -797,12 +818,32 @@ img.join-btn {
   .map {
     height: 340px;
   }
+
+  .join-text {
+    width: 220px;
+    height: 46px;
+    padding-left: 10px;
+  }
+
+  .button-border {
+    width: 230px;
+    height: 55px;
+  }
 }
 
 @media (max-width: 321px) {
   .main-bnr {
     height: 150px;
     padding-top: 50px;
+  }
+
+  .club_players {
+    position: static;
+    padding: 4rem 0;
+  }
+
+  .website-code {
+    overflow: hidden;
   }
 
   .country-available {
@@ -821,28 +862,33 @@ img.join-btn {
   h3 {
     font-size: 25px;
   }
+
   .join-text p {
     font-size: 20px;
     line-height: 40px;
-}
-.join-text {
-  width: 205px;
-  height: 40px;
-}
-.button-border {
-  width: 216px;
-  height: 49px;
-}
-.club-buttons {
-  margin-top: 20px;
-}
-img.join-btn {
-  height: 14px;
-  width: 12px;
-  margin: 0;
-  margin-top: 15px;
-  margin-left: 10px;
-}
+  }
+
+  .join-text {
+    width: 205px;
+    height: 40px;
+  }
+
+  .button-border {
+    width: 216px;
+    height: 49px;
+  }
+
+  .club-buttons {
+    margin-top: 20px;
+  }
+
+  img.join-btn {
+    height: 14px;
+    width: 12px;
+    margin: 0;
+    margin-top: 15px;
+    margin-left: 10px;
+  }
 
 }
 

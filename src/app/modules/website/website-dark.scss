@@ -7,21 +7,35 @@
 .dark-theme .website-code .navbar-nav .nav-link.active::after {
   background-color: #BDE34E;
 }
-.dark-theme .website-code h2.coming-heading
-  {
+
+.dark-theme .website-code #footer .footer-top .footer-links ul li a:hover {
+  color: #bde34f !important;
+  background: transparent !important;
+}
+
+.dark-theme .website-code h2.coming-heading {
   color: #BDE34E;
 }
-.dark-theme .website-code h2.coming-heading{
+
+.dark-theme .website-code h2.coming-heading {
   color: #E05263;
 }
+
 .dark-theme .feature-players i.fa-solid.fa-xmark {
   color: #072944;
 }
-.dark-theme .button4 .mat-icon, .dark-theme .button1 .mat-icon, .dark-theme .button2 .mat-icon, .dark-theme .button3 .mat-icon {
-color: #072944;
+
+.dark-theme .button4 .mat-icon,
+.dark-theme .button1 .mat-icon,
+.dark-theme .button2 .mat-icon,
+.dark-theme .button3 .mat-icon {
+  color: #072944;
 }
 
-.dark-theme .button1, .dark-theme .button2, .dark-theme .button3, .dark-theme .button4 {
+.dark-theme .button1,
+.dark-theme .button2,
+.dark-theme .button3,
+.dark-theme .button4 {
   background: #BDE34E;
   border-radius: 20px;
 }
@@ -199,9 +213,11 @@ color: #072944;
 .dark-theme .website-code .overlay {
   background: linear-gradient(to top, #072944 10%, transparent 100%);
 }
+
 .dark-theme .overlay {
   opacity: unset !important;
 }
+
 .dark-theme .website-code a.btn-primary {
   background: #bde34f !important;
   border: #bde34f !important;
@@ -290,6 +306,12 @@ button.faq-scout-button {
   margin-top: 7px;
   margin-left: 15px;
 }
+
+// .dark-theme .website-code a.login-btn:hover,
+// .dark-theme .website-code .banner-btn a.btn-primary:hover,
+// .dark-theme .website-code .btn.btn-register:hover {
+//   background: linear-gradient(45deg, #EFFFC1, #BDE34F);
+// }
 
 .dark-theme .website-code a.login-btn:hover,
 .dark-theme .website-code .banner-btn a.btn-primary:hover,
@@ -430,13 +452,13 @@ button.faq-scout-button {
   background: #072944;
 }
 
-.dark-theme .website-code #footer .footer-top .footer-links ul li a:hover {
-  color: #bde34f !important;
-}
-
 .dark-theme .website-code .choice {
   background: linear-gradient(180deg, #EFFFC1, #BDE34F);
   border: 1px solid #0C3453;
+}
+
+.dark-theme .website-code .learn-more:hover {
+  background: #BDE34F;
 }
 
 .dark-theme .website-code #footer a.login-btn {
@@ -2235,6 +2257,23 @@ button.faq-scout-button {
     opacity: 1;
   }
 
+  .dark-theme .footer-links a:hover {
+    color: #bde34f;
+  }
+
+  .dark-theme ul.social-links i:hover {
+    color: #bde34f !important;
+  }
+
+  .dark-theme a:not([href]):not([class]):hover {
+    color: #BDE34E !important;
+
+  }
+
+  .dark-theme a.nav-link:hover {
+    color: #bde34f;
+  }
+
   .dark-vector-img {
     margin-top: 9px;
     margin-left: 10px;
@@ -2332,6 +2371,7 @@ button.faq-scout-button {
 }
 
 @media (max-width: 575px) {
+
   // .dark-theme .website-code .slider:before {
   //   height: 27px;
   //   width: 27px;
