@@ -40,12 +40,34 @@ export class EditPlanComponent implements OnInit {
 
   async ngOnInit() {
     // If this.data.plans is an array, assign it directly
-    this.countries = this.data.plans;
     this.selectedPlan =this.data.selectedPlan;
+    this.populateCountries();
     this.defaultCard = this.data.defaultCard;
     this.selectedCountries = this.data.country;
     this.stripe = await this.stripeService.getStripe();
-    console.log('data',this.data)
+    console.log(this.data)
+
+  }
+
+  populateCountries() {
+    // Transform the 'plans' object into an array
+    this.countries = Object.keys(this.data.plans).map(key => {
+      const plan = this.data.plans[key];
+      return {
+        id: plan.id,
+        package_name: plan.package_name,
+        priceMonthly : plan.month_price,
+        priceYearly : plan.year_price,
+        currency: plan.currency,
+        month_package_id : plan.month_package_id,
+        year_id : plan.id,
+        year_package_id : plan.year_package_id,
+        monthly : plan.plans.monthly,
+        yearly : plan.plans.yearly,
+      };
+    });
+    this.selectedPlan = this.countries.find(country => country.id === this.selectedPlan.id);
+    console.log(this.selectedPlan)
   }
 
 
@@ -101,7 +123,6 @@ export class EditPlanComponent implements OnInit {
     
     if (this.selectedPlan) {
       const planId = this.isYearly ? this.selectedPlan.yearly : this.selectedPlan.monthly;
-      const subscribeId = this.isYearly ? this.selectedPlan.monthly : this.selectedPlan.yearly;
 
       if (this.isYearly) {
         if (this.selectedPlan?.monthly?.is_package_active === 'active') {
@@ -248,9 +269,7 @@ export class EditPlanComponent implements OnInit {
       response => {
         if (response?.status && response?.data) {
           const userPlans = response.data.packages;
-
           this.selectedCountries = userPlans?.country || ''; // Default to empty string if country is undefined
-
           console.log('userPlans', userPlans);
         } else {
           console.error('Invalid API response:', response);
@@ -264,11 +283,8 @@ export class EditPlanComponent implements OnInit {
 
   onCountrySelect(event: any) {
     const selectedCountryId = event.target.value;
+    console.log(selectedCountryId)
     this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
-
-    // if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
-    //   this.selectedCountries.push(this.selectedPlan);
-    // }
   }
 
   removeCountry(country: any) {
