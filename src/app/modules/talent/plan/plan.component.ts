@@ -24,8 +24,8 @@ interface Plan {
   isYearly: boolean;
   quantity: number;
   includes: string[];
-  yearData: any;
-  monthData: any;
+  yearly: any;
+  monthly: any;
   is_package_active:any;
 }
 
@@ -36,12 +36,13 @@ interface Plan {
 })
 export class PlanComponent implements OnInit, OnDestroy {
 
-  plans: Plan[] = [];
+  plans: any;
   maxQuantity: number = 10;
-  premiumPlans: Plan[] = [];
-  boostedPlans: Plan[] = [];
-  otherPlans: Plan[] = [];
-  selectedPlan: Plan | null = null;
+  premiumPlans: any;
+  boostedPlans: any;
+  countryPlans: any;
+  demoPlans: any;
+  selectedPlan: any | null = null;
   userCards: any[] = [];
   defaultCard: any = null;
   stripe: any;
@@ -62,8 +63,8 @@ export class PlanComponent implements OnInit, OnDestroy {
   stripePromise = loadStripe(environment.stripePublishableKey);
 
   constructor(
-    private talentService: TalentService, 
-    private paymentService: PaymentService, 
+    private talentService: TalentService,
+    private paymentService: PaymentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private toastr: ToastrService
@@ -75,6 +76,7 @@ export class PlanComponent implements OnInit, OnDestroy {
     this.getBoosterData()
     this.stripe = await this.paymentService.getStripe();
     this.loggedInUser = JSON.parse(this.loggedInUser || '{}');
+    this.getBoosterData()
   }
 
   // Open coupon dialog
@@ -88,7 +90,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       if (result) {
         this.isCouponApplied = true; // Show that the coupon has been applied
         this.couponCode = result; // Store the coupon code entered by the user
-        console.log(this.couponCode);
         this.redirectToCheckout(planId);
       }
       if (result==null) {
@@ -101,17 +102,17 @@ export class PlanComponent implements OnInit, OnDestroy {
   async redirectToCheckout(planId: string) {
     this.isLoadingCheckout = true;
     this.toastr.info('Redirecting to payment...', 'Loading', { timeOut: 3000 });
-  
+
     try {
       const response = await this.paymentService.createCheckoutSession(planId, '', this.couponCode).toPromise();
-  
+
       if (response?.data?.payment_intent?.id) {
         // Show success message after redirection attempt
         this.toastr.success('Redirected to Stripe Checkout successfully.', 'Success');
 
         const stripe = await this.stripe;
         await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
-  
+
       } else {
         this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
@@ -124,8 +125,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       this.isLoadingCheckout = false;
     }
   }
-  
-
 
   // Apply coupon logic (e.g., send to backend for validation)
   applyCoupon(): void {
@@ -140,51 +139,110 @@ export class PlanComponent implements OnInit, OnDestroy {
   fetchPlans() {
     this.plansSubscription = this.talentService.getPackages().subscribe({
       next: (response) => {
-        if (response?.status && response?.data?.length) {
-          const premiumPlans: Plan[] = [];
-          const boostedPlans: Plan[] = [];
-          const otherPlans: Plan[] = [];
+        if (response?.status) {
+          // Initialize plan arrays
 
-          response.data[0]?.forEach((plan: any) => {
-            const newPlanData: Plan = {
-              id: plan.id,
-              name: plan.package_name,
-              priceMonthly: plan.interval === "monthly" || plan.interval === "daily" ? parseFloat(plan.price) : null,
-              priceYearly: plan.interval === "yearly" || plan.interval === "weekly"  ? parseFloat(plan.price) : null,
-              currency: plan.currency,
-              isYearly: (plan.is_package_active == 'active' ) ? true : false ,
-              yearData: plan.interval === "yearly" || plan.interval === "weekly" ? plan : null,
-              monthData: plan.interval === "monthly" || plan.interval === "daily" ? plan : null,
-              quantity: 1,
-              includes: this.getIncludes(plan.package_name),
-              is_package_active : (plan.is_package_active == 'active' ) ? 'active' : null,
-            };
+          const res = response.data;
 
-            if (plan.package_name.toLowerCase().includes('premium')) {
-              this.mergePlan(premiumPlans, newPlanData);
-            } else if (plan.package_name.toLowerCase().includes('booster')) {
-              this.mergePlan(boostedPlans, newPlanData);
-            } else {
-              this.mergePlan(otherPlans, newPlanData);
+          let country_plans:any=[];
+          // Iterate over the keys in the response object (e.g., premium, booster, country, demo)
+          Object.keys(res).forEach((key) => {
+
+            // Group plans by category
+            if (key.toLowerCase().includes('premium')) {
+              this.premiumPlans = res[key];
+              this.premiumPlans.isYearly = res[key].active_interval=='yearly';
+
+                Object.keys(this.premiumPlans?.plans).forEach((key) => {
+                    this.premiumPlans[this.premiumPlans.plans[key].interval] = this.premiumPlans.plans[key];
+                })
+                this.premiumPlans.priceMonthly = this.premiumPlans['monthly'].price;
+                this.premiumPlans.priceYearly = this.premiumPlans['yearly'].price;
+                this.premiumPlans.currency = this.premiumPlans['yearly'].currency;
+                this.premiumPlans.includes = ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];
+
+            } else if (key.toLowerCase().includes('booster')) {
+              this.boostedPlans = res[key];
+              this.boostedPlans.isYearly = res[key].active_interval=='yearly';
+
+              Object.keys(this.boostedPlans?.plans).forEach((key) => {
+                this.boostedPlans[this.boostedPlans.plans[key].interval] = this.boostedPlans.plans[key];
+              })
+              this.boostedPlans.includes = ["Jump to the top of search results.", "Higher chances to get discovered.", "Profile boosts help you grow your network and following faster.", "You can boost your profile to reach a specific audience, such as Talents, Clubs or Scouts."];
+              this.boostedPlans.priceMonthly = this.boostedPlans['monthly'].price;
+              this.boostedPlans.priceYearly = this.boostedPlans['yearly'].price;
+              this.boostedPlans.currency = this.boostedPlans['yearly'].currency;
+
+
+            } else if (key.toLowerCase().includes('country')) {
+              this.countryPlans = res[key] || {};
+              this.countryPlans.data = this.countryPlans.data || {};
+
+              const plans = res[key]?.plans || {};
+
+              Object.keys(plans).forEach((planKey) => {
+                const plan = plans[planKey];
+
+                if (plan.location) {
+                  const locationData = this.countryPlans.data[plan.location] = this.countryPlans.data[plan.location] || {};
+
+                  locationData.plans = locationData.plans || {};
+                  locationData.plans[plan.interval] = plan;
+
+                  locationData.package_name = plan.package_name;
+                  locationData.currency = plan.currency;
+
+                  if (plan.interval === 'monthly') {
+                    locationData.id = plan.id;
+                    locationData.month_package_id = plan.package_id;
+                    locationData.month_price = plan.price;
+                  } else if (plan.interval === 'yearly') {
+                    locationData.year_id = plan.id;
+                    locationData.year_package_id = plan.package_id;
+                    locationData.year_price = plan.price;
+                  }
+
+                  country_plans[plan.location] = plan;
+                }
+              });
+
+              this.countryPlans.includes = [
+                "Present your profile to clubs and leagues in other countries.",
+                "Higher chances to get hired globally.",
+                "Build your global portfolio."
+              ];
+
+              // Uncomment if `country_plans` assignment is needed elsewhere
+              // this.countryPlans.country_plans = country_plans;
+            } else if (key.toLowerCase().includes('demo')) {
+              this.demoPlans = res[key];
+              this.demoPlans.isYearly = res[key].active_interval=='weekly';
+
+              Object.keys(this.demoPlans?.plans).forEach((key) => {
+                this.demoPlans[this.demoPlans.plans[key].interval] = this.demoPlans.plans[key];
+              })
+              this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
+              this.demoPlans.priceMonthly = this.demoPlans['daily'].price;
+              this.demoPlans.priceYearly = this.demoPlans['weekly'].price;
+              this.demoPlans.currency = this.demoPlans['weekly'].currency;
             }
           });
+          console.log('country_plans',this.boostedPlans)
 
-          this.premiumPlans = premiumPlans;
-          this.boostedPlans = boostedPlans;
-          this.otherPlans = otherPlans;
-          this.selectedPlan = this.otherPlans[0] || null;
+          // Set the default selected plan (first country plan or null if none exist)
+          this.selectedPlan = this.countryPlans.plans[0] || null;
 
+          // Fetch user cards
           this.getUserCards();
-          
-          this.route.queryParams.subscribe(params => {
-            const selectedCountryId = params['countryId'];
 
-            if(selectedCountryId){
+          // Handle query parameters for country ID
+          this.route.queryParams.subscribe((params) => {
+            const selectedCountryId = params['countryId'];
+            if (selectedCountryId) {
               this.onSelectPlan(selectedCountryId);
-              this.editPlanPopup(this.otherPlans,this.country)
+              this.editPlanPopup(this.countryPlans, this.country);
             }
           });
-          
         }
       },
       error: (err) => {
@@ -192,7 +250,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.isLoadingPlans = false;
-      }
+      },
     });
   }
 
@@ -202,8 +260,8 @@ export class PlanComponent implements OnInit, OnDestroy {
       const existingPlan = planArray[existingPlanIndex];
       existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
       existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
-      existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
-      existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
+      existingPlan.yearly = existingPlan.yearly || newPlanData.yearly;
+      existingPlan.monthly = existingPlan.monthly || newPlanData.monthly;
     } else {
       planArray.push(newPlanData);
     }
@@ -249,14 +307,14 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('No default card found for payment');
       return;
     }
-  
+
     try {
       const subscriptionData = {
         paymentMethodId: this.defaultCard.stripe_payment_method_id,
         planId: plan.id,
       };
       const response = await this.talentService.subscribeToPlan(subscriptionData).toPromise();
-  
+
       if (response?.status === 'success') {
         console.log('Subscription successful!', response.subscription);
       } else {
@@ -290,7 +348,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
 
-  toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
+  toggleBillingPlan(plan: any, isYearly: boolean, subscribeId: any): void {
     const originalIsYearly = plan.isYearly;
 
     if (plan.isYearly != isYearly) {
@@ -298,8 +356,10 @@ export class PlanComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newPlanId = isYearly ? plan.yearData : plan.monthData;
+    const newPlanId = isYearly ? plan.yearly : plan.monthly;
 
+    console.log(plan)
+    console.log(newPlanId)
     if (newPlanId.is_package_active == 'active') {
       plan.isYearly = !originalIsYearly;
       return;
@@ -356,7 +416,7 @@ export class PlanComponent implements OnInit, OnDestroy {
       console.error('Error subscribing:', err);
     }
   }
-    
+
   decreaseValue(plan: Plan) {
     if (plan.quantity > 1) plan.quantity--;
   }
@@ -366,10 +426,11 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   editPlanPopup(plans:any,country:any) {
+
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
-      data: { 
-        plans: plans ,
+      data: {
+        plans: plans.data ,
         selectedPlan :this.selectedPlan,
         defaultCard : this.defaultCard ,
         country : country ,
@@ -380,7 +441,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   addBoostPopup(planId:any) {
     const dialogRef = this.dialog.open(AddBoosterComponent, {
       width: '850px',
-      data: { 
+      data: {
         id: planId ,
       }
     });
@@ -394,8 +455,8 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   onPlanSelect(event: Event) {
     const selectedId = (event.target as HTMLSelectElement).value;
-    const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
-  
+    const selected = this.countryPlans.find((plan: any) => plan.id === selectedId);
+
     if (selected) {
       this.selectedPlan = selected;
     }
@@ -403,9 +464,9 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
   onSelectPlan(selectedId:any) {
-    
-    const selected = this.otherPlans.find((plan: any) => plan.id === selectedId);
-  
+
+    const selected = this.countryPlans.find((plan: any) => plan.id === selectedId);
+
     if (selected) {
       this.selectedPlan = selected;
     }
@@ -414,7 +475,6 @@ export class PlanComponent implements OnInit, OnDestroy {
   getActiveMultiCountryPlanCount(): number {
     return this.country.length;
   }
-
 
   editBooster(data:any){
 
@@ -426,7 +486,8 @@ export class PlanComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result ) {
-        alert('Booster profile updated')
+        this.getBoosterData()
+        // alert('Booster profile updated')
       }
     });
   }

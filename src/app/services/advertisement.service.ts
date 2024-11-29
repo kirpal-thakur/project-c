@@ -43,4 +43,11 @@ export class AdvertisementService {
     expireAdvertisements(params: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}admin/expire-advertisement`, params);
     }
+
+    getPageAds(){
+        return this.http.get<any>(`${this.apiUrl}admin/get-pages`);
+    }
+    getAdvertisementType(id:any){
+        return this.http.get<any>(`${this.apiUrl}admin/get-page-ads/${id}`);
+    }
 }

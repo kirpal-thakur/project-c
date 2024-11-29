@@ -1,0 +1,269 @@
+<section class="website-code">
+<app-header></app-header>
+<div class="main">
+  <div class="overlay"></div>
+  <div class="banner-inner py_0">
+    <div class="container">
+      <div class="about">
+        <h2 class="cookie-text">Contact Us</h2>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="adVisible[0]" class="skyscraper-left">
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <div *ngIf="adVisible[1]" class="skyscraper-right">
+    <img src="./assets/images/skyscraper - 120x600.png">
+    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+</div>
+
+<div class="contact-form py_0">
+  <div class="container">
+    <h3 class="form-heading">GET IN TOUCH</h3>
+    <div class="row">
+      <div class="col-lg-8 col-md-12 col-12">
+
+        <div class="radio-group">
+          <label>I am:</label>
+          <label class="custom-radio">
+            <input type="radio" name="options" value="option1" [(ngModel)]="selectedOption" />
+            <span class="radio-button"></span>
+            Talent
+          </label>
+
+          <label class="custom-radio">
+            <input type="radio" name="options" value="option2" [(ngModel)]="selectedOption" />
+            <span class="radio-button"></span>
+            Club
+          </label>
+
+          <label class="custom-radio">
+            <input type="radio" name="options" value="option3" [(ngModel)]="selectedOption" />
+            <span class="radio-button"></span>
+            Scout
+          </label>
+        </div>
+
+
+        <div *ngIf="selectedOption === 'option1'">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div>
+              <input id="name" formControlName="name" placeholder="Name" />
+              <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
+                <div *ngIf="name?.errors?.['required']">Name is required.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="email" type="email" formControlName="email" placeholder="E-Mail" />
+              <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="phone" type="tel" formControlName="phone" placeholder="Phone" />
+              <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
+                <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
+                <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div>
+              </div>
+            </div>
+
+            <div>
+              <textarea id="message" formControlName="message" placeholder="Message"></textarea>
+              <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error">
+                <div *ngIf="message?.errors?.['required']">Message is required.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <!-- <div class="recaptcha">
+                        <label>
+                          <input type="checkbox" [(ngModel)]="isChecked"> I'm not a robot
+                        </label>
+                      </div> -->
+
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
+
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <button type="submit" [disabled]="contactForm.invalid">Send</button>
+              </div>
+            </div>
+
+
+          </form>
+
+        </div>
+
+        <div *ngIf="selectedOption === 'option2'">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div>
+              <input id="name" formControlName="name" placeholder="Name" />
+              <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
+                <div *ngIf="name?.errors?.['required']">Name is required.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="email" type="email" formControlName="email" placeholder="E-Mail" />
+              <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="phone" type="tel" formControlName="phone" placeholder="Phone" />
+              <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
+                <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
+                <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div>
+              </div>
+            </div>
+
+            <div>
+              <textarea id="message" formControlName="message" placeholder="Message"></textarea>
+              <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error">
+                <div *ngIf="message?.errors?.['required']">Message is required.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <!-- <div class="recaptcha">
+                        <label>
+                          <input type="checkbox" [(ngModel)]="isChecked"> I'm not a robot
+                        </label>
+                      </div> -->
+
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
+
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <button type="submit" [disabled]="contactForm.invalid">Send</button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+
+        <div *ngIf="selectedOption === 'option3'">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+            <div>
+              <input id="name" formControlName="name" placeholder="Name" />
+              <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
+                <div *ngIf="name?.errors?.['required']">Name is required.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="email" type="email" formControlName="email" placeholder="E-Mail" />
+              <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <div *ngIf="email?.errors?.['required']">Email is required.</div>
+                <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+              </div>
+            </div>
+
+            <div>
+              <input id="phone" type="tel" formControlName="phone" placeholder="Phone" />
+              <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
+                <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
+                <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div>
+              </div>
+            </div>
+
+            <div>
+              <textarea id="message" formControlName="message" placeholder="Message"></textarea>
+              <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error">
+                <div *ngIf="message?.errors?.['required']">Message is required.</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <!-- <div class="recaptcha">
+                        <label>
+                          <input type="checkbox" [(ngModel)]="isChecked"> I'm not a robot
+                        </label>
+                      </div> -->
+
+                      <form class="recapthe-code" (ngSubmit)="onSubmit()">
+                        <re-captcha 
+                        siteKey="6LcyRIIqAAAAAGbx3k78MXur6aRibCCL1uKVzeBR" 
+                        (resolved)="resolved($event)">
+                      </re-captcha>
+                      </form>
+
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <button type="submit" [disabled]="contactForm.invalid">Send</button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+
+
+      </div>
+      <div class="col-lg-4 col-md-12 col-12">
+        <div class="contact-text">
+        <div class="location">
+          <div class="location-image">
+            <img class="dark-location" src="./assets/images/location logo.svg">
+            <img class="light-location" src="./assets/images/location-light.svg">
+          </div>
+          <div>
+            <p class="location-text">Succer You Sports AG</p>
+            <p class="location-text">Ida-Stäuli-Strasse 95</p>
+            <p class="location-text">CH-8404 Winterthur</p>
+            <p class="location-text">Switzerland</p>
+          </div>
+        </div>
+
+        <div class="mail">
+          <div class="location-image">
+            <img class="dark-mail" src="./assets/images/mail logo.svg">
+            <img class="light-mail" src="./assets/images/mail-light.svg">
+          </div>
+          <div>
+            <a class="location-text" href="mailto:info@socceryou.ch">E-Mail</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
+      <div *ngIf="adVisible[2]" class="leaderboard-image">
+        <img src="./assets/images/leaderboard - 728x90.png">
+        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div *ngIf="adVisible[3]" class="small-square-image">
+        <img src="./assets/images/small sqaure - 200x200.png">
+        <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+<app-footer></app-footer>
+</section>

@@ -47,6 +47,9 @@ export class EditMembershipProfileComponent {
         (audience: any) => Number(audience.target_role)
       );
     }
+    // console.log('Pre-selected Audience IDs:', this.selectedAudienceIds,'this_stats_booster_audience',this.stats?.booster_audience);
+
+    // console.log('audiences:', this.audiences);
 
   }
 
