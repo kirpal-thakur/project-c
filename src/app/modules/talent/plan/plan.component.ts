@@ -24,8 +24,8 @@ interface Plan {
   isYearly: boolean;
   quantity: number;
   includes: string[];
-  yearData: any;
-  monthData: any;
+  yearly: any;
+  monthly: any;
   is_package_active:any;
 }
 
@@ -90,7 +90,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       if (result) {
         this.isCouponApplied = true; // Show that the coupon has been applied
         this.couponCode = result; // Store the coupon code entered by the user
-        console.log(this.couponCode);
         this.redirectToCheckout(planId);
       }
       if (result==null) {
@@ -145,6 +144,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
           const res = response.data;
 
+          let country_plans:any=[];
           // Iterate over the keys in the response object (e.g., premium, booster, country, demo)
           Object.keys(res).forEach((key) => {
 
@@ -183,8 +183,14 @@ export class PlanComponent implements OnInit, OnDestroy {
                   this.countryPlans[plan.location] = this.countryPlans[plan.location] || {};
                   this.countryPlans[plan.location].plans = this.countryPlans[plan.location].plans || {};
                   this.countryPlans[plan.location].plans[plan.interval] = plan;
+                  this.countryPlans[plan.location].name = plan.package_name
+                  if(plan.interval == 'monthly'){
+                    this.countryPlans[plan.location].monthPrice = plan.price
+                  }else{
+                    this.countryPlans[plan.location].yearPrice = plan.price
+                  }
+                  country_plans[plan.location] = plan;
                 }
-
               });
               this.countryPlans.includes = ["Present your profile to clubs and leagues in other countries.", "Higher chances to get hired globally.", "Build you global portfolio."];
             } else if (key.toLowerCase().includes('demo')) {
@@ -198,12 +204,9 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.demoPlans.priceMonthly = this.demoPlans['daily'].price;
               this.demoPlans.priceYearly = this.demoPlans['weekly'].price;
               this.demoPlans.currency = this.demoPlans['weekly'].currency;
-
-
             }
           });
-
-          console.log(this.countryPlans)
+          console.log('country_plans',this.countryPlans)
 
           // Set the default selected plan (first country plan or null if none exist)
           this.selectedPlan = this.countryPlans.plans[0] || null;
@@ -236,8 +239,8 @@ export class PlanComponent implements OnInit, OnDestroy {
       const existingPlan = planArray[existingPlanIndex];
       existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
       existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
-      existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
-      existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
+      existingPlan.yearly = existingPlan.yearly || newPlanData.yearly;
+      existingPlan.monthly = existingPlan.monthly || newPlanData.monthly;
     } else {
       planArray.push(newPlanData);
     }
@@ -324,7 +327,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
 
-  toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
+  toggleBillingPlan(plan: any, isYearly: boolean, subscribeId: any): void {
     const originalIsYearly = plan.isYearly;
 
     if (plan.isYearly != isYearly) {
@@ -332,8 +335,10 @@ export class PlanComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newPlanId = isYearly ? plan.yearData : plan.monthData;
+    const newPlanId = isYearly ? plan.yearly : plan.monthly;
 
+    console.log(plan)
+    console.log(newPlanId)
     if (newPlanId.is_package_active == 'active') {
       plan.isYearly = !originalIsYearly;
       return;
