@@ -455,10 +455,6 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover p {
   background: #BDE34F;
-  padding: 10px !important; 
-  border-radius: 10px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
   color: #072944   ;
   // transition: all 0.4s ease-in-out !important;
 
@@ -466,7 +462,6 @@ box-shadow: none !important;
 
 
 .dark-theme .sidebar_menu a:hover {
-  padding: 0 10px !important;
   background: #BDE34F;
 }
 
@@ -2399,4 +2394,37 @@ color: #fff;
 }
 .dark-theme .dropdown-item:focus,.dark-theme .dropdown-item:hover{
   background: #0C3453;
+}
+.dark-theme .green-bg{
+  fill: #BDE34F;
+}
+.dark-theme .blue-bg{
+  fill: #1F4360;
+}
+.dark-theme .form-group mat-datepicker-toggle svg{
+  color: rgb(255, 255, 255) !important;
+}
+.dark-theme .form-group .mat-mdc-select-arrow{
+  color: #fff;
+}
+.dark-theme .mdc-list-item__primary-text{
+  color: #fff;
+}
+.dark-theme .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{
+  background: #072944;
+}
+.dark-theme .mat-mdc-select-panel{
+  background: #072944;
+}
+.dark-theme .mat-pseudo-checkbox-full {
+  border-color: #fff;
+}
+.dark-theme .bg-light{
+  background: #072944 !important;
+}
+.dark-theme .settings  svg path{
+  fill: #FFF;
+}
+.dark-theme .Feature_images p{
+  color: #fff !important;
 }
