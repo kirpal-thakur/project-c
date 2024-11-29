@@ -8,6 +8,10 @@
   background-color: #BDE34E;
 }
 
+.dark-theme .register .form-select {
+  filter: brightness(0) invert(1) !important;
+}
+
 .dark-theme .website-code #footer .footer-top .footer-links ul li a:hover {
   color: #bde34f !important;
   background: transparent !important;
@@ -2273,7 +2277,6 @@ button.faq-scout-button {
   .dark-theme a.nav-link:hover {
     color: #bde34f;
   }
-
   .dark-vector-img {
     margin-top: 9px;
     margin-left: 10px;
