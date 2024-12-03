@@ -144,7 +144,7 @@
                           )"
                         (click)="
                         demoPlans?.active_plan_id == null ?
-                        openCouponDialog(demoPlans?.isYearly ? demoPlans?.yearly?.id : demoPlans?.monthly?.id) :
+                        openCouponDialog(demoPlans?.isYearly ? demoPlans?.weekly?.id : demoPlans?.daily?.id) :
                         updatePlan(demoPlans,demoPlans?.isYearly,demo)"
                       >
                         {{'Choose Plan' | translate}}

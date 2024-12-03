@@ -1,22 +1,22 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium && isPremium">
+<div class="unlock_page" *ngIf="!isPremium">
   <div class="gallery-parent">
     <div class="d-flex justify-content-between ">
       <p class="gallery-photo">{{'Photos' | translate }} </p>
     </div>
     
     <div class="row mt-3">
-      <div class="col-md-2 position-relative w-20 my-2" *ngFor="let image of userImages">
+      <div class="col-md-2 position-relative w-20 my-2 py-3" >
         <!-- <img src="{{imageBaseUrl}}{{image.file_name}}" alt="" srcset="" class="img-fluid"> -->
       </div>
     </div>
-  
+
     <div class="d-flex justify-content-between mt-4">
       <p class="gallery-photo">{{'Videos' | translate }} </p>
     </div>
     
     <div class="row mt-3">
-      <div class="col-md-2 position-relative w-20" *ngFor="let image of userVideos">
+      <div class="col-md-2 position-relative w-20 py-3" >
         <!-- <video class="img-fluid" controls>
           <source src="{{imageBaseUrl}}{{image.file_name}}" type="video/mp4">
           Your browser does not support the video tag.
@@ -42,7 +42,7 @@
   </div> 
 </div>
 
-<div class="gallery-parent"  >
+<div class="gallery-parent"  *ngIf="isPremium">
   <div class="d-flex justify-content-between ">
     <p class="gallery-photo">{{'Photos' | translate }} </p>
     <p class="gallery-pic-upload pointer" (click)="addPhotosPopup()">{{'AddPhotos' | translate}}</p>

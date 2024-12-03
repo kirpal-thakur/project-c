@@ -39,8 +39,8 @@ export class DashboardComponent implements OnInit {
   userId: any ;
   user: any = {};
   userNationalities: any = [];
-  coverImage: any = "";
-  profileImage: any = "";
+  coverImage: any ;
+  profileImage: any ;
   selectedFile : any;
   teams : any;
   highlights : any;
@@ -243,17 +243,17 @@ export class DashboardComponent implements OnInit {
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
           this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
 
-          if (this.user.meta.profile_image_path) {
+          if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
           }
-          if (this.user.meta.cover_image_path) {
+          if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
 
           this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          if (this.userNationalities.length) {
+          if (this.userNationalities?.length) {
             // Fetch flag details for each nationality
             this.userNationalities.forEach((nat:any, index:any) => {
               this.getCountry(nat.flag_path, index);
@@ -277,7 +277,8 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
@@ -311,7 +312,8 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
@@ -376,7 +378,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  
+
   openHighlight() {
 
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
@@ -448,8 +450,8 @@ export class DashboardComponent implements OnInit {
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
-        if (response && response.status && response.data && response.data.userData) {          
-            this.coverImage = response.data.userData.cover_image_path;          
+        if (response?.data?.userData?.metaValue) {
+            this.coverImage = response.data.userData.cover_image_path;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
