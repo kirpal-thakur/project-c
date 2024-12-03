@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { AdvertisementService } from '../../../services/advertisement.service';
 
 export interface ClubMember {
   name: string;
@@ -165,6 +166,9 @@ export class IndexComponent {
 
   // Manage Navbar Expansion
   isNavbarExpanded = false;
+
+  constructor(private advertisementService: AdvertisementService) {}
+
 
   toggleNavbar(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;

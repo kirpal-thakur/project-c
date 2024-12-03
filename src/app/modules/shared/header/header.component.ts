@@ -40,7 +40,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
-    this.profileImgUrl = this.loggedInUser.meta.profile_image_path;
+    this.profileImgUrl = this.loggedInUser.profile_image_path;
 
     this.talentService.message$.subscribe(msg => {
       this.profileImgUrl = msg;

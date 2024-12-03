@@ -536,15 +536,16 @@ html {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   // transition: all 0.4s ease-in-out !important;
-
 }
 
 .sidebar_menu a:hover {
-  padding: 0 10px !important;
+  // padding: 0 10px !important;
   background: #023A4A;
 
 }
-
+.compact-sidebar .page-sidebar .sidebar_menu a:hover {
+  width: max-content;
+}
 
 .sidebar_menu a.active {
   background: #023A4A;

@@ -20,7 +20,7 @@ export class IndexComponent implements OnInit{
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.path = event.url;
-        console.log('talent-index',this.path);
+        console.log('shared-index',this.path);
       }
     });
   }

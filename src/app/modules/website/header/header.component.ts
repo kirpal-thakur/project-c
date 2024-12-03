@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   lang: string = '';
   token: string = '';
   tokenVerified: boolean = false;
-
+  languages:any = environment.langs;
   selectedClub: number | null = null;
   selectedCountry: string = '';
   selectedTeam: number | null = null;
@@ -206,12 +206,16 @@ export class HeaderComponent implements OnInit {
             case "4":
               navigationRoute = '/talent/dashboard';
               break;
-            default:
+            case "1":
               navigationRoute = '/admin/dashboard';
+              break;
+            default:
+              navigationRoute = '';
               break;
           }
           localStorage.setItem('authToken', token);
           localStorage.setItem('userData', JSON.stringify(userData));
+          localStorage.setItem('userInfo', JSON.stringify(userData));
 
           let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
           if (modal) {
@@ -243,6 +247,17 @@ export class HeaderComponent implements OnInit {
     const selectedLanguage = localStorage.getItem('lang') || '';
     const domain = environment.targetDomain?.domain || 'ch';
 
+      // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = localStorage.getItem('lang') || '';
+
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.languages.find(
+      (lang:any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+
     const registrationData = {
       first_name: this.firstName,
       last_name: this.lastName,
@@ -254,7 +269,7 @@ export class HeaderComponent implements OnInit {
       password: this.password,
       password_confirm: this.confirmPassword,
       privacy_policy: this.privacyPolicy,
-      lang: selectedLanguage,
+      lang: selectedLanguageId,
       domain: domain,
       club_id: this.selectedClub
     };

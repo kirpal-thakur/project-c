@@ -31,15 +31,14 @@ export const environment = {
       { name:'Belgium', slug: "be", id: 8, flag: "Belgium.svg" },
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
-
     ],
 
     apiUrl:'https://api.socceryou.ch/api/',
 
     mailchimp: {
-      apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',
-      apiKey: '62a0ffa8d6e9c3d5ed7c8a09e9111b41-us17',  // Correct API key
-      listId: '7afbbb070a'
+        apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',
+        apiKey: '62a0ffa8d6e9c3d5ed7c8a09e9111b41-us17',  // Correct API key
+        listId: '7afbbb070a'
       }
   } as const;
   
