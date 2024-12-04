@@ -149,7 +149,7 @@
               font-weight: 500;
             "
           >
-          15 Items
+          {{allPages.length}}  {{(allPages.length > 1) ? "Items" : 'Item'}}
           </div>
 
         </div>
@@ -480,7 +480,7 @@
                 <td>
                   <span [ngClass]="getStatusClass(page?.status)">{{page?.status}}</span>
                 </td>
-                <td class="c_pointer text-center">
+                <td class="c_pointer text-center view" (click)="viewPage(page.id)">
                   <svg id="users-icon"
                     width="25"
                     height="25"

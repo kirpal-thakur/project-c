@@ -32,6 +32,9 @@ export class WebPagesComponent {
   idsToProceed: any = [];
   allSelected: boolean = false;
   selectedIds:any = [];
+  getPageDetail:any = [];
+
+
   constructor(private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
     this.getAllPagesData();
@@ -137,8 +140,7 @@ export class WebPagesComponent {
     const addNewPage = this.dialog.open(AddPageComponent,{
       width: '1000px',
       height: '600px'
-    });
-
+    })
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if(result.action == "page-added-successfully"){
@@ -148,4 +150,19 @@ export class WebPagesComponent {
       }
     });
   }
+
+  viewPage(pageId: string){
+    this.webpages.getSinglePageDetail(pageId).subscribe((res) => {
+      if(res.status){
+        const viewPage = this.dialog.open(AddPageComponent, {
+          width: '1000px',
+          height: '600px',
+          data: {
+            page: res.data.page,
+          }
+        })
+      }      
+    });
+  }
+
 }

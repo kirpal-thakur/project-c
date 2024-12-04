@@ -33,4 +33,10 @@ export class WebPages {
     addNewPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.apiUrl}admin/add-page`, params);
     }
+
+    getSinglePageDetail(pageId:string):Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.apiUrl}admin/get-page/${pageId}`
+        );
+    }
 }

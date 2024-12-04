@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { WebPages } from '../../../../../services/webpages.service';
 import { NgForm } from '@angular/forms';
 
@@ -35,17 +35,27 @@ export class AddPageComponent {
   slug: string = '';
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
+  pageDetail: any | null = null;
   @ViewChild('myForm') form!: NgForm;
 
 
 
-  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>) { }
+  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { 
+   }
   ngOnInit() {
     this.getAllLanguages();
     loadCKEditorCloud({
       version: '44.0.0',
       premium: true
     }).then(this._setupEditor.bind(this));
+    if(this.data){
+      this.pageDetail = this.data.page
+      this.title = this.pageDetail.title;
+      this.slug = this.pageDetail.slug;
+      this.status = (this.pageDetail.status == 'draft') ? 1 : 2;
+      this.selectedLanguage = '3';
+      this.title = this.pageDetail.title;
+    }
   }
 
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
@@ -198,11 +208,18 @@ export class AddPageComponent {
   }
 
   onSubmit(): void {
+    let formData = new FormData();
     let form = this.form.value;
     form.featured_image = this.featured_image
     form.content = this.content
     form.language = this.selectedLanguage;
-    this.addNewPage(form);
+    formData.append('title', form.title);
+    formData.append('status', form.status);
+    formData.append('slug', form.slug);
+    formData.append('language', form.language);
+    formData.append('content', form.content);
+    formData.append('featured_image', form.featured_image);
+    this.addNewPage(formData);
   }
 
   handleFileInput(files: Event) {
@@ -210,6 +227,7 @@ export class AddPageComponent {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.featured_image = file
+      console.log(this.featured_image, 'handle-file-Input');
     }
   }
 
