@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { WebPages } from '../../../../services/webpage.service';
+import { WebPages } from '../../../../services/webpages.service';
 import { DatePipe } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { Router } from '@angular/router';
+import { AddPageComponent } from './add-page/add-page.component';
+
 interface WebPage {
   id: string;
   user_id: string;
@@ -24,7 +29,10 @@ interface WebPage {
 
 export class WebPagesComponent {
   allPages : WebPage[] =  [];
-  constructor(private webpages: WebPages, private datePipe: DatePipe) {}
+  idsToProceed: any = [];
+  allSelected: boolean = false;
+  selectedIds:any = [];
+  constructor(private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
     this.getAllPagesData();
   }
@@ -38,7 +46,6 @@ export class WebPagesComponent {
           updated_at: this.formatDate(page.updated_at),
         }));
       }
-      console.log(this.allPages, 'web-page-component');
     });
   }
 
@@ -64,6 +71,80 @@ export class WebPagesComponent {
               return page;
             }
         });
+      }
+    });
+  }
+
+  confirmSingleDeletion(id:any){
+    this.idsToProceed = [id];
+    this.showMatDialog("", "delete-advertisement-confirmation");
+  }
+
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deletePage();
+        }
+      }
+    });
+  }
+
+  deletePage():any {
+    let params = {id:this.idsToProceed};
+    this.webpages.deleteWebPages(params).subscribe((response) => {
+      if(response.status){
+        this.getAllPagesData();
+        this.showMatDialog('Page deleted successfully!.', 'display');
+      }else{
+        this.showMatDialog('Error in removing advertisement. Please try again.', 'display');
+      }
+    });
+  }
+
+  selectAllCoupons() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedIds = this.allPages.map((ad:any) => ad.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedIds);
+  }
+
+  onCheckboxChange(item: any) {
+    const index = this.selectedIds.indexOf(item.id);
+    if (index === -1) {
+      this.selectedIds.push(item.id);
+    } else {
+      this.selectedIds.splice(index, 1);
+    }
+  }
+
+  createNewPage(){
+    const addNewPage = this.dialog.open(AddPageComponent,{
+      width: '1000px',
+      height: '600px'
+    });
+
+    addNewPage.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "page-added-successfully"){
+          this.showMatDialog('Page added successfully!.', 'display');
+          this.getAllPagesData();
+        }
       }
     });
   }

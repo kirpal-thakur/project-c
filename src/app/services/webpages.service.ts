@@ -19,4 +19,18 @@ export class WebPages {
             `${this.apiUrl}admin/get-pages`
         );
     }
+
+    deleteWebPages(params: any): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}admin/delete-page`, params);
+    }
+
+    getAllLanguage(): Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.apiUrl}get-languages`
+        );
+    }
+
+    addNewPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.apiUrl}admin/add-page`, params);
+    }
 }
