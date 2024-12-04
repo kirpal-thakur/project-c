@@ -130,6 +130,7 @@ export const MY_FORMATS = {
     AddBoosterComponent
   ],
   imports: [
+
     CommonModule,
     TranslateModule ,
     TalentRoutingModule,  // This includes RouterModule

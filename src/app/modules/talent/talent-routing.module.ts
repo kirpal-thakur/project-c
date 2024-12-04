@@ -26,9 +26,6 @@ const routes: Routes = [
       { path: 'plans', component: PlanComponent},
       { path: 'countries', component: CountriesComponent},
       { path: 'setting', component: SettingComponent},
-      { path: 'view/player/:id', component: ViewProfileComponent},
-      { path: 'view/scout/:id', component: ViewProfileComponent },
-      { path: 'view/club/:id', component: ViewProfileComponent },
     ]
   }
 ];

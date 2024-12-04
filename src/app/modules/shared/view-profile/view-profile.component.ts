@@ -219,7 +219,8 @@ export class ViewProfileComponent implements OnInit {
       return;
     }
   
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
   
     fetch(geocodingUrl)
@@ -262,7 +263,8 @@ export class ViewProfileComponent implements OnInit {
       return;
     }
 
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
