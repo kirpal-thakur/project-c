@@ -81,11 +81,6 @@ export class ExploreComponent implements OnInit {
     }
   }
 
-  private saveTrackedViews() {
-    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
-  }
-
-
   private trackBoostedProfileViews(players: any[]) {
     // Collect all profile IDs that need to be tracked
     const profilesToTrack = players
@@ -112,7 +107,11 @@ export class ExploreComponent implements OnInit {
       });
     }
   }
-  
+
+  private saveTrackedViews() {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
+
   // Track profile click only once per session
   private trackProfileClick(profileId: number) {
     const id: number[] = [profileId];  // Create an array of profileId
@@ -141,7 +140,7 @@ export class ExploreComponent implements OnInit {
 
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
-    console.log(this.selectedCountry, 'get-user-favorites');
+
     // Construct the params object with complex whereClause and metaQuery logic
     let params: any = {
       offset: pageIndex * pageSize,

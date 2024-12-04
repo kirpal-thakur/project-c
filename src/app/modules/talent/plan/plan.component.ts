@@ -403,18 +403,26 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   updateSubscription(oldId: any, newId: any) {
+
+    this.toastr.info('Updating Plan, Please wait...', 'Loading',{ disableTimeOut: true });
+
+    this.getUserPlans();
+
     this.paymentService.upgradeSubscription(oldId, newId).subscribe(
       response => {
         if (response && response.status) {
-          this.toastr.success('Your subscription has been updated successfully.');
-          console.log('Subscription updated successfully:', response);
+
+          this.toastr.clear();
+          this.toastr.success('Plan has been updated successfully.');
           this.getUserPlans();
         } else {
+          this.toastr.clear();
           this.toastr.error('Failed to update subscription. Please try again.');
           console.error('Failed to update subscription', response);
         }
       },
       error => {
+        this.toastr.clear();
         this.toastr.error('Error updating subscription. Please try again later.');
         console.error('Error updating subscription:', error);
       }
