@@ -1,3 +1,11 @@
+
+.dark-theme app-player-list nav.navbar.navbar-expand-lg.navbar-light.sticky {
+  background: #072944 !important;
+}
+
+
+
+
 .dark-theme .website-code {
   position: relative;
   background: #0C3453;
@@ -11,6 +19,13 @@
 .dark-theme .website-code #footer .footer-top .footer-links ul li a:hover {
   color: #bde34f !important;
   background: transparent !important;
+}
+.dark-theme .register .form-select {
+  filter: brightness(0) invert(1) !important;
+}
+.dark-theme form button {
+  background: #bde34f;
+  color: #0c3453;
 }
 
 .dark-theme .website-code h2.coming-heading {
@@ -148,6 +163,13 @@
 .dark-theme .website-code .form-select {
   border: 2px solid #BDE34F;
 }
+.dark-theme .mdc-list-item__primary-text:hover {
+  color: #bde34f !important;
+  font-size: 18px;
+}
+.dark-theme .billed-text .dark-theme .premium-text-data{
+  color: #bde34f;
+  }
 
 
 .dark-theme .website-code button.page-active.active {

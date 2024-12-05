@@ -512,10 +512,16 @@ img.join-btn {
     height: 330px;
   }
 
-  .map[_ngcontent-ng-c3424183209] {
+  .map{
     height: 1100px;
   }
 
+}
+
+@media (max-width: 1441px){
+  .skyscraper-left, .skyscraper-right{
+      display: none
+  }
 }
 
 @media (max-width: 1199px) {

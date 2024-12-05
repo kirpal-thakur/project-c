@@ -27,8 +27,9 @@ button.faq-talent-button {
     color: white;
     font-size: 20px;
     font-weight: 200;
-    margin-right: 50px;
     opacity: 75%;
+    height: 40px;
+    width: 126px;
 }
 
 button.faq-talent-button.active,
@@ -66,6 +67,7 @@ button.faq-club-button.active {
     align-items: center;
     justify-content: flex-end;
 }
+
 
 
 label {
@@ -106,6 +108,9 @@ select#numberSelect {
 
 .tabs {
     margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
 }
 
 .players {

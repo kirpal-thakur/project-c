@@ -12,7 +12,30 @@ h6 {
 
 .seperter {
     position: relative;
-    display: none;
+    margin-bottom: 10px;
+}
+.google-sign-in {
+    margin-bottom: 30px;
+}
+.google-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    width: 367px;
+    height: 42px;
+    border-radius: 30px;
+    border: 1px solid #85B1D3;
+}
+p.google-text {
+    color: #000000 !important; 
+    font-size: 18px;
+    font-weight: 700;
+}
+img.google-image {
+    width: 20px;
+    height: 21px;
+    margin-right: 10px;
 }
 
 h3 {
@@ -79,7 +102,11 @@ body {
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 10px;
+    width: 155px;
+    text-align: center;
 }
+
+
 
 /*--------------------------------------------------------------
 # login
@@ -672,6 +699,7 @@ button.create-account.d-block {
 .navbar-nav {
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .navbar-expand .navbar-nav {
@@ -859,7 +887,7 @@ input:checked+.slider:before {
 
 option {
     color: black;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .btn-close::after {
@@ -1216,6 +1244,7 @@ select.form-select.custom-select1 {
         position: fixed;
         top: 0;
         left: 0;
+        overflow: hidden;
         width: 100%;
         z-index: 1000;
         background-color: #fff; /* Optional: background color */
@@ -2520,11 +2549,11 @@ select.form-select.custom-select1 {
     }
 
     &:after {
-        left: 30px;
+        left: 0;
     }
 
     &:before {
-        right: 30px;
+        right: 0;
     }
 
     .cookie_popup p {

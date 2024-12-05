@@ -103,10 +103,16 @@
   display: none;
 }
 
+
+
 /*---------------------------------------------------------------------------------------------------------
    # material css
    --------------------------------------------------------------------------------------------------------- */
 
+
+  .light-theme app-player-list nav.navbar.navbar-expand-lg.navbar-light.sticky {
+    background: #092E01 !important;
+}
 
 
 
@@ -116,6 +122,30 @@
 
 .light-theme .website-code h2.coming-heading {
   color: #E05263;
+}
+
+.light-theme form button {
+  background: #e05263;
+  color: white;
+}
+.light-theme .website-code .custom-list-item:hover::before {
+  color: #E05263;
+}
+.mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
+  cursor: pointer !important;
+}
+.mdc-list-item:hover::before {
+  background-color: transparent !important;
+  opacity: unset !important;
+}
+
+.light-theme .mdc-list-item__primary-text:hover {
+  color: #e05263 !important;
+  font-size: 18px;
+}
+
+.light-theme .billed-text, .light-theme .premium-text-data{
+color: #e05263;
 }
 
 .light-theme .feature-players i.fa-solid.fa-xmark {
@@ -508,11 +538,11 @@
 }
 
 .light-theme .website-code .cookie-popup {
-  background: #092E01;
+  background: linear-gradient(to left, #2B4A25 10%, #092E01 100%);
 }
 
 .light-theme .website-code .personalization-box {
-  background: #092E01;
+  background: linear-gradient(to left, #2B4A25 10%, #092E01 100%);
 }
 
 .light-theme .website-code #footer .footer-top .footer-links ul li a:hover {
@@ -2006,6 +2036,7 @@ a.dropdown-item.ai-icon.selected {
 }
 
 @media (max-width: 1199px) {
+  
   .dashboard-title {
     margin-right: 3%;
   }

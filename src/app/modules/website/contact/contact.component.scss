@@ -143,6 +143,7 @@ height: 41px;
 border-radius: 20px;
 font-weight: 700;
 margin-top: 20px;
+border: none;
 }
 // .recaptcha {
 //   background-color: white;
@@ -294,7 +295,13 @@ bottom: 0;
 }
 
 // advertisement
+@media (max-width: 1441px) {
 
+  .skyscraper-left,
+  .skyscraper-right {
+      display: none
+  }
+}
 
 @media (max-width: 1199px){
 input#name, input#email, input#phone, textarea#message {

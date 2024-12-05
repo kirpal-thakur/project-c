@@ -856,9 +856,12 @@ p.d-o-b {
     background-image: url(../../../../assets/images/feature-image.svg);
     background-repeat: no-repeat;
     height: 510px;
-    width: 330px;
+    width: 100%;
     padding-top: 50px;
     padding-left: 50px;
+}
+.premium-text-data{
+    font-size: 13px;
 }
 
 .premium {
@@ -921,6 +924,21 @@ span {
     justify-content: right;
     margin-bottom: 10px;
     margin-top: 50px;
+}
+
+.billed1 {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+   
+}
+.billed-text{
+    display: flex;
+    justify-content: right;
+    font-size: 13px;
+    margin-bottom: 10px;
+    margin-right: 40px;
+
 }
 
 .billed-monthly {
@@ -1378,7 +1396,11 @@ span {
     }
 
 }
-
+@media (max-width: 1441px){
+    .skyscraper-image{
+        display: none
+    }
+}
 @media (max-width: 1404px) {
     .banner-image1 img {
         top: 12%;
@@ -1477,6 +1499,11 @@ span {
 }
 
 @media (max-width: 1281px) {
+
+    .skyscraper-image{
+        display: none
+    }
+
     .banner-image1 img {
         right: 34%;
         top: 15%;
