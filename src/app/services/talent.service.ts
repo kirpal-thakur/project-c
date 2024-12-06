@@ -616,15 +616,28 @@ export class TalentService {
   }
 
   // Download reports (assuming backend supports this feature)
+  // downloadReports(reportIds: string[]): Observable<any> {
+  //   console.log(reportIds);
+
+  //   const headers = this.headers();
+
+  //   let params = new HttpParams();
+  //   reportIds.forEach(id => {
+  //     params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+  //   });
+
+  //   return this.http.post(`${this.apiUrl}player/download-performance-reports`, { params, responseType: 'blob',headers });
+  // }
+
+  // Download reports (assuming backend supports this feature)
   downloadReports(reportIds: string[]): Observable<any> {
-    const headers = this.headers();
 
-    let params = new HttpParams();
-    reportIds.forEach(id => {
-      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    const headers = this.headers(); // Assuming this.headers() provides correct headers
+    const body = { id: reportIds }; // Send report IDs as an array in the request body
+
+    return this.http.post(`${this.apiUrl}player/download-performance-reports`, body, {
+      headers // Specify response type for downloading files
     });
-
-    return this.http.get(`${this.apiUrl}download-reports`, { params, responseType: 'blob',headers });
   }
 
   // talent.service.ts

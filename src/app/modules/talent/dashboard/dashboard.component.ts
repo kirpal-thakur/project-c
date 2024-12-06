@@ -461,7 +461,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       console.warn("Main image not found in the album.");
       return;
     }
-  
+
     // Handle edge cases (first and last image)
     const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
   
@@ -513,7 +513,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
             }
           },
           (error) => {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading profile image:', error);
           },

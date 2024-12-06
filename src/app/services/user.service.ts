@@ -477,7 +477,7 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<any>(
-      `${this.apiUrl}/export-single-user/${userId}`, {headers}
+      `${this.apiUrl}export-single-user/${userId}`, {headers}
     );
   }
 
