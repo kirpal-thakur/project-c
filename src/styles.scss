@@ -529,7 +529,7 @@ html {
 
 .sidebar_menu a:hover p {
   background: #023A4A;
-  padding: 10px !important;
+  // padding: 10px 10px 10px 0px !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -1556,11 +1556,21 @@ input:checked+.slider:before {
 .cupen-btn-date .mat-mdc-form-field-infix {
   width: 120px;
 }
-
+.explore-all_input .mat-mdc-form-field-infix {
+  width: 164px;
+  padding-left: 10px;
+    padding-right: 10px;
+}
 .cupen-btn-date-1 .mat-mdc-form-field-has-icon-prefix .mat-mdc-text-field-wrapper {
   border-radius: 10px !important;
 }
-
+.search-area {
+  width: 100% !important;
+  margin-right: 20px;
+}
+.light-theme{
+  min-width: 156px;
+}
 .cupen-btn-date-1 .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   background-color: #fff;
 }
