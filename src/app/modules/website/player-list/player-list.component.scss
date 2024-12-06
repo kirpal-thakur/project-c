@@ -31,6 +31,9 @@ button.faq-talent-button {
     height: 40px;
     width: 126px;
 }
+select:focus-visible {
+    outline: unset;
+}
 
 button.faq-talent-button.active,
 button.faq-club-button.active {
