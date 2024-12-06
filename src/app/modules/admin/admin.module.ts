@@ -82,6 +82,7 @@ import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { AddPageComponent } from './website/web-pages/add-page/add-page.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home-page.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -152,7 +153,8 @@ export const MY_FORMATS = {
     CommonFilterPopupComponent,
     UploadAttachmentComponent,
     InviteScoutTalentPopupComponent,
-    AddPageComponent
+    AddPageComponent,
+    AddHomePageComponent
   ],
   imports: [
     CommonModule,

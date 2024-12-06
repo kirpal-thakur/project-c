@@ -1,0 +1,163 @@
+@if(!showTabForm){
+<div class="container mt-5">
+  <form [formGroup]="addHomePageForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <!-- General Information Block -->
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">Language Information</legend>
+      <div class="row">
+        <div class="mb-3 col-md-12">
+          <label for="langId" class="form-label">Select Language</label>
+          <select class="form-select" id="langId" formControlName="lang_id">
+            <option value="" disabled selected>Select a language</option>
+            @if(languages && languages.length > 0){
+            @for (language of languages; track $index) {
+            <option value="{{language.id}}">{{language.language}}</option>
+            }
+            }
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Banner Section -->
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">Banner Section</legend>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="bannerBgImg" class="form-label">Banner Background Image</label>
+          <input type="file" class="form-control" (change)="handleFileInput($event, 'banner_bg_img')" id="bannerBgImg"
+            formControlName="banner_bg_img" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="bannerImg" class="form-label">Banner Image</label>
+          <input type="file" class="form-control" id="bannerImg" formControlName="banner_img"
+            (change)="handleFileInput($event, 'banner_img')" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="bannerBtnTxt" class="form-label">Banner Button Text</label>
+          <input type="text" class="form-control" id="bannerBtnTxt" formControlName="banner_btn_txt" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="bannerBtnLink" class="form-label">Banner Button Link</label>
+          <input type="text" class="form-control" id="bannerBtnLink" formControlName="banner_btn_link" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Slider Section -->
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">Slider Section</legend>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="sliderHeading" class="form-label">Slider Heading</label>
+          <input type="text" class="form-control" id="sliderHeading" formControlName="slider_heading" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="sliderBtnTxt" class="form-label">Slider Button Text</label>
+          <input type="text" class="form-control" id="sliderBtnTxt" formControlName="slider_btn_txt" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="sliderBtnLink" class="form-label">Slider Button Link</label>
+          <input type="text" class="form-control" id="sliderBtnLink" formControlName="slider_btn_link" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Hero Section -->
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">Hero Section</legend>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="heroBgImg" class="form-label">Hero Background Image</label>
+          <input type="file" class="form-control" (change)="handleFileInput($event, 'hero_bg_img')" id="heroBgImg"
+            formControlName="hero_bg_img" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="heroHeadingTxt" class="form-label">Hero Heading Text</label>
+          <input type="text" class="form-control" id="heroHeadingTxt" formControlName="hero_heading_txt" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="heroBtnTxt" class="form-label">Hero Button Text</label>
+          <input type="text" class="form-control" id="heroBtnTxt" formControlName="hero_btn_txt" />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="heroBtnLink" class="form-label">Hero Button Link</label>
+          <input type="text" class="form-control" id="heroBtnLink" formControlName="hero_btn_link" />
+        </div>
+      </div>
+    </fieldset>
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary mb-3">Next</button>
+  </form>
+</div>
+}@else{
+  <div class="container mt-5">
+    <form (ngSubmit)="onTabFormSubmit()" #myForm="ngForm" enctype="multipart/form-data">
+      
+      <!-- Tab Section -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Tab Section Information</legend>
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            <label for="bannerBtnTxt" class="form-label">Title</label>
+            <input type="text" class="form-control" id="bannerBtnTxt" name="title" [(ngModel)]="title" />
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="bannerBtnLink" class="form-label">First Button Text</label>
+            <input type="text" class="form-control" id="bannerBtnLink" name="first_btn_txt" [(ngModel)]="first_btn_txt" />
+          </div>
+          <div class="mb-3 col-md-12">
+            <label for="bannerBtnLink" class="form-label">Second Button Text</label>
+            <input type="text" class="form-control" id="bannerBtnLink" name="sec_btn_txt" [(ngModel)]="sec_btn_txt" />
+          </div>
+        </div>
+      </fieldset>
+      
+      <!-- First Tab Section -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">First Tab Section</legend>
+        <div *ngFor="let tab of first_tab; let index = index" class="row">
+          <div class="mb-3 col-md-6">
+            <label for="heroBgImg" class="form-label">Images</label>
+            <input type="file" class="form-control" (change)="handleTabFilesInput($event, index, 'first_tab')" id="heroBgImg{{index}}"
+                   [(ngModel)]="tab.images" [name]="'images' + index" [ngModelOptions]="{standalone: true}" multiple />
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="heroHeadingTxt" class="form-label">Title</label>
+            <input type="text" class="form-control" id="heroHeadingTxt{{index}}" [(ngModel)]="tab.title" [name]="'title' + index" />
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="heroBtnTxt" class="form-label">Description</label>
+            <input type="text" class="form-control" id="heroBtnTxt{{index}}" [(ngModel)]="tab.desc" [name]="'desc' + index" />
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Second Tab Section -->
+      <fieldset class="border p-3 mb-4">
+        <legend class="w-auto px-2">Second Tab Section</legend>
+        <div *ngFor="let tab of second_tab; let index = index" class="row">
+          <div class="mb-3 col-md-6">
+            <label for="heroBgImg" class="form-label">Images</label>
+            <input type="file" class="form-control" (change)="handleTabFilesInput($event, index, 'second_tab')" id="heroBgImg{{index}}"
+                  [(ngModel)]="tab.images" [name]="'images' + index" [ngModelOptions]="{standalone: true}" multiple/>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="heroHeadingTxt" class="form-label">Title</label>
+            <input type="text" class="form-control" id="heroHeadingTxt{{index}}" [(ngModel)]="tab.title" [name]="'title' + index" />
+          </div>
+          <div class="mb-3 col-md-6">
+            <label for="heroBtnTxt" class="form-label">Description</label>
+            <input type="text" class="form-control" id="heroBtnTxt{{index}}" [(ngModel)]="tab.desc" [name]="'desc' + index" />
+          </div>
+        </div>
+      </fieldset>
+      
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary mb-3">Add New Page</button>
+    </form>
+  </div>
+  
+
+
+}

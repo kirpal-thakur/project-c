@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class WebPages {
     private apiUrl;
+    private frontendApiUrl = 'https://api.socceryou.ch/frontend/';
 
     constructor(private http: HttpClient) {
         this.apiUrl = environment?.apiUrl;
@@ -39,4 +40,20 @@ export class WebPages {
             `${this.apiUrl}admin/get-page/${pageId}`
         );
     }
+
+    getPageBaseOnTheId(langId:string):Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-frontend-pages?lang_id=${langId}`
+        );
+    }
+
+
+    addHomePage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-homepage`, params);
+    }
+
+    addHomePageTabData(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-tabs-homepage`, params);
+    }
+
 }

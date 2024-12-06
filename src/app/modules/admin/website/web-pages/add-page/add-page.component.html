@@ -3,6 +3,20 @@
   <h2 class="mb-4">Add Page</h2>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm" enctype="multipart/form-data">
     <div class="row mb-3">
+      <div class="col-md-12">
+        <label for="activate" class="form-label">Select Page <span class="text-danger">*</span>
+        </label>
+        <select id="activate" class="form-select" (change)="onChangeSelectedPage($event)" name="status" required>
+          @if(pages && pages.length > 0){
+          <option value="0">Select page</option>
+          @for (page of pages; track $index) {
+          <option value="{{page.id}}">{{page.title}}</option>
+          }
+          }
+        </select>
+      </div>
+    </div>
+    <!-- <div class="row mb-3">
       <div class="col-md-6">
         <label for="title" class="form-label">Title <span class="text-danger">*</span>
         </label>
@@ -46,16 +60,16 @@
     <div class="mb-4">
       <label for="description" class="form-label">Description <span class="text-danger">*</span>
       </label>
-      <!-- <textarea class="form-control" id="description" rows="5" placeholder="Description" [(ngModel)]="content" name="content" required></textarea> -->
       <ckeditor *ngIf="( Editor && config )" [editor]="Editor" [config]="config" (change)="onChange($event)"
         (ready)="onEditorReady($event)">
       </ckeditor>
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Add Page</button>
+    </div> -->
+    <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
+    <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId"></app-add-home-page>
   </form>
 </div>
 }@else {
-<div class="container mt-5">
+<!-- <div class="container mt-5">
   <h2 class="mb-4">View Page</h2>
   <form>
     <div class="row mb-3">
@@ -92,11 +106,10 @@
     <div class="mb-4">
       <label for="description" class="form-label">Description <span class="text-danger">*</span>
       </label>
-      <!-- <textarea class="form-control" id="description" rows="5" placeholder="Description" [(ngModel)]="content" name="content" required></textarea> -->
       <ckeditor *ngIf="( Editor && config )"  data="{{pageDetail.content}}" [editor]="Editor" [config]="config" (change)="onChange($event)"
         (ready)="onEditorReady($event)">
       </ckeditor>
     </div>
   </form>
-</div>
+</div> -->
 }

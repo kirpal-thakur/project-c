@@ -29,16 +29,23 @@ export class AddPageComponent {
   languages: Language[] = [];
   title: string = '';
   content: string = '';
-  selectedLanguage: string = '1';
+  selectedLanguage: string = '0';
   featured_image: File | null = null;
   status: number = 1;
   slug: string = '';
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
   pageDetail: any | null = null;
+  pages = [
+    {id: 1, title: "home"},
+    {id: 6, title: "about"},
+    {id: 8, title: "contact"},
+    {id: 9, title: "pricing"},
+  ];
+  selectedPageTitle: string = "";
+  selectedPageId:string=""
+
   @ViewChild('myForm') form!: NgForm;
-
-
 
   constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { 
    }
@@ -249,5 +256,12 @@ export class AddPageComponent {
         });
       }
     });
+  }
+
+  onChangeSelectedPage(event:any){
+    let getPageId = event.target.value;
+    this.selectedPageId = getPageId;
+    let findPageIndex =  this.pages.findIndex((val) => val.id == getPageId);
+    this.selectedPageTitle = this.pages[findPageIndex].title;
   }
 }
