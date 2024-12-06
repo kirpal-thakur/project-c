@@ -47,12 +47,13 @@
   <div class="container">
     <h2 class="country-available">Countries Available</h2>
     <div class="row">
-      <div class="col-xxl-4 col-lg-6 col-md-6 col-12">
-        <mat-list>
-          <mat-list-item *ngFor="let country of countries" class="custom-list-item country-name">
-            {{ country }}
-          </mat-list-item>  
-          </mat-list>    
+      <div class="col-xxl-4 col-lg-6 col-md-6 col-12"> 
+          
+          <mat-list>
+            <mat-list-item *ngFor="let country of countries" rel="noopener noreferrer">
+              <a class="custom-list-item country-name" [href]="country.url" target="_blank">{{ country.name }}</a>
+            </mat-list-item>
+          </mat-list> 
       </div>
       <div class="col-xxl-8 col-lg-6 col-md-6 col-12">
         <div class="map">

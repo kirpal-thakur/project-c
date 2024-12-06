@@ -21,29 +21,33 @@
             <!-- Talent Tab Content -->
             <div *ngIf="selectedTab === 'talent'">
               <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers()">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers(); let i = index">
                   <div class="players player-card">
                     <div class="player1">
                       <div class="player-img">
-                        <img [src]="player.image" alt="{{ player.name }}" />
+                        <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
+                      <p *ngIf="player.class">Class: {{ player.class }}</p>
                     </div>
                     <div class="corner-image7">
-                      <img src="./assets/images/FC Thun 1.png" />
+                      <img [src]="player.cornerImage || './assets/images/default-corner.png'" />
                     </div>
                     <div class="flag">
                       <div class="flag-image7">
-                        <img src="./assets/images/flag.svg" class="flag-img" />
+                        <img [src]="player.flagImage || './assets/images/default-flag.svg'" class="flag-img" />
                         <div class="bottom-line"></div>
                         <div class="flag-bottom">
                           <img src="./assets/images/birthday.svg" class="birthday-img" />
-                          <p class="d-o-b">2004</p>
+                          <p class="d-o-b">{{ player.birthYear || 'N/A' }}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
               </div>
 
               <!-- Pagination controls -->
@@ -56,52 +60,58 @@
                 </div>
 
                 <div class="pages">
-                  <!-- "Back" button: only show if not on the first page -->
-                  <button class="prev-page" (click)="prevPage()" [disabled]="currentPage === 1">
-                    <i class="fa-solid fa-angle-left"></i>
-                    <p>Back</p>
-                  </button>
-                  
+                  <!-- "Back" button: Only show if not on the first page -->
+                  <ng-container *ngIf="currentPage > 1">
+                    <button class="prev-page" (click)="prevPage()">
+                      <i class="fa-solid fa-angle-left"></i>
+                      <p>Back</p>
+                    </button>
+                  </ng-container>
+
                   <!-- Page buttons: Dynamically display pages based on the current page and total pages -->
                   <ng-container *ngFor="let page of pagesToShow()">
                     <button class="page-active" (click)="goToPage(page)" [class.active]="currentPage === page">
                       {{ page }}
                     </button>
                   </ng-container>
-                  
-                  <!-- "Next" button: only show if not on the last page -->
-                  <button class="next-page" (click)="nextPage()" [disabled]="currentPage === totalPages()">
-                    <p>Next</p> 
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
+
+                  <!-- "Next" button: Only show if not on the last page -->
+                  <ng-container *ngIf="currentPage < totalPages()">
+                    <button class="next-page" (click)="nextPage()">
+                      <p>Next</p>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </ng-container>
                 </div>
-                
-                
               </div>
+
 
             </div>
 
             <!-- Club Tab Content -->
             <div *ngIf="selectedTab === 'club'">
               <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers()">
-                  <div class="players player-card">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers(); let i = index">
+                  <div class="players player-card"
+                    [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
                     <div class="player1">
                       <div class="player-img">
-                        <img [src]="player.image" alt="{{ player.name }}" />
+                        <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
+                      <p *ngIf="player.class">Class: {{ player.class }}</p>
                     </div>
                     <div class="corner-image7">
-                      <img src="./assets/images/FC Thun 1.png" />
+                      <img [src]="player.cornerImage || './assets/images/default-corner.png'" />
                     </div>
                     <div class="flag">
                       <div class="flag-image7">
-                        <img src="./assets/images/flag.svg" class="flag-img" />
+                        <img [src]="player.flagImage || './assets/images/default-flag.svg'" class="flag-img" />
                         <div class="bottom-line"></div>
                         <div class="flag-bottom">
                           <img src="./assets/images/birthday.svg" class="birthday-img" />
-                          <p class="d-o-b">2004</p>
+                          <p class="d-o-b">{{ player.birthYear || 'N/A' }}</p>
                         </div>
                       </div>
                     </div>
@@ -119,52 +129,57 @@
                 </div>
 
                 <div class="pages">
-                  <!-- "Back" button: only show if not on the first page -->
-                  <button class="prev-page" (click)="prevPage()" [disabled]="currentPage === 1">
-                    <i class="fa-solid fa-angle-left"></i>
-                    <p>Back</p>
-                  </button>
-                  
+                  <!-- "Back" button: Only show if not on the first page -->
+                  <ng-container *ngIf="currentPage > 1">
+                    <button class="prev-page" (click)="prevPage()">
+                      <i class="fa-solid fa-angle-left"></i>
+                      <p>Back</p>
+                    </button>
+                  </ng-container>
+
                   <!-- Page buttons: Dynamically display pages based on the current page and total pages -->
                   <ng-container *ngFor="let page of pagesToShow()">
                     <button class="page-active" (click)="goToPage(page)" [class.active]="currentPage === page">
                       {{ page }}
                     </button>
                   </ng-container>
-                  
-                  <!-- "Next" button: only show if not on the last page -->
-                  <button class="next-page" (click)="nextPage()" [disabled]="currentPage === totalPages()">
-                    <p>Next</p> 
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
+
+                  <!-- "Next" button: Only show if not on the last page -->
+                  <ng-container *ngIf="currentPage < totalPages()">
+                    <button class="next-page" (click)="nextPage()">
+                      <p>Next</p>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </ng-container>
                 </div>
-                
-                
               </div>
+
 
             </div>
 
             <!-- Scouts Tab Content -->
             <div *ngIf="selectedTab === 'scouts'">
               <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers()">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-6" *ngFor="let player of getCurrentPlayers(); let i = index">
                   <div class="players player-card">
                     <div class="player1">
                       <div class="player-img">
-                        <img [src]="player.image" alt="{{ player.name }}" />
+                        <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
+                      <p *ngIf="player.class">Class: {{ player.class }}</p>
                     </div>
                     <div class="corner-image7">
-                      <img src="./assets/images/FC Thun 1.png" />
+                      <img [src]="player.cornerImage || './assets/images/default-corner.png'" />
                     </div>
                     <div class="flag">
                       <div class="flag-image7">
-                        <img src="./assets/images/flag.svg" class="flag-img" />
+                        <img [src]="player.flagImage || './assets/images/default-flag.svg'" class="flag-img" />
                         <div class="bottom-line"></div>
                         <div class="flag-bottom">
                           <img src="./assets/images/birthday.svg" class="birthday-img" />
-                          <p class="d-o-b">2004</p>
+                          <p class="d-o-b">{{ player.birthYear || 'N/A' }}</p>
                         </div>
                       </div>
                     </div>
@@ -182,28 +197,31 @@
                 </div>
 
                 <div class="pages">
-                  <!-- "Back" button: only show if not on the first page -->
-                  <button class="prev-page" (click)="prevPage()" [disabled]="currentPage === 1">
-                    <i class="fa-solid fa-angle-left"></i>
-                    <p>Back</p>
-                  </button>
-                  
+                  <!-- "Back" button: Only show if not on the first page -->
+                  <ng-container *ngIf="currentPage > 1">
+                    <button class="prev-page" (click)="prevPage()">
+                      <i class="fa-solid fa-angle-left"></i>
+                      <p>Back</p>
+                    </button>
+                  </ng-container>
+
                   <!-- Page buttons: Dynamically display pages based on the current page and total pages -->
                   <ng-container *ngFor="let page of pagesToShow()">
                     <button class="page-active" (click)="goToPage(page)" [class.active]="currentPage === page">
                       {{ page }}
                     </button>
                   </ng-container>
-                  
-                  <!-- "Next" button: only show if not on the last page -->
-                  <button class="next-page" (click)="nextPage()" [disabled]="currentPage === totalPages()">
-                    <p>Next</p> 
-                    <i class="fa-solid fa-angle-right"></i>
-                  </button>
+
+                  <!-- "Next" button: Only show if not on the last page -->
+                  <ng-container *ngIf="currentPage < totalPages()">
+                    <button class="next-page" (click)="nextPage()">
+                      <p>Next</p>
+                      <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </ng-container>
                 </div>
-                
-                
               </div>
+
 
             </div>
           </div>

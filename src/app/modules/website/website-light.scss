@@ -110,8 +110,12 @@
    --------------------------------------------------------------------------------------------------------- */
 
 
-  .light-theme app-player-list nav.navbar.navbar-expand-lg.navbar-light.sticky {
-    background: #092E01 !important;
+.light-theme app-player-list nav.navbar.navbar-expand-lg.navbar-light.sticky {
+  background: #092E01 !important;
+}
+
+.light-theme .custom-list-item.country-name:hover {
+  color: #E05263 !important;
 }
 
 
@@ -123,17 +127,26 @@
 .light-theme .website-code h2.coming-heading {
   color: #E05263;
 }
-
+.light-theme .website-code .multi-country{
+  background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
+}
+.light-theme .website-code .booster{
+  background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
+}
 .light-theme form button {
   background: #e05263;
   color: white;
 }
+
 .light-theme .website-code .custom-list-item:hover::before {
   color: #E05263;
 }
-.mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
+
+.mat-mdc-list-item:not(.mat-mdc-list-item-interactive),
+.mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
   cursor: pointer !important;
 }
+
 .mdc-list-item:hover::before {
   background-color: transparent !important;
   opacity: unset !important;
@@ -144,8 +157,9 @@
   font-size: 18px;
 }
 
-.light-theme .billed-text, .light-theme .premium-text-data{
-color: #e05263;
+.light-theme .billed-text,
+.light-theme .premium-text-data {
+  color: #e05263;
 }
 
 .light-theme .feature-players i.fa-solid.fa-xmark {
@@ -598,6 +612,7 @@ color: #e05263;
 
 .light-theme .website-code .premium {
   background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
+  
 
 }
 
@@ -2023,6 +2038,18 @@ a.dropdown-item.ai-icon.selected {
 // ------------------------- users end ------------------
 
 // ------------------------- respone------------------
+
+// @media (min-width: 992px) {
+//   .container, .container-lg, .container-md, .container-sm {
+//       max-width: 790px;
+//   }
+// }
+// @media (min-width: 1200px) {
+//   .container, .container-lg, .container-md, .container-sm, .container-xl {
+//       max-width: 1025px;
+//   }
+// }
+
 @media (min-width: 1281px) {
   .skyscraper-image img {
     height: 580px !important;
@@ -2035,8 +2062,15 @@ a.dropdown-item.ai-icon.selected {
   }
 }
 
+// @media (min-width: 1400px) {
+//   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+//       max-width: 1230px;
+//   }
+// }
+
+
 @media (max-width: 1199px) {
-  
+
   .dashboard-title {
     margin-right: 3%;
   }

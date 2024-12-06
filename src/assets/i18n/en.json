@@ -236,6 +236,7 @@
     },
     "indexTranslate": {
         "talent": "Talent",
+        "logIn": "Login",
         "clubsAndScouts": "Clubs and Scouts",
         "recentlyJoined": "Recently Joined",
         "seeAll": "See all",

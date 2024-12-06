@@ -12,6 +12,7 @@ import { CommonDataService } from '../../../services/common-data.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -52,6 +53,7 @@ export class HeaderComponent implements OnInit {
  //this is get by the domain
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
+ domains: any = environment.domains;
   //clubs
   // clubs = [
   //   { id: 1, name: 'Club A' },

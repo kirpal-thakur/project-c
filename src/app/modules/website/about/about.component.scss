@@ -161,6 +161,10 @@ mat-list-item {
   padding-left: 20px;
   /* Adjust spacing as needed */
 }
+.custom-list-item.country-name:hover {
+
+  font-size: 22px !important;
+}
 
 .custom-list-item::before {
   content: "•";
@@ -169,7 +173,7 @@ mat-list-item {
   font-size: 20px;
   /* Adjust size as needed */
   margin-right: 10px;
-  margin-top: 4px;
+  margin-top: 0;
   /* Space between dot and text */
   display: inline-block;
   /* Ensures proper alignment */

@@ -6,10 +6,59 @@ h1 {
     padding-top: 50px;
 }
 
+.bg-red {
+    background-image: url("/assets/images/boosted-talent-profile-bg.png") !important;
+    background-repeat: no-repeat !important;
+    background-position-x: right;
+    background-position-y: bottom;
+    background-size: cover;
+}
+
+// boosted
+.player-img {
+    position: relative;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    /* Adjust based on your needs */
+    background-size: cover;
+    background-position: center;
+}
+
+.image-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 13.67px;
+    line-height: 18.22px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: #023A4A;
+    height: 46px;
+    width: 102px;
+    padding: 13px;
+    border-radius: 0 0 13px 0;
+}
+
+//boosted
+
 .image-gallery {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.players.player-card.highlight-background {
+    background-image: url('/assets/images/boosted-talent-profile-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    /* Optional */
 }
 
 .image-container {
@@ -31,6 +80,7 @@ button.faq-talent-button {
     height: 40px;
     width: 126px;
 }
+
 select:focus-visible {
     outline: unset;
 }
@@ -92,7 +142,8 @@ select#numberSelect {
 .pages button {
     cursor: pointer;
 }
-.adv-player-list{
+
+.adv-player-list {
     position: relative;
 }
 
@@ -257,6 +308,7 @@ button.prev-page {
     align-items: center;
     padding: 13px;
 }
+
 .pages {
     display: flex;
 }
@@ -274,13 +326,16 @@ button.next-page {
     align-items: center;
     padding: 13px;
 }
-p{
+
+p {
     font-size: 14px;
 }
+
 i.fa-solid.fa-angle-left {
     font-size: 12px;
     margin-right: 4px;
 }
+
 i.fa-solid.fa-angle-right {
     margin-left: 4px;
     font-size: 12px;
@@ -313,7 +368,7 @@ button.page-active {
 
 // advertisement
 
-.skyscraper-left{
+.skyscraper-left {
     height: 600px;
     width: 120px;
     content: "";
@@ -322,11 +377,13 @@ button.page-active {
     left: 0;
     top: 10%;
 }
-.skyscraper-left img{
+
+.skyscraper-left img {
     height: 600px;
     width: 120px;
 }
-.skyscraper-right{
+
+.skyscraper-right {
     height: 600px;
     width: 120px;
     content: "";
@@ -335,12 +392,13 @@ button.page-active {
     right: 0;
     top: 10%;
 }
-.skyscraper-right img{
+
+.skyscraper-right img {
     height: 600px;
     width: 120px;
 }
 
-  .large-rectangle {
+.large-rectangle {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -353,6 +411,7 @@ button.page-active {
     height: 280px;
     width: 336px;
 }
+
 .inline-rectangle {
     position: absolute;
     left: 50%;
@@ -362,10 +421,12 @@ button.page-active {
     width: 300px;
     height: 250px;
 }
+
 .inline-rectangle img {
     width: 300px;
     height: 250px;
 }
+
 .square {
     position: absolute;
     right: 0;
@@ -375,50 +436,58 @@ button.page-active {
     height: 250px;
     display: flex;
 }
+
 .square img {
     width: 250px;
     height: 250px;
 }
-.advertisement{
-   position: relative;
-   height: 350px;
+
+.advertisement {
+    position: relative;
+    height: 350px;
 }
 
 
-  // advertisement
- // advertisement
- @media (max-width: 1404px){
+// advertisement
+// advertisement
+@media (max-width: 1404px) {
     .player1 {
         height: 292px;
         width: 260px;
     }
+
     .player-img img {
         height: 280px;
         width: 249px;
     }
+
     .players {
         width: 260px;
         height: 292px;
     }
+
     .player-name7 {
         bottom: 5px;
         width: 250px;
     }
- }
+}
 
 @media (max-width: 1281px) {
     .player-img img {
         height: 275px;
         width: 250px;
     }
-    .player1{
+
+    .player1 {
         height: 285px;
         width: 260px;
     }
-    .players{
+
+    .players {
         width: 260px;
         height: 289px;
     }
+
     .player-name7 {
         bottom: 8px;
         width: 251px;
@@ -459,7 +528,9 @@ button.page-active {
 
 
 }
-@media (max-width: 991px){
+
+@media (max-width: 991px) {
+
     .leaderboard-club-image img,
     .small-sqaure-image img,
     .skyscraper-image img,
@@ -468,10 +539,10 @@ button.page-active {
     .leaderboard-image img,
     .banner-image img,
     .advertisement,
-    .advertisement1, 
+    .advertisement1,
     .skyscraper-left img,
-    .skyscraper-right img{
-      display: none;
+    .skyscraper-right img {
+        display: none;
     }
 }
 
@@ -547,9 +618,11 @@ button.page-active {
         margin-bottom: 20px;
         padding-top: 20px;
     }
-    .pagination-controls{
+
+    .pagination-controls {
         display: block;
     }
+
     .pages {
         display: flex;
         justify-content: space-between;
@@ -560,6 +633,7 @@ button.page-active {
         margin-bottom: 25px;
         justify-content: space-evenly;
     }
+
     .input-number {
         margin-bottom: 20px;
     }
@@ -620,7 +694,8 @@ button.page-active {
         height: 16px;
         width: 17px;
     }
-    select#numberSelect{
+
+    select#numberSelect {
         width: 60px;
         height: 30px;
         border-radius: 4px;
@@ -754,28 +829,33 @@ button.page-active {
     button.faq-talent-button {
         font-size: 15px;
     }
+
     button.prev-page {
         width: 60px;
         height: 30px;
         padding: 7px;
     }
+
     button.next-page {
         width: 60px;
         height: 30px;
         padding: 7px;
         margin-left: 5px;
     }
+
     button {
         margin: 0;
         padding: 0;
     }
+
     button.page-active {
         width: 34px;
         height: 30px;
         font-size: 12px;
         margin-left: 5px;
     }
-    button.page-active.active{
+
+    button.page-active.active {
         height: 30px;
         width: 34px;
         font-size: 12px;
