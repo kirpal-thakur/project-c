@@ -65,7 +65,7 @@
                       </div>
                     </div>
                   </div>
-                    <div class="col-lg-4" *ngIf="country.count > 0">    
+                    <div class="col-lg-4" *ngIf="country.count > 0">
                       <div class="premium-card">
                         <div class="d-flex align-items-end justify-content-between">
                           <h5>{{ 'Multi Country' | translate }}</h5>
@@ -73,7 +73,7 @@
                         </div>
                         <p>{{ country.length }} {{ 'Countries Selected' | translate }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                          <a class="premium-edit_btn text-white" href="/talent/plans">{{ 'Edit Plan' | translate }}</a>       
+                          <a class="premium-edit_btn text-white" href="/talent/plans">{{ 'Edit Plan' | translate }}</a>
                           <button class="premium-subscription_btn" (click)="confirmCountryPlanCancellation(country)">
                             {{ 'Cancel subscription' | translate }}
                           </button>
@@ -84,9 +84,9 @@
                             </svg>
                         </div>
                       </div>
-                    </div>                                      
-                    
-                    <div class="col-lg-4" *ngIf="booster">     
+                    </div>
+
+                    <div class="col-lg-4 mt-2" *ngIf="booster">
                       <div class="premium-card ">
                         <div class="d-flex align-items-end justify-content-between">
                             <h5>{{booster.package_name }}</h5>
@@ -96,8 +96,8 @@
                         <p *ngIf="booster.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ booster.stripe_cancel_at | date: 'dd.MM.yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
                             <a class="premium-edit_btn text-white cursor-pointer"  (click)="editBooster(booster)">{{'Edit Plan' | translate}}</a>
-                            <button 
-                              class="premium-subscription_btn" 
+                            <button
+                              class="premium-subscription_btn"
                               [disabled]="booster.stripe_cancel_at != null"
                               (click)="confirmAndCancelSubscription(booster.id)">
                               <div *ngIf="booster.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -123,14 +123,14 @@
                         <div class="d-flex align-items-center ">
                           <h2 class="card-title mb-0 me-3 ">{{'Latest Transaction' | translate}}</h2>
                         </div>
-                  
+
                         <div class="d-flex align-items-center ">
                           <a class="btn btn-outline-white ms-2 delete-text" id="users-icon" (click)="exportData()">
                             <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M12 16.5L7 11.5L8.4 10.05L11 12.65V4.5H13V12.65L15.6 10.05L17 11.5L12 16.5ZM4 20.5V15.5H6V18.5H18V15.5H20V20.5H4Z" fill="#787878"  class="td-icon-purchase"/>
-                            </svg> {{'ExportXLS' | translate }} 
+                            </svg> {{'ExportXLS' | translate }}
                           </a>
-                          
+
                           <div class="d-flex align-items-center slider-arrows">
                             <mat-paginator
                               [length]="totalItems"

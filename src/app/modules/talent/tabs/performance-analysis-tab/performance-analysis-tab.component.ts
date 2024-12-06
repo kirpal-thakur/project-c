@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TalentService } from '../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerfomanceReportComponent } from './add-perfomance-report/add-perfomance-report.component';
-import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 
 interface Report {
   id: string;

@@ -10,18 +10,30 @@ import { tap, catchError } from 'rxjs/operators'; // For storing data after fetc
 })
 export class TalentService {
   private apiUrl: string;
-  private domain: string = environment.targetDomain.domain;
+  private domain: any;
   private userToken: string | null;
   public teams: any[] = [];
   private messageSource = new Subject<string>();
   message$ = this.messageSource.asObservable();
-  private lang: string = 'en'; // You can dynamically set this if needed
+  public lang:any; // You can dynamically set this if needed
+  languages:any = environment.langs;
 
   constructor(private http: HttpClient) {
+    
+      // Retrieve the selected language code from localStorage
+      const selectedLanguageSlug = localStorage.getItem('lang') || '';
+
+      // Find the corresponding language ID from the langs array
+      const lang = this.languages.find(
+        (lang:any) => lang.slug === selectedLanguageSlug
+      );
+
+      // Default to a specific language ID if none is found (e.g., English)
+      this.lang = lang ? lang.id : 1;
+
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
-    this.domain = environment.targetDomain.domain;
-
+    this.domain = environment.targetDomain.id;
     console.log(this.domain);
   }
 

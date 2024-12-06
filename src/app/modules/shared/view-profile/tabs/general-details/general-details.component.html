@@ -165,7 +165,7 @@
             </div>
             <div class="main-position">
             <h6 class="details_2"> {{ 'Other-position(s)' | translate}}</h6>
-            <h5 class="details-1">{{getOtherPositions()}}</h5>
+            <h5 class="details-1">{{otherPositions}}</h5>
             </div>
         </div>
         </div>
@@ -190,8 +190,9 @@
                         </svg>
                     </span>
                     <span>
-                        www.facebook.com/{{userData?.meta?.sm_facebook}}
+                        <a href="https://www.facebook.com/{{userData?.meta?.sm_facebook}}" target="_blank"> www.facebook.com/{{userData?.meta?.sm_facebook}}</a>
                     </span>
+
                 </div>
                 <div *ngIf="userData?.meta?.sm_instagram" class="social_icons mb-1">
                     <span class="me-2">
@@ -219,7 +220,9 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.instagram.com/{{userData?.meta?.sm_instagram}}</span>
+                    <span>
+                        <a href="https://www.instagram.com/{{userData?.meta?.sm_instagram}}" target="_blank"> www.instagram.com/{{userData?.meta?.sm_instagram}}</a>
+                    </span>
                 </div>
 
                 <!-- TikTok Link -->
@@ -239,7 +242,11 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.tiktok.com/{{userData?.meta?.sm_tiktok}}</span>
+                    <span>
+
+                        <a href="https://www.tiktok.com/{{userData?.meta?.sm_tiktok}}" target="_blank"> www.tiktok.com/{{userData?.meta?.sm_tiktok}}</a>
+
+                    </span>
                 </div>
 
                 <!-- Vimeo Link -->
@@ -257,7 +264,11 @@
                         </defs>
                     </svg>
                     </span>
-                    <span>www.vimeo.com/{{userData?.meta?.sm_vimeo}}</span>
+                    <span>
+
+                        <a href="https://www.vimeo.com/{{userData?.meta?.sm_vimeo}}" target="_blank"> www.vimeo.com/{{userData?.meta?.sm_vimeo}}</a>
+
+                    </span>
                 </div>
 
                 <!-- X (formerly Twitter) Link -->
@@ -274,7 +285,9 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.twitter.com/{{userData?.meta?.sm_x}}</span>
+                    <span>
+                        <a href="https://www.twitter.com/{{userData?.meta?.sm_x}}" target="_blank"> www.twitter.com/{{userData?.meta?.sm_x}}</a>
+                    </span>
                 </div>
 
                 <!-- YouTube Link -->
@@ -293,7 +306,10 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.youtube.com/{{userData?.meta?.sm_youtube}}</span>
+                    <span>
+
+                        <a href="https://www.youtube.com/{{userData?.meta?.sm_youtube}}" target="_blank"> www.youtube.com/{{userData?.meta?.sm_youtube}}</a>
+                    </span>
                 </div>
 
             </div>

@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
 import { SocketService } from '../../../services/socket.service';
+import { map,filter } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 
 interface Notification {
   image: string;
@@ -22,20 +25,25 @@ interface Notification {
 })
 export class HeaderComponent {
 
+  currentPageName: string = ''; // Variable to store current page name
   searchResults: any[] = [];
   searchUser: any;
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService, private router: Router, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
   loggedInUser: any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang: string = '';
   domains: any = environment.domains;
   message: string = '';
-
+  isLoading: boolean = false; // Flag to track loading state
+  language : any;
   liveNotification: any[] = [];
   showNotification: boolean = false;
+
+  searchControl = new FormControl('');
+  filteredUsers: any[] = [];
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(this.loggedInUser);
@@ -46,8 +54,16 @@ export class HeaderComponent {
       this.profileImgUrl = msg;
     });
 
-
     this.lang = localStorage.getItem('lang') || 'en'
+
+    const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+    if (selectedLanguage) {
+      this.language = selectedLanguage;
+    }else{
+      this.language = this.domains[0];
+    }
+    console.log(this.language);
+
     this.updateThemeText();
 
     this.socketService.on('notification').subscribe((data) => {
@@ -73,7 +89,75 @@ export class HeaderComponent {
       }, 5000); // 5000 ms = 5 seconds
     });
 
+    //   this.router.events
+    //   .pipe(
+    //     filter(event => event instanceof NavigationEnd), // Ensure only navigation events are handled
+    //     map(() => {
+    //       const child = this.route.firstChild;
+    //       return child?.snapshot.data['title'] || 'Home'; // Default title if no data
+    //     })
+    //   )
+    //   .subscribe((title: string) => {
+    //     this.currentPageName = title; // Assign the title to `currentPageName`
+    //   });
+
+    // }
+
+      // Set the page name for the initial load
+      this.setPageTitleFromRoute();
+
+      // Listen for route changes and update the title
+      this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd), // Ensure only navigation events are handled
+        map(() => this.route.firstChild?.snapshot.data['title'] || 'Home') // Default to 'Home' if no title
+      )
+      .subscribe((title: string) => {
+        this.currentPageName = title;
+      });
+
+
+    this.searchControl.valueChanges
+    .pipe(
+      filter((value): value is string => value !== null && value.trim().length > 0), // Exclude null or empty strings
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((searchText: string) => {
+        this.isLoading = true;
+        return this.userService.searchUser(searchText).pipe(
+          finalize(() => (this.isLoading = false))
+        );
+      })
+    )
+    .subscribe(
+      (response: any) => {
+        if (response && response.status && response.data?.userData) {
+          this.filteredUsers = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+          this.filteredUsers = [];
+        }
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+        this.filteredUsers = [];
+      }
+    );
   }
+
+  // Method to set the page title on the initial load
+  private setPageTitleFromRoute() {
+    const childRoute = this.route.firstChild;
+    if (childRoute && childRoute.snapshot.data['title']) {
+      this.currentPageName = childRoute.snapshot.data['title'];
+    } else {
+      this.currentPageName = 'Home'; // Default to 'Home' if no title found
+    }
+  }
+  navigateToTab(tab: string) {
+    this.router.navigate(['/talent/setting'], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
+  }
+
 
   ChangeLang(lang: any) {
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
@@ -191,48 +275,45 @@ export class HeaderComponent {
 
   }
 
-  selectUser(user: any) {
-    console.log('User selected:', user);
-    this.searchResults = [];
-    this.showSuggestions = false;
-    this.searchUser = user.first_name + ' ' + user.last_name
 
+  selectUser(user: any): void {
+
+    this.searchControl.setValue(`${user.first_name} ${user.last_name}`, {
+      emitEvent: false,
+    });
+
+    this.filteredUsers = [];
     // Navigate or perform actions with the selected user
-    this.exploreUser(user.role_name, user.id)
-  }
-
-
-  private saveTrackedViews() {
-    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
-  }
-
-  // Track profile click only once per session
-  private trackProfileClick(profileId: number) {
-    const id: number[] = [profileId];  // Create an array of profileId
-
-    if (!this.viewsTracked[profileId]?.clicked) {
-      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
-        next: () => {
-          console.log(`Click tracked for profile ${profileId}`);
-          this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
-          this.saveTrackedViews();  // Save the updated viewsTracked
-        },
-        error: (error) => console.error('Error tracking profile click', error)
-      });
-    }
+    this.exploreUser(user.role_name, user.id);
   }
 
   exploreUser(slug: string, id: number): void {
-    this.trackProfileClick(id); // Track the click before navigation
-    const pageRoute = 'view/' + slug.toLowerCase();
+    this.trackProfileClick(id);
+    const pageRoute = `view/${slug.toLowerCase()}`;
     this.router.navigate([pageRoute, id]);
   }
 
-  hideSuggestions() {
-    setTimeout(() => {
-      this.showSuggestions = false;
-    }, 200); // Delay to ensure selectUser runs before hiding suggestions
+  private trackProfileClick(profileId: number): void {
+    const id: number[] = [profileId];
+    if (!this.viewsTracked[profileId]?.clicked) {
+      this.talentService
+        .trackProfiles(this.loggedInUser.id, id, 'click')
+        .subscribe({
+          next: () => {
+            console.log(`Click tracked for profile ${profileId}`);
+            this.viewsTracked[profileId] = {
+              ...this.viewsTracked[profileId],
+              clicked: true,
+            };
+            this.saveTrackedViews();
+          },
+          error: (error) =>
+            console.error('Error tracking profile click', error),
+        });
+    }
   }
 
+  private saveTrackedViews(): void {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
 }
-
