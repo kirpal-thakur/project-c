@@ -138,8 +138,8 @@ export class WebPagesComponent {
 
   createNewPage(){
     const addNewPage = this.dialog.open(AddPageComponent,{
-      width: '1500px',
-      height: '600px'
+      width: '2500px',
+      height: '800px',
     })
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {
@@ -155,7 +155,7 @@ export class WebPagesComponent {
     this.webpages.getSinglePageDetail(pageId).subscribe((res) => {
       if(res.status){
         const viewPage = this.dialog.open(AddPageComponent, {
-          width: '1000px',
+          width: '2500px',
           height: '600px',
           data: {
             page: res.data.page,
