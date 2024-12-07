@@ -66,6 +66,8 @@
     </div> -->
     <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
     <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId"></app-add-home-page>
+    <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId"></app-add-contact-page>
+    <app-add-about-page *ngIf="selectedPageTitle == 'about'" [pageId]="selectedPageId"></app-add-about-page>
   </form>
 </div>
 }@else {

@@ -83,6 +83,8 @@ import { AddPageComponent } from './website/web-pages/add-page/add-page.componen
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home-page.component';
+import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
+import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
 
 export const MY_FORMATS = {
   parse: {
@@ -154,7 +156,9 @@ export const MY_FORMATS = {
     UploadAttachmentComponent,
     InviteScoutTalentPopupComponent,
     AddPageComponent,
-    AddHomePageComponent
+    AddHomePageComponent,
+    AddContactPageComponent,
+    AddAboutPageComponent
   ],
   imports: [
     CommonModule,

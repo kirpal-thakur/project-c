@@ -39,8 +39,8 @@ export class AddPageComponent {
   pages = [
     {id: 1, title: "home"},
     {id: 6, title: "about"},
-    {id: 8, title: "contact"},
-    {id: 9, title: "pricing"},
+    {id: 9, title: "contact"},
+    {id: 8, title: "pricing"},
   ];
   selectedPageTitle: string = "";
   selectedPageId:string=""

@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AdvertisementService } from '../../../services/advertisement.service';
-
+import { WebPages } from '../../../services/webpages.service';
 export interface ClubMember {
   name: string;
   image: string;
@@ -60,8 +60,10 @@ export interface ClubMember {
 })
 export class IndexComponent {
   @ViewChild('owlCarousel') owlCarousel!: ElementRef;
-
-
+  selectedLangId:any = null;
+  pageDetail:any=null;
+  sliderDetail:any=null;
+  imageBaseUrl:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
     { name: 'Ziddane', image: './assets/images/ziddane.svg', year: '2004' },
@@ -167,7 +169,7 @@ export class IndexComponent {
   // Manage Navbar Expansion
   isNavbarExpanded = false;
 
-  constructor(private advertisementService: AdvertisementService) {}
+  constructor(private advertisementService: AdvertisementService, private webPages: WebPages) {}
 
 
   toggleNavbar(): void {
@@ -269,6 +271,11 @@ adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad vis
 ngOnInit() {
   // Initially, all ads are visible
   this.adVisible = [true, true, true, true, true];
+
+  this.webPages.languageId$.subscribe((data) => {
+    this.getPageDynamicData(data);
+  });
+  
 }
 
 closeAd(index: number) {
@@ -276,5 +283,30 @@ closeAd(index: number) {
 }
 
 
+getPageDynamicData(languageId:any){
+  this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
+    let pageData = res.data.pageData;
+    let sliderData = res.data.sliderData;
+    console.log(res, pageData, sliderData);
+      if(res.status){
+        this.pageDetail = pageData;
+        this.sliderDetail = sliderData;
+        this.imageBaseUrl = res.data.base_url;
+      }
+  });
+}
+
+getFlagImage(data:any){
+  let parseData = JSON.parse(data);
+  // console.log(parseData, 'parse-data');
+}
+
+getBirthYear(date:any){
+  if(date){
+    const birthYear = new Date(date); // Convert to Date object
+    return birthYear.getFullYear();
+  }
+  return 'N/A';
+}
 
 }
