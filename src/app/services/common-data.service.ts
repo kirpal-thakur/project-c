@@ -19,6 +19,12 @@ export class CommonDataService {
     );
   }
 
+  getAllCurrencies(): Observable<any> {
+    return this.http.get(
+      `${this.apiUrl}get-currencies`
+    );
+  }
+
   getAllClubs(): Observable<any> {
     return this.http.get(
       `${this.apiUrl}get-clubs-list`

@@ -51,7 +51,7 @@ const routes: Routes = [
   { path: 'thank-you', component: ThankuComponent },
   {path: 'cookie-popup', component: CookiePopupComponent},
   {path: 'new-chat', component: NewChatComponent},
-  {path: 'password-reset-link', component: PasswordResetLinkComponent},
+  {path: 'expired-link', component: PasswordResetLinkComponent},
   // {path: '', component: ComingSoonComponent},
 ];
 

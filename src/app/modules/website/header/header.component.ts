@@ -381,28 +381,72 @@ export class HeaderComponent implements OnInit {
 
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
-        if (response.status === true) {
-          const magicToken = response.data.magic_link_url;
-          this.authService.magicLogin(`http://localhost:4200/Index?confirm-token=${magicToken}`).subscribe(
-            magicLoginResponse => {
-              if (magicLoginResponse.status === true) {
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            () => {
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
-        } else {
-          this.forgotPasswordMessage = response.message;
-        }
+        // if (response.status === true) {
+        //   this.handleMagicLinkLogin(response.data.magic_link_url);
+        // } else {
+          this.forgotPasswordMessage = response.message || 'Failed to send password reset link.';
+        // }
       },
       () => {
         this.forgotPasswordMessage = 'An error occurred. Please try again later.';
       }
     );
+  }
+
+  private handleMagicLinkLogin(magicLinkUrl: string) {
+    this.authService.loginWithMagic(magicLinkUrl).subscribe(
+      response => {
+        if (response.status === true) {
+          this.storeUserData(response.data.token, response.data.user);
+          this.navigateToDashboard(response.data.user.role);
+        } else {
+          this.handleInvalidLink();
+        }
+      },
+      () => {
+        this.handleInvalidLink();
+      }
+    );
+  }
+
+  private handleInvalidLink() {
+    let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    if (modal) {
+      modal.hide();
+    }
+    this.router.navigate(['/expired-link']);
+  }
+
+  private storeUserData(token: string, userData: any) {
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('userData', JSON.stringify(userData));
+  }
+
+  private navigateToDashboard(userRole: string) {
+    let navigationRoute = '';
+    switch (userRole) {
+      case "2":
+        navigationRoute = '/club/dashboard';
+        break;
+      case "3":
+        navigationRoute = '/scout/dashboard';
+        break;
+      case "4":
+        navigationRoute = '/talent/dashboard';
+        break;
+      case "1":
+        navigationRoute = '/admin/dashboard';
+        break;
+      default:
+        navigationRoute = '';
+        break;
+    }
+
+    let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    if (modal) {
+      modal.hide();
+    }
+    this.router.navigate([navigationRoute]);
   }
 
   initializeGoogleSignIn(): void {

@@ -137,7 +137,7 @@ export class FooterComponent implements OnInit{
         // Google API script might not be loaded yet; wait for it to load
         console.warn('Google API script is not fully loaded.');
       }
-  this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       console.log('Magic Token:', this.token);
 
@@ -167,8 +167,6 @@ export class FooterComponent implements OnInit{
         console.log('Token is not provided');
       }
     });
-
-    
    
   }
 
