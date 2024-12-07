@@ -9,14 +9,15 @@
 
               <li class="nav-item" role="presentation">
                 <button
-                  class="nav-link d-flex align-items-center active"
+                  class="nav-link d-flex align-items-center"
+                  [ngClass]="{'active': tab === 'activity'}"
                   id="profile-tab"
                   data-bs-toggle="tab"
                   data-bs-target="#profile-tab-pane"
                   type="button"
                   role="tab"
                   aria-controls="profile-tab-pane"
-                  aria-selected="false"
+                  [attr.aria-selected]="tab === 'activity'"
                   (click)="switchTab('activity')"
                 >
                   <svg id="users-icon"
@@ -41,13 +42,14 @@
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link d-flex align-items-center"
-                  id="profile-tab"
+                  [ngClass]="{'active': tab === 'setting'}"
+                  id="settings-tab"
                   data-bs-toggle="tab"
-                  data-bs-target="#profile-tab-pane"
+                  data-bs-target="#settings-tab-pane"
                   type="button"
                   role="tab"
-                  aria-controls="profile-tab-pane"
-                  aria-selected="false"
+                  aria-controls="settings-tab-pane"
+                  [attr.aria-selected]="tab === 'setting'"
                   (click)="switchTab('setting')"
                 >
                 <svg width="16" height="15" viewBox="0 0 16 15" fill="none" class="me-2" xmlns="http://www.w3.org/2000/svg">
@@ -63,8 +65,8 @@
       </div>
       <div class="col-lg-9">
         <div class="tab-content" id="myTabContent">
-          <talent-activity-log *ngIf="tab == 'activity'"></talent-activity-log>
-          <app-app-setting *ngIf="tab == 'setting'"> </app-app-setting>
+          <talent-activity-log id="activity-log" *ngIf="tab === 'activity'"></talent-activity-log>
+          <app-app-setting id="app-settings" *ngIf="tab === 'setting'"> </app-app-setting>
         </div>
       </div>
     </div>

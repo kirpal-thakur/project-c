@@ -229,7 +229,6 @@ export class HeaderComponent implements OnInit {
           }
           localStorage.setItem('authToken', token);
           localStorage.setItem('userData', JSON.stringify(userData));
-          localStorage.setItem('userInfo', JSON.stringify(userData));
 
           let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
           if (modal) {

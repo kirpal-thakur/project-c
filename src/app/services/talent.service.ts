@@ -10,18 +10,30 @@ import { tap, catchError } from 'rxjs/operators'; // For storing data after fetc
 })
 export class TalentService {
   private apiUrl: string;
-  private domain: string = environment.targetDomain.domain;
+  private domain: any;
   private userToken: string | null;
   public teams: any[] = [];
   private messageSource = new Subject<string>();
   message$ = this.messageSource.asObservable();
-  private lang: string = 'en'; // You can dynamically set this if needed
+  public lang:any; // You can dynamically set this if needed
+  languages:any = environment.langs;
 
   constructor(private http: HttpClient) {
+    
+      // Retrieve the selected language code from localStorage
+      const selectedLanguageSlug = localStorage.getItem('lang') || '';
+
+      // Find the corresponding language ID from the langs array
+      const lang = this.languages.find(
+        (lang:any) => lang.slug === selectedLanguageSlug
+      );
+
+      // Default to a specific language ID if none is found (e.g., English)
+      this.lang = lang ? lang.id : 1;
+
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
-    this.domain = environment.targetDomain.domain;
-
+    this.domain = environment.targetDomain.id;
     console.log(this.domain);
   }
 
@@ -604,15 +616,28 @@ export class TalentService {
   }
 
   // Download reports (assuming backend supports this feature)
+  // downloadReports(reportIds: string[]): Observable<any> {
+  //   console.log(reportIds);
+
+  //   const headers = this.headers();
+
+  //   let params = new HttpParams();
+  //   reportIds.forEach(id => {
+  //     params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+  //   });
+
+  //   return this.http.post(`${this.apiUrl}player/download-performance-reports`, { params, responseType: 'blob',headers });
+  // }
+
+  // Download reports (assuming backend supports this feature)
   downloadReports(reportIds: string[]): Observable<any> {
-    const headers = this.headers();
 
-    let params = new HttpParams();
-    reportIds.forEach(id => {
-      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    const headers = this.headers(); // Assuming this.headers() provides correct headers
+    const body = { id: reportIds }; // Send report IDs as an array in the request body
+
+    return this.http.post(`${this.apiUrl}player/download-performance-reports`, body, {
+      headers // Specify response type for downloading files
     });
-
-    return this.http.get(`${this.apiUrl}download-reports`, { params, responseType: 'blob',headers });
   }
 
   // talent.service.ts

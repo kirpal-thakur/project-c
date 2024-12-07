@@ -48,14 +48,14 @@ export class FavoritesComponent {
       // Set pagination parameters
       const page = this.paginator ? this.paginator.pageIndex * 10 : 0;
       const pageSize = this.paginator ? this.paginator.pageSize : 10;
-  
+
       // Prepare query parameters
       let params: any = {
         offset: page,
         limit: pageSize,
         search: this.keyword // Search keyword
       };
-  
+
       // Make the API request with query parameters
       this.talentService.getFavoritesData(params).subscribe((response) => {
         if (response && response.status && response.data) {
@@ -70,20 +70,20 @@ export class FavoritesComponent {
       console.error('Error fetching users:', error);
     }
   }
-  
+
   onPageChange() {
     this.getUserFavorites();
   }
 
-  search(filterValue:any) {   
+  search(filterValue:any) {
     this.keyword = filterValue.target?.value.trim().toLowerCase();
     if(this.keyword.length >= 3){
       this.getUserFavorites();
      } else if(this.keyword.length == 0){
       this.getUserFavorites();
-    }   
+    }
   }
-    
+
   navigate(slug:string, id:Number): void {
     let pageRoute = '/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
@@ -99,9 +99,9 @@ export class FavoritesComponent {
   }
 
   selectAllFavorites() {
-    
+
     this.allSelected = !this.allSelected;
-    
+
     if (this.allSelected) {
       this.selectedIds = this.userFavorites.map((fav:any) => fav.id);
     } else {
@@ -125,7 +125,7 @@ export class FavoritesComponent {
 
   openViewProfile(user:any) {
 
-    this.exploreUser(user.role_name, user.id);
+    this.exploreUser(user.role_name, user.favorite_id);
     // const dialogRef = this.dialog.open(PlayerProfileComponent, {
     //   width: '800px',
     //   data: { user :  user }

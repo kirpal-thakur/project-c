@@ -1,16 +1,20 @@
 export const environment = {
     production: false,
     googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
+
     targetDomain: {
-      domain: 'ch' 
+      name:'Switzerland', domain: "ch", id: 1, flag: "Switzerland.svg"
     },
+
     stripePublishableKey: 'pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a', // Your Stripe publishable key for production
+
     roles:[
       { role: "Admin", id: 1 },
       { role: "Club", id: 2 },
       { role: "Scout", id: 3 },
       { role: "Player", id: 4 },
     ],
+
     langs:[
       { language:'English', slug: "en", id: 1 },
       { language:'German', slug: "de", id: 2 },
@@ -21,6 +25,7 @@ export const environment = {
       { language:'Danish', slug: "da", id: 7 },
       { language:'Swedish', slug: "sv", id: 8 },
     ],
+
     domains:[
       { name:'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg" },
       { name:'German', slug: "de", id: 2, flag: "Germany.svg" },

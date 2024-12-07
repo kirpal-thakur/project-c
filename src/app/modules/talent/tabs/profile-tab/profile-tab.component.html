@@ -206,7 +206,7 @@
                         </svg>   
                     </span>
                     <span>
-                        www.facebook.com/{{user?.meta?.sm_facebook}}
+                       <a href="https://www.facebook.com/{{user?.meta?.sm_facebook}}" target="_blank"> www.facebook.com/{{user?.meta?.sm_facebook}}</a>
                     </span>
                 </div>
                 <div *ngIf="user?.meta?.sm_instagram" class="social_icons mb-1">
@@ -235,13 +235,15 @@
                             </defs>
                         </svg>   
                     </span>
-                    <span>www.instagram.com/{{user?.meta?.sm_instagram}}</span>
+                    <span>
+                       <a href="https://www.instagram.com/{{user?.meta?.sm_instagram}}" target="_blank"> www.instagram.com/{{user?.meta?.sm_instagram}}</a>
+                    </span>
+
                 </div>
 
                 <!-- TikTok Link -->
                 <div *ngIf="user?.meta?.sm_tiktok" class="social_icons mb-1">
                     <span class="me-2">
-                        
                         <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_3009_6594)">
                             <path d="M11.8575 6.48185C13.0249 7.31016 14.455 7.79753 15.9995 7.79753V4.84739C15.7072 4.84745 15.4157 4.81716 15.1297 4.75702V7.07921C13.5852 7.07921 12.1553 6.5919 10.9877 5.76365V11.7841C10.9877 14.7959 8.52792 17.2372 5.49392 17.2372C4.36186 17.2372 3.30961 16.8975 2.43555 16.3148C3.43317 17.3274 4.82442 17.9554 6.36355 17.9554C9.3978 17.9554 11.8576 15.5141 11.8576 12.5022V6.48185H11.8575ZM12.9306 3.50552C12.334 2.85858 11.9422 2.02251 11.8575 1.09818V0.71875H11.0332C11.2407 1.89353 11.9485 2.89718 12.9306 3.50552ZM4.35455 14.0037C4.02123 13.57 3.84105 13.0393 3.84186 12.4936C3.84186 11.1162 4.96692 9.9993 6.35498 9.9993C6.61362 9.99917 6.87074 10.0386 7.1173 10.1162V7.10006C6.82917 7.06089 6.53842 7.0442 6.2478 7.05034V9.39791C6.00113 9.32027 5.74387 9.28087 5.48511 9.2811C4.09711 9.2811 2.97211 10.3978 2.97211 11.7755C2.97211 12.7496 3.53442 13.5929 4.35455 14.0037Z" fill="#FF004F"/>
@@ -255,7 +257,10 @@
                             </defs>
                         </svg> 
                     </span>
-                    <span>www.tiktok.com/{{user?.meta?.sm_tiktok}}</span>
+                    
+                    <span>
+                        <a href="https://www.tiktok.com/{{user?.meta?.sm_tiktok}}" target="_blank"> www.tiktok.com/{{user?.meta?.sm_tiktok}}</a>
+                     </span>
                 </div>
 
                 <!-- Vimeo Link -->
@@ -273,7 +278,9 @@
                         </defs>
                     </svg> 
                     </span>
-                    <span>www.vimeo.com/{{user?.meta?.sm_vimeo}}</span>
+                    <span>
+                        <a href="https://www.vimeo.com/{{user?.meta?.sm_vimeo}}" target="_blank"> www.vimeo.com/{{user?.meta?.sm_vimeo}}</a>
+                     </span>
                 </div>
             
                 <!-- X (formerly Twitter) Link -->
@@ -290,7 +297,9 @@
                             </defs>
                         </svg> 
                     </span>
-                    <span>www.twitter.com/{{user?.meta?.sm_x}}</span>
+                    <span>
+                        <a href="https://www.twitter.com/{{user?.meta?.sm_x}}" target="_blank"> www.twitter.com/{{user?.meta?.sm_x}}</a>
+                     </span>
                 </div>
 
                 <!-- YouTube Link -->
@@ -309,7 +318,9 @@
                             </defs>
                         </svg>
                     </span>
-                    <span>www.youtube.com/{{user?.meta?.sm_youtube}}</span>
+                    <span>
+                        <a href="https://www.youtube.com/{{user?.meta?.sm_youtube}}" target="_blank"> www.youtube.com/{{user?.meta?.sm_youtube}}</a>
+                     </span>
                 </div>
             </div>
             

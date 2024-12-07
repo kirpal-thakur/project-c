@@ -115,3 +115,24 @@
 .search-area{
   width: 60vw;
 }
+
+.loading-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.mat-spinner {
+  margin-right: 8px;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: unset !important;
+}
+
+.search-area .form-control {
+  opacity: 1;
+  // background-color: #ffffff;
+}
