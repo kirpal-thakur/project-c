@@ -77,6 +77,10 @@ export class WebPages {
         return this.http.post<any>(`${this.frontendApiUrl}save-aboutpage`, params);
     }
 
-
+    getPageByLangAndPageId(langId:any): Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-homepage-data?&lang_id=${langId}&page_id=9`
+        );
+    }
 
 }

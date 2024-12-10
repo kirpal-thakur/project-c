@@ -139,7 +139,7 @@ export class WebPagesComponent {
   createNewPage(){
     const addNewPage = this.dialog.open(AddPageComponent,{
       width: '1500px',
-      height: '600px'
+      height: '800px'
     })
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {

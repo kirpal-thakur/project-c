@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { WebPages } from '../../../services/webpages.service';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
