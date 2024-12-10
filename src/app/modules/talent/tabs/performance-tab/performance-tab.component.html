@@ -1,5 +1,5 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium && isPremium">
+<div class="unlock_page" *ngIf="!isPremium ">
   <div class="table-responsive px-3 bg-0C3453" style="width: 100%;">
     <div class="new_performance">
     </div>
@@ -100,7 +100,7 @@
 </div>
 
 
-<div class="table-responsive px-3 bg-0C3453" style="width: 100%;"  >
+<div class="table-responsive px-3 bg-0C3453" style="width: 100%;"  *ngIf="isPremium ">
   <div class="new_performance">
     <button (click)="openAddDialog()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

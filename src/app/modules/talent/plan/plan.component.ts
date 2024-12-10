@@ -101,12 +101,14 @@ export class PlanComponent implements OnInit, OnDestroy {
   // Redirect to Stripe Checkout with coupon code logic
   async redirectToCheckout(planId: string) {
     this.isLoadingCheckout = true;
-    this.toastr.info('Redirecting to payment...', 'Loading', { timeOut: 3000 });
+    this.toastr.info('Redirecting to payment...', 'Loading',{ disableTimeOut: true });
 
     try {
       const response = await this.paymentService.createCheckoutSession(planId, '', this.couponCode).toPromise();
 
       if (response?.data?.payment_intent?.id) {
+        this.toastr.clear();
+
         // Show success message after redirection attempt
         this.toastr.success('Redirected to Stripe Checkout successfully.', 'Success');
 
@@ -114,14 +116,19 @@ export class PlanComponent implements OnInit, OnDestroy {
         await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
 
       } else {
+        this.toastr.clear();
+
         this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
       }
     } catch (error) {
+      this.toastr.clear();
       // Show error message if API call fails
       this.toastr.error('Error creating Stripe Checkout session. Please try again later.', 'Error');
       console.error('Error creating Stripe Checkout session:', error);
     } finally {
+      this.toastr.clear();
+
       this.isLoadingCheckout = false;
     }
   }
@@ -161,6 +168,12 @@ export class PlanComponent implements OnInit, OnDestroy {
                 this.premiumPlans.currency = this.premiumPlans['yearly'].currency;
                 this.premiumPlans.includes = ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];
 
+                  this.premiumPlans.id = this.premiumPlans['monthly'].package_id;
+                  this.premiumPlans.month_package_id = this.premiumPlans['monthly'].id;
+                  this.premiumPlans.month_price = this.premiumPlans['monthly'].price;
+                  this.premiumPlans.year_package_id = this.premiumPlans['yearly'].id;
+                  this.premiumPlans.year_price = this.premiumPlans['yearly'].price;
+
             } else if (key.toLowerCase().includes('booster')) {
               this.boostedPlans = res[key];
               this.boostedPlans.isYearly = res[key].active_interval=='yearly';
@@ -172,6 +185,12 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.boostedPlans.priceMonthly = this.boostedPlans['monthly'].price;
               this.boostedPlans.priceYearly = this.boostedPlans['yearly'].price;
               this.boostedPlans.currency = this.boostedPlans['yearly'].currency;
+
+              this.boostedPlans.id = this.boostedPlans['monthly'].package_id;
+              this.boostedPlans.month_package_id = this.boostedPlans['monthly'].id;
+              this.boostedPlans.month_price = this.boostedPlans['monthly'].price;
+              this.boostedPlans.year_package_id = this.boostedPlans['yearly'].id;
+              this.boostedPlans.year_price = this.boostedPlans['yearly'].price;
 
 
             } else if (key.toLowerCase().includes('country')) {
@@ -221,19 +240,24 @@ export class PlanComponent implements OnInit, OnDestroy {
               Object.keys(this.demoPlans?.plans).forEach((key) => {
                 this.demoPlans[this.demoPlans.plans[key].interval] = this.demoPlans.plans[key];
               })
-              this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
               this.demoPlans.priceMonthly = this.demoPlans['daily'].price;
               this.demoPlans.priceYearly = this.demoPlans['weekly'].price;
               this.demoPlans.currency = this.demoPlans['weekly'].currency;
+              this.demoPlans.id = this.demoPlans['daily'].package_id;
+              this.demoPlans.month_package_id = this.demoPlans['daily'].id;
+              this.demoPlans.month_price = this.demoPlans['daily'].price;
+              this.demoPlans.year_package_id = this.demoPlans['weekly'].id;
+              this.demoPlans.year_price = this.demoPlans['weekly'].price;
+              this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
             }
           });
-          console.log('country_plans',this.boostedPlans)
+          console.log('demoPlans',this.demoPlans)
 
           // Set the default selected plan (first country plan or null if none exist)
           this.selectedPlan = this.countryPlans.plans[0] || null;
 
           // Fetch user cards
-          this.getUserCards();
+          // this.getUserCards();
 
           // Handle query parameters for country ID
           this.route.queryParams.subscribe((params) => {
@@ -356,14 +380,14 @@ export class PlanComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newPlanId = isYearly ? plan.yearly : plan.monthly;
+    plan.isYearly = originalIsYearly;
+    return;
+  }
 
-    console.log(plan)
-    console.log(newPlanId)
-    if (newPlanId.is_package_active == 'active') {
-      plan.isYearly = !originalIsYearly;
-      return;
-    }
+  updatePlan(plan: any, isYearly: boolean, subscribeId: any){
+    const originalIsYearly = plan.isYearly;
+
+    const newPlanId = isYearly ? plan.yearly : plan.monthly;
 
     const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
       data: { plan, isYearly }
@@ -384,6 +408,7 @@ export class PlanComponent implements OnInit, OnDestroy {
         if (response && response.status) {
           this.toastr.success('Your subscription has been updated successfully.');
           console.log('Subscription updated successfully:', response);
+          this.getUserPlans();
         } else {
           this.toastr.error('Failed to update subscription. Please try again.');
           console.error('Failed to update subscription', response);

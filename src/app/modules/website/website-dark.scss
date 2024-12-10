@@ -12,6 +12,9 @@
   color: #bde34f !important;
   background: transparent !important;
 }
+.dark-theme .register .form-select {
+  filter: brightness(0) invert(1) !important;
+}
 
 .dark-theme .website-code h2.coming-heading {
   color: #BDE34E;
