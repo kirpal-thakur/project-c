@@ -9,23 +9,6 @@
 <hr class="m-0">
 
   <div class="p-3 create-new_popup">
-    <!-- <div class="mb-3 discount-btn">
-    <p class="code-text ">
-      Select the type of coupon:
-    </p>
-    <button class="custom-button">
-      <label>
-        <input class="form-check-input" type="radio" name="options" [(ngModel)]="type" value="amount">
-        $ Discount
-      </label>
-    </button>
-    <button class="custom-button ms-3 ">
-      <label>
-        <input class="form-check-input" type="radio" name="options" [(ngModel)]="type" value="percent">
-        % Discount    </label>
-    </button>
-    <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
-    </div> -->
 
     <div class="mb-3 discount-btn">
       <p class="code-text">
@@ -63,14 +46,6 @@
       </div>
 
     </div>
-
-    <!-- <div class="mb-3" >
-    <p  class="code-text">
-      Discount
-    </p>
-      <input type="text" class="cupen-btn-1" style="min-width: 170px;" [(ngModel)]="discount">
-      <div *ngIf="errorMsg.discount" class="error-msg">{{errorMsg.discount}}</div>
-    </div> -->
 
     <!-- Conditional Inputs Based on Selected Type -->
     <div *ngIf="type === 'percent'" class="mb-3">

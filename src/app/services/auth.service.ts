@@ -35,8 +35,9 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-   forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  forgotPassword(email: string): Observable<any> {
+    let confirmation_link = window.location.origin+'/home?confirm-token=';
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email , confirmation_link});
   }
 
   loginWithMagic(magic_link_url: string): Observable<any> {
@@ -45,9 +46,8 @@ export class AuthService {
   }
 
   magicLogin(token: string): Observable<any> {
-    const endpointUrl = `${this.apiUrl}/magic-login/${token}`;
-    console.log(endpointUrl,"chek the magic token")
-    console.log('Token:', token); 
+    const endpointUrl = `${this.apiUrl}/validate-forgot-password-token/${token}`;
+
     return this.http.get<any>(endpointUrl);
   }
 

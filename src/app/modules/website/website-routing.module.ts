@@ -29,6 +29,7 @@ import { PasswordResetLinkComponent } from './password-reset-link/password-reset
 
 const routes: Routes = [
   { path: '', component: IndexComponent }, // Default route
+  { path: 'home', component: IndexComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },

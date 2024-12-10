@@ -113,6 +113,7 @@ export class HeaderComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
+      console.log('params',params)
       if (this.token) {
         this.authService.magicLogin(this.token).subscribe(
           response => {
@@ -491,24 +492,20 @@ export class HeaderComponent implements OnInit {
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
-    console.log('Selected Country:', this.selectedCountry);
   }
 
   onClubChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedClub = +selectElement.value; // Convert to number
-    console.log('Selected Club ID:', this.selectedClub);
   }
 
   onTeamChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedTeam = +selectElement.value; // Convert to number
-    console.log('Selected Team ID:', this.selectedTeam);
   }
   onCompanyNameChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.companyName = inputElement.value;
-    console.log('Company Name:', this.companyName);
   }
 
   // isNavbarExpanded = false;
@@ -537,7 +534,6 @@ export class HeaderComponent implements OnInit {
         id: club.id || '',
         name: club.club_name || ''
       }));
-      console.log(resp, 'club-resp');
     });
   }
 
