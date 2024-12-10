@@ -1,11 +1,6 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
-  
-
-  
-// dropdown
-
 h1,
 h2,
 h3,
@@ -17,30 +12,7 @@ h6 {
 
 .seperter {
     position: relative;
-    margin-bottom: 10px;
-}
-.google-sign-in {
-    margin-bottom: 30px;
-}
-.google-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    width: 367px;
-    height: 42px;
-    border-radius: 30px;
-    border: 1px solid #85B1D3;
-}
-p.google-text {
-    color: #000000 !important; 
-    font-size: 18px;
-    font-weight: 700;
-}
-img.google-image {
-    width: 20px;
-    height: 21px;
-    margin-right: 10px;
+    display: none;
 }
 
 h3 {
@@ -107,11 +79,7 @@ body {
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 10px;
-    width: 155px;
-    text-align: center;
 }
-
-
 
 /*--------------------------------------------------------------
 # login
@@ -138,7 +106,7 @@ body {
 }
 
 .login .modal-btn .btn {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .login .modal-btn .socail_btn {
@@ -704,7 +672,6 @@ button.create-account.d-block {
 .navbar-nav {
     display: flex;
     justify-content: space-between;
-    overflow: hidden;
 }
 
 .navbar-expand .navbar-nav {
@@ -1249,7 +1216,6 @@ select.form-select.custom-select1 {
         position: fixed;
         top: 0;
         left: 0;
-        overflow: hidden;
         width: 100%;
         z-index: 1000;
         background-color: #fff; /* Optional: background color */
@@ -1268,24 +1234,9 @@ select.form-select.custom-select1 {
     option {
         font-size: 14px;
     }
-    .login-btn {
-        padding: 10px 10px;
-        width: 135px;
-    }
-    li.nav-item{
-        margin-left: 15px;
-    }
 }
 
 @media (max-width: 1199px) {
-    .login-btn{
-        padding: 10px 0;
-        width: 130px;
-    }
-    li.nav-item {
-        margin-left: 0;
-    }
-
     .sidebar {
         display: none;
     }
@@ -1300,7 +1251,7 @@ select.form-select.custom-select1 {
 
     .nav-link {
         padding: 0 !important;
-        margin-right: 10px;
+        margin-right: 20px;
         font-size: 16px;
     }
 
@@ -1350,9 +1301,6 @@ select.form-select.custom-select1 {
     .navbar-collapse {
         background-color: transparent;
         padding-bottom: 10px;
-    }
-    .modal-dialog {
-        max-width: 488px;
     }
 
     option {
@@ -1830,10 +1778,6 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 575px) {
-    .modal-dialog {
-        max-width: 330px;
-    }
-
     .logo-image img {
         height: 60px;
         width: 70px;
@@ -2252,7 +2196,7 @@ select.form-select.custom-select1 {
     // }
 
     .login .modal-btn .btn {
-        margin-bottom: 10px;
+        margin-bottom: 0;
     }
 
     .switch1 {
@@ -2352,17 +2296,6 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 321px) {
-    .modal-dialog {
-        max-width: 300px;
-    }
-    .login .modal-footer {
-        padding: 0px 25px;
-    }
-    .login .modal-body {
-        padding: 0px 25px;
-        z-index: 1;
-    }
-
     input:checked+.slider:before {
         transform: translateX(21px);
     }
@@ -2587,11 +2520,11 @@ select.form-select.custom-select1 {
     }
 
     &:after {
-        left: 0;
+        left: 30px;
     }
 
     &:before {
-        right: 0;
+        right: 30px;
     }
 
     .cookie_popup p {
