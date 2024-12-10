@@ -105,34 +105,43 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllCountries();
-    this.getAllClubs();
-    this.lang = localStorage.getItem('lang') || 'en';
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
-    this.applyTheme();
 
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
-      console.log('params',params)
       if (this.token) {
         this.authService.magicLogin(this.token).subscribe(
           response => {
-            if (response.success) {
+            if (response.status && response.data) {
+              const token = response.data.token;
+              const userData = response.data.user;
+              const userRole = userData.role;
+
+              localStorage.setItem('authToken', token);
+              localStorage.setItem('userRole', userRole);
+              localStorage.setItem('userData', JSON.stringify(userData));
               this.tokenVerified = true;
               this.openModal();
+
             } else {
               this.tokenVerified = false;
-              this.notVerified();
+              this.router.navigate(['/expired-link']);
             }
           },
           error => {
             console.error('Error verifying token:', error);
             this.tokenVerified = false;
-            this.notVerified();
+            this.router.navigate(['/expired-link']);
           }
         );
       }
     });
+
+
+    this.getAllCountries();
+    this.getAllClubs();
+    this.lang = localStorage.getItem('lang') || 'en';
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+    this.applyTheme();
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
@@ -356,7 +365,7 @@ export class HeaderComponent implements OnInit {
     this.registerFormSubmitted = false;
   }
 
-  
+
   isFormValid(): boolean {
     let fieldType = ['string', 'boolean'];
     return [
@@ -382,72 +391,16 @@ export class HeaderComponent implements OnInit {
 
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
-        // if (response.status === true) {
-        //   this.handleMagicLinkLogin(response.data.magic_link_url);
-        // } else {
-          this.forgotPasswordMessage = response.message || 'Failed to send password reset link.';
-        // }
+        if (response.status) {
+            this.forgotPasswordMessage = response.message;
+        } else {
+          this.forgotPasswordMessage = response.message;
+        }
       },
       () => {
         this.forgotPasswordMessage = 'An error occurred. Please try again later.';
       }
     );
-  }
-
-  private handleMagicLinkLogin(magicLinkUrl: string) {
-    this.authService.loginWithMagic(magicLinkUrl).subscribe(
-      response => {
-        if (response.status === true) {
-          this.storeUserData(response.data.token, response.data.user);
-          this.navigateToDashboard(response.data.user.role);
-        } else {
-          this.handleInvalidLink();
-        }
-      },
-      () => {
-        this.handleInvalidLink();
-      }
-    );
-  }
-
-  private handleInvalidLink() {
-    let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
-    if (modal) {
-      modal.hide();
-    }
-    this.router.navigate(['/expired-link']);
-  }
-
-  private storeUserData(token: string, userData: any) {
-    localStorage.setItem('authToken', token);
-    localStorage.setItem('userData', JSON.stringify(userData));
-  }
-
-  private navigateToDashboard(userRole: string) {
-    let navigationRoute = '';
-    switch (userRole) {
-      case "2":
-        navigationRoute = '/club/dashboard';
-        break;
-      case "3":
-        navigationRoute = '/scout/dashboard';
-        break;
-      case "4":
-        navigationRoute = '/talent/dashboard';
-        break;
-      case "1":
-        navigationRoute = '/admin/dashboard';
-        break;
-      default:
-        navigationRoute = '';
-        break;
-    }
-
-    let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
-    if (modal) {
-      modal.hide();
-    }
-    this.router.navigate([navigationRoute]);
   }
 
   initializeGoogleSignIn(): void {
@@ -481,10 +434,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openModal() {
-    this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
-  }
 
-  notVerified() {
     this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
   }
 
@@ -492,20 +442,24 @@ export class HeaderComponent implements OnInit {
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
+    console.log('Selected Country:', this.selectedCountry);
   }
 
   onClubChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedClub = +selectElement.value; // Convert to number
+    console.log('Selected Club ID:', this.selectedClub);
   }
 
   onTeamChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedTeam = +selectElement.value; // Convert to number
+    console.log('Selected Team ID:', this.selectedTeam);
   }
   onCompanyNameChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.companyName = inputElement.value;
+    console.log('Company Name:', this.companyName);
   }
 
   // isNavbarExpanded = false;
@@ -534,6 +488,7 @@ export class HeaderComponent implements OnInit {
         id: club.id || '',
         name: club.club_name || ''
       }));
+      console.log(resp, 'club-resp');
     });
   }
 

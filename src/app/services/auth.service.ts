@@ -17,7 +17,18 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, loginData);
   }
 
-
+  resetPassword(newPassword: string, confirmPassword: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    const data = {
+      new_password: newPassword,
+      new_con_password: confirmPassword,
+    };
+    return this.http.post(this.apiUrl+'/reset-password', data, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Replace with actual token or fetch dynamically
+      },
+    });
+  }
 
   register(registrationData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, registrationData);
