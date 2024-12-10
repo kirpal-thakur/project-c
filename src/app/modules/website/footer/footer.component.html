@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-lg-6 col-md-12 col-12 footer-contact">
           <div class="footer-logo">
-              <img src="./assets/images/pink-logo.png">
-         </div>
+            <img src="./assets/images/pink-logo.png">
+          </div>
 
           <ul class="social-link">
             <li class="insta-icon">
@@ -14,7 +14,7 @@
             <li class="linkedin-icon">
               <i class="fa-brands fa-linkedin-in"></i>
             </li>
-           
+
           </ul>
         </div>
 
@@ -23,14 +23,16 @@
           <ul>
             <li><a [routerLink]="'/pricing'">{{ 'footerTranslate.pricing' | translate }}</a></li>
             <li>
-              <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal-login">
+              <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
+                data-bs-target="#exampleModal-login">
                 {{ 'footerTranslate.signIn' | translate }}
-                  <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  </svg>
+                <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                </svg>
               </a>
-          </li>
+            </li>
             <li>
-              <a  data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              <a data-bs-toggle="modal" data-bs-target="#exampleModal1">
                 {{ 'footerTranslate.createAccount' | translate }}</a>
             </li>
             <li><a [routerLink]="'/faq'">{{ 'footerTranslate.faq' | translate }}</a></li>
@@ -57,16 +59,22 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="select-country">
         <a class="c-name">{{ 'footerTranslate.selectCountry' | translate }}</a>
         <select class="form-select" aria-label="Default select example" (change)="onCountryChange($event)">
-          <option value="" disabled selected class="countary">{{ 'footerTranslate.selectCountry' | translate }}</option>
-          <option *ngFor="let country of countries" [value]="country.id" [selected]="country.country_name === 'England'" class="options-country">
-  {{ country.country_name }}
-</option>
+          <option value="" disabled selected class="country">{{ 'footerTranslate.selectCountry' | translate }}</option>
+          <option *ngFor="let country of countries" [value]="country.id" [selected]="country.slug === 'ch'" class="options-country">
+            <!-- Use country.flag for the correct flag image -->
+            <img [src]="'https://api.socceryou.ch/uploads/logos/' + country.flag" width="30" height="24" class="me-2" />
+            {{ country.name }}
+          </option>
         </select>
       </div>
+      
+
+
+
     </div>
   </div>
 

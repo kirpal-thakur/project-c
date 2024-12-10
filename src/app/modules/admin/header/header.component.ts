@@ -26,7 +26,7 @@ export class HeaderComponent {
   loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang: string = '';
-  domains: any = environment.domains;
+  domains: any = environment.domains; 
 
   liveNotification: any[] = [];
   showNotification: boolean = false;

@@ -172,19 +172,35 @@
                             </label>
                         </div>
                     </div>
-                    <div class="coustom-select" >
-                        <select class="form-select custom-select" aria-label="Language selector"
-                            (change)="ChangeLang($event)">
-                            <option [selected]="lang==='en'" value="en">EN</option>
-                            <option [selected]="lang==='de'" value="de">DE</option>
-                            <option [selected]="lang==='it'" value="it">IT</option>
-                            <option [selected]="lang==='fr'" value="fr">FR</option>
-                            <option [selected]="lang==='es'" value="es">ES</option>
-                            <option [selected]="lang==='pt'" value="pt">PT</option>
-                            <option [selected]="lang==='dk'" value="dk">DK</option>
-                            <option [selected]="lang==='se'" value="se">SE</option>
+
+                    <div class="coustom-select">
+                        <select class="form-select custom-select" aria-label="Language selector" (change)="ChangeLang($event)">
+                          <option *ngFor="let domain of langs" [selected]="lang === domain.slug" [value]="domain.slug">
+                            <img [src]="'https://api.socceryou.ch/uploads/logos/' + domain.flag" width="30"
+                                    height="24" class="me-2" />
+                            {{ domain.slug }}
+                          </option>
                         </select>
-                    </div>
+                      </div>
+                      
+                      
+
+                    <!-- <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="true">
+                            {{ lang | translate }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let domain of domains" class="dropdown-item1"
+                                [class.selected]="lang === domain.slug" (click)="ChangeLang(domain.slug)">
+                                <img [src]="'https://api.socceryou.ch/uploads/logos/' + domain.flag" width="30"
+                                    height="24" class="me-2" />
+                                {{ domain.slug | translate }}
+                            </li>
+                        </ul>
+                    </div> -->
+
+
 
                     <!-- <div class="dropdown-menu dropdown-menu-end"> 
                         <h6 class="mx-3 border-bottom pb-2 fs-15">Select Language</h6>
@@ -193,7 +209,7 @@
                           <span style="text-transform: uppercase;">{{ domain.slug | translate }}</span>
                         </a>
                     </div> -->
-                    
+
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
                         data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2" width="8"
                             height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -411,8 +427,8 @@
                                 <div class="mb-3">
                                     <label class="form-label">{{ 'loginTranslate.fistName' | translate }}</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ 'loginTranslate.fistName' | translate }}" [(ngModel)]="firstName"
-                                        name="firstName" required />
+                                        placeholder="{{ 'loginTranslate.fistName' | translate }}"
+                                        [(ngModel)]="firstName" name="firstName" required />
                                     <div *ngIf="registerForm.controls['firstName']?.errors?.['required'] && (registerForm.controls['firstName']?.dirty || registerForm.controls['firstName']?.touched)"
                                         class="text-danger">
                                         {{ 'loginTranslate.firstNameRequired' | translate }}
@@ -427,7 +443,7 @@
                                         name="lastName" required />
                                     <div *ngIf="registerForm.controls['lastName']?.errors?.['required'] && (registerForm.controls['lastName']?.dirty || registerForm.controls['lastName']?.touched)"
                                         class="text-danger">
-                                         {{ 'loginTranslate.lastNameRequired' | translate }}
+                                        {{ 'loginTranslate.lastNameRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
@@ -501,14 +517,16 @@
                                     <label class="form-label">{{ 'loginTranslate.club' | translate }}</label>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onCountryChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate }}</option>
+                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate
+                                                }}</option>
                                             <option *ngFor="let country of countries" [value]="country.code">{{
                                                 country.name }}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onClubChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}</option>
+                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}
+                                            </option>
                                             <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}
                                             </option>
                                         </select>
@@ -521,14 +539,16 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onCountryChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate }}</option>
+                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate
+                                                }}</option>
                                             <option *ngFor="let country of countries" [value]="country.code">{{
                                                 country.name }}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onClubChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}</option>
+                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}
+                                            </option>
                                             <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}
                                             </option>
                                         </select>
@@ -538,7 +558,8 @@
 
                             <div *ngIf="activeIndex === 3" class="content-box">
                                 <div class="form-group">
-                                    <label class="c-name" for="companyName">{{ 'loginTranslate.companyName' | translate }}</label>
+                                    <label class="c-name" for="companyName">{{ 'loginTranslate.companyName' | translate
+                                        }}</label>
                                     <input type="text" id="companyName" class="form-control" [(ngModel)]="companyName"
                                         (input)="onCompanyNameChange($event)" placeholder="Enter your company name"
                                         required />
@@ -558,11 +579,11 @@
                                         name="email" required />
                                     <div *ngIf="registerForm.controls['email']?.errors?.['required'] && (registerForm.controls['email']?.dirty || registerForm.controls['email']?.touched)"
                                         class="text-danger">
-                                       {{ 'loginTranslate.emailRequired' | translate }}
+                                        {{ 'loginTranslate.emailRequired' | translate }}
                                     </div>
                                     <div *ngIf="registerForm.controls['email']?.errors?.['emailExists'] && (registerForm.controls['email']?.dirty || registerForm.controls['email']?.touched)"
                                         class="text-danger">
-                                       {{ 'loginTranslate.emailtryAgain' | translate }}
+                                        {{ 'loginTranslate.emailtryAgain' | translate }}
                                     </div>
                                 </div>
                             </div>
@@ -592,7 +613,8 @@
                                     <label class="form-label">{{ 'loginTranslate.userDomain' | translate }}</label>
                                     <select class="form-select form-control" [(ngModel)]="userDomain" name="userDomain"
                                         required>
-                                        <option value="" disabled selected>{{ 'loginTranslate.selectDomain' | translate }}</option>
+                                        <option value="" disabled selected>{{ 'loginTranslate.selectDomain' | translate
+                                            }}</option>
                                         <option value="1">socceryou.ch</option>
                                         <option value="2">socceryou.de</option>
                                         <option value="3">socceryou.it</option>
@@ -606,7 +628,7 @@
                                     </select>
                                     <div *ngIf="registerForm.controls['userDomain']?.errors?.['required'] && (registerForm.controls['userDomain']?.dirty || registerForm.controls['userDomain']?.touched)"
                                         class="text-danger">
-                                      {{ 'loginTranslate.domainRequired' | translate }}
+                                        {{ 'loginTranslate.domainRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
@@ -618,13 +640,14 @@
                                         name="password" required />
                                     <div *ngIf="registerForm.controls['password']?.errors?.['required'] && (registerForm.controls['password']?.dirty || registerForm.controls['password']?.touched)"
                                         class="text-danger">
-                                       {{ 'loginTranslate.passwordRequired' | translate }}
+                                        {{ 'loginTranslate.passwordRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="confirmPassword">{{ 'loginTranslate.confirmPassword' |
+                                    <label class="form-label" for="confirmPassword">{{ 'loginTranslate.confirmPassword'
+                                        |
                                         translate }}</label>
                                     <input type="password" id="confirmPassword" class="form-control"
                                         placeholder="{{ 'confirmPasswordPlaceholder' | translate }}"
@@ -636,7 +659,7 @@
                                             {{ 'loginTranslate.passwordRequired' | translate }}
                                         </ng-container>
                                         <ng-container *ngIf="password !== confirmPassword">
-                                        {{ 'loginTranslate.passwordNotMAtch' | translate }}
+                                            {{ 'loginTranslate.passwordNotMAtch' | translate }}
                                         </ng-container>
                                     </div>
                                 </div>
@@ -680,12 +703,14 @@
                                 </div>
                             </div>
                             <div class="modal-footer1 modal-btn border-0 justify-content-center">
-                                <button type="submit" class="create-account d-block">{{ 'loginTranslate.createAccount' | translate
+                                <button type="submit" class="create-account d-block">{{ 'loginTranslate.createAccount' |
+                                    translate
                                     }}</button>
                                 <span class="mt-3 dont-account">
                                     {{ 'loginTranslate.alreadyHaveAnAccount' | translate }}
                                     <a class="register" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal-login">{{ 'loginTranslate.logIn' | translate }}</a>
+                                        data-bs-target="#exampleModal-login">{{ 'loginTranslate.logIn' | translate
+                                        }}</a>
                                 </span>
                             </div>
                         </div>

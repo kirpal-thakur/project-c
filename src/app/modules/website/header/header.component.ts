@@ -3,6 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
@@ -21,6 +22,7 @@ declare var google: any; // Declare google
 export class HeaderComponent implements OnInit {
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm;
+
 
   isNavbarExpanded = false;
   isDarkMode: boolean = false;
@@ -53,7 +55,7 @@ export class HeaderComponent implements OnInit {
  //this is get by the domain
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
- domains: any = environment.domains;
+ langs: any = environment.langs;
   //clubs
   // clubs = [
   //   { id: 1, name: 'Club A' },
@@ -96,7 +98,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private translateService: TranslateService,
     public dialog: MatDialog,
-    private commonDataService: CommonDataService
+    private commonDataService: CommonDataService,
+    private http: HttpClient
   ) {}
 
   isScrolled = false;
@@ -169,7 +172,27 @@ export class HeaderComponent implements OnInit {
 
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage);
+
+    const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
+    if (target) {
+      this.lang = target.value;
+      this.getContentForLanguage(this.lang);
   }
+}
+  getContentForLanguage(lang: string): void {
+    const apiUrl = `${environment.apiUrl}language/${lang}`;  // Use the API URL from the environment file
+    this.http.get(apiUrl).subscribe({
+      next: (response: any) => {
+        // Handle the API response based on the selected language
+        console.log(response);
+        // You can update the UI or internal state with the response data
+      },
+      error: (error) => {
+        console.error('Error fetching language content', error);
+      }
+    });
+  }
+  
 
   login() {
     this.loginButtonClicked = true;
@@ -484,5 +507,6 @@ export class HeaderComponent implements OnInit {
       console.log(resp, 'club-resp');
     });
   }
+  
 
 }

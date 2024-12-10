@@ -383,6 +383,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
                                 <h2 class="premium-heading2">{{ 'talentTranslate.premium' | translate }}</h2>
                                 <h3 class="premium-heading3">
                                     {{ isActive1 ? '470' : '47' }}<span>.- CHF / {{ isActive1 ? 'Year' : 'Month'
@@ -396,12 +397,22 @@
                                 <div class="premium-text" *ngFor="let feature of premiumFeatures">
                                     <img src="./assets/images/mdi_tick.svg">
                                     <p>{{ feature }}</p>
+
+                                    
                                 </div>
+                                <!-- <div class="icon-container" (click)="addText()">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            
+                                
+                                <div class="dynamic-text-container">
+                                    <p *ngFor="let text of dynamicTexts" class="dynamic-text">{{ text }}</p>
+                                </div> -->
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <!-- Toggle for Multi-Country Plan -->
             <div>
@@ -418,6 +429,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
                                 <h2 class="premium-heading2">{{ 'talentTranslate.multi-country' | translate }} </h2>
                                 <h3 class="premium-heading3">
                                     {{ isActive2 ? '110' : '11' }}<span>.- CHF / {{ isActive2 ? 'Year' : 'Month'
@@ -452,6 +464,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
                                 <h2 class="premium-heading2">{{ 'talentTranslate.booster' | translate }}</h2>
                                 <h3 class="premium-heading3">
                                     {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month'
