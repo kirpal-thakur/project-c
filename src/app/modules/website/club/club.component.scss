@@ -39,11 +39,12 @@ P {
 }
 
 .banner-left {
-    position: absolute;
-    top: 30%;
-    left: 6%;
-    z-index: 2;
-    padding-right: 71%;
+        position: relative;
+        top: 120%;
+        left: 0;
+        z-index: 2;
+        margin-right: 22%;
+    
 }
 
 .banner-heading {
@@ -2014,11 +2015,6 @@ span {
         right: 68%;
     }
 
-    .banner-left {
-        padding-right: 71%;
-        // top: 33%;
-        left: 8%;
-    }
 }
 
 @media (min-width: 1920px) {
@@ -2102,12 +2098,6 @@ span {
     .feature-player3 .flag-image7 {
         top: 140px;
         left: 10px;
-    }
-
-    .banner-left {
-        padding-right: 67%;
-        // top: 35%;
-        left: 16%;
     }
 
     .feature-player1 .flag-image,
@@ -2237,11 +2227,6 @@ span {
         height: 830px;
     }
 
-    .banner-left {
-        left: 25%;
-        padding-right: 60%;
-    }
-
     .banner-image1 img {
         width: 400px;
         height: 700px;
@@ -2287,11 +2272,11 @@ span {
 
 }
 
-@media (max-width: 1441px) {
-    .skyscraper-image {
-        display: none
-    }
-}
+// @media (max-width: 1441px) {
+//     .skyscraper-image {
+//         display: none
+//     }
+// }
 
 
 @media (max-width: 1404px) {
@@ -2396,11 +2381,6 @@ span {
     .player-img img {
         height: 210px;
         width: 210px;
-    }
-
-    .banner-left {
-        padding-right: 68%;
-        top: 35%;
     }
 
     .feature-players .player-img img {
@@ -2726,11 +2706,6 @@ span {
         right: 46%;
     }
 
-    .banner-left {
-        padding-right: 68%;
-        top: 35%;
-    }
-
     .feature-players .player-img img {
         height: 210px;
         width: 210px;
@@ -2886,7 +2861,6 @@ span {
 
     .player-member6 {
         top: 69%;
-        top: 42%;
         right: 28%;
     }
 
@@ -2930,10 +2904,6 @@ span {
         width: 80px;
     }
 
-    .banner-left {
-        padding-right: 73%;
-        top: 35%;
-    }
 
     .player1 {
         height: 190px;
@@ -3376,12 +3346,13 @@ span {
     .banner {
         height: 950px;
     }
-
-
     .banner-left {
-        padding-right: 0;
-        top: 15%;
+        top: 80%;
     }
+    span {
+        font-size: 13px;
+    }
+
 
     .player-member1 {
         top: 42%;
@@ -3466,19 +3437,19 @@ span {
         width: 100%;
     }
 
-    .premium-col-right {
-        padding-top: 30px;
-        padding-right: 30px;
-    }
+    // .premium-col-right {
+    //     padding-top: 30px;
+    //     padding-right: 30px;
+    // }
 
-    .premium-img {
-        padding-top: 30px;
-        padding-left: 30px;
-    }
-
+    // .premium-img {
+    //     padding-top: 30px;
+    //     padding-left: 30px;
+    // }
     .premium {
-        margin-bottom: 30px;
+        padding: 30px 20px 40px 20px;
     }
+
 
     .half-image {
         display: none;
@@ -4261,9 +4232,9 @@ span {
 
     }
 
-    .premium-img {
-        height: 200px;
-    }
+    // .premium-img {
+    //     height: 200px;
+    // }
 }
 
 
@@ -4272,13 +4243,12 @@ span {
         height: 62vh;
     }
 
-    .features {
-        height: 880px;
+    .banner-left {
+        margin-right: 0;
     }
 
-    .banner-left {
-        padding-right: 0;
-        top: 20%;
+    .features {
+        height: 880px;
     }
 
     .player-member1 {
@@ -4290,6 +4260,16 @@ span {
         right: 76%;
         top: 71%;
     }
+    img.bg-image {
+        height: 100%;
+        width: 100%;
+    }
+    .premium-img {
+        width: 100%;
+        height: 150px;
+    }
+    
+    
 
     .player-member3 {
         top: 89%;
@@ -4857,18 +4837,18 @@ span {
         font-size: 25px;
     }
 
-    .premium-col-right {
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-    }
+    // .premium-col-right {
+    //     padding-top: 20px;
+    //     padding-right: 30px;
+    //     padding-bottom: 10px;
+    //     padding-left: 10px;
+    // }
 
-    .premium-img {
-        padding-top: 10px;
-        padding-left: 10px;
-        height: 180px;
-    }
+    // .premium-img {
+    //     padding-top: 10px;
+    //     padding-left: 10px;
+    //     height: 180px;
+    // }
 
     .player2 .player-img::after {
         width: 35px;
@@ -4881,6 +4861,9 @@ span {
         bottom: 29%;
         width: 320px;
         height: 210px;
+    }
+    .premium {
+        padding: 30px 20px 20px 10px;
     }
 
     .club-offers1 img {
@@ -5699,9 +5682,9 @@ span {
         line-height: 19px;
     }
 
-    .premium-img {
-        width: 290px;
-    }
+    // .premium-img {
+    //     width: 290px;
+    // }
 
     .button1 {
         top: 53%;

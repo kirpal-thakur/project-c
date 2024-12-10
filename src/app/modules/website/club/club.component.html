@@ -698,28 +698,32 @@
                     </div>
 
                 </div>
-
-                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
-
-                    <div *ngIf="adVisible[4]" class="large-rectangle">
-                        <img src="./assets/images/large rectangle - 336x280 .png">
-                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-
-                    </div>
-
-                    <div *ngIf="adVisible[5]" class="inline-rectangle">
-                        <img src="./assets/images/inline rectangle - 300x250.png">
-                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-
-                    <div *ngIf="adVisible[6]" class="square">
-                        <img src="./assets/images/sqaure - 250x250.png">
-                        <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-
-                </div>
             </div>
         </div>
+
+
+        <div>
+        <div class="container">
+        <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+            <div *ngIf="adVisible[4]" class="large-rectangle">
+                <img src="./assets/images/large rectangle - 336x280 .png">
+                <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+
+            </div>
+
+            <div *ngIf="adVisible[5]" class="inline-rectangle">
+                <img src="./assets/images/inline rectangle - 300x250.png">
+                <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div *ngIf="adVisible[6]" class="square">
+                <img src="./assets/images/sqaure - 250x250.png">
+                <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            </div>
+
+        </div>
+    </div>
 
         <app-footer></app-footer>
     </div>

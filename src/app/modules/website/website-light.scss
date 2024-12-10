@@ -2041,38 +2041,86 @@ a {
 // ------------------------- users end ------------------
 
 // ------------------------- respone------------------
-
-// @media (min-width: 992px) {
-//   .container, .container-lg, .container-md, .container-sm {
-//       max-width: 790px;
-//   }
-// }
-// @media (min-width: 1200px) {
-//   .container, .container-lg, .container-md, .container-sm, .container-xl {
-//       max-width: 1025px;
-//   }
-// }
-
-@media (min-width: 1281px) {
-  .skyscraper-image img {
+@media (min-width: 1200px){
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1070px;
+  }
+}
+@media (min-width: 1280px) {
+  .skyscraper-image img, .skyscraper-left img, .skyscraper-right img {
     height: 580px !important;
     width: 105px !important;
   }
 
-  .skyscraper-image {
+  .skyscraper-image, .skyscraper-left, .skyscraper-right {
+    height: 580px !important;
+    width: 105px !important;
+  }
+}
+@media (min-width: 1440px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1220px;
+  }
+}
+@media (min-width: 1536px) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl {
+      max-width: 1320px;
+  }
+}
+@media (min-width: 2560px){
+  .skyscraper-image img, .skyscraper-left img, .skyscraper-right img {
+    height: 580px !important;
+    width: 105px !important;
+  }
+
+  .skyscraper-image, .skyscraper-left, .skyscraper-right {
     height: 580px !important;
     width: 105px !important;
   }
 }
 
-// @media (min-width: 1400px) {
-//   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-//       max-width: 1230px;
-//   }
-// }
-
 
 @media (max-width: 1199px) {
+
+  .leaderboard-club-image img,
+  .small-sqaure-image img,
+  .skyscraper-image img,
+  .skyscraper-image img,
+  .wide-skyscraper-image img,
+  .leaderboard-image img,
+  .banner-image img,
+  .advertisement,
+  .advertisement1 {
+    display: none;
+  }
+
+  .skyscraper-image,
+  .wide-skyscraper-image,
+  .leaderboard-club-image,
+  .leaderboard-image,
+  .small-sqaure-image {
+    display: none;
+  }
+
+  .leaderboard-club-image img,
+  .small-sqaure-image img,
+  .skyscraper-image img,
+  .skyscraper-image img,
+  .wide-skyscraper-image img,
+  .leaderboard-image img,
+  .banner-image img,
+  .advertisement,
+  .advertisement1,
+  .skyscraper-left img,
+  .skyscraper-right img, .advertisment 
+    {
+    display: none;
+  }
+
+  .skyscraper-right,
+  .skyscraper-left {
+    display: none;
+  }
 
   .dashboard-title {
     margin-right: 3%;
@@ -2082,22 +2130,6 @@ a {
     width: 50px;
     height: 25px;
   }
-
-  // .light-theme .website-code .slider:before {
-  //   height: 28px;
-  //   width: 28px;
-  //   left: 0px;
-  //   bottom: 0px;
-  // }
-
-  // .notification_dropdown a svg {
-  //   width: 20px;
-  // }
-
-  // .country_dropdown a img {
-  //   width: 33px;
-  //   height: 35px;
-  // }
 
   .profile img {
     height: 35px;
@@ -2121,12 +2153,6 @@ a {
 }
 
 @media (max-width: 991px) {
-
-  .skyscraper-right,
-  .skyscraper-left {
-    display: none;
-  }
-
   .mdc-list-item.mdc-list-item--with-one-line {
     height: 32px !important;
   }

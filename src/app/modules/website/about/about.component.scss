@@ -522,12 +522,6 @@ img.join-btn {
 
 }
 
-@media (max-width: 1441px){
-  .skyscraper-left, .skyscraper-right{
-      display: none
-  }
-}
-
 @media (max-width: 1199px) {
   .main-bnr {
     height: 300px;
@@ -572,46 +566,12 @@ img.join-btn {
     width: 520px;
   }
 
-  .club {
-    height: 600px;
-  }
+  .club-banner {
+    padding: 30%;
+}
 }
 
 @media (max-width: 991px) {
-
-  .leaderboard-club-image img,
-  .small-sqaure-image img,
-  .skyscraper-image img,
-  .skyscraper-image img,
-  .wide-skyscraper-image img,
-  .leaderboard-image img,
-  .banner-image img,
-  .advertisement,
-  .advertisement1 {
-    display: none;
-  }
-
-  .skyscraper-image,
-  .wide-skyscraper-image,
-  .leaderboard-club-image,
-  .leaderboard-image,
-  .small-sqaure-image {
-    display: none;
-  }
-
-  .leaderboard-club-image img,
-  .small-sqaure-image img,
-  .skyscraper-image img,
-  .skyscraper-image img,
-  .wide-skyscraper-image img,
-  .leaderboard-image img,
-  .banner-image img,
-  .advertisement,
-  .advertisement1,
-  .skyscraper-left img,
-  .skyscraper-right img {
-    display: none;
-  }
 
   .py_0 {
     padding-top: 30px;
