@@ -13,7 +13,7 @@ import { CommonDataService } from '../../../services/common-data.service';
 import { ToastrService } from 'ngx-toastr';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
-
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'app-header',
@@ -61,46 +61,59 @@ export class HeaderComponent implements OnInit {
   clubs: Array<{ id: number; name: string }> = [];
   langs: any = environment.langs;
 
-  teams = [
-    { id: 1, name: 'Team Alpha' },
-    { id: 2, name: 'Team Bravo' },
-    { id: 3, name: 'Team Charlie' },
-    { id: 4, name: 'Team Delta' },
-    { id: 5, name: 'Team Echo' },
-  ];
+  allLanguage = [];
+  selectedLanguageId = null;
+    //clubs
+    // clubs = [
+    //   { id: 1, name: 'Club A' },
+    //   { id: 2, name: 'Club B' },
+    //   { id: 3, name: 'Club C' },
+    //   { id: 4, name: 'Club D' },
+    //   { id: 5, name: 'Club E' },
+    // ];
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      740: { items: 3 },
-      940: { items: 6 }
-    },
-    nav: true
-  };
+    teams = [
+      { id: 1, name: 'Team Alpha' },
+      { id: 2, name: 'Team Bravo' },
+      { id: 3, name: 'Team Charlie' },
+      { id: 4, name: 'Team Delta' },
+      { id: 5, name: 'Team Echo' },
+    ];
 
-  constructor(
-    private themeService: ThemeService,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private translateService: TranslateService,
-    public dialog: MatDialog,
-    private commonDataService: CommonDataService,
-    private http: HttpClient,
-    private toastr : ToastrService
-  ) {}
+    customOptions: OwlOptions = {
+      loop: true,
+      mouseDrag: false,
+      touchDrag: false,
+      pullDrag: false,
+      dots: false,
+      navSpeed: 700,
+      navText: ['', ''],
+      responsive: {
+        0: { items: 1 },
+        400: { items: 2 },
+        740: { items: 3 },
+        940: { items: 6 }
+      },
+      nav: true
+    };
 
-  isScrolled = false;
-  serverBusy = false;
-  @HostListener('window:scroll', [])
+    constructor(
+      private themeService: ThemeService,
+      private authService: AuthService,
+      private route: ActivatedRoute,
+      private router: Router,
+      private translateService: TranslateService,
+      public dialog: MatDialog,
+      private commonDataService: CommonDataService,
+      private http: HttpClient,
+      private toastr : ToastrService,
+      private webpage: WebPages
+    ) {}
+
+    isScrolled = false;
+    serverBusy = false;
+    @HostListener('window:scroll', [])
+
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
@@ -182,6 +195,8 @@ export class HeaderComponent implements OnInit {
     if (typeof google !== 'undefined' && google.accounts) {
       this.initializeGoogleSignIn();
     }
+
+    this.getAllLanguage();
   }
 
   setActive(index: number): void {
@@ -209,8 +224,17 @@ export class HeaderComponent implements OnInit {
   ChangeLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedLanguage = selectElement.value;
-
+    let selectedLanguageId : any = null;
+    let getLanguageIndex = this.allLanguage.findIndex((val:any) => {
+      if(val.slug == selectedLanguage){
+        selectedLanguageId = val.id
+        return val;
+      }
+    });
+    this.webpage.updateData(selectedLanguageId);
+    this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', selectedLanguage);
+    localStorage.setItem('lang_id', selectedLanguageId);
     this.translateService.use(selectedLanguage);
 
     const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
@@ -232,7 +256,7 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  
+
 
   login() {
     this.loginButtonClicked = true;
@@ -545,6 +569,15 @@ export class HeaderComponent implements OnInit {
       console.log(resp, 'club-resp');
     });
   }
-  
+
+
+  getAllLanguage(){
+    this.webpage.getAllLanguage().subscribe((res) => {
+      if(res.status){
+        this.allLanguage = res.data.languages;
+        console.log(this.allLanguage, 'testing...');
+      }
+    });
+  }
 
 }
