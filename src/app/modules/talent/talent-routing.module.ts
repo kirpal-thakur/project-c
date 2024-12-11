@@ -17,18 +17,48 @@ const routes: Routes = [
     path: '',
     component: IndexComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-      { path: 'favorites', component: FavoritesComponent},
-      { path: 'membership', component: MembershipComponent},
-      { path: 'explore', component: ExploreComponent},
-      { path: 'chat', component: ChatComponent},
-      { path: 'plans', component: PlanComponent},
-      { path: 'countries', component: CountriesComponent},
-      { path: 'setting', component: SettingComponent},
-      { path: 'view/player/:id', component: ViewProfileComponent},
-      { path: 'view/scout/:id', component: ViewProfileComponent },
-      { path: 'view/club/:id', component: ViewProfileComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' , data: { title: 'Dashboard' }},
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+        data: { title: 'Dashboard' }
+      },
+      {
+        path: 'favorites',
+        component: FavoritesComponent,
+        data: { title: 'Favorites' }
+      },
+      {
+        path: 'membership',
+        component: MembershipComponent,
+        data: { title: 'Membership' }
+      },
+      {
+        path: 'explore',
+        component: ExploreComponent,
+        data: { title: 'Explore' }
+      },
+      {
+        path: 'chat',
+        component: ChatComponent,
+        data: { title: 'Chat' }
+      },
+      {
+        path: 'plans',
+        component: PlanComponent,
+        data: { title: 'Plans' }
+      },
+      {
+        path: 'countries',
+        component: CountriesComponent,
+        data: { title: 'Countries' }
+      },
+      {
+        path: 'setting',
+        component: SettingComponent,
+        data: { title: 'Settings' }
+      },
     ]
   }
 ];

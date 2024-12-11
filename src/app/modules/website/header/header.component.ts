@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommonDataService } from '../../../services/common-data.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
-
+import { WebPages } from '../../../services/webpages.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -52,6 +52,8 @@ export class HeaderComponent implements OnInit {
  //this is get by the domain
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
+ allLanguage = [];
+ selectedLanguageId = null;
   //clubs
   // clubs = [
   //   { id: 1, name: 'Club A' },
@@ -94,7 +96,8 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private translateService: TranslateService,
     public dialog: MatDialog,
-    private commonDataService: CommonDataService
+    private commonDataService: CommonDataService,
+    private webpage: WebPages
   ) {}
 
   isScrolled = false;
@@ -137,6 +140,8 @@ export class HeaderComponent implements OnInit {
     if (typeof google !== 'undefined' && google.accounts) {
       this.initializeGoogleSignIn();
     }
+
+    this.getAllLanguage();
   }
 
   setActive(index: number): void {
@@ -164,8 +169,17 @@ export class HeaderComponent implements OnInit {
   ChangeLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedLanguage = selectElement.value;
-
+    let selectedLanguageId : any = null;
+    let getLanguageIndex = this.allLanguage.findIndex((val:any) => {
+      if(val.slug == selectedLanguage){
+        selectedLanguageId = val.id
+        return val;
+      }
+    });
+    this.webpage.updateData(selectedLanguageId);
+    this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', selectedLanguage);
+    localStorage.setItem('lang_id', selectedLanguageId);
     this.translateService.use(selectedLanguage);
   }
 
@@ -215,7 +229,6 @@ export class HeaderComponent implements OnInit {
           }
           localStorage.setItem('authToken', token);
           localStorage.setItem('userData', JSON.stringify(userData));
-          localStorage.setItem('userInfo', JSON.stringify(userData));
 
           let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
           if (modal) {
@@ -495,6 +508,15 @@ export class HeaderComponent implements OnInit {
         name: club.club_name || ''
       }));
       console.log(resp, 'club-resp');
+    });
+  }
+
+  getAllLanguage(){
+    this.webpage.getAllLanguage().subscribe((res) => {
+      if(res.status){
+        this.allLanguage = res.data.languages;
+        console.log(this.allLanguage, 'testing...');
+      }
     });
   }
 

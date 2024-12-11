@@ -5,81 +5,557 @@ import { environment } from '../../environments/environment';
 import { Observable, of, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
+export interface Notification {
+  id: number;
+  event: string;
+  message: string;
+  senderId: number;
+  receiverId: number;
+  seen: number; // 0 for unseen, 1 for seen
+  time: string; // Assuming this is a date-time string
+  senderName: string;
+  senderProfileImage: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class TalentService {
   private apiUrl: string;
+  private domain: any;
   private userToken: string | null;
-  private apiUrl2 = 'https://api.socceryou.ch/api/';
   public teams: any[] = [];
   private messageSource = new Subject<string>();
   message$ = this.messageSource.asObservable();
+  public lang:any; // You can dynamically set this if needed
+  languages:any = environment.langs;
+  private apiUrl3 = "https://alerts.socceryou.ch/";
 
   constructor(private http: HttpClient) {
+    
+      // Retrieve the selected language code from localStorage
+      const selectedLanguageSlug = localStorage.getItem('lang') || '';
+
+      // Find the corresponding language ID from the langs array
+      const lang = this.languages.find(
+        (lang:any) => lang.slug === selectedLanguageSlug
+      );
+
+      // Default to a specific language ID if none is found (e.g., English)
+      this.lang = lang ? lang.id : 1;
+
     this.apiUrl = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
+    this.domain = environment.targetDomain.id;
+    console.log(this.domain);
+  }
+
+  // Method to create common headers for all requests
+  private headers(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`,
+      // 'Domain': this.domain,
+      // 'Lang': this.lang
+    });
   }
 
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);
   }
 
-  getProfileData(userId: any=1): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}profile`,
-      {  headers } // Combine params and headers here
+  getNotifications(userId: any = 1): Observable<any> {
+    return this.http.get<{ status: boolean, notifications: Notification[], unseen_count: number, total_count:number }>(
+      `${this.apiUrl3}notifications?userId=${userId}`,
     );
   }
 
-  getPlans(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-packages`
+  getProfileData(userId: any = 1): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
+      `${this.apiUrl}profile`,
+      { headers }
     );
   }
 
   getPackages(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-  
-    // Send the HTTP GET request with both params and headers
+    const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: {} }>(
       `${this.apiUrl}user/get-packages`,
-      {  headers } // Combine params and headers here
+      { headers }
+    );
+  }
+
+  getPlans(): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}get-packages`,
+      { headers }
     );
   }
 
   getCards(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-payment-methods`
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-payment-methods`,
+      { headers }
     );
   }
 
-  getUser(user:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/profile/${user}`
+  getUser(user: any): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/profile/${user}`,
+      { headers }
     );
   }
 
   getGalleryData(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-gallery`
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-gallery`,
+      { headers }
     );
   }
 
   getHighlightsData(): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}user/get-gallery-highlights`,
+      { headers }
+    );
+  }
+
+  getBoosterData(): Observable<any> {
+    const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-gallery-highlights`
+      `${this.apiUrl}user/get-booster-stats`,
+      { headers }
+    );
+  }
+
+  // Modified function to search clubs based on a search term
+  searchClubs(clubName: string): Observable<any> {
+    // Prepare the headers (if needed)
+    const headers = this.headers();
+
+    // Make the GET request to the API with the query parameter
+    return this.http.get(`${this.apiUrl}get-clubs-list?club_name=${clubName}`, { headers });
+  }
+
+  // Fetch teams (without any search term)
+  getClubs(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get(`${this.apiUrl}get-clubs-list`, { headers });
+  }
+
+  getClubsForPlayer(): Observable<any> {
+    const headers = this.headers();
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-clubs-list`, {headers}
+    );
+  }
+
+  getLeagues(): Observable<any> {
+    const headers = this.headers();
+    return this.http.get(`${this.apiUrl}get-leagues`, {headers});
+  }
+  
+  getCoverImg(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
+      `${this.apiUrl}user/get-cover-image`, {headers}
+    );
+  }
+
+  // Method to update user profile  
+  updateUserProfile(formData: FormData): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post(`${this.apiUrl}user/update-profile`, formData, { headers });
+  }
+  
+  // Method to update user profile  
+  updateGeneralProfile(formData: FormData): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post(`${this.apiUrl}player/update-general-info`, formData, { headers });
+  }
+  
+  getPerformanceData(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}player/get-performance-detail`, { headers }
+    );
+  }
+
+  getTransferData(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}player/get-transfer-detail`, { headers }
+    );
+  }
+  
+  getViewTransferData(id:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-transfer-detail/${id}`, { headers }
+    );
+  }
+  
+  getCountries(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-countries`, { headers }
+    );
+
+  }
+  
+  getDomains(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-domains`, { headers }
+    );
+  }
+
+  getUserDomains(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/get-active-domains`, { headers }
+    );
+  }
+
+  removeFavorites(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}delete-favorites`, params, { headers });
+  }
+
+  getExportLinkPurchaseData(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/export-purchase-history`, { headers }    );
+  }
+
+  getUserPlans(): Observable<any> {
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/get-active-packages`
+    );
+  }
+
+  uploadCoverImage(formdata: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}user/upload-cover-image/`, formdata, { headers });
+  }
+
+  // getFavoritesData(userId:any, params:any): Observable<any> {
+  //   return this.http.get<{ status: boolean, message: string, data: { } }>(
+  //     `${this.apiUrl}get-favorites`    );
+  // }
+
+  getAllUses(): Observable<any> {
+    const headers = this.headers();
+
+    // Construct HttpParams object
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}users-frontend-with-login?noLimit=true`, { headers }
+    );
+  }
+
+  deleteCoverImage(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}user/delete-cover-image/`, {headers}
+    );
+  }
+  
+  uploadProfileImage(formdata: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}user/upload-profile-image/`, formdata, { headers });
+  }
+
+  uploadGalleryImages(formdata: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}user/upload-gallery-image/`, formdata, { headers });
+  }
+
+  deleteGalleryImage(params:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}user/delete-gallery-file`, params, { headers });
+  }
+
+  updateTransferDetails(transferId: number, transferData: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(
+      `${this.apiUrl}player/edit-transfer-detail/${transferId}`,
+      transferData, 
+      { headers }
+    );
+  }
+  
+  getPerformanceReports(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<any>(
+      `${this.apiUrl}player/get-performance-reports`,
+      { headers }
+    );
+  }
+
+  
+  updatePerformance(performanceId:any, params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/edit-performance-detail/${performanceId}`, params, { headers });
+  }
+
+  // Update newsletter subscription
+  updateNewsletter(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}user/settings/newsletter`, params, { headers });
+  }
+
+  uploadReport(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/upload-performance-report`, params, {
+      headers: headers,
+      reportProgress: true,  // This enables progress tracking
+      observe: 'events',     // This allows us to observe the full event stream, including upload progress
+    });
+  }
+ 
+
+  addPerformance(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/add-performance-detail`, params, { headers });
+  }
+
+  deletePerformanceReport(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/delete-performance-report`, params, { headers });
+  }
+
+  deletePerformance(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<any>(`${this.apiUrl}player/delete-performance-detail/${params}`,  { headers });
+  }
+
+  updateTransfer(transferId:any, params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/edit-transfer-detail/${transferId}`, params, { headers });
+  }
+
+  addTransfer(params: any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.post<any>(`${this.apiUrl}player/add-transfer-detail/`, params, { headers });
+  }
+
+  deleteTransfer(id: any): Observable<any> {
+    const headers = this.headers();
+
+    // Make sure you use DELETE, not GET
+    return this.http.get<any>(`${this.apiUrl}player/delete-transfer-detail/${id}`, { headers });
+  }
+  
+  /**
+   * Change password for the user.
+   * @param newPassword The new password to set.
+   * @param confirmPassword The confirmation of the new password.
+   * @returns Observable of the API response.
+   */
+  changePassword(newPassword: string, confirmPassword: string): Observable<any> {
+    const headers = this.headers();
+
+    const formData = new FormData();
+    formData.append('new_password', newPassword);
+    formData.append('new_con_password', confirmPassword);
+
+    // POST request to the change-password API
+    return this.http.post<any>(`${this.apiUrl}change-password`, formData, { headers });
+  }
+
+  
+  getPositions(): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<any>(
+      `${this.apiUrl}/get-positions`,
+      { headers }
+    );
+  }
+
+  toggleFeaturedFiles(reportIds: any[]): Observable<any> {
+    const headers = this.headers();
+
+    let params = new HttpParams();
+    reportIds.forEach(id => {
+      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    return this.http.post(`${this.apiUrl}user/set-featured-file`, params , {headers});
+  }
+  
+
+  getPerformanceReportsData(id:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<any>(
+      `${this.apiUrl}get-performance-reports/${id}`,
+      { headers }
+    );
+  }
+
+  getPerformanceList(id:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<any>(
+      `${this.apiUrl}get-performance-detail/${id}`,
+      { headers }
+    );
+  }
+
+  
+  getGalleryFiles(id:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery/${id}`, { headers }
+    );
+  }
+
+  
+  getHighlightsFiles(id:any): Observable<any> {
+    const headers = this.headers();
+
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}get-gallery-highlights/${id}`, { headers }
+    );
+  }
+
+  // Method to track boosted profile views
+  updateBoosterAudience(audienceIds: any[]): Observable<any> {
+    const headers = this.headers();
+
+    let params = new HttpParams();
+    audienceIds.forEach(id => {
+      params = params.append('booster_audience[]', id);  // Append each ID to the 'ids[]' query param
+    });
+
+    // Send POST request with payload in body
+    return this.http.post(`${this.apiUrl}user/update-booster-audience`, params , {headers});
+  }
+
+
+  validateCoupon(couponCode: string): Observable<any> {
+    const headers = this.headers();
+
+    let params = new HttpParams();
+      params = params.append('coupon_code', couponCode);  
+
+    return this.http.post(`${this.apiUrl}user/validate-coupon`, params , {headers});
+  }
+
+
+  updateShowTour(userId: number, showTour: number): Observable<any> {
+    const headers = this.headers();
+
+    let params = new HttpParams();
+      params = params.append('user[show_tour]', showTour);  
+
+    // Send POST request with payload in body
+    return this.http.post(`${this.apiUrl}player/update-general-info`, params , {headers});
+  }
+
+
+  getExploresData(params: any): Observable<any> {
+    let queryParams = new HttpParams()
+      // Basic pagination parameters
+      .set('offset', params.offset || 0)
+      .set('limit', params.limit || 10);
+
+    // Add whereClause filters
+    if (params.whereClause) {
+      Object.keys(params.whereClause).forEach(key => {
+        const value = params.whereClause[key];
+        if (Array.isArray(value)) {
+          // If the value is an array (like for position or age), append each value
+          value.forEach(val => {
+            queryParams = queryParams.append(`whereClause[${key}][]`, val);
+          });
+        } else {
+          queryParams = queryParams.set(`whereClause[${key}]`, value);
+        }
+      });
+    }
+
+    // Add metaQuery filters
+    if (params.metaQuery && Array.isArray(params.metaQuery)) {
+      params.metaQuery.forEach((meta: any, index: number) => {
+        // Set meta_key and operator directly
+        queryParams = queryParams
+          .set(`metaQuery[${index}][meta_key]`, meta.meta_key)
+          .set(`metaQuery[${index}][operator]`, meta.operator);
+
+        // Handle meta_value separately if it's an array
+        if (Array.isArray(meta.meta_value)) {
+          meta.meta_value.forEach((value: any, valueIndex: number) => {
+            queryParams = queryParams.set(`metaQuery[${index}][meta_value][${valueIndex}]`, value);
+          });
+        } else {
+          queryParams = queryParams.set(`metaQuery[${index}][meta_value]`, meta.meta_value);
+        }
+      });
+    }
+
+    // Add ordering parameters if needed
+    if (params.orderBy) {
+      queryParams = queryParams
+        .set('orderBy', params.orderBy)
+        .set('order', params.order || 'desc');
+    }
+
+    // Add other query parameters
+    if (params.countOnly) {
+      queryParams = queryParams.set('countOnly', 'true');
+    }
+    if (params.noLimit) {
+      queryParams = queryParams.set('noLimit', 'true');
+    }
+
+    const headers = this.headers();
+
+    // Send the HTTP GET request with both params and headers
+    return this.http.get<{ status: boolean, message: string, data: {} }>(
+      `${this.apiUrl}users-frontend`,
+      { params: queryParams, headers } // Combine params and headers here
     );
   }
 
   // Fetch teams and store globally and in localStorage
   getTeams(): Observable<any> {
+    const headers = this.headers();
+
     const cachedTeams = localStorage.getItem('teams');
 
     if (cachedTeams) {
@@ -91,7 +567,7 @@ export class TalentService {
       return of(this.teams);
     } else {
       // Fetch teams from the API, store in global variable and localStorage
-      return this.http.get(`${this.apiUrl2}get-teams`).pipe(
+      return this.http.get<any>(`${this.apiUrl}get-teams`, { headers }).pipe(
         tap((response: any) => {
           if (response && response.status) {
             this.teams = response.data.teams; // Store teams globally
@@ -103,17 +579,13 @@ export class TalentService {
     }
   }
 
-  getBoosterData(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-booster-stats`
-    );
-  }
-
   // Fetch teams and store globally and in localStorage
   searchTeams(team:string): Observable<any> {
 
+    const headers = this.headers();
+
     // Fetch teams from the API, store in global variable and localStorage
-    return this.http.get(`${this.apiUrl2}get-teams?search=${team}`).pipe(
+    return this.http.get(`${this.apiUrl}get-teams?search=${team}`, { headers }).pipe(
       tap((response: any) => {
         if (response && response.status) {
           this.teams = response.data.teams; // Store teams globally
@@ -132,105 +604,25 @@ export class TalentService {
     };
   }
 
-  // Modified function to search clubs based on a search term
-  searchClubs(clubName: string): Observable<any> {
-    // Prepare the headers (if needed)
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}` // Include authorization token
-    });
 
-    // Make the GET request to the API with the query parameter
-    return this.http.get(`${this.apiUrl2}get-clubs-list?club_name=${clubName}`, { headers });
-  }
+  getPurchaseData(pageNumber: number, pageSize: number): Observable<any> {
+    const headers = this.headers();
 
-  // Fetch teams (without any search term)
-  getClubs(): Observable<any> {
-    return this.http.get(`${this.apiUrl2}get-clubs-list`);
-  }
-
-  getClubsForPlayer(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-clubs-list`, {headers}
+    return this.http.get<{ status: boolean, message: string, data: any }>(
+      `${this.apiUrl}user/get-purchase-history`, {
+        params: {
+          page: pageNumber.toString(),
+          // limit: pageSize.toString()
+        }
+        ,headers
+      }
     );
   }
 
-  getLeagues(): Observable<any> {
-    return this.http.get(`${this.apiUrl2}get-leagues`);
-  }
-  
-  getCoverImg(): Observable<any> {    
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.userToken}` // Include authorization token
-    });
-
-    return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
-      `${this.apiUrl}user/get-cover-image`
-    );
-  }
-
-  // Method to update user profile  
-  updateUserProfile(formData: FormData): Observable<any> {
-    const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.userToken}` // Include authorization token
-    });
-
-      return this.http.post(`${this.apiUrl}user/update-profile`, formData, { headers });
-  }
-  
-  // Method to update user profile  
-  updateGeneralProfile(formData: FormData): Observable<any> {
-    const headers = new HttpHeaders({
-        'Authorization': `Bearer ${this.userToken}` // Include authorization token
-    });
-
-      return this.http.post(`${this.apiUrl}player/update-general-info`, formData, { headers });
-  }
-  
-  getPerformanceData(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}player/get-performance-detail`
-    );
-  }
-
-  getTransferData(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}player/get-transfer-detail`
-    );
-  }
-  
-  getViewTransferData(id:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-transfer-detail/${id}`
-    );
-  }
-  
-  getCountries(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-countries`
-    );
-  }
-  
-  getDomains(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-domains`
-    );
-  }
-
-  getUserDomains(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-active-domains`
-    );
-  }
-  
-  // getFavoritesData(userId:any, params:any): Observable<any> {
-  //   return this.http.get<{ status: boolean, message: string, data: { } }>(
-  //     `${this.apiUrl}get-favorites`    );
-  // }
 
   getFavoritesData(params: any): Observable<any> {
+    const headers = this.headers();
+
     // Construct HttpParams object
     let queryParams = new HttpParams()
       .set('offset', params.offset || 0)
@@ -238,422 +630,55 @@ export class TalentService {
       .set('search', params.search || '');
 
     return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}get-favorites`, { params: queryParams }
-    );
-  }
-  
-  getAllUses(): Observable<any> {
-    // Construct HttpParams object
-    return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}users-frontend-with-login?noLimit=true`
-    );
-  }
-  
-  
-getExploresData(params: any): Observable<any> {
-  let queryParams = new HttpParams()
-    // Basic pagination parameters
-    .set('offset', params.offset || 0)
-    .set('limit', params.limit || 10);
-
-  // Add whereClause filters
-  if (params.whereClause) {
-    Object.keys(params.whereClause).forEach(key => {
-      const value = params.whereClause[key];
-      if (Array.isArray(value)) {
-        // If the value is an array (like for position or age), append each value
-        value.forEach(val => {
-          queryParams = queryParams.append(`whereClause[${key}][]`, val);
-        });
-      } else {
-        queryParams = queryParams.set(`whereClause[${key}]`, value);
-      }
-    });
-  }
-
-  // Add metaQuery filters
-  if (params.metaQuery && Array.isArray(params.metaQuery)) {
-    params.metaQuery.forEach((meta: any, index: number) => {
-      // Set meta_key and operator directly
-      queryParams = queryParams
-        .set(`metaQuery[${index}][meta_key]`, meta.meta_key)
-        .set(`metaQuery[${index}][operator]`, meta.operator);
-
-      // Handle meta_value separately if it's an array
-      if (Array.isArray(meta.meta_value)) {
-        meta.meta_value.forEach((value: any, valueIndex: number) => {
-          queryParams = queryParams.set(`metaQuery[${index}][meta_value][${valueIndex}]`, value);
-        });
-      } else {
-        queryParams = queryParams.set(`metaQuery[${index}][meta_value]`, meta.meta_value);
-      }
-    });
-  }
-
-  // Add ordering parameters if needed
-  if (params.orderBy) {
-    queryParams = queryParams
-      .set('orderBy', params.orderBy)
-      .set('order', params.order || 'desc');
-  }
-
-  // Add other query parameters
-  if (params.countOnly) {
-    queryParams = queryParams.set('countOnly', 'true');
-  }
-  if (params.noLimit) {
-    queryParams = queryParams.set('noLimit', 'true');
-  }
-  
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${this.userToken}`
-  });
-
-  // Send the HTTP GET request with both params and headers
-  return this.http.get<{ status: boolean, message: string, data: {} }>(
-    `${this.apiUrl}users-frontend`, 
-    { params: queryParams, headers } // Combine params and headers here
-  );
-}
-  
-  removeFavorites(params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}delete-favorites`, params, { headers });
-  }
-
-  getPurchaseData(pageNumber: number, pageSize: number): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: any }>(
-      `${this.apiUrl}user/get-purchase-history`, {
-        params: {
-          page: pageNumber.toString(),
-          // limit: pageSize.toString()
-        }
-      }
-    );
-  }
-
-  getExportLinkPurchaseData(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: any }>(
-      `${this.apiUrl}user/export-purchase-history`    );
-  }
-
-  getUserPlans(): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: any }>(
-      `${this.apiUrl}user/get-active-packages`
-    );
-  }
-    
-  uploadCoverImage(formdata: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.post<any>(`${this.apiUrl2}user/upload-cover-image/`, formdata, { headers });
-  }
-
-  deleteCoverImage(): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}user/delete-cover-image/`, {headers}
-    );
-  }
-  
-  uploadProfileImage(formdata: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.post<any>(`${this.apiUrl2}user/upload-profile-image/`, formdata, { headers });
-  }
-
-  uploadGalleryImages(formdata: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.post<any>(`${this.apiUrl2}user/upload-gallery-image/`, formdata, { headers });
-  }
-
-  deleteGalleryImage(params:any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    return this.http.post<any>(`${this.apiUrl2}user/delete-gallery-file`, params, { headers });
-  }
-
-  updateTransferDetails(transferId: number, transferData: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`, // Include authorization token
-    });
-  
-    return this.http.post<any>(
-      `${this.apiUrl2}player/edit-transfer-detail/${transferId}`, 
-      transferData, 
-      { headers }
-    );
-  }
-  
-  getPerformanceReports(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    
-    return this.http.get<any>(
-      `${this.apiUrl2}player/get-performance-reports`, 
-      { headers }
-    );
-  }
-
-  
-  updatePerformance(performanceId:any, params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}player/edit-performance-detail/${performanceId}`, params, { headers });
-  }
-
-  // Update newsletter subscription
-  updateNewsletter(params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}user/settings/newsletter`, params, { headers });
-  }
-
-  uploadReport(params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-  
-    return this.http.post<any>(`${this.apiUrl2}player/upload-performance-report`, params, {
-      headers: headers,
-      reportProgress: true,  // This enables progress tracking
-      observe: 'events',     // This allows us to observe the full event stream, including upload progress
-    });
-  }
- 
-
-  addPerformance(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}player/add-performance-detail`, params, { headers });
-  }
-
-  deletePerformanceReport(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}player/delete-performance-report`, params, { headers });
-  }
-
-  deletePerformance(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.get<any>(`${this.apiUrl2}player/delete-performance-detail/${params}`,  { headers });
-  }
-
-  updateTransfer(transferId:any, params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}player/edit-transfer-detail/${transferId}`, params, { headers });
-  }
-
-  addTransfer(params: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    return this.http.post<any>(`${this.apiUrl2}player/add-transfer-detail/`, params, { headers });
-  }
-
-  deleteTransfer(id: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');  // Get the token from localStorage
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${userToken}`
-    });
-  
-    // Pass the headers and params to the DELETE request
-    const options = {
-      headers: headers
-    };
-  
-    // Make sure you use DELETE, not GET
-    return this.http.get<any>(`${this.apiUrl2}player/delete-transfer-detail/${id}`, options);
-  }
-  
-  /**
-   * Change password for the user.
-   * @param newPassword The new password to set.
-   * @param confirmPassword The confirmation of the new password.
-   * @returns Observable of the API response.
-   */
-  changePassword(newPassword: string, confirmPassword: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`,  // Add token to header
-    });
-
-    const formData = new FormData();
-    formData.append('new_password', newPassword);
-    formData.append('new_con_password', confirmPassword);
-
-    // POST request to the change-password API
-    return this.http.post<any>(`${this.apiUrl2}change-password`, formData, { headers });
-  }
-
-  
-  getPositions(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    
-    return this.http.get<any>(
-      `${this.apiUrl2}/get-positions`, 
-      { headers }
+      `${this.apiUrl}get-favorites`, { params: queryParams , headers }
     );
   }
 
   // Download reports (assuming backend supports this feature)
-  downloadReports(reportIds: string[]): Observable<any> {
-    let params = new HttpParams();
-    reportIds.forEach(id => {
-      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
-    });
+  // downloadReports(reportIds: string[]): Observable<any> {
+  //   console.log(reportIds);
 
-    return this.http.get(`${this.apiUrl2}download-reports`, { params, responseType: 'blob' });
+  //   const headers = this.headers();
+
+  //   let params = new HttpParams();
+  //   reportIds.forEach(id => {
+  //     params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+  //   });
+
+  //   return this.http.post(`${this.apiUrl}player/download-performance-reports`, { params, responseType: 'blob',headers });
+  // }
+
+  // Download reports (assuming backend supports this feature)
+  downloadReports(reportIds: string[]): Observable<any> {
+
+    const headers = this.headers(); // Assuming this.headers() provides correct headers
+    const body = { id: reportIds }; // Send report IDs as an array in the request body
+
+    return this.http.post(`${this.apiUrl}player/download-performance-reports`, body, {
+      headers // Specify response type for downloading files
+    });
   }
 
   // talent.service.ts
   subscribeToPlan(subscriptionData: { paymentMethodId: string; planId: number; }): Observable<any> {
-    return this.http.post('/api/subscribe', subscriptionData); // Adjust the endpoint as needed
-  }
+    const headers = this.headers();
 
-  toggleFeaturedFiles(reportIds: any[]): Observable<any> {
-  
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    let params = new HttpParams();
-    reportIds.forEach(id => {
-      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
-    });
-
-    return this.http.post(`${this.apiUrl2}user/set-featured-file`, params , {headers});
-  }
-  
-
-  getPerformanceReportsData(id:any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    
-    return this.http.get<any>(
-      `${this.apiUrl2}get-performance-reports/${id}`, 
-      { headers }
-    );
-  }
-
-  getPerformanceList(id:any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-    
-    return this.http.get<any>(
-      `${this.apiUrl2}get-performance-detail/${id}`, 
-      { headers }
-    );
-  }
-
-  
-  getGalleryFiles(id:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-gallery/${id}`
-    );
-  }
-
-  
-  getHighlightsFiles(id:any): Observable<any> {
-    return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-gallery-highlights/${id}`
-    );
+    return this.http.post('/api/subscribe', subscriptionData, { headers });
   }
 
   // Method to track boosted profile views
   trackProfiles(user_id: number, profileId: any[], action: string): Observable<any> {
+    const headers = this.headers();
 
     let params = new HttpParams();
-      params = params.append('user_id', user_id);  
-      params = params.append('action',  action);  
+      params = params.append('user_id', user_id);
+      params = params.append('action',  action);
       profileId.forEach(id => {
         params = params.append('profile_viewed[]', id);  // Append each ID to the 'ids[]' query param
       });
-      
-    // Send POST request with payload in body
-    return this.http.post<any>(`${this.apiUrl2}user/track-booster-profile`, params);
-  }
-
-  // Method to track boosted profile views
-  updateBoosterAudience(audienceIds: any[]): Observable<any> {
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    let params = new HttpParams();
-    audienceIds.forEach(id => {
-      params = params.append('booster_audience[]', id);  // Append each ID to the 'ids[]' query param
-    });
 
     // Send POST request with payload in body
-    return this.http.post(`${this.apiUrl2}user/update-booster-audience`, params , {headers});
-
+    return this.http.post<any>(`${this.apiUrl}user/track-booster-profile`, params, { headers });
   }
 
-
-  validateCoupon(couponCode: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    let params = new HttpParams();
-      params = params.append('coupon_code', couponCode);  
-
-    return this.http.post(`${this.apiUrl2}user/validate-coupon`, params , {headers});
-  }
-
-
-  updateShowTour(userId: number, showTour: number): Observable<any> {
-    // const url = `https://alerts.socceryou.ch/update_showTour?userId=${userId}&showTour=${showTour}`;
-    // return this.http.get<any>(url);
-
-    
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`
-    });
-
-    let params = new HttpParams();
-      params = params.append('user[show_tour]', showTour);  
-
-    // Send POST request with payload in body
-    
-    return this.http.post(`${this.apiUrl}player/update-general-info`, params , {headers});
-  }
 }

@@ -19,7 +19,6 @@
                   <img [src]="profileImage" alt="" *ngIf="user?.meta && user?.meta?.profile_image_path" class="" />
                   <img src="../../../../assets/images/default/talent-profile-default.png" class="" alt="" *ngIf="!user?.meta || !user?.meta?.profile_image_path" />
 
-
                   <div class="user-edit ">
                     <label for="profile-upload" class="">
                       <div class="edit-profile cursor-pointer" matTooltip="Upload New Profile Image"  matTooltipPosition="right">

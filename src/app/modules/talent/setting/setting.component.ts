@@ -8,6 +8,7 @@ import {  MatDialog } from '@angular/material/dialog';
 import {
   MatDialogRef,
 } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class SettingComponent implements OnInit {
     private themeService: ThemeService,
     private authService: AuthService,
     private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
      ) {}
 
     userData: any;
@@ -52,6 +55,15 @@ export class SettingComponent implements OnInit {
     } else {
       console.log('No user data found in local storage.');
     }
+
+    // Listen for hash changes in the route
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment === 'app-settings') {
+        this.tab = 'setting'; // Switch to the App Settings tab
+      } else if (fragment === 'activity') {
+        this.tab = 'activity'; // Switch to Activity Log tab
+      }
+    });
     // this.fetchProfileData();
   }
 

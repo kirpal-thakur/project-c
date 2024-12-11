@@ -31,6 +31,7 @@ export class MembershipComponent {
   premium : any =[];
   country: any=[];
   booster: any=[];
+  demo: any=[];
   stats: any;
   exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -93,6 +94,7 @@ export class MembershipComponent {
         this.userPlans = response.data.packages;
         this.premium = this.userPlans.premium[0];
         this.booster = this.userPlans.booster[0];
+        this.demo = this.userPlans.demo[0];
         this.country = this.userPlans.country;
         this.country.count = this.userPlans.country.length;
         console.log('userPlans',this.userPlans)

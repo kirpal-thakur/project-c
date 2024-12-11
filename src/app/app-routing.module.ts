@@ -39,16 +39,17 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
   },
+  {
+    path: 'view',
+    loadChildren: () =>
+      import('./modules/shared/shared.module').then(
+        (m) => m.SharedModule
+      ),
+    canActivate: [AuthGuard]
+  },
   { path: 'success', component: SuccessComponent ,canActivate: [AuthGuard]},
   { path: 'cancel', component: CancelComponent ,canActivate: [AuthGuard]},
-  // {
-  //   path: 'view',
-  //   loadChildren: () =>
-  //     import('./modules/shared/shared.module').then(
-  //       (m) => m.SharedModule
-  //     ),
-  //   canActivate: [AuthGuard]
-  // },
+
   {
     path: 'club',
     loadChildren: () =>

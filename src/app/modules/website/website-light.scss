@@ -54,9 +54,9 @@
   /*---------------------------------------------------------------------------------------------------------
    # material css
    --------------------------------------------------------------------------------------------------------- */
-.mdc-list-item__primary-text {
-  color: white !important;
-}
+// .mdc-list-item__primary-text {
+//   color: white ;
+// }
 
 .mdc-list-item__primary-text {
   font-weight: 600 !important;
@@ -851,7 +851,7 @@ a {
 }
 
 .page-content {
-  padding: 0px 25px 50px 25px;
+  padding: 0px 25px 50px 10px;
 }
 
 .main-wrapper {
@@ -1271,7 +1271,7 @@ a.dropdown-item.ai-icon.selected {
 
 .sidebar_menu a:hover p {
   background: #023A4A;
-  padding: 10px !important;
+  // padding: 10px 10px 10px 0px !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -1280,7 +1280,7 @@ a.dropdown-item.ai-icon.selected {
 }
 
 .sidebar_menu a:hover {
-  padding: 0 10px !important;
+  // padding: 0 10px !important;
   background: #023A4A;
 
 }

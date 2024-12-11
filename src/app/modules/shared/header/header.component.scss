@@ -6,7 +6,10 @@
 .notification-box
 {
   overflow:auto;
-  max-height: 600px;
+  max-height: 80vh;
+  overflow-x: hidden;
+  transform-origin: top;
+  animation: scale-open .3s ease-in-out forwards;
 }
 
 .header-view-profile{
@@ -18,6 +21,20 @@
 }
 .header-peter{
   font-size: 12px;
+}
+
+.live-notification-box {
+  transform-origin: top;
+  animation: scale-open .3s ease-in-out forwards;
+}
+
+@keyframes scale-open {
+  from{
+    transform: scaleY(0);
+  }
+  to{
+    transform: scaleY(1);
+  }
 }
 
 @media(max-width: 768px){
@@ -114,4 +131,25 @@
 
 .search-area{
   width: 60vw;
+}
+
+.loading-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+}
+
+.mat-spinner {
+  margin-right: 8px;
+}
+
+::ng-deep .mat-mdc-form-field-infix {
+  min-height: unset !important;
+}
+
+.search-area .form-control {
+  opacity: 1;
+  // background-color: #ffffff;
 }

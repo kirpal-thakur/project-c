@@ -23,11 +23,12 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="banner-content" routerLink="/Admin">
-              <img class="home-banner-image" src="./assets/images/white-logo.png">
+              <img class="home-banner-image" src="{{imageBaseUrl+pageDetail.banner_img}}">
             </div>
             <div class="banner-btn text-center mt-5">
-              <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ 'registerNow' | translate }}
+              <a href="{{ pageDetail.banner_btn_link }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail.banner_btn_txt }}
               </a>
+              <!-- {{ 'registerNow' | translate }} -->
 
               <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
                 data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2" width="8" height="12" viewBox="0 0 8 12"
@@ -59,10 +60,12 @@
     <div class="container">
       <div class="joined">
         <div class="joined-text">
-          <h3>Recently Joined</h3>
+          <!-- <h3>Recently Joined</h3> -->
+          <h3>{{pageDetail.slider_heading}}</h3>
         </div>
         <div class="joined-btn">
-          <button type="button" [routerLink]="'/player-list'" class="btn btn-light">See All</button>
+          <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail.slider_btn_txt}}</button>
+          <!-- <a href="{{pageDetail.slider_btn_link}}" type="button" class="btn btn-light">{{pageDetail.slider_btn_txt}}</a> -->
         </div>
       </div>
     </div>
@@ -71,160 +74,34 @@
       <div class="carousel-slide" #owlCarousel (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
         (touchstart)="onTouchStart()" (touchend)="onTouchEnd()">
         <owl-carousel-o [options]="customOptions">
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/Ronaldinho Gaúcho.png" class="player-image">
-                </div>
-                <p class="player-name">Ronaldinho Gaúcho</p>
-
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag">
-                  <div class="flag-image">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                    <div class="bottom-line"></div>
-                    <div class="flag-bottom">
-                      <img src="./assets/images/birthday.svg" class="birthday-img">
-                      <p class="d-o-b">2004</p>
+          @for (slider of sliderDetail.users; track $index) {
+            <ng-template carouselSlide>
+              <div class="player-carousel">
+                <div class="player-border">
+                  <div class="player-img">
+                    <img src="{{slider.meta.profile_image_path}}" class="player-image">
+                  </div>
+                  <p class="player-name">{{slider.first_name + slider.last_name}}</p>
+  
+                  <div class="corner-image">
+                    <img src="./assets/images/FC Thun 1.png">
+                  </div>
+                  <div class="flag">
+                    <div class="flag-image">
+                      <!-- <img src="{{getFlagImage(slider.user_nationalities)}}" class="flag-img"> -->
+                      <div class="bottom-line"></div>
+                      <div class="flag-bottom">
+                        <img src="./assets/images/birthday.svg" class="birthday-img">
+                        <p class="d-o-b">{{getBirthYear(slider.meta.date_of_birth)}}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-template>
+            </ng-template>
+          }  
 
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/ziddane.png" class="player-image">
-                </div>
-                <p class="player-name">Ziddane</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag">
-                  <div class="flag-image">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                    <div class="bottom-line"></div>
-                    <div class="flag-bottom">
-                      <img src="./assets/images/birthday.svg" class="birthday-img">
-                      <p class="d-o-b">2004</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
 
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/FC Thun 1.png" class="player-image1">
-                </div>
-                <p class="player-name">FC Thun</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag-image1">
-                  <img src="./assets/images/flag.svg" class="flag-img">
-                </div>
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/Gabriel Jesus.png" class="player-image">
-                </div>
-                <p class="player-name">Gabriel Jesus</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag">
-                  <div class="flag-image">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                    <div class="bottom-line"></div>
-                    <div class="flag-bottom">
-                      <img src="./assets/images/birthday.svg" class="birthday-img">
-                      <p class="d-o-b">2004</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/E╠ütoile Carouge FC..png" class="player-image1">
-                </div>
-                <p class="player-name">Eütoile Carouge FC</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag-image1">
-                  <img src="./assets/images/flag.svg" class="flag-img">
-                </div>
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/Harry Kane.png" class="player-image">
-                </div>
-                <p class="player-name">Harry Kane</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag">
-                  <div class="flag-image">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                    <div class="bottom-line"></div>
-                    <div class="flag-bottom">
-                      <img src="./assets/images/birthday.svg" class="birthday-img">
-                      <p class="d-o-b">2004</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
-
-          <ng-template carouselSlide>
-            <div class="player-carousel">
-              <div class="player-border">
-                <div class="player-img">
-                  <img src="./assets/images/Messi.png" class="player-image">
-                </div>
-                <p class="player-name">Messi</p>
-                <div class="corner-image">
-                  <img src="./assets/images/FC Thun 1.png">
-                </div>
-                <div class="flag">
-                  <div class="flag-image">
-                    <img src="./assets/images/flag.svg" class=" flag-img">
-                    <div class="bottom-line"></div>
-                    <div class="flag-bottom">
-                      <img src="./assets/images/birthday.svg" class="birthday-img">
-                      <p class="d-o-b">2004</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ng-template>
         </owl-carousel-o>
       </div>
     </div>
@@ -962,15 +839,14 @@
       </div>
 
       <div class="club_players">
-        <h3>Platform for Football</h3>
-        <h3>Players, Clubs and Scouts.</h3>
+        <h3>{{pageDetail.hero_heading_txt}}</h3>
         <div class="club-buttons">
           <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
             <div class="button-border">
               <div class="join-text">
-                <p> Join Now</p>
-                <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
-                <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
+                <p> {{pageDetail.hero_btn_txt}}</p>
+                <img class="join-btn check-image-dark" src="{{imageBaseUrl+pageDetail.hero_bg_img}}">
+                <img class="join-btn check-image-light" src="{{imageBaseUrl+pageDetail.hero_bg_img}}">
               </div>
             </div>
           </div>

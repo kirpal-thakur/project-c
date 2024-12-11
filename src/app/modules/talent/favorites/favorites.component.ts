@@ -27,9 +27,17 @@ export class FavoritesComponent {
   selectedIds: number[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   keyword:any = "";
-  constructor(private route: ActivatedRoute, private userService: TalentService, private router: Router, public dialog: MatDialog) { }
-  
+
+  loggedInUser:any = localStorage.getItem('userData');
+
+  // Filters and UI variables (other code omitted for brevity)
+  viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
+
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router, public dialog: MatDialog) { }
+
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+
     this.route.params.subscribe((params:any) => {
       this.getUserFavorites();
     });
@@ -40,16 +48,16 @@ export class FavoritesComponent {
       // Set pagination parameters
       const page = this.paginator ? this.paginator.pageIndex * 10 : 0;
       const pageSize = this.paginator ? this.paginator.pageSize : 10;
-  
+
       // Prepare query parameters
       let params: any = {
         offset: page,
         limit: pageSize,
         search: this.keyword // Search keyword
       };
-  
+
       // Make the API request with query parameters
-      this.userService.getFavoritesData(params).subscribe((response) => {
+      this.talentService.getFavoritesData(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.userFavorites = response.data[0].favorites;
           this.totalFavorites = response.data[0].totalCount;
@@ -62,20 +70,20 @@ export class FavoritesComponent {
       console.error('Error fetching users:', error);
     }
   }
-  
+
   onPageChange() {
     this.getUserFavorites();
   }
 
-  search(filterValue:any) {   
+  search(filterValue:any) {
     this.keyword = filterValue.target?.value.trim().toLowerCase();
     if(this.keyword.length >= 3){
       this.getUserFavorites();
      } else if(this.keyword.length == 0){
       this.getUserFavorites();
-    }   
+    }
   }
-    
+
   navigate(slug:string, id:Number): void {
     let pageRoute = '/'+slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
@@ -91,9 +99,9 @@ export class FavoritesComponent {
   }
 
   selectAllFavorites() {
-    
+
     this.allSelected = !this.allSelected;
-    
+
     if (this.allSelected) {
       this.selectedIds = this.userFavorites.map((fav:any) => fav.id);
     } else {
@@ -115,24 +123,50 @@ export class FavoritesComponent {
     this.showMatDialog("", "delete-favorite-confirmation");
   }
 
-
   openViewProfile(user:any) {
 
-    const dialogRef = this.dialog.open(PlayerProfileComponent, {
-      width: '800px',
-      data: { user :  user }
-    });
+    this.exploreUser(user.role_name, user.favorite_id);
+    // const dialogRef = this.dialog.open(PlayerProfileComponent, {
+    //   width: '800px',
+    //   data: { user :  user }
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('User saved:', result);
-        // Handle the save result (e.g., update the user details)
-      } else {
-        console.log('User canceled the edit');
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     console.log('User saved:', result);
+    //     // Handle the save result (e.g., update the user details)
+    //   } else {
+    //     console.log('User canceled the edit');
+    //   }
+    // });
   }
-  
+
+  private saveTrackedViews() {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
+
+  // Track profile click only once per session
+  private trackProfileClick(profileId: number) {
+    const id: number[] = [profileId];  // Create an array of profileId
+
+    if (!this.viewsTracked[profileId]?.clicked) {
+      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
+        next: () => {
+          console.log(`Click tracked for profile ${profileId}`);
+          this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
+          this.saveTrackedViews();  // Save the updated viewsTracked
+        },
+        error: (error) => console.error('Error tracking profile click', error)
+      });
+    }
+  }
+
+  exploreUser(slug: string, id: number): void {
+    this.trackProfileClick(id); // Track the click before navigation
+    const pageRoute = 'view/' + slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
+  }
+
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
@@ -158,7 +192,7 @@ export class FavoritesComponent {
 
     let params = {id:this.idsToDelete};
 
-    this.userService.removeFavorites(params).subscribe(
+    this.talentService.removeFavorites(params).subscribe(
       response => {
         if(response.status){
           this.getUserFavorites();

@@ -1,0 +1,124 @@
+<div class="container mt-4">
+    <h2>Contact Us</h2>
+    <form #contactForm="ngForm" (ngSubmit)="submitForm()" enctype="multipart/form-data">
+        <div class="row">
+            <!-- Language ID Dropdown -->
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="lang_id">Language ID</label>
+                    <select id="lang_id" class="form-control" name="lang_id" [(ngModel)]="formData.lang_id" required>
+                        <option disabled>
+                            Select Language
+                        </option>
+                        <option *ngFor="let lang of languages" [value]="lang.id">
+                            {{ lang.language }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Banner Title -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="banner_title">Banner Title</label>
+                    <input type="text" id="banner_title" class="form-control" name="banner_title"
+                        [(ngModel)]="formData.banner_title" required>
+                </div>
+            </div>
+
+            <!-- Banner Background Image -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="banner_bg_img">Banner Background Image</label>
+                    <input type="file" id="banner_bg_img" class="form-control" (change)="onFileChange($event)" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <!-- Form Title -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_title">Form Title</label>
+                    <input type="text" id="form_title" class="form-control" name="form_title"
+                        [(ngModel)]="formData.form_title" required>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="txt_before_radio_btn">Before Profile Text</label>
+                    <input type="text" id="txt_before_radio_btn" class="form-control" name="txt_before_radio_btn"
+                        [(ngModel)]="formData.txt_before_radio_btn" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="talent_label_txt">Talent label Text</label>
+                    <input type="text" id="talent_label_txt" class="form-control" name="talent_label_txt"
+                        [(ngModel)]="formData.talent_label_txt" required>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="club_label_txt">Club label text</label>
+                    <input type="text" id="club_label_txt" class="form-control" name="club_label_txt"
+                        [(ngModel)]="formData.club_label_txt" required>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="scout_label_txt">Scout label text</label>
+                    <input type="text" id="scout_label_txt" class="form-control" name="scout_label_txt"
+                        [(ngModel)]="formData.scout_label_txt" required>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row mt-3">
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" name="email" [(ngModel)]="formData.email"
+                        required>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="submit_btn_txt">Submit Button Text</label>
+                    <input type="text" id="submit_btn_txt" class="form-control" name="submit_btn_txt" [(ngModel)]="formData.submit_btn_txt"
+                        required>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="address">Address</label>
+                        <textarea rows="8" id="address" class="form-control" name="address" [(ngModel)]="formData.address"
+                        required></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary w-100 mb-2 mt-2">Submit</button>
+    </form>
+</div>

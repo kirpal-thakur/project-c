@@ -8,6 +8,7 @@
     font-size: 14px;
     font-weight: 500;
 }
+
 .subscription-switch input[type="checkbox"]{
     position: relative;
     width: 58px;
@@ -53,8 +54,9 @@
 .subscription-plan h2 {
     font-size: 20px;
     color: #707070;
-    font-weight: 600;
+    font-weight: 800;
 }
+
 .subscription-plan{
     padding: 15px 20px;
     background: rgb(240,255,236);
@@ -183,7 +185,8 @@ sub.premium-month_title {
     padding-left: 35px;
     margin-bottom: 20px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 500;
     color: #fff;
     -webkit-user-select: none;
     -moz-user-select: none;

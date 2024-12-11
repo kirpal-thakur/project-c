@@ -5,7 +5,7 @@
       >
         <div class="d-flex align-items-center heading w-100 website-create-btn">
           <h2 class="card-title mb-0 me-3 ms-3">{{'Webpages' | translate}}</h2>
-          <a  class="btn btn-success btn-sm web-create-bg">{{'CreateNew' | translate}}</a>
+          <button (click)="createNewPage()" class="btn btn-success btn-sm web-create-bg">{{'CreateNew' | translate}}</button>
         </div>
         <div class="card-search">
           <div class="input-group">
@@ -67,21 +67,23 @@
         class="d-flex align-items-center justify-content-between mt-3"
       >
         <div class="d-flex align-items-center">
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle website-main-checkbox"
+          <div class="dropdown  dropdown-coupon">
+            <button (click)="selectAllCoupons()"
+              class="btn btn-secondary dropdown-toggle dropdown-toggle-checkbox coupon-main-checkbox"
               type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
             >
               <div class="form-check">
                 <input
                   class="form-check-input"
                   type="checkbox"
                   value=""
-                  id="flexCheckDefault"
+                  id="flexCheckDefault1"
+                  [checked]="allSelected"
                 />
               </div>
+              <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+              </svg>
             </button>
             <!-- <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Action</a></li>
@@ -89,7 +91,7 @@
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul> -->
           </div>
-          <a class="btn btn-outline-white">
+          <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('published')">
             <svg id="users-icon"
               width="24"
               height="24"
@@ -103,9 +105,9 @@
               />
             </svg>
 
-            {{'Publish' | translate}}</a
+            {{'Publish' | translate}}</button
           >
-          <a class="btn btn-outline-white">
+          <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('draft')">
             <svg id="users-icon"
             class="me-1"
               width="22"
@@ -120,7 +122,7 @@
               />
             </svg>
 
-            {{'Draft' | translate}}</a
+            {{'Draft' | translate}}</button
           >
           <a class="btn  btn-outline-white">
             <svg id="users-icon"
@@ -147,7 +149,7 @@
               font-weight: 500;
             "
           >
-          15 Items
+          {{allPages.length}}  {{(allPages.length > 1) ? "Items" : 'Item'}}
           </div>
 
         </div>
@@ -446,225 +448,93 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="webpages-chekbox"  style="width: 50px;">
-              <span class="form-check align-self-center me-2">
-                <input
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck1"
-                  class="form-check-input"
-                /><label
-                  for="defaultCheck1"
-                  class="form-check-label"
-                ></label>
-              </span>
 
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-               <span class="main-template">Home</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_success">Pubished</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="d-flex webpages-chekbox">
-              <span class="form-check align-self-center ">
-                <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
-                <label for="defaultCheck1" class="form-check-label"></label>
-              </span>
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-               <span class="main-template">Talent</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_pending">Draft</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon "
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon "
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <td class="webpages-chekbox" style="width: 50px;">
-              <span class="form-check align-self-center me-2">
-                <input
-                  type="checkbox"
-                  value=""
-                  id="defaultCheck1"
-                  class="form-check-input"
-                /><label
-                  for="defaultCheck1"
-                  class="form-check-label"
-                ></label>
-              </span>
-
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-               <span class="main-template">About</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_success">Pubished</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-
+          @if (allPages.length > 0 && allPages) {
+            @for (page of allPages; track $index) {
+              <tr>
+                <td class="webpages-chekbox"  style="width: 50px;">
+                  <span class="form-check align-self-center me-2">
+                    <input
+                      type="checkbox"
+                      value=""
+                      id="defaultCheck1"
+                      class="form-check-input"
+                      [checked]="selectedIds.includes(page.id)"
+                      (change)="onCheckboxChange(page)"
+                    /><label
+                      for="defaultCheck1"
+                      class="form-check-label"
+                    ></label>
+                  </span>
+    
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                  <span class="main-template">{{page?.title}}</span>
+                  </div>
+                </td>
+                <td>{{page?.language}}</td>
+    
+                <td>{{page?.created_at}}</td>
+                <td>{{page?.updated_at}}</td>
+                <td>
+                  <span [ngClass]="getStatusClass(page?.status)">{{page?.status}}</span>
+                </td>
+                <td class="c_pointer text-center view" (click)="viewPage(page.id)">
+                  <svg id="users-icon"
+                    width="25"
+                    height="25"
+                    viewBox="0 0 25 25"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+                      fill="#787878"
+                    />
+                    <path
+                      d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+                      fill="#787878"
+                    />
+                  </svg>
+                </td>
+                <td class="c_pointer text-center">
+                  <svg id="users-icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                      fill="#787878"
+                    />
+                  </svg>
+                </td>
+                <td class="c_pointer text-center">
+                  <svg id="users-icon"
+                    width="22"
+                    height="23"
+                    viewBox="0 0 22 23"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="me-1"
+                    (click)="confirmSingleDeletion(page.id)"
+                  >
+                    <path
+                      d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                      fill="#787878"
+                    ></path>
+                  </svg>
+                </td>
+              </tr>
+            }
+          }@else {
+            <tr>
+              <td colspan="9"><app-loader class="loader"></app-loader></td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

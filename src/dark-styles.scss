@@ -2,11 +2,11 @@
   position: relative;
   background: #0C3453;
   font-family: "Libre Franklin", sans-serif !important;
-  // .form-select {
-  //   background: none; /* Removes the background */
-  //   color: #ffffff; /* Ensures the text color is visible on a dark background */
-  //   border: 1px solid #ffffff; /* Optional: White border to match dark theme */
-  // }
+  .form-select {
+    background: none; /* Removes the background */
+    color: #ffffff; /* Ensures the text color is visible on a dark background */
+    border: 1px solid #ffffff; /* Optional: White border to match dark theme */
+  }
 
 }
 ul,
@@ -455,7 +455,7 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover p {
   background: #BDE34F;
-  padding: 10px !important;
+  // padding: 10px 10px 10px 0px !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -2126,7 +2126,7 @@ color: rgba(255, 255, 255, 0.5) !important;
 .dark-theme .gallery-pic-upload {
   color: #ffffff !important;
 }
-.dark-theme .player-name_title h6,.dark-theme .subscription-plan h2,.dark-theme  .elton-close_btn svg path,.dark-theme .rechnung-titel,.dark-theme .pdf-download_btn{
+.dark-theme .player-name_title h6,.dark-theme  .elton-close_btn svg path,.dark-theme .rechnung-titel,.dark-theme .pdf-download_btn{
   color: #fff !important;
 }
 .dark-theme .subscription-plan{
@@ -2364,6 +2364,11 @@ color: #fff;
   background: #BDE34F !important;
   border: 1px solid #BDE34F !important;
 }
+.dark-theme .premium-plan_box{
+  h3,h6,sub,span,.premium_list label{
+    color: #072944 !important;
+  }
+} 
 .dark-theme .choose-plan-btn{
   background: rgba(23, 91, 7, 1);
 }
@@ -2431,4 +2436,26 @@ color: #fff;
 }
 .dark-theme .Feature_images p{
   color: #fff !important;
+}
+.dark-theme .premium-card{
+  background: #BDE34F !important;
+}
+.dark-theme .premium-card h5{
+  color: #072944 !important;
+}
+.dark-theme .premium-card h6{
+  color: #072944 !important;
+}
+.dark-theme .premium-card p{
+  color: #072944 !important;
+}
+.dark-theme .premium-card .premium-edit_btn{
+  color: #072944 !important;
+}
+.dark-theme button.premium-subscription_btn{
+  background: #FD5454 !important;
+  color: #fff !important;
+}
+.dark-theme .suggestion-list{
+  background: #072944 !important;
 }

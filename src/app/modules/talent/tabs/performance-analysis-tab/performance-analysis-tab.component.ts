@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TalentService } from '../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerfomanceReportComponent } from './add-perfomance-report/add-perfomance-report.component';
-import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 
 interface Report {
   id: string;
@@ -82,13 +81,48 @@ export class PerformanceAnalysisTabComponent implements OnInit {
   }
 
   // Download selected reports
-  async downloadSelectedReports() {
+  // async downloadSelectedReports() {
+  //   const selectedReports = this.reports.filter(report => report.selected);
+  //   let selectedIds :any = [];
+
+  //   console.log(selectedReports)
+  //   if (selectedReports.length > 0) {
+  //     // Loop through each selected report and download it
+  //     for (const report of selectedReports) {
+  //       selectedIds[] = report.id
+  //       await this.downloadInvoice(selectedIds);
+  //       // await this.downloadInvoice(report.id, this.path+report.file_name ,report.file_type);
+  //     }
+  //   } else {
+  //     console.log('No reports selected for download.');
+  //   }
+  // }
+
+  // Download selected reports
+  downloadSelectedReports() {
     const selectedReports = this.reports.filter(report => report.selected);
+    let selectedIds: any[] = []; // Initialize as an array
+
     if (selectedReports.length > 0) {
-      // Loop through each selected report and download it
+      // Collect all selected report IDs
       for (const report of selectedReports) {
-        await this.downloadInvoice(report.id, this.path+report.file_name ,report.file_type);
+        selectedIds.push(report.id);
       }
+
+      this.talentService.downloadReports(selectedIds).subscribe(
+        response => {
+          if (response.status) {
+            console.log(selectedIds);
+            // Open the file in a new tab
+            window.open(response.data.zip_path);
+          }
+        },
+        error => {
+          this.errorMessage = 'Error fetching reports: ' + error.message;
+        }
+      );
+
+
     } else {
       console.log('No reports selected for download.');
     }
