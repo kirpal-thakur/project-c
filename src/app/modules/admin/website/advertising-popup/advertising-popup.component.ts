@@ -90,6 +90,17 @@ export class AdvertisingPopupComponent   {
       this.pageName = this.pageOptions[index].page;
       this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
     }
+
+    this.advertisementService.getPageAds().subscribe((response) => {
+      let {pages} = response.data;
+      // pageOptions
+      this.pageOptions = pages.map((value: any) => {
+        return {
+          id: value.id,
+          page: value.title
+        }
+      });
+    });
   }
 
   close(): void {
@@ -108,6 +119,7 @@ export class AdvertisingPopupComponent   {
   }
 
   formatDate(date:any) {
+    date = new Date(date);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
     const day = String(date.getDate()).padStart(2, '0');
@@ -274,4 +286,14 @@ export class AdvertisingPopupComponent   {
     );
   }
 
+  onChange(event: any){
+    this.advertisementService.getAdvertisementType(event.target.value).subscribe((response) => {
+      let adsTypes = response.data.ad_types;
+      if(adsTypes){
+        this.typeOptions = adsTypes;
+      }else{
+        this.typeOptions = [];
+      }
+    });
+  }
 }

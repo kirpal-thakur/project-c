@@ -49,11 +49,11 @@ export class ProfileTabComponent {
       }
       
     }
-    if (changes['mainPosition']) {
-      // Update the mainPosition object with the latest mainPositionData
-      this.mainPosition = changes['mainPosition'].currentValue;
-      
-    }
+    // if (changes['mainPosition']) {
+    //   // Update the mainPosition object with the latest mainPositionData
+    //   this.mainPosition = changes['mainPosition'].currentValue;
+    // }
+
     this.getMainPosition();
     this.getOtherPositions();
   }
@@ -78,7 +78,6 @@ export class ProfileTabComponent {
     return age;
   }
 
-  
   getUserProfile() {
     try {
       this.talentService.getProfileData().subscribe((response) => {
@@ -93,6 +92,9 @@ export class ProfileTabComponent {
             this.userNationalities = JSON.parse(this.user.user_nationalities);
           }
 
+
+          this.getMainPosition();
+          this.getOtherPositions();
         } else {
           console.error('Invalid API response structure:', response);
         }
@@ -153,12 +155,12 @@ export class ProfileTabComponent {
     }
   }
 
-  
+
   // Function to get other positions from the array
   getOtherPositions() {
     this.otherPositions = this.positions
       .filter((pos : any) => pos.main_position == null)
       .map((pos : any) => pos.position_name)
-      .join('/');    
+      .join('/');
   }
 }

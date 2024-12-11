@@ -27,7 +27,6 @@
             "outputPath": "dist/c",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            // "baseHref": "/angular/browser/",
             "polyfills": [
               "zone.js"
             ],
@@ -43,17 +42,25 @@
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/intro.js/introjs.css",
-              "node_modules/ngx-lightbox/lightbox.css"
+              "node_modules/ngx-lightbox/lightbox.css",
+              "src/app/modules/website/website-dark.scss",
+              "src/app/modules/website/website-light.scss",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "moment"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "2.5mb",
+                  "maximumError": "3mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -104,7 +111,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/dark-styles.scss"
+              "src/dark-styles.scss",
+              "src/app/modules/website/website-dark.scss",
+              "src/app/modules/website/website-light.scss",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css"
             ],
             "scripts": []
           }

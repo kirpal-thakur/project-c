@@ -18,7 +18,7 @@ export class UserDetailPopupComponent {
     public dialogRef : MatDialogRef<UserDetailPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public user: any) {
     console.log('edit user', user); 
-
+ 
     }
   close() {
     this.dialogRef.close();

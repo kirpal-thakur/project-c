@@ -1,0 +1,10 @@
+<div class="d-flex flex-wrap">
+    <talent-sidebar></talent-sidebar>
+    <div class="page-container">
+      <talent-header *ngIf="path != '/scout/dashboard'"></talent-header>
+      <div class="outlet_outer">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  

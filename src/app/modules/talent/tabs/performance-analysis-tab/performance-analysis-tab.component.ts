@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { TalentService } from '../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPerfomanceReportComponent } from './add-perfomance-report/add-perfomance-report.component';
-import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 
 interface Report {
   id: string;
@@ -60,39 +59,74 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     this.reports.forEach(report => (report.selected = this.allSelected));
   }
 
-    // Download a single report
-    async downloadInvoice(id: any, src: any ,type : any) {
-      try {
-        const response = await fetch(src);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const blob = await response.blob(); // Convert the response to a Blob object
-        const url = window.URL.createObjectURL(blob);
-        const anchor = document.createElement('a');
-        anchor.href = url;
-        anchor.download = `report-${id}.${type}`; // Set the filename for download
-        document.body.appendChild(anchor);
-        anchor.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(anchor);
-      } catch (error) {
-        console.error('There was an error downloading the file:', error);
+  // Download a single report
+  async downloadInvoice(id: any, src: any ,type : any) {
+    try {
+      const response = await fetch(src);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+      const blob = await response.blob(); // Convert the response to a Blob object
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = `report-${id}.${type}`; // Set the filename for download
+      document.body.appendChild(anchor);
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(anchor);
+    } catch (error) {
+      console.error('There was an error downloading the file:', error);
     }
-  
-    // Download selected reports
-    async downloadSelectedReports() {
-      const selectedReports = this.reports.filter(report => report.selected);
-      if (selectedReports.length > 0) {
-        // Loop through each selected report and download it
-        for (const report of selectedReports) {
-          await this.downloadInvoice(report.id, this.path+report.file_name ,report.file_type);
-        }
-      } else {
-        console.log('No reports selected for download.');
+  }
+
+  // Download selected reports
+  // async downloadSelectedReports() {
+  //   const selectedReports = this.reports.filter(report => report.selected);
+  //   let selectedIds :any = [];
+
+  //   console.log(selectedReports)
+  //   if (selectedReports.length > 0) {
+  //     // Loop through each selected report and download it
+  //     for (const report of selectedReports) {
+  //       selectedIds[] = report.id
+  //       await this.downloadInvoice(selectedIds);
+  //       // await this.downloadInvoice(report.id, this.path+report.file_name ,report.file_type);
+  //     }
+  //   } else {
+  //     console.log('No reports selected for download.');
+  //   }
+  // }
+
+  // Download selected reports
+  downloadSelectedReports() {
+    const selectedReports = this.reports.filter(report => report.selected);
+    let selectedIds: any[] = []; // Initialize as an array
+
+    if (selectedReports.length > 0) {
+      // Collect all selected report IDs
+      for (const report of selectedReports) {
+        selectedIds.push(report.id);
       }
+
+      this.talentService.downloadReports(selectedIds).subscribe(
+        response => {
+          if (response.status) {
+            console.log(selectedIds);
+            // Open the file in a new tab
+            window.open(response.data.zip_path);
+          }
+        },
+        error => {
+          this.errorMessage = 'Error fetching reports: ' + error.message;
+        }
+      );
+
+
+    } else {
+      console.log('No reports selected for download.');
     }
+  }
 
   openAddReport() {
     const dialogRef = this.dialog.open(AddPerfomanceReportComponent, {
@@ -132,8 +166,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
   
     console.log('Selected report IDs:', this.selectedIds);
   }
-  
-  
+
   deleteReports() {
     if(this.selectedIds.length <= 0){
       return
@@ -141,7 +174,7 @@ export class PerformanceAnalysisTabComponent implements OnInit {
     let params :any = {id:this.selectedIds};
     if (confirm('Are you sure you want to delete the selected reports?')) {
       
-      this.talentService.deletePerformance(params).subscribe(
+      this.talentService.deletePerformanceReport(params).subscribe(
         (response) => {
           if (response.status) {
             this.loadReports();

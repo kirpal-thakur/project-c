@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import { ThemeService } from '../../../services/theme.service';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
+import { SocketService } from '../../../services/socket.service';
+import { map,filter } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 
 interface Notification {
   image: string;
   title: string;
   content: string;
   time: string;
+  seen: number;
 }
 
 @Component({
@@ -20,35 +25,186 @@ interface Notification {
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  
+
+  currentPageName: string = ''; // Variable to store current page name
   searchResults: any[] = [];
-  searchUser:any;
+  searchUser: any;
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService ,private router: Router,private talentService: TalentService, private themeService: ThemeService, private authService: AuthService,private translateService: TranslateService) {}
-  loggedInUser:any = localStorage.getItem('userInfo');
+  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  loggedInUser: any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
-  lang:string = '';
+  lang: string = '';
   domains: any = environment.domains;
   message: string = '';
+  isLoading: boolean = false; // Flag to track loading state
+  language : any;
+  liveNotification: any[] = [];
+  showNotification: boolean = false;
+
+  searchControl = new FormControl('');
+  filteredUsers: any[] = [];
+
+  isClosed: boolean = false;
+  allNotifications: Notification[] = [];
+  notifications: Notification[] = [];
+  currentIndex = 0;
+  notificationsPerPage = 3;
+  unseenCount = 0;
 
   ngOnInit() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    this.fetchNotifications(userId);
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
-    this.profileImgUrl = this.loggedInUser.meta.profile_image_path;
+    this.profileImgUrl = this.loggedInUser.profile_image_path;
 
     this.talentService.message$.subscribe(msg => {
       this.profileImgUrl = msg;
     });
-    
-    
+
     this.lang = localStorage.getItem('lang') || 'en'
+
+    const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+    if (selectedLanguage) {
+      this.language = selectedLanguage;
+    }else{
+      this.language = this.domains[0];
+    }
+    console.log(this.language);
+
     this.updateThemeText();
+
+    this.socketService.on('notification').subscribe((data) => {
+      // Fetch all notifications to update this.allNotifications with the latest data
+      let userId = this.loggedInUser?.id;
+      if (userId) {
+        this.fetchNotifications(userId);
+      }
+
+      console.log("data", data);
+
+      const obj = {
+        image: data.senderProfileImage,
+        title: data.senderName,
+        content: data.message,
+        time: 'just now'
+      };
+
+      // Add the notification to the array and show the notification box
+      this.liveNotification = [obj]; // Keep only the latest notification
+      this.showNotification = true;
+
+      console.log('New notification:', data.message);
+
+      // Hide the notification after 3 seconds
+      setTimeout(() => {
+        this.liveNotification = [];
+        this.showNotification = false;
+      }, 5000); // 5000 ms = 5 seconds
+    });
+
+    //   this.router.events
+    //   .pipe(
+    //     filter(event => event instanceof NavigationEnd), // Ensure only navigation events are handled
+    //     map(() => {
+    //       const child = this.route.firstChild;
+    //       return child?.snapshot.data['title'] || 'Home'; // Default title if no data
+    //     })
+    //   )
+    //   .subscribe((title: string) => {
+    //     this.currentPageName = title; // Assign the title to `currentPageName`
+    //   });
+
+    // }
+
+      // Set the page name for the initial load
+      this.setPageTitleFromRoute();
+
+      // Listen for route changes and update the title
+      this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd), // Ensure only navigation events are handled
+        map(() => this.route.firstChild?.snapshot.data['title'] || 'Home') // Default to 'Home' if no title
+      )
+      .subscribe((title: string) => {
+        this.currentPageName = title;
+      });
+
+
+    this.searchControl.valueChanges
+    .pipe(
+      filter((value): value is string => value !== null && value.trim().length > 0), // Exclude null or empty strings
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((searchText: string) => {
+        this.isLoading = true;
+        return this.userService.searchUser(searchText).pipe(
+          finalize(() => (this.isLoading = false))
+        );
+      })
+    )
+    .subscribe(
+      (response: any) => {
+        if (response && response.status && response.data?.userData) {
+          this.filteredUsers = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+          this.filteredUsers = [];
+        }
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+        this.filteredUsers = [];
+      }
+    );
   }
 
-  ChangeLang(lang:any){
-    const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
+  toggleDropdown() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    console.log(this.currentIndex)
+
+    // this.fetchNotifications(userId);
+
+    this.isClosed = !this.isClosed;
+  }
+
+  // Method to set the page title on the initial load
+  private setPageTitleFromRoute() {
+    const childRoute = this.route.firstChild;
+    if (childRoute && childRoute.snapshot.data['title']) {
+      this.currentPageName = childRoute.snapshot.data['title'];
+    } else {
+      this.currentPageName = 'Home'; // Default to 'Home' if no title found
+    }
+  }
+  navigateToTab(tab: string) {
+    this.router.navigate(['/talent/setting'], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
+  }
+
+
+  ChangeLang(lang: any) {
+    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
   }
@@ -65,10 +221,10 @@ export class HeaderComponent {
     this.updateThemeText()
   }
 
-  updateThemeText (){
+  updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    document.getElementById('theme-text')!.textContent =this.themeText
+    document.getElementById('theme-text')!.textContent = this.themeText
   }
 
 
@@ -80,69 +236,125 @@ export class HeaderComponent {
     document.body.classList.toggle('mobile-sidebar-active');
   }
 
-  notifications: Notification[] = [
-    {
-      image: '../../../assets/images/1.jpg',
-      title: 'Elton Price',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      time: '14 hours ago'
+  // notifications: Notification[] = [
+  //   {
+  //     image: '../../../assets/images/1.jpg',
+  //     title: 'Elton Price1',
+  //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //     time: '14 hours ago'
+  //   }
+  // ];
+
+
+
+  // loadMoreNotifications() {
+  //   const moreNotifications: Notification[] = [
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe2',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '13 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '11 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '9 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '18 hours ago'
+  //     }
+  //   ];
+
+  //   this.notifications = [...this.notifications, ...moreNotifications];
+
+  // }
+
+  onNotificationClick(event: Event) {
+    event.stopPropagation(); // Prevent dropdown from closing
+  }
+
+  fetchNotifications(userId: number): void {
+    this.talentService.getNotifications(userId).subscribe({
+      next: (response) => {
+        console.log('Fetched notifications response:', response);
+  
+        if (response.status && response.notifications) {
+          this.unseenCount = response.unseen_count;
+          // Clear existing notifications to avoid stale data
+          this.allNotifications = [];
+          this.notifications = [];
+          console.log("info", this.currentIndex, this.notificationsPerPage)
+          if(this.currentIndex != 0){
+            this.notificationsPerPage = this.currentIndex;
+          }
+          this.currentIndex = 0;
+  
+          // Map fetched notifications to the Notification interface
+          this.allNotifications = response.notifications.map((notif: any) => ({
+            image: notif.senderProfileImage || '../../../assets/images/default.jpg',
+            title: notif.senderName || 'Unknown',
+            content: notif.message,
+            time: notif.time,
+            seen: notif.seen,
+          }));
+  
+          this.loadMoreNotifications(); // Load the initial set of notifications
+        } else {
+          console.warn('No notifications found in the response.');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      },
+    });
+  }
+  
+
+  // Load notifications in chunks of 3
+  loadMoreNotifications(): void {
+    const nextNotifications = this.allNotifications.slice(
+      this.currentIndex,
+      this.currentIndex + this.notificationsPerPage
+    );
+    this.notifications = [...this.notifications, ...nextNotifications];
+    this.currentIndex += this.notificationsPerPage;
+    if(this.notificationsPerPage>=3){
+      this.notificationsPerPage = 3;
     }
-  ];
-
-  loadMoreNotifications() {
-    const moreNotifications: Notification[] = [
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '13 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '11 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '9 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '18 hours ago'
-      }
-    ];
-
-    this.notifications = [...this.notifications, ...moreNotifications];
-
   }
 
   onSearch() {
@@ -152,59 +364,56 @@ export class HeaderComponent {
       return;
     }
 
-    this.userService.searchUser(this.searchUser).subscribe((response:any)=>{
-      if (response && response.status && response.data && response.data.userData) {          
-          this.searchResults = response.data.userData;          
+    this.userService.searchUser(this.searchUser).subscribe((response: any) => {
+      if (response && response.status && response.data && response.data.userData) {
+        this.searchResults = response.data.userData;
       } else {
         // this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
-    });  
+    });
 
   }
 
-  selectUser(user: any) {
-    console.log('User selected:', user);
-    this.searchResults = [];
-    this.showSuggestions = false;
-    this.searchUser = user.first_name +' '+ user.last_name
 
+  selectUser(user: any): void {
+
+    this.searchControl.setValue(`${user.first_name} ${user.last_name}`, {
+      emitEvent: false,
+    });
+
+    this.filteredUsers = [];
     // Navigate or perform actions with the selected user
-    this.exploreUser(user.role_name,user.id)
-  }
-
-  
-  private saveTrackedViews() {
-    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
-  }
-
-  // Track profile click only once per session
-  private trackProfileClick(profileId: number) {
-    const id: number[] = [profileId];  // Create an array of profileId
-
-    if (!this.viewsTracked[profileId]?.clicked) {
-      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
-        next: () => {
-          console.log(`Click tracked for profile ${profileId}`);
-          this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
-          this.saveTrackedViews();  // Save the updated viewsTracked
-        },
-        error: (error) => console.error('Error tracking profile click', error)
-      });
-    }
+    this.exploreUser(user.role_name, user.id);
   }
 
   exploreUser(slug: string, id: number): void {
-    this.trackProfileClick(id); // Track the click before navigation
-    const pageRoute = 'view/' + slug.toLowerCase();
+    this.trackProfileClick(id);
+    const pageRoute = `view/${slug.toLowerCase()}`;
     this.router.navigate([pageRoute, id]);
   }
 
-  hideSuggestions() {
-    setTimeout(() => {
-      this.showSuggestions = false;
-    }, 200); // Delay to ensure selectUser runs before hiding suggestions
+  private trackProfileClick(profileId: number): void {
+    const id: number[] = [profileId];
+    if (!this.viewsTracked[profileId]?.clicked) {
+      this.talentService
+        .trackProfiles(this.loggedInUser.id, id, 'click')
+        .subscribe({
+          next: () => {
+            console.log(`Click tracked for profile ${profileId}`);
+            this.viewsTracked[profileId] = {
+              ...this.viewsTracked[profileId],
+              clicked: true,
+            };
+            this.saveTrackedViews();
+          },
+          error: (error) =>
+            console.error('Error tracking profile click', error),
+        });
+    }
   }
 
+  private saveTrackedViews(): void {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
 }
-

@@ -30,7 +30,7 @@ export class PerformanceTabComponent {
   @Input() isPremium: any;
 
   // from_date:2021-01-01
-  //   to_date:2022-01-01
+  // to_date:2022-01-01
   constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
   
   async ngOnInit() {
@@ -90,6 +90,7 @@ export class PerformanceTabComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
+      console.log('openDeleteDialog',id)
       if (result) {
         // If result is true, proceed with deletion logic
         this.deleteUserPerformance(id);
@@ -98,14 +99,15 @@ export class PerformanceTabComponent {
       }
     });
   }
-  
+
   deleteUserPerformance(id: string): void {
+
     // Call your service to delete the user performance by ID
     this.talentService.deletePerformance(id).subscribe(
       (response: any) => {
         console.log('Performance deleted successfully');
         // Optionally refresh the list or handle success
-        this.getUserPerformance(this.userId);        
+        this.getUserPerformance(this.userId);
       },
       (error: any) => {
         console.error('Error deleting performance:', error);
@@ -215,7 +217,7 @@ export class PerformanceTabComponent {
     // Format the date strings
     const fromDateString = fromDate.toLocaleString('default', { month: 'long', year: 'numeric' });
     const toDateString = performance_detail.to_date === '0000-00-00' 
-      ? 'Present' 
+      ? 'Present'
       : toDate.toLocaleString('default', { month: 'long', year: 'numeric' });
   
     let dateRange = `${fromDateString ?? '-'} - ${toDateString ?? '-'}`;

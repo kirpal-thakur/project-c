@@ -5,6 +5,7 @@ import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SocketService } from '../../../services/socket.service';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -24,7 +25,7 @@ export class ViewProfileComponent implements OnInit {
   userImages: any = [];
   userVideos: any = [];
   imageBaseUrl: any;
-  defaultCoverImage: any = './media/palyers.png';
+  defaultCoverImage: any ;
   isFavorite: boolean = false; // Added to track favorite status
   downloadPath: any='';
   isPremium:any= false;
@@ -35,6 +36,7 @@ export class ViewProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private talentService: TalentService,
+    private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
     private socketService: SocketService
@@ -66,13 +68,20 @@ export class ViewProfileComponent implements OnInit {
             this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
           }
 
+          if (this.userNationalities?.length) {
+            // Fetch flag details for each nationality
+            this.userNationalities.forEach((nat:any, index:any) => {
+              this.getCountry(nat.flag_path, index);
+            });
+          }
+
           // Set isFavorite status based on user data or API response
           this.isFavorite = this.user.marked_favorite; // Assuming API returns this
           
           if(this.isPremium){
             this.getHighlightsData(this.userId);
             this.getGalleryData(this.userId);
-            this.exportSingleUser(this.userId);
+            // this.exportSingleUser(this.userId);
           }
           
         } else {
@@ -192,19 +201,32 @@ export class ViewProfileComponent implements OnInit {
   exportSingleUser(userId: number) {
 
     try {
+
+      // Set loading state and display info toast
+      this.toastr.info('Downloading...', 'Please wait', { disableTimeOut: true });
+
       this.userService.exportSingleUser(userId).subscribe((response) => {
         if (response && response.status && response.data) {
-          this.downloadPath = response.data.file_path; 
+          this.toastr.clear();
+
+          this.downloadPath = response.data.file_path;
+          // Open the file in a new tab
+          window.open(response.data.file_path);
+
         } else {
+          this.toastr.clear();
+          this.toastr.error('Failed to download. Please try again.', 'Download Failed');
+
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
+      this.toastr.clear();
       console.error('Error adding to favorites:', error);
     }
 
   }
-  
+
   
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
     if (!placeOfBirth) {
@@ -212,7 +234,8 @@ export class ViewProfileComponent implements OnInit {
       return;
     }
   
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
   
     fetch(geocodingUrl)
@@ -247,4 +270,44 @@ export class ViewProfileComponent implements OnInit {
     // Set the URL to an <img> element in your template or save it in a variable
     this.countryFlagUrl = flagUrl;
   }
+
+
+  getCountry(placeOfBirth: string ,key : any): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
+
+            this.userNationalities[key].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
+          } else {
+            console.error("Country not found in placeOfBirth.");
+            return;
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+          return;
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
 }

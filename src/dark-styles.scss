@@ -7,7 +7,7 @@
     color: #ffffff; /* Ensures the text color is visible on a dark background */
     border: 1px solid #ffffff; /* Optional: White border to match dark theme */
   }
-  
+
 }
 ul,
 p , h1 ,h2 ,h3,h4,h5,h6{
@@ -455,18 +455,17 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover p {
   background: #BDE34F;
-  padding: 10px !important; 
+  // padding: 10px 10px 10px 0px !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  color: #072944   ;
+  color: #072944;
   // transition: all 0.4s ease-in-out !important;
 
 }
 
 
 .dark-theme .sidebar_menu a:hover {
-  padding: 0 10px !important;
   background: #BDE34F;
 }
 
@@ -1412,13 +1411,11 @@ background-color: #072944;
 }
 
 //  .dark-theme #theme-text{
-//     background-color:#0c3453;
-//   }
-  .dark-theme .light-theme {
-    // background-color:#0c3453 !important;
-  }
-
-
+//    background-color:#0c3453;
+//  }
+// .dark-theme .light-theme {
+//   background-color:#0c3453 !important;
+// }
 
 @media (max-width: 767px) {
   .theme_dropdown,
@@ -1572,7 +1569,7 @@ background-color: #072944;
   }
   .page-sidebar{
     overflow : auto;
-  } 
+  }
   .page-sidebar-inner {
     height: 67% !important;
   }
@@ -1621,7 +1618,7 @@ background-color: #072944;
 .dark-theme .NgxEditor__Content{
   background-color: #072944;
   color: white;
-  
+
 }
 
 .dark-theme .marketing-calender-field .mat-mdc-text-field-wrapper{
@@ -1646,7 +1643,7 @@ background-color: #072944;
 
 }
 
-// new changes css Start 
+// new changes css Start
 
 .dark-theme .right-sidebar .card .card-header a {
   color: #4379EE !important;
@@ -1699,11 +1696,11 @@ background-color: #072944;
 }
 .dark-theme .my-svg-icon .my-path{
   fill: #4F7A9D;
-  
+
 }
-.dark-theme .my-svg-icon .my-path a.active{
- 
-}
+// .dark-theme .my-svg-icon .my-path a.active{
+
+// }
 // .dark-theme .active .my-svg-icon .my-path {
 //   fill: white !important ; /* Change the color of the SVG when the link is active */
 // }
@@ -1731,7 +1728,7 @@ background-color: #072944;
 //   border-top-right-radius: 10px;
 //   border-top-left-radius: 10px;
 //   background-color: #072944 !important;
-  
+
 // }
 
 .dark-theme .settings-tabs  .nav-tabs .nav-item .nav-link{
@@ -1745,7 +1742,7 @@ background-color: #072944;
 .dark-theme .profile path{
   fill: #4F7A9D !important ;
   stroke: #4F7A9D !important ;
-} 
+}
 
 .dark-theme .settings-tabs .nav-tabs .nav-link svg path {
   fill: none !important;
@@ -1753,7 +1750,7 @@ background-color: #072944;
 }
 
 .dark-theme .settings-tabs .nav-tabs  .nav-link.active svg path {
- 
+
   stroke: #ffffff !important;
 }
 .dark-theme .dropdown-activity-log {
@@ -1806,7 +1803,7 @@ background-color: #072944;
   background-color: #0C3453;
   // margin: 0 10px  ;
 }
-.dark-theme .border-end, .border-bottom, .border-top{ 
+.dark-theme .border-end, .border-bottom, .border-top{
   border-color: #1F4360 !important;
 }
 
@@ -1829,7 +1826,7 @@ background-color: #072944;
 
 .dark-theme .reject-stroke{
   stroke: #000000;
-} 
+}
 .dark-theme .export-xls svg path{
   fill: transparent !important;
   stroke: #ffffff;
@@ -1840,7 +1837,7 @@ background-color: #072944;
   position: absolute;
   height: 1px !important;
   background: #ffffff !important;
-  
+
 }
 
 .dark-theme .user-details-left .list-view p{
@@ -1876,16 +1873,16 @@ background-color: #072944;
 }
 
 .dark-theme .table-striped tbody tr:nth-child(even) {
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
 }
 .dark-theme .table-striped thead th {
-  background-color: #0C3453; 
+  background-color: #0C3453;
 }
 .dark-theme .table-striped.explore-table thead th{
-  background-color: #072944 !important; 
+  background-color: #072944 !important;
 }
 .dark-theme .table-striped.explore-table thead th select{
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
   color: #ffff !important;
   border-color: #1F4360 !important;
 }
@@ -1901,7 +1898,7 @@ background-color: #072944;
 
 .dark-theme .custom-size-calendar .mdc-text-field--filled:not(.mdc-text-field--disabled){
   color: #ffffff !important;
-} 
+}
 
 .dark-theme  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
 
@@ -1949,24 +1946,24 @@ background-color: #072944;
 
 .dark-theme .gallery-p{
   color: #ffffff;
-  
+
 }
 
 .dark-theme .upload-box svg path{
   stroke: #ffffff;
 }
-.dark-theme .gallery-upload-button{    
+.dark-theme .gallery-upload-button{
   color: #2C2C2C;
 }
 
-.dark-theme .upload-btn{    
+.dark-theme .upload-btn{
   color: #2C2C2C;
 }
 .dark-theme .upload-img svg path{
   stroke: #ffffff;
 }
 
-.dark-theme hr{    
+.dark-theme hr{
   color: #fff;
 }
 
@@ -1975,7 +1972,7 @@ background-color: #072944;
   color: #ffffff;
 }
 
- 
+
 .dark-theme .gallery-h5{
   color: #ffffff;
 }
@@ -1989,7 +1986,7 @@ background-color: #072944;
 }
 
 .dark-theme .meta-date .mat-mdc-form-field-flex{
-  background-color: #0C3453; 
+  background-color: #0C3453;
   color: #ffffff;
 }
 
@@ -2042,15 +2039,15 @@ background-color: #072944;
 }
 
 .dark-theme .tbody-scout-profile  tr:first-child {
-  border-top: 2px solid #1F4360 !important; 
+  border-top: 2px solid #1F4360 !important;
 }
 
 .dark-theme .tbody-scout-profile {
-  border-top: 2px solid #1F4360 !important; 
+  border-top: 2px solid #1F4360 !important;
 }
 
 .dark-theme .historyTextarea {
-  background-color: #0C3453 !important; 
+  background-color: #0C3453 !important;
   border: 1px solid #072944 !important;
   color: #ffffff !important;
 }
@@ -2129,7 +2126,7 @@ color: rgba(255, 255, 255, 0.5) !important;
 .dark-theme .gallery-pic-upload {
   color: #ffffff !important;
 }
-.dark-theme .player-name_title h6,.dark-theme .subscription-plan h2,.dark-theme  .elton-close_btn svg path,.dark-theme .rechnung-titel,.dark-theme .pdf-download_btn{
+.dark-theme .player-name_title h6,.dark-theme  .elton-close_btn svg path,.dark-theme .rechnung-titel,.dark-theme .pdf-download_btn{
   color: #fff !important;
 }
 .dark-theme .subscription-plan{
@@ -2165,7 +2162,7 @@ color: rgba(255, 255, 255, 0.5) !important;
   background: #1d3e59  !important;
   border:1px solid #1d3e59 !important;
 }
-.dark-theme .table-bg-2 { 
+.dark-theme .table-bg-2 {
   background: #072944 !important;
   border:1px solid #072944 !important;
 }
@@ -2367,11 +2364,16 @@ color: #fff;
   background: #BDE34F !important;
   border: 1px solid #BDE34F !important;
 }
+.dark-theme .premium-plan_box{
+  h3,h6,sub,span,.premium_list label{
+    color: #072944 !important;
+  }
+} 
 .dark-theme .choose-plan-btn{
   background: rgba(23, 91, 7, 1);
 }
 .dark-theme .premium_list label input:checked ~ .checkmark{
-  background: #072944 !important; 
+  background: #072944 !important;
   border: 1px solid #072944 !important;
 }
 .dark-theme .navbar-expand .navbar-nav .dropdown-menu{
@@ -2398,4 +2400,62 @@ color: #fff;
 }
 .dark-theme .sort-icon svg path{
   fill: #fff;
+}
+.dark-theme .dropdown-item:focus,.dark-theme .dropdown-item:hover{
+  background: #0C3453;
+}
+.dark-theme .green-bg{
+  fill: #BDE34F;
+}
+.dark-theme .blue-bg{
+  fill: #1F4360;
+}
+.dark-theme .form-group mat-datepicker-toggle svg{
+  color: rgb(255, 255, 255) !important;
+}
+.dark-theme .form-group .mat-mdc-select-arrow{
+  color: #fff;
+}
+.dark-theme .mdc-list-item__primary-text{
+  color: #fff;
+}
+.dark-theme .cdk-overlay-pane:not(.mat-mdc-select-panel-above) div.mat-mdc-select-panel{
+  background: #072944;
+}
+.dark-theme .mat-mdc-select-panel{
+  background: #072944;
+}
+.dark-theme .mat-pseudo-checkbox-full {
+  border-color: #fff;
+}
+.dark-theme .bg-light{
+  background: #072944 !important;
+}
+.dark-theme .settings  svg path{
+  fill: #FFF;
+}
+.dark-theme .Feature_images p{
+  color: #fff !important;
+}
+.dark-theme .premium-card{
+  background: #BDE34F !important;
+}
+.dark-theme .premium-card h5{
+  color: #072944 !important;
+}
+.dark-theme .premium-card h6{
+  color: #072944 !important;
+}
+.dark-theme .premium-card p{
+  color: #072944 !important;
+}
+.dark-theme .premium-card .premium-edit_btn{
+  color: #072944 !important;
+}
+.dark-theme button.premium-subscription_btn{
+  background: #FD5454 !important;
+  color: #fff !important;
+}
+.dark-theme .suggestion-list{
+  background: #072944 !important;
 }

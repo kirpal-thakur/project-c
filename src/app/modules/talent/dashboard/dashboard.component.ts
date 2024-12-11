@@ -1,4 +1,4 @@
-import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
+import { Component, OnInit ,EventEmitter, Output, OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,23 +13,25 @@ import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
 import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
-
+import { NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit , OnDestroy {
   lightboxIsOpen: boolean = false; // Track the state of the lightbox
   mainImage: { src: string } = { src: '' }; // Current main image source
   album: any[] = []; // Array for album images
   loggedInUser:any = localStorage.getItem('userData');
   countryFlagUrl : any;
-  
-  constructor(private route: ActivatedRoute,
+
+  constructor(
+    private route: ActivatedRoute,
     private userService: UserService,
-    private talentService: TalentService,    
+    private talentService: TalentService,
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
@@ -39,8 +41,8 @@ export class DashboardComponent implements OnInit {
   userId: any ;
   user: any = {};
   userNationalities: any = [];
-  coverImage: any = "";
-  profileImage: any = "";
+  coverImage: any ;
+  profileImage: any ;
   selectedFile : any;
   teams : any;
   highlights : any;
@@ -55,10 +57,14 @@ export class DashboardComponent implements OnInit {
   isPremium: any = false;
   StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
-  
+  private routeSubscription: Subscription | null = null; // Initialize with null
+  private introInstance: any; // Reference to the Intro.js instance
+
   loading: boolean = true;  // Add this line to track loading state
 
   async ngOnInit() {
+    this.introInstance = introJs();
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
     
@@ -67,24 +73,43 @@ export class DashboardComponent implements OnInit {
     this.getHighlightsData();
     this.loadCountries();
     this.getGalleryData();
-    
+
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
     });
-    
+
     await this.getAllTeams();
-    
+
+    // Listen for route changes
+    this.routeSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.stopIntroTour(); // Stop the tour on navigation
+      }
+    });
   }
 
   ngAfterViewInit() {
   }
 
+  stopIntroTour() {
+    if (this.introInstance) {
+      this.introInstance.exit(); // Stop and clean up the tour
+      this.introInstance = null; // Reset the reference
+    }
+  }
+
+  ngOnDestroy() {
+    // Clean up subscription to avoid memory leaks
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+    this.stopIntroTour(); // Ensure the tour stops when the component is destroyed
+  }
+
   startIntroTour() {
-    
-    const intro = introJs();
-  
-    intro.setOptions({
+
+    this.introInstance.setOptions({
       steps: [
         {
           element: '.edit-profile',
@@ -121,63 +146,61 @@ export class DashboardComponent implements OnInit {
       tooltipPosition: 'auto',
     });
   
-      // Add the "Don't show again" checkbox dynamically
-      intro.onafterchange(() => {
-        const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
-      
-        if (tooltipHeader) {
-          // Check if the "close-section" already exists
-          let closeSection = tooltipHeader.querySelector('.close-section') as HTMLElement;
-          if (!closeSection) {
-            // Create the "close-section" container div
-            closeSection = document.createElement('div');
-            closeSection.className = 'close-section';
-      
-            // Apply styling to align elements
-            closeSection.style.display = 'flex';
-            closeSection.style.alignItems = 'center';
-            closeSection.style.justifyContent = 'flex-end';
-      
-            // Add the checkbox and label
-            closeSection.innerHTML = `
-              <label style="font-size: 12px; display: flex; align-items: center; margin-right: 10px; color: white;">
-                <input type="checkbox" id="dontShowAgain" style="margin-right: 5px; cursor: pointer;" />
-                Don't show it again
-              </label>
-            `;
-      
-            // Append "close-section" outside the <h1> but inside the header
-            tooltipHeader.appendChild(closeSection);
-      
-            // Add event listener to the checkbox
-            const checkbox = closeSection.querySelector('#dontShowAgain') as HTMLInputElement;
-            if (checkbox) {
-              checkbox.addEventListener('click', (event) => {
-                event.stopPropagation(); // Ensure clicks do not propagate
-                console.log('Checkbox clicked:', checkbox.checked);
-                if (checkbox.checked) {
-                  console.log('User selected "Don’t show it again"');
-                  // Save the user's preference
-                  localStorage.setItem('dontShowIntroTour', 'true');
-                } else {
-                  console.log('User unchecked "Don’t show it again"');
-                  localStorage.removeItem('dontShowIntroTour');
-                }
-              });
-            }
+    // Add the "Don't show again" checkbox dynamically
+    this.introInstance.onafterchange(() => {
+      const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
+
+      if (tooltipHeader) {
+        // Check if the "close-section" already exists
+        let closeSection = tooltipHeader.querySelector('.close-section') as HTMLElement;
+        if (!closeSection) {
+          // Create the "close-section" container div
+          closeSection = document.createElement('div');
+          closeSection.className = 'close-section';
+
+          // Apply styling to align elements
+          closeSection.style.display = 'flex';
+          closeSection.style.alignItems = 'center';
+          closeSection.style.justifyContent = 'flex-end';
+
+          // Add the checkbox and label
+          closeSection.innerHTML = `
+            <label style="font-size: 12px; display: flex; align-items: center; margin-right: 10px; color: white;">
+              <input type="checkbox" id="dontShowAgain" style="margin-right: 5px; cursor: pointer;" />
+              Don't show it again
+            </label>
+          `;
+
+          // Append "close-section" outside the <h1> but inside the header
+          tooltipHeader.appendChild(closeSection);
+
+          // Add event listener to the checkbox
+          const checkbox = closeSection.querySelector('#dontShowAgain') as HTMLInputElement;
+          if (checkbox) {
+            checkbox.addEventListener('click', (event) => {
+              event.stopPropagation(); // Ensure clicks do not propagate
+              console.log('Checkbox clicked:', checkbox.checked);
+              if (checkbox.checked) {
+                console.log('User selected "Don’t show it again"');
+                // Save the user's preference
+                localStorage.setItem('dontShowIntroTour', 'true');
+              } else {
+                console.log('User unchecked "Don’t show it again"');
+                localStorage.removeItem('dontShowIntroTour');
+              }
+            });
           }
         }
-      });
-      
-      
-  
+      }
+    });
+
     // Handle when the tour finishes
-    intro.oncomplete(() => this.handleTourExit());
+    this.introInstance.oncomplete(() => this.handleTourExit());
   
     // Handle when the tour is exited manually
-    // intro.onexit(() => this.handleTourExit());
+    // introInstance.onexit(() => this.handleTourExit());
   
-    intro.start();
+    this.introInstance.start();
   }
   
   // Centralized handling of "Don't show again" logic
@@ -243,23 +266,22 @@ export class DashboardComponent implements OnInit {
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
           this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
 
-          if (this.user.meta.profile_image_path) {
+          if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
           }
-          if (this.user.meta.cover_image_path) {
+          if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
 
           this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          // Use map to generate an array of flag URLs based on the userNationalities
-          this.getCountry(this.userNationalities[0].flag_path);
-
-          // After all the flag URLs are fetched, update the nationalities
-          // Promise.all(nationalityFlagPromises).then((updatedNationalities) => {
-          //   this.userNationalities = updatedNationalities;  // Update the user nationalities with flag URLs
-          // });
+          if (this.userNationalities?.length) {
+            // Fetch flag details for each nationality
+            this.userNationalities.forEach((nat:any, index:any) => {
+              this.getCountry(nat.flag_path, index);
+            });
+          }
 
         }
 
@@ -271,6 +293,99 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            this.getCountryFlag(country);
+          } else {
+            console.error("Country not found in placeOfBirth.");
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
+  getCountry(placeOfBirth: string ,key : any): void {
+    if (!placeOfBirth) {
+      console.error("Place of birth is empty.");
+      return;
+    }
+
+
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
+    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+
+    fetch(geocodingUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'OK' && data.results.length > 0) {
+          const addressComponents = data.results[0].address_components;
+
+          // Extract country from address components
+          const countryComponent = addressComponents.find((component: any) =>
+            component.types.includes('country')
+          );
+
+          if (countryComponent) {
+            const country = countryComponent.short_name;  // Set country name, use short_name for country code
+            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
+
+            this.userNationalities[key].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
+          } else {
+            console.error("Country not found in placeOfBirth.");
+            return;
+          }
+        } else {
+          console.error("Geocoding API error:", data.status, data.error_message);
+          return;
+        }
+      })
+      .catch(error => console.error("Error fetching geocoding data:", error));
+  }
+
+  getCountryFlag(countryCode: string) {
+    console.log("Country found:", countryCode);
+
+    // Using Flagpedia API for flag images
+    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+
+    // Set the URL to an <img> element in your template or save it in a variable
+    this.countryFlagUrl = flagUrl;
+  }
+
+  // After loading, mark countries as loaded and check if both are ready
+  loadCountries() {
+    return this.talentService.getCountries().subscribe(
+      (response) => {
+        if (response && response.status) {
+          this.countries = response.data.countries;
+        }
+    });
+  }
 
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
@@ -286,7 +401,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  
+
   openHighlight() {
 
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
@@ -339,14 +454,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  //   // Set the main image to be the one clicked
-  //   this.mainImage = { src: this.album[index].src };
-
-  //   // Open the lightbox
-  //   this.lightboxIsOpen = true;
-  // }
-
-
   navigateImage(direction: 'prev' | 'next'): void {
     // Get current image index
     const currentIndex = this.album.findIndex(image => image.src === this.mainImage.src);
@@ -354,20 +461,20 @@ export class DashboardComponent implements OnInit {
       console.warn("Main image not found in the album.");
       return;
     }
-  
+
     // Handle edge cases (first and last image)
     const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
   
     // Update main image and handle potential wrapping
     this.mainImage = { src: this.album[newIndex].src };
   }
-  
+
 
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
-        if (response && response.status && response.data && response.data.userData) {          
-            this.coverImage = response.data.userData.cover_image_path;          
+        if (response?.data?.userData?.metaValue) {
+            this.coverImage = response.data.userData.cover_image_path;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
@@ -406,7 +513,7 @@ export class DashboardComponent implements OnInit {
             }
           },
           (error) => {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading profile image:', error);
           },
@@ -422,7 +529,6 @@ export class DashboardComponent implements OnInit {
   sendMessage() {
     this.talentService.updatePicOnHeader(this.profileImage);
   }
-
 
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -578,96 +684,6 @@ export class DashboardComponent implements OnInit {
     console.log('Data received from child:', data);
   }
 
-  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
 
-
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
-
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
-
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            this.getCountryFlag(country);
-          } else {
-            console.error("Country not found in placeOfBirth.");
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
-
-  getCountry(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
-
-
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
-
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
-
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            console.log(`https://flagcdn.com/w320/${country.toLowerCase()}.png`);
-
-            this.userNationalities[0].flag_path = `https://flagcdn.com/w320/${country.toLowerCase()}.png`;
-          } else {
-            console.error("Country not found in placeOfBirth.");
-            return;
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-          return;
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
-
-  getCountryFlag(countryCode: string) {
-    console.log("Country found:", countryCode);
-
-    // Using Flagpedia API for flag images
-    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
-
-    // Set the URL to an <img> element in your template or save it in a variable
-    this.countryFlagUrl = flagUrl;
-  }
-
-  // After loading, mark countries as loaded and check if both are ready
-  loadCountries() {
-    return this.talentService.getCountries().subscribe(
-      (response) => {
-        if (response && response.status) {
-          this.countries = response.data.countries;
-        }
-    });
-  }
 
 }

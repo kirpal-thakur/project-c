@@ -39,7 +39,7 @@ export class ThemeService {
       localStorage.setItem(this.themeKey, 'dark');
     }
   }
-  
+
   isDarkMode(): boolean {
     return this.darkMode;
   }

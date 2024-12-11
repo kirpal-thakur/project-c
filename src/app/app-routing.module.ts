@@ -39,20 +39,29 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
   },
-  { path: 'success', component: SuccessComponent ,canActivate: [AuthGuard]},
-  { path: 'cancel', component: CancelComponent ,canActivate: [AuthGuard]},
   {
     path: 'view',
     loadChildren: () =>
       import('./modules/shared/shared.module').then(
         (m) => m.SharedModule
-      ), 
+      ),
     canActivate: [AuthGuard]
   },
+  { path: 'success', component: SuccessComponent ,canActivate: [AuthGuard]},
+  { path: 'cancel', component: CancelComponent ,canActivate: [AuthGuard]},
+
+  {
+    path: 'club',
+    loadChildren: () =>
+      import('./modules/club/club.module').then(
+        (m) => m.ScoutModule
+      ),
+    // canActivate: [AuthGuard]  // Protect this route with AuthGuard if necessary
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

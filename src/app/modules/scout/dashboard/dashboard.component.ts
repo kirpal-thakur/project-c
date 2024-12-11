@@ -1,19 +1,23 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
-import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { ScoutService } from '../../../services/scout.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
+import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
+import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
+import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent  implements OnInit {
+export class DashboardComponent implements OnInit {
   loggedInUser:any = localStorage.getItem('userData');
   
-  constructor(private route: ActivatedRoute, private userService: UserService,private talentService: TalentService, public dialog: MatDialog, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService,private scoutService: ScoutService, public dialog: MatDialog, private router: Router) { }
   activeTab: string = 'profile';
   userId: any ;
   user: any = {};
@@ -81,25 +85,25 @@ export class DashboardComponent  implements OnInit {
   }
   
   openHighlight() {
-    // const dialogRef = this.dialog.open(EditHighlightsComponent, {
-    //   width: '800px',
-    //   data: {
-    //       images: this.userImages ,
-    //       videos: this.userVideos , 
-    //       url: this.imageBaseUrl 
-    //   }
-    // });
+    const dialogRef = this.dialog.open(EditHighlightsComponent, {
+      width: '800px',
+      data: {
+          images: this.userImages ,
+          videos: this.userVideos , 
+          url: this.imageBaseUrl 
+      }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.getHighlightsData()
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getHighlightsData()
+    });
 
   }
 
   
   getGalleryData(){
     try {
-      this.talentService.getGalleryData().subscribe((response)=>{
+      this.scoutService.getGalleryData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userImages = response.data.images; 
           this.userVideos = response.data.videos; 
@@ -116,7 +120,7 @@ export class DashboardComponent  implements OnInit {
   
   getUserProfile(userId:any){
     try {
-      this.talentService.getProfileData(userId).subscribe((response)=>{
+      this.scoutService.getProfileData(userId).subscribe((response)=>{
         if (response && response.status && response.data && response.data.user_data) {
           this.user = response.data.user_data; 
           console.log('user:', this.user);
@@ -143,7 +147,7 @@ export class DashboardComponent  implements OnInit {
 
   getHighlightsData(){
     try {
-      this.talentService.getHighlightsData().subscribe((response)=>{
+      this.scoutService.getHighlightsData().subscribe((response)=>{
         if (response && response.status && response.data && response.data.images) {
           this.highlights = response.data; 
           // this.isLoading = false;
@@ -160,7 +164,7 @@ export class DashboardComponent  implements OnInit {
 
   getCoverImg(){
     try {
-      this.talentService.getCoverImg().subscribe((response)=>{
+      this.scoutService.getCoverImg().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {          
             this.coverImage = response.data.userData.cover_image_path;          
         } else {
@@ -178,13 +182,11 @@ export class DashboardComponent  implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-
       try {
-
         const formdata = new FormData();
         formdata.append("profile_image", this.selectedFile);
-
-        this.talentService.uploadProfileImage(formdata).subscribe((response)=>{
+        this.scoutService.uploadProfileImage(formdata).subscribe((response)=>{
+          console.log(response, 'update-profile-image');
           if (response && response.status) {
             this.profileImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.profileImage); // Emitting the data
@@ -211,7 +213,7 @@ export class DashboardComponent  implements OnInit {
         const formdata = new FormData();
         formdata.append("cover_image", this.selectedFile);
 
-        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
+        this.scoutService.uploadCoverImage(formdata).subscribe((response)=>{
           if (response && response.status) {
             this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
@@ -230,7 +232,7 @@ export class DashboardComponent  implements OnInit {
 
   deleteCoverImage(){
     try {
-      this.talentService.deleteCoverImage().subscribe((response)=>{
+      this.scoutService.deleteCoverImage().subscribe((response)=>{
         if (response && response.status) {
           setTimeout(() => {
             this.coverImage = './media/palyers.png';
@@ -250,44 +252,44 @@ export class DashboardComponent  implements OnInit {
 
   
   openDeleteDialog() {
-    // const dialogRef = this.dialog.open(DeletePopupComponent, {
-    //   width: '600px',
-    // });
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '600px',
+    });
   
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if (result) {
-    //     // If result is true, proceed with deletion logic
-    //     this.deleteCoverImage();
-    //   } else {
-    //     console.log('User canceled the delete');
-    //   }
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // If result is true, proceed with deletion logic
+        this.deleteCoverImage();
+      } else {
+        console.log('User canceled the delete');
+      }
+    });
   }
   
   showMatDialog(message:string, action:string){
-    // const messageDialog = this.dialog.open(MessagePopupComponent,{
-    //   width: '500px',
-    //   position: {
-    //     top:'150px'
-    //   },
-    //   data: {
-    //     message: message,
-    //     action: action
-    //   }
-    // })
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
 
-    // messageDialog.afterClosed().subscribe(result => {
-    //   if (result !== undefined) {
-    //     if(result.action == "delete-confirmed"){
-    //       this.deleteUser();
-    //     }
-    //   //  console.log('Dialog result:', result);
-    //   }
-    // });
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteUser();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
   }
   
   getAllTeams(){
-    this.talentService.getTeams().subscribe((data) => {
+    this.scoutService.getTeams().subscribe((data) => {
       this.teams = data;
     });
   }

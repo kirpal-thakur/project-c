@@ -18,31 +18,31 @@ export class ExploreComponent implements OnInit {
   currentPage: number = 0;
   pageSizeOptions: number[] = [5, 10, 15, 20]; // Added page size options
   userNationalities: any = [];
-  nation: any = [];  
+  nation: any = [];
   ageRange: number[] = [];
 
   roles: any = [
-    { role: "Clubs",   id: 2 },
-    { role: "Scouts",  id: 3 },
-    { role: "Talent",  id: 4 },
-    { role: "League" , id: 5 }
+    { role: "Clubs", id: 2 },
+    { role: "Scouts", id: 3 },
+    { role: "Talent", id: 4 },
+    { role: "League", id: 5 }
   ];
 
   positions: any[] = [];
   countries: any;
-  clubs : any;
-  leagues : any;
+  clubs: any;
+  leagues: any;
 
   // Filters
   selectedRole: number | null = null;
   selectedCountry: number | null = null;
-  selectedPositions: any ;
+  selectedPositions: any;
   selectedAge: any;
   selectedFoot: any;
   selectedTopSpeed: string | null = null;
   selectedLeague: number | null = null;
   selectedClub: number | null = null;
-  loggedInUser:any = localStorage.getItem('userData');
+  loggedInUser: any = localStorage.getItem('userData');
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -59,9 +59,9 @@ export class ExploreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
-    
+
     this.loadPositions();
     this.loadLeagues();
     this.loadClubs();
@@ -81,30 +81,25 @@ export class ExploreComponent implements OnInit {
     }
   }
 
-  private saveTrackedViews() {
-    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
-  }
-
-
   private trackBoostedProfileViews(players: any[]) {
     // Collect all profile IDs that need to be tracked
     const profilesToTrack = players
       .filter(player => player.package_name === 'Booster')
       .filter(profile => !this.viewsTracked[profile.id]?.viewed && this.loggedInUser.id !== profile.id)
       .map(profile => profile.id); // Collect profile IDs into an array
-  
+
     // Check if we have profiles to track
     if (profilesToTrack.length > 0) {
       // Send the array of profile IDs in a single API call
       this.talentService.trackProfiles(this.loggedInUser.id, profilesToTrack, 'view').subscribe({
         next: () => {
           console.log(`Views tracked for profiles: ${profilesToTrack.join(', ')}`);
-          
+
           // Update the local viewsTracked object
           profilesToTrack.forEach(profileId => {
             this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], viewed: true };
           });
-  
+
           // Save the updated viewsTracked state
           this.saveTrackedViews();
         },
@@ -112,7 +107,11 @@ export class ExploreComponent implements OnInit {
       });
     }
   }
-  
+
+  private saveTrackedViews() {
+    sessionStorage.setItem('viewsTracked', JSON.stringify(this.viewsTracked));
+  }
+
   // Track profile click only once per session
   private trackProfileClick(profileId: number) {
     const id: number[] = [profileId];  // Create an array of profileId
@@ -133,6 +132,18 @@ export class ExploreComponent implements OnInit {
     this.trackProfileClick(id); // Track the click before navigation
     const pageRoute = 'view/' + slug.toLowerCase();
     this.router.navigate([pageRoute, id]);
+
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    this.socketService.emit("profileViewed", {senderId: userId, receiverId: id})
   }
 
   // Event handler for page change in paginator
@@ -141,7 +152,7 @@ export class ExploreComponent implements OnInit {
 
     const pageIndex = this.currentPage;
     const pageSize = this.pageSize;
-  
+
     // Construct the params object with complex whereClause and metaQuery logic
     let params: any = {
       offset: pageIndex * pageSize,
@@ -150,11 +161,11 @@ export class ExploreComponent implements OnInit {
         role: this.selectedRole,
         user_domain: this.selectedCountry,
         age: this.selectedAge,
-        position : this.selectedPositions
+        position: this.selectedPositions
       },
       metaQuery: [],
     };
-  
+
     // Add other filters if they are selected
     if (this.selectedFoot) {
       params.metaQuery.push({
@@ -163,7 +174,7 @@ export class ExploreComponent implements OnInit {
         operator: '='
       });
     }
-  
+
     if (this.selectedTopSpeed) {
       params.metaQuery.push({
         meta_key: 'top_speed',
@@ -171,7 +182,7 @@ export class ExploreComponent implements OnInit {
         operator: '='
       });
     }
-  
+
     if (this.selectedLeague) {
       params.metaQuery.push({
         meta_key: 'league',
@@ -179,7 +190,7 @@ export class ExploreComponent implements OnInit {
         operator: '='
       });
     }
-  
+
     if (this.selectedClub) {
       params.metaQuery.push({
         meta_key: 'club',
@@ -187,14 +198,14 @@ export class ExploreComponent implements OnInit {
         operator: '='
       });
     }
-  
+
     // Clean null or empty filters from whereClause
     Object.keys(params.whereClause).forEach(key => {
       if (params.whereClause[key] === null || params.whereClause[key] === undefined || params.whereClause[key]?.length === 0) {
         delete params.whereClause[key];
       }
     });
-  
+
 
     // Call service to fetch filtered data
     this.talentService.getExploresData(params).subscribe({
@@ -217,7 +228,7 @@ export class ExploreComponent implements OnInit {
       }
     });
   }
-  
+
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
@@ -319,7 +330,7 @@ export class ExploreComponent implements OnInit {
       filters.push({ label: footLabel, value: this.selectedFoot.join(', ') });
     }
     if (this.selectedTopSpeed) {
-      let selectedTopSpeed:any = {
+      let selectedTopSpeed: any = {
         '15': '15-20 Km/hr',
         '20': '20-25 Km/hr',
         '25': '25-30 Km/hr',
@@ -339,7 +350,7 @@ export class ExploreComponent implements OnInit {
   }
 
   // Example method to remove a filter
-  removeFilter( label: string ) {
+  removeFilter(label: string) {
     // Logic to remove the selected filter and update the filter array
     switch (label) {
       case 'Category':
@@ -369,9 +380,9 @@ export class ExploreComponent implements OnInit {
     }
 
     // Refresh data after removing filter
-    this.getUsers(); 
+    this.getUsers();
   }
-  
+
   // Generic method to get names by ID
   getNameById(label: string, id: string): string {
     switch (label) {

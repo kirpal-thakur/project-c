@@ -1,40 +1,5 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium && isPremium">
-  <div class="card bg-color">
-    <div class="card-header border-0">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover table-users">
-  
-          <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> {{ 'Title' | translate }} </th>
-            <td mat-cell *matCellDef="let element">
-              <div class="d-flex align-items-center">
-                <span class="main-template" style="padding-left: 15px">
-                  --
-                </span>
-              </div>
-            </td>
-          </ng-container>
-  
-          <!-- Joined Date Column -->
-          <ng-container matColumnDef="joinedDate">
-            <th mat-header-cell *matHeaderCellDef> {{ 'Date' | translate }} </th>
-            <td mat-cell *matCellDef="let element">
-              --
-            </td>
-          </ng-container>
-  
-          <!-- Header row definition -->
-          <tr mat-header-row *matHeaderRowDef="['name', 'joinedDate']"></tr>
-  
-          <!-- Data row definition -->
-          <tr mat-row *matRowDef="let row; columns: ['name', 'joinedDate']"></tr>
-  
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="unlock_page" *ngIf="!isPremium">
   <div class="upgrade_unlock">
     <a class="unlock_btn cursor-pointer" href="/talent/plans">
       <svg width="15" height="19" viewBox="0 0 15 19" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +17,7 @@
   </div> 
 </div>
 
-<div class="card bg-color" >
+<div class="card bg-color" *ngIf="isPremium">
   <div class="card-header border-0">
     <div class="d-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center">
@@ -120,7 +85,7 @@
         <!-- Joined Date Column -->
         <ng-container matColumnDef="joinedDate">
           <th mat-header-cell *matHeaderCellDef> {{ 'Date' | translate }} </th>
-          <td mat-cell *matCellDef="let element"> {{ element.created_at | date: 'MM.dd.yyyy - hh.mm a' }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.created_at | date: 'dd.MM.yyyy - hh.mm a' }} </td>
         </ng-container>
 
         <!-- Download Column -->

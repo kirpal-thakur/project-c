@@ -31,7 +31,9 @@ export class MembershipComponent {
   premium : any =[];
   country: any=[];
   booster: any=[];
+  demo: any=[];
   stats: any;
+  exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
@@ -64,6 +66,25 @@ export class MembershipComponent {
     });
   }
 
+  exportData(): void {
+    this.talentService.getExportLinkPurchaseData().subscribe(
+      (response) => {
+        if (response?.status && response?.data?.file_path) {
+          const filePath = response.data.file_path;
+
+          // Open the file path in a new tab
+          window.open(filePath, '_blank');
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      (error) => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
+  }
+
+
 
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
@@ -73,6 +94,7 @@ export class MembershipComponent {
         this.userPlans = response.data.packages;
         this.premium = this.userPlans.premium[0];
         this.booster = this.userPlans.booster[0];
+        this.demo = this.userPlans.demo[0];
         this.country = this.userPlans.country;
         this.country.count = this.userPlans.country.length;
         console.log('userPlans',this.userPlans)
@@ -316,7 +338,7 @@ export class MembershipComponent {
   }
 
   editBooster(data:any){
-    
+
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
       width: '1000px',
       data: { stats : this.stats
@@ -325,7 +347,7 @@ export class MembershipComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result ) {
-        alert('Booster profile updated')
+        this.getBoosterData()
       }
     });
   }

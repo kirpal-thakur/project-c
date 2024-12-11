@@ -87,14 +87,10 @@ export class ActivityLogComponent {
       this.showMessage('Select activity(s) first.');
       return false;
     }
+
     this.idsToDelete = this.selectedIds;
-    this.showDeleteConfirmationPopup();
+    this.showMatDialog("Are you sure you want to delete this Activity?","delete-activity-confirmation");
   }
-
-  showDeleteConfirmationPopup(){
-    this.showMatDialog("", "delete-activity-confirmation");
-  }
-
 
   deleteActivity():any {
     let params = {id:this.idsToDelete};
@@ -117,6 +113,7 @@ export class ActivityLogComponent {
   }
 
   showMatDialog(message:string, action:string){
+
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
       position: {

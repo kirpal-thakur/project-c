@@ -142,7 +142,10 @@
   padding: 8px;
   cursor: pointer;
 }
-
+.position_inputs mat-select span{
+  color: #000;
+  font-weight: 400 !important;
+}
 .suggestions-list li:hover {
   background-color: #f0f0f0;
 }

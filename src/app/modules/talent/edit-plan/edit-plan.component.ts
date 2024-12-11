@@ -23,7 +23,7 @@ export class EditPlanComponent implements OnInit {
   stripePromise = loadStripe(environment.stripePublishableKey); // Your Stripe public key
   stripe: any;
   isYearly = false; // Subscription type
-  defaultCard: any=null; // Variable to hold the default card
+  defaultCard: any = null; // Variable to hold the default card
 
   @Output() buys: EventEmitter<any> = new EventEmitter();
 
@@ -40,12 +40,34 @@ export class EditPlanComponent implements OnInit {
 
   async ngOnInit() {
     // If this.data.plans is an array, assign it directly
-    this.countries = Array.isArray(this.data.plans) ? this.data.plans : Object.values(this.data.plans);
     this.selectedPlan =this.data.selectedPlan;
+    this.populateCountries();
     this.defaultCard = this.data.defaultCard;
     this.selectedCountries = this.data.country;
     this.stripe = await this.stripeService.getStripe();
-    console.log('data',this.data,'countries',this.countries)
+    console.log(this.data)
+
+  }
+
+  populateCountries() {
+    // Transform the 'plans' object into an array
+    this.countries = Object.keys(this.data.plans).map(key => {
+      const plan = this.data.plans[key];
+      return {
+        id: plan.id,
+        package_name: plan.package_name,
+        priceMonthly : plan.month_price,
+        priceYearly : plan.year_price,
+        currency: plan.currency,
+        month_package_id : plan.month_package_id,
+        year_id : plan.id,
+        year_package_id : plan.year_package_id,
+        monthly : plan.plans.monthly,
+        yearly : plan.plans.yearly,
+      };
+    });
+    this.selectedPlan = this.countries.find(country => country.id === this.selectedPlan.id);
+    console.log(this.selectedPlan)
   }
 
 
@@ -84,6 +106,7 @@ export class EditPlanComponent implements OnInit {
   }
 
   buyNow() {
+
     if (this.isPlanAlreadySelected()) {
       this.toastr.warning('You already have a subscription for this plan with a different interval.', 'Warning');
       this.dialog.open(MessagePopupComponent, {
@@ -96,20 +119,19 @@ export class EditPlanComponent implements OnInit {
       return;
     }
 
-    const oldPlan = this.selectedCountries.find(c => c.package_name === this.selectedPlan.name) || null;
+    const oldPlan = this.selectedCountries.find(c => c.package_name === this.selectedPlan.package_name) || null;
     
     if (this.selectedPlan) {
-      const planId = this.isYearly ? this.selectedPlan.yearData : this.selectedPlan.monthData;
-      const subscribeId = this.isYearly ? this.selectedPlan.monthData : this.selectedPlan.yearData;
+      const planId = this.isYearly ? this.selectedPlan.yearly : this.selectedPlan.monthly;
 
       if (this.isYearly) {
-        if (this.selectedPlan?.monthData?.is_package_active === 'active') {
+        if (this.selectedPlan?.monthly?.is_package_active === 'active') {
           this.updatePlan(planId, this.isYearly, oldPlan);
         } else {
           this.openCouponDialog(planId.id);
         }
       } else {
-        if (this.selectedPlan?.yearData?.is_package_active === 'active') {
+        if (this.selectedPlan?.yearly?.is_package_active === 'active') {
           this.updatePlan(planId, this.isYearly, oldPlan);
         } else {
           this.openCouponDialog(planId.id);
@@ -186,14 +208,13 @@ export class EditPlanComponent implements OnInit {
 
   isPlanAlreadySelected(): boolean {
     return this.selectedCountries.some(country => 
-      country.package_name === this.selectedPlan?.name && 
+      country.package_name === this.selectedPlan?.package_name &&
       (
         (this.isYearly && country.interval === 'yearly') || 
         (!this.isYearly && country.interval === 'monthly')
       )
     );
-  } 
-  
+  }
   
   confirmAndCancelSubscription(subscriptionId: string, canceled = false): void {
     if (canceled) {
@@ -248,9 +269,7 @@ export class EditPlanComponent implements OnInit {
       response => {
         if (response?.status && response?.data) {
           const userPlans = response.data.packages;
-
           this.selectedCountries = userPlans?.country || ''; // Default to empty string if country is undefined
-
           console.log('userPlans', userPlans);
         } else {
           console.error('Invalid API response:', response);
@@ -264,11 +283,8 @@ export class EditPlanComponent implements OnInit {
 
   onCountrySelect(event: any) {
     const selectedCountryId = event.target.value;
+    console.log(selectedCountryId)
     this.selectedPlan = this.countries.find(country => country.id === selectedCountryId);
-
-    // if (this.selectedCountries.indexOf(this.selectedPlan) === -1) {
-    //   this.selectedCountries.push(this.selectedPlan);
-    // }
   }
 
   removeCountry(country: any) {

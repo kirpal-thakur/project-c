@@ -79,6 +79,13 @@ import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attac
 import { NgxDatepickerModule } from '@handylib/ngx-datepicker';
 import { InviteScoutTalentPopupComponent } from './tabs/invite-scout-talent-popup/invite-scout-talent-popup.component';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { AddPageComponent } from './website/web-pages/add-page/add-page.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home-page.component';
+import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
+import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
+
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
@@ -147,7 +154,11 @@ export const MY_FORMATS = {
     AddRepresentatorPopupComponent,
     CommonFilterPopupComponent,
     UploadAttachmentComponent,
-    InviteScoutTalentPopupComponent
+    InviteScoutTalentPopupComponent,
+    AddPageComponent,
+    AddHomePageComponent,
+    AddContactPageComponent,
+    AddAboutPageComponent
   ],
   imports: [
     CommonModule,
@@ -170,7 +181,8 @@ export const MY_FORMATS = {
     MatPaginator,
     NgxEditorModule,
     MatProgressSpinnerModule,
-    NgxDatepickerModule
+    NgxDatepickerModule,
+    CKEditorModule
   ],
   providers: [
     UserService,
