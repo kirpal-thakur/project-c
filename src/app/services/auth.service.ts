@@ -34,6 +34,10 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/register`, registrationData);
   }
 
+  verifyEmail(token: any, time: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/verify-email/${token}/${time}`);
+  }
+
   logout() {
     localStorage.removeItem('authToken');
     localStorage.setItem('logoutMessage', 'true');

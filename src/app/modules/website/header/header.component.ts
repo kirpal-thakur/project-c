@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonDataService } from '../../../services/common-data.service';
+import { ToastrService } from 'ngx-toastr';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 
@@ -52,18 +53,13 @@ export class HeaderComponent implements OnInit {
   selectedCountry: string = '';
   selectedTeam: number | null = null;
   companyName: string = '';
- //this is get by the domain
- countries: Array<{ code: string; name: string }> = [];
- clubs: Array<{ id: number; name: string }> = [];
- langs: any = environment.langs;
-  //clubs
-  // clubs = [
-  //   { id: 1, name: 'Club A' },
-  //   { id: 2, name: 'Club B' },
-  //   { id: 3, name: 'Club C' },
-  //   { id: 4, name: 'Club D' },
-  //   { id: 5, name: 'Club E' },
-  // ];
+  verifyToken:any = null;
+  verifyTime:any = null;
+
+  //this is get by the domain
+  countries: Array<{ code: string; name: string }> = [];
+  clubs: Array<{ id: number; name: string }> = [];
+  langs: any = environment.langs;
 
   teams = [
     { id: 1, name: 'Team Alpha' },
@@ -72,7 +68,6 @@ export class HeaderComponent implements OnInit {
     { id: 4, name: 'Team Delta' },
     { id: 5, name: 'Team Echo' },
   ];
-  
 
   customOptions: OwlOptions = {
     loop: true,
@@ -99,7 +94,8 @@ export class HeaderComponent implements OnInit {
     private translateService: TranslateService,
     public dialog: MatDialog,
     private commonDataService: CommonDataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr : ToastrService
   ) {}
 
   isScrolled = false;
@@ -114,6 +110,8 @@ export class HeaderComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       if (this.token) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
         this.authService.magicLogin(this.token).subscribe(
           response => {
             if (response.status && response.data) {
@@ -139,6 +137,38 @@ export class HeaderComponent implements OnInit {
           }
         );
       }
+
+      this.verifyToken = params['token'];
+      this.verifyTime = params['time'];
+
+      if (this.verifyToken && this.verifyTime) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
+        this.authService.verifyEmail(this.verifyToken,this.verifyTime).subscribe(
+          response => {
+            if (response.status) {
+              this.toastr.clear();
+
+              this.toastr.success('Email is verified. You can login now...', 'Email Verified!');
+
+              const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+              loginModal.show();
+
+            } else {
+              this.toastr.clear();
+
+              this.router.navigate(['/expired-link']);
+            }
+          },
+          error => {
+            this.toastr.clear();
+
+            this.router.navigate(['/expired-link']);
+          }
+        );
+      }
+
+
     });
 
 
@@ -273,24 +303,29 @@ export class HeaderComponent implements OnInit {
   register() {
     this.serverBusy = true;
     this.registerFormSubmitted = true;
+
     if (!this.isFormValid()) {
       this.serverBusy = false;
-      console.error('Please fill in all required fields.');
+      this.toastr.warning('Please fill in all required fields.', 'Validation Error');
       return;
     }
+
+    this.toastr.info('Registration is in process...', 'Please wait', { disableTimeOut: true });
+
     const selectedLanguage = localStorage.getItem('lang') || '';
     const domain = environment.targetDomain?.domain || 'ch';
 
-      // Retrieve the selected language code from localStorage
+    // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = localStorage.getItem('lang') || '';
 
     // Find the corresponding language ID from the langs array
     const selectedLanguageObj = this.languages.find(
-      (lang:any) => lang.slug === selectedLanguageSlug
+      (lang: any) => lang.slug === selectedLanguageSlug
     );
 
     // Default to a specific language ID if none is found (e.g., English)
     const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    let verification_link = window.location.origin+'/home';
 
     const registrationData = {
       first_name: this.firstName,
@@ -305,56 +340,51 @@ export class HeaderComponent implements OnInit {
       privacy_policy: this.privacyPolicy,
       lang: selectedLanguageId,
       domain: domain,
-      club_id: this.selectedClub
+      club_id: this.selectedClub,
+      verification_link : verification_link
     };
 
     this.authService.register(registrationData).subscribe(
-      // response => {
-      //   if (response.status === true) {
-      //     this.serverBusy = false;
-      //     bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
-      //     const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-      //     loginModal.show();
-      //   } else {
-      //     console.log("status is false", response);
-      //     this.serverBusy = false;
-      //     this.registerError = typeof response.message === 'object'
-      //       ? Object.values(response.message).join(' ')
-      //       : response.message;
-      //     this.registerFormSubmitted = false;
-      //   }
-      // },
-      // error => {
-      //   this.handleRegistrationError(error);
-      // }
-
-      response => {
+      (response) => {
         console.log('Registration response:', response);
         if (response.status === true) {
+          this.toastr.clear();
+
           this.serverBusy = false;
+          this.toastr.success('Registration successful! Thank you.', 'Success');
           const registerModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal1'));
           if (registerModal) {
             registerModal.hide();
           }
-          const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-          loginModal.show();
+
+          if (registerModal) {
+            registerModal.hide();
+          }
+          // this.router.navigate(['/email-verify']);
+
+          // const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+          // loginModal.show();
         } else {
+          this.toastr.clear();
+
           let errorMessage = '';
-          // Check if response.message is an object
           if (typeof response.message === 'object') {
-            // Loop through each error message and concatenate them
-            Object.keys(response.message).forEach(key => {
+            Object.keys(response.message).forEach((key) => {
               errorMessage += response.message[key] + ' ';
             });
           } else {
             errorMessage = response.message;
           }
-          this.registerError = errorMessage.trim(); // Trim to remove any leading or trailing spaces
-          this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+          this.toastr.error(errorMessage.trim(), 'Registration Failed');
+          this.registerError = errorMessage.trim();
+          this.registerFormSubmitted = false;
         }
       },
-      error => {
+      (error) => {
+        this.toastr.clear();
+
         console.error('Registration failed:', error);
+        let errorMessage = 'An error occurred during registration. Please try again.';
         if (error && error.status === 400 && error.error && error.error.data) {
           const errorData = error.error.data;
           if (errorData.username) {
@@ -363,12 +393,11 @@ export class HeaderComponent implements OnInit {
           if (errorData.email) {
             this.registerForm.controls['email'].setErrors({ emailExists: true });
           }
-          this.registerError = errorData.message || 'An error occurred during registration.';
-        } else {
-          console.error('An error occurred while registering:', error);
-          this.registerError = 'An error occurred during registration. Please try again.';
+          errorMessage = errorData.message || errorMessage;
         }
-        this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+        this.toastr.error(errorMessage, 'Registration Failed');
+        this.registerError = errorMessage;
+        this.registerFormSubmitted = false;
       }
     );
   }
