@@ -47,22 +47,15 @@ export class FooterComponent implements OnInit{
     nav: true
   }
 
-  // countries = [
-  //   { id: 1, country_name: 'England' },
-  //   { id: 2, country_name: 'USA' },
-  //   // Add more countries as needed
-  // ];
-
-  selectedCountryId: string | null = null;
   isDropdownUp: boolean = false;
 
-  onCountryChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedCountryId = selectElement.value;
+  // onCountryChange(event: Event): void {
+  //   const selectElement = event.target as HTMLSelectElement;
+  //   this.selectedCountryId = selectElement.value;
 
-    // Check if we should flip the dropdown based on available space
-    this.isDropdownUp = this.shouldDropdownBeUp();
-  }
+  //   // Check if we should flip the dropdown based on available space
+  //   this.isDropdownUp = this.shouldDropdownBeUp();
+  // }
 
   shouldDropdownBeUp(): boolean {
     // Logic to determine if dropdown should be flipped
@@ -70,18 +63,15 @@ export class FooterComponent implements OnInit{
     return true; // Replace with actual condition
   }
 
-  countries = [
-    { id: 1, country_name: 'Switzerland' },
-    { id: 2, country_name: 'Germany' },
-    { id: 3, country_name: 'France' },
-    { id: 4, country_name: 'Italy' },
-    { id: 5, country_name: 'Portugal' },
-    { id: 6, country_name: 'England' },
-    { id: 7, country_name: 'Spain' },
-    { id: 8, country_name: 'Belgium' },
-    { id: 9, country_name: 'Sweden' },
-    { id: 10, country_name: 'Denmark' }
-  ];
+  countries = environment.domains; // Assuming the countries are defined in the environment
+  selectedCountryId: string = '';
+
+
+  onCountryChange(event: any): void {
+    this.selectedCountryId = event.target.value;
+    console.log('Selected Country ID:', this.selectedCountryId);
+    // You can perform additional logic here, such as calling an API with the selected country ID
+  }
 
   selectedCountry: number | null = null;
 
@@ -136,6 +126,7 @@ export class FooterComponent implements OnInit{
       } else {
         // Google API script might not be loaded yet; wait for it to load
         console.warn('Google API script is not fully loaded.');
+        this.countries = environment.domains;
       }
 
     // this.route.queryParams.subscribe(params => {

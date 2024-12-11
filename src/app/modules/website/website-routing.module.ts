@@ -23,6 +23,7 @@ import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
+import { EmailVerifyComponent } from './email-verify/email-verify.component';
 import { ValidateUserComponent } from './validateUser/validateUser.component';
 import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 
@@ -53,6 +54,8 @@ const routes: Routes = [
   {path: 'cookie-popup', component: CookiePopupComponent},
   {path: 'new-chat', component: NewChatComponent},
   {path: 'expired-link', component: PasswordResetLinkComponent},
+  {path: 'password-reset-link', component: PasswordResetLinkComponent},
+  {path: 'email-verify', component:EmailVerifyComponent}
   // {path: '', component: ComingSoonComponent},
 ];
 

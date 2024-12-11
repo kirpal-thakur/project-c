@@ -6,7 +6,7 @@
   <div class="banner-inner py_0">
     <div class="container">
       <div class="about">
-        <h3 class="about-text">About Us</h3> 
+        <h3 class="about-text">{{'aboutTranslate.aboutUs' | translate}}</h3> 
       </div>
     </div>
   </div>
@@ -32,11 +32,7 @@
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <p class="content-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-          officia deserunt mollit anim id est laborum.
+          {{'aboutTranslate.aboutUsText' | translate}}
         </p>
       </div>
     </div>
@@ -45,14 +41,15 @@
 
 <div class="countries py_0">
   <div class="container">
-    <h2 class="country-available">Countries Available</h2>
+    <h2 class="country-available">{{'aboutTranslate.countriesAvailable' | translate}}</h2>
     <div class="row">
-      <div class="col-xxl-4 col-lg-6 col-md-6 col-12">
-        <mat-list>
-          <mat-list-item *ngFor="let country of countries" class="custom-list-item country-name">
-            {{ country }}
-          </mat-list-item>  
-          </mat-list>    
+      <div class="col-xxl-4 col-lg-6 col-md-6 col-12"> 
+          
+          <mat-list>
+            <mat-list-item *ngFor="let country of countries" rel="noopener noreferrer">
+              <a class="custom-list-item country-name" [href]="country.url" target="_blank">{{ country.name }}</a>
+            </mat-list-item>
+          </mat-list> 
       </div>
       <div class="col-xxl-8 col-lg-6 col-md-6 col-12">
         <div class="map">
@@ -85,13 +82,13 @@
         </div>
   
       <div class="club_players">
-        <h3>Platform for Football</h3>
-        <h3>Players, Clubs and Scouts.</h3>
+        <h3>{{'aboutTranslate.platformForFootball' | translate}}</h3>
+        <h3>{{'aboutTranslate.playersClubsAndScouts' | translate}}</h3>
         <div class="club-buttons">
           <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
             <div class="button-border">
               <div class="join-text">
-               <p> Join Now</p>
+               <p>{{'aboutTranslate.joinNow' | translate}}</p>
                <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
                <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
               </div>

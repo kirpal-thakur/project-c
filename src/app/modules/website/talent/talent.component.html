@@ -1,488 +1,544 @@
 <section class="website-code">
-<div class="main">
+    <div class="main">
 
-    <app-header></app-header>
+        <app-header></app-header>
 
-    <div class="banner py-0">
-        <div class="overlay1"></div>
+        <div class="banner py-0">
+            <div class="overlay1"></div>
+            <div class="container">
+                <div class="banner-data">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-4 col-12">
+                            <div class="banner-left">
+                                <h1 class="banner-heading">{{ 'talentTranslate.showcaseYourProfile' | translate }}</h1>
+                                <h4 class="banner-heading5"> {{ 'talentTranslate.discoveredByClub$Scouts' | translate }}
+                                </h4>
+                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{
+                                    'talentTranslate.registerNow' | translate }}
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-8 col-12">
+                            <div class="banner-images">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="banner-image1">
+                                            <img class="light-images" src="./assets/images/Frame 3863.png">
+                                            <img class="dark-images" src="./assets/images/club-dark-banner1.png">
+                                        </div>
+                                        <div class="banner-image2">
+                                            <img class="light-images" src="./assets/images/Gallery-Highlight.png">
+                                            <img class="dark-images" src="./assets/images/club-dark-banner2.png">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="banner-image3">
+                                            <img class="light-images" src="./assets/images/talent-banner-image.png">
+                                            <img class="dark-images" src="./assets/images/club-dark-banner3.png">
+                                        </div>
+                                        <div class="banner-image4">
+                                            <img class="light-images" src="./assets/images/talent-main-content (3).png">
+                                            <img class="dark-images" src="./assets/images/club-dark-banner4.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="adVisible[0]" class="skyscraper-image">
+                        <img src="./assets/images/skyscraper - 120x600.png">
+                        <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="advertisment" [ngClass]="{'hidden': !adVisible[1]}">
+            <div *ngIf="adVisible[1]" class="leaderboard-image">
+                <img src="./assets/images/leaderboard - 728x90.png">
+                <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="club-scout py_0">
         <div class="container">
-            <div class="banner-data">
-                <div class="row">
-                    <div class="col-lg-6 col-md-4 col-12">
-                        <div class="banner-left">
-                            <h1 class="banner-heading">Showcase your profile</h1>
-                            <h4 class="banner-heading5">Get discovered by Clubs and Scouts from all around the world.
-                            </h4>
-                            <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">Register
-                                Now
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-8 col-12">
-                        <div class="banner-images">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="banner-image1">
-                                        <img class="light-images" src="./assets/images/Frame 3863.png">
-                                        <img class="dark-images" src="./assets/images/club-dark-banner1.png">
-                                    </div>
-                                    <div class="banner-image2">
-                                        <img class="light-images" src="./assets/images/Gallery-Highlight.png">
-                                        <img class="dark-images" src="./assets/images/club-dark-banner2.png">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="banner-image3">
-                                        <img class="light-images" src="./assets/images/talent-banner-image.png">
-                                        <img class="dark-images" src="./assets/images/club-dark-banner3.png">
-                                    </div>
-                                    <div class="banner-image4">
-                                        <img class="light-images" src="./assets/images/talent-main-content (3).png">
-                                        <img class="dark-images" src="./assets/images/club-dark-banner4.png">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <h3 class="club-heading4">{{ 'talentTranslate.iAmATAlent' | translate }}</h3>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="club_text">
+                        <img class="light-images" src="./assets/images/talent-icon1.svg">
+                        <img class="dark-images" src="./assets/images/dark-talent-icon1.svg">
+                        <p class="club-text1"> {{ 'talentTranslate.engagesWithOtherUsers' | translate }}</p>
                     </div>
                 </div>
-
-                <div *ngIf="adVisible[0]" class="skyscraper-image">
-                    <img src="./assets/images/skyscraper - 120x600.png">
-                    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="club_text">
+                        <img class="light-images" src="./assets/images/talent-icon2.svg">
+                        <img class="dark-images" src="./assets/images/dark-talent-icon2.svg">
+                        <p class="club-text1"> {{ 'talentTranslate.receiveNotification' | translate }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="club_text">
+                        <img class="light-images" src="./assets/images/talent-icon3.svg">
+                        <img class="dark-images" src="./assets/images/dark-talent-icon3.svg">
+                        <p class="club-text1">{{ 'talentTranslate.impressesAClub' | translate }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="advertisment" [ngClass]="{'hidden': !adVisible[1]}">
-        <div *ngIf="adVisible[1]" class="leaderboard-image">
-            <img src="./assets/images/leaderboard - 728x90.png">
-            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-    </div>
-</div>
-
-<div class="club-scout py_0">
-    <div class="container">
-        <h3 class="club-heading4">I’m a Talent</h3>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="club_text">
-                    <img class="light-images" src="./assets/images/talent-icon1.svg">
-                    <img class="dark-images" src="./assets/images/dark-talent-icon1.svg">
-                    <p class="club-text1">Engages with other users, follows football clubs, and connects with
-                        scouts, managers, and coaches.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="club_text">
-                    <img class="light-images" src="./assets/images/talent-icon2.svg">
-                    <img class="dark-images" src="./assets/images/dark-talent-icon2.svg">
-                    <p class="club-text1">Receive notifications about opportunities for trials with clubs.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="club_text">
-                    <img class="light-images" src="./assets/images/talent-icon3.svg">
-                    <img class="dark-images" src="./assets/images/dark-talent-icon3.svg">
-                    <p class="club-text1">Impresses a club during a trial and receives an offer for a professional
-                        contract.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="features py_0">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 col-12">
-                <div class="left-accordion">
-                    <h3 class="feature-heading3">Features</h3>
-                    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item" (click)="setActiveAccordion(1)">
-                            <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <img class="light-feature1" src="./assets/images/talent-feature-icon.svg">
-                                <img class="dark-feature1" src="./assets/images/talent-dark-f1.svg">
-                                <h2 class="accordion-header">
-                                    Profile Creation
-                                </h2>
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                </button>
-                            </div>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p class="feature-text">Create a detailed personal profile showcasing your
-                                        skills, performance data, photos, videos, and statistics.</p>
+    <div class="features py_0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="left-accordion">
+                        <h3 class="feature-heading3">{{ 'talentTranslate.features' | translate }}</h3>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item" (click)="setActiveAccordion(1)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <img class="light-feature1" src="./assets/images/talent-feature-icon.svg">
+                                    <img class="dark-feature1" src="./assets/images/talent-dark-f1.svg">
+                                    <h2 class="accordion-header">
+                                        {{ 'talentTranslate.profileCreation' | translate }}
+                                    </h2>
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    </button>
+                                </div>
+                                <div id="collapseOne" class="accordion-collapse collapse show"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p class="feature-text">{{ 'talentTranslate.detailedPersonalProfile' | translate
+                                            }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item" (click)="setActiveAccordion(2)">
-                            <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                aria-expanded="false" aria-controls="collapseTwo">
-                                <img class="light-feature2" src="./assets/images/talent-feature-icon2.svg">
-                                <img class="dark-feature2" src="./assets/images/talent-dark-f2.svg">
-                                <h2 class="accordion-header">Highlight Photos and Videos</h2>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                </button>
-                            </div>
-                            <div id="collapseTwo" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p class="feature-text">Browse a comprehensive database of football talents with
-                                        detailed profiles and filtering options.</p>
+                            <div class="accordion-item" (click)="setActiveAccordion(2)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    <img class="light-feature2" src="./assets/images/talent-feature-icon2.svg">
+                                    <img class="dark-feature2" src="./assets/images/talent-dark-f2.svg">
+                                    <h2 class="accordion-header">{{ 'talentTranslate.highlightPhotos$Videos' | translate
+                                        }}</h2>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    </button>
+                                </div>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p class="feature-text"> {{ 'talentTranslate.browseAComprehensiveDatabase' |
+                                            translate }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="accordion-item" (click)="setActiveAccordion(3)">
-                            <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                aria-expanded="false" aria-controls="collapseThree">
-                                <img class="light-feature3" src="./assets/images/talent-feature-icon3.svg">
-                                <img class="dark-feature3" src="./assets/images/talent-dark-f3.svg">
-                                <h2 class="accordion-header">
-                                    Networking and Communication
-                                </h2>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                </button>
-                            </div>
-                            <div id="collapseThree" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p class="feature-text">Connect and communicate with other football talents to
-                                        build your network and opportunities.</p>
+                            <div class="accordion-item" (click)="setActiveAccordion(3)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                    <img class="light-feature3" src="./assets/images/talent-feature-icon3.svg">
+                                    <img class="dark-feature3" src="./assets/images/talent-dark-f3.svg">
+                                    <h2 class="accordion-header">
+                                        {{ 'talentTranslate.networkingAndCommunication' | translate }}
+                                    </h2>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                    </button>
+                                </div>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p class="feature-text">{{ 'talentTranslate.connectAndCommunicate' | translate
+                                            }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="accordion-item" (click)="setActiveAccordion(4)">
-                            <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <img class="light-feature4" src="./assets/images/talent-feature-icon4.svg">
-                                <img class="dark-feature4" src="./assets/images/talent-dark-f4.svg">
-                                <h2 class="accordion-header" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                    aria-expanded="false" aria-controls="collapseFour">
-                                    Premium Membership
-                                </h2>
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                </button>
-                            </div>
-                            <div id="collapseFour" class="accordion-collapse collapse"
-                                data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <p class="feature-text">Enjoy additional features and benefits with our premium
-                                        membership, including exclusive content and advanced filtering options.</p>
+                            <div class="accordion-item" (click)="setActiveAccordion(4)">
+                                <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <img class="light-feature4" src="./assets/images/talent-feature-icon4.svg">
+                                    <img class="dark-feature4" src="./assets/images/talent-dark-f4.svg">
+                                    <h2 class="accordion-header" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        {{ 'talentTranslate.premiumMembership' | translate }}
+                                    </h2>
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                    </button>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-12">
-                <div class="club-scouts">
-                <div class="club-offer" *ngIf="activeAccordionIndex === 1">
-                    <div class="club-offers1">
-                        <img class="light-images" src="./assets/images/club-scouts5.png">
-                        <img class="dark-images" src="./assets/images/dark-design5.PNG">
-                    </div>
-                    <div class="club-offers2">
-                        <img class="light-images" src="./assets/images/club-scouts6.png">
-                        <img class="dark-images" src="./assets/images/dark-design6.PNG">
-                    </div>
-                    <div class="club-offers3">
-                        <img class="light-images" src="./assets/images/club-scouts7.png">
-                        <img class="dark-images" src="./assets/images/dark-design4.PNG">
-                    </div>
-                </div>
-
-                <div *ngIf="activeAccordionIndex === 2">
-                    <div class="accodian-box2-images">
-                        <div class="accodian-image1">
-                            <img class="light-images" src="./assets/images/accodian1.png">
-                            <img class="dark-images" src="./assets/images/dark-accodian1.png">
-                        </div>
-                        <div class="accodian-image2">
-                            <img class="light-images" src="./assets/images/accodian2.png">
-                            <img class="dark-images" src="./assets/images/dark-accodian2.png">
-                        </div>
-                        <div class="accodian-image3">
-                            <img class="light-images" src="./assets/images/accodian3.png">
-                            <img class="dark-images" src="./assets/images/dark-accodian3.png">
-                        </div>
-
-                    </div>
-                </div>
-
-                <div *ngIf="activeAccordionIndex === 3">
-                    <div class="networking-images">
-                        <div class="networking-images1">
-                            <img class="light-images" src="./assets/images/network1.png">
-                            <img class="dark-images" src="./assets/images/dark-network1.png">
-                        </div>
-                        <div class="networking-images2">
-                            <img  class="light-images" src="./assets/images/network2.png">
-                            <img class="dark-images" src="./assets/images/dark-network2.png">
-                        </div>
-                        <div class="networking-images3">
-                            <img  class="light-images" src="./assets/images/network3.png">
-                            <img class="dark-images" src="./assets/images/dark-network3.png">
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngIf="activeAccordionIndex === 4">
-                    <div class="feature-players">
-                        <div class="feature-player1">
-                            <div class="player1">
-                                <div class="player-img">
-                                    <img src="./assets/images/ziddane.png">
-                                </div>
-                                <p class="player-name1">Ziddane</p>
-                            </div>
-                            <div class="corner-image">
-                                <img src="./assets/images/FC Thun 1.png">
-                            </div>
-                            <div class="flag">
-                                <div class="flag-image">
-                                    <img src="./assets/images/flag.svg" class="flag-img">
-                                    <div class="bottom-line"></div>
-                                    <div class="flag-bottom">
-                                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                                        <p class="d-o-b">2004</p>
+                                <div id="collapseFour" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <p class="feature-text">{{ 'talentTranslate.enjoyAdditionalFeatures' | translate
+                                            }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="feature-player2">
-                            <div class="player2">
-                                <div class="player-img">
-                                    <img src="./assets/images/Ronaldinho Gaúcho.png">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <div class="club-scouts">
+                        <div class="club-offer" *ngIf="activeAccordionIndex === 1">
+                            <div class="club-offers1">
+                                <img class="light-images" src="./assets/images/club-scouts5.png">
+                                <img class="dark-images" src="./assets/images/dark-design5.PNG">
+                            </div>
+                            <div class="club-offers2">
+                                <img class="light-images" src="./assets/images/club-scouts6.png">
+                                <img class="dark-images" src="./assets/images/dark-design6.PNG">
+                            </div>
+                            <div class="club-offers3">
+                                <img class="light-images" src="./assets/images/club-scouts7.png">
+                                <img class="dark-images" src="./assets/images/dark-design4.PNG">
+                            </div>
+                        </div>
+
+                        <div *ngIf="activeAccordionIndex === 2">
+                            <div class="accodian-box2-images">
+                                <div class="accodian-image1">
+                                    <img class="light-images" src="./assets/images/accodian1.png">
+                                    <img class="dark-images" src="./assets/images/dark-accodian1.png">
                                 </div>
-                                <p class="player-name2">Ronaldinho Gaúcho
-                                </p>
+                                <div class="accodian-image2">
+                                    <img class="light-images" src="./assets/images/accodian2.png">
+                                    <img class="dark-images" src="./assets/images/dark-accodian2.png">
+                                </div>
+                                <div class="accodian-image3">
+                                    <img class="light-images" src="./assets/images/accodian3.png">
+                                    <img class="dark-images" src="./assets/images/dark-accodian3.png">
+                                </div>
+
                             </div>
-                            <div class="corner-image4">
-                                <img src="./assets/images/FC Thun 1.png">
+                        </div>
+
+                        <div *ngIf="activeAccordionIndex === 3">
+                            <div class="networking-images">
+                                <div class="networking-images1">
+                                    <img class="light-images" src="./assets/images/network1.png">
+                                    <img class="dark-images" src="./assets/images/dark-network1.png">
+                                </div>
+                                <div class="networking-images2">
+                                    <img class="light-images" src="./assets/images/network2.png">
+                                    <img class="dark-images" src="./assets/images/dark-network2.png">
+                                </div>
+                                <div class="networking-images3">
+                                    <img class="light-images" src="./assets/images/network3.png">
+                                    <img class="dark-images" src="./assets/images/dark-network3.png">
+                                </div>
                             </div>
-                            <div class="flag">
-                                <div class="flag-image4">
-                                    <img src="./assets/images/flag.svg" class="flag-img">
-                                    <div class="bottom-line"></div>
-                                    <div class="flag-bottom">
-                                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                                        <p class="d-o-b">2004</p>
+                        </div>
+
+                        <div *ngIf="activeAccordionIndex === 4">
+                            <div class="feature-players">
+                                <div class="feature-player1">
+                                    <div class="player1">
+                                        <div class="player-img">
+                                            <img src="./assets/images/ziddane.png">
+                                        </div>
+                                        <p class="player-name1">Ziddane {{ 'talentTranslate.ziddane' | translate }}</p>
+                                    </div>
+                                    <div class="corner-image">
+                                        <img src="./assets/images/FC Thun 1.png">
+                                    </div>
+                                    <div class="flag">
+                                        <div class="flag-image">
+                                            <img src="./assets/images/flag.svg" class="flag-img">
+                                            <div class="bottom-line"></div>
+                                            <div class="flag-bottom">
+                                                <img src="./assets/images/birthday.svg" class="birthday-img">
+                                                <p class="d-o-b">2004</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="feature-player3">
-                            <div class="player3">
-                                <div class="player-img">
-                                    <img src="./assets/images/Gabriel Jesus.png">
-                                </div>
-                                <p class="player-name3">Gabriel Jesus
-                                </p>
-                            </div>
-                            <div class="corner-image7">
-                                <img src="./assets/images/FC Thun 1.png">
-                            </div>
-                            <div class="flag">
-                                <div class="flag-image7">
-                                    <img src="./assets/images/flag.svg" class="flag-img">
-                                    <div class="bottom-line"></div>
-                                    <div class="flag-bottom">
-                                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                                        <p class="d-o-b">2004</p>
+                                <div class="feature-player2">
+                                    <div class="player2">
+                                        <div class="player-img">
+                                            <img src="./assets/images/Ronaldinho Gaúcho.png">
+                                        </div>
+                                        <p class="player-name2">{{ 'talentTranslate.ronaldinhoGaúcho' | translate }}
+                                        </p>
+                                    </div>
+                                    <div class="corner-image4">
+                                        <img src="./assets/images/FC Thun 1.png">
+                                    </div>
+                                    <div class="flag">
+                                        <div class="flag-image4">
+                                            <img src="./assets/images/flag.svg" class="flag-img">
+                                            <div class="bottom-line"></div>
+                                            <div class="flag-bottom">
+                                                <img src="./assets/images/birthday.svg" class="birthday-img">
+                                                <p class="d-o-b">2004</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="button1">
-                            <button mat-icon-button>
-                                <mat-icon>Foot: Left, Right</mat-icon>
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <div class="button2">
-                            <button mat-icon-button>
-                                <mat-icon>Location: Switzerland</mat-icon>
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <div class="button3">
-                            <button mat-icon-button>
-                                <mat-icon>Age: 15, 16</mat-icon>
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
-                        </div>
-                        <div class="button4">
-                            <button mat-icon-button>
-                                <mat-icon>Top Speed: 20-25 km/h</mat-icon>
-                                <i class="fa-solid fa-xmark"></i>
-                            </button>
+                                <div class="feature-player3">
+                                    <div class="player3">
+                                        <div class="player-img">
+                                            <img src="./assets/images/Gabriel Jesus.png">
+                                        </div>
+                                        <p class="player-name3">{{ 'talentTranslate.jesus' | translate }}
+                                        </p>
+                                    </div>
+                                    <div class="corner-image7">
+                                        <img src="./assets/images/FC Thun 1.png">
+                                    </div>
+                                    <div class="flag">
+                                        <div class="flag-image7">
+                                            <img src="./assets/images/flag.svg" class="flag-img">
+                                            <div class="bottom-line"></div>
+                                            <div class="flag-bottom">
+                                                <img src="./assets/images/birthday.svg" class="birthday-img">
+                                                <p class="d-o-b">2004</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="button1">
+                                    <button mat-icon-button>
+                                        <mat-icon>{{ 'talentTranslate.footLeftRight' | translate }}</mat-icon>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="button2">
+                                    <button mat-icon-button>
+                                        <mat-icon>{{ 'talentTranslate.locationSwitzerland' | translate }}</mat-icon>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="button3">
+                                    <button mat-icon-button>
+                                        <mat-icon>{{ 'talentTranslate.age-15-16' | translate }}</mat-icon>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="button4">
+                                    <button mat-icon-button>
+                                        <mat-icon>{{ 'talentTranslate.topSpeed' | translate }}</mat-icon>
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
+        <div class="container">
+            <div class="adv">
+                <div *ngIf="adVisible[2]" class="small-sqaure-image">
+                    <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
+                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div *ngIf="adVisible[3]" class="banner-image">
+                    <img src="./assets/images/banner - 468x60.png">
+                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pricing py_0">
+        <div class="container">
+            <h3 class="price-heading3">{{ 'talentTranslate.pricing' | translate }}</h3>
+
+            <!-- Toggle for Premium Plan -->
+            <div>
+                <div class="billed">
+                    <p class="billed-text">{{ 'talentTranslate.yearlyPlan' | translate }}</p>
+                </div>
+                <div class="billed1">
+                    <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
+                        {{ 'talentTranslate.billedMonthly' | translate }}</p>
+                    <div class="toggle-button" [ngClass]="{ 'active': isActive1, 'inactive': !isActive1 }"
+                        (click)="toggle1()"></div>
+                    <p [ngClass]="{ 'active-text': !isActive1, 'inactive-text': isActive1 }">{{
+                        'talentTranslate.billedYearly' | translate }}</p>
+                </div>
+
+                <div class="premium">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
+                                <h2 class="premium-heading2">{{ 'talentTranslate.premium' | translate }}</h2>
+                                <h3 class="premium-heading3">
+                                    {{ isActive1 ? '470' : '47' }}<span>.- CHF / {{ isActive1 ? 'Year' : 'Month'
+                                        }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-col-right">
+                                <h5 class="premium-heading5">{{ 'talentTranslate.premiumIncludes' | translate }}</h5>
+                                <div class="premium-text" *ngFor="let feature of premiumFeatures">
+                                    <img src="./assets/images/mdi_tick.svg">
+                                    <p>{{ feature }}</p>
+
+                                    
+                                </div>
+                                <!-- <div class="icon-container" (click)="addText()">
+                                    <i class="fa-solid fa-plus"></i>
+                                </div>
+                            
+                                
+                                <div class="dynamic-text-container">
+                                    <p *ngFor="let text of dynamicTexts" class="dynamic-text">{{ text }}</p>
+                                </div> -->
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Toggle for Multi-Country Plan -->
+            <div>
+                <div class="billed">
+                    <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">{{
+                        'talentTranslate.billedMonthly' | translate }}</p>
+                    <div class="toggle-button" [ngClass]="{ 'active': isActive2, 'inactive': !isActive2 }"
+                        (click)="toggle2()"></div>
+                    <p [ngClass]="{ 'active-text': !isActive2, 'inactive-text': isActive2 }">{{
+                        'talentTranslate.billedYearly' | translate }}</p>
+                </div>
+
+                <div class="premium">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
+                                <h2 class="premium-heading2">{{ 'talentTranslate.multi-country' | translate }} </h2>
+                                <h3 class="premium-heading3">
+                                    {{ isActive2 ? '110' : '11' }}<span>.- CHF / {{ isActive2 ? 'Year' : 'Month'
+                                        }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-col-right">
+                                <h5 class="premium-heading5">{{ 'talentTranslate.multi-country' | translate }}</h5>
+                                <div class="premium-text" *ngFor="let feature of multiCountryFeatures">
+                                    <img src="./assets/images/mdi_tick.svg">
+                                    <p>{{ feature }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="billed">
+                    <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">{{
+                        'talentTranslate.billedMonthly' | translate }}</p>
+                    <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }"
+                        (click)="toggle3()"></div>
+                    <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">{{
+                        'talentTranslate.billedYearly' | translate }}</p>
+                </div>
+
+                <div class="premium">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
+                                <h2 class="premium-heading2">{{ 'talentTranslate.booster' | translate }}</h2>
+                                <h3 class="premium-heading3">
+                                    {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month'
+                                        }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-col-right">
+                                <h5 class="premium-heading5"> {{ 'talentTranslate.boosterInclude' | translate }}</h5>
+                                <div class="premium-text" *ngFor="let feature of boosterFeatures">
+                                    <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
+                                    <p>{{ feature }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="container">
+            <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+
+
+                <div *ngIf="adVisible[4]" class="large-rectangle">
+                    <img src="./assets/images/large rectangle - 336x280 .png">
+                    <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[5]" class="inline-rectangle">
+                    <img src="./assets/images/inline rectangle - 300x250.png">
+                    <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div *ngIf="adVisible[6]" class="square">
+                    <img src="./assets/images/sqaure - 250x250.png">
+                    <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
             </div>
         </div>
     </div>
-</div>
 
-<div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
-    <div class="container">
-        <div class="adv">
-            <div *ngIf="adVisible[2]" class="small-sqaure-image">
-                <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
-                <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div *ngIf="adVisible[3]" class="banner-image">
-                <img src="./assets/images/banner - 468x60.png">
-                <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="pricing py_0">
-    <div class="container">
-        <h3 class="price-heading3">Pricing</h3>
-
-        <!-- Toggle for Premium Plan -->
-        <div>
-            <div class="billed">
-                <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
-                    Billed Monthly</p>
-                <div class="toggle-button" [ngClass]="{ 'active': isActive1, 'inactive': !isActive1 }"
-                    (click)="toggle1()"></div>
-                <p [ngClass]="{ 'active-text': !isActive1, 'inactive-text': isActive1 }">Billed Yearly</p>
-            </div>
-
-            <div class="premium">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-img">
-                            <h2 class="premium-heading2">Premium</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive1 ? '470' : '47' }}<span>.- CHF / {{ isActive1 ? 'Year' : 'Month'
-                                    }}</span>
-                            </h3>
-                        </div>
+    <!-- <div>
+        <div class="container">
+            <div class="add" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+            <div class="row ">
+                <div class="col-lg-4 col-md-4 col-4">
+                    <div *ngIf="adVisible[4]" class="large-rectangle">
+                        <img src="./assets/images/large rectangle - 336x280 .png">
+                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-col-right">
-                            <h5 class="premium-heading5">Premium Includes</h5>
-                            <div class="premium-text" *ngFor="let feature of premiumFeatures">
-                                <img src="./assets/images/mdi_tick.svg">
-                                <p>{{ feature }}</p>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <div *ngIf="adVisible[5]" class="inline-rectangle">
+                        <img src="./assets/images/inline rectangle - 300x250.png">
+                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
+                    
+                </div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <div *ngIf="adVisible[6]" class="square">
+                        <img src="./assets/images/sqaure - 250x250.png">
+                        <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    
+                </div>
                 </div>
             </div>
         </div>
+    </div> -->
 
-        <!-- Toggle for Multi-Country Plan -->
-        <div>
-            <div class="billed">
-                <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">Billed Monthly</p>
-                <div class="toggle-button" [ngClass]="{ 'active': isActive2, 'inactive': !isActive2 }"
-                    (click)="toggle2()"></div>
-                <p [ngClass]="{ 'active-text': !isActive2, 'inactive-text': isActive2 }">Billed Yearly</p>
-            </div>
-
-            <div class="premium">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-img">
-                            <h2 class="premium-heading2">Multi-Country</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive2 ? '110' : '11' }}<span>.- CHF / {{ isActive2 ? 'Year' : 'Month'
-                                    }}</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-col-right">
-                            <h5 class="premium-heading5">Multi-Country</h5>
-                            <div class="premium-text" *ngFor="let feature of multiCountryFeatures">
-                                <img src="./assets/images/mdi_tick.svg">
-                                <p>{{ feature }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div>
-            <div class="billed">
-                <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">Billed Monthly</p>
-                <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }"
-                    (click)="toggle3()"></div>
-                <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">Billed Yearly</p>
-            </div>
-
-            <div class="premium">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-img">
-                            <h2 class="premium-heading2">Booster</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month'
-                                    }}</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-col-right">
-                            <h5 class="premium-heading5">Booster Includes</h5>
-                            <div class="premium-text" *ngFor="let feature of boosterFeatures">
-                                <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
-                                <p>{{ feature }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
-
-
-            <div *ngIf="adVisible[4]" class="large-rectangle">
-                <img src="./assets/images/large rectangle - 336x280 .png">
-                <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <div *ngIf="adVisible[5]" class="inline-rectangle">
-                <img src="./assets/images/inline rectangle - 300x250.png">
-                <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <div *ngIf="adVisible[6]" class="square">
-                <img src="./assets/images/sqaure - 250x250.png">
-                <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<app-footer></app-footer>
+    <app-footer></app-footer>
 </section>

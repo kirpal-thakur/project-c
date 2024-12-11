@@ -7,7 +7,7 @@
     padding-bottom: 50px;
 }
 
-.overlay1{
+.overlay1 {
     position: absolute;
     height: 100%;
     right: 0;
@@ -39,11 +39,12 @@ P {
 }
 
 .banner-left {
-    position: absolute;
-    top: 30%;
-    left: 6%;
-    z-index: 2;
-    padding-right: 71%;
+        position: relative;
+        top: 120%;
+        left: 0;
+        z-index: 2;
+        margin-right: 22%;
+    
 }
 
 .banner-heading {
@@ -161,6 +162,7 @@ a.btn.btn-register {
     bottom: 45px;
     left: 10px;
 }
+
 .bottom-line {
     height: 1px;
     background-color: #E0E0E0;
@@ -1338,29 +1340,29 @@ img.dark-feature4 {
 # pricing
 --------------------------------------------------------------*/
 
-// .pricing {
-//     background-color: #092E01;
-// }
-
-.premium-img {
-    background-image: url(../../../../assets/images/feature-image.svg);
-    background-repeat: no-repeat;
-    height: 510px;
-    width: 330px;
-    padding-top: 50px;
-    padding-left: 50px;
-}
-
 .premium {
     width: 100%;
-    height: 338px;
-    margin-bottom: 80px;
+    min-height: 338px; /* Ensures it starts with a base size */
     border-radius: 10px;
+    padding: 50px 20px 90px 40px;
+    position: relative;
+    box-sizing: border-box;
+}
+img.bg-image {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
 }
 
-.premium-col-right {
-    padding-top: 50px;
-    padding-right: 50px;
+
+.price-heading3 {
+    height: 35px;
+    color: white;
+    text-transform: uppercase;
+    width: 100%;
 }
 
 .price-heading3 {
@@ -1409,6 +1411,23 @@ span {
     display: flex;
     justify-content: right;
     margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.billed1 {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 10px;
+
+}
+
+.billed-text {
+    display: flex;
+    justify-content: right;
+    font-size: 13px;
+    margin-bottom: 10px;
+    margin-right: 40px;
+
 }
 
 .billed-monthly {
@@ -1996,63 +2015,79 @@ span {
         right: 68%;
     }
 
-    .banner-left {
-        padding-right: 71%;
-        // top: 33%;
-        left: 8%;
-    }
 }
 
 @media (min-width: 1920px) {
     .banner {
         height: 1200px;
     }
+
     .skyscraper-image {
         top: 12%;
     }
+
     .feature-players .player-img img {
         height: 240px;
         width: 227px;
     }
+
     .player-img img {
         height: 280px;
         width: 260px;
     }
-    .player1{
+
+    .player1 {
         height: 290px;
         width: 268px;
     }
-    .player-name, .player-name1, .player-name2, .player-name3, .player-name7, .player-name8, .player-col-2 .player-name, .player-col-2 .player-name1 {
+
+    .player-name,
+    .player-name1,
+    .player-name2,
+    .player-name3,
+    .player-name7,
+    .player-name8,
+    .player-col-2 .player-name,
+    .player-col-2 .player-name1 {
         width: 260px;
     }
+
     .player-img3 img {
         width: 260px;
         height: 180px;
     }
+
     .player3 {
         height: 190px;
         width: 268px;
     }
+
     .player10 {
         height: 285px;
         width: 132px;
     }
+
     .player10 .player-img img {
         height: 265px;
         width: 127px;
     }
-    .player-name10, .player-name11 {
+
+    .player-name10,
+    .player-name11 {
         width: 127px;
         padding-left: 102px;
     }
+
     .player2 {
         height: 270px;
         width: 265px;
     }
+
     .banner .player2 .player-img img {
         height: 258px;
         width: 257px;
     }
+
     .player-name9 {
         width: 257px;
         height: 14px;
@@ -2063,12 +2098,6 @@ span {
     .feature-player3 .flag-image7 {
         top: 140px;
         left: 10px;
-    }
-
-    .banner-left {
-        padding-right: 67%;
-        // top: 35%;
-        left: 16%;
     }
 
     .feature-player1 .flag-image,
@@ -2112,6 +2141,7 @@ span {
         height: 310px;
         width: 310px;
     }
+
     .banner .player2 .player-img img {
         height: 280px;
         width: 302px;
@@ -2197,11 +2227,6 @@ span {
         height: 830px;
     }
 
-    .banner-left {
-        left: 25%;
-        padding-right: 60%;
-    }
-
     .banner-image1 img {
         width: 400px;
         height: 700px;
@@ -2246,6 +2271,12 @@ span {
     }
 
 }
+
+// @media (max-width: 1441px) {
+//     .skyscraper-image {
+//         display: none
+//     }
+// }
 
 
 @media (max-width: 1404px) {
@@ -2352,69 +2383,84 @@ span {
         width: 210px;
     }
 
-    .banner-left {
-        padding-right: 68%;
-        top: 35%;
-    }
-
-     .feature-players .player-img img {
+    .feature-players .player-img img {
         width: 215px;
         height: 215px;
     }
-    .feature-player3 .player3,.feature-player2 .player2, .feature-player1 .player1{
+
+    .feature-player3 .player3,
+    .feature-player2 .player2,
+    .feature-player1 .player1 {
         height: 224px;
         width: 223px;
     }
-    .feature-player1, .feature-player2, .feature-player3 {
+
+    .feature-player1,
+    .feature-player2,
+    .feature-player3 {
         height: 224px;
         width: 223px;
     }
+
     .feature-player3 .player-name3 {
         width: 215px;
     }
+
     .feature-player2 .player-name2 {
         top: 190px;
         width: 215px;
     }
+
     .feature-player1 .player-name1 {
         top: 190px;
         width: 215px;
     }
+
     .feature-player2 .player2 .player-img::after {
         bottom: 28px;
     }
+
     .feature-player2 {
         top: 39%;
         right: 185px;
     }
+
     .feature-player1 {
         left: 1%;
     }
+
     .club-offers3 img {
         bottom: 8%;
         width: 480px;
     }
+
     .accodian-image2 img {
         left: 0;
     }
+
     .networking-images1 img {
         left: 16%;
     }
+
     .button4 {
         right: 60px;
     }
+
     .button3 {
         top: 57%;
         right: 25px;
     }
+
     .button2 {
         top: 84%;
         right: 10%;
     }
+
     .button1 {
         top: 50%;
         left: 0;
     }
+
     // .club-offers3 img {
     //     right: 11%;
     //     bottom: 17%;
@@ -2535,6 +2581,15 @@ span {
 }
 
 @media (max-width: 1281px) {
+    .club_text {
+        padding: 30px;
+        border-radius: 10px;
+        height: 220px;
+        margin-top: 100px;
+    }
+
+
+
     .player1 {
         height: 230px;
         width: 220px;
@@ -2651,57 +2706,80 @@ span {
         right: 46%;
     }
 
-    .banner-left {
-        padding-right: 68%;
-        top: 35%;
-    }
-
     .feature-players .player-img img {
         height: 210px;
         width: 210px;
     }
-    .feature-player3 .player3, .feature-player2 .player2, .feature-player1 .player1 {
+
+    .feature-player3 .player3,
+    .feature-player2 .player2,
+    .feature-player1 .player1 {
         height: 219px;
         width: 218px;
     }
-    .feature-player1, .feature-player2, .feature-player3 {
+
+    .feature-player1,
+    .feature-player2,
+    .feature-player3 {
         height: 222px;
         width: 216px;
     }
+
     .feature-player2 .player-name2 {
         top: 184px;
         width: 210px;
     }
+
     .feature-player3 .player-name3 {
         width: 210px;
     }
+
     .feature-player1 .player-name1 {
         top: 187px;
         width: 210px;
         height: 30px;
     }
+
     .feature-player2 {
         right: 190px;
     }
+
     .feature-player1 {
-        top: 10%;
+        top: 5%;
         left: 2%;
     }
+
     .feature-player3 {
         top: 16%;
     }
-    .button1{
+
+    .button1 {
         left: 1%;
     }
-    .button2{
-        top: 87%;
+
+    .button2 {
+        top: 82%;
         right: 10%;
     }
-    .button4{
+
+    .feature-player1 .flag-image {
+        top: 115px;
+    }
+
+    .feature-player2 .flag-image4 {
+        top: 115px;
+    }
+
+    .feature-player3 .flag-image7 {
+        top: 115px;
+    }
+
+    .button4 {
         right: 57px;
         top: 8%;
     }
-    .button3{
+
+    .button3 {
         top: 60%;
         right: 20px;
     }
@@ -2720,19 +2798,23 @@ span {
         width: 500px;
         height: 320px;
     }
+
     .club-offers1 img {
         top: 0;
         left: 1%;
         height: 230px;
         width: 280px;
     }
+
     .accodian-image2 img {
         left: 0;
         top: 42%;
     }
+
     .networking-images3 img {
         left: 2%;
     }
+
     .networking-images1 img {
         left: 13%;
         top: 8%;
@@ -2761,7 +2843,8 @@ span {
     }
 
     .player-member3 {
-        top:78%;
+        top: 80%;
+        top: 78%;
         right: 47%;
     }
 
@@ -2774,9 +2857,9 @@ span {
         top: 43%;
         right: 28%;
     }
-    .player-member6{
+
+    .player-member6 {
         top: 69%;
-        top: 42%;
         right: 28%;
     }
 
@@ -2818,10 +2901,6 @@ span {
         width: 80px;
     }
 
-    .banner-left {
-        padding-right: 73%;
-        top: 35%;
-    }
 
     .player1 {
         height: 190px;
@@ -3264,12 +3343,13 @@ span {
     .banner {
         height: 950px;
     }
-
-
     .banner-left {
-        padding-right: 0;
-        top: 15%;
+        top: 80%;
     }
+    span {
+        font-size: 13px;
+    }
+
 
     .player-member1 {
         top: 42%;
@@ -3354,19 +3434,19 @@ span {
         width: 100%;
     }
 
-    .premium-col-right {
-        padding-top: 30px;
-        padding-right: 30px;
-    }
+    // .premium-col-right {
+    //     padding-top: 30px;
+    //     padding-right: 30px;
+    // }
 
-    .premium-img {
-        padding-top: 30px;
-        padding-left: 30px;
-    }
-
+    // .premium-img {
+    //     padding-top: 30px;
+    //     padding-left: 30px;
+    // }
     .premium {
-        margin-bottom: 30px;
+        padding: 30px 20px 40px 20px;
     }
+
 
     .half-image {
         display: none;
@@ -4056,87 +4136,102 @@ span {
         width: 50px;
         height: 50px;
     }
+
     .feature-player1 {
         top: 4%;
         left: 0;
         height: 228px;
         width: 228px;
     }
-    .feature-player2{
+
+    .feature-player2 {
         top: 41%;
         right: 33%;
         height: 228px;
         width: 228px;
     }
-    .feature-player3{
+
+    .feature-player3 {
         top: 11%;
         right: 0;
         height: 228px;
         width: 228px;
-    } 
-    .button1{
+    }
+
+    .button1 {
         position: absolute;
         z-index: 1;
         top: 52%;
         left: 0;
     }
-    .button3{
+
+    .button3 {
         top: 58%;
         right: 10px;
     }
-    .button4{
+
+    .button4 {
         top: 3%;
         right: 10%;
     }
+
     .club-offers3 img {
         right: 8%;
         bottom: 6%;
         height: 280px;
         width: 430px;
     }
+
     .accodian-image1 img {
         top: 17%;
         right: 15%;
         height: 300px;
         width: 380px;
     }
+
     .accodian-image2 img {
         top: 52%;
         height: 180px;
         width: 220px;
         left: 0;
     }
+
     .accodian-image3 img {
         top: 51.5%;
         right: 0;
         width: 210px;
         height: 170px;
     }
+
     .networking-images1 img {
         height: 430px;
         width: 335px;
         left: 11%;
         top: 5%;
     }
+
     .networking-images2 img {
         width: 230px;
         height: 68px;
         right: 0;
         top: 19%;
     }
+
     .networking-images3 img {
         height: 68px;
         width: 207px;
         top: 62%;
         left: 0;
     }
+
     .premium {
         height: 450px;
 
     }
-    .premium-img {
-        height: 200px;
-    }
+
+    // .premium-img {
+    //     height: 200px;
+    // }
 }
 
 
@@ -4145,13 +4240,12 @@ span {
         height: 62vh;
     }
 
-    .features {
-        height: 880px;
+    .banner-left {
+        margin-right: 0;
     }
 
-    .banner-left {
-        padding-right: 0;
-        top: 20%;
+    .features {
+        height: 880px;
     }
 
     .player-member1 {
@@ -4163,6 +4257,16 @@ span {
         right: 76%;
         top: 71%;
     }
+    img.bg-image {
+        height: 100%;
+        width: 100%;
+    }
+    .premium-img {
+        width: 100%;
+        height: 150px;
+    }
+    
+    
 
     .player-member3 {
         top: 89%;
@@ -4689,6 +4793,7 @@ span {
         height: 55px;
         width: 50px;
     }
+
     .button1 {
         top: 66%;
         right: 61%;
@@ -4729,18 +4834,18 @@ span {
         font-size: 25px;
     }
 
-    .premium-col-right {
-        padding-top: 20px;
-        padding-right: 30px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-    }
+    // .premium-col-right {
+    //     padding-top: 20px;
+    //     padding-right: 30px;
+    //     padding-bottom: 10px;
+    //     padding-left: 10px;
+    // }
 
-    .premium-img {
-        padding-top: 10px;
-        padding-left: 10px;
-        height: 180px;
-    }
+    // .premium-img {
+    //     padding-top: 10px;
+    //     padding-left: 10px;
+    //     height: 180px;
+    // }
 
     .player2 .player-img::after {
         width: 35px;
@@ -4753,6 +4858,9 @@ span {
         bottom: 29%;
         width: 320px;
         height: 210px;
+    }
+    .premium {
+        padding: 30px 20px 20px 10px;
     }
 
     .club-offers1 img {
@@ -4866,13 +4974,16 @@ span {
         top: 28%;
         left: 96px;
     }
+
     .button1 {
         right: 58%;
         top: 59%;
     }
+
     .feature-player1 .player-img::after {
         bottom: 22px;
     }
+
     .feature-player3 .player-img::after {
         bottom: 24px;
     }
@@ -4888,35 +4999,42 @@ span {
     .feature-player1 .flag-image {
         top: 64px;
     }
+
     .club-offers1 img {
         left: 2%;
     }
+
     .club-offers3 img {
         right: 2%;
     }
+
     .accodian-image2 img {
         top: 35.8%;
         height: 145px;
         width: 180px;
         left: 0;
     }
+
     .accodian-image1 img {
         top: 9%;
         right: 10%;
         height: 228px;
         width: 290px;
     }
+
     .accodian-image3 img {
         top: 36%;
         right: 0;
         height: 120px;
         width: 136px;
     }
+
     .networking-images1 img {
         height: 330px;
         width: 265px;
         left: 12%;
     }
+
     .networking-images3 img {
         top: 49%;
     }
@@ -5561,9 +5679,9 @@ span {
         line-height: 19px;
     }
 
-    .premium-img {
-        width: 290px;
-    }
+    // .premium-img {
+    //     width: 290px;
+    // }
 
     .button1 {
         top: 53%;
