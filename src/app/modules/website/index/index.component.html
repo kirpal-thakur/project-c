@@ -26,13 +26,12 @@
                 <img class="home-banner-image" src="./assets/images/white-logo.png">
               </div>
               <div class="banner-btn text-center mt-5">
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{  'talentTranslate.registerNow' |
-                  translate }}
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Register Now
                 </a>
 
                 <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal-login">{{  'indexTranslate.logIn' | translate }}<svg class="ms-2" width="8" height="12"
-                    viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  data-bs-target="#exampleModal-login">{{ 'websiteTranslate.logIn' | translate }}<svg class="ms-2"
+                    width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.34766 1.5L6.34766 6L1.34766 10.5" stroke="white" stroke-width="2"
                       stroke-linecap="round" />
                   </svg>
@@ -60,11 +59,10 @@
       <div class="container">
         <div class="joined">
           <div class="joined-text">
-            <h3>{{  'indexTranslate.recentlyJoined' | translate }}</h3>
+            <h3>Recently Joined</h3>
           </div>
           <div class="joined-btn">
-            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{  'indexTranslate.seeAll' | translate
-              }}</button>
+            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">See all</button>
           </div>
         </div>
       </div>
@@ -79,7 +77,8 @@
                   <div class="player-img">
                     <img src="./assets/images/Ronaldinho Gaúcho.png" class="player-image">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.ronaldinhoGaúcho' | translate }}</p>
+                  <p class="player-name">Ronaldinho Gaúcho
+                  </p>
 
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
@@ -104,7 +103,7 @@
                   <div class="player-img">
                     <img src="./assets/images/ziddane.png" class="player-image">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.ziddane' | translate }}</p>
+                  <p class="player-name">Ziddane</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -128,7 +127,7 @@
                   <div class="player-img">
                     <img src="./assets/images/FC Thun 1.png" class="player-image1">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.fcThun' | translate }}</p>
+                  <p class="player-name">FC Thun</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -145,7 +144,7 @@
                   <div class="player-img">
                     <img src="./assets/images/Gabriel Jesus.png" class="player-image">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.gabrielJesus' | translate }}</p>
+                  <p class="player-name">Gabriel Jesus</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -169,7 +168,7 @@
                   <div class="player-img">
                     <img src="./assets/images/E╠ütoile Carouge FC..png" class="player-image1">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.eütoile' | translate }}</p>
+                  <p class="player-name">Eütoile Carouge FC</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -186,7 +185,7 @@
                   <div class="player-img">
                     <img src="./assets/images/Harry Kane.png" class="player-image">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.harryKane' | translate }}</p>
+                  <p class="player-name">Harry Kane</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -210,7 +209,7 @@
                   <div class="player-img">
                     <img src="./assets/images/Messi.png" class="player-image">
                   </div>
-                  <p class="player-name">{{  'indexTranslate.messi' | translate}}</p>
+                  <p class="player-name">Messi</p>
                   <div class="corner-image">
                     <img src="./assets/images/FC Thun 1.png">
                   </div>
@@ -236,7 +235,7 @@
     <!-- How It Works -->
     <div class="works py_0">
       <div class="container">
-        <h3>{{  'indexTranslate.howItWorks' | translate }}</h3>
+        <h3>How it works</h3>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
             <div class="work-banner">
@@ -244,14 +243,14 @@
                 <div class="talent-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Talent'}" (click)="showCategory('Talent')">
-                    <p class="club-p">{{  'indexTranslate.talent' | translate }}</p>
+                    <p class="club-p">Talent</p>
                   </button>
                 </div>
                 <div class="club-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Clubs & Scouts'}"
                     (click)="showCategory('Clubs & Scouts')">
-                    <p class="club-s">{{  'indexTranslate.clubsAndScouts' | translate }}</p>
+                    <p class="club-s">Clubs and Scouts</p>
                   </button>
                 </div>
               </div>
@@ -262,9 +261,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.profileCreation' | translate }}
+                    Sign-up & Profile Creation
                   </a>
-                  <p>{{  'indexTranslate.CreatesAComprehensiveProfile' | translate }}</p>
+                  <p>Creates a comprehensive profile showcasing skills, achievements, and stats.</p>
                 </div>
               </div>
 
@@ -275,9 +274,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.networking&Opportunity' | translate }}
+                    Networking & Opportunity
                   </a>
-                  <p> {{  'indexTranslate.engageWithOtherUsers' | translate }}</p>
+                  <p>Engage with other users, football clubs, and connect with scouts, managers, and coaches.</p>
                 </div>
               </div>
 
@@ -288,9 +287,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.Success&Progression' | translate }}
+                    Success & Progression
                   </a>
-                  <p> {{  'indexTranslate.impresses' | translate }}</p>
+                  <p>Impresses your favorite club and receives an offer for a professional contract.</p>
                 </div>
               </div>
 
@@ -301,9 +300,10 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.profileCreation' | translate }}
+                    Sign-up & Profile Creation
                   </a>
-                  <p>{{  'indexTranslate.accesses' | translate }}</p>
+                  <p>Accesses the database of player profiles, reports, and performance analytics to discover emerging
+                    players.</p>
                 </div>
               </div>
 
@@ -314,9 +314,10 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.networking&Opportunity' | translate }}
+                    Networking & Opportunity
                   </a>
-                  <p>{{  'indexTranslate.communicate' | translate }}</p>
+                  <p>Communicate with players and other stakeholders through the platform's messaging system, providing
+                    feedback on their performance and discussing contract negotiations.</p>
                 </div>
               </div>
 
@@ -327,9 +328,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    {{  'indexTranslate.decisionMaking&Action' | translate }}
+                    Decision Making & Action
                   </a>
-                  <p>{{  'indexTranslate.finalize' | translate }}</p>
+                  <p>Finalize contract offers and negotiate terms with potential recruits.</p>
                 </div>
               </div>
             </div>
@@ -379,7 +380,7 @@
                           <div class="member1-image">
                             <img src="./assets/images/ziddane.png" alt="Player Image">
                           </div>
-                          <p class="club_member1-name">{{  'indexTranslate.ziddane'| translate}}</p>
+                          <p class="club_member1-name">Ziddane</p>
                           <img src="./assets/images/FC Zu╠êrich.png" class="ziddane-image" alt="Corner Image">
                           <div class="flag-image">
                             <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -398,7 +399,7 @@
                           <div class="member2-image">
                             <img src="./assets/images/FC Thun 1.png" alt="Player Image">
                           </div>
-                          <p class="club_member1-name">{{  'indexTranslate.fcThun'| translate}} </p>
+                          <p class="club_member1-name">FC Thun</p>
 
                           <div class="flag-image">
                             <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -415,7 +416,8 @@
                             <div class="member3-image">
                               <img src="./assets/images/Ronaldinho Gaúcho.png" alt="Player Image">
                             </div>
-                            <p class="club_member3-name">{{  'indexTranslate.ronaldinhoGaúcho'| translate}}</p>
+                            <p class="club_member3-name">Ronaldinho Gaúcho
+                            </p>
                             <img src="assets/images/SC Bru╠êhl .png" class="Ronaldinho-image" alt="Corner Image">
                             <div class="flag-image">
                               <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -433,7 +435,7 @@
                             <div class="member2-image">
                               <img src="./assets/images/FC Rapperswil-Jona.png" alt="Player Image">
                             </div>
-                            <p class="club_member1-name">{{  'indexTranslate.rfcRapperswil'| translate}} </p>
+                            <p class="club_member1-name">FC Rapperswil Jona</p>
 
                             <div class="flag-image">
                               <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -447,7 +449,7 @@
                             <div class="member5-image">
                               <img src="./assets/images/jammie.png" alt="Player Image">
                             </div>
-                            <p class="club_member5-name">{{  'indexTranslate.jamie'| translate}}</p>
+                            <p class="club_member5-name">Jamie Vardy</p>
                             <img src="./assets/images/FC Wil.png" class="fc-image" alt="Corner Image">
                             <div class="flag-image">
                               <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -468,7 +470,7 @@
                           <div class="member2-image">
                             <img src="./assets/images/E╠ütoile Carouge FC..png" alt="Player Image">
                           </div>
-                          <p class="club_member1-name">{{  'indexTranslate.eütoile'| translate}}</p>
+                          <p class="club_member1-name">Eütoile Carouge FC</p>
 
                           <div class="flag-image">
                             <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -482,7 +484,7 @@
                           <div class="member7-image">
                             <img src="./assets/images/mohamad.png" alt="Player Image">
                           </div>
-                          <p class="club_member7-name">{{  'indexTranslate.mohamedSalah'| translate}}</p>
+                          <p class="club_member7-name">Mohamed Salah</p>
                           <img src="./assets/images/FC Thun 1.png" class="sc-image" alt="Corner Image">
                           <div class="flag-image">
                             <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -591,7 +593,7 @@
 
     <div class="works-1 py_0">
       <div class="container">
-        <h3>{{  'indexTranslate.howItWorks' | translate }}</h3>
+        <h3>How it works</h3>
         <div class="row">
           <div class="col-lg-6 col-md-12 col-12">
             <div class="work-banner">
@@ -599,14 +601,14 @@
                 <div class="talent-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Talent'}" (click)="showCategory('Talent')">
-                    <p class="club-p">{{  'indexTranslate.talents' | translate }}</p>
+                    <p class="club-p">Talent</p>
                   </button>
                 </div>
                 <div class="club-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Clubs & Scouts'}"
                     (click)="showCategory('Clubs & Scouts')">
-                    <p class="club-s">{{  'indexTranslate.club' | translate }}</p>
+                    <p class="club-s">Clubs and Scouts</p>
                   </button>
                 </div>
               </div>
@@ -623,9 +625,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                          {{  'indexTranslate.profileCreation' | translate }}
+                          Sign-up & Profile Creation
                         </a>
-                        <p>{{  'indexTranslate.CreatesAComprehensiveProfile' | translate }}</p>
+                        <p>Creates a comprehensive profile showcasing skills, achievements, and stats.</p>
                       </div>
                     </div>
                     <div class="player1">
@@ -667,9 +669,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                          {{  'indexTranslate.networking&Opportunity' | translate }}
+                          Networking & Opportunity
                         </a>
-                        <p> {{  'indexTranslate.engageWithOtherUsers' | translate }}</p>
+                        <p>Engage with other users, football clubs, and connect with scouts, managers, and coaches.</p>
                       </div>
                     </div>
                     <div class="player2">
@@ -680,7 +682,7 @@
                               <div class="member1-image">
                                 <img src="./assets/images/ziddane.png" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">{{  'indexTranslate.ziddane' | translate}}</p>
+                              <p class="club_member1-name">ziddane</p>
                               <img src="./assets/images/FC Zu╠êrich.png" class="ziddane-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -697,7 +699,7 @@
                               <div class="member2-image">
                                 <img src="./assets/images/FC Thun 1.png" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">{{  'indexTranslate.fcThun' | translate }} </p>
+                              <p class="club_member1-name">FC Thun</p>
 
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -713,7 +715,8 @@
                               <div class="member3-image">
                                 <img src="./assets/images/Ronaldinho Gaúcho.png" alt="Player Image">
                               </div>
-                              <p class="club_member3-name">{{  'indexTranslate.ronaldinhoGaúcho'| translate}}</p>
+                              <p class="club_member3-name">Ronaldinho Gaúcho
+                              </p>
                               <img src="./assets/images/SC Bru╠êhl .png" class="Ronaldinho-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -729,7 +732,7 @@
                               <div class="member2-image">
                                 <img src="./assets/images/fussball.svg" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">{{  'indexTranslate.rfcRapperswil'| translate}} </p>
+                              <p class="club_member1-name">FC Rapperswil Jona</p>
 
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -741,7 +744,7 @@
                               <div class="member5-image">
                                 <img src="./assets/images/jammie.png" alt="Player Image">
                               </div>
-                              <p class="club_member5-name">{{  'indexTranslate.jamie'| translate}}</p>
+                              <p class="club_member5-name">Jamie Vardy</p>
                               <img src="./assets/images/FC Wil.png" class="fc-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -760,7 +763,7 @@
                               <div class="member2-image">
                                 <img src="./assets/images/E╠ütoile Carouge FC..png" alt="Player Image">
                               </div>
-                              <p class="club_member1-name"> {{  'indexTranslate.eütoile'| translate}}</p>
+                              <p class="club_member1-name">Eütoile Carouge FC</p>
 
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -772,7 +775,7 @@
                               <div class="member7-image">
                                 <img src="./assets/images/mohamad.png" alt="Player Image">
                               </div>
-                              <p class="club_member7-name">{{  'indexTranslate.mohamedSalah'| translate}}</p>
+                              <p class="club_member7-name">Mohamed Salah</p>
                               <img src="./assets/images/FC Thun 1.png" class="sc-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -801,9 +804,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                          {{  'indexTranslate.Success&Progression'| translate}}
+                          Success & Progression
                         </a>
-                        <p> {{  'indexTranslate.impresses'| translate}}</p>
+                        <p>Impresses your favorite club and receives an offer for a professional contract.</p>
                       </div>
                     </div>
 
@@ -833,9 +836,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                          {{  'indexTranslate.profileCreation'| translate}}
+                          Sign-up & Profile Creation
                         </a>
-                        <p> {{  'indexTranslate.accesses'| translate}}</p>
+                        <p>Accesses the database of player profiles, reports, and performance analytics to discover emerging players.</p>
                       </div>
                     </div>
                     <div class="player1">
@@ -875,9 +878,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                         {{  'indexTranslate.networking&Opportunity'| translate}}
+                          Networking & Opportunity
                         </a>
-                        <p>{{  'indexTranslate.communicate'| translate}}</p>
+                        <p>Communicate with players and other stakeholders through the platform's messaging system, providing feedback on their performance and discussing contract negotiations.</p>
                       </div>
                     </div>
                     <div class="player2">
@@ -906,9 +909,9 @@
                       </div>
                       <div class="progress_btn">
                         <a>
-                          {{  'indexTranslate.decisionMaking&Action' | translate }}
+                          Decision Making & Action
                         </a>
-                        <p> {{  'indexTranslate.impresses' | translate }}</p>
+                        <p>Finalize contract offers and negotiate terms with potential recruits.</p>
                       </div>
                     </div>
                     <div class="club-scouts">
@@ -959,13 +962,13 @@
         </div>
 
         <div class="club_players">
-          <h3>{{  'indexTranslate.platformForFootball' | translate }}</h3>
-          <h3>{{  'indexTranslate.playersClub$Scouts' | translate }}</h3>
+          <h3>Platform for Football</h3>
+          <h3>Players, Clubs and Scouts.</h3>
           <div class="club-buttons">
             <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <div class="button-border">
                 <div class="join-text">
-                  <p>{{  'indexTranslate.joinNow' | translate }}</p>
+                  <p>Join Now</p>
                   <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
                   <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
                 </div>

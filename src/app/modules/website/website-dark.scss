@@ -242,6 +242,15 @@
 .dark-theme .overlay {
   opacity: unset !important;
 }
+.dark-theme option {
+  color: white !important;
+  font-size: 18px;
+  background: #072944;
+}
+// .dark-theme option:hover {
+//   color: black !important;
+//   background: #bde34f !important;
+// }
 
 .dark-theme .website-code a.btn-primary {
   background: #bde34f !important;
