@@ -26,7 +26,9 @@ interface Language {
   styleUrl: './add-page.component.scss'
 })
 export class AddPageComponent {
-  languages: Language[] = [];
+  languages: any = localStorage.getItem('languages');
+  lang_id: any = localStorage.getItem('lang_id');
+  lang: any = localStorage.getItem('lang');
   title: string = '';
   content: string = '';
   selectedLanguage: string = '0';
@@ -36,21 +38,18 @@ export class AddPageComponent {
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
   pageDetail: any | null = null;
-  pages = [
-    {id: 1, title: "home"},
-    {id: 6, title: "about"},
-    {id: 9, title: "contact"},
-    {id: 8, title: "pricing"},
-  ];
+  pages:any = [];
   selectedPageTitle: string = "";
   selectedPageId:string=""
 
   @ViewChild('myForm') form!: NgForm;
 
-  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { 
-   }
+  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {
+  }
+
   ngOnInit() {
-    this.getAllLanguages();
+    this.languages = JSON.parse(this.languages);
+
     loadCKEditorCloud({
       version: '44.0.0',
       premium: true
@@ -60,9 +59,10 @@ export class AddPageComponent {
       this.title = this.pageDetail.title;
       this.slug = this.pageDetail.slug;
       this.status = (this.pageDetail.status == 'draft') ? 1 : 2;
-      this.selectedLanguage = '3';
+      this.selectedLanguage = this.lang_id;
       this.title = this.pageDetail.title;
     }
+    this.getAllPages();
   }
 
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
@@ -188,12 +188,13 @@ export class AddPageComponent {
           ]
         }
     };
-}
+  }
 
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
+
+  getAllPages(){
+    this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
       if (response.status) {
-        this.languages = response.data.languages;
+        this.pages = response.data.pages;
       }
     });
   }
@@ -260,8 +261,9 @@ export class AddPageComponent {
 
   onChangeSelectedPage(event:any){
     let getPageId = event.target.value;
-    this.selectedPageId = getPageId;
-    let findPageIndex =  this.pages.findIndex((val) => val.id == getPageId);
-    this.selectedPageTitle = this.pages[findPageIndex].title;
+    this.selectedPageTitle = getPageId;
+    let findPageIndex =  this.pages.findIndex((val:any) => val.page_type == getPageId);
+    // console.log(this.pages[findPageIndex],getPageId)
+    this.selectedPageId = this.pages[findPageIndex].id;
   }
 }

@@ -33,11 +33,13 @@ export class WebPagesComponent {
   allSelected: boolean = false;
   selectedIds:any = [];
   getPageDetail:any = [];
-
+  pages:any = [];
+  lang_id: any = localStorage.getItem('lang_id');
 
   constructor(private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
     this.getAllPagesData();
+    this.getFrontendPages();
   }
 
   getAllPagesData(){
@@ -162,6 +164,15 @@ export class WebPagesComponent {
           }
         })
       }      
+    });
+  }
+
+
+  getFrontendPages(){
+    this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
+      if (response.status) {
+        this.pages = response.data.pages;
+      }
     });
   }
 

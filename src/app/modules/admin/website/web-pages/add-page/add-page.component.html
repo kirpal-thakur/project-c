@@ -8,10 +8,10 @@
         </label>
         <select id="activate" class="form-select" (change)="onChangeSelectedPage($event)" name="status" required>
           @if(pages && pages.length > 0){
-          <option value="0">Select page</option>
-          @for (page of pages; track $index) {
-          <option value="{{page.id}}">{{page.title}}</option>
-          }
+            <option value="0">Select page</option>
+            @for (page of pages; track $index) {
+            <option value="{{page.page_type}}">{{page.title}}</option>
+            }
           }
         </select>
       </div>
@@ -65,9 +65,9 @@
       </ckeditor>
     </div> -->
     <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
-    <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId"></app-add-home-page>
-    <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId"></app-add-contact-page>
-    <app-add-about-page *ngIf="selectedPageTitle == 'about'" [pageId]="selectedPageId"></app-add-about-page>
+    <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
+    <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
+    <app-add-about-page *ngIf="selectedPageTitle == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
   </form>
 </div>
 }@else {

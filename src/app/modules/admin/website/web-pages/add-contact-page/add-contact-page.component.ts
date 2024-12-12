@@ -23,7 +23,8 @@ interface Language {
 })
 export class AddContactPageComponent {
   @Input() pageId: any;
-  languages: Language[] = [];
+  @Input() languages: Language[] = [];
+
 
   formData: any = {
     page_id: '',
@@ -42,16 +43,6 @@ export class AddContactPageComponent {
   constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddContactPageComponent>) {}
 
   ngOnInit() {
-    this.getAllLanguages();
-  }
-
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
-      if (response.status) {
-        console.log(response.data.languages,'get-all-languages');
-        this.languages = response.data.languages;
-      }
-    });
   }
 
   onFileChange(event: any): void {

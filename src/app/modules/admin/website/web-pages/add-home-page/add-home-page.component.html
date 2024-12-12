@@ -19,6 +19,30 @@
       </div>
     </fieldset>
 
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">SEO Information</legend>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="metaTitle" class="form-label">Meta Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="metaTitle"
+            formControlName="meta_title"
+          />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="metaDescription" class="form-label">Meta Description</label>
+          <textarea
+            class="form-control"
+            id="metaDescription"
+            formControlName="meta_description"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </fieldset>
+
     <!-- Banner Section -->
     <fieldset class="border p-3 mb-4">
       <legend class="w-auto px-2">Banner Section</legend>

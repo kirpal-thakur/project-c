@@ -234,15 +234,27 @@ export class HeaderComponent implements OnInit {
     this.webpage.updateData(selectedLanguageId);
     this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', selectedLanguage);
+
+    // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = selectedLanguage;
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.languages.find(
+      (lang: any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
     localStorage.setItem('lang_id', selectedLanguageId);
+
     this.translateService.use(selectedLanguage);
 
     const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
     if (target) {
       this.lang = target.value;
       this.getContentForLanguage(this.lang);
+    }
   }
-}
+
   getContentForLanguage(lang: string): void {
     const apiUrl = `${environment.apiUrl}language/${lang}`;  // Use the API URL from the environment file
     this.http.get(apiUrl).subscribe({
@@ -384,7 +396,7 @@ export class HeaderComponent implements OnInit {
           if (registerModal) {
             registerModal.hide();
           }
-          // this.router.navigate(['/email-verify']);
+          this.router.navigate(['/email-verify']);
 
           // const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
           // loginModal.show();
@@ -516,7 +528,6 @@ export class HeaderComponent implements OnInit {
     this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
   }
 
-
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
@@ -572,10 +583,11 @@ export class HeaderComponent implements OnInit {
 
 
   getAllLanguage(){
-    this.webpage.getAllLanguage().subscribe((res) => {
-      if(res.status){
-        this.allLanguage = res.data.languages;
-        console.log(this.allLanguage, 'testing...');
+
+    this.webpage.getAllLanguage().subscribe((response) => {
+      if (response.status) {
+        this.languages = response.data.languages;
+        localStorage.setItem('languages', JSON.stringify(this.languages));
       }
     });
   }

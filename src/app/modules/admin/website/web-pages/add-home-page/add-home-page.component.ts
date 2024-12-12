@@ -22,10 +22,10 @@ interface Language {
 })
 export class AddHomePageComponent {
   @Input() pageId: any;
+  @Input() languages: Language[] = [];
   addHomePageForm: FormGroup;
-  languages: Language[] = [];
   selectedLanguage: string = '0';
-  showTabForm:boolean=false;
+  showTabForm: boolean = false;
   filesData:  any = {
     banner_bg_img : null,
     banner_img : null,
@@ -86,12 +86,13 @@ export class AddHomePageComponent {
       hero_heading_txt: [''],
       hero_btn_txt: [''],
       hero_btn_link: [''],
+      meta_title: [''], // New input
+      meta_description: [''], // New input
       lang: 1,
     });
   }
 
   ngOnInit() {
-    this.getAllLanguages();
   }
 
   onSubmit(): void {
@@ -115,23 +116,15 @@ export class AddHomePageComponent {
     formData.append('hero_heading_txt', this.addHomePageForm.value.hero_heading_txt);
     formData.append('hero_btn_txt', this.addHomePageForm.value.hero_btn_txt);
     formData.append('hero_btn_link', this.addHomePageForm.value.hero_btn_link);
+    formData.append('meta_title', this.addHomePageForm.value.meta_title); // Include meta_title
+    formData.append('meta_description', this.addHomePageForm.value.meta_description); // Include meta_description
     formData.append('lang', '1');
 
     this.webpages.addHomePage(formData).subscribe((res) => {
       this.showTabForm = true;
     });
 
-    //  this.showTabForm = true;
   }
-
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
-      if (response.status) {
-        this.languages = response.data.languages;
-      }
-    });
-  }
-
 
   handleFileInput(files:any, fieldName:string){
     const input = files.target as HTMLInputElement;

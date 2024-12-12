@@ -23,9 +23,25 @@ export class WebPages {
     }
 
     getAllPages(): Observable<any> {
+
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pages`
         );
+
+
+    }
+
+    getFrontendPages(lang_id:any): Observable<any> {
+
+        if(lang_id)
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}`
+        );
+        else
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}`
+        );
+
     }
 
     deleteWebPages(params: any): Observable<any>{
