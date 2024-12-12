@@ -532,6 +532,7 @@ export class HeaderComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
     console.log('Selected Country:', this.selectedCountry);
+    this.getClugById(this.selectedCountry);
   }
 
   onClubChange(event: Event): void {
@@ -565,12 +566,23 @@ export class HeaderComponent implements OnInit {
   getAllCountries(){
     this.commonDataService.getAllCountries().subscribe((resp) => {
       this.countries = resp.data.domains.map((country: any) => ({
-        code: country.domain_country_code || '',
+        code: country.country_id || '',
         name: country.location || ''
       }));
     });
   }
 
+  getClugById(id :any ){
+    if(id){
+      this.commonDataService.getAllClubsbyId(id).subscribe((resp) => {
+        this.clubs = resp.data.clubs.map((club: any) => ({
+          id: club.id || '',
+          name: club.club_name || ''
+        }));
+        console.log(resp, 'club-resp');
+      });
+    }
+  }
   getAllClubs(){
     this.commonDataService.getAllClubs().subscribe((resp) => {
       this.clubs = resp.data.clubs.map((club: any) => ({
