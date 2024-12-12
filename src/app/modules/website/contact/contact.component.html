@@ -25,6 +25,10 @@
 <div class="contact-form py_0">
   <div class="container">
     <h3 class="form-heading">GET IN TOUCH</h3>
+        <!-- Message display -->
+        <div *ngIf="responseMessage" [ngClass]="messageType" class="contact-response-message">
+          {{ responseMessage }}
+        </div>
     <div class="row">
       <div class="col-lg-8 col-md-12 col-12">
 
@@ -53,14 +57,15 @@
         <div *ngIf="selectedOption === 'option1'">
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div>
-              <input id="name" formControlName="name" placeholder="Name" />
+              <input type="hidden" name="domain" ng-model="contactForm.domain" />
+              <input id="name" formControlName="name" placeholder="Name" ng-model="contactForm.name"  />
               <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
                 <div *ngIf="name?.errors?.['required']">Name is required.</div>
               </div>
             </div>
 
             <div>
-              <input id="email" type="email" formControlName="email" placeholder="E-Mail" />
+              <input id="email" type="email" formControlName="email" placeholder="E-Mail" ng-model="contactForm.email" />
               <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
                 <div *ngIf="email?.errors?.['required']">Email is required.</div>
                 <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
@@ -68,7 +73,7 @@
             </div>
 
             <div>
-              <input id="phone" type="tel" formControlName="phone" placeholder="Phone" />
+              <input id="phone" type="tel" formControlName="phone" placeholder="Phone" ng-model="contactForm.phone" />
               <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
                 <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
                 <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div>
@@ -76,7 +81,7 @@
             </div>
 
             <div>
-              <textarea id="message" formControlName="message" placeholder="Message"></textarea>
+              <textarea id="message" formControlName="message" placeholder="Message" ng-model="contactForm.message"></textarea>
               <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error">
                 <div *ngIf="message?.errors?.['required']">Message is required.</div>
               </div>
@@ -105,14 +110,14 @@
         <div *ngIf="selectedOption === 'option2'">
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div>
-              <input id="name" formControlName="name" placeholder="Name" />
+              <input id="name" formControlName="name" placeholder="Name" ng-model="contactForm.name" />
               <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
                 <div *ngIf="name?.errors?.['required']">Name is required.</div>
               </div>
             </div>
 
             <div>
-              <input id="email" type="email" formControlName="email" placeholder="E-Mail" />
+              <input id="email" type="email" formControlName="email" placeholder="E-Mail" ng-model="contactForm.email" />
               <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
                 <div *ngIf="email?.errors?.['required']">Email is required.</div>
                 <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
