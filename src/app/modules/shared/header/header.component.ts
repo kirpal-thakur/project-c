@@ -16,6 +16,7 @@ interface Notification {
   title: string;
   content: string;
   time: string;
+  seen: number;
 }
 
 @Component({
@@ -45,7 +46,26 @@ export class HeaderComponent {
   searchControl = new FormControl('');
   filteredUsers: any[] = [];
 
+  isClosed: boolean = false;
+  allNotifications: Notification[] = [];
+  notifications: Notification[] = [];
+  currentIndex = 0;
+  notificationsPerPage = 3;
+  unseenCount = 0;
+
   ngOnInit() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    this.fetchNotifications(userId);
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
     this.profileImgUrl = this.loggedInUser.profile_image_path;
@@ -67,11 +87,17 @@ export class HeaderComponent {
     this.updateThemeText();
 
     this.socketService.on('notification').subscribe((data) => {
-      // Create a new notification object
-      console.log(data);
+      // Fetch all notifications to update this.allNotifications with the latest data
+      let userId = this.loggedInUser?.id;
+      if (userId) {
+        this.fetchNotifications(userId);
+      }
+
+      console.log("data", data);
+
       const obj = {
         image: data.senderProfileImage,
-        title: data.senderId,
+        title: data.senderName,
         content: data.message,
         time: 'just now'
       };
@@ -145,6 +171,24 @@ export class HeaderComponent {
     );
   }
 
+  toggleDropdown() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    console.log(this.currentIndex)
+
+    // this.fetchNotifications(userId);
+
+    this.isClosed = !this.isClosed;
+  }
+
   // Method to set the page title on the initial load
   private setPageTitleFromRoute() {
     const childRoute = this.route.firstChild;
@@ -192,69 +236,125 @@ export class HeaderComponent {
     document.body.classList.toggle('mobile-sidebar-active');
   }
 
-  notifications: Notification[] = [
-    {
-      image: '../../../assets/images/1.jpg',
-      title: 'Elton Price',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      time: '14 hours ago'
+  // notifications: Notification[] = [
+  //   {
+  //     image: '../../../assets/images/1.jpg',
+  //     title: 'Elton Price1',
+  //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //     time: '14 hours ago'
+  //   }
+  // ];
+
+
+
+  // loadMoreNotifications() {
+  //   const moreNotifications: Notification[] = [
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe2',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '13 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '11 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '9 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '18 hours ago'
+  //     }
+  //   ];
+
+  //   this.notifications = [...this.notifications, ...moreNotifications];
+
+  // }
+
+  onNotificationClick(event: Event) {
+    event.stopPropagation(); // Prevent dropdown from closing
+  }
+
+  fetchNotifications(userId: number): void {
+    this.talentService.getNotifications(userId).subscribe({
+      next: (response) => {
+        console.log('Fetched notifications response:', response);
+  
+        if (response.status && response.notifications) {
+          this.unseenCount = response.unseen_count;
+          // Clear existing notifications to avoid stale data
+          this.allNotifications = [];
+          this.notifications = [];
+          console.log("info", this.currentIndex, this.notificationsPerPage)
+          if(this.currentIndex != 0){
+            this.notificationsPerPage = this.currentIndex;
+          }
+          this.currentIndex = 0;
+  
+          // Map fetched notifications to the Notification interface
+          this.allNotifications = response.notifications.map((notif: any) => ({
+            image: notif.senderProfileImage || '../../../assets/images/default.jpg',
+            title: notif.senderName || 'Unknown',
+            content: notif.message,
+            time: notif.time,
+            seen: notif.seen,
+          }));
+  
+          this.loadMoreNotifications(); // Load the initial set of notifications
+        } else {
+          console.warn('No notifications found in the response.');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      },
+    });
+  }
+  
+
+  // Load notifications in chunks of 3
+  loadMoreNotifications(): void {
+    const nextNotifications = this.allNotifications.slice(
+      this.currentIndex,
+      this.currentIndex + this.notificationsPerPage
+    );
+    this.notifications = [...this.notifications, ...nextNotifications];
+    this.currentIndex += this.notificationsPerPage;
+    if(this.notificationsPerPage>=3){
+      this.notificationsPerPage = 3;
     }
-  ];
-
-  loadMoreNotifications() {
-    const moreNotifications: Notification[] = [
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '13 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '11 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '9 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '18 hours ago'
-      }
-    ];
-
-    this.notifications = [...this.notifications, ...moreNotifications];
-
   }
 
   onSearch() {

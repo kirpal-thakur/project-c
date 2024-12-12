@@ -5,6 +5,18 @@ import { environment } from '../../environments/environment';
 import { Observable, of, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
+export interface Notification {
+  id: number;
+  event: string;
+  message: string;
+  senderId: number;
+  receiverId: number;
+  seen: number; // 0 for unseen, 1 for seen
+  time: string; // Assuming this is a date-time string
+  senderName: string;
+  senderProfileImage: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +29,7 @@ export class TalentService {
   message$ = this.messageSource.asObservable();
   public lang:any; // You can dynamically set this if needed
   languages:any = environment.langs;
+  private apiUrl3 = "https://alerts.socceryou.ch/";
 
   constructor(private http: HttpClient) {
 
@@ -48,6 +61,12 @@ export class TalentService {
 
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);
+  }
+
+  getNotifications(userId: any = 1): Observable<any> {
+    return this.http.get<{ status: boolean, notifications: Notification[], unseen_count: number, total_count:number }>(
+      `${this.apiUrl3}notifications?userId=${userId}`,
+    );
   }
 
   getProfileData(userId: any = 1): Observable<any> {
