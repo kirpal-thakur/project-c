@@ -28,12 +28,25 @@
   animation: scale-open .3s ease-in-out forwards;
 }
 
+.my-animate{
+  animation: scale-open2 .3s ease forwards;
+}
+
 @keyframes scale-open {
   from{
     transform: scaleY(0);
   }
   to{
     transform: scaleY(1);
+  }
+}
+
+@keyframes scale-open2 {
+  from{
+    transform: translateY(-10rem);
+  }
+  to{
+    transform: translateY(0rem);
   }
 }
 

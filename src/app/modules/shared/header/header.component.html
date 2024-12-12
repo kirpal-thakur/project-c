@@ -84,7 +84,8 @@
           </div>
         </li>
         <li class="nav-item dropdown notification_dropdown">
-          <a class="nav-link nav-action" type="button" (click)="toggleDropdown()" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-action" type="button" (click)="toggleDropdown()" data-bs-toggle="dropdown"
+            aria-expanded="false">
 
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -162,7 +163,7 @@
                   </span>
                 </div> -->
 
-                <div class="row bg-light p-3 justify-content-between border-bottom"
+                <div class="row bg-light p-3 justify-content-between border-bottom my-animate"
                   *ngFor="let notification of notifications">
                   <div class="col-2">
                     <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
@@ -177,17 +178,19 @@
                     <h6 [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
                       {{ notification.title }}
                     </h6>
-                    <p [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                    <p class="pb-3" [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
                       {{ notification.content }}
                     </p>
                     <small [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
                       {{ notification.time }}
                     </small>
                   </div>
-                  
+
                   <div class="col-1">
                     <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
                     </svg>
                   </div>
                 </div>
@@ -213,7 +216,9 @@
                   </div>
                   <div class="col-1">
                     <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
                     </svg>
                   </div>
                 </div>

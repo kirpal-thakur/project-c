@@ -17,6 +17,7 @@ interface Notification {
   content: string;
   time: string;
   seen: number;
+  senderId: number;
 }
 
 @Component({
@@ -54,6 +55,7 @@ export class HeaderComponent {
   unseenCount = 0;
 
   ngOnInit() {
+
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -86,12 +88,14 @@ export class HeaderComponent {
 
     this.updateThemeText();
 
+    
+
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
-      let userId = this.loggedInUser?.id;
-      if (userId) {
-        this.fetchNotifications(userId);
-      }
+      // let userId = this.loggedInUser?.id;
+      // if (userId) {
+      //   this.fetchNotifications(userId);
+      // }
 
       console.log("data", data);
 
@@ -99,8 +103,12 @@ export class HeaderComponent {
         image: data.senderProfileImage,
         title: data.senderName,
         content: data.message,
-        time: 'just now'
+        time: 'just now',
+        seen: data.seen,
+        senderId: data.senderId,
       };
+
+      this.notifications.unshift(obj);
 
       // Add the notification to the array and show the notification box
       this.liveNotification = [obj]; // Keep only the latest notification
@@ -171,6 +179,22 @@ export class HeaderComponent {
     );
   }
 
+  isUserOnline(senderId: number): boolean {
+    if(!this.socketService.onlineUsers){
+      return false;
+    }
+    return senderId.toString() in this.socketService.onlineUsers;
+  }
+
+  // isSenderOnline(senderId: number): boolean {
+  //   if (!this.onlineUsers) {
+  //     return false; // Return false if onlineUsers is not yet populated
+  //   }
+
+  //   console.log("data is here = ", this.onlineUsers)
+  //   return senderId.toString() in this.onlineUsers;
+  // }
+
   toggleDropdown() {
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -184,9 +208,9 @@ export class HeaderComponent {
 
     console.log(this.currentIndex)
 
-    // this.fetchNotifications(userId);
-
     this.isClosed = !this.isClosed;
+
+    
   }
 
   // Method to set the page title on the initial load
@@ -330,6 +354,7 @@ export class HeaderComponent {
             content: notif.message,
             time: notif.time,
             seen: notif.seen,
+            senderId : notif.senderId,
           }));
   
           this.loadMoreNotifications(); // Load the initial set of notifications

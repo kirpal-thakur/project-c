@@ -12,6 +12,8 @@ export class SocketService {
   // private readonly socketUrl: string = 'https://alerts.socceryou.ch/'; // Replace with your backend URL
   private readonly socketUrl: string = environment.socketUrl; // Replace with your backend URL
 
+  public onlineUsers: { [userId: string]: string } = {};
+
   constructor() {
     // Initialize the socket connection
     this.socket = io(this.socketUrl);
@@ -26,6 +28,11 @@ export class SocketService {
     else{
       console.log("No data found in localStorage."); 
     }
+
+    this.socket.on('updateOnlineUsers', (data: { onlineUsers: { [userId: string]: string } }) => {
+      this.onlineUsers = data.onlineUsers;
+      console.log('Updated online users:', this.onlineUsers);
+    });
   }
 
   // Method to emit 'connectUser' event
