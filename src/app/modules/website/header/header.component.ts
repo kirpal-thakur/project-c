@@ -166,19 +166,26 @@ export class HeaderComponent implements OnInit {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
 
-  ChangeLang(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedLanguage = selectElement.value;
-
+  ChangeLang(lang: any) {
+    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage);
+    this.translateService.use(selectedLanguage)
 
-    const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
-    if (target) {
-      this.lang = target.value;
-      this.getContentForLanguage(this.lang);
   }
-}
+
+//   ChangeLang(event: Event): void {
+//     const selectElement = event.target as HTMLSelectElement;
+//     const selectedLanguage = selectElement.value;
+
+//     localStorage.setItem('lang', selectedLanguage);
+//     this.translateService.use(selectedLanguage);
+
+//     const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
+//     if (target) {
+//       this.lang = target.value;
+//       this.getContentForLanguage(this.lang);
+//   }
+// }
   getContentForLanguage(lang: string): void {
     const apiUrl = `${environment.apiUrl}language/${lang}`;  // Use the API URL from the environment file
     this.http.get(apiUrl).subscribe({
