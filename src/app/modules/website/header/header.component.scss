@@ -77,8 +77,11 @@ body {
 
 .login-btn {
     font-size: 16px;
-    padding: 10px 20px;
+    padding: 10px 0;
     border-radius: 10px;
+    width: 135px;
+    text-align: center;
+
 }
 
 /*--------------------------------------------------------------
@@ -626,6 +629,9 @@ button.create-account.d-block {
     left: unset;
     right: 10%;
     top: 70%;
+}
+.coustom-select1 {
+    display: none;
 }
 
 
@@ -1308,6 +1314,9 @@ select.form-select.custom-select1 {
     .navbar-collapse {
         background-color: transparent;
         padding-bottom: 10px;
+    }
+    .coustom-select1 {
+        display: block;
     }
 
     option {

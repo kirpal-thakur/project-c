@@ -18,8 +18,8 @@ export const environment = {
       { language:'French', slug: "fr", id: 4, flag: "France.svg"},
       { language:'Spanish', slug: "es", id: 5, flag: "Spain.svg" },
       { language:'Portuguese', slug: "pt", id: 6, flag: "Portugal.svg" },
-      { language:'Danish', slug: "da", id: 7, flag: "Denmark.svg" },
-      { language:'Swedish', slug: "sv", id: 8, flag: "Sweden-sweden.svg"},
+      { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
+      { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
     ],
     domains:[
       { name:'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg" },
@@ -33,6 +33,8 @@ export const environment = {
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
     ],
+
+    
 
     apiUrl:'https://api.socceryou.ch/api/',
     socketUrl:'https://alerts.socceryou.ch/',

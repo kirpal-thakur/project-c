@@ -56,14 +56,7 @@ export class HeaderComponent implements OnInit {
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
  langs: any = environment.langs;
-  //clubs
-  // clubs = [
-  //   { id: 1, name: 'Club A' },
-  //   { id: 2, name: 'Club B' },
-  //   { id: 3, name: 'Club C' },
-  //   { id: 4, name: 'Club D' },
-  //   { id: 5, name: 'Club E' },
-  // ];
+ 
 
   teams = [
     { id: 1, name: 'Team Alpha' },
@@ -112,9 +105,16 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCountries();
     this.getAllClubs();
-    this.lang = localStorage.getItem('lang') || 'en';
+    this.lang = localStorage.getItem('slug') || 'en';
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
+    const savedLanguage = localStorage.getItem('slug');
+
+    //flag-images
+    if (savedLanguage) {
+      this.slug = savedLanguage;
+      this.translateService.use(savedLanguage);  // Load the language using ngx-translate
+    }
 
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
@@ -165,13 +165,23 @@ export class HeaderComponent implements OnInit {
   applyTheme() {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
+  // lang1: string = 'en'; // Default language
+  slug: string = 'en';
 
-  ChangeLang(lang: any) {
-    const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
-    localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage)
+  ChangeLang(lang: any) { 
+    // Determine if the provided argument is a string or a language event object
+    const selectedLanguage = typeof lang !== 'string' ? lang.target.value : lang;
+    
+    // Update the class property for the language (optional, depending on your needs)
+    this.slug = selectedLanguage; 
+    
+    // Store the selected language in localStorage
+    localStorage.setItem('lang', selectedLanguage); 
+    
+    // Use the translation service to update the language
+    this.translateService.use(selectedLanguage);
+}
 
-  }
 
 //   ChangeLang(event: Event): void {
 //     const selectElement = event.target as HTMLSelectElement;

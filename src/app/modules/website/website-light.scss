@@ -634,7 +634,10 @@ body {
 .light-theme .website-code .toggle-button.active {
   background-color: #E05263;
 }
-
+.light-theme .website-code a.dropdown-item.ai-icon.selected {
+  background-color: #E05263 !important;  /* Set the background color to pink */
+  color: white;  /* Optional: Change the text color to white for better contrast */
+}
 .light-theme .website-code .dark-feature1 {
   display: none;
 }
