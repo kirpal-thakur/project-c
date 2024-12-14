@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { BlogService } from '../../../../services/blog.service';
 import { BlogPopupComponent } from './blog-popup/blog-popup.component';
+import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -64,6 +65,124 @@ export class BlogComponent {
       this.isLoading = false;
       console.error('Error fetching coupons:', error);
     }
+  }
+
+  publishBlogs(): any{
+    if(this.selectedIds.length == 0){
+      this.showMatDialog('Select Blog(s) first.', 'display');
+      return false;
+    }
+
+    let params = {id:this.selectedIds};
+    this.blogService.publishBlogs(params).subscribe(
+      response => {
+        if(response.status){
+          this.getBlogs();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Blog(s) published successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in publishing blog. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error publishing blog:', error);
+      }
+    );
+  }
+  applyFilter(filterValue:any) {
+    this.filterValue = filterValue.target?.value.trim().toLowerCase();
+    if(this.filterValue.length >= 3){
+      this.getBlogs();
+     } else if(this.filterValue.length == 0){
+      this.getBlogs();
+     }
+  }
+  draftBlogs(): any{
+    if(this.selectedIds.length == 0){
+      this.showMatDialog('Select Blog(s) first.', 'display');
+      return false;
+    }
+
+    let params = {id:this.selectedIds};
+    this.blogService.draftBlogs(params).subscribe(
+      response => {
+        if(response.status){
+          this.getBlogs();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Blog(s) drafted successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in drafting Blog. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error drafted blogs:', error);
+      }
+    );
+  }
+  confirmDeletion():any {
+    if(this.selectedIds.length == 0){
+    //  this.showMatDialog('Select coupon(s) first.', 'display');
+      return false;
+    }
+    this.idsToProceed = this.selectedIds;
+    this.showDeleteConfirmationPopup();
+  }
+
+  showDeleteConfirmationPopup(){
+      this.showMatDialog("", "delete-coupon-confirmation");
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    });
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteBlogs();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+  deleteBlogs(){
+    let params = {id:this.idsToProceed};
+    this.blogService.deleteBlog(params).subscribe(
+      response => {
+        if(response.status){
+          this.getBlogs();
+          this.selectedIds = [];
+          this.allSelected = false;
+          // console.log('Coupons deleted successfully:', response);
+          this.showMatDialog('Blog(s) deleted successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in removing Blog. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error deleting coupon:', error); 
+      }
+    );
+  }
+  selectAllBlogs() {
+    this.allSelected = !this.allSelected;
+    if (this.allSelected) {
+      this.selectedIds = this.blogs.map((coupon:any) => coupon.id);
+    } else {
+      this.selectedIds = [];
+    }
+    console.log('Selected user IDs:', this.selectedIds);
   }
 
   onCheckboxChange(item: any) {
