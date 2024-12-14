@@ -47,6 +47,7 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'talent', component: TalentComponent },
   { path: 'learn-more', component: LearnMoreComponent },
+  { path: 'news/:slug', component: LearnMoreComponent },
   { path: 'player-list', component: PlayerListComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'thank-you', component: ThankuComponent },
