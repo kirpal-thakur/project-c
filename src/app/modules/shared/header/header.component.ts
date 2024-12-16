@@ -6,7 +6,7 @@ import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
 import { SocketService } from '../../../services/socket.service';
-import { map,filter } from 'rxjs/operators';
+import { map,filter, timeout } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
@@ -18,6 +18,7 @@ interface Notification {
   time: string;
   seen: number;
   senderId: number;
+  shouldAnimate: boolean;
 }
 
 @Component({
@@ -46,6 +47,8 @@ export class HeaderComponent {
 
   searchControl = new FormControl('');
   filteredUsers: any[] = [];
+  clickedNewNotification : boolean = false;
+  isScrolledBeyond : boolean = false;
 
   isClosed: boolean = false;
   allNotifications: Notification[] = [];
@@ -106,20 +109,25 @@ export class HeaderComponent {
         time: 'just now',
         seen: data.seen,
         senderId: data.senderId,
+        shouldAnimate: true,
       };
-
-      this.notifications.unshift(obj);
-
+      
       // Add the notification to the array and show the notification box
       this.liveNotification = [obj]; // Keep only the latest notification
       this.showNotification = true;
-
+      if(this.isScrolledBeyond){
+        this.clickedNewNotification = true;
+      }
+      
+      this.notifications.unshift(obj);
+      
       console.log('New notification:', data.message);
 
       // Hide the notification after 3 seconds
       setTimeout(() => {
         this.liveNotification = [];
         this.showNotification = false;
+        obj.shouldAnimate = false;
       }, 5000); // 5000 ms = 5 seconds
     });
 
@@ -331,6 +339,23 @@ export class HeaderComponent {
     event.stopPropagation(); // Prevent dropdown from closing
   }
 
+  onScroll(): void {
+    console.log("something")
+    const notificationBox = document.getElementById('notification-box-id');
+    if (notificationBox) {
+      // Check if scroll position is greater than 300
+      this.isScrolledBeyond = notificationBox.scrollTop > 200;
+    }
+  }
+
+  scrollToTop(): void {
+    const notificationBox = document.getElementById('notification-box-id');
+    if (notificationBox) {
+      notificationBox.scrollTop = 0;
+    }
+    this.clickedNewNotification = false;
+  }
+
   fetchNotifications(userId: number): void {
     this.talentService.getNotifications(userId).subscribe({
       next: (response) => {
@@ -355,6 +380,7 @@ export class HeaderComponent {
             time: notif.time,
             seen: notif.seen,
             senderId : notif.senderId,
+            shouldAnimate:false,
           }));
   
           this.loadMoreNotifications(); // Load the initial set of notifications
@@ -367,19 +393,28 @@ export class HeaderComponent {
       },
     });
   }
+
+  something : boolean = false;
   
 
   // Load notifications in chunks of 3
   loadMoreNotifications(): void {
+    this.something=true;
+
     const nextNotifications = this.allNotifications.slice(
       this.currentIndex,
       this.currentIndex + this.notificationsPerPage
     );
-    this.notifications = [...this.notifications, ...nextNotifications];
+    setTimeout(() => {
+      this.something = false;
+      this.notifications = [...this.notifications, ...nextNotifications];
+    }, 2000);
+
     this.currentIndex += this.notificationsPerPage;
     if(this.notificationsPerPage>=3){
       this.notificationsPerPage = 3;
     }
+    
   }
 
   onSearch() {
