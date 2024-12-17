@@ -46,7 +46,7 @@ export class BlogPopupComponent  implements OnInit, OnDestroy  {
     @Inject(MAT_DIALOG_DATA) public blog: any
   ) {
     if(blog){
-      this.getBlog(blog.slug)
+      this.getBlog(blog.id)
     }
 
     let envRoles:any = environment.roles;
@@ -123,7 +123,7 @@ export class BlogPopupComponent  implements OnInit, OnDestroy  {
 
     try {
       this.isLoading = true;
-      this.blogApi.getBlogBySlug(id).subscribe((response)=>{
+      this.blogApi.getBlogById(id).subscribe((response)=>{
       if (response && response.status && response.data && response.data.blog) {
         
         this.blog = response.data.blog;

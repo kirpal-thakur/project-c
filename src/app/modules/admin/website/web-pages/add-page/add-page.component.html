@@ -10,7 +10,7 @@
           @if(pages && pages.length > 0){
             <option value="0">Select page</option>
             @for (page of pages; track $index) {
-            <option value="{{page.page_type}}">{{page.title}}</option>
+             <option value="{{page}}">{{page}}</option>
             }
           }
         </select>
@@ -68,6 +68,8 @@
     <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
     <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
     <app-add-about-page *ngIf="selectedPageTitle == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
+    <app-add-content-page *ngIf="selectedPageTitle == 'imprint' " [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
+ 
   </form>
 </div>
 }@else {
