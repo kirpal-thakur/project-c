@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { WebPages } from '../../../../../services/webpages.service';
 import { NgForm } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../../../environments/environment';
+
 import { CKEditorModule, loadCKEditorCloud, CKEditorCloudResult } from '@ckeditor/ckeditor5-angular';
 import type { ClassicEditor, EditorConfig } from 'https://cdn.ckeditor.com/typings/ckeditor5.d.ts';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -38,7 +39,7 @@ export class AddPageComponent {
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
   pageDetail: any | null = null;
-  pages:any = [];
+  pages:any = environment.pages;
   selectedPageTitle: string = "";
   selectedPageId:string=""
 
@@ -194,7 +195,7 @@ export class AddPageComponent {
   getAllPages(){
     this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
       if (response.status) {
-        this.pages = response.data.pages;
+       // this.pages = response.data.pages;
       }
     });
   }

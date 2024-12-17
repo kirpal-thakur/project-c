@@ -86,7 +86,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home-page.component';
 import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
 import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
-
+import { AddContentPageComponent } from './website/web-pages/add-content-page/add-content-page.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
@@ -160,7 +160,8 @@ export const MY_FORMATS = {
     AddPageComponent,
     AddHomePageComponent,
     AddContactPageComponent,
-    AddAboutPageComponent
+    AddAboutPageComponent,
+    AddContentPageComponent
   ],
   imports: [
     CommonModule,

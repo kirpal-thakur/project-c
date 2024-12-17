@@ -38,7 +38,9 @@ export const environment = {
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
     ],
-
+    pages:[
+      'home','talent','clubs_and_scouts','about_us','pricing','news','contact','imprint','privacy_policy','terms_and_conditions','cookie_policy','faq','content_page'
+    ],
     apiUrl:'https://api.socceryou.ch/api/',
     socketUrl:'https://alerts.socceryou.ch/',
     mailchimp: {

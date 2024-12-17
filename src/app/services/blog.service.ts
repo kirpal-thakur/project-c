@@ -25,7 +25,7 @@ export class BlogService {
     }
     getBlogById(id:any){
         return this.http.get<{ status: boolean, message: string, data: any }>(
-            `${this.apiUrl}admin/get-blog/${id}`
+            `${this.apiUrl}admin/get-blog?id=${id}`
           );
     }
     addBlog(record: any): Observable<any> {
