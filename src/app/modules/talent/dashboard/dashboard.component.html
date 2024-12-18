@@ -52,7 +52,7 @@
                   </div>
                   <div class="boost_profile d-flex align-items-center" *ngIf="booster">
                     <span>{{'TalentsTranslate.boostProfile' | translate}}</span>
-                    <span class="active_btn">{{'Active' | translate}}</span>
+                    <span class="active_btn">{{'TalentsTranslate.active' | translate}}</span>
                     <a href="talent/plans" class="cursor-pointer" >
                       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -250,7 +250,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'League level' | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.leagueLevel' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.league_level">{{user?.meta?.league_level}}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.league_level">NA</h5>
                         </div>

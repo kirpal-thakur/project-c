@@ -346,10 +346,16 @@
         "higherChancesOfBeingDiscoveredByAScoutOrClub": "Higher chances of being discovered by a scout or club",
 
 
-        "loading": "",
+        "loading": "Loading , please wait...",
         "deafultProfilePreview": "Default Profile Preview",
         "choosePlan": "Choose Plan",
         "ConfirmDeleteinformation": "Once information is deleted, it can’t be undone. Do you want to delete?",
         "alertMessage": "You have 1 more active Multi-Country subscription. Choose one country from the below list to showcase your profile in that country."
+    },
+
+    "GoogleTranslate": {
+        "active": "Active",
+        "leagueLevel": "League level"
+
     }
 }
