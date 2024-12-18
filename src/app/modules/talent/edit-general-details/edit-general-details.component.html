@@ -4,7 +4,7 @@
     <div class="col-md-12 p-0">
       <div class="personal_edit">
         <div class="dialog-header m-auto">
-          <h2>{{'Edit General Details' | translate}}</h2>
+          <h2>{{'TalentsTranslate.editGeneralDetails' | translate}}</h2>
         </div>
         
         <div class="close_buttons">
@@ -18,7 +18,7 @@
           <!-- In the team since -->
           <div class="row">
             <div class="form-group col-lg-4">
-            <label for="teamSince" class="form-label">{{'In the team since' | translate}}</label>
+            <label for="teamSince" class="form-label">{{'TalentsTranslate.inTheTeamSince' | translate}}</label>
             <div class="d-flex align-items-center justify-content-center">
                 <input
                 matInput
@@ -44,7 +44,7 @@
   
             <!-- International player -->
             <div class=" form-group col-lg-4">
-              <label for="internationalPlayer" class="form-label">{{'International player' | translate}}</label>
+              <label for="internationalPlayer" class="form-label">{{'TalentsTranslate.internationalPlayer' | translate}}</label>
               <select class="form-select" id="internationalPlayer" name="international_player" [(ngModel)]="international_player">              
                 <option *ngFor="let country of countries" [value]="country.id" [selected]="user?.meta?.international_player==country.id">{{ country.country_name }}</option>
               </select>
@@ -97,7 +97,7 @@
             <div class="form-group col-lg-4 mb-2">
               <!-- Last change -->
               <div class="position_inputs">
-                <label for="lastChange" class="form-label">{{'Last change' | translate}}</label>
+                <label for="lastChange" class="form-label">{{'TalentsTranslate.lastChange' | translate}}</label>
                   <div class="d-flex align-items-center justify-content-center">
                     <input
                     matInput
@@ -115,7 +115,7 @@
   
               <!-- Main Position -->
               <div class="position_inputs">
-                <label for="mainPosition" class="form-label">{{'Main Position' | translate}}</label>
+                <label for="mainPosition" class="form-label">{{'TalentsTranslate.mainPosition' | translate}}</label>
                 
                 <mat-select
                   [(ngModel)]="main_position"
@@ -135,7 +135,7 @@
 
               <!-- Other Positions -->
               <div class="position_inputs">
-                <label for="otherPositions" class="form-label">{{'Other Positions' | translate}}</label>
+                <label for="otherPositions" class="form-label">{{'TalentsTranslate.otherPositions' | translate}}</label>
                 <mat-select
                   [(ngModel)]="other_positions"
                   class="form-select"
@@ -158,7 +158,7 @@
   
             <!-- Social media usernames -->
           <div class="social_form-box">
-            <span class="social_heading" >{{'Social Media' | translate}}</span>
+            <span class="social_heading" >{{'TalentsTranslate.socialMedia' | translate}}</span>
             <span class="note_titles">{{'Note:You only need to add your username.' | translate}}</span>
           </div>
           <div class="row">
@@ -323,8 +323,8 @@
   
           <!-- Save and Cancel buttons -->
           <div class="dialog-actions align-items-center d-flex justify-content-between">
-            <button class="cancel-btn" (click)="onCancel()">Cancel</button>
-            <button class="save-btn">Save</button>
+            <button class="cancel-btn" (click)="onCancel()">{{'TalentsTranslate.cancel' | translate}}</button>
+            <button class="save-btn">{{'TalentsTranslate.save' | translate}}</button>
           </div>
         </form>
       

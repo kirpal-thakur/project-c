@@ -2,10 +2,10 @@
     <div class="main-wrapper">
         <div class="card bg-color">
             <div class="card-header border-0">
-                <h4 class="card-billing ">{{'Billing' | translate}}</h4>
+                <h4 class="card-billing ">{{'TalentsTranslate.billing' | translate}}</h4>
                 <div class="d-flex align-items-center justify-content-between marketing-header-bar">
                   <div class="d-flex align-items-end justify-content-between w-100 mt-2">
-                    <h2 class="card-title mb-0 me-3">{{'Subscription plan' | translate}}</h2>
+                    <h2 class="card-title mb-0 me-3">{{'TalentsTranslate.subscriptionPlans' | translate}}</h2>
                     <!-- <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button> -->
                   </div>
                 </div>
@@ -19,16 +19,16 @@
                             <h5>{{premium.package_name }}</h5>
                             <h6> {{ premium.price}}<sub class="premium-month_title">{{premium.currency}}/{{ premium.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                        <p *ngIf="premium.stripe_cancel_at == null">{{ 'Renews on' | translate }} {{ premium.plan_period_end | date: 'dd.MM.yyyy' }}</p>
-                        <p *ngIf="premium.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ premium.stripe_cancel_at | date: 'dd.MM.yyyy' }}</p>
+                        <p *ngIf="premium.stripe_cancel_at == null">{{ 'TalentsTranslate.renewsOn' | translate }} {{ premium.plan_period_end | date: 'dd.MM.yyyy' }}</p>
+                        <p *ngIf="premium.stripe_cancel_at != null">{{ 'TalentsTranslate.expiresOn' | translate }} {{ premium.stripe_cancel_at | date: 'dd.MM.yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                            <a class="premium-edit_btn text-white"  href="/talent/plans">{{'Edit Plan' | translate}}</a>
+                            <a class="premium-edit_btn text-white"  href="/talent/plans">{{'TalentsTranslate.editPlan' | translate}}</a>
                             <button 
                               class="premium-subscription_btn" 
                               [disabled]="premium.stripe_cancel_at != null"
                               (click)="confirmAndCancelSubscription(premium.id)">
-                              <div *ngIf="premium.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
-                              <div *ngIf="premium.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
+                              <div *ngIf="premium.stripe_cancel_at == null">{{ 'cancelSubscription' | translate }}</div>
+                              <div *ngIf="premium.stripe_cancel_at != null">{{ 'renewSubscription' | translate }}</div>
                             </button>
                             
                         </div>
@@ -42,14 +42,14 @@
                     <div class="col-lg-4" *ngIf="country.count > 0">    
                       <div class="premium-card">
                         <div class="d-flex align-items-end justify-content-between">
-                          <h5>{{ 'Multi Country' | translate }}</h5>
+                          <h5>{{ 'TalentsTranslate.multicountry' | translate }}</h5>
                           <h6> {{ country[0].price }}<sub class="premium-month_title">{{country[0].currency}}/{{ country.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                        <p>{{ country.length }} {{ 'Countries Selected' | translate }}</p>
+                        <p>{{ country.length }} {{ 'TalentsTranslate.countriesSelected' | translate }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                          <a class="premium-edit_btn text-white" href="/talent/plans">{{ 'Edit Plan' | translate }}</a>       
+                          <a class="premium-edit_btn text-white" href="/talent/plans">{{ 'TalentsTranslate.editPlan' | translate }}</a>       
                           <button class="premium-subscription_btn" (click)="confirmCountryPlanCancellation(country)">
-                            {{ 'Cancel subscription' | translate }}
+                            {{ 'TalentsTranslate.cancelSubscription' | translate }}
                           </button>
                         </div>
                         <div class="premium-card_football">
@@ -66,16 +66,16 @@
                             <h5>{{booster.package_name }}</h5>
                             <h6> {{ booster.price}}<sub class="premium-month_title">{{booster.currency}}/{{booster.interval == 'monthly' ? 'month' : 'year' }}</sub></h6>
                         </div>
-                        <p *ngIf="booster.stripe_cancel_at == null">{{ 'Renews on' | translate }} {{ booster.plan_period_end | date: 'dd.MM.yyyy' }}</p>
-                        <p *ngIf="booster.stripe_cancel_at != null">{{ 'Expires on' | translate }} {{ booster.stripe_cancel_at | date: 'dd.MM.yyyy' }}</p>
+                        <p *ngIf="booster.stripe_cancel_at == null">{{ 'TalentsTranslate.renewsOn' | translate }} {{ booster.plan_period_end | date: 'dd.MM.yyyy' }}</p>
+                        <p *ngIf="booster.stripe_cancel_at != null">{{ 'TalentsTranslate.renewSubscription' | translate }} {{ booster.stripe_cancel_at | date: 'dd.MM.yyyy' }}</p>
                         <div class="d-flex align-items-center justify-content-between mt-4">
-                            <a class="premium-edit_btn text-white cursor-pointer"  (click)="editBooster(booster)">{{'Edit Plan' | translate}}</a>
+                            <a class="premium-edit_btn text-white cursor-pointer"  (click)="editBooster(booster)">{{'TalentsTranslate.editPlan' | translate}}</a>
                             <button 
                               class="premium-subscription_btn" 
                               [disabled]="booster.stripe_cancel_at != null"
                               (click)="confirmAndCancelSubscription(booster.id)">
-                              <div *ngIf="booster.stripe_cancel_at == null">{{ 'Cancel subscription' | translate }}</div>
-                              <div *ngIf="booster.stripe_cancel_at != null">{{ 'Renew Subscription' | translate }}</div>
+                              <div *ngIf="booster.stripe_cancel_at == null">{{ 'TalentsTranslate.cancelSubscription' | translate }}</div>
+                              <div *ngIf="booster.stripe_cancel_at != null">{{ 'TalentsTranslate.renewSubscription' | translate }}</div>
                             </button>
                         </div>
                         <div class="premium-card_football">
@@ -95,14 +95,14 @@
                 <div class="purchase-parent bg-0C3453">
                     <div class="d-flex align-items-center justify-content-between transaction_box mb-2">
                         <div class="d-flex align-items-center ">
-                          <h2 class="card-title mb-0 me-3 ">{{'Latest Transaction' | translate}}</h2>
+                          <h2 class="card-title mb-0 me-3 ">{{'TalentsTranslate.latestTransaction' | translate}}</h2>
                         </div>
                   
                         <div class="d-flex align-items-center ">
                           <a class="btn btn-outline-white ms-2 delete-text" id="users-icon" (click)="exportData()">
                             <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M12 16.5L7 11.5L8.4 10.05L11 12.65V4.5H13V12.65L15.6 10.05L17 11.5L12 16.5ZM4 20.5V15.5H6V18.5H18V15.5H20V20.5H4Z" fill="#787878"  class="td-icon-purchase"/>
-                            </svg> {{'ExportXLS' | translate }} 
+                            </svg> {{'TalentsTranslate.exportXLS' | translate }} 
                           </a>
                           
                           <div class="d-flex align-items-center slider-arrows">
@@ -116,10 +116,10 @@
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">{{'Name' | translate}}</th>
-                            <th scope="col">{{'Date' | translate}}</th>
-                            <th scope="col">{{'VoucherCode' | translate}}</th>
-                            <th scope="col">{{'Amount' | translate}}</th>
+                            <th scope="col">{{'TalentsTranslate.name' | translate}}</th>
+                            <th scope="col">{{'TalentsTranslate.transferDate' | translate}}</th>
+                            <th scope="col">{{'TalentsTranslate.voucherCode' | translate}}</th>
+                            <th scope="col">{{'TalentsTranslate.amount' | translate}}</th>
                             <th scope="col">{{'Interval' | translate}}</th>
                             <th scope="col" class="text-center">{{'View' | translate}}</th>
                             <th scope="col" class="text-center">{{'Download' | translate}}</th>
