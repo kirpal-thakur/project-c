@@ -81,7 +81,7 @@ export class WebPages {
 
     getDynamicHomePage(langId:any):Observable<any>{
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}get-homepage-data?&lang_id=${langId}&page_id=1`
+            `${this.frontendApiUrl}get-page-by-slug?page_type=home&lang_id=${langId}`
         );
     }
 
@@ -103,4 +103,11 @@ export class WebPages {
         );
     }
 
+    getPageById(id:any): Observable<any> {
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.apiUrl}admin/get-pagecontent/${id}`
+        );
+
+
+    }
 }

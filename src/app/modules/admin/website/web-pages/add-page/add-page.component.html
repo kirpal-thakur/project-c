@@ -65,10 +65,11 @@
       </ckeditor>
     </div> -->
     <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
-    <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
-    <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
-    <app-add-about-page *ngIf="selectedPageTitle == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
-    <app-add-content-page *ngIf="selectedPageTitle == 'imprint' " [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
+    <app-add-home-page *ngIf="selectedPageType == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
+    <app-add-contact-page *ngIf="selectedPageType == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
+    <app-add-about-page *ngIf="selectedPageType == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
+    <app-add-content-page *ngIf="selectedPageType == 'imprint' ||  selectedPageType == 'privacy_policy' ||  selectedPageType == 'terms_and_conditions' ||  selectedPageType == 'cookie_policy' ||  selectedPageType == 'content_page'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
+    <app-add-faq-page *ngIf="selectedPageType == 'faq'" [pageId]="selectedPageId" [languages]="languages"></app-add-faq-page>
  
   </form>
 </div>

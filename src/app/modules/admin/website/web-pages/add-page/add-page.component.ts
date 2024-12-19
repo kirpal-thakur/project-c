@@ -41,11 +41,17 @@ export class AddPageComponent {
   pageDetail: any | null = null;
   pages:any = environment.pages;
   selectedPageTitle: string = "";
+  selectedPageType: string = "";
   selectedPageId:string=""
 
   @ViewChild('myForm') form!: NgForm;
 
   constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {
+    if(data){
+      this.selectedPageType = data.page_type;
+      this.selectedPageId = data.id;
+    }
+   
   }
 
   ngOnInit() {
@@ -57,13 +63,13 @@ export class AddPageComponent {
     }).then(this._setupEditor.bind(this));
     if(this.data){
       this.pageDetail = this.data.page
-      this.title = this.pageDetail.title;
+     // this.title = this.pageDetail.title;
       this.slug = this.pageDetail.slug;
       this.status = (this.pageDetail.status == 'draft') ? 1 : 2;
       this.selectedLanguage = this.lang_id;
-      this.title = this.pageDetail.title;
+     // this.title = this.pageDetail.title;
     }
-    this.getAllPages();
+   // this.getAllPages();
   }
 
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
@@ -262,9 +268,11 @@ export class AddPageComponent {
 
   onChangeSelectedPage(event:any){
     let getPageId = event.target.value;
-    this.selectedPageTitle = getPageId;
-    let findPageIndex =  this.pages.findIndex((val:any) => val.page_type == getPageId);
+    //console.log('selectedPageType',event.target.value);
+    this.selectedPageType = getPageId;
+    this.selectedPageId = '';
+    //let findPageIndex =  this.pages.findIndex((val:any) => val.page_type == getPageId);
     // console.log(this.pages[findPageIndex],getPageId)
-    this.selectedPageId = this.pages[findPageIndex].id;
+    //this.selectedPageId = this.pages[findPageIndex].id;
   }
 }
