@@ -1243,9 +1243,47 @@ select.form-select.custom-select1 {
 }
 
 
+@media (min-width: 1536px){
+.dropdown-menu {
+    left: unset;
+    right: 12%;
+    top: 70%;
+}
+}
+
+
+
 @media (max-width: 1281px) {
     option {
         font-size: 14px;
+    }
+    .navbar-brand {
+
+     margin-right: 0; 
+      
+    }
+    li.nav-item{
+        margin-left: 10px;
+    }
+    .login-btn {
+        font-size: 15px;
+    }
+    .theme_btn span {
+        padding-right: 5px;
+    }
+    .navbar-brand img {
+        width: 230px;
+        height: 100px;
+    }
+    .coustom-select .form-select {
+        margin-right: 5px;
+        width: 70px;
+    }
+    .nav-link{
+        font-size: 19px;
+    }
+    .switch {
+        margin-right: 5px;
     }
 }
 
@@ -1264,15 +1302,14 @@ select.form-select.custom-select1 {
 
     .nav-link {
         padding: 0 !important;
-        margin-right: 20px;
+        margin-right: 10px;
         font-size: 16px;
     }
 
 
     .navbar-brand img {
-        width: 160px;
-        height: 70px;
-
+        width: 180px;
+        height: 80px;
     }
 
     .coustom-select .form-select {
@@ -1289,7 +1326,7 @@ select.form-select.custom-select1 {
     .switch {
         width: 50px;
         height: 30px;
-        margin-right: 20px;
+        margin-right: 10px;
     }
 
     li.nav-item {

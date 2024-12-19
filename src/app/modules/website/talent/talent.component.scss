@@ -1159,7 +1159,12 @@ span {
     .accodian-image2 img {
         left: 7%;
     }
+    .banner-left {
+  
+        margin-right: 42%;
+    }
 }
+
 
 @media (min-width: 1536px) {
     .banner-image1 img {
@@ -1171,6 +1176,9 @@ span {
 
     .banner {
         height: 1100px;
+    }
+    .banner-left {
+        margin-right: 45%;
     }
 
     .banner-image2 img {
@@ -1533,7 +1541,7 @@ span {
     }
     .banner-left {
         top: 72%;
-        margin-right: 35%;
+        margin-right: 33%;
     }
 
     .banner-image1 img {

@@ -2047,7 +2047,7 @@ a {
 // ------------------------- respone------------------
 @media (min-width: 1200px){
   .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1070px;
+      max-width: 1040px;
   }
 }
 @media (min-width: 1280px) {
@@ -2055,6 +2055,10 @@ a {
     height: 580px !important;
     width: 105px !important;
   }
+  .inline-rectangle{
+    left: 54% !important;
+  
+}
 
   .skyscraper-image, .skyscraper-left, .skyscraper-right {
     height: 580px !important;
@@ -2063,12 +2067,12 @@ a {
 }
 @media (min-width: 1440px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1220px;
+      max-width: 1200px;
   }
 }
 @media (min-width: 1536px) {
   .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1320px;
+      max-width: 1280px;
   }
 }
 @media (min-width: 2560px){
