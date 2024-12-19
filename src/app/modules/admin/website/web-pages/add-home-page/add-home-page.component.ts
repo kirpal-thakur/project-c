@@ -31,6 +31,7 @@ export class AddHomePageComponent {
     banner_img : null,
     hero_bg_img : null,
   }
+  baseUrl: string = '';
   first_btn_txt: string = '';
   sec_btn_txt: string = '';
   title: string = '';
@@ -100,10 +101,7 @@ export class AddHomePageComponent {
 
   onSubmit(): void {
     this.addHomePageForm.value.page_id = this.pageId;
-    this.addHomePageForm.value.banner_bg_img = this.filesData.banner_bg_img;
-    this.addHomePageForm.value.banner_img = this.filesData.banner_img;
-    this.addHomePageForm.value.hero_bg_img = this.filesData.hero_bg_img;
-
+ 
 
     let formData = new FormData();
     formData.append('page_id', this.pageId);
@@ -111,12 +109,18 @@ export class AddHomePageComponent {
 
     if(this.addHomePageForm.value.banner_bg_img != null){
       formData.append('banner_bg_img', this.addHomePageForm.value.banner_bg_img);
+      this.addHomePageForm.value.banner_bg_img = this.filesData.banner_bg_img;
+    
     }
     if(this.addHomePageForm.value.banner_img != null){
       formData.append('banner_img', this.addHomePageForm.value.banner_img);
+      this.addHomePageForm.value.banner_img = this.filesData.banner_img;
+   
     }
     if(this.addHomePageForm.value.hero_bg_img != null){
       formData.append('hero_bg_img', this.addHomePageForm.value.hero_bg_img);
+      this.addHomePageForm.value.hero_bg_img = this.filesData.hero_bg_img;
+
     }
     
     formData.append('banner_btn_txt', this.addHomePageForm.value.banner_btn_txt);
@@ -214,21 +218,22 @@ export class AddHomePageComponent {
           hero_heading_txt: response.data.pageData.hero_heading_txt,
           hero_btn_txt: response.data.pageData.hero_btn_txt,
           hero_btn_link: response.data.pageData.hero_btn_link,
-           meta_title: response.data.pageData.meta_title,
-          meta_description: response.data.pageData.meta_description,
+
+          meta_title: response.data.meta_title,
+          meta_description: response.data.meta_description,
         })
        // this.addHomePageForm.value.lang_id = response.data.pageData.
      
-         // this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
-         // this.filesData.banner_img = response.data.pageData.banner_img;
-         // this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
+          this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
+          this.filesData.banner_img = response.data.pageData.banner_img;
+          this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
            
           this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
           this.first_tab = response.data.pageData.tabs_data.first_tab;
           this.sec_btn_txt = response.data.pageData.tabs_data.sec_btn_txt;
           this.second_tab = response.data.pageData.tabs_data.second_tab;
           this.title = response.data.pageData.tabs_data.title;
-
+          this.baseUrl = response.data.base_url;
       }
     });
      
