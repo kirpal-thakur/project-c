@@ -17,11 +17,11 @@ interface Language {
 }
 
 @Component({
-  selector: 'app-add-content-page',
-  templateUrl: './add-content-page.component.html',
-  styleUrls: ['./add-content-page.component.scss']
+  selector: 'app-add-faq-page',
+  templateUrl: './add-faq-page.component.html',
+  styleUrls: ['./add-faq-page.component.scss']
 })
-export class AddContentPageComponent implements OnInit {
+export class AddFaqPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
   
@@ -50,7 +50,7 @@ export class AddContentPageComponent implements OnInit {
     lang_id: localStorage.getItem('lang_id'),
   };
 
-  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddContentPageComponent>) {}
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddFaqPageComponent>) {}
 
   ngOnInit(): void {
     this.editor = new Editor();

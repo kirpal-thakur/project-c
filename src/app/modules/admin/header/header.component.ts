@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
 import { goToActiveLog } from '../../../../utlis';
+import { SharedService } from '../../../services/shared.service';
 
 interface Notification {
   image: string;
@@ -22,7 +23,7 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private shareService:  SharedService, private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
   loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang: string = '';
@@ -130,6 +131,10 @@ export class HeaderComponent {
     // Default to a specific language ID if none is found (e.g., English)
     const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
     localStorage.setItem('lang_id', selectedLanguageId);
+    this.shareService.updateData({
+      action:'lang_updated',
+      id:selectedLanguageId
+    })
 
   }
 

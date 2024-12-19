@@ -9,12 +9,12 @@
 
 
       <div *ngIf="adVisible[0]" class="skyscraper-image">
-        <img src="./assets/images/skyscraper - 120x600.png">
+        <img src="{{imageBaseUrl + advertisemnetData[0].featured_image}}">
         <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div *ngIf="adVisible[1]" class="wide-skyscraper-image">
-        <img src="./assets/images/wide-skyscraper - 160x600.png">
+        <img src="{{imageBaseUrl + advertisemnetData[1].featured_image}}">
         <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -48,7 +48,7 @@
     </div>
     <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
       <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <img src="./assets/images/leaderboard - 728x90.png">
+        <img src="{{imageBaseUrl + advertisemnetData[2].featured_image}}">
         <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
@@ -111,7 +111,8 @@
     <!-- How It Works -->
     <div class="works py_0">
       <div class="container">
-        <h3>how it works</h3>
+
+        <h3>{{pageDetail?.tabs_data?.title}}</h3>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
             <div class="work-banner">
@@ -119,14 +120,14 @@
                 <div class="talent-btn">
                   <button type="button" class="btn btn-success" [ngClass]="{'active-btn': selectedCategory === 'Talent'}"
                     (click)="showCategory('Talent')">
-                    <p class="club-p">Talent</p>
+                    <p class="club-p">{{pageDetail?.tabs_data?.first_btn_txt}}</p>
                   </button>
                 </div>
                 <div class="club-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Clubs & Scouts'}"
                     (click)="showCategory('Clubs & Scouts')">
-                    <p class="club-s">Clubs and Scouts</p>
+                    <p class="club-s">{{pageDetail?.tabs_data?.sec_btn_txt}}</p>
                   </button>
                 </div>
               </div>
@@ -137,9 +138,11 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Sign-up & Profile Creation
+                    {{pageDetail?.tabs_data?.first_tab[0]?.title}}
                   </a>
-                  <p>Creates a comprehensive profile showcasing skills, achievements, and stats.</p>
+                  <p>
+                    {{pageDetail?.tabs_data?.first_tab[0]?.desc}}
+                  </p>
                 </div>
               </div>
 
@@ -150,9 +153,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Networking & Opportunity
+                    {{pageDetail?.tabs_data?.first_tab[1]?.title}}
                   </a>
-                  <p>Engage with other users, football clubs, and connect with scouts, managers, and coaches.</p>
+                  <p> {{pageDetail?.tabs_data?.first_tab[1]?.desc}}</p>
                 </div>
               </div>
 
@@ -163,9 +166,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Success & Progression
+                    {{pageDetail?.tabs_data?.first_tab[2]?.title}}
                   </a>
-                  <p>Impresses your favorite club and receives an offer for a professional contract.</p>
+                  <p>{{pageDetail?.tabs_data?.first_tab[2]?.title}}</p>
                 </div>
               </div>
 
@@ -176,10 +179,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Sign-up & Profile Creation
+                    {{pageDetail?.tabs_data?.second_tab[0]?.title}}
                   </a>
-                  <p>Accesses the database of player profiles, reports, and performance analytics to discover emerging
-                    players.</p>
+                  <p> {{pageDetail?.tabs_data?.second_tab[0]?.desc}}</p>
                 </div>
               </div>
 
@@ -190,10 +192,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Networking & Opportunity
+                    {{pageDetail?.tabs_data?.second_tab[1]?.title}}
                   </a>
-                  <p>Communicate with players and other stakeholders through the platform's messaging system, providing
-                    feedback on their performance and discussing contract negotiations.</p>
+                  <p>{{pageDetail?.tabs_data?.second_tab[1]?.desc}}</p>
                 </div>
               </div>
 
@@ -204,9 +205,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Decision Making & Action
+                    {{pageDetail?.tabs_data?.second_tab[2]?.title}}
                   </a>
-                  <p>Finalize contract offers and negotiate terms with potential recruits.</p>
+                  <p>{{pageDetail?.tabs_data?.second_tab[2]?.desc}}</p>
                 </div>
               </div>
             </div>
@@ -827,12 +828,12 @@
         <div class="container1">
           <div class="advertisment">
             <div *ngIf="adVisible[3]" class="leaderboard-club-image">
-              <img src="./assets/images/leaderboard - 728x90.png">
+              <img src="{{imageBaseUrl + advertisemnetData[3].featured_image}}">
               <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <div *ngIf="adVisible[4]" class="small-sqaure-image">
-              <img src="./assets/images/small sqaure - 200x200.png">
+              <img src="{{imageBaseUrl + advertisemnetData[4].featured_image}}">
               <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>

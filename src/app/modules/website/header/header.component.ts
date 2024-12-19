@@ -11,6 +11,7 @@ import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.compone
 import { MatDialog } from '@angular/material/dialog';
 import { CommonDataService } from '../../../services/common-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../../../services/shared.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 import { WebPages } from '../../../services/webpages.service';
@@ -98,6 +99,7 @@ export class HeaderComponent implements OnInit {
     };
 
     constructor(
+      private sharedservice:SharedService,
       private themeService: ThemeService,
       private authService: AuthService,
       private route: ActivatedRoute,
@@ -245,6 +247,11 @@ export class HeaderComponent implements OnInit {
     // Default to a specific language ID if none is found (e.g., English)
     selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
     localStorage.setItem('lang_id', selectedLanguageId);
+    console.log('lang_id',selectedLanguageId);
+    this.sharedservice.updateData({
+      action:'updatedLang',
+      id:selectedLanguageId
+    });
 
     this.translateService.use(selectedLanguage);
 

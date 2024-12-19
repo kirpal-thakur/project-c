@@ -167,6 +167,21 @@ export class WebPagesComponent {
     });
   }
 
+  editPage(page: any){
+    const addNewPage = this.dialog.open(AddPageComponent,{
+      width: '1500px',
+      height: '800px',
+      data : page
+    })
+    addNewPage.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "page-added-successfully"){
+          this.showMatDialog('Page updated successfully!.', 'display');
+          this.getAllPagesData();
+        }
+      }
+    });
+  }
 
   getFrontendPages(){
     this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {

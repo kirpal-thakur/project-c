@@ -87,6 +87,7 @@ import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home
 import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
 import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
 import { AddContentPageComponent } from './website/web-pages/add-content-page/add-content-page.component';
+import { AddFaqPageComponent } from './website/web-pages/add-faq-page/add-faq-page.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
@@ -161,7 +162,8 @@ export const MY_FORMATS = {
     AddHomePageComponent,
     AddContactPageComponent,
     AddAboutPageComponent,
-    AddContentPageComponent
+    AddContentPageComponent,
+    AddFaqPageComponent
   ],
   imports: [
     CommonModule,
