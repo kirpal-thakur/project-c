@@ -294,9 +294,14 @@ right: 0;
 bottom: 0;
 }
 
+@media (max-width: 1200px){
+input#name, input#email, input#phone, textarea#message {
+  width: 640px;
+}
+}
 
 
-@media (max-width: 1199px){
+@media (max-width: 1024px){
 input#name, input#email, input#phone, textarea#message {
 width: 570px;
 }

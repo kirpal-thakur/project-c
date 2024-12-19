@@ -1678,8 +1678,72 @@ span {
         right: 71%;
     }
 }
+@media (max-width: 1200px){
+    .banner-image2 img {
+        width: 285px;
+        height: 220px;
+        top: 68%;
+    }
 
-@media(max-width: 1199px) {
+    .banner-image1 img {
+        width: 290px;
+        height: 505px;
+    }
+    .banner-image3 img {
+        width: 395px;
+        height: 270px;
+    }
+    .banner-image4 img {
+        top: 47%;
+        right: 0;
+        height: 380px;
+        width: 395px;
+    }
+    .banner-left {
+        margin-right: 31%;
+    }
+    .club-offers2 img {
+        width: 240px;
+        height: 240px;
+    }
+    .club-offers1 img {
+        height: 210px;
+        width: 250px;
+    }
+    .club-offers3 img {
+        right: 27%;
+        bottom: 5%;
+        width: 340px;
+        height: 270px;
+    }
+    .accodian-image3 img {
+        height: 160px;
+        width: 195px;
+    }
+    .accodian-image2 img {
+        height: 190px;
+        width: 240px;
+        top: 44.5%;
+    }
+    .networking-images1 img {
+        left: 15%;
+    }
+    .button1 {
+        top: 90%;
+        right: 64%;
+    }
+    .button4 {
+        top: 4%;
+        right: 30px;
+    }
+    .feature-player2{
+        right: 180px;
+    }
+
+
+}
+
+@media(max-width: 1024px) {
     .features {
         height: 520px;
     }

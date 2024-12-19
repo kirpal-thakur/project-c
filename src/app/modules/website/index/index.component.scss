@@ -1979,7 +1979,20 @@ img.success-image {
 /*--------------------------------------------------------------
 #  Networking & Opportunity
 --------------------------------------------------------------*/
+// @media (min-width: 1199px) {
+//   .talent-img1 img {
+//     top: 10%;
+//     width: 270px;
+//     height: 470px;
+//   }
 
+//   .talent-img2 img {
+//     top: 65%;
+//     width: 270px;
+//     height: 220px;
+//   }
+
+// }
 
 @media (min-width: 1536px) {
   .main-bnr {
@@ -2333,7 +2346,7 @@ img.success-image {
 @media (min-width: 2560px) {
   .main-bnr {
     height: 1200px;
-}
+  }
 
   .skyscraper-image,
   .wide-skyscraper-image {
@@ -2604,20 +2617,7 @@ img.success-image {
 
 }
 
-// @media (min-width: 1329px){
-//   .talent-img1 img {
-//     left: 47%;
-// }
-// .talent-img2 img {
-//   left: 47%;
-//   top: 68%;
-// }
-// .player-list-images .talent-img2 img {
-//   top: 63%;
-//   left: 47%;
-// }
 
-// }
 
 
 @media (max-width: 1281px) {
@@ -2695,9 +2695,111 @@ img.success-image {
     right: 27%;
   }
 }
+@media (max-width: 1200px){
+  .talent-img1 img {
+    top: 10%;
+    left: 48%;
+    width: 270px;
+    height: 470px;
+}
+.talent-img2 img {
+  top: 65%;
+  left: 48%;
+  width: 270px;
+  height: 220px;
+}
+.talent-img3 img {
+  top: 14%;
+  right: 0;
+  width: 340px;
+  height: 255px;
+}
+.talent-img4 img {
+  top: 45%;
+  right: 0;
+  width: 340px;
+  height: 345px;
+}
+.player-list-images .talent-img2 img {
+  top: 60%;
+  left: 48%;
+  width: 270px;
+  height: 210px;
+}
+.player-list-images .talent-img4 img {
+  top: 42%;
+  right: 0;
+  width: 340px;
+  height: 350px;
+}
+.network1{
+  width: 220px;
+  height: 230px;
+}
+.network2{
+  width: 200px;
+  height: 280px;
+  top: 49%;
+}
+.network3 {
+  width: 220px;
+  height: 230px;
+}
+.network4 {
+  width: 200px;
+  height: 280px;
+  top: 30%;
+  right: 188px;
 
+}
+.network5{
+  width: 220px;
+  height: 240px;
+  top: 63%;
+}
+.network6 {
+  width: 160px;
+  height: 280px;
+}
+.network7 {
+  width: 160px;
+  height: 300px;
+}
+.member1-image img {
+  height: 205px;
+}
+.member2-image{
+  height: 255px;
+  padding-top: 60px;
+  padding-left: 37px;
+}
+.member3-image img, .member5-image img{
+  height: 205px;
+}
+.club_member2 {
+  height: 265px;
+}
+.message-panel1 img {
+  width: 230px;
+  height: 630px;
 
-@media (max-width: 1199px) {
+}
+.message-panel img {
+  width: 380px;
+  height: 490px;
+}
+.club-offers1 img {
+  height: 260px;
+  width: 320px;
+}
+.club-offers2 img {
+  width: 300px;
+  height: 300px;
+}
+
+}
+
+@media (max-width: 1024px) {
   .main-bnr {
     height: 820px;
   }

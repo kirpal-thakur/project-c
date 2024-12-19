@@ -39,12 +39,12 @@ P {
 }
 
 .banner-left {
-        position: relative;
-        top: 120%;
-        left: 0;
-        z-index: 2;
-        margin-right: 22%;
-    
+    position: relative;
+    top: 120%;
+    left: 0;
+    z-index: 2;
+    margin-right: 22%;
+
 }
 
 .banner-heading {
@@ -793,7 +793,8 @@ img.birthday-img {
 .features {
     overflow: hidden;
 }
-.features1{
+
+.features1 {
     display: none;
 }
 
@@ -1344,12 +1345,14 @@ img.dark-feature4 {
 
 .premium {
     width: 100%;
-    min-height: 338px; /* Ensures it starts with a base size */
+    min-height: 338px;
+    /* Ensures it starts with a base size */
     border-radius: 10px;
     padding: 50px 20px 90px 40px;
     position: relative;
     box-sizing: border-box;
 }
+
 img.bg-image {
     position: absolute;
     content: "";
@@ -1623,22 +1626,25 @@ span {
 #  adv
 --------------------------------------------------------------*/
 
-@media (min-width: 1440px){
+@media (min-width: 1440px) {
     .club-offers2 img {
         right: 0;
         top: 16%;
         width: 280px;
         height: 275px;
     }
+
     .club-offers1 img {
         right: 51%;
         height: 245px;
         width: 285px;
-    }    
+    }
+
     .accodian-image2 img {
         left: 7%;
     }
 }
+
 @media (min-width: 1441px) {
     .player-img img {
         height: 260px;
@@ -2836,7 +2842,121 @@ span {
     }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1200px) {
+    .player-img img {
+        height: 200px;
+        width: 192px;
+    }
+
+    .player1 {
+        height: 210px;
+        width: 200px;
+    }
+
+    .player-name7,
+    .player-name1,
+    .player-name2,
+    .player-name,
+    .player-name3,
+    .player-name7,
+    .player-name8,
+    .player-name9,
+    .player-col-2 .player-name,
+    .player-col-2 .player-name1 {
+        width: 192px;
+    }
+    .player10 {
+        height: 210px;
+        width: 105px;
+    }
+    .player10 .player-img img {
+        height: 200px;
+        width: 100px;
+    }
+    .player-name10, .player-name11 {
+        width: 100px;
+        padding-left: 80px;
+    }
+    .banner-left {
+        margin-right: 10%;
+    }
+    .player3 {
+        height: 125px;
+        width: 200px;
+    }
+    .player-img3 img {
+        width: 192px;
+        border-radius: 5px 5px 0px 0px;
+    }
+    .player2 {
+        height: 200px;
+        width: 200px;
+    }
+    .banner .player2 .player-img img {
+        height: 192px;
+        width: 192px;
+    }
+    .player-member2{
+        top: 49%;
+        right: 46%;
+    }
+    .player-member3{
+        top: 72%;
+        right: 46%;
+    }
+    .player-member4{
+        top: 18%;
+        right: 28%;
+    }
+    .player-member5{
+        top: 41%;
+        right: 28%;
+    }
+    .player-member6{
+        top: 64%;
+        right: 28%;
+    }
+    .player-member8{
+        top: 42%;
+        right: 10%;
+    }
+    .player-member9{
+        top: 65%;
+        right: 10%;
+    }
+    .player-member12{
+        top: 49%;
+    }
+    .button4 {
+        right: 25px;
+        top: 8%;
+    }
+    .button1 {
+        top: 81%;
+    }
+    .feature-player2{
+        right: 174px;
+    }
+    .club-offers3 img {
+        bottom: 10%;
+        width: 440px;
+        height: 300px;
+    }
+    .accodian-image2 img {
+        width: 240px;
+        height: 200px;
+    }
+    .accodian-image3 img {
+        height: 165px;
+        width: 195px;
+    }
+    .networking-images1 img {
+        left: 7%;
+    }
+
+}
+
+@media (max-width: 1024px) {
     .banner {
         height: 820px;
     }
@@ -3363,9 +3483,11 @@ span {
     .banner {
         height: 950px;
     }
+
     .banner-left {
         top: 80%;
     }
+
     span {
         font-size: 13px;
     }
@@ -3700,8 +3822,8 @@ span {
         height: 228px;
         width: 228px;
     }
-    
-    .features{
+
+    .features {
         display: none;
     }
 
@@ -3718,6 +3840,7 @@ span {
         height: 500px;
         position: relative;
     }
+
     .feature-players {
         margin-left: 0;
     }
@@ -4066,16 +4189,18 @@ span {
         right: 76%;
         top: 71%;
     }
+
     img.bg-image {
         height: 100%;
         width: 100%;
     }
+
     .premium-img {
         width: 100%;
         height: 150px;
     }
-    
-    
+
+
 
     .player-member3 {
         top: 89%;
@@ -4656,6 +4781,7 @@ span {
         width: 320px;
         height: 210px;
     }
+
     .premium {
         padding: 30px 20px 20px 10px;
     }
@@ -4673,7 +4799,11 @@ span {
         height: 230px;
         width: 300px;
     }
-    .accodian-box2-images, .networking-images, .feature-players, .club-scout-box {
+
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
         height: 400px;
     }
 
@@ -4782,16 +4912,19 @@ span {
         left: -2%;
 
     }
-    .button2{
+
+    .button2 {
         top: 89%;
         right: 3%;
     }
 
-    .button3{
+    .button3 {
         top: 60%;
         right: -5%;
     }
-    .feature-player3 .player-img::after, .feature-player1 .player-img::after {
+
+    .feature-player3 .player-img::after,
+    .feature-player1 .player-img::after {
         bottom: 23px;
     }
 
@@ -4856,7 +4989,9 @@ span {
         right: 75%;
         top: 72%;
     }
-    .feature-player3 .player-img::after, .feature-player1 .player-img::after {
+
+    .feature-player3 .player-img::after,
+    .feature-player1 .player-img::after {
         bottom: 13px;
     }
 
@@ -5287,7 +5422,10 @@ span {
         left: 3%;
     }
 
-    .accodian-box2-images, .networking-images, .feature-players, .club-scout-box {
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
         height: 350px;
     }
 
