@@ -19,6 +19,7 @@ interface Notification {
   seen: number;
   senderId: number;
   shouldAnimate: boolean;
+  relativeTime: string;
 }
 
 @Component({
@@ -110,6 +111,7 @@ export class HeaderComponent {
         seen: data.seen,
         senderId: data.senderId,
         shouldAnimate: true,
+        relativeTime : 'just now',
       };
       
       // Add the notification to the array and show the notification box
@@ -381,6 +383,7 @@ export class HeaderComponent {
             seen: notif.seen,
             senderId : notif.senderId,
             shouldAnimate:false,
+            relativeTime: notif.relativeTime,
           }));
   
           this.loadMoreNotifications(); // Load the initial set of notifications
