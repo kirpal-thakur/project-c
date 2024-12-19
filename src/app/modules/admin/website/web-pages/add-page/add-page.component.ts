@@ -72,6 +72,10 @@ export class AddPageComponent {
    // this.getAllPages();
   }
 
+  close(): void {
+    console.log('Close button clicked');
+    this.dialogRef.close();
+  }
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
     const {
         ClassicEditor,

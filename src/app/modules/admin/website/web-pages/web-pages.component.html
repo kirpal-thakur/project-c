@@ -5,7 +5,7 @@
       >
         <div class="d-flex align-items-center heading w-100 website-create-btn">
           <h2 class="card-title mb-0 me-3 ms-3">{{'Webpages' | translate}}</h2>
-          <button (click)="createNewPage()" class="btn btn-success btn-sm web-create-bg">{{'CreateNew' | translate}}</button>
+          <!-- <button (click)="createNewPage()" class="btn btn-success btn-sm web-create-bg">{{'CreateNew' | translate}}</button> -->
         </div>
         <div class="card-search">
           <div class="input-group">
@@ -443,8 +443,8 @@
             </th>
             <th scope="col">{{ 'Status' | translate }}</th>
             <th class="text-center" scope="col">{{ 'View' | translate }}</th>
-            <th class="text-center" scope="col">{{ 'Edit' | translate }}</th>
-            <th class="text-center" scope="col">{{ 'Remove' | translate }}</th>
+            <!-- <th class="text-center" scope="col">{{ 'Edit' | translate }}</th> -->
+            <!-- <th class="text-center" scope="col">{{ 'Remove' | translate }}</th> -->
           </tr>
         </thead>
         <tbody>
@@ -480,7 +480,7 @@
                 <td>
                   <span [ngClass]="getStatusClass(page?.status)">{{page?.status}}</span>
                 </td>
-                <td class="c_pointer text-center view" (click)="viewPage(page.id)">
+                <!-- <td class="c_pointer text-center view" >
                   <svg id="users-icon"
                     width="25"
                     height="25"
@@ -497,7 +497,7 @@
                       fill="#787878"
                     />
                   </svg>
-                </td>
+                </td> -->
                 <td class="c_pointer text-center">
                   <svg (click)="editPage(page)"id="users-icon"
                     width="24"
@@ -512,7 +512,7 @@
                     />
                   </svg>
                 </td>
-                <td class="c_pointer text-center">
+                <!-- <td class="c_pointer text-center">
                   <svg  id="users-icon"
                     width="22"
                     height="23"
@@ -527,7 +527,7 @@
                       fill="#787878"
                     ></path>
                   </svg>
-                </td>
+                </td> -->
               </tr>
             }
           }@else {

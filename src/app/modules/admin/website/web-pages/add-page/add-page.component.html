@@ -1,9 +1,10 @@
 @if(!pageDetail){
 <div class="container mt-5">
   <!-- <h2 class="mb-4">Add Page</h2> -->
+  <div (click)="close()" class="close-img mb-1" ></div>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm" enctype="multipart/form-data">
-    <!-- <div class="row mb-3">
-      <div class="col-md-12">
+    <div class="row mb-3">
+      <!-- <div class="col-md-12">
         <label for="activate" class="form-label">Select Page <span class="text-danger">*</span>
         </label>
         <select id="activate" class="form-select" (change)="onChangeSelectedPage($event)" name="status" required>
@@ -14,8 +15,8 @@
             }
           }
         </select>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
     <!-- <div class="row mb-3">
       <div class="col-md-6">
         <label for="title" class="form-label">Title <span class="text-danger">*</span>
