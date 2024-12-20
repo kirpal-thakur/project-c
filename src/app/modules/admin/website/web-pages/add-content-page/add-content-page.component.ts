@@ -57,6 +57,10 @@ export class AddContentPageComponent implements OnInit {
     if(this.pageType){
       this.formData.page_type = this.pageType;
     }
+    if(this.pageId){
+        this.formData.page_id = this.pageId;
+        this.getPagebyId(this.pageId);
+    }
   }
 
   ngOnDestroy(): void {
@@ -86,5 +90,16 @@ export class AddContentPageComponent implements OnInit {
         action: 'page-added-successfully'
       });
     }); 
+  }
+  getPagebyId(id:number){
+    this.webpages.getPageById(id).subscribe(response => {
+      if (response.status) {
+          this.formData.banner_title = response.data.pageData.banner_title;
+          this.formData.page_content = response.data.pageData.page_content; 
+          this.formData.meta_title = response.data.meta_title;
+          this.formData.meta_description = response.data.meta_description;
+      }
+    });
+     
   }
 }
