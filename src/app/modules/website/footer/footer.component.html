@@ -2,10 +2,10 @@
   <div class="footer-top">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-md-12 col-12 footer-contact">
+        <div class="col-lg-4 col-md-12 col-12 footer-contact">
           <div class="footer-logo">
-              <img src="./assets/images/pink-logo.png">
-         </div>
+            <img src="./assets/images/pink-logo.png">
+          </div>
 
           <ul class="social-link">
             <li class="insta-icon">
@@ -14,36 +14,37 @@
             <li class="linkedin-icon">
               <i class="fa-brands fa-linkedin-in"></i>
             </li>
-           
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-4  col-12 footer-links">
+        <div class="col-lg-3 col-md-4  col-12 footer-links">
           <h4>{{ 'product' | translate }}</h4>
           <ul>
             <li><a [routerLink]="'/pricing'">{{ 'pricing' | translate }}</a></li>
             <li>
-              <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal" data-bs-target="#exampleModal-login">
+              <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
+                data-bs-target="#exampleModal-login">
                 {{ 'signIn' | translate }}
-                  <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  </svg>
+                <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                </svg>
               </a>
-          </li>
+            </li>
             <li>
-              <a  data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              <a data-bs-toggle="modal" data-bs-target="#exampleModal1">
                 {{ 'createAccount' | translate }}</a>
             </li>
             <li><a [routerLink]="'/faq'">{{ 'faq' | translate }}</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-4  col-12 footer-links">
+        <div class="col-lg-3 col-md-4  col-12 footer-links">
           <h4>{{ 'company' | translate }}</h4>
           <ul>
-            <li><a [routerLink]="'/talent'">{{ 'talent' | translate }}</a></li>
-            <li><a [routerLink]="'/club'">{{ 'club' | translate }}</a></li>
+            <li><a [routerLink]="'/talent'">{{ 'talents' | translate }}</a></li>
+            <li><a [routerLink]="'/club'">{{ 'clubsAndScouts' | translate }}</a></li>
             <li><a [routerLink]="'/about'">{{ 'about' | translate }}</a></li>
-            <li><a [routerLink]="'/news'">{{ 'news' | translate }}</a></li>
+            <li><a [routerLink]="'/news'">{{ 'news&Media' | translate }}</a></li>
             <li><a [routerLink]="'/contact'">{{ 'contact' | translate }}</a></li>
           </ul>
         </div>
@@ -57,16 +58,38 @@
           </ul>
         </div>
       </div>
-      
-      <div class="select-country">
+
+      <!-- <div class="select-country">
         <a class="c-name">{{ 'selectCountry' | translate }}</a>
         <select class="form-select" aria-label="Default select example" (change)="onCountryChange($event)">
-          <option value="" disabled selected class="countary">{{ 'selectCountry' | translate }}</option>
-          <option *ngFor="let country of countries" [value]="country.id" [selected]="country.country_name === 'England'" class="options-country">
-  {{ country.country_name }}
-</option>
+          <option value="" disabled selected class="country">{{ 'selectCountry' | translate }}</option>
+          <option *ngFor="let domain of domains" [value]="country.id" [selected]="country.slug === 'ch'" class="options-country">
+            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+            {{ domain.name }}
+          </option>
         </select>
+      </div> -->
+
+
+      <div class="form-select1">
+        <a class="form-select select-country" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ name }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <p class="country">{{ 'selectCountry' | translate }}</p>
+          <a href="#" *ngFor="let domain of domains" class="dropdown-item ai-icon options-country"
+            [class.selected]="name === domain.name" (click)="ChangeLang(domain.name)">
+            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+            <span>{{ domain.name }}</span>
+          </a>
+        </div>
       </div>
+
+
+
+
+
+
     </div>
   </div>
 

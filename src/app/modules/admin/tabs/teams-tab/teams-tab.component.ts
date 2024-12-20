@@ -31,11 +31,7 @@ export class TeamsTabComponent {
     try {
       this.userService.getClubTeams(userId).subscribe((response)=>{
         if (response && response.status && response.data) {
-          if(response.data.length){
-            this.teams = response.data.teams;
-          }else{
-            this.teams = [];
-          }
+          this.teams = response.data.teams;
           this.isLoading = false;
         } else {
           this.teams = [];

@@ -22,10 +22,26 @@ export class WebPages {
         this.apiUrl = environment?.apiUrl;
     }
 
-    getAllPages(): Observable<any> {
+    getAllPages(lang_id:any): Observable<any> {
+
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.apiUrl}admin/get-pages`
+            `${this.apiUrl}admin/get-pages?lang_id=${lang_id}`
         );
+
+
+    }
+
+    getFrontendPages(lang_id:any): Observable<any> {
+
+        if(lang_id)
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}`
+        );
+        else
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}`
+        );
+
     }
 
     deleteWebPages(params: any): Observable<any>{
@@ -65,7 +81,7 @@ export class WebPages {
 
     getDynamicHomePage(langId:any):Observable<any>{
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}get-homepage-data?&lang_id=${langId}&page_id=1`
+            `${this.frontendApiUrl}get-page-by-slug?page_type=home&lang_id=${langId}`
         );
     }
 
@@ -77,6 +93,21 @@ export class WebPages {
         return this.http.post<any>(`${this.frontendApiUrl}save-aboutpage`, params);
     }
 
+    addContentPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-content-page`, params);
+    }
+
+    getPageByLangAndPageId(langId:any): Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-homepage-data?&lang_id=${langId}&page_id=9`
+        );
+    }
+
+    getPageById(id:any): Observable<any> {
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.apiUrl}admin/get-pagecontent/${id}`
+        );
 
 
+    }
 }

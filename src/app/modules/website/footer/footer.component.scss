@@ -970,7 +970,7 @@ img.vector-img {
 }
 
 .form-select {
-  width: 160px;
+  width: 180px;
   font-size: 16px;
   line-height: 28px;
   margin-top: 10px;
@@ -980,15 +980,20 @@ img.vector-img {
   // border: 1px solid #E05263;
   filter: none;
 }
+p.country {
+  font-size: 20px;
+}
+
+
 
 option.countary {
   color: white;
   background-color: #6FB95D;
 }
 
-.footer-links {
-  text-transform: capitalize;
-}
+// .footer-links {
+//   text-transform: capitalize;
+// }
 
 
 /* Responsive Design for Mobile */

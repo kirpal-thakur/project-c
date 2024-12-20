@@ -1,20 +1,21 @@
 @if(!pageDetail){
 <div class="container mt-5">
-  <h2 class="mb-4">Add Page</h2>
+  <!-- <h2 class="mb-4">Add Page</h2> -->
+  <div (click)="close()" class="close-img mb-1" ></div>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm" enctype="multipart/form-data">
     <div class="row mb-3">
-      <div class="col-md-12">
+      <!-- <div class="col-md-12">
         <label for="activate" class="form-label">Select Page <span class="text-danger">*</span>
         </label>
         <select id="activate" class="form-select" (change)="onChangeSelectedPage($event)" name="status" required>
           @if(pages && pages.length > 0){
-          <option value="0">Select page</option>
-          @for (page of pages; track $index) {
-          <option value="{{page.id}}">{{page.title}}</option>
-          }
+            <option value="0">Select page</option>
+            @for (page of pages; track $index) {
+             <option value="{{page}}">{{page}}</option>
+            }
           }
         </select>
-      </div>
+      </div> -->
     </div>
     <!-- <div class="row mb-3">
       <div class="col-md-6">
@@ -65,9 +66,12 @@
       </ckeditor>
     </div> -->
     <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
-    <app-add-home-page *ngIf="selectedPageTitle == 'home'" [pageId]="selectedPageId"></app-add-home-page>
-    <app-add-contact-page *ngIf="selectedPageTitle == 'contact'" [pageId]="selectedPageId"></app-add-contact-page>
-    <app-add-about-page *ngIf="selectedPageTitle == 'about'" [pageId]="selectedPageId"></app-add-about-page>
+    <app-add-home-page *ngIf="selectedPageType == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
+    <app-add-contact-page *ngIf="selectedPageType == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
+    <app-add-about-page *ngIf="selectedPageType == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
+    <app-add-content-page *ngIf="selectedPageType == 'imprint' ||  selectedPageType == 'privacy_policy' ||  selectedPageType == 'terms_and_conditions' ||  selectedPageType == 'cookie_policy' ||  selectedPageType == 'content_page'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
+    <app-add-faq-page *ngIf="selectedPageType == 'faq'" [pageId]="selectedPageId" [languages]="languages"></app-add-faq-page>
+ 
   </form>
 </div>
 }@else {

@@ -32,7 +32,7 @@ export class TalentService {
   private apiUrl3 = "https://alerts.socceryou.ch/";
 
   constructor(private http: HttpClient) {
-    
+
       // Retrieve the selected language code from localStorage
       const selectedLanguageSlug = localStorage.getItem('lang') || '';
 
@@ -160,7 +160,7 @@ export class TalentService {
     const headers = this.headers();
     return this.http.get(`${this.apiUrl}get-leagues`, {headers});
   }
-  
+
   getCoverImg(): Observable<any> {
     const headers = this.headers();
 
@@ -169,20 +169,20 @@ export class TalentService {
     );
   }
 
-  // Method to update user profile  
+  // Method to update user profile
   updateUserProfile(formData: FormData): Observable<any> {
     const headers = this.headers();
 
     return this.http.post(`${this.apiUrl}user/update-profile`, formData, { headers });
   }
-  
-  // Method to update user profile  
+
+  // Method to update user profile
   updateGeneralProfile(formData: FormData): Observable<any> {
     const headers = this.headers();
 
     return this.http.post(`${this.apiUrl}player/update-general-info`, formData, { headers });
   }
-  
+
   getPerformanceData(): Observable<any> {
     const headers = this.headers();
 
@@ -198,7 +198,7 @@ export class TalentService {
       `${this.apiUrl}player/get-transfer-detail`, { headers }
     );
   }
-  
+
   getViewTransferData(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -206,7 +206,7 @@ export class TalentService {
       `${this.apiUrl}get-transfer-detail/${id}`, { headers }
     );
   }
-  
+
   getCountries(): Observable<any> {
     const headers = this.headers();
 
@@ -215,7 +215,7 @@ export class TalentService {
     );
 
   }
-  
+
   getDomains(): Observable<any> {
     const headers = this.headers();
 
@@ -278,7 +278,7 @@ export class TalentService {
       `${this.apiUrl}user/delete-cover-image/`, {headers}
     );
   }
-  
+
   uploadProfileImage(formdata: any): Observable<any> {
     const headers = this.headers();
 
@@ -302,11 +302,11 @@ export class TalentService {
 
     return this.http.post<any>(
       `${this.apiUrl}player/edit-transfer-detail/${transferId}`,
-      transferData, 
+      transferData,
       { headers }
     );
   }
-  
+
   getPerformanceReports(): Observable<any> {
     const headers = this.headers();
 
@@ -316,7 +316,7 @@ export class TalentService {
     );
   }
 
-  
+
   updatePerformance(performanceId:any, params: any): Observable<any> {
     const headers = this.headers();
 
@@ -339,7 +339,7 @@ export class TalentService {
       observe: 'events',     // This allows us to observe the full event stream, including upload progress
     });
   }
- 
+
 
   addPerformance(params: any): Observable<any> {
     const headers = this.headers();
@@ -377,7 +377,7 @@ export class TalentService {
     // Make sure you use DELETE, not GET
     return this.http.get<any>(`${this.apiUrl}player/delete-transfer-detail/${id}`, { headers });
   }
-  
+
   /**
    * Change password for the user.
    * @param newPassword The new password to set.
@@ -395,7 +395,7 @@ export class TalentService {
     return this.http.post<any>(`${this.apiUrl}change-password`, formData, { headers });
   }
 
-  
+
   getPositions(): Observable<any> {
     const headers = this.headers();
 
@@ -415,7 +415,7 @@ export class TalentService {
 
     return this.http.post(`${this.apiUrl}user/set-featured-file`, params , {headers});
   }
-  
+
 
   getPerformanceReportsData(id:any): Observable<any> {
     const headers = this.headers();
@@ -435,7 +435,7 @@ export class TalentService {
     );
   }
 
-  
+
   getGalleryFiles(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -444,7 +444,7 @@ export class TalentService {
     );
   }
 
-  
+
   getHighlightsFiles(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -471,7 +471,7 @@ export class TalentService {
     const headers = this.headers();
 
     let params = new HttpParams();
-      params = params.append('coupon_code', couponCode);  
+      params = params.append('coupon_code', couponCode);
 
     return this.http.post(`${this.apiUrl}user/validate-coupon`, params , {headers});
   }
@@ -481,7 +481,7 @@ export class TalentService {
     const headers = this.headers();
 
     let params = new HttpParams();
-      params = params.append('user[show_tour]', showTour);  
+      params = params.append('user[show_tour]', showTour);
 
     // Send POST request with payload in body
     return this.http.post(`${this.apiUrl}player/update-general-info`, params , {headers});

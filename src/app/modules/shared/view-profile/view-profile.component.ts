@@ -77,13 +77,13 @@ export class ViewProfileComponent implements OnInit {
 
           // Set isFavorite status based on user data or API response
           this.isFavorite = this.user.marked_favorite; // Assuming API returns this
-          
+
           if(this.isPremium){
             this.getHighlightsData(this.userId);
             this.getGalleryData(this.userId);
             // this.exportSingleUser(this.userId);
           }
-          
+
         } else {
           console.error('Invalid API response structure:', response);
         }
@@ -164,7 +164,7 @@ export class ViewProfileComponent implements OnInit {
         myUserId = userData.id;
     }
     else{
-      console.log("No data found in localStorage."); 
+      console.log("No data found in localStorage.");
     }
 
     try {
@@ -227,7 +227,7 @@ export class ViewProfileComponent implements OnInit {
 
   }
 
-  
+
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");

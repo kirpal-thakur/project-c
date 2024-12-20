@@ -50,7 +50,8 @@ export class ClubComponent {
        'The complete talent profile with all stages of his career and performance data.',
        'Export data in excel and pdf formats.',
        'Create your favorite list.',
-       'Highlight your best photos and videos on your profile.'
+       'Highlight your best photos and videos on your profile.',
+       
      ];
    
      multiCountryFeatures = [

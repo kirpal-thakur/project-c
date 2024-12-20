@@ -47,22 +47,15 @@ export class FooterComponent implements OnInit{
     nav: true
   }
 
-  // countries = [
-  //   { id: 1, country_name: 'England' },
-  //   { id: 2, country_name: 'USA' },
-  //   // Add more countries as needed
-  // ];
-
-  selectedCountryId: string | null = null;
   isDropdownUp: boolean = false;
 
-  onCountryChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedCountryId = selectElement.value;
+  // onCountryChange(event: Event): void {
+  //   const selectElement = event.target as HTMLSelectElement;
+  //   this.selectedCountryId = selectElement.value;
 
-    // Check if we should flip the dropdown based on available space
-    this.isDropdownUp = this.shouldDropdownBeUp();
-  }
+  //   // Check if we should flip the dropdown based on available space
+  //   this.isDropdownUp = this.shouldDropdownBeUp();
+  // }
 
   shouldDropdownBeUp(): boolean {
     // Logic to determine if dropdown should be flipped
@@ -70,18 +63,16 @@ export class FooterComponent implements OnInit{
     return true; // Replace with actual condition
   }
 
-  countries = [
-    { id: 1, country_name: 'Switzerland' },
-    { id: 2, country_name: 'Germany' },
-    { id: 3, country_name: 'France' },
-    { id: 4, country_name: 'Italy' },
-    { id: 5, country_name: 'Portugal' },
-    { id: 6, country_name: 'England' },
-    { id: 7, country_name: 'Spain' },
-    { id: 8, country_name: 'Belgium' },
-    { id: 9, country_name: 'Sweden' },
-    { id: 10, country_name: 'Denmark' }
-  ];
+  countries = environment.domains; // Assuming the countries are defined in the environment
+  selectedCountryId: string = '';
+  domains: any = environment.domains;
+
+
+  onCountryChange(event: any): void {
+    this.selectedCountryId = event.target.value;
+    console.log('Selected Country ID:', this.selectedCountryId);
+    // You can perform additional logic here, such as calling an API with the selected country ID
+  }
 
   selectedCountry: number | null = null;
 
@@ -126,9 +117,9 @@ export class FooterComponent implements OnInit{
   lang:string = '';
   token= '';
   tokenVerified = false;
+  name: string = 'Switzerland';
 
   ngOnInit(): void {
-    this.lang = localStorage.getItem('lang') || 'en'
       // Check if the google.accounts.id library is loaded
       if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
         // Initialize Google Sign-In
@@ -136,40 +127,40 @@ export class FooterComponent implements OnInit{
       } else {
         // Google API script might not be loaded yet; wait for it to load
         console.warn('Google API script is not fully loaded.');
+        this.countries = environment.domains;
       }
-  this.route.queryParams.subscribe(params => {
-      this.token = params['confirm-token'] || '';
-      console.log('Magic Token:', this.token);
 
-      if (this.token) {
-        // Call authService to verify magic token
-        this.authService.magicLogin(this.token).subscribe(
-          (response: any) => {
-            console.log('Magic Login Response:', response);
-            if (response.success) {
-              this.tokenVerified = true;
-              this.openModal();
-            } else {
-              this.tokenVerified = false;
-              console.log('Token is not verified please check');
-              this.notverifyed();
-              console.log("popup is not open")
-            }
-          },
-          (error) => {
-            console.error('Error verifying token:', error);
-            this.tokenVerified = false;
-            this.notverifyed();
-          }
-        );
-      } else {
-        this.tokenVerified = false;
-        console.log('Token is not provided');
-      }
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.token = params['confirm-token'] || '';
+    //   console.log('Magic Token:', this.token);
 
-    
-   
+    //   if (this.token) {
+    //     // Call authService to verify magic token
+    //     this.authService.magicLogin(this.token).subscribe(
+    //       (response: any) => {
+    //         console.log('Magic Login Response:', response);
+    //         if (response.success) {
+    //           this.tokenVerified = true;
+    //           this.openModal();
+    //         } else {
+    //           this.tokenVerified = false;
+    //           console.log('Token is not verified please check');
+    //           this.notverifyed();
+    //           console.log("popup is not open")
+    //         }
+    //       },
+    //       (error) => {
+    //         console.error('Error verifying token:', error);
+    //         this.tokenVerified = false;
+    //         this.notverifyed();
+    //       }
+    //     );
+    //   } else {
+    //     this.tokenVerified = false;
+    //     console.log('Token is not provided');
+    //   }
+    // });
+
   }
 
   performMagicLogin(token: string) {
@@ -191,17 +182,25 @@ export class FooterComponent implements OnInit{
     );
   }
 
-  ChangeLang(lang:any){
-    const selectedLanguage = lang.target.value;
+  ChangeLang(slug: string): void {
+    this.name = slug;
+
+    // Assuming the slug also represents the language (e.g., 'en', 'fr', 'de')
+    const selectedLanguage = slug; 
+
+    // Store the selected language in localStorage
     localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage)
+
+    // Switch the language using ngx-translate
+    this.translateService.use(selectedLanguage);
+
+    console.log(`Country (and language) changed to: ${slug}`);
   }
 
   toggleTheme(event: Event) {
     event.preventDefault();
     this.themeService.toggleTheme();
   }
-
 
   login() {
     this.loginButtonClicked = true;
@@ -382,26 +381,28 @@ export class FooterComponent implements OnInit{
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
         console.log('Password recovery response:', response);
-        if (response.status === true) {
-            const magicToken = response.data.magic_link_url;
-            const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
-             console.log("Magic link URL:", magic_link_url);
-          this.authService.magicLogin(magic_link_url).subscribe(
-            magicLoginResponse => {
-              console.log('Magic login response:', magicLoginResponse);
-              if (magicLoginResponse.status === true) {
-                console.log('Auto-login successful.');
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                console.error('Auto-login failed:', magicLoginResponse.message);
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            magicLoginError => {
-              console.error('An error occurred during auto-login:', magicLoginError);
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
+        if (response.status) {
+            this.forgotPasswordMessage = response.message;
+
+            // const magicToken = response.data.magic_link_url;
+            // const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
+            // console.log("Magic link URL:", magic_link_url);
+            // this.authService.magicLogin(magic_link_url).subscribe(
+            //   magicLoginResponse => {
+            //     console.log('Magic login response:', magicLoginResponse);
+            //     if (magicLoginResponse.status === true) {
+            //       console.log('Auto-login successful.');
+            //       this.router.navigate(['/Admin/Dashboard']);
+            //     } else {
+            //       console.error('Auto-login failed:', magicLoginResponse.message);
+            //       this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
+            //     }
+            //   },
+            //   magicLoginError => {
+            //     console.error('An error occurred during auto-login:', magicLoginError);
+            //     this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
+            //   }
+            // );
         } else {
           console.error('Password recovery failed:', response.message);
           this.forgotPasswordMessage = response.message;

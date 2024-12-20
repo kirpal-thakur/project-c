@@ -67,7 +67,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-    
+
     // Adding a slight delay to ensure elements are rendered before the tour starts
     this.getUserProfile(this.userId);
     this.getHighlightsData();
@@ -145,7 +145,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       doneLabel: 'Finish',
       tooltipPosition: 'auto',
     });
-  
+
     // Add the "Don't show again" checkbox dynamically
     this.introInstance.onafterchange(() => {
       const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
@@ -196,22 +196,22 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     // Handle when the tour finishes
     this.introInstance.oncomplete(() => this.handleTourExit());
-  
+
     // Handle when the tour is exited manually
     // introInstance.onexit(() => this.handleTourExit());
-  
+
     this.introInstance.start();
   }
-  
+
   // Centralized handling of "Don't show again" logic
   handleTourExit() {
     const checkbox = document.getElementById('dontShowAgain') as HTMLInputElement;
     const dontShowAgain = checkbox?.checked || false;
-  
+
     // Call the API to update showTour (replace with your API call logic)
     this.updateShowTour(dontShowAgain ? 0 : 1);
   }
-  
+
   updateShowTour(showTour: number) {
     this.talentService.updateShowTour(this.userId, showTour).subscribe(
       () => {
@@ -408,8 +408,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
       width: '800px',
       data: {
           images: this.userImages ,
-          videos: this.userVideos , 
-          url: this.imageBaseUrl 
+          videos: this.userVideos ,
+          url: this.imageBaseUrl
       }
     });
 
@@ -417,19 +417,19 @@ export class DashboardComponent implements OnInit , OnDestroy {
       this.getHighlightsData()
     });
 
-  }  
+  }
 
   getHighlightsData(){
     try {
       this.talentService.getHighlightsData().subscribe((response)=>{
         if (response && response.status && response.data && response.data.images) {
-          this.highlights = response.data; 
+          this.highlights = response.data;
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
@@ -464,7 +464,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     // Handle edge cases (first and last image)
     const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
-  
+
     // Update main image and handle potential wrapping
     this.mainImage = { src: this.album[newIndex].src };
   }
@@ -479,13 +479,13 @@ export class DashboardComponent implements OnInit , OnDestroy {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
-    
+
   onProfileFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

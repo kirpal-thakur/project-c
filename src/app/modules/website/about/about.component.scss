@@ -161,6 +161,10 @@ mat-list-item {
   padding-left: 20px;
   /* Adjust spacing as needed */
 }
+.custom-list-item.country-name:hover {
+
+  font-size: 22px !important;
+}
 
 .custom-list-item::before {
   content: "•";
@@ -169,7 +173,7 @@ mat-list-item {
   font-size: 20px;
   /* Adjust size as needed */
   margin-right: 10px;
-  margin-top: 4px;
+  margin-top: 0;
   /* Space between dot and text */
   display: inline-block;
   /* Ensures proper alignment */
@@ -313,7 +317,7 @@ img.vector-img {
   font-size: 30px;
   text-align: center;
   line-height: 50px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 img.join-btn {
@@ -323,7 +327,7 @@ img.join-btn {
 }
 
 .button-border {
-  background: linear-gradient(45deg, #C2A64A, #A77A2E);
+  background: linear-gradient(to top, #A77A2E, #C2A64A);
   width: 284px;
   height: 62px;
   border-radius: 60px;
@@ -344,7 +348,7 @@ img.join-btn {
   content: "";
   z-index: 1;
   position: absolute;
-  left: 0;
+  left: 1%;
   top: 43%;
 }
 
@@ -359,7 +363,7 @@ img.join-btn {
   content: "";
   z-index: 1;
   position: absolute;
-  right: 0;
+  right: 1%;
   top: 43%;
 }
 
@@ -512,13 +516,25 @@ img.join-btn {
     height: 330px;
   }
 
-  .map[_ngcontent-ng-c3424183209] {
+  .map{
     height: 1100px;
   }
 
 }
+@media (max-width: 1200px) {
+.content-text {
+  padding: 50px 50px 0 50px;
+}
+.map img {
+  height: 600px;
+  width: 670px;
+}
+.map {
+  height: 540px;
+}
+}
 
-@media (max-width: 1199px) {
+@media (max-width: 1024px) {
   .main-bnr {
     height: 300px;
   }
@@ -562,46 +578,12 @@ img.join-btn {
     width: 520px;
   }
 
-  .club {
-    height: 600px;
-  }
+  .club-banner {
+    padding: 30%;
+}
 }
 
 @media (max-width: 991px) {
-
-  .leaderboard-club-image img,
-  .small-sqaure-image img,
-  .skyscraper-image img,
-  .skyscraper-image img,
-  .wide-skyscraper-image img,
-  .leaderboard-image img,
-  .banner-image img,
-  .advertisement,
-  .advertisement1 {
-    display: none;
-  }
-
-  .skyscraper-image,
-  .wide-skyscraper-image,
-  .leaderboard-club-image,
-  .leaderboard-image,
-  .small-sqaure-image {
-    display: none;
-  }
-
-  .leaderboard-club-image img,
-  .small-sqaure-image img,
-  .skyscraper-image img,
-  .skyscraper-image img,
-  .wide-skyscraper-image img,
-  .leaderboard-image img,
-  .banner-image img,
-  .advertisement,
-  .advertisement1,
-  .skyscraper-left img,
-  .skyscraper-right img {
-    display: none;
-  }
 
   .py_0 {
     padding-top: 30px;

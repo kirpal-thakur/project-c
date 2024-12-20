@@ -1,103 +1,103 @@
 <section class="website-code">
-<app-header></app-header>
-<div class="main">
-  <div class="overlay"></div>
-  <div class="banner-inner py_0">
+  <app-header></app-header>
+  <div class="main">
+    <div class="overlay"></div>
+    <div class="banner-inner py_0">
+      <div class="container">
+        <div class="about">
+          <h2 class="privacy-text">Privacy Policy</h2>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="adVisible[0]" class="skyscraper-left">
+      <img src="./assets/images/skyscraper - 120x600.png">
+      <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  
+    <div *ngIf="adVisible[1]" class="skyscraper-right">
+      <img src="./assets/images/skyscraper - 120x600.png">
+      <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+  
+  <div class="privacy">
     <div class="container">
-      <div class="about">
-        <h2 class="privacy-text">Privacy Policy</h2>
+  
+      <div class="py_0">
+        <h4>Privacy Policy</h4>
+        <p>At SoccerYou, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use,
+          and safeguard your personal information when you use our website and services.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Information We Collect</h4>
+        <ul>
+          <li>Personal Information: When you register, we collect information such as your name, email address, date of
+            birth, and location.</li>
+          <li>Usage Data: We gather data on how you interact with our website, including your IP address, browser type,
+            and access times.</li>
+        </ul>
+      </div>
+  
+      <div class="py_0">
+        <h4>How We Use Your Information</h4>
+        <ul>
+          <li>To Provide Services: Your information helps us deliver the features and services you request.</li>
+          <li>To Improve Our Services: We analyze usage data to improve our platform and user experience.</li>
+          <li>To Communicate: We may use your information to send you updates, newsletters, and other communications.</li>
+        </ul>
+      </div>
+  
+      <div class="py_0">
+        <h4>Sharing Your Information</h4>
+        <p>We do not sell or rent your personal information to third parties. We may share your data with trusted partners
+          who assist us in operating our website, conducting our business, or servicing you, provided those parties agree
+          to keep this information confidential.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Data Security</h4>
+        <p>We implement a variety of security measures to maintain the safety of your personal information. Your data is
+          stored in secure environments and is accessible only to authorized personnel.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Cookies</h4>
+        <p>Our website uses cookies to enhance user experience. Cookies are small files that a site or its service
+          provider transfers to your computer's hard drive through your web browser (if you allow) that enables the site's
+          or service provider's systems to recognize your browser and capture and remember certain information.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Your Rights</h4>
+        <p>You have the right to access, update, or delete your personal information at any time. If you wish to exercise
+          any of these rights, please contact us here E-Mail.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Changes to Our Privacy Policy</h4>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and we will
+          notify you of significant changes via email or through our website.</p>
+      </div>
+  
+      <div class="py_0">
+        <h4>Contact Us</h4>
+        <p class="contact-text">If you have any questions or concerns about these Terms and Conditions, please contact us
+          at:</p>
+        <p> Address: </p>
+        <p>Succer You Sports AG</p>
+        <p>Ida-Stäuli-Strasse 95</p>
+        <p>CH-8404 Winterthur</p>
+        <p>Switzerland</p>
+      </div>
+  
+      <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
+      <div *ngIf="adVisible[2]" class="leaderboard-image">
+        <img src="./assets/images/leaderboard - 728x90.png">
+        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+      </div>
       </div>
     </div>
   </div>
-  <div *ngIf="adVisible[0]" class="skyscraper-left">
-    <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-  </div>
-
-  <div *ngIf="adVisible[1]" class="skyscraper-right">
-    <img src="./assets/images/skyscraper - 120x600.png">
-    <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-  </div>
-</div>
-
-<div class="privacy">
-  <div class="container">
-
-    <div class="py_0">
-      <h4>Privacy Policy</h4>
-      <p>At SoccerYou, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use,
-        and safeguard your personal information when you use our website and services.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Information We Collect</h4>
-      <ul>
-        <li>Personal Information: When you register, we collect information such as your name, email address, date of
-          birth, and location.</li>
-        <li>Usage Data: We gather data on how you interact with our website, including your IP address, browser type,
-          and access times.</li>
-      </ul>
-    </div>
-
-    <div class="py_0">
-      <h4>How We Use Your Information</h4>
-      <ul>
-        <li>To Provide Services: Your information helps us deliver the features and services you request.</li>
-        <li>To Improve Our Services: We analyze usage data to improve our platform and user experience.</li>
-        <li>To Communicate: We may use your information to send you updates, newsletters, and other communications.</li>
-      </ul>
-    </div>
-
-    <div class="py_0">
-      <h4>Sharing Your Information</h4>
-      <p>We do not sell or rent your personal information to third parties. We may share your data with trusted partners
-        who assist us in operating our website, conducting our business, or servicing you, provided those parties agree
-        to keep this information confidential.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Data Security</h4>
-      <p>We implement a variety of security measures to maintain the safety of your personal information. Your data is
-        stored in secure environments and is accessible only to authorized personnel.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Cookies</h4>
-      <p>Our website uses cookies to enhance user experience. Cookies are small files that a site or its service
-        provider transfers to your computer's hard drive through your web browser (if you allow) that enables the site's
-        or service provider's systems to recognize your browser and capture and remember certain information.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Your Rights</h4>
-      <p>You have the right to access, update, or delete your personal information at any time. If you wish to exercise
-        any of these rights, please contact us here E-Mail.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Changes to Our Privacy Policy</h4>
-      <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page, and we will
-        notify you of significant changes via email or through our website.</p>
-    </div>
-
-    <div class="py_0">
-      <h4>Contact Us</h4>
-      <p class="contact-text">If you have any questions or concerns about these Terms and Conditions, please contact us
-        at:</p>
-      <p> Address: </p>
-      <p>Succer You Sports AG</p>
-      <p>Ida-Stäuli-Strasse 95</p>
-      <p>CH-8404 Winterthur</p>
-      <p>Switzerland</p>
-    </div>
-
-    <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
-    <div *ngIf="adVisible[2]" class="leaderboard-image">
-      <img src="./assets/images/leaderboard - 728x90.png">
-      <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    </div>
-  </div>
-</div>
-<app-footer></app-footer>
-</section>
+  <app-footer></app-footer>
+  </section>

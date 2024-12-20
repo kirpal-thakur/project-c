@@ -8,6 +8,7 @@ import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
 import { goToActiveLog } from '../../../../utlis';
+import { SharedService } from '../../../services/shared.service';
 
 interface Notification {
   image: string;
@@ -27,6 +28,7 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
+<<<<<<< HEAD
   constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService,private talentService: TalentService, private socketService: SocketService) { }
   loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
@@ -37,6 +39,15 @@ export class HeaderComponent {
   isLoading: boolean = false; // Flag to track loading state
   isShowAllNotification: boolean = false;
   language: any;
+=======
+  constructor(private shareService:  SharedService, private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
+  loggedInUser: any = localStorage.getItem('userData');
+  profileImgUrl: any = "";
+  lang: string = '';
+  domains: any = environment.domains; 
+
+  languages: any = localStorage.getItem('languages');
+>>>>>>> origin/main
   liveNotification: any[] = [];
   showNotification: boolean = false;
 
@@ -51,6 +62,7 @@ export class HeaderComponent {
   unseenCount = 0;
 
   ngOnInit() {
+<<<<<<< HEAD
 
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -63,6 +75,9 @@ export class HeaderComponent {
     }
 
     this.fetchNotifications(userId);
+=======
+    this.languages = JSON.parse(this.languages);
+>>>>>>> origin/main
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -144,6 +159,7 @@ export class HeaderComponent {
     });
   }
 
+<<<<<<< HEAD
   isUserOnline(senderId: number): boolean {
     if(!this.socketService.onlineUsers){
       return false;
@@ -169,10 +185,28 @@ export class HeaderComponent {
     
   }
 
+=======
+>>>>>>> origin/main
   ChangeLang(lang: any) {
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
+
+    // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = selectedLanguage;
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.languages.find(
+      (lang: any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    localStorage.setItem('lang_id', selectedLanguageId);
+    this.shareService.updateData({
+      action:'lang_updated',
+      id:selectedLanguageId
+    })
 
   }
 
@@ -193,7 +227,6 @@ export class HeaderComponent {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
     document.getElementById('theme-text')!.textContent = this.themeText
-
   }
 
 

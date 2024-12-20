@@ -3,15 +3,19 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonDataService } from '../../../services/common-data.service';
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../../../services/shared.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 import { WebPages } from '../../../services/webpages.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,6 +24,7 @@ import { WebPages } from '../../../services/webpages.service';
 export class HeaderComponent implements OnInit {
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm;
+
 
   isNavbarExpanded = false;
   isDarkMode: boolean = false;
@@ -49,92 +54,151 @@ export class HeaderComponent implements OnInit {
   selectedCountry: string = '';
   selectedTeam: number | null = null;
   companyName: string = '';
+  verifyToken:any = null;
+  verifyTime:any = null;
  //this is get by the domain
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
- allLanguage = [];
- selectedLanguageId = null;
-  //clubs
-  // clubs = [
-  //   { id: 1, name: 'Club A' },
-  //   { id: 2, name: 'Club B' },
-  //   { id: 3, name: 'Club C' },
-  //   { id: 4, name: 'Club D' },
-  //   { id: 5, name: 'Club E' },
-  // ];
+ langs: any = environment.langs;
 
-  teams = [
-    { id: 1, name: 'Team Alpha' },
-    { id: 2, name: 'Team Bravo' },
-    { id: 3, name: 'Team Charlie' },
-    { id: 4, name: 'Team Delta' },
-    { id: 5, name: 'Team Echo' },
-  ];
-  
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      740: { items: 3 },
-      940: { items: 6 }
-    },
-    nav: true
-  };
+  allLanguage = [];
+  selectedLanguageId = null;
+    //clubs
+    // clubs = [
+    //   { id: 1, name: 'Club A' },
+    //   { id: 2, name: 'Club B' },
+    //   { id: 3, name: 'Club C' },
+    //   { id: 4, name: 'Club D' },
+    //   { id: 5, name: 'Club E' },
+    // ];
 
-  constructor(
-    private themeService: ThemeService,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private translateService: TranslateService,
-    public dialog: MatDialog,
-    private commonDataService: CommonDataService,
-    private webpage: WebPages
-  ) {}
+    teams = [
+      { id: 1, name: 'Team Alpha' },
+      { id: 2, name: 'Team Bravo' },
+      { id: 3, name: 'Team Charlie' },
+      { id: 4, name: 'Team Delta' },
+      { id: 5, name: 'Team Echo' },
+    ];
 
-  isScrolled = false;
-  serverBusy = false;
-  @HostListener('window:scroll', [])
+    customOptions: OwlOptions = {
+      loop: true,
+      mouseDrag: false,
+      touchDrag: false,
+      pullDrag: false,
+      dots: false,
+      navSpeed: 700,
+      navText: ['', ''],
+      responsive: {
+        0: { items: 1 },
+        400: { items: 2 },
+        740: { items: 3 },
+        940: { items: 6 }
+      },
+      nav: true
+    };
+
+    constructor(
+      private sharedservice:SharedService,
+      private themeService: ThemeService,
+      private authService: AuthService,
+      private route: ActivatedRoute,
+      private router: Router,
+      private translateService: TranslateService,
+      public dialog: MatDialog,
+      private commonDataService: CommonDataService,
+      private http: HttpClient,
+      private toastr : ToastrService,
+      private webpage: WebPages
+    ) {}
+
+    isScrolled = false;
+    serverBusy = false;
+    @HostListener('window:scroll', [])
+
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
   ngOnInit(): void {
-    this.getAllCountries();
-    this.getAllClubs();
-    this.lang = localStorage.getItem('lang') || 'en';
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
-    this.applyTheme();
 
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       if (this.token) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
         this.authService.magicLogin(this.token).subscribe(
           response => {
-            if (response.success) {
+            if (response.status && response.data) {
+              const token = response.data.token;
+              const userData = response.data.user;
+              const userRole = userData.role;
+
+              localStorage.setItem('authToken', token);
+              localStorage.setItem('userRole', userRole);
+              localStorage.setItem('userData', JSON.stringify(userData));
               this.tokenVerified = true;
               this.openModal();
+
             } else {
               this.tokenVerified = false;
-              this.notVerified();
+              this.router.navigate(['/expired-link']);
             }
           },
           error => {
             console.error('Error verifying token:', error);
             this.tokenVerified = false;
-            this.notVerified();
+            this.router.navigate(['/expired-link']);
           }
         );
       }
+
+      this.verifyToken = params['token'];
+      this.verifyTime = params['time'];
+
+      if (this.verifyToken && this.verifyTime) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
+        this.authService.verifyEmail(this.verifyToken,this.verifyTime).subscribe(
+          response => {
+            if (response.status) {
+              this.toastr.clear();
+
+              this.toastr.success('Email is verified. You can login now...', 'Email Verified!');
+
+              const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+              loginModal.show();
+
+            } else {
+              this.toastr.clear();
+
+              this.router.navigate(['/expired-link']);
+            }
+          },
+          error => {
+            this.toastr.clear();
+
+            this.router.navigate(['/expired-link']);
+          }
+        );
+      }
+
+
     });
+
+
+    this.getAllCountries();
+    this.getAllClubs();
+    this.lang = localStorage.getItem('slug') || 'en';
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+    this.applyTheme();
+    const savedLanguage = localStorage.getItem('slug');
+
+    //flag-images
+    if (savedLanguage) {
+      this.slug = savedLanguage;
+      this.translateService.use(savedLanguage);  // Load the language using ngx-translate
+    }
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
@@ -165,6 +229,8 @@ export class HeaderComponent implements OnInit {
   applyTheme() {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
+  // lang1: string = 'en'; // Default language
+  slug: string = 'en';
 
   ChangeLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
@@ -179,9 +245,46 @@ export class HeaderComponent implements OnInit {
     this.webpage.updateData(selectedLanguageId);
     this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', selectedLanguage);
+
+    // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = selectedLanguage;
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.languages.find(
+      (lang: any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
     localStorage.setItem('lang_id', selectedLanguageId);
+    console.log('lang_id',selectedLanguageId);
+    this.sharedservice.updateData({
+      action:'updatedLang',
+      id:selectedLanguageId
+    });
+
     this.translateService.use(selectedLanguage);
+
+    const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
+    if (target) {
+      this.lang = target.value;
+      this.getContentForLanguage(this.lang);
+    }
   }
+
+  getContentForLanguage(lang: string): void {
+    const apiUrl = `${environment.apiUrl}language/${lang}`;  // Use the API URL from the environment file
+    this.http.get(apiUrl).subscribe({
+      next: (response: any) => {
+        // Handle the API response based on the selected language
+        console.log(response);
+        // You can update the UI or internal state with the response data
+      },
+      error: (error) => {
+        console.error('Error fetching language content', error);
+      }
+    });
+  }
+
 
   login() {
     this.loginButtonClicked = true;
@@ -252,24 +355,29 @@ export class HeaderComponent implements OnInit {
   register() {
     this.serverBusy = true;
     this.registerFormSubmitted = true;
+
     if (!this.isFormValid()) {
       this.serverBusy = false;
-      console.error('Please fill in all required fields.');
+      this.toastr.warning('Please fill in all required fields.', 'Validation Error');
       return;
     }
+
+    this.toastr.info('Registration is in process...', 'Please wait', { disableTimeOut: true });
+
     const selectedLanguage = localStorage.getItem('lang') || '';
     const domain = environment.targetDomain?.domain || 'ch';
 
-      // Retrieve the selected language code from localStorage
+    // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = localStorage.getItem('lang') || '';
 
     // Find the corresponding language ID from the langs array
     const selectedLanguageObj = this.languages.find(
-      (lang:any) => lang.slug === selectedLanguageSlug
+      (lang: any) => lang.slug === selectedLanguageSlug
     );
 
     // Default to a specific language ID if none is found (e.g., English)
     const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    let verification_link = window.location.origin+'/home';
 
     const registrationData = {
       first_name: this.firstName,
@@ -284,56 +392,51 @@ export class HeaderComponent implements OnInit {
       privacy_policy: this.privacyPolicy,
       lang: selectedLanguageId,
       domain: domain,
-      club_id: this.selectedClub
+      club_id: this.selectedClub,
+      verification_link : verification_link
     };
 
     this.authService.register(registrationData).subscribe(
-      // response => {
-      //   if (response.status === true) {
-      //     this.serverBusy = false;
-      //     bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
-      //     const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-      //     loginModal.show();
-      //   } else {
-      //     console.log("status is false", response);
-      //     this.serverBusy = false;
-      //     this.registerError = typeof response.message === 'object'
-      //       ? Object.values(response.message).join(' ')
-      //       : response.message;
-      //     this.registerFormSubmitted = false;
-      //   }
-      // },
-      // error => {
-      //   this.handleRegistrationError(error);
-      // }
-
-      response => {
+      (response) => {
         console.log('Registration response:', response);
         if (response.status === true) {
+          this.toastr.clear();
+
           this.serverBusy = false;
+          this.toastr.success('Registration successful! Thank you.', 'Success');
           const registerModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal1'));
           if (registerModal) {
             registerModal.hide();
           }
-          const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-          loginModal.show();
+
+          if (registerModal) {
+            registerModal.hide();
+          }
+          this.router.navigate(['/email-verify']);
+
+          // const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+          // loginModal.show();
         } else {
+          this.toastr.clear();
+
           let errorMessage = '';
-          // Check if response.message is an object
           if (typeof response.message === 'object') {
-            // Loop through each error message and concatenate them
-            Object.keys(response.message).forEach(key => {
+            Object.keys(response.message).forEach((key) => {
               errorMessage += response.message[key] + ' ';
             });
           } else {
             errorMessage = response.message;
           }
-          this.registerError = errorMessage.trim(); // Trim to remove any leading or trailing spaces
-          this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+          this.toastr.error(errorMessage.trim(), 'Registration Failed');
+          this.registerError = errorMessage.trim();
+          this.registerFormSubmitted = false;
         }
       },
-      error => {
+      (error) => {
+        this.toastr.clear();
+
         console.error('Registration failed:', error);
+        let errorMessage = 'An error occurred during registration. Please try again.';
         if (error && error.status === 400 && error.error && error.error.data) {
           const errorData = error.error.data;
           if (errorData.username) {
@@ -342,12 +445,11 @@ export class HeaderComponent implements OnInit {
           if (errorData.email) {
             this.registerForm.controls['email'].setErrors({ emailExists: true });
           }
-          this.registerError = errorData.message || 'An error occurred during registration.';
-        } else {
-          console.error('An error occurred while registering:', error);
-          this.registerError = 'An error occurred during registration. Please try again.';
+          errorMessage = errorData.message || errorMessage;
         }
-        this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+        this.toastr.error(errorMessage, 'Registration Failed');
+        this.registerError = errorMessage;
+        this.registerFormSubmitted = false;
       }
     );
   }
@@ -369,7 +471,7 @@ export class HeaderComponent implements OnInit {
     this.registerFormSubmitted = false;
   }
 
-  
+
   isFormValid(): boolean {
     let fieldType = ['string', 'boolean'];
     return [
@@ -395,20 +497,8 @@ export class HeaderComponent implements OnInit {
 
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
-        if (response.status === true) {
-          const magicToken = response.data.magic_link_url;
-          this.authService.magicLogin(`http://localhost:4200/Index?confirm-token=${magicToken}`).subscribe(
-            magicLoginResponse => {
-              if (magicLoginResponse.status === true) {
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            () => {
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
+        if (response.status) {
+            this.forgotPasswordMessage = response.message;
         } else {
           this.forgotPasswordMessage = response.message;
         }
@@ -450,18 +540,15 @@ export class HeaderComponent implements OnInit {
   }
 
   openModal() {
+
     this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
   }
-
-  notVerified() {
-    this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
-  }
-
 
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
     console.log('Selected Country:', this.selectedCountry);
+    this.getClugById(this.selectedCountry);
   }
 
   onClubChange(event: Event): void {
@@ -495,12 +582,23 @@ export class HeaderComponent implements OnInit {
   getAllCountries(){
     this.commonDataService.getAllCountries().subscribe((resp) => {
       this.countries = resp.data.domains.map((country: any) => ({
-        code: country.domain_country_code || '',
+        code: country.country_id || '',
         name: country.location || ''
       }));
     });
   }
 
+  getClugById(id :any ){
+    if(id){
+      this.commonDataService.getAllClubsbyId(id).subscribe((resp) => {
+        this.clubs = resp.data.clubs.map((club: any) => ({
+          id: club.id || '',
+          name: club.club_name || ''
+        }));
+        console.log(resp, 'club-resp');
+      });
+    }
+  }
   getAllClubs(){
     this.commonDataService.getAllClubs().subscribe((resp) => {
       this.clubs = resp.data.clubs.map((club: any) => ({
@@ -511,11 +609,13 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+
   getAllLanguage(){
-    this.webpage.getAllLanguage().subscribe((res) => {
-      if(res.status){
-        this.allLanguage = res.data.languages;
-        console.log(this.allLanguage, 'testing...');
+
+    this.webpage.getAllLanguage().subscribe((response) => {
+      if (response.status) {
+        this.languages = response.data.languages;
+        localStorage.setItem('languages', JSON.stringify(this.languages));
       }
     });
   }
