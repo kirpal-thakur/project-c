@@ -24,7 +24,6 @@ interface Language {
 export class AddContentPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
-  
   @Input() languages: Language[] = [];
   editor!: Editor;
   toolbar: Toolbar = [
@@ -33,33 +32,36 @@ export class AddContentPageComponent implements OnInit {
     ['ordered_list', 'bullet_list'],
     ['link', 'image'],
     ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
+    ['align_left', 'align_center', 'align_right', 'align_justify']
   ];
   content: string = '';
   formData: any = {
-    slug:'',
-    meta_title:'',
-    meta_description:'',
-    title:'',
+    slug: '',
+    meta_title: '',
+    meta_description: '',
+    title: '',
     banner_title: '',
     banner_img: null,
     page_content: '',
     page_id: '',
-    page_type:'',
+    page_type: '',
     language: localStorage.getItem('lang'),
-    lang_id: localStorage.getItem('lang_id'),
+    lang_id: localStorage.getItem('lang_id')
   };
+  imageLoaded: boolean = false;
+
+  bannerImagePreview: string | ArrayBuffer | null = null;
 
   constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddContentPageComponent>) {}
 
   ngOnInit(): void {
     this.editor = new Editor();
-    if(this.pageType){
+    if (this.pageType) {
       this.formData.page_type = this.pageType;
     }
-    if(this.pageId){
-        this.formData.page_id = this.pageId;
-        this.getPagebyId(this.pageId);
+    if (this.pageId) {
+      this.formData.page_id = this.pageId;
+      this.getPagebyId(this.pageId);
     }
   }
 
@@ -67,10 +69,26 @@ export class AddContentPageComponent implements OnInit {
     this.editor.destroy();
   }
 
-
   onFileChange(event: any, fieldName: string): void {
-    this.formData[fieldName] = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.formData[fieldName] = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.bannerImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
+
+  // Update the `removeImage` method to reset the `imageLoaded` property.
+  removeImage(fieldName: string): void {
+    this.formData[fieldName] = null;
+    this.bannerImagePreview = null;
+    this.imageLoaded = false;
+  }
+
 
   submitForm(): void {
     const formData = new FormData();
@@ -83,23 +101,24 @@ export class AddContentPageComponent implements OnInit {
         formData.append(key, this.formData[key]);
       }
     }
-    console.log('content',this.content);
+    console.log('content', this.content);
     console.log(this.formData, 'submit-form');
     this.webpages.addContentPage(formData).subscribe(response => {
       this.dialogRef.close({
         action: 'page-added-successfully'
       });
-    }); 
+    });
   }
-  getPagebyId(id:number){
+
+  getPagebyId(id: number): void {
     this.webpages.getPageById(id).subscribe(response => {
       if (response.status) {
-          this.formData.banner_title = response.data.pageData.banner_title;
-          this.formData.page_content = response.data.pageData.page_content; 
-          this.formData.meta_title = response.data.meta_title;
-          this.formData.meta_description = response.data.meta_description;
+        this.formData.banner_title = response.data.pageData.banner_title;
+        this.formData.page_content = response.data.pageData.page_content;
+        this.formData.meta_title = response.data.meta_title;
+        this.formData.meta_description = response.data.meta_description;
+        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_img;
       }
     });
-     
   }
 }
