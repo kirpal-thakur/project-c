@@ -18,17 +18,16 @@
         </div>
 
         <div class="coustom-select1">
-            <select class="form-select custom-select1" aria-label="Language selector" (change)="ChangeLang($event)"
-                [ngClass]="{'hidden': isNavbarExpanded}">
-                <option [selected]="lang==='en'" value="en">EN</option>
-                <option [selected]="lang==='de'" value="de">DE</option>
-                <option [selected]="lang==='it'" value="it">IT</option>
-                <option [selected]="lang==='fr'" value="fr">FR</option>
-                <option [selected]="lang==='es'" value="es">ES</option>
-                <option [selected]="lang==='pt'" value="pt">PT</option>
-                <option [selected]="lang==='dk'" value="dk">DK</option>
-                <option [selected]="lang==='se'" value="se">SE</option>
-            </select>
+            <a class="form-select custom-select1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ slug | uppercase }}
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a href="#" *ngFor="let domain of langs" class="dropdown-item ai-icon"
+                 [class.selected]="slug === domain.slug" (click)="ChangeLang(domain.slug)">
+                <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+                <span style="text-transform: uppercase;">{{ domain.slug }}</span>
+              </a>
+            </div>
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -163,7 +162,7 @@
                 <div class="extra-nav d-flex align-items-center">
                     <div class="theme_btn d-flex align-items-center">
                         <span class="light-text">{{ 'mode' | translate }}</span>
-                        <span class="dark-text"> Dark mode</span>
+                        <span class="dark-text">{{ 'darkMode' | translate }}</span>
                         <div>
                             <label class="switch">
                                 <input type="checkbox" (change)="toggleTheme($event)" id="themeToggle"
@@ -174,41 +173,19 @@
                     </div>
 
                     <div class="coustom-select">
-                        <select class="form-select custom-select" aria-label="Language selector" (change)="ChangeLang($event)">
-                          <option *ngFor="let domain of langs" [selected]="lang === domain.slug" [value]="domain.slug">
-                            <img [src]="'https://api.socceryou.ch/uploads/logos/' + domain.flag" width="30"
-                                    height="24" class="me-2" />
-                            {{ domain.slug }}
-                          </option>
-                        </select>
+                        <a class="form-select custom-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{ slug | uppercase }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a href="#" *ngFor="let domain of langs" class="dropdown-item ai-icon"
+                             [class.selected]="slug === domain.slug" (click)="ChangeLang(domain.slug)">
+                            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+                            <span style="text-transform: uppercase;">{{ domain.slug }}</span>
+                          </a>
+                        </div>
                       </div>
                       
-                      
 
-                    <!-- <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-bs-toggle="dropdown" aria-expanded="true">
-                            {{ lang | translate }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li *ngFor="let domain of domains" class="dropdown-item1"
-                                [class.selected]="lang === domain.slug" (click)="ChangeLang(domain.slug)">
-                                <img [src]="'https://api.socceryou.ch/uploads/logos/' + domain.flag" width="30"
-                                    height="24" class="me-2" />
-                                {{ domain.slug | translate }}
-                            </li>
-                        </ul>
-                    </div> -->
-
-
-
-                    <!-- <div class="dropdown-menu dropdown-menu-end"> 
-                        <h6 class="mx-3 border-bottom pb-2 fs-15">Select Language</h6>
-                        <a href="#" *ngFor="let domain of domains" class="dropdown-item ai-icon " [class.selected]="lang===domain.slug" (click)="ChangeLang(domain.slug)">
-                          <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
-                          <span style="text-transform: uppercase;">{{ domain.slug | translate }}</span>
-                        </a>
-                    </div> -->
 
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
                         data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2" width="8"
@@ -243,29 +220,31 @@
                             <img class="light-images register-logo" src="./assets/images/light-logo-sy.png">
                             <img class="dark-images register-logo" src="./assets/images/dark-logo-sy.png">
                         </div>
-                        <h6>Welcome back to SoccerYou</h6>
-                        <p>Login to your account below</p>
+                        <h6>{{'welcomeBack' | translate}}</h6>
+                        <p>{{'loginMessage' | translate}}</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                <label for="exampleFormControlInput1" class="form-label">{{'emailLabel' |
+                                    translate}}</label>
                                 <input [(ngModel)]="email" type="email" class="form-control"
                                     placeholder="example@email.com" name="password" required />
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlInput2" class="form-label">Password</label>
+                                <label for="exampleFormControlInput2" class="form-label">{{'passwordLabel' |
+                                    translate}}</label>
                                 <input [(ngModel)]="password" type="password" class="form-control"
                                     id="exampleFormControlInput2" placeholder="**************" />
                                 <a href="#" class="forgot_btn" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">Forgot password?
+                                    data-bs-target="#exampleModal">{{'forgotPasswordLink' | translate}}
                                 </a>
                             </div>
                             <div *ngIf="loginButtonClicked && (!email || !password)" class="text-danger">
-                                Please fill in all required fields.
+                                {{'requiredFieldsMessage' | translate}}
                             </div>
                             <div *ngIf="invalidCred" class="text-danger" #invalidCredMessage>
-                                {{' invalidCred' | translate}}
+                                {{ invalidCred | translate}}
                             </div>
 
                             <!-------------------- modal-box-2 ----------------------->
@@ -276,7 +255,8 @@
                     </div>
                 </div>
                 <div class="modal-footer modal-btn border-0 d-block" style="text-align: center;">
-                    <a href="javascript:void(0)" (click)="login()" class="btn btn-primary d-block">Login</a>
+                    <a href="javascript:void(0)" (click)="login()" class="btn btn-primary d-block">{{'loginButton' |
+                        translate}}</a>
 
                     <!-- <div class="seperter">
                         <h6 class="mb-0 font-w400">or</h6>
@@ -290,8 +270,9 @@
                     </div> -->
 
                     <div>
-                        <span class="mt-3 dont-account">Don’t have account?
-                            <a class="register" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal1">Register
+                        <span class="mt-3 dont-account">{{'dontHaveAccount' | translate}}
+                            <a class="register" href="#" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal1">{{'register' | translate}}
                             </a>
                         </span>
                     </div>
@@ -318,27 +299,30 @@
                         </div>
 
 
-                        <h6>Password Recovery</h6>
-                        <p>
-                            Fill in the email you’ve used to create SoccerYou account and we’ll send you a reset link.
-                        </p>
+                        <h6>{{ 'passwordRecovery' | translate }}</h6>
+                        <p>{{ 'passwordRecoveryDescription' | translate }}</p>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" [placeholder]="'example@email.com'" [(ngModel)]="forgotPasswordEmail" />
+                                <label for="exampleFormControlInput1" class="form-label">{{ 'emailLabel' | translate
+                                    }}</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    [placeholder]="'example@email.com'" [(ngModel)]="forgotPasswordEmail" />
+
                             </div>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="forgotPasswordMessage" class="alert alert-info text-center">
-                    {{forgotPasswordMessage}}
+                    <!-- {{forgotPasswordMessage}} -->
+                    {{ 'provideEmailAddress' | translate }}
                 </div>
                 <div class="modal-footer modal-btn border-0 justify-content-center">
-                    <button (click)="forgotPassword()" class="btn btn-primary d-block">Reset</button>
-                    <a class="register mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal-login">Back to
-                        Login</a>
+                    <button (click)="forgotPassword()" class="btn btn-primary d-block">{{ 'resetButton' | translate
+                        }}</button>
+                    <a class="register mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal-login">{{
+                        'backToLogin' | translate }}</a>
                 </div>
             </div>
         </div>
@@ -374,23 +358,24 @@
 
                     <div class="col-6">
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
+                            <label class="form-label">{{ 'passwordLabel' | translate }}</label>
                             <input type="password" class="form-control" placeholder="Password" name="password"
                                 required />
                             <div class="text-danger">
-                                Password
+                                {{ 'passwordLabel' | translate }}
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
-                            <label class="form-label">ConfirmPassword</label>
+                            <label class="form-label">{{ 'confirmPasswordLabel' | translate }}</label>
                             <input type="password" class="form-control" placeholder="ConfirmPassword"
                                 name="confirmPassword" required />
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn btn-success btn-sm web-create-bg" style="width: 300px;">Save</button>
+                        <button class="btn btn-success btn-sm web-create-bg" style="width: 300px;">{{ 'save' | translate
+                            }}</button>
                     </div>
                 </div>
 
@@ -416,48 +401,48 @@
                             <img class="light-images register-logo" src="./assets/images/light-logo-sy.png">
                             <img class="dark-images register-logo" src="./assets/images/dark-logo-sy.png">
                         </div>
-                        <h6>{{ 'loginTranslate.createAccount' | translate }}</h6>
-                        <p>{{ 'loginTranslate.enterYourDetails' | translate }}</p>
+                        <h6>{{ 'createAccount' | translate }}</h6>
+                        <p>{{ 'createAccountDescription' | translate }}</p>
                     </div>
                     <form (submit)="register()" #registerForm="ngForm">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.fistName' | translate }}</label>
+                                    <label class="form-label">{{ 'firstNameLabel' | translate }}</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ 'loginTranslate.fistName' | translate }}"
-                                        [(ngModel)]="firstName" name="firstName" required />
+                                        placeholder="{{ 'firstNameLabel' | translate }}" [(ngModel)]="firstName"
+                                        name="firstName" required />
                                     <div *ngIf="registerForm.controls['firstName']?.errors?.['required'] && (registerForm.controls['firstName']?.dirty || registerForm.controls['firstName']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.firstNameRequired' | translate }}
+                                        {{ 'firstNameRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.lastName' | translate }}</label>
+                                    <label class="form-label">{{ 'lastNameLabel' | translate }}</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ 'loginTranslate.lastName' | translate }}" [(ngModel)]="lastName"
+                                        placeholder="{{ 'lastNameLabel' | translate }}" [(ngModel)]="lastName"
                                         name="lastName" required />
                                     <div *ngIf="registerForm.controls['lastName']?.errors?.['required'] && (registerForm.controls['lastName']?.dirty || registerForm.controls['lastName']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.lastNameRequired' | translate }}
+                                        {{ 'lastNameRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.userName' | translate }}</label>
+                                    <label class="form-label">{{ 'usernameLabel' | translate }}</label>
                                     <input type="text" class="form-control"
-                                        placeholder="{{ 'loginTranslate.userName' | translate }}" [(ngModel)]="username"
+                                        placeholder="{{ 'usernameLabel' | translate }}" [(ngModel)]="username"
                                         name="username" required />
                                     <div *ngIf="registerForm.controls['username']?.errors?.['required'] && (registerForm.controls['username']?.dirty || registerForm.controls['username']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.usernameRequired' | translate }}
+                                        {{ 'usernameRequired' | translate }}
                                     </div>
                                     <div *ngIf="registerForm.controls['username']?.errors?.['usernameExists'] && (registerForm.controls['username']?.dirty || registerForm.controls['username']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.existUser' | translate }}
+                                        {{ 'usernameExists' | translate }}
                                     </div>
                                 </div>
                             </div>
@@ -468,7 +453,7 @@
                                         <input class="form-check-input" type="radio" value="4" [(ngModel)]="role"
                                             name="role" id="ManualInput" required />
                                         <div class="form-check-label">
-                                            <span class="font-w400">{{ 'loginTranslate.player' | translate }}</span>
+                                            <span class="font-w400">{{ 'playerRole' | translate }}</span>
                                             <i *ngIf="activeIndex === 1"
                                                 class="bi bi-check-circle-fill text-success"></i>
                                             <i *ngIf="activeIndex !== 1" class="bi bi-circle text-muted"></i>
@@ -484,7 +469,7 @@
                                         <input class="form-check-input" type="radio" value="2" [(ngModel)]="role"
                                             name="role" id="AutomaticInput" required />
                                         <div class="form-check-label">
-                                            <span class="font-w400">{{ 'loginTranslate.club' | translate }}</span>
+                                            <span class="font-w400">{{ 'clubRole' | translate }}</span>
                                             <i *ngIf="activeIndex === 2"
                                                 class="bi bi-check-circle-fill text-success"></i>
                                             <i *ngIf="activeIndex !== 2" class="bi bi-circle text-muted"></i>
@@ -500,7 +485,7 @@
                                         <input class="form-check-input" type="radio" value="3" [(ngModel)]="role"
                                             name="role" id="scoutRole" required />
                                         <div class="form-check-label">
-                                            <span class="font-w400">{{ 'loginTranslate.scout' | translate }}</span>
+                                            <span class="font-w400">{{ 'scoutRole' | translate }}</span>
                                             <i *ngIf="activeIndex === 3"
                                                 class="bi bi-check-circle-fill text-success"></i>
                                             <i *ngIf="activeIndex !== 3" class="bi bi-circle text-muted"></i>
@@ -512,10 +497,10 @@
 
                             <div *ngIf="activeIndex === 1" class="content-box">
                                 <div class="row">
-                                    <label class="form-label">{{ 'loginTranslate.club' | translate }}</label>
+                                    <label class="form-label">{{ 'clubDetails' | translate }}</label>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onCountryChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate
+                                            <option value="" disabled selected>{{ 'country' | translate
                                                 }}</option>
                                             <option *ngFor="let country of countries" [value]="country.code">{{
                                                 country.name }}</option>
@@ -523,7 +508,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onClubChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}
+                                            <option value="" disabled selected>{{ 'clubRole' | translate }}
                                             </option>
                                             <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}
                                             </option>
@@ -533,11 +518,11 @@
                             </div>
 
                             <div *ngIf="activeIndex === 2" class="content-box">
-                                <label class="form-label">{{ 'loginTranslate.club' | translate }}</label>
+                                <label class="form-label">{{ 'clubDetails' | translate }}</label>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onCountryChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.country' | translate
+                                            <option value="" disabled selected>{{ 'country' | translate
                                                 }}</option>
                                             <option *ngFor="let country of countries" [value]="country.code">{{
                                                 country.name }}</option>
@@ -545,7 +530,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
                                         <select class="form-select" (change)="onClubChange($event)">
-                                            <option value="" disabled selected>{{ 'loginTranslate.club' | translate }}
+                                            <option value="" disabled selected>{{ 'clubRole' | translate }}
                                             </option>
                                             <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}
                                             </option>
@@ -556,7 +541,7 @@
 
                             <div *ngIf="activeIndex === 3" class="content-box">
                                 <div class="form-group">
-                                    <label class="c-name" for="companyName">{{ 'loginTranslate.companyName' | translate
+                                    <label class="c-name" for="companyName">{{ 'companyName' | translate
                                         }}</label>
                                     <input type="text" id="companyName" class="form-control" [(ngModel)]="companyName"
                                         (input)="onCompanyNameChange($event)" placeholder="Enter your company name"
@@ -567,30 +552,30 @@
 
                             <div *ngIf="registerForm.controls['role']?.errors?.['required'] && (registerForm.controls['role']?.dirty || registerForm.controls['role']?.touched)"
                                 class="text-danger">
-                                {{ 'loginTranslate.moreInformation' | translate }}
+                                {{ 'moreInformation' | translate }}
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.email' | translate }}</label>
+                                    <label class="form-label">{{ 'Email' | translate }}</label>
                                     <input type="email" class="form-control"
-                                        placeholder="{{ 'loginTranslate.example' | translate }}" [(ngModel)]="email"
+                                        placeholder="{{ 'example@email.com' | translate }}" [(ngModel)]="email"
                                         name="email" required />
                                     <div *ngIf="registerForm.controls['email']?.errors?.['required'] && (registerForm.controls['email']?.dirty || registerForm.controls['email']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.emailRequired' | translate }}
+                                        {{ 'emailRequiredError' | translate }}
                                     </div>
                                     <div *ngIf="registerForm.controls['email']?.errors?.['emailExists'] && (registerForm.controls['email']?.dirty || registerForm.controls['email']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.emailtryAgain' | translate }}
+                                        {{ 'emailTakenError' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="display: none;">
                                 <div class="mb-3">
-                                    <label class="form-label">Language</label>
+                                    <label class="form-label">{{ 'language' | translate }}</label>
                                     <select class="form-select form-control" [(ngModel)]="language" name="language"
                                         required>
-                                        <option value="" disabled selected>Select a language</option>
+                                        <option value="" disabled selected>{{ 'selectLanguage' | translate }}</option>
                                         <option value="1">English</option>
                                         <option value="2">German</option>
                                         <option value="3">Italian</option>
@@ -602,16 +587,16 @@
                                     </select>
                                     <div *ngIf="registerForm.controls['language']?.errors?.['required'] && (registerForm.controls['language']?.dirty || registerForm.controls['language']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.languageRequired' | translate }}
+                                        {{ 'languageRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6" style="display: none;">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.userDomain' | translate }}</label>
+                                    <label class="form-label">{{ 'userDomain' | translate }}</label>
                                     <select class="form-select form-control" [(ngModel)]="userDomain" name="userDomain"
                                         required>
-                                        <option value="" disabled selected>{{ 'loginTranslate.selectDomain' | translate
+                                        <option value="" disabled selected>{{ 'selectDomain' | translate
                                             }}</option>
                                         <option value="1">socceryou.ch</option>
                                         <option value="2">socceryou.de</option>
@@ -626,25 +611,25 @@
                                     </select>
                                     <div *ngIf="registerForm.controls['userDomain']?.errors?.['required'] && (registerForm.controls['userDomain']?.dirty || registerForm.controls['userDomain']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.domainRequired' | translate }}
+                                        {{ 'domainRequired' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label class="form-label">{{ 'loginTranslate.password' | translate }}</label>
+                                    <label class="form-label">{{ 'passwordLabel' | translate }}</label>
                                     <input type="password" class="form-control"
                                         placeholder="{{ 'passwordPlaceholder' | translate }}" [(ngModel)]="password"
                                         name="password" required />
                                     <div *ngIf="registerForm.controls['password']?.errors?.['required'] && (registerForm.controls['password']?.dirty || registerForm.controls['password']?.touched)"
                                         class="text-danger">
-                                        {{ 'loginTranslate.passwordRequired' | translate }}
+                                        {{ 'passwordRequiredError' | translate }}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label class="form-label" for="confirmPassword">{{ 'loginTranslate.confirmPassword'
+                                    <label class="form-label" for="confirmPassword">{{ 'confirmPasswordLabel'
                                         |
                                         translate }}</label>
                                     <input type="password" id="confirmPassword" class="form-control"
@@ -654,10 +639,10 @@
                                     <div *ngIf="confirmPasswordControl.invalid && (confirmPasswordControl.dirty || confirmPasswordControl.touched)"
                                         class="text-danger">
                                         <ng-container *ngIf="confirmPasswordControl.errors?.['required']">
-                                            {{ 'loginTranslate.passwordRequired' | translate }}
+                                            {{ 'passwordRequiredError' | translate }}
                                         </ng-container>
                                         <ng-container *ngIf="password !== confirmPassword">
-                                            {{ 'loginTranslate.passwordNotMAtch' | translate }}
+                                            {{ confirmPasswordError' | translate }}
                                         </ng-container>
                                     </div>
                                 </div>
@@ -683,7 +668,7 @@
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                         [(ngModel)]="privacyPolicy" name="privacyPolicy" required />
                                     <label class="form-check-label fs-14 font-w400 text-light" for="flexCheckDefault">
-                                        {{ 'loginTranslate.moreInformation' | translate }}
+                                        {{ 'privacyPolicyLabel' | translate }}
                                     </label>
                                     <div *ngIf="registerForm.controls['privacyPolicy']?.errors?.['required'] && (registerForm.controls['privacyPolicy']?.dirty || registerForm.controls['privacyPolicy']?.touched)"
                                         class="text-danger">
@@ -696,18 +681,18 @@
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-1"
                                         [(ngModel)]="newsletter" name="newsletter" />
                                     <label class="form-check-label fs-14 font-w400 text-light" for="flexCheckDefault-1">
-                                        {{ 'loginTranslate.subscribeToNewsletter' | translate }}
+                                        {{ 'newsletterLabel' | translate }}
                                     </label>
                                 </div>
                             </div>
                             <div class="modal-footer1 modal-btn border-0 justify-content-center">
-                                <button type="submit" class="create-account d-block">{{ 'loginTranslate.createAccount' |
+                                <button type="submit" class="create-account d-block">{{ 'createAccount' |
                                     translate
                                     }}</button>
                                 <span class="mt-3 dont-account">
-                                    {{ 'loginTranslate.alreadyHaveAnAccount' | translate }}
+                                    {{ 'alreadyHaveAccount' | translate }}
                                     <a class="register" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal-login">{{ 'loginTranslate.logIn' | translate
+                                        data-bs-target="#exampleModal-login">{{ 'loginButton' | translate
                                         }}</a>
                                 </span>
                             </div>

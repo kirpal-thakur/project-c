@@ -127,12 +127,15 @@
 .light-theme .website-code h2.coming-heading {
   color: #E05263;
 }
-.light-theme .website-code .multi-country{
+
+.light-theme .website-code .multi-country {
   background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
 }
-.light-theme .website-code .booster{
+
+.light-theme .website-code .booster {
   background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
 }
+
 .light-theme form button {
   background: #e05263;
   color: white;
@@ -612,7 +615,7 @@
 
 .light-theme .website-code .premium {
   background: radial-gradient(circle at 25% 0%, transparent, #2B4A25);
-  
+
 
 }
 
@@ -632,7 +635,14 @@ body {
 }
 
 .light-theme .website-code .toggle-button.active {
-  background-color: #498D39;
+  background-color: #E05263;
+}
+
+.light-theme .website-code a.dropdown-item.ai-icon.selected {
+  background-color: #E05263 !important;
+  /* Set the background color to pink */
+  color: white;
+  /* Optional: Change the text color to white for better contrast */
 }
 
 .light-theme .website-code .dark-feature1 {
@@ -816,10 +826,9 @@ body {
 }
 
 .light-theme .website-code .join-text {
-  background: linear-gradient(
-    to top,
-    #236115 10%,
-    #6FB95D 100%);
+  background: linear-gradient(to top,
+      #236115 10%,
+      #6FB95D 100%);
 }
 
 .light-theme .website-code .join-text p {
@@ -2042,43 +2051,80 @@ a {
 // ------------------------- users end ------------------
 
 // ------------------------- respone------------------
-@media (min-width: 1200px){
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1070px;
+@media (min-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1040px;
   }
 }
+
 @media (min-width: 1280px) {
-  .skyscraper-image img, .skyscraper-left img, .skyscraper-right img {
+
+  .skyscraper-image img,
+  .skyscraper-left img,
+  .skyscraper-right img {
     height: 580px !important;
     width: 105px !important;
   }
 
-  .skyscraper-image, .skyscraper-left, .skyscraper-right {
+  .inline-rectangle {
+    left: 54% !important;
+
+  }
+
+  .skyscraper-image,
+  .skyscraper-left,
+  .skyscraper-right {
     height: 580px !important;
     width: 105px !important;
   }
 }
+
 @media (min-width: 1440px) {
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1220px;
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1200px;
   }
 }
+
 @media (min-width: 1536px) {
-  .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1320px;
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1280px;
   }
 }
-@media (min-width: 2560px){
-  .skyscraper-image img, .skyscraper-left img, .skyscraper-right img {
+
+@media (min-width: 2560px) {
+
+  .skyscraper-image img,
+  .skyscraper-left img,
+  .skyscraper-right img {
     height: 580px !important;
     width: 105px !important;
   }
 
-  .skyscraper-image, .skyscraper-left, .skyscraper-right {
+  .skyscraper-image,
+  .skyscraper-left,
+  .skyscraper-right {
     height: 580px !important;
     width: 105px !important;
   }
 }
+
+
+
 
 
 @media (max-width: 1199px) {
@@ -2113,8 +2159,8 @@ a {
   .advertisement,
   .advertisement1,
   .skyscraper-left img,
-  .skyscraper-right img, .advertisment 
-    {
+  .skyscraper-right img,
+  .advertisment {
     display: none;
   }
 
@@ -2152,6 +2198,33 @@ a {
     left: 54.5% !important;
   }
 }
+@media (max-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm {
+    max-width: 1030px;
+  }
+
+  .skyscraper-image,
+  .wide-skyscraper-image,
+  .leaderboard-image,
+  .leaderboard-club-image,
+  .small-sqaure-image,
+  .banner-image,
+  .dark-theme .website-code .advertisement, .dark-theme .website-code .py_1,
+  .advertisment,
+  .advertisement1,
+  .skyscraper-left,
+  .skyscraper-right,
+  .adv,
+  .advertisement
+ {
+   display: none;
+}
+}
+
 
 @media (max-width: 991px) {
   .mdc-list-item.mdc-list-item--with-one-line {

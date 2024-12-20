@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { WebPages } from '../../../services/webpages.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -14,8 +15,13 @@ export class ContactComponent implements OnInit {
   adVisible: boolean[] = [true, true, true, true]; // Array to manage ad visibility
   captchaResolved = false; // Track if captcha is resolved
   recaptchaToken: string | null = null; // Captcha token for backend validation
-
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  responseMessage: string = '';
+  messageType: string = '';  
+  constructor(private route: ActivatedRoute, 
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
     // Initialize form with validation rules
@@ -24,6 +30,8 @@ export class ContactComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]], // Adjust pattern as needed
       message: ['', Validators.required],
+      domain : window.location.hostname,
+      lang : localStorage.getItem('lang'),
     });
   }
 
@@ -58,14 +66,16 @@ export class ContactComponent implements OnInit {
   }
 
   // Handle form submission
-  onSubmit(): void {
+  onSubmit(): void {  
+    // return false;
     if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
       const formData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
-
+      const result = {};
       // Send the form data and captcha token to the server
       this.http.post('/api/verify-captcha', formData).subscribe(
-        (response) => {
-          console.log('Form submitted successfully:', response);
+        (response) => { 
+
+          // console.log('Form submitted successfully:', result);
         },
         (error) => {
           console.error('Error submitting form:', error);
@@ -79,10 +89,37 @@ export class ContactComponent implements OnInit {
         console.error('Form is invalid:', this.contactForm.errors);
       }
     }
+    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
+    
+    this.http.post<any>('https://api.socceryou.ch/frontend/save-contact-form', ContactformData).subscribe(
+      (response) => {
+        // console.log('Form submitted successfully:', response);
+        if(response.message != '' && response.data.redirect_url != ''){
+          this.setResponseMessage(response.message, response.data.class);
+          this.router.navigate(['/'+response.data.redirect_url]);
+        }else{
+          alert('something went wrong');
+        }
+      },
+      (error) => {
+        console.error('Error submitting form:', error);
+      }
+    );
   }
-
   // Close specific ad
   closeAd(index: number): void {
     this.adVisible[index] = false; // Hide the ad at the given index
   }
+
+  setResponseMessage(message: string, type: string): void {
+    this.responseMessage = message;
+    this.messageType = type;
+
+    // Clear message after 3 seconds (optional)
+    setTimeout(() => {
+      this.responseMessage = '';
+      this.messageType = '';
+    }, 10000);
+  }
+
 }

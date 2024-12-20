@@ -39,12 +39,12 @@ P {
 }
 
 .banner-left {
-        position: relative;
-        top: 120%;
-        left: 0;
-        z-index: 2;
-        margin-right: 22%;
-    
+    position: relative;
+    top: 120%;
+    left: 0;
+    z-index: 2;
+    margin-right: 22%;
+
 }
 
 .banner-heading {
@@ -770,10 +770,9 @@ img.birthday-img {
 }
 
 .club_text {
-    padding: 60px;
-    // background: radial-gradient(circle at 100% 0%, #2B4A25, transparent);
+    padding: 25px 50px 25px 30px;
     border-radius: 10px;
-    height: 250px;
+    height: 200px;
     margin-top: 100px;
 }
 
@@ -793,6 +792,10 @@ img.birthday-img {
 --------------------------------------------------------------*/
 .features {
     overflow: hidden;
+}
+
+.features1 {
+    display: none;
 }
 
 .accordion-banner {
@@ -1203,7 +1206,7 @@ img.dark-feature4 {
     position: absolute;
     z-index: 1;
     top: 4%;
-    right: 100px;
+    right: 40px;
 }
 
 .button4 .mat-icon {
@@ -1342,12 +1345,14 @@ img.dark-feature4 {
 
 .premium {
     width: 100%;
-    min-height: 338px; /* Ensures it starts with a base size */
+    min-height: 338px;
+    /* Ensures it starts with a base size */
     border-radius: 10px;
     padding: 50px 20px 90px 40px;
     position: relative;
     box-sizing: border-box;
 }
+
 img.bg-image {
     position: absolute;
     content: "";
@@ -1577,7 +1582,7 @@ span {
     top: 16%;
     z-index: 2;
     content: "";
-    left: 0;
+    left: 1%;
     height: 600px;
     width: 120px;
 }
@@ -1621,6 +1626,24 @@ span {
 #  adv
 --------------------------------------------------------------*/
 
+@media (min-width: 1440px) {
+    .club-offers2 img {
+        right: 0;
+        top: 16%;
+        width: 280px;
+        height: 275px;
+    }
+
+    .club-offers1 img {
+        right: 51%;
+        height: 245px;
+        width: 285px;
+    }
+
+    .accodian-image2 img {
+        left: 7%;
+    }
+}
 
 @media (min-width: 1441px) {
     .player-img img {
@@ -1909,9 +1932,9 @@ span {
         right: 7%;
     }
 
-    .button1 {
-        right: 30%;
-    }
+    // .button1 {
+    //     right: 30%;
+    // }
 
     .button4 .mat-icon {
         height: 19px;
@@ -2008,11 +2031,6 @@ span {
 
     .feature-player1 {
         right: 23%;
-    }
-
-    .button1 {
-        right: 67%;
-        right: 68%;
     }
 
 }
@@ -2582,11 +2600,12 @@ span {
 
 @media (max-width: 1281px) {
     .club_text {
-        padding: 30px;
+        padding: 20px;
         border-radius: 10px;
-        height: 220px;
+        height: 185px;
         margin-top: 100px;
     }
+
 
 
 
@@ -2823,7 +2842,121 @@ span {
     }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1200px) {
+    .player-img img {
+        height: 200px;
+        width: 192px;
+    }
+
+    .player1 {
+        height: 210px;
+        width: 200px;
+    }
+
+    .player-name7,
+    .player-name1,
+    .player-name2,
+    .player-name,
+    .player-name3,
+    .player-name7,
+    .player-name8,
+    .player-name9,
+    .player-col-2 .player-name,
+    .player-col-2 .player-name1 {
+        width: 192px;
+    }
+    .player10 {
+        height: 210px;
+        width: 105px;
+    }
+    .player10 .player-img img {
+        height: 200px;
+        width: 100px;
+    }
+    .player-name10, .player-name11 {
+        width: 100px;
+        padding-left: 80px;
+    }
+    .banner-left {
+        margin-right: 10%;
+    }
+    .player3 {
+        height: 125px;
+        width: 200px;
+    }
+    .player-img3 img {
+        width: 192px;
+        border-radius: 5px 5px 0px 0px;
+    }
+    .player2 {
+        height: 200px;
+        width: 200px;
+    }
+    .banner .player2 .player-img img {
+        height: 192px;
+        width: 192px;
+    }
+    .player-member2{
+        top: 49%;
+        right: 46%;
+    }
+    .player-member3{
+        top: 72%;
+        right: 46%;
+    }
+    .player-member4{
+        top: 18%;
+        right: 28%;
+    }
+    .player-member5{
+        top: 41%;
+        right: 28%;
+    }
+    .player-member6{
+        top: 64%;
+        right: 28%;
+    }
+    .player-member8{
+        top: 42%;
+        right: 10%;
+    }
+    .player-member9{
+        top: 65%;
+        right: 10%;
+    }
+    .player-member12{
+        top: 49%;
+    }
+    .button4 {
+        right: 25px;
+        top: 8%;
+    }
+    .button1 {
+        top: 81%;
+    }
+    .feature-player2{
+        right: 174px;
+    }
+    .club-offers3 img {
+        bottom: 10%;
+        width: 440px;
+        height: 300px;
+    }
+    .accodian-image2 img {
+        width: 240px;
+        height: 200px;
+    }
+    .accodian-image3 img {
+        height: 165px;
+        width: 195px;
+    }
+    .networking-images1 img {
+        left: 7%;
+    }
+
+}
+
+@media (max-width: 1024px) {
     .banner {
         height: 820px;
     }
@@ -3073,12 +3206,12 @@ span {
     }
 
     .club-text1 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .club_text {
-        padding: 33px;
-        height: 200px;
+        padding: 19px;
+        height: 180px;
     }
 
     h2.accordion-header {
@@ -3308,6 +3441,10 @@ span {
 
 @media (max-width: 991px) {
 
+    .accordion-collapse {
+        transition: height 0.5s ease-in-out;
+    }
+
     .leaderboard-club-image img,
     .small-sqaure-image img,
     .skyscraper-image img,
@@ -3343,9 +3480,11 @@ span {
     .banner {
         height: 950px;
     }
+
     .banner-left {
         top: 80%;
     }
+
     span {
         font-size: 13px;
     }
@@ -3406,26 +3545,6 @@ span {
         right: 5%;
     }
 
-    // .button1 {
-    //     top: 90%;
-    //     left: 5%;
-    // }
-
-    // .button3 {
-    //     top: 77%;
-    //     right: 133px;
-    // }
-
-    // .button2 {
-    //     top: 94%;
-    //     right: 28%;
-    // }
-
-    // .button4 {
-    //     top: 46%;
-    //     right: 26%;
-    // }
-
     .club_text {
         margin-top: 30px;
     }
@@ -3434,15 +3553,6 @@ span {
         width: 100%;
     }
 
-    // .premium-col-right {
-    //     padding-top: 30px;
-    //     padding-right: 30px;
-    // }
-
-    // .premium-img {
-    //     padding-top: 30px;
-    //     padding-left: 30px;
-    // }
     .premium {
         padding: 30px 20px 40px 20px;
     }
@@ -3698,6 +3808,40 @@ span {
         height: 980px;
     }
 
+    .feature-players .player-img img {
+        height: 197px;
+        width: 220px;
+    }
+
+    .feature-player1 .player1,
+    .feature-player2 .player2,
+    .feature-player3 .player3 {
+        height: 228px;
+        width: 228px;
+    }
+
+    .features {
+        display: none;
+    }
+
+    // features1
+
+    .features1 {
+        display: block;
+    }
+
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 500px;
+        position: relative;
+    }
+
+    .feature-players {
+        margin-left: 0;
+    }
+
     .club-offers1 img {
         width: 288px;
         height: 235px;
@@ -3727,14 +3871,14 @@ span {
     }
 
     .accodian-image2 img {
-        top: 52%;
+        top: 54%;
         height: 180px;
         width: 220px;
         left: 8%;
     }
 
     .accodian-image3 img {
-        top: 51.5%;
+        top: 53%;
         right: 14%;
         width: 210px;
         height: 170px;
@@ -3757,13 +3901,13 @@ span {
     .networking-images3 img {
         height: 68px;
         width: 207px;
-        top: 65%;
+        top: 68%;
         left: 5%;
     }
 
     .feature-player1 {
         top: 4%;
-        left: 9%;
+        left: 6%;
         height: 228px;
         width: 228px;
     }
@@ -3776,8 +3920,8 @@ span {
     }
 
     .feature-player3 {
-        top: 11%;
-        right: 9%;
+        top: 13%;
+        right: 8%;
         height: 228px;
         width: 228px;
     }
@@ -3790,236 +3934,21 @@ span {
     }
 
     .button2 {
-        top: 86%;
+        top: 89%;
         right: 20%;
     }
 
     .button3 {
-        top: 60%;
+        top: 62%;
         right: 80px;
     }
 
     .button4 {
-        top: 3%;
+        top: 5%;
         right: 23%;
     }
 
-    .feature-players .player-img img {
-        height: 197px;
-        width: 220px;
-    }
-
-    .feature-player1 .player1,
-    .feature-player2 .player2,
-    .feature-player3 .player3 {
-        height: 228px;
-        width: 228px;
-    }
-
 }
-
-// @media (max-width: 885px) {
-//     .club-offers3 img {
-//         width: 380px;
-//         height: 280px;
-//         right: 32%;
-//         bottom: 6%;
-//     }
-
-//     .club-offers1 img {
-//         width: 300px;
-//         height: 240px;
-//         top: 53%;
-//         right: 49%;
-//     }
-
-//     .club-offers2 img {
-//         height: 265px;
-//         width: 290px;
-//         right: 13%;
-//         top: 60%;
-//     }
-
-//     .accodian-image1 img {
-//         top: 45%;
-//         right: 25%;
-//         height: 320px;
-//         width: 400px;
-//     }
-
-//     .accodian-image3 img {
-//         top: 61.5%;
-//         right: 15%;
-//         width: 225px;
-//         height: 180px;
-//     }
-
-//     .accodian-image2 img {
-//         right: 50%;
-//         top: 62%;
-//         height: 190px;
-//         width: 230px;
-//     }
-
-//     .networking-images1 img {
-//         height: 450px;
-//         width: 350px;
-//     }
-
-//     .networking-images2 img {
-//         width: 200px;
-//         height: 70px;
-//     }
-
-//     .networking-images3 img {
-//         height: 70px;
-//         width: 200px;
-//     }
-
-//     .networking-images3 {
-//         top: 77%;
-//         left: 17%;
-//     }
-
-//     .networking-images2 {
-//         top: 56%;
-//         left: 58%;
-//     }
-
-//     .feature-players .player-img img {
-//         height: 230px;
-//         width: 230px;
-//     }
-
-//     .feature-player1 .player1,
-//     .feature-player2 .player2,
-//     .feature-player3 .player3 {
-//         height: 239px;
-//         width: 239px;
-//     }
-
-//     .feature-player1,
-//     .feature-player2,
-//     .feature-player3 {
-//         height: 238px;
-//         width: 238px;
-//     }
-
-//     .feature-player3 .player-name3 {
-//         bottom: 4px;
-//         width: 230px;
-//     }
-
-//     .feature-player2 .player-name2 {
-//         top: 204px;
-//         width: 230px;
-//     }
-
-//     .feature-player1 .player-name1 {
-//         top: 204px;
-//         width: 230px;
-//     }
-
-//     .feature-player1 {
-//         top: 46%;
-//         right: 57%;
-//     }
-
-//     .feature-player2 {
-//         top: 64%;
-//         right: 41%;
-//     }
-
-//     .feature-player3 {
-//         top: 51%;
-//         right: 17%;
-//     }
-
-//     .button1 {
-//         top: 70%;
-//         left: 16%;
-//     }
-
-//     .button2 {
-//         left: 50%;
-//         top: 90%;
-//     }
-
-//     .feature-player3 .player-img::after,
-//     .feature-player2 .player2 .player-img::after,
-//     .feature-player1 .player-img::after {
-//         bottom: 28px;
-//     }
-
-//     .feature-player3 .flag-image7,
-//     .feature-player2 .flag-image4,
-//     .feature-player1 .flag-image {
-//         top: 120px;
-//     }
-
-
-// }
-
-// @media (max-width: 835px) {
-
-//     .banner-image1 img,
-//     .banner-image2 img {
-//         right: 34%;
-//     }
-
-//     .club-offers2 img {
-//         right: 12%;
-//     }
-
-//     .networking-images2 {
-//         right: 20%;
-//     }
-
-//     .feature-player2 {
-//         right: 40%;
-//     }
-
-//     .feature-player3 {
-//         right: 15%;
-//     }
-// }
-
-// @media (max-width: 800px) {
-//     .banner-image1 img {
-//         right: 35%;
-//     }
-
-//     .banner-image2 img {
-//         right: 35%;
-//     }
-
-//     .club-offers2 img {
-//         right: 11%;
-//         top: 60%;
-//     }
-
-//     .club-offers1 img {
-//         top: 53%;
-//         right: 50%;
-//     }
-
-//     .networking-images2 {
-//         top: 56%;
-//         left: 61%;
-//     }
-
-//     .networking-images3 {
-//         left: 13%;
-//     }
-
-//     .feature-player2 {
-//         right: 39%;
-//     }
-
-//     .feature-player3 {
-//         right: 12%;
-//     }
-// }
 
 @media (max-width: 767px) {
     .banner {
@@ -4257,16 +4186,18 @@ span {
         right: 76%;
         top: 71%;
     }
+
     img.bg-image {
         height: 100%;
         width: 100%;
     }
+
     .premium-img {
         width: 100%;
         height: 150px;
     }
-    
-    
+
+
 
     .player-member3 {
         top: 89%;
@@ -4644,24 +4575,24 @@ span {
     }
 
     .feature-player2 {
-        top: 31%;
+        top: 43%;
         width: 177px;
-        left: 105px;
+        right: 27%;
     }
 
     .feature-player1 {
         width: 166px;
         height: 222px;
         right: 60%;
-        top: 4%;
-        left: 0;
+        top: 7%;
+        left: -5%;
     }
 
     .feature-player3 {
         width: 158px;
         height: 220px;
-        right: 10px;
-        top: 9%;
+        right: -2%;
+        top: 18%;
     }
 
     .feature-players img.flag-img {
@@ -4795,25 +4726,25 @@ span {
     }
 
     .button1 {
-        top: 66%;
-        right: 61%;
+        top: 87%;
         left: 0;
+
     }
 
 
     .button2 {
-        top: 65%;
-        right: 6%;
+        top: 91%;
+        right: 3%;
     }
 
     .button3 {
-        top: 44%;
-        right: 0px;
+        top: 63%;
+        right: -5%;
     }
 
     .button4 {
-        top: 1%;
-        right: 4%;
+        top: 7%;
+        right: 1%;
     }
 
 
@@ -4834,18 +4765,6 @@ span {
         font-size: 25px;
     }
 
-    // .premium-col-right {
-    //     padding-top: 20px;
-    //     padding-right: 30px;
-    //     padding-bottom: 10px;
-    //     padding-left: 10px;
-    // }
-
-    // .premium-img {
-    //     padding-top: 10px;
-    //     padding-left: 10px;
-    //     height: 180px;
-    // }
 
     .player2 .player-img::after {
         width: 35px;
@@ -4855,10 +4774,11 @@ span {
 
     .club-offers3 img {
         right: 8%;
-        bottom: 29%;
+        bottom: 9%;
         width: 320px;
         height: 210px;
     }
+
     .premium {
         padding: 30px 20px 20px 10px;
     }
@@ -4872,21 +4792,28 @@ span {
 
     .accodian-image1 img {
         top: 9%;
-        right: 13%;
+        right: 12%;
         height: 230px;
         width: 300px;
     }
 
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 400px;
+    }
+
     .accodian-image2 img {
-        top: 35.8%;
+        top: 43.8%;
         height: 160px;
         width: 195px;
-        left: 0;
+        left: -5%;
     }
 
     .accodian-image3 img {
-        top: 36%;
-        right: 0;
+        top: 43%;
+        right: -5%;
         height: 125px;
         width: 155px;
     }
@@ -4900,17 +4827,18 @@ span {
     .networking-images3 img {
         height: 55px;
         width: 170px;
-        left: 0;
-        top: 51%;
+        left: -5%;
+        top: 64%;
     }
 
 
     .networking-images2 img {
         height: 55px;
         width: 180px;
-        right: 0;
-        top: 16%;
+        right: -5%;
+        top: 20%;
     }
+
 
 
 
@@ -4963,7 +4891,7 @@ span {
     }
 
     .feature-player3 {
-        right: 0;
+        right: -5%;
     }
 
     .feature-player3 .corner-image7 img {
@@ -4971,27 +4899,35 @@ span {
     }
 
     .feature-player2 {
-        top: 28%;
-        left: 96px;
+        top: 38%;
+        left: 84px;
+
     }
 
     .button1 {
-        right: 58%;
-        top: 59%;
+        top: 79%;
+        left: -2%;
+
     }
 
+    .button2 {
+        top: 89%;
+        right: 3%;
+    }
+
+    .button3 {
+        top: 60%;
+        right: -5%;
+    }
+
+    .feature-player3 .player-img::after,
     .feature-player1 .player-img::after {
-        bottom: 22px;
+        bottom: 23px;
     }
-
-    .feature-player3 .player-img::after {
-        bottom: 24px;
-    }
-
 
     .button4 {
-        top: 1%;
-        right: 1%;
+        top: 7%;
+        right: -5%;
     }
 
     .feature-player3 .flag-image7,
@@ -5000,31 +4936,21 @@ span {
         top: 64px;
     }
 
-    .club-offers1 img {
-        left: 2%;
-    }
-
-    .club-offers3 img {
-        right: 2%;
-    }
-
     .accodian-image2 img {
-        top: 35.8%;
+        top: 44%;
         height: 145px;
         width: 180px;
-        left: 0;
     }
 
     .accodian-image1 img {
         top: 9%;
-        right: 10%;
+        right: 7%;
         height: 228px;
         width: 290px;
     }
 
     .accodian-image3 img {
-        top: 36%;
-        right: 0;
+        top: 44%;
         height: 120px;
         width: 136px;
     }
@@ -5032,11 +4958,11 @@ span {
     .networking-images1 img {
         height: 330px;
         width: 265px;
-        left: 12%;
+        left: 8%;
     }
 
     .networking-images3 img {
-        top: 49%;
+        top: 62%;
     }
 }
 
@@ -5059,6 +4985,11 @@ span {
     .player-member2 {
         right: 75%;
         top: 72%;
+    }
+
+    .feature-player3 .player-img::after,
+    .feature-player1 .player-img::after {
+        bottom: 13px;
     }
 
     .player-member5 {
@@ -5236,17 +5167,17 @@ span {
     }
 
     .feature-player2 {
-        top: 27%;
+        top: 45%;
         width: 140px;
         height: 145px;
-        left: 91px;
+        left: 77px;
     }
 
     .feature-player3 {
         width: 140px;
         height: 145px;
-        right: 0;
-        top: 9%;
+        top: 21%;
+        right: -5%;
     }
 
     .feature-player3 .corner-image7 img {
@@ -5254,23 +5185,22 @@ span {
     }
 
     .button1 {
-        top: 33%;
-        right: 66%;
-        left: 0;
+        top: 56%;
+        left: -7%;
     }
 
     .button2 {
-        top: 57%;
-        right: 10%;
+        top: 90%;
+        right: 11%;
     }
 
     .button3 {
-        top: 40%;
-        right: 0px;
+        top: 65%;
+        right: -2%;
     }
 
     .button4 {
-        top: 3%;
+        top: 11%;
         right: 4%;
     }
 
@@ -5377,8 +5307,7 @@ span {
         width: 139px;
         height: 145px;
         right: 60%;
-        top: 4%;
-        left: 0;
+        top: 11%;
     }
 
     .button1 button {
@@ -5428,7 +5357,7 @@ span {
 
     .club-offers3 img {
         right: 3%;
-        bottom: 37%;
+        bottom: 4%;
         width: 300px;
         height: 200px;
     }
@@ -5449,23 +5378,23 @@ span {
 
     .accodian-image1 img {
         top: 8%;
-        left: 10%;
+        left: 4%;
         height: 207px;
         width: 280px;
     }
 
     .accodian-image3 img {
-        top: 32%;
-        right: 0;
+        top: 44%;
+        // right: 0;
         height: 100px;
         width: 132px;
     }
 
     .accodian-image2 img {
-        top: 32%;
+        top: 44%;
         height: 130px;
         width: 169px;
-        left: 0;
+        // left: 0;
     }
 
     .networking-images1 img {
@@ -5476,19 +5405,27 @@ span {
     .networking-images3 img {
         height: 50px;
         width: 150px;
-        top: 45%;
+        top: 64%;
     }
 
     .networking-images2 img {
         height: 45px;
         width: 145px;
-        top: 14%;
+        top: 20%;
     }
 
     .networking-images2 {
         top: 84%;
         left: 3%;
     }
+
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 350px;
+    }
+
 }
 
 @media (max-width: 321px) {
@@ -5657,15 +5594,14 @@ span {
     .feature-player3 {
         width: 110px;
         height: 127px;
-        top: 13%;
-        right: 12px;
+        top: 18%;
     }
 
     .feature-player2 {
         width: 119px;
         height: 127px;
         left: 25%;
-        top: 27%;
+        top: 37%;
 
     }
 
@@ -5684,24 +5620,24 @@ span {
     // }
 
     .button1 {
-        top: 53%;
-        right: 60%;
+        top: 75%;
         left: 0;
     }
 
     .button4 {
-        top: 6%;
-        right: 2%;
+        top: 8%;
+        right: -7%;
     }
 
     .button3 {
-        top: 39%;
-        right: 7px;
+        top: 56%;
+        right: -7%;
     }
 
     .button2 {
-        top: 59%;
-        right: 13%;
+        top: 85%;
+        right: 3%;
+
     }
 
     .player-img::after {
@@ -5769,15 +5705,13 @@ span {
     }
 
     .club-offers3 img {
-        right: 0;
-        bottom: 44%;
+        bottom: 18%;
         width: 260px;
         height: 165px;
 
     }
 
     .club-offers2 img {
-        right: 2%;
         top: 7%;
         width: 140px;
         height: 130px;
@@ -5793,35 +5727,41 @@ span {
     .accodian-image1 img {
         height: 180px;
         width: 220px;
+        top: 14%;
     }
 
     .accodian-image3 img {
         height: 94px;
         width: 122px;
-        top: 29%;
+        top: 45%;
     }
 
     .accodian-image2 img {
         height: 115px;
         width: 135px;
-        top: 29%;
+        top: 45%;
     }
 
     .networking-images1 img {
         height: 280px;
         width: 230px;
-        left: 10%;
+        left: 6%;
+        top: 11%;
+
     }
 
     .networking-images3 img {
         height: 45px;
         width: 125px;
-        top: 42%;
+        top: 66%;
+        left: -7%;
     }
 
     .networking-images2 img {
         height: 45px;
         width: 125px;
+        right: -7%;
+        top: 24%;
     }
 
 
