@@ -1,11 +1,11 @@
 <section class="website-code">
 <app-header></app-header>
-<div class="main">
+<div class="main" style="background-image: url('{{base_url+banner_img}}');">
   <div class="overlay"></div>
   <div class="banner-inner py_0">
     <div class="container">
       <div class="about">
-        <h2 class="cookie-text">Cookie Policy</h2>
+        <h2 class="cookie-text">{{banner_title}}</h2>
       </div>
     </div>
   </div>
@@ -22,9 +22,9 @@
 </div>
 
   <div class="cookie-policy">
-      <div class="container">
+      <div class="container"  [innerHTML]="page_content" >
 
-      <div class="cookie py_0">
+      <!-- <div class="cookie py_0">
       <h4>Cookie Policy</h4>
       <p>At SoccerYou, we use cookies to enhance your experience on our website. This Cookie Policy explains what cookies are, how we use them, and how you can manage them.</p>
       </div>
@@ -83,7 +83,7 @@
         <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
       </div>
-  </div>
+  </div> -->
   </div>
   </div>
   <app-footer></app-footer>

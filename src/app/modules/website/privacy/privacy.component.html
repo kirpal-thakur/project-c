@@ -1,11 +1,11 @@
 <section class="website-code">
   <app-header></app-header>
-  <div class="main">
+  <div class="main" style="background-image: url('{{base_url+banner_img}}');" >
     <div class="overlay"></div>
     <div class="banner-inner py_0">
       <div class="container">
         <div class="about">
-          <h2 class="privacy-text">Privacy Policy</h2>
+          <h2 class="privacy-text">{{banner_title}}</h2>
         </div>
       </div>
     </div>
@@ -21,9 +21,9 @@
   </div>
   
   <div class="privacy">
-    <div class="container">
+    <div class="container"  [innerHTML]="page_content">
   
-      <div class="py_0">
+  <!--     <div class="py_0">
         <h4>Privacy Policy</h4>
         <p>At SoccerYou, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use,
           and safeguard your personal information when you use our website and services.</p>
@@ -89,7 +89,7 @@
         <p>Ida-Stäuli-Strasse 95</p>
         <p>CH-8404 Winterthur</p>
         <p>Switzerland</p>
-      </div>
+      </div> -->
   
       <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
       <div *ngIf="adVisible[2]" class="leaderboard-image">

@@ -1,12 +1,12 @@
 
 <section class="website-code">
   <app-header></app-header>
-  <div class="main">
+  <div class="main" style="background-image: url('{{base_url+banner_img}}');">
     <div class="overlay"></div>
     <div class="banner-inner py_0">
       <div class="container">
         <div class="about">
-          <h2 class="terms-text">Terms and Conditions</h2>
+          <h2 class="terms-text">{{banner_title}}</h2>
         </div>
       </div>
     </div>
@@ -23,9 +23,9 @@
   </div>
   
   <div class="terms">
-    <div class="container">
+    <div class="container"  [innerHTML]="page_content">
   
-    <div class="terms_text py_0">
+   <!--  <div class="terms_text py_0">
     <h4>Terms and Conditions</h4>
     <p>Welcome to SoccerYou. By using our website and services, you agree to the following terms and conditions. Please read them carefully.</p>
   </div>
@@ -99,7 +99,7 @@
         <p>Ida-Stäuli-Strasse 95</p>
         <p>CH-8404 Winterthur</p>
         <p>Switzerland</p>
-      </div>
+      </div> -->
   
       <div *ngIf="adVisible[2]" class="leaderboard-image">
         <img src="./assets/images/leaderboard - 728x90.png">
