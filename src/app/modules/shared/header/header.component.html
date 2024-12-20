@@ -87,7 +87,8 @@
           <a class="nav-link nav-action" type="button" (click)="toggleDropdown()" data-bs-toggle="dropdown"
             aria-expanded="false">
 
-            <svg [ngClass]="{'bell-animate' : unseenCount > 0, 'new-bell-animate' : showNotification}" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg [ngClass]="{'bell-animate' : unseenCount > 0, 'new-bell-animate' : showNotification}" width="28"
+              height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.4524 25.6682C11.0605 27.0357 12.409 28 14.0005 28C15.592 28 16.9405 27.0357 17.5487 25.6682C16.4265 25.7231 15.2594 25.76 14.0005 25.76C12.7417 25.76 11.5746 25.723 10.4524 25.6682Z"
                 fill="#737B8B"></path>
@@ -97,9 +98,11 @@
             </svg>
             <span *ngIf="unseenCount>0" class="badge light text-white bg-danger rounded-circle">{{unseenCount}}</span>
           </a>
-          <div class="dropdown-menu py-0 notification-box" id="notification-box-id" (click)="onNotificationClick($event)" (scroll)="onScroll()">
+          <div class="dropdown-menu py-0 notification-box" id="notification-box-id"
+            (click)="onNotificationClick($event)" (scroll)="onScroll()">
 
-            <div *ngIf="isScrolledBeyond && clickedNewNotification" class="go-to-top-btn my-animate" style="position: sticky; top: 0; z-index: 10;">
+            <div *ngIf="isScrolledBeyond && clickedNewNotification" class="go-to-top-btn my-animate"
+              style="position: sticky; top: 0; z-index: 10;">
               <button class="btn btn-primary" (click)="scrollToTop()" style="width: 100%;">New Notification</button>
             </div>
 
@@ -148,7 +151,7 @@
                   </svg></span>
               </div> -->
 
-              
+
 
               <div id="notifications">
                 <!-- <div class="d-flex bg-light p-3 justify-content-between border-bottom"
@@ -169,12 +172,12 @@
                   </span>
                 </div> -->
 
-                
 
-                
 
-                <div class="row bg-light p-3 justify-content-between border-bottom" [ngClass]="{'my-animate' : notification.shouldAnimate}"
-                  *ngFor="let notification of notifications">
+
+
+                <div class="row bg-light p-3 justify-content-between border-bottom"
+                  [ngClass]="{'my-animate' : notification.shouldAnimate}" *ngFor="let notification of notifications">
                   <div class="col-2">
                     <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
                       alt="">
@@ -212,8 +215,10 @@
               <div class="load_more" *ngIf="currentIndex < allNotifications.length && !something">
                 <span (click)="loadMoreNotifications()" style="cursor: pointer;">View all notifications</span>
               </div>
+              
             </div>
           </div>
+
           <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show live-notification-box"
             data-bs-popper="static" style="z-index: 0;">
             <div>
