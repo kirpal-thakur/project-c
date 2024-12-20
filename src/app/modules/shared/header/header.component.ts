@@ -58,7 +58,18 @@ export class HeaderComponent {
   notificationsPerPage = 3;
   unseenCount = 0;
 
+  notificationSeen : boolean = false;
+
   ngOnInit() {
+
+    let notificationStatus = localStorage.getItem("notificationSeen");
+    if (notificationStatus) {
+      let jsonData = JSON.parse(notificationStatus);
+      this.notificationSeen = jsonData;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
 
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -206,6 +217,8 @@ export class HeaderComponent {
   // }
 
   toggleDropdown() {
+    this.notificationSeen = true;
+    localStorage.setItem('notificationSeen', 'true');
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -219,8 +232,6 @@ export class HeaderComponent {
     console.log(this.currentIndex)
 
     this.isClosed = !this.isClosed;
-
-    
   }
 
   // Method to set the page title on the initial load
