@@ -47,6 +47,7 @@ import {MatAutocompleteModule, MatAutocompleteSelectedEvent} from '@angular/mate
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { TemplatePopupComponent } from './templates/template-popup/template-popup.component';
+import { BlogPopupComponent } from './website/blog/blog-popup/blog-popup.component';
 import { MarketingPopupComponent } from './marketing/marketing-popup/marketing-popup.component';
 import { FilterPopupComponrnt } from './filter-popup/filter-popup.component';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
@@ -85,7 +86,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home-page.component';
 import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
 import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
-
+import { AddContentPageComponent } from './website/web-pages/add-content-page/add-content-page.component';
+import { AddFaqPageComponent } from './website/web-pages/add-faq-page/add-faq-page.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
@@ -127,6 +129,7 @@ export const MY_FORMATS = {
     InboxPopupComponent,
     MarketingPopupComponent,
     TemplatePopupComponent,
+    BlogPopupComponent,
     FilterPopupComponrnt,
     MessagePopupComponent,
     ScoutDetailComponent,
@@ -158,7 +161,9 @@ export const MY_FORMATS = {
     AddPageComponent,
     AddHomePageComponent,
     AddContactPageComponent,
-    AddAboutPageComponent
+    AddAboutPageComponent,
+    AddContentPageComponent,
+    AddFaqPageComponent
   ],
   imports: [
     CommonModule,

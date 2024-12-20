@@ -40,6 +40,7 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { EmailVerifyComponent } from './email-verify/email-verify.component';
 import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 
 // Import services
@@ -54,6 +55,7 @@ import { ThemeService } from '../../services/theme.service';
     IndexComponent,
     ConfirmPasswordComponent,
     HeaderComponent,
+    EmailVerifyComponent,
     FooterComponent,
     AboutComponent,
     FeatureComponent,

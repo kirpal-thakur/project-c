@@ -26,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    LightboxDialogComponent
+    LightboxDialogComponent,
   ],
   imports: [
     BrowserModule,

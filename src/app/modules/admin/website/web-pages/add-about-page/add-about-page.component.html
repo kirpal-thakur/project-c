@@ -1,1 +1,157 @@
-<p>add-about-page works!</p>
+<div class="container mt-5">
+  <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
+    <h2>About Page Form</h2>
+
+    <!-- About Banner Title -->
+    <div class="mb-3">
+      <label for="about_banner_title" class="form-label">About Banner Title</label>
+      <input
+        type="text"
+        id="about_banner_title"
+        class="form-control"
+        name="about_banner_title"
+        [(ngModel)]="formData.about_banner_title"
+        required
+      />
+    </div>
+
+    <!-- About Banner Description -->
+    <div class="mb-3">
+      <label for="about_banner_desc" class="form-label">About Banner Description</label>
+      <textarea
+        id="about_banner_desc"
+        class="form-control"
+        name="about_banner_desc"
+        [(ngModel)]="formData.about_banner_desc"
+        required
+      ></textarea>
+    </div>
+
+    <!-- About Banner Background Image -->
+    <div class="mb-3">
+      <label for="about_banner_bg_img" class="form-label">About Banner Background Image</label>
+      <input
+        type="file"
+        id="about_banner_bg_img"
+        class="form-control"
+        (change)="onFileChange($event, 'about_banner_bg_img')"
+        required
+      />
+    </div>
+
+    <!-- About Banner Image -->
+    <div class="mb-3">
+      <label for="about_banner_img" class="form-label">About Banner Image</label>
+      <input
+        type="file"
+        id="about_banner_img"
+        class="form-control"
+        (change)="onFileChange($event, 'about_banner_img')"
+        required
+      />
+    </div>
+
+    <!-- Countries Section Title -->
+    <div class="mb-3">
+      <label for="country_section_title" class="form-label">Countries Section Title</label>
+      <input
+        type="text"
+        id="country_section_title"
+        class="form-control"
+        name="country_section_title"
+        [(ngModel)]="formData.country_section_title"
+        required
+      />
+    </div>
+
+    <!-- Country Names -->
+    <div class="mb-3">
+      <label class="form-label">Country Names</label>
+      <mat-form-field class="w-100">
+        <mat-select
+          multiple
+          name="about_country_names"
+          [(ngModel)]="formData.about_country_names"
+          required
+        >
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Country Section Banner Image -->
+    <div class="mb-3">
+      <label for="country_section_banner_img" class="form-label">Country Section Banner Image</label>
+      <input
+        type="file"
+        id="country_section_banner_img"
+        class="form-control"
+        (change)="onFileChange($event, 'country_section_banner_img')"
+        required
+      />
+    </div>
+
+    <!-- Hero Heading Text -->
+    <div class="mb-3">
+      <label for="about_hero_heading_txt" class="form-label">Hero Heading Text</label>
+      <input
+        type="text"
+        id="about_hero_heading_txt"
+        class="form-control"
+        name="about_hero_heading_txt"
+        [(ngModel)]="formData.about_hero_heading_txt"
+        required
+      />
+    </div>
+
+    <!-- Hero Button Text -->
+    <div class="mb-3">
+      <label for="about_hero_btn_txt" class="form-label">Hero Button Text</label>
+      <input
+        type="text"
+        id="about_hero_btn_txt"
+        class="form-control"
+        name="about_hero_btn_txt"
+        [(ngModel)]="formData.about_hero_btn_txt"
+        required
+      />
+    </div>
+
+    <!-- Hero Button Link -->
+    <div class="mb-3">
+      <label for="about_hero_btn_link" class="form-label">Hero Button Link</label>
+      <input
+        type="text"
+        id="about_hero_btn_link"
+        class="form-control"
+        name="about_hero_btn_link"
+        [(ngModel)]="formData.about_hero_btn_link"
+        required
+      />
+    </div>
+
+    <div class="row mb-3">
+      <!-- Language ID Dropdown -->
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="lang_id">Language</label>
+                <select id="lang_id" class="form-control" name="lang_id" [(ngModel)]="formData.lang_id" required>
+                    <option disabled>
+                        Select Language
+                    </option>
+                    <option *ngFor="let lang of languages" [value]="lang.id">
+                        {{ lang.language }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+  </form>
+
+</div>

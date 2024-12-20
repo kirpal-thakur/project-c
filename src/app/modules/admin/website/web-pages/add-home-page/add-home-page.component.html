@@ -2,7 +2,7 @@
 <div class="container mt-5">
   <form [formGroup]="addHomePageForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <!-- General Information Block -->
-    <fieldset class="border p-3 mb-4">
+    <fieldset *ngIf="!pageId" class="border p-3 mb-4">
       <legend class="w-auto px-2">Language Information</legend>
       <div class="row">
         <div class="mb-3 col-md-12">
@@ -19,6 +19,30 @@
       </div>
     </fieldset>
 
+    <fieldset class="border p-3 mb-4">
+      <legend class="w-auto px-2">SEO Information</legend>
+      <div class="row">
+        <div class="mb-3 col-md-6">
+          <label for="metaTitle" class="form-label">Meta Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="metaTitle"
+            formControlName="meta_title"
+          />
+        </div>
+        <div class="mb-3 col-md-6">
+          <label for="metaDescription" class="form-label">Meta Description</label>
+          <textarea
+            class="form-control"
+            id="metaDescription"
+            formControlName="meta_description"
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </fieldset>
+
     <!-- Banner Section -->
     <fieldset class="border p-3 mb-4">
       <legend class="w-auto px-2">Banner Section</legend>
@@ -27,11 +51,22 @@
           <label for="bannerBgImg" class="form-label">Banner Background Image</label>
           <input type="file" class="form-control" (change)="handleFileInput($event, 'banner_bg_img')" id="bannerBgImg"
             formControlName="banner_bg_img" />
+            
+            <div class="img_wrp">
+              <img src="{{baseUrl + filesData.banner_bg_img}}" width="100"  height="100">
+              <div class="close-img close"></div>
+             </div>
+
         </div>
         <div class="mb-3 col-md-6">
           <label for="bannerImg" class="form-label">Banner Image</label>
           <input type="file" class="form-control" id="bannerImg" formControlName="banner_img"
             (change)="handleFileInput($event, 'banner_img')" />
+            <div class="img_wrp">
+              <img src="{{baseUrl + filesData.banner_img}}" width="100"  height="100">
+              <div class="close-img close"></div>
+             </div>
+
         </div>
         <div class="mb-3 col-md-6">
           <label for="bannerBtnTxt" class="form-label">Banner Button Text</label>
@@ -71,6 +106,12 @@
           <label for="heroBgImg" class="form-label">Hero Background Image</label>
           <input type="file" class="form-control" (change)="handleFileInput($event, 'hero_bg_img')" id="heroBgImg"
             formControlName="hero_bg_img" />
+            <div class="img_wrp">
+              <img src="{{baseUrl + filesData.hero_bg_img}}" width="100"  height="100">
+              <div class="close-img close"></div>
+             </div>
+
+
         </div>
         <div class="mb-3 col-md-6">
           <label for="heroHeadingTxt" class="form-label">Hero Heading Text</label>
@@ -121,6 +162,13 @@
             <label for="heroBgImg" class="form-label">Images</label>
             <input type="file" class="form-control" (change)="handleTabFilesInput($event, index, 'first_tab')" id="heroBgImg{{index}}"
                    [(ngModel)]="tab.images" [name]="'images' + index" [ngModelOptions]="{standalone: true}" multiple />
+                  
+
+                   <div class="img_wrp">
+                    <img src="{{baseUrl + tab.images}}" width="100"  height="100">
+                    <div class="close-img close"></div>
+                   </div>
+                 
           </div>
           <div class="mb-3 col-md-6">
             <label for="heroHeadingTxt" class="form-label">Title</label>
@@ -141,6 +189,12 @@
             <label for="heroBgImg" class="form-label">Images</label>
             <input type="file" class="form-control" (change)="handleTabFilesInput($event, index, 'second_tab')" id="heroBgImg{{index}}"
                   [(ngModel)]="tab.images" [name]="'images' + index" [ngModelOptions]="{standalone: true}" multiple/>
+                 <div class="img_wrp">
+                  <img src="{{baseUrl + tab.images}}" width="100"  height="100">
+                  <div class="close-img close"></div>
+                 </div>
+                 
+
           </div>
           <div class="mb-3 col-md-6">
             <label for="heroHeadingTxt" class="form-label">Title</label>
@@ -154,7 +208,7 @@
       </fieldset>
       
       <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary mb-3">Add New Page</button>
+      <button type="submit" class="btn btn-primary mb-3">Update Page</button>
     </form>
   </div>
   

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { WebPages } from '../../../../../services/webpages.service';
 import { NgForm } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../../../environments/environment';
+
 import { CKEditorModule, loadCKEditorCloud, CKEditorCloudResult } from '@ckeditor/ckeditor5-angular';
 import type { ClassicEditor, EditorConfig } from 'https://cdn.ckeditor.com/typings/ckeditor5.d.ts';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -26,7 +27,9 @@ interface Language {
   styleUrl: './add-page.component.scss'
 })
 export class AddPageComponent {
-  languages: Language[] = [];
+  languages: any = localStorage.getItem('languages');
+  lang_id: any = localStorage.getItem('lang_id');
+  lang: any = localStorage.getItem('lang');
   title: string = '';
   content: string = '';
   selectedLanguage: string = '0';
@@ -36,35 +39,43 @@ export class AddPageComponent {
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
   pageDetail: any | null = null;
-  pages = [
-    {id: 1, title: "home"},
-    {id: 6, title: "about"},
-    {id: 9, title: "contact"},
-    {id: 8, title: "pricing"},
-  ];
+  pages:any = environment.pages;
   selectedPageTitle: string = "";
+  selectedPageType: string = "";
   selectedPageId:string=""
 
   @ViewChild('myForm') form!: NgForm;
 
-  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { 
-   }
+  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {
+    if(data){
+      this.selectedPageType = data.page_type;
+      this.selectedPageId = data.id;
+    }
+   
+  }
+
   ngOnInit() {
-    this.getAllLanguages();
+    this.languages = JSON.parse(this.languages);
+
     loadCKEditorCloud({
       version: '44.0.0',
       premium: true
     }).then(this._setupEditor.bind(this));
     if(this.data){
       this.pageDetail = this.data.page
-      this.title = this.pageDetail.title;
+     // this.title = this.pageDetail.title;
       this.slug = this.pageDetail.slug;
       this.status = (this.pageDetail.status == 'draft') ? 1 : 2;
-      this.selectedLanguage = '3';
-      this.title = this.pageDetail.title;
+      this.selectedLanguage = this.lang_id;
+     // this.title = this.pageDetail.title;
     }
+   // this.getAllPages();
   }
 
+  close(): void {
+    console.log('Close button clicked');
+    this.dialogRef.close();
+  }
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
     const {
         ClassicEditor,
@@ -188,12 +199,13 @@ export class AddPageComponent {
           ]
         }
     };
-}
+  }
 
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
+
+  getAllPages(){
+    this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
       if (response.status) {
-        this.languages = response.data.languages;
+       // this.pages = response.data.pages;
       }
     });
   }
@@ -260,8 +272,11 @@ export class AddPageComponent {
 
   onChangeSelectedPage(event:any){
     let getPageId = event.target.value;
-    this.selectedPageId = getPageId;
-    let findPageIndex =  this.pages.findIndex((val) => val.id == getPageId);
-    this.selectedPageTitle = this.pages[findPageIndex].title;
+    //console.log('selectedPageType',event.target.value);
+    this.selectedPageType = getPageId;
+    this.selectedPageId = '';
+    //let findPageIndex =  this.pages.findIndex((val:any) => val.page_type == getPageId);
+    // console.log(this.pages[findPageIndex],getPageId)
+    //this.selectedPageId = this.pages[findPageIndex].id;
   }
 }

@@ -1,32 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  styleUrls: ['./about.component.scss'] // Note the plural 'styleUrls'
 })
 export class AboutComponent {
-  // ngOnInit() {
-  //   this.adVisible = [true, true, true, true, true, true, true];
-  // }
-  // adVisible: boolean[] = [true, true, true, true, true, true, true]; // Array to manage ad visibility
-
-  // closeAd(index: number) {
-  //   this.adVisible[index] = false; // Set the specific ad to not visible based on index
-  // }
-
   adVisible = [true, true, true, true, true, true, true]; // Array to control ad visibility
+
   countries = [
-    'Switzerland', 'Germany', 'France', 'Italy', 'Portugal',
-    'England', 'Spain', 'Belgium', 'Sweden', 'Denmark'
+    { name: 'Switzerland', url: 'https://www.socceryou.ch' },
+    { name: 'Germany', url: 'https://www.socceryou.de' },
+    { name: 'France', url: 'https://www.socceryou.fr' },
+    { name: 'Italy', url: 'https://www.socceryou.it' },
+    { name: 'Portugal', url: 'https://www.socceryou.pt' },
+    { name: 'England', url: 'https://www.socceryou.co.uk' },
+    { name: 'Spain', url: 'https://www.socceryou.es' },
+    { name: 'Belgium', url: 'https://www.socceryou.be' },
+    { name: 'Sweden', url: 'https://www.socceryou.se' },
+    { name: 'Denmark', url: 'https://www.socceryou.dk' }
   ];
 
   closeAd(index: number) {
-    this.adVisible[index] = false;
+    this.adVisible[index] = false; // Hide the ad
   }
 
   openModal(modalId: string) {
+    console.log(`Open modal: ${modalId}`);
     // Implement modal opening logic here
   }
-
 }

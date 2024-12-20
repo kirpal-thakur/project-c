@@ -33,15 +33,17 @@ export class WebPagesComponent {
   allSelected: boolean = false;
   selectedIds:any = [];
   getPageDetail:any = [];
-
+  pages:any = [];
+  lang_id: any = localStorage.getItem('lang_id');
 
   constructor(private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
     this.getAllPagesData();
+    this.getFrontendPages();
   }
 
   getAllPagesData(){
-    this.webpages.getAllPages().subscribe((response) => {
+    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.map((page: any) => ({
           ...page,
@@ -67,7 +69,7 @@ export class WebPagesComponent {
 
   getPublishOrDraftFilterData(type:string){
     this.allPages = [];
-    this.webpages.getAllPages().subscribe((response) => {
+    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.filter((page: any) => {
             if(page.status == type){
@@ -138,8 +140,8 @@ export class WebPagesComponent {
 
   createNewPage(){
     const addNewPage = this.dialog.open(AddPageComponent,{
-      width: '2500px',
-      height: '800px',
+      width: '1500px',
+      height: '800px'
     })
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {
@@ -162,6 +164,30 @@ export class WebPagesComponent {
           }
         })
       }      
+    });
+  }
+
+  editPage(page: any){
+    const addNewPage = this.dialog.open(AddPageComponent,{
+      width: '1500px',
+      height: '800px',
+      data : page
+    })
+    addNewPage.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "page-added-successfully"){
+          this.showMatDialog('Page updated successfully!.', 'display');
+          this.getAllPagesData();
+        }
+      }
+    });
+  }
+
+  getFrontendPages(){
+    this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
+      if (response.status) {
+        this.pages = response.data.pages;
+      }
     });
   }
 

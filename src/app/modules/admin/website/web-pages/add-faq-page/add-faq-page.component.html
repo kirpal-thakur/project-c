@@ -1,0 +1,159 @@
+<div class="container mt-5">
+  <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
+    <h2>Faq Page</h2>
+
+        <!-- General Information Block -->
+        <fieldset class="border p-3 mb-4">
+          <!-- <legend class="w-auto px-2">Language Information</legend> -->
+          <div class="row">
+            <div class="mb-3 col-md-12">
+              <label for="langId" class="form-label">Select Language</label>
+              <select class="form-select" id="langId"    name="language"
+              [(ngModel)]="formData.language">
+                <option value="" disabled selected>Select a language</option>
+                @if(languages && languages.length > 0){
+                  @for (language of languages; track $index) {
+                   <option value="{{language.id}}">{{language.language}}</option>
+                  }
+                }
+              </select>
+            </div>
+          </div>
+        </fieldset>
+    
+        <fieldset class="border p-3 mb-4">
+          <!-- <legend class="w-auto px-2">SEO Information</legend> -->
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="metaTitle" class="form-label">Meta Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="metaTitle"
+                name="meta_title"
+                [(ngModel)]="formData.meta_title"
+              />
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="metaDescription" class="form-label">Meta Description</label>
+              <textarea
+                class="form-control"
+                id="metaDescription"
+                name="meta_description"
+                [(ngModel)]="formData.meta_description"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </fieldset>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            name="title"
+            [(ngModel)]="formData.title"
+            required
+          />
+        </div>
+         <!-- About Banner Title -->
+    <div class="mb-3">
+      <label for="Slug" class="form-label">Slug</label>
+      <input
+        type="text"
+        id="slug"
+        class="form-control"
+        name="slug"
+        [(ngModel)]="formData.slug"
+        required
+      />
+    </div>
+    <!-- About Banner Title -->
+    <div class="mb-3">
+      <label for="faq_banner_title" class="form-label">Faq Banner Title</label>
+      <input
+        type="text"
+        id="faq_banner_title"
+        class="form-control"
+        name="faq_banner_title"
+        [(ngModel)]="formData.faq_banner_title"
+        required
+      />
+    </div>
+    <!-- About Banner Title -->
+    <div class="mb-3">
+      <label for="faq_collapse_titile" class="form-label">Faq Collapse Title</label>
+      <input
+        type="text"
+        id="faq_collapse_titile"
+        class="form-control"
+        name="faq_collapse_titile"
+        [(ngModel)]="formData.faq_collapse_titile"
+        required
+      />
+    </div>
+      <!-- About Banner Title -->
+      <div class="mb-3">
+        <label for="faq_first_btn_txt" class="form-label">Faq first button text</label>
+        <input
+          type="text"
+          id="faq_first_btn_txt"
+          class="form-control"
+          name="faq_first_btn_txt"
+          [(ngModel)]="formData.faq_first_btn_txt"
+          required
+        />
+      </div>
+        <!-- About Banner Title -->
+    <div class="mb-3">
+      <label for="faq_sec_btn_txt" class="form-label">Faq second button text</label>
+      <input
+        type="text"
+        id="faq_sec_btn_txt"
+        class="form-control"
+        name="faq_sec_btn_txt"
+        [(ngModel)]="formData.faq_sec_btn_txt"
+        required
+      />
+    </div>
+      <!-- About Banner Title -->
+      <div class="mb-3">
+        <label for="faq_third_btn_txt" class="form-label">Faq third button text</label>
+        <input
+          type="text"
+          id="faq_third_btn_txt"
+          class="form-control"
+          name="faq_third_btn_txt"
+          [(ngModel)]="formData.faq_third_btn_txt"
+          required
+        />
+      </div>
+
+     <!-- About Banner Background Image -->
+     <div class="mb-3">
+      <label for="banner_img" class="form-label"> Banner Image</label>
+      <input
+        type="file"
+        id="banner_img"
+        class="form-control"
+        (change)="onFileChange($event, 'banner_img')"
+        required
+      />
+    </div>
+
+    <!-- About Banner Description -->
+    <div class="mb-3">
+      <label for="page_content" class="form-label"> Description</label>
+      
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" class="editor-width" name="page_content"[(ngModel)]="formData.page_content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+  </form>
+
+</div>

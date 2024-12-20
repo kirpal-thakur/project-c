@@ -5,9 +5,10 @@
       >
         <div class="d-flex align-items-center heading w-100">
           <h2 class="card-title mb-0 me-3">{{'Blog' | translate}}</h2>
-          <a  class="btn btn-success btn-sm web-create-bg">{{ 'CreateNew' | translate }}</a>
+          <a (click)="editBlog(null)" class="btn btn-success btn-sm web-create-bg">{{ 'CreateNew' | translate }}</a>
 
         </div>
+
         <div class="card-search">
           <div class="input-group">
             <span class="input-group-text"
@@ -40,6 +41,7 @@
               type="text"
               placeholder="Search Message"
               aria-label="Username"
+              (keyup)="applyFilter($event)"
               aria-describedby="basic-addon1"
               class="form-control ps-0"
             />
@@ -73,6 +75,7 @@
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              (click)="selectAllBlogs()"
             >
               <div class="form-check">
                 <input
@@ -80,16 +83,13 @@
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  [checked]="allSelected"
                 />
               </div>
             </button>
-            <!-- <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul> -->
+ 
           </div>
-          <a class="btn btn-outline-white">
+          <a  (click)="publishBlogs()" class="btn btn-outline-white">
             <svg id="users-icon"
               width="24"
               height="24"
@@ -105,7 +105,7 @@
 
             {{'Publish' | translate}}</a
           >
-          <a class="btn btn-outline-white">
+          <a  (click)="draftBlogs()"  class="btn btn-outline-white">
             <svg id="users-icon"
             class="me-1"
               width="22"
@@ -122,7 +122,7 @@
 
             {{'Draft' | translate}}</a
           >
-          <a class="btn btn-outline-white">
+          <a  (click)="confirmDeletion()" class="btn btn-outline-white">
             <svg id="users-icon"
               width="22"
               height="24"
@@ -153,256 +153,128 @@
         </div>
       </div>
     </div>
-    <!-- <div>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">{{'Name' | translate}}</th>
-            <th scope="col">{{'Language' | translate }}</th>
-            <th scope="col">
-              {{'Published' | translate }}
-              <svg id="users-icon"
-                width="9"
-                height="15"
-                viewBox="0 0 9 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                  fill="#111418"
-                />
-              </svg>
-            </th>
-            <th scope="col">
-              {{'LastModified' | translate  }}
-              <svg id="users-icon"
-                width="9"
-                height="15"
-                viewBox="0 0 9 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.15341 8.43701H7.84716C8.44903 8.43701 8.74997 9.1958 8.32528 9.63818L4.97841 13.1245C4.71404 13.3999 4.28654 13.3999 4.02497 13.1245L0.675285 9.63818C0.250597 9.1958 0.551535 8.43701 1.15341 8.43701ZM8.32528 5.36084L4.97841 1.87451C4.71404 1.59912 4.28654 1.59912 4.02497 1.87451L0.675285 5.36084C0.250597 5.80322 0.551535 6.56201 1.15341 6.56201H7.84716C8.44903 6.56201 8.74997 5.80322 8.32528 5.36084Z"
-                  fill="#111418"
-                />
-              </svg>
-            </th>
 
-            <th scope="col">{{'Status' | translate }}</th>
-            <th class="text-center" scope="col">{{'View' | translate }}</th>
-            <th class="text-center" scope="col">{{'Edit' | translate }}</th>
-            <th class="text-center" scope="col">{{'Remove'  | translate }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="d-flex justify-content-center ">
-              <span class="form-check align-self-center ">
-                <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
-                <label for="defaultCheck1" class="form-check-label"></label>
-              </span>
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-               <span class="main-template">Edit goes here</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_success">Pubished</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <td class="d-flex justify-content-center ">
-              <span class="form-check align-self-center ">
-                <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
-                <label for="defaultCheck1" class="form-check-label"></label>
-              </span>
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-               <span class="main-template">Title goes here</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_pending">Draft</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-          <tr>
-            <td class="d-flex justify-content-center ">
-              <span class="form-check align-self-center ">
-                <input type="checkbox" value="" id="defaultCheck1" class="form-check-input"/>
-                <label for="defaultCheck1" class="form-check-label"></label>
-              </span>
-            </td>
-            <td>
-              <div class="d-flex align-items-center">
-              <span class="main-template">Title goes here</span>
-              </div>
-            </td>
-            <td>English</td>
-
-            <td>08.04.2024</td>
-            <td>08.05.2024</td>
-            <td>
-              <span class="bg_success">Pubished</span>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="25"
-                height="25"
-                viewBox="0 0 25 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
-                  fill="#787878"
-                />
-                <path
-                  d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
-                  fill="#787878"
-                />
-              </svg>
-            </td>
-            <td class="c_pointer text-center">
-              <svg id="users-icon"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="me-1"
-              >
-                <path
-                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
-                  fill="#787878"
-                ></path>
-              </svg>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
     <div class="table-responsive">
+      <table mat-table [dataSource]="blogs" class="table table-hover table-striped table-users ">
+       
+        <!-- Position Column -->
+        <ng-container matColumnDef="#">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <span class="form-check align-self-center me-2">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [checked]="selectedIds.includes(element.id)"
+                (change)="onCheckboxChange(element)"
+              />
+              <label for="defaultCheck1" class="form-check-label"></label>
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef > Name </th>
+          <td mat-cell *matCellDef="let element">  {{ element.title }}</td>
+        </ng-container>
+        
+        <ng-container matColumnDef="Language">
+          <th mat-header-cell *matHeaderCellDef> Language </th>
+           <td mat-cell *matCellDef="let element">  {{ element.language }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Published">
+          <th mat-header-cell *matHeaderCellDef > Published </th>
+          <td mat-cell *matCellDef="let element">  
+              {{ element.updated_at }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Last Modified">
+          <th mat-header-cell *matHeaderCellDef> Last Modified  </th>
+          <td mat-cell *matCellDef="let element"> {{ element.updated_at }}</td>
+        </ng-container>
+  
+        
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> Status </th>
+          <td mat-cell *matCellDef="let element" class="text-center"> 
+            <span *ngIf="element.status == 'published'" class="bg_success">Published</span>
+            <span *ngIf="element.status == 'expired'" class="bg_reject text-white">Expired</span>
+            <span *ngIf="element.status == 'draft'" class="bg_pending">Draft</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="View all">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> View all </th>
+          <td mat-cell *matCellDef="let element" class="text-center cursor-pointer">  
+            <svg id="users-icon"
+            width="25"
+            height="25"
+            viewBox="0 0 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.5 15.625C14.2259 15.625 15.625 14.2259 15.625 12.5C15.625 10.7741 14.2259 9.375 12.5 9.375C10.7741 9.375 9.375 10.7741 9.375 12.5C9.375 14.2259 10.7741 15.625 12.5 15.625Z"
+              fill="#787878"
+            />
+            <path
+              d="M24.1715 12.2344C23.2527 9.85754 21.6575 7.80204 19.5831 6.32194C17.5087 4.84184 15.0461 4.00201 12.4997 3.90625C9.9532 4.00201 7.4906 4.84184 5.41623 6.32194C3.34187 7.80204 1.74667 9.85754 0.827793 12.2344C0.765736 12.406 0.765736 12.594 0.827793 12.7656C1.74667 15.1425 3.34187 17.198 5.41623 18.6781C7.4906 20.1582 9.9532 20.998 12.4997 21.0938C15.0461 20.998 17.5087 20.1582 19.5831 18.6781C21.6575 17.198 23.2527 15.1425 24.1715 12.7656C24.2336 12.594 24.2336 12.406 24.1715 12.2344ZM12.4997 17.5781C11.4953 17.5781 10.5135 17.2803 9.67841 16.7223C8.84332 16.1643 8.19244 15.3712 7.80809 14.4433C7.42374 13.5154 7.32318 12.4944 7.51912 11.5093C7.71506 10.5242 8.1987 9.61941 8.90889 8.90922C9.61908 8.19903 10.5239 7.71539 11.509 7.51945C12.494 7.32351 13.5151 7.42407 14.443 7.80842C15.3709 8.19278 16.164 8.84365 16.722 9.67875C17.28 10.5138 17.5778 11.4956 17.5778 12.5C17.5757 13.8462 17.04 15.1366 16.0882 16.0885C15.1363 17.0404 13.8458 17.5761 12.4997 17.5781Z"
+              fill="#787878"
+            />
+          </svg>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Edit">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> Edit </th>
+          <td mat-cell *matCellDef="let element" class="text-center cursor-pointer">  
+              <svg id="users-icon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  (click)="editBlog(element)"
+              >
+                  <path
+                  d="M3 17.4585V20.4985C3 20.7785 3.22 20.9985 3.5 20.9985H6.54C6.67 20.9985 6.8 20.9485 6.89 20.8485L17.81 9.93854L14.06 6.18854L3.15 17.0985C3.05 17.1985 3 17.3185 3 17.4585ZM20.71 7.03854C20.8027 6.94602 20.8762 6.83614 20.9264 6.71516C20.9766 6.59419 21.0024 6.46451 21.0024 6.33354C21.0024 6.20257 20.9766 6.07289 20.9264 5.95191C20.8762 5.83094 20.8027 5.72105 20.71 5.62854L18.37 3.28854C18.2775 3.19583 18.1676 3.12229 18.0466 3.07211C17.9257 3.02192 17.796 2.99609 17.665 2.99609C17.534 2.99609 17.4043 3.02192 17.2834 3.07211C17.1624 3.12229 17.0525 3.19583 16.96 3.28854L15.13 5.11854L18.88 8.86854L20.71 7.03854Z"
+                  fill="#787878"
+                  />
+              </svg>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Remove">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> Remove </th>
+          <td mat-cell *matCellDef="let element" class="text-center cursor-pointer">  
+              <svg id="users-icon"
+                  width="22"
+                  height="23"
+                  viewBox="0 0 22 23"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="me-1"
+                  (click)="confirmSingleDeletion(element.id)"
+              >
+                  <path
+                  d="M5.49967 17.5589C5.49967 18.5112 6.32467 19.2904 7.33301 19.2904H14.6663C15.6747 19.2904 16.4997 18.5112 16.4997 17.5589V7.16999H5.49967V17.5589ZM17.4163 4.57277H14.208L13.2913 3.70703H8.70801L7.79134 4.57277H4.58301V6.30425H17.4163V4.57277Z"
+                  fill="#787878"
+                  ></path>
+              </svg>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+        <tr class="mat-row user-empty-tr" *matNoDataRow>
+          <td [attr.colspan]="displayedColumns.length" class="user-empty-td">
+            <app-loader *ngIf="isLoading"></app-loader>
+            <div *ngIf="blogs.length == 0 && !isLoading" style="text-align: center;">No records found.</div>
+          </td>
+        </tr>
+      </table>
+  </div>
+
+ <!--    <div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -599,7 +471,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
 
 
   </div>

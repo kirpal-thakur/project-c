@@ -1,7 +1,7 @@
 <div class="dialog-content add-perfomance">
     <div class="personal_edit">
         <div class="dialog-header m-auto">
-            <h2>{{'Upload Performance Report' | translate}}</h2>
+            <h2>{{'TalentsTranslate.uploadPerformanceReport' | translate}}</h2>
         </div>
         <div class="close_buttons" (click)="dialogRef.close()">
             <button class="close-btn">X</button>
@@ -25,7 +25,7 @@
                     <path d="M10.6641 16H15.9974" stroke="#787878" stroke-width="2" stroke-linecap="round" />
                 </svg>
             </div>
-            <h2>{{'Drag and Drop files here' | translate}}</h2>
+            <h2>{{'TalentsTranslate.dragAndDropFiles' | translate}}</h2>
             <p>{{'Files supported: JPG, PNG, PDF' | translate}}</p>
             <input id="reportUpload" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png,.pdf" type="file" class="d-none" />
             <p>{{'Maximum Size: 5MB' | translate}}</p>
@@ -33,7 +33,7 @@
 
         <div class="row align-items-center document-title_box">
             <div class="form-group col-lg-6 ">
-                <label for="document-title">{{'Document Title' | translate}}</label> <br>
+                <label for="document-title">{{'TalentsTranslate.documentTitle' | translate}}</label> <br>
                 <input type="text" id="document-title" [(ngModel)]="documentTitle" placeholder="Enter Document Title" />
             </div>
             <div class="col-lg-6 choose-file-name" id="upload-file-process"  *ngIf="selectedFile" >
@@ -61,8 +61,8 @@
       
     </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between perfomance-report-btn">            
-        <button class="cancel-btn" (click)="dialogRef.close()">{{'Cancel' | translate}}</button>
-        <button class="upload-btn" (click)="uploadFile()">{{'Upload' | translate}}</button>
+        <button class="cancel-btn" (click)="dialogRef.close()">{{'TalentsTranslate.cancel' | translate}}</button>
+        <button class="upload-btn" (click)="uploadFile()">{{'TalentsTranslate.upload' | translate}}</button>
     </div>
 
 </div>

@@ -23,12 +23,13 @@ import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
 import { NewChatComponent } from './new-chat/new-chat.component';
 import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
-import { ValidateUserComponent } from './validateUser/validateUser.component';
+import { EmailVerifyComponent } from './email-verify/email-verify.component';
 import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 
 
 const routes: Routes = [
   { path: '', component: IndexComponent }, // Default route
+  { path: 'home', component: IndexComponent },
   { path: 'confirm-password', component: ConfirmPasswordComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
@@ -46,12 +47,15 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'talent', component: TalentComponent },
   { path: 'learn-more', component: LearnMoreComponent },
+  { path: 'news/:slug', component: LearnMoreComponent },
   { path: 'player-list', component: PlayerListComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'thank-you', component: ThankuComponent },
-  {path: 'cookie-popup', component: CookiePopupComponent},
-  {path: 'new-chat', component: NewChatComponent},
-  {path: 'password-reset-link', component: PasswordResetLinkComponent},
+  { path: 'cookie-popup', component: CookiePopupComponent},
+  { path: 'new-chat', component: NewChatComponent},
+  { path: 'expired-link', component: PasswordResetLinkComponent},
+  { path: 'password-reset-link', component: PasswordResetLinkComponent},
+  { path: 'email-verify', component:EmailVerifyComponent}
   // {path: '', component: ComingSoonComponent},
 ];
 

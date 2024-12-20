@@ -9,6 +9,7 @@ export class TalentComponent {
   isActive1 = true; // Premium Plan
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
+  dynamicTexts: string[] = []
 
   activeAccordionIndex = 1;
 
@@ -45,12 +46,18 @@ export class TalentComponent {
       // Save the new state to local storage
       localStorage.setItem('toggleState2', this.isActive3.toString());
     }
+    addText() {
+      // Add new text when the + icon is clicked
+      this.dynamicTexts.push('New dynamic text added!');
+    }
      
      premiumFeatures = [
        'The complete talent profile with all stages of his career and performance data.',
        'Export data in excel and pdf formats.',
        'Create your favorite list.',
        'Highlight your best photos and videos on your profile.'
+       
+       
      ];
    
      multiCountryFeatures = [
@@ -60,9 +67,10 @@ export class TalentComponent {
      ];
 
      boosterFeatures = [
-      'Present your profile to clubs and leagues in other countries.',
-      'Higher chances to get hired globally.',
-      'Build your global portfolio.'
+      'Jump to the top of search results.',
+      'HHigher chances to get discovered.',
+      'Profile boosts help you grow your network and following faster.',
+      'You can boost your profile to reach a specific audience, such as Talents, Clubs or Scouts.'
     ];
 
 

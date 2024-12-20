@@ -3,6 +3,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { AdvertisementService } from '../../../services/advertisement.service';
 import { WebPages } from '../../../services/webpages.service';
+import { SharedService } from '../../../services/shared.service';
 export interface ClubMember {
   name: string;
   image: string;
@@ -63,6 +64,8 @@ export class IndexComponent {
   selectedLangId:any = null;
   pageDetail:any=null;
   sliderDetail:any=null;
+  advertisemnetData:any=null;
+  
   imageBaseUrl:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
@@ -169,8 +172,11 @@ export class IndexComponent {
   // Manage Navbar Expansion
   isNavbarExpanded = false;
 
-  constructor(private advertisementService: AdvertisementService, private webPages: WebPages) {}
+  constructor( private shareservice:SharedService,private advertisementService: AdvertisementService, private webPages: WebPages) {
+   
+  }
 
+ 
 
   toggleNavbar(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
@@ -274,9 +280,15 @@ ngOnInit() {
 
   this.webPages.languageId$.subscribe((data) => {
     this.getPageDynamicData(data);
+    console.log('here is data',data)
   });
-  
+  this.shareservice.data$.subscribe((data) => {
+    if(data.action == 'updatedLang'){
+        this.getPageDynamicData(data.id);
+    }
+  });
 }
+
 
 closeAd(index: number) {
   this.adVisible[index] = false; // Set the specific ad to not visible based on index
@@ -284,13 +296,14 @@ closeAd(index: number) {
 
 
 getPageDynamicData(languageId:any){
+
   this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
     let pageData = res.data.pageData;
     let sliderData = res.data.sliderData;
-    console.log(res, pageData, sliderData);
-      if(res.status){
+    if(res.status){
         this.pageDetail = pageData;
         this.sliderDetail = sliderData;
+        this.advertisemnetData = res.data.advertisemnetData;
         this.imageBaseUrl = res.data.base_url;
       }
   });

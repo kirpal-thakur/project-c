@@ -1,10 +1,10 @@
-import { Component, Input, NgModule } from '@angular/core';
+// Angular Component
+import { Component, Input, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { WebPages } from '../../../../../services/webpages.service';
-import {
-  MatDialogRef, MAT_DIALOG_DATA
-} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+
 interface Language {
   id: string;
   description: string;
@@ -14,64 +14,60 @@ interface Language {
   created_at: string;
   slug: string;
 }
+
 @Component({
   selector: 'app-add-about-page',
   templateUrl: './add-about-page.component.html',
-  styleUrl: './add-about-page.component.scss'
+  styleUrls: ['./add-about-page.component.scss']
 })
-export class AddAboutPageComponent {
+export class AddAboutPageComponent implements OnInit {
   @Input() pageId: any;
-  languages: Language[] = [];
+  @Input() languages: Language[] = [];
 
   formData: any = {
+    about_banner_title: '',
+    about_banner_desc: '',
+    about_banner_bg_img: null,
+    about_banner_img: null,
+    country_section_title: '',
+    about_country_names: [],
+    country_section_banner_img: null,
+    about_hero_heading_txt: '',
+    about_hero_btn_txt: '',
+    about_hero_btn_link: '',
     page_id: '',
-    lang_id: '',
-    banner_bg_img: null,
-    banner_title: '',
-    form_title: '',
-    txt_before_radio_btn: '',
-    talent_label_txt: '',
-    club_label_txt: '',
-    scout_label_txt: '',
-    submit_btn_txt: '',
-    address: '',
-    email: '',
+    lang: localStorage.getItem('lang'),
+    lang_id: localStorage.getItem('lang_id'),
   };
 
-  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddAboutPageComponent>) {}
+  countries: string[] = ['Switzerland', 'France', 'Germany', 'Italy', 'Portugal'];
 
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddAboutPageComponent>) {}
 
-  ngOnInit() {
-    this.getAllLanguages();
+  ngOnInit(): void {
+    this.formData.page_id = this.pageId;
   }
 
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
-      if (response.status) {
-        console.log(response.data.languages,'get-all-languages');
-        this.languages = response.data.languages;
-      }
-    });
-  }
-
-
-  onFileChange(event: any): void {
-    this.formData.banner_bg_img = event.target.files[0];
+  onFileChange(event: any, fieldName: string): void {
+    this.formData[fieldName] = event.target.files[0];
   }
 
   submitForm(): void {
-    this.formData.page_id = this.pageId;
     const formData = new FormData();
     for (const key in this.formData) {
-      formData.append(key, this.formData[key]);
+      if (Array.isArray(this.formData[key])) {
+        this.formData[key].forEach((item: string, index: number) => {
+          formData.append(`${key}[${index}]`, item);
+        });
+      } else {
+        formData.append(key, this.formData[key]);
+      }
     }
     console.log(this.formData, 'submit-form');
-    this.webpages.addContactPage(formData).subscribe(response => {
+    this.webpages.addAboutPage(formData).subscribe(response => {
       this.dialogRef.close({
-        action: "page-added-successfully"
+        action: 'page-added-successfully'
       });
     });
   }
-
-
 }

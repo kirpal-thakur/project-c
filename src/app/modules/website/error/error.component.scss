@@ -4,13 +4,22 @@
 // .py_0{
 //     padding-top: 100px;
 // }
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
 .main-bnr {
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 620px;
+    height: 100vh; /* Adjusted to 100% */
     object-fit: cover;
-    position: relative;
+    // position: relative;
+    background-image: url(/assets/images/error-bnr.jpg);
+}
+.banner-image-error {
+    text-align: center;
 }
 
 .overlay {
@@ -28,12 +37,9 @@
     font-size: 55px;
     text-transform: uppercase;
     font-weight: 600;
-    position: absolute;
-    content: "";
-    z-index: 1;
-    padding: 18% 50% 10% 0%;
-    top: 0;
-    left: 5%;
+    margin-top: 34%;
+
+   
 }
 
 h3.banner-text-h3 {
@@ -42,27 +48,21 @@ h3.banner-text-h3 {
     margin-top: 2%;
 }
 
-img.check-image-light,
-img.check-image-dark {
-    position: absolute;
-    content: "";
-    z-index: 1;
-    padding: 16% 10% 0% 18%;
-    top: 0;
-    right: 0;
-}
+
 
 a.btn.btn-register {
-    position: absolute;
     border-radius: 20px;
     font-size: 18px;
     font-weight: 700;
     height: 41px;
     width: 278px;
-    content: "";
-    z-index: 1;
-    bottom: 15%;
-    left: 5%;
+    margin-top: 4%;
+    color: #072944;
+    background-color: #BDE34F;
+}
+img.check-image-dark {
+    margin-top: 31%;
+    margin-left: 20%;
 }
 
 
@@ -72,201 +72,109 @@ a.btn.btn-register {
 
 
 @media (min-width: 1441px) {
-    .banner-text-h2 {
-        padding: 12% 50% 10% 0%;
-        left: 5%;
-    }
-    a.btn.btn-register {
-        bottom: 30%;
-        left: 5%;
-    }
-    img.check-image-light, img.check-image-dark {
-        padding: 13% 8% 0% 0%;
-    }
+   
 }
 
 
 @media (min-width: 1919px) {
-    .banner-text-h2 {
-        padding: 12% 50% 10% 0%;
-        left: 16%;
-    }
-    a.btn.btn-register {
-        bottom: 20%;
-        left: 16%;
-    }
-    img.check-image-light, img.check-image-dark {
-        padding: 12% 16% 0% 0%;
-    }
+ 
 }
 
 @media (max-width: 1199px) {
     .banner-text-h2 {
-        font-size: 40px;
-        padding-top: 17%;
-    }
-
-    a.btn.btn-register {
-        bottom: 12%;
-    }
-
-    img.check-image-light,
-    img.check-image-dark {
-        height: 380px;
-        padding-right: 12%;
+        font-size: 45px;
+        font-weight: 600;
 
     }
+  
+ 
 
-    .main-bnr {
-        height: 430px;
-        object-fit: cover;
-    }
-
+  
 }
 
 @media (max-width: 991px) {
-    .main-bnr {
-        height: 350px;
-    }
-
-    .banner-text-h2 {
-        font-size: 28px;
-        left: 7%;
-    }
-
-    a.btn.btn-register {
-        height: 40px;
-        width: 240px;
-        left: 7%;
-    }
-
-    a.btn.btn-register {
-        bottom: 18%;
-    }
-
-    img.check-image-light,
     img.check-image-dark {
-        height: 300px;
-        padding-right: 12%;
+        margin-top: 75%;
+        margin-left: 20%;
+        width: 230px;
+
     }
+    .banner-text-h2 {
+        font-size: 35px;
+        font-weight: 600;
+        margin-top: 77%;
+    }
+
+    
+
+    
 
 }
 
 @media (max-width: 913px) {
-    a.btn.btn-register {
-        bottom: 10%;
-    }
+  
 }
 
 @media (max-width: 854px) {
-    .main-bnr {
-        height: 348px;
-    }
-
-    .banner-text-h2 {
-        font-size: 26px;
-        left: 12%;
-    }
-
-    a.btn.btn-register {
-        left: 12%;
-        bottom: 18%;
-    }
+ 
 }
 
 @media (max-width: 767px) {
 
-    .banner-text-h2 {
-        font-size: 26px;
-        left: 13%;
-    }
-
-    a.btn.btn-register {
-        left: 13%;
-        bottom: 27%;
-    }
-
-    img.check-image-light,
-    img.check-image-dark {
-        height: 270px;
-        padding-right: 10%;
-    }
+  
 }
 
 @media (max-width: 575px) {
-    .main-bnr {
-        height: 800px;
+    .banner-text-h2{
+        margin-top: 34%;
+        font-size: 44px;
     }
 
-    .banner-text-h2 {
-        font-size: 40px;
-        padding: 0;
-        top: 18%;
-        left: 5%;
-    }
-
-    a.btn.btn-register {
-        width: 94%;
-        left: 3%;
-        bottom: 55%;
-    }
-
-    img.check-image-light,
     img.check-image-dark {
-        height: 280px;
+        margin-top: 35%;
+    }
+    a.btn.btn-register{
         width: 100%;
-        top: 52%;
-        padding: 0;
+    }
+    img.check-image-dark {
+        margin-left: 0;
+    }
+    .banner-image-error {
+        text-align: center;
     }
 
 }
 
-@media (max-width: 540px) {}
+@media (max-width: 415px) {
+    .banner-text-h2{
+        font-size: 42px;
+    }
+}
 
 @media (max-width: 391px) {
-    .banner-text-h2 {
-        font-size: 38px;
+    .banner-text-h2{
+        font-size: 39px;
     }
 }
 
 @media (max-width: 376px) {
     .banner-text-h2 {
+        margin-top: 34%;
         font-size: 37px;
     }
-
-    .main-bnr {
-        height: 700px;
-    }
-
+ 
 }
-
-@media (max-width: 361px) {
+@media (max-width: 345px) {
     .banner-text-h2 {
         font-size: 35px;
     }
 }
 
 
-@media (max-width: 345px) {
-    .banner-text-h2 {
-        font-size: 32px;
-        left: 6%;
-        top: 20%;
-    }
-
-}
-
 @media (max-width: 321px) {
     .banner-text-h2 {
-        font-size: 30px;
+        margin-top: 34%;
+        font-size: 32px;
     }
-
-    .main-bnr {
-        height: 600px;
-    }
-
-    img.check-image-light,
-    img.check-image-dark {
-        height: 230px;
-    }
+   
 }

@@ -1,7 +1,7 @@
 <div class="dialog-content transfer_details">
   <div class="personal_edit">
     <div class="dialog-header m-auto">
-      <h2>{{'Edit Transfer Details' | translate}}</h2>
+      <h2>{{'TalentsTranslate.editTransferDetails' | translate}}</h2>
     </div>
     <div class="close_buttons">
       <button class="close-btn" (click)="onCancel()">X</button>
@@ -14,8 +14,8 @@
     <div class="overflow-card">
      <div class="row mb-4">
       <div class="form-group moving_select col-lg-6">
-        <h2>{{'Moving To' | translate}}</h2>
-        <label for="team_to" class="form-label">{{'Team' | translate}}</label>
+        <h2>{{'TalentsTranslate.moveTo' | translate}}</h2>
+        <label for="team_to" class="form-label">{{'TalentsTranslate.team' | translate}}</label>
         
         <input
           type="text"
@@ -37,8 +37,8 @@
         </ul>
       </div>
       <div class="form-group moving_select col-lg-6">
-        <h2>{{'Moving From' | translate}}</h2>
-        <label for="team_from" class="form-label">{{'Team' | translate}}</label>
+        <h2>{{'TalentsTranslate.movingFrom' | translate}}</h2>
+        <label for="team_from" class="form-label">{{'TalentsTranslate.team' | translate}}</label>
         
           <input
             type="text"
@@ -67,7 +67,7 @@
         <input class="form-select" type="text" id="session" name="session" [(ngModel)]="transfer.session" required>
       </div>
       <div class="form-group moving_select col-lg-6">
-        <label for="date_of_transfer" class="form-label">{{'Date' | translate}}</label>
+        <label for="date_of_transfer" class="form-label">{{'TalentsTranslate.transferDate' | translate}}</label>
         <div class="d-flex align-items-center justify-content-center">
           <input
             matInput
@@ -86,8 +86,8 @@
     </div>
   </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between mt-5">
-      <button class="cancel-btn" type="button" (click)="onCancel()">{{'Cancel' | translate}}</button>
-      <button class="save-btn" type="submit" [disabled]="!transferForm.valid">{{'Save' | translate}}</button>
+      <button class="cancel-btn" type="button" (click)="onCancel()">{{'TalentsTranslate.cancel' | translate}}</button>
+      <button class="save-btn" type="submit" [disabled]="!transferForm.valid">{{'TalentsTranslate.save' | translate}}</button>
     </div>
 
   </form>
