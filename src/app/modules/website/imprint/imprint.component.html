@@ -1,12 +1,12 @@
 <section class="website-code">
   <div class="main">
     <app-header></app-header>
-    <div class="main-bnr">
+    <div class="main-bnr"  style="background-image: url('{{base_url+banner_img}}');">
     <div class="overlay"></div>
     <div class="banner-inner py_0">
       <div class="container">
         <div class="about">
-          <h2 class="imprint-text">Imprint</h2>
+          <h2 class="imprint-text">{{banner_title}}</h2>
         </div>
       </div>
     </div>
@@ -21,9 +21,10 @@
     </div>
   </div>
   
-  <div class="imprint">
+  <div class="imprint" [innerHTML]="page_content">
+
     <div class="container">
-        <div class="imprint-cols">
+        <!-- <div class="imprint-cols">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="information">
@@ -93,7 +94,7 @@
             <p>We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
             </p>
         </div>
-  
+   -->
         <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
         <div *ngIf="adVisible[2]" class="leaderboard-image">
           <img src="./assets/images/leaderboard - 728x90.png">

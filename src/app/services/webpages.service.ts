@@ -84,6 +84,11 @@ export class WebPages {
             `${this.frontendApiUrl}get-page-by-slug?page_type=home&lang_id=${langId}`
         );
     }
+    getDynamicContentPage(content:any,langId:any):Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-page-by-slug?page_type=${content}&lang_id=${langId}`
+        );
+    }
 
     addContactPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-contactpage`, params);
