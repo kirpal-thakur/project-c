@@ -43,7 +43,7 @@ export class WebPagesComponent {
   }
 
   getAllPagesData(){
-    this.webpages.getAllPages().subscribe((response) => {
+    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.map((page: any) => ({
           ...page,
@@ -69,7 +69,7 @@ export class WebPagesComponent {
 
   getPublishOrDraftFilterData(type:string){
     this.allPages = [];
-    this.webpages.getAllPages().subscribe((response) => {
+    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.filter((page: any) => {
             if(page.status == type){

@@ -22,10 +22,10 @@ export class WebPages {
         this.apiUrl = environment?.apiUrl;
     }
 
-    getAllPages(): Observable<any> {
+    getAllPages(lang_id:any): Observable<any> {
 
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.apiUrl}admin/get-pages`
+            `${this.apiUrl}admin/get-pages?lang_id=${lang_id}`
         );
 
 
