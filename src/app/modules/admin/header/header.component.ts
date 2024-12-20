@@ -28,8 +28,8 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-<<<<<<< HEAD
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService,private talentService: TalentService, private socketService: SocketService) { }
+  constructor(private shareService:  SharedService, private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService,private talentService: TalentService, private socketService: SocketService) { }
+
   loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang: string = '';
@@ -38,16 +38,8 @@ export class HeaderComponent {
 
   isLoading: boolean = false; // Flag to track loading state
   isShowAllNotification: boolean = false;
-  language: any;
-=======
-  constructor(private shareService:  SharedService, private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
-  loggedInUser: any = localStorage.getItem('userData');
-  profileImgUrl: any = "";
-  lang: string = '';
-  domains: any = environment.domains; 
 
   languages: any = localStorage.getItem('languages');
->>>>>>> origin/main
   liveNotification: any[] = [];
   showNotification: boolean = false;
 
@@ -62,7 +54,6 @@ export class HeaderComponent {
   unseenCount = 0;
 
   ngOnInit() {
-<<<<<<< HEAD
 
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -75,9 +66,7 @@ export class HeaderComponent {
     }
 
     this.fetchNotifications(userId);
-=======
     this.languages = JSON.parse(this.languages);
->>>>>>> origin/main
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -159,7 +148,6 @@ export class HeaderComponent {
     });
   }
 
-<<<<<<< HEAD
   isUserOnline(senderId: number): boolean {
     if(!this.socketService.onlineUsers){
       return false;
@@ -185,8 +173,6 @@ export class HeaderComponent {
     
   }
 
-=======
->>>>>>> origin/main
   ChangeLang(lang: any) {
 
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
