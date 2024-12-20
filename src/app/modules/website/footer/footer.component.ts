@@ -65,6 +65,7 @@ export class FooterComponent implements OnInit{
 
   countries = environment.domains; // Assuming the countries are defined in the environment
   selectedCountryId: string = '';
+  domains: any = environment.domains;
 
 
   onCountryChange(event: any): void {
@@ -116,9 +117,9 @@ export class FooterComponent implements OnInit{
   lang:string = '';
   token= '';
   tokenVerified = false;
+  name: string = 'Switzerland';
 
   ngOnInit(): void {
-    this.lang = localStorage.getItem('lang') || 'en'
       // Check if the google.accounts.id library is loaded
       if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
         // Initialize Google Sign-In
@@ -181,10 +182,19 @@ export class FooterComponent implements OnInit{
     );
   }
 
-  ChangeLang(lang:any){
-    const selectedLanguage = lang.target.value;
+  ChangeLang(slug: string): void {
+    this.name = slug;
+
+    // Assuming the slug also represents the language (e.g., 'en', 'fr', 'de')
+    const selectedLanguage = slug; 
+
+    // Store the selected language in localStorage
     localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage)
+
+    // Switch the language using ngx-translate
+    this.translateService.use(selectedLanguage);
+
+    console.log(`Country (and language) changed to: ${slug}`);
   }
 
   toggleTheme(event: Event) {

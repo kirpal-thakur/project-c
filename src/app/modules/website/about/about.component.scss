@@ -317,7 +317,7 @@ img.vector-img {
   font-size: 30px;
   text-align: center;
   line-height: 50px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 img.join-btn {
@@ -348,7 +348,7 @@ img.join-btn {
   content: "";
   z-index: 1;
   position: absolute;
-  left: 0;
+  left: 1%;
   top: 43%;
 }
 
@@ -363,7 +363,7 @@ img.join-btn {
   content: "";
   z-index: 1;
   position: absolute;
-  right: 0;
+  right: 1%;
   top: 43%;
 }
 
@@ -521,8 +521,20 @@ img.join-btn {
   }
 
 }
+@media (max-width: 1200px) {
+.content-text {
+  padding: 50px 50px 0 50px;
+}
+.map img {
+  height: 600px;
+  width: 670px;
+}
+.map {
+  height: 540px;
+}
+}
 
-@media (max-width: 1199px) {
+@media (max-width: 1024px) {
   .main-bnr {
     height: 300px;
   }

@@ -10,7 +10,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{ 'Talent' | translate }}</mat-label>
+                      <mat-label>{{ 'TalentsTranslate.talents' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedRole" (selectionChange)="applyFilter()" id="roles" name="role">
                         <mat-option *ngFor="let role of roles" [value]="role.id">{{role.role}}</mat-option>
                       </mat-select>
@@ -22,7 +22,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{ 'Country' | translate }}</mat-label>
+                      <mat-label>{{ 'TalentsTranslate.country' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedCountry" (selectionChange)="applyFilter()" id="country" name="country">
                         <mat-option *ngFor="let country of countries" [value]="country.id">{{country.location}}</mat-option>
                       </mat-select>
@@ -34,7 +34,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'Position' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.position' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedPositions" (selectionChange)="applyFilter()" id="position" name="position" multiple>
                         <mat-option *ngFor="let position of positions" [value]="position.id">{{position.position}}</mat-option>
                       </mat-select>
@@ -46,7 +46,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'Age' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.age' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedAge" (selectionChange)="applyFilter()" id="age" name="age" multiple>
                         <mat-option *ngFor="let age of ageRange" [value]="age">{{ age }}</mat-option>
                       </mat-select>
@@ -58,11 +58,11 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'Foot' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.foot' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedFoot" (selectionChange)="applyFilter()" id="foot" name="foot" multiple>
-                        <mat-option value="right">Right</mat-option>
-                        <mat-option value="left">Left</mat-option>
-                        <mat-option value="both">Both</mat-option>
+                        <mat-option value="right">{{'TalentsTranslate.rightFoot' | translate}}</mat-option>
+                        <mat-option value="left">{{'TalentsTranslate.leftFoot' | translate}}</mat-option>
+                        <mat-option value="both">{{'TalentsTranslate.bothFoot' | translate}}</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
@@ -72,7 +72,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'Top Speed' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.topSpeed' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedTopSpeed" (selectionChange)="applyFilter()" id="top-speed" name="topSpeed">
                         <mat-option value="15">15-20 Km/hr</mat-option>
                         <mat-option value="20">20-25 km/hr</mat-option>
@@ -88,7 +88,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'League' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.league' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedLeague" (selectionChange)="applyFilter()" id="league" name="league">
                         <mat-option *ngFor="let league of leagues" [value]="league.id">{{league.league_name}}</mat-option>
                       </mat-select>
@@ -100,7 +100,7 @@
                 <th>
                   <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
-                      <mat-label>{{'Club' | translate}}</mat-label>
+                      <mat-label>{{'TalentsTranslate.clubRole' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedClub" (selectionChange)="applyFilter()" id="club" name="club">
                         <mat-option *ngFor="let club of clubs" [value]="club.id">{{club.club_name}}</mat-option>
                       </mat-select>
@@ -181,7 +181,7 @@
                       </div>
                     }
                   <div class="boosted-box" *ngIf="player.package_name == 'Booster'">
-                    {{'Boosted'|translate}}
+                    {{'TalentsTranslate.boosted'|translate}}
                   </div>
                 </div>
                 

@@ -56,11 +56,11 @@ export class HeaderComponent implements OnInit {
   companyName: string = '';
   verifyToken:any = null;
   verifyTime:any = null;
+ //this is get by the domain
+ countries: Array<{ code: string; name: string }> = [];
+ clubs: Array<{ id: number; name: string }> = [];
+ langs: any = environment.langs;
 
-  //this is get by the domain
-  countries: Array<{ code: string; name: string }> = [];
-  clubs: Array<{ id: number; name: string }> = [];
-  langs: any = environment.langs;
 
   allLanguage = [];
   selectedLanguageId = null;
@@ -189,9 +189,16 @@ export class HeaderComponent implements OnInit {
 
     this.getAllCountries();
     this.getAllClubs();
-    this.lang = localStorage.getItem('lang') || 'en';
+    this.lang = localStorage.getItem('slug') || 'en';
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
+    const savedLanguage = localStorage.getItem('slug');
+
+    //flag-images
+    if (savedLanguage) {
+      this.slug = savedLanguage;
+      this.translateService.use(savedLanguage);  // Load the language using ngx-translate
+    }
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
@@ -222,6 +229,8 @@ export class HeaderComponent implements OnInit {
   applyTheme() {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
+  // lang1: string = 'en'; // Default language
+  slug: string = 'en';
 
   ChangeLang(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;

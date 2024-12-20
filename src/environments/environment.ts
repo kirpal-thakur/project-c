@@ -16,14 +16,14 @@ export const environment = {
     ],
 
     langs:[
-      { language:'English', slug: "en", id: 1 },
-      { language:'German', slug: "de", id: 2 },
-      { language:'Italian', slug: "it", id: 3 },
-      { language:'French', slug: "fr", id: 4 },
-      { language:'Spanish', slug: "es", id: 5 },
-      { language:'Portuguese', slug: "pt", id: 6 },
-      { language:'Danish', slug: "da", id: 7 },
-      { language:'Swedish', slug: "sv", id: 8 },
+      { language:'English', slug: "en", id: 1, flag: "England.svg" },
+      { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
+      { language:'Italian', slug: "it", id: 3, flag: "Italy.svg"},
+      { language:'French', slug: "fr", id: 4, flag: "France.svg"},
+      { language:'Spanish', slug: "es", id: 5, flag: "Spain.svg" },
+      { language:'Portuguese', slug: "pt", id: 6, flag: "Portugal.svg" },
+      { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
+      { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
     ],
 
     domains:[

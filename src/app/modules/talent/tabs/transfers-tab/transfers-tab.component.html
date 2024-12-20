@@ -97,7 +97,7 @@
           </clipPath>
           </defs>
       </svg>    
-      {{'Upgrade to unlock'|translate}}
+      {{'TalentsTranslate.upgradeToUnlock'|translate}}
     </a>
   </div> 
 </div>
@@ -146,20 +146,20 @@
             </svg>
         </div>
         <div class="sasion_text">
-          <h6 class="details_2"> {{'Date' | translate}}</h6>
-          <h5 class="details-1">{{ transfer.date_of_transfer | date:'dd.MM.yyyy' }}</h5>
+          <h6 class="details_2"> {{'TalentsTranslate.date' | translate}}</h6>
+          <h5 class="details-1">{{ transfer.date_of_transfer | date:'MM.dd.yyyy' }}</h5>
         </div>
       </div>
     </div>
     <div class="col-lg-9">
     <div class="moving_box row align-items-center">
         <div class="col-lg-5 moving_logo">
-          <h2>{{'MOVING TO' | translate}}</h2>
+          <h2>{{'TalentsTranslate.movingTo' | translate}}</h2>
           <div class="moving-team-logo d-flex gap-3">
             <img src="{{transfer.team_logo_path_to}}" alt="" > 
             
             <div class="moving-team_name">
-              <h6 class="details_2">{{'Team' | translate}}</h6>
+              <h6 class="details_2">{{'TalentsTranslate.team' | translate}}</h6>
               <h5 class="details-1">{{transfer.team_name_to}}-{{transfer.team_type_to}} </h5>
             </div>
           </div>
@@ -178,11 +178,11 @@
           <button  class="edit_button"  (click)="openDeleteDialog(transfer.id)"><svg  width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path  d="M5.50065 17.5608C5.50065 18.5132 6.32565 19.2923 7.33398 19.2923H14.6673C15.6757 19.2923 16.5007 18.5132 16.5007 17.5608V7.17195H5.50065V17.5608ZM17.4173 4.57473H14.209L13.2923 3.70898H8.70898L7.79232 4.57473H4.58398V6.30621H17.4173V4.57473Z" fill="#787878"></path></svg><span >Delete</span></button>
         </div>
         <div class="col-lg-5 moving_logo">
-          <h2>{{'MOVING FROM' | translate}}</h2>
+          <h2>{{'TalentsTranslate.movingFrom' | translate}}</h2>
           <div class="moving-team-logo d-flex gap-3">          
             <img src="{{transfer.team_logo_path_from}}" alt="" >
             <div class="moving-team_name">
-              <h6 class="details_2">{{'Team' | translate}}</h6>
+              <h6 class="details_2">{{'TalentsTranslate.team' | translate}}</h6>
               <h5 class="details-1">{{transfer.team_name_from}}-{{transfer.team_type_from}} </h5>
             </div>
           </div>

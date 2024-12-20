@@ -25,6 +25,10 @@ p {
     font-size: 18px;
 }
 
+.features1 {
+    display: none;
+}
+
 // .main {
 //     background-color: #236115;
 // }
@@ -219,10 +223,9 @@ a.btn.btn-register {
 }
 
 .club_text {
-    padding: 60px;
-    // background: radial-gradient(circle at 100% 0%, #2B4A25, transparent);
+    padding: 25px;
     border-radius: 10px;
-    height: 250px;
+    height: 200px;
     margin-top: 100px;
 }
 
@@ -861,9 +864,11 @@ p.d-o-b {
     // padding-left: 50px;
     // padding-bottom: 20%;
 }
-.premium-text-data{
+
+.premium-text-data {
     font-size: 13px;
 }
+
 img.bg-image {
     position: absolute;
     content: "";
@@ -875,7 +880,8 @@ img.bg-image {
 
 .premium {
     width: 100%;
-    min-height: 338px; /* Ensures it starts with a base size */
+    min-height: 338px;
+    /* Ensures it starts with a base size */
     border-radius: 10px;
     padding: 50px 20px 90px 40px;
     position: relative;
@@ -937,9 +943,10 @@ span {
     display: flex;
     justify-content: right;
     margin-bottom: 10px;
-   
+
 }
-.billed-text{
+
+.billed-text {
     display: flex;
     justify-content: right;
     font-size: 13px;
@@ -1072,7 +1079,7 @@ span {
     content: "";
     z-index: 2;
     position: absolute;
-    left: 0;
+    left: 1%;
     top: 16%;
 }
 
@@ -1137,6 +1144,27 @@ span {
 /*--------------------------------------------------------------
 #  pricing
 --------------------------------------------------------------*/
+@media (min-width: 1440px){
+    .club-offers2 img {
+        right: 0;
+        top: 16%;
+        width: 280px;
+        height: 275px;
+    }
+    .club-offers1 img {
+        right: 51%;
+        height: 245px;
+        width: 285px;
+    }    
+    .accodian-image2 img {
+        left: 7%;
+    }
+    .banner-left {
+  
+        margin-right: 42%;
+    }
+}
+
 
 @media (min-width: 1536px) {
     .banner-image1 img {
@@ -1148,6 +1176,9 @@ span {
 
     .banner {
         height: 1100px;
+    }
+    .banner-left {
+        margin-right: 45%;
     }
 
     .banner-image2 img {
@@ -1503,14 +1534,14 @@ span {
 
 @media (max-width: 1281px) {
     .club_text {
-        padding: 37px;
+        padding: 20px;
         border-radius: 10px;
-        height: 220px;
+        height: 185px;
         margin-top: 100px;
     }
-    .banner-left{
+    .banner-left {
         top: 72%;
-        margin-right: 35%;
+        margin-right: 33%;
     }
 
     .banner-image1 img {
@@ -1525,24 +1556,23 @@ span {
 
     .club-offers2 img {
         right: 0;
-        top: 20%;
-        width: 260px;
-        height: 245px;
+        top: 21%;
+        width: 250px;
+        height: 240px;
     }
 
     .club-offers3 img {
-
         right: 26%;
         bottom: 5%;
-        width: 360px;
-        height: 290px;
+        width: 349px;
+        height: 280px;
     }
 
     .club-offers1 img {
-        top: 5%;
-        right: 50%;
-        height: 220px;
-        width: 260px;
+        top: 8%;
+        right: 51%;
+        height: 215px;
+        width: 250px;
     }
 
     .accodian-image2 img {
@@ -1648,8 +1678,72 @@ span {
         right: 71%;
     }
 }
+@media (max-width: 1200px){
+    .banner-image2 img {
+        width: 285px;
+        height: 220px;
+        top: 68%;
+    }
 
-@media(max-width: 1199px) {
+    .banner-image1 img {
+        width: 290px;
+        height: 505px;
+    }
+    .banner-image3 img {
+        width: 395px;
+        height: 270px;
+    }
+    .banner-image4 img {
+        top: 47%;
+        right: 0;
+        height: 380px;
+        width: 395px;
+    }
+    .banner-left {
+        margin-right: 31%;
+    }
+    .club-offers2 img {
+        width: 240px;
+        height: 240px;
+    }
+    .club-offers1 img {
+        height: 210px;
+        width: 250px;
+    }
+    .club-offers3 img {
+        right: 27%;
+        bottom: 5%;
+        width: 340px;
+        height: 270px;
+    }
+    .accodian-image3 img {
+        height: 160px;
+        width: 195px;
+    }
+    .accodian-image2 img {
+        height: 190px;
+        width: 240px;
+        top: 44.5%;
+    }
+    .networking-images1 img {
+        left: 15%;
+    }
+    .button1 {
+        top: 90%;
+        right: 64%;
+    }
+    .button4 {
+        top: 4%;
+        right: 30px;
+    }
+    .feature-player2{
+        right: 180px;
+    }
+
+
+}
+
+@media(max-width: 1024px) {
     .features {
         height: 520px;
     }
@@ -1764,7 +1858,7 @@ span {
 
     .button2 {
         top: 405px;
-        left: 47%;
+        // left: 47%;
     }
 
     .button3 {
@@ -1791,11 +1885,12 @@ span {
         font-size: 15px;
     }
 
-    .club_text {
-        padding: 25px;
-        height: 200px;
+    .club_text{
+        padding: 20px;
+        height: 170px;
         margin-top: 50px;
     }
+
 
     .accordion-item::after {
         width: 100%;
@@ -1979,6 +2074,9 @@ span {
 
 
 @media (max-width: 991px) {
+    .accordion-collapse {
+        transition: height 0.5s ease-in-out;
+    }
 
     .leaderboard-club-image img,
     .small-sqaure-image img,
@@ -2020,7 +2118,8 @@ span {
     }
 
     .features {
-        height: 980px;
+        // height: 980px;
+        display: none;
     }
 
     .banner-heading {
@@ -2113,10 +2212,12 @@ span {
         min-height: 270px;
         padding: 30px 20px 20px 10px;
     }
+
     .premium {
         padding-bottom: 0;
     }
-    .premium-img{
+
+    .premium-img {
         padding-top: 0;
         padding-left: 10px;
         height: 260px;
@@ -2133,84 +2234,6 @@ span {
 
     .left-accodian {
         padding-right: 0;
-    }
-
-    .club-offers1 img {
-        width: 288px;
-        height: 235px;
-        top: 13%;
-        right: 51%;
-    }
-
-    .club-offers2 img {
-        height: 260px;
-        width: 280px;
-        right: 8%;
-        top: 26%;
-    }
-
-    .club-offers3 img {
-        width: 350px;
-        height: 265px;
-        right: 32%;
-        bottom: 0;
-    }
-
-    .accodian-image1 img {
-        top: 28%;
-        right: 25%;
-        height: 300px;
-        width: 380px;
-    }
-
-    .accodian-image2 img {
-        right: 50%;
-        top: 65%;
-        height: 180px;
-        width: 220px;
-    }
-
-    .accodian-image3 img {
-        top: 63.5%;
-        right: 15%;
-        width: 210px;
-        height: 170px;
-    }
-
-    .networking-images1 img {
-        height: 453px;
-        width: 360px;
-        left: 20%;
-        top: 15%;
-    }
-
-    .networking-images2 img {
-        width: 230px;
-        height: 68px;
-        right: 10%;
-        top: 29%;
-    }
-
-    .networking-images3 img {
-        height: 68px;
-        width: 207px;
-        top: 75%;
-        left: 5%;
-    }
-
-    .feature-player1 {
-        top: 14%;
-        right: 58%;
-    }
-
-    .feature-player2 {
-        top: 51%;
-        right: 38%;
-    }
-
-    .feature-player3 {
-        top: 23%;
-        right: 9%;
     }
 
     .player-img img {
@@ -2294,234 +2317,128 @@ span {
         left: 10px;
     }
 
+    // features1
+
+    .features1 {
+        display: block;
+    }
+
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 500px;
+        position: relative;
+    }
+
+    .club-offers1 img {
+        width: 288px;
+        height: 235px;
+        top: 8%;
+        right: 53%;
+    }
+
+    .club-offers2 img {
+        height: 260px;
+        width: 280px;
+        right: 7%;
+        top: 20%;
+    }
+
+    .club-offers3 img {
+        width: 350px;
+        height: 265px;
+        right: 32%;
+        bottom: 4%;
+    }
+
+    .accodian-image1 img {
+        top: 8%;
+        right: 25%;
+        height: 300px;
+        width: 380px;
+    }
+
+    .accodian-image2 img {
+        left: 15%;
+        top: 44%;
+        height: 180px;
+        width: 220px;
+
+    }
+
+    .accodian-image3 img {
+        top: 44.5%;
+        right: 14%;
+        width: 210px;
+        height: 170px;
+    }
+
+    .networking-images1 img {
+        height: 453px;
+        width: 360px;
+        left: 20%;
+        top: 6%;
+    }
+
+    .networking-images2 img {
+        width: 230px;
+        height: 68px;
+        right: 10%;
+        top: 22%;
+    }
+
+    .networking-images3 img {
+        height: 68px;
+        width: 207px;
+        top: 69%;
+        left: 5%;
+    }
+
+    .feature-player1 {
+        top: 7%;
+        left: 1%;
+    }
+
+    .feature-player2 {
+        top: 46%;
+        right: 34%;
+    }
+
+    .feature-player3 {
+        top: 16%;
+        right: 1%;
+    }
+
+    .button1 {
+        top: 59%;
+        // left: 5%;
+        right: 70%;
+
+    }
+
+    .button2 {
+        // left: 50%;
+        top: 94%;
+        right: 19%;
+
+
+    }
+
+    .button3 {
+        top: 65%;
+        right: 7%;
+    }
+
+
+    .button4 {
+        top: 7%;
+        right: 19%;
+    }
+
 }
 
-// @media (max-width: 885px) {
-//     .banner-image1 img {
-//         width: 180px;
-//         height: 330px;
-//     }
 
-//     .banner-image2 img {
-//         width: 180px;
-//         height: 145px;
-//         top: 69%;
-//     }
-
-//     .banner-image3 img {
-//         width: 260px;
-//         height: 180px;
-//     }
-
-//     .banner-image4 img {
-//         height: 240px;
-//         width: 260px;
-//         top: 51%;
-//     }
-
-//     .club-offers3 img {
-//         width: 380px;
-//         height: 280px;
-//         right: 32%;
-//         bottom: 0;
-//     }
-
-//     .club-offers1 img {
-//         width: 300px;
-//         height: 240px;
-//         top: 10%;
-//         right: 52%;
-//     }
-
-//     .club-offers2 img {
-//         right: 7%;
-//         top: 23%;
-//     }
-
-//     .accodian-image1 img {
-//         top: 13%;
-//         right: 22%;
-//         height: 330px;
-//         width: 420px;
-//     }
-
-//     .accodian-image3 img {
-//         top: 51.5%;
-//         right: 7%;
-//         width: 250px;
-//         height: 207px;
-//     }
-
-//     .accodian-image2 img {
-//         right: 50%;
-//         top: 53%;
-//         height: 220px;
-//         width: 270px;
-//     }
-
-//     .networking-images1 img {
-//         height: 500px;
-//         width: 400px;
-//     }
-
-//     .networking-images2 img {
-//         width: 260px;
-//         height: 78px;
-//         right: 4%;
-//     }
-
-//     .networking-images3 img {
-//         height: 78px;
-//         width: 240px;
-//         left: 7%;
-//         top: 71%;
-//     }
-
-//     .networking-images3 {
-//         top: 77%;
-//         left: 17%;
-//     }
-
-//     .networking-images2 {
-//         right: 24%;
-//         top: 53%;
-//     }
-
-//     .player-img img {
-//         height: 230px;
-//         width: 230px;
-//     }
-//     .banner-left {
-//         padding-right: 64%;
-//     }
-
-//     .feature-player1 .player1,
-//     .feature-player2 .player2,
-//     .feature-player3 .player3 {
-//         height: 239px;
-//         width: 239px;
-//     }
-
-//     .feature-player1,
-//     .feature-player2,
-//     .feature-player3 {
-//         height: 238px;
-//         width: 238px;
-//     }
-
-//     .feature-player3 .player-name3 {
-//         bottom: 4px;
-//         width: 230px;
-//     }
-
-//     .feature-player2 .player-name2 {
-//         top: 204px;
-//         width: 230px;
-//     }
-
-//     .feature-player1 .player-name1 {
-//         top: 204px;
-//         width: 230px;
-//     }
-
-//     .feature-player1 {
-//         top: 15%;
-//         right: 59%;
-//     }
-
-//     .feature-player2 {
-//         top: 54%;
-//         right: 41%;
-//     }
-
-//     .feature-player3 {
-//         top: 24%;
-//         right: 9%;
-//     }
-
-//     .button1 {
-//         top: 66%;
-//         left: 6%;
-//     }
-
-//     .button2 {
-//         left: 56%;
-//         top: 103%;
-//     }
-
-//     .button4 {
-//         top: 16%;
-//     }
-
-//     .button3 {
-//         top: 74%;
-//         right: 15%;
-//     }
-
-// }
-
-// @media (max-width: 835px) {
-
-//     .banner-image1 img,
-//     .banner-image2 img {
-//         right: 34%;
-//     }
-
-//     .club-offers2 img {
-//         right: 12%;
-//     }
-
-//     .networking-images2 {
-//         right: 20%;
-//     }
-
-//     .feature-player2 {
-//         right: 40%;
-//     }
-
-//     .feature-player3 {
-//         right: 15%;
-//     }
-// }
-
-// @media (max-width: 800px) {
-//     .banner-image1 img {
-//         right: 35%;
-//     }
-
-//     .banner-image2 img {
-//         right: 35%;
-//     }
-
-//     .club-offers1 img {
-//         top: 10%;
-//         right: 53%;
-//     }
-
-//     .club-offers2 img {
-//         right: 8%;
-//         top: 24%;
-//     }
-
-//     .networking-images2 {
-//         right: 16%;
-//     }
-
-//     .networking-images3 {
-//         top: 77%;
-//         left: 13%;
-//     }
-
-//     .feature-player2 {
-//         top: 54%;
-//         right: 39%;
-//     }
-
-//     .feature-player3 {
-//         top: 24%;
-//         right: 8%;
-//     }
-// }
 
 @media (max-width: 767px) {
     .features {
@@ -2668,11 +2585,11 @@ span {
 
     .button1 {
         top: 67%;
-        left: 0;
+        // left: 0;
     }
 
     .button2 {
-        left: 71%;
+        // left: 71%;
         top: 97%;
     }
 
@@ -2705,6 +2622,7 @@ span {
     h3 {
         font-size: 25px;
     }
+
     .banner-left {
         margin-right: 0;
     }
@@ -2748,72 +2666,6 @@ span {
 
     .club-scout.py_0 {
         padding-top: 40px;
-    }
-
-    .club-offers1 img {
-        width: 200px;
-        height: 165px;
-        top: 7%;
-        left: 0;
-    }
-
-    .club-scouts {
-        height: 350px;
-    }
-
-    .club-offers2 img {
-        height: 180px;
-        width: 190px;
-        top: 22%;
-        right: 0;
-    }
-
-    .club-offers3 img {
-        width: 270px;
-        height: 200px;
-        left: 8%;
-    }
-
-    .accodian-image1 img {
-        top: 15%;
-        right: 15%;
-        height: 235px;
-        width: 300px;
-    }
-
-    .accodian-image3 img {
-        top: 56%;
-        right: 0;
-        width: 164px;
-        height: 135px;
-    }
-
-    .accodian-image2 img {
-        right: 0;
-        top: 56%;
-        height: 155px;
-        width: 190px;
-        left: 0;
-    }
-
-    .networking-images1 img {
-        height: 330px;
-        width: 265px;
-        left: 15%;
-    }
-
-    .networking-images2 img {
-        width: 160px;
-        height: 47px;
-        right: 0;
-        top: 29%;
-    }
-
-    .networking-images3 img {
-        height: 47px;
-        width: 143px;
-        top: 80%;
-        left: 0;
     }
 
     .player-img img {
@@ -2946,9 +2798,11 @@ span {
         top: 59px;
         left: 7px;
     }
+
     img.bg-image {
         width: 100%;
     }
+
     .feature-player3 .flag-image7 {
         top: 58px;
         left: 7px;
@@ -2983,6 +2837,119 @@ span {
         font-size: 25px;
     }
 
+    //features1
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 350px;
+    }
+
+    .club-offers1 img {
+        width: 180px;
+        height: 150px;
+        top: 7%;
+        left: 0;
+    }
+
+    .club-scouts {
+        height: 350px;
+    }
+
+    .club-offers2 img {
+        height: 160px;
+        width: 165px;
+        top: 22%;
+        right: 0;
+    }
+
+    .club-offers3 img {
+        width: 265px;
+        height: 195px;
+        left: 5%;
+        bottom: 7%;
+    }
+
+    .accodian-image1 img {
+        top: 6%;
+        right: 15%;
+        height: 235px;
+        width: 300px;
+    }
+
+    .accodian-image3 img {
+        top: 47%;
+        right: 0;
+        width: 164px;
+        height: 135px;
+    }
+
+    .accodian-image2 img {
+        right: 0;
+        top: 47%;
+        height: 155px;
+        width: 190px;
+        left: 0;
+    }
+
+    .networking-images1 img {
+        height: 330px;
+        width: 265px;
+        left: 15%;
+    }
+
+    .networking-images2 img {
+        width: 160px;
+        height: 47px;
+        right: 0;
+        top: 22%;
+    }
+
+    .networking-images3 img {
+        height: 47px;
+        width: 143px;
+        top: 72%;
+        left: 0;
+    }
+
+    .feature-player1 {
+        top: 8%;
+        left: -22%;
+
+    }
+
+    .feature-player2 {
+        top: 44%;
+        right: 35%;
+    }
+
+    .feature-player3 {
+        top: 19%;
+        right: -6%;
+    }
+
+    .button1 {
+        top: 92%;
+        right: 60%;
+    }
+
+    .button2 {
+        // left: 53%;
+        top: 92%;
+        right: -3%;
+
+    }
+
+    .button3 {
+        top: 66%;
+        right: 0;
+    }
+
+    .button4 {
+        top: 8%;
+        right: 7%;
+    }
+
 }
 
 @media (max-width: 415px) {
@@ -3005,19 +2972,36 @@ span {
         width: 243px;
     }
 
+
+    //features
     .club-offers2 img {
         height: 178px;
         width: 180px;
         top: 22%;
-        right: 0;
+        right: -5%;
     }
 
     .club-offers1 img {
         width: 195px;
         height: 165px;
         top: 7%;
-        left: 0;
+        left: -5%;
     }
+
+    .club-offers3 img {
+        bottom: 2%;
+    }
+
+    .networking-images2 img {
+        right: -5%;
+    }
+
+    .networking-images3 img {
+        left: -5%;
+    }
+
+
+
 }
 
 @media (max-width: 391px) {
@@ -3043,24 +3027,23 @@ span {
         top: 84%;
     }
 
+    //features1
+
     .club-offers1 img {
         width: 180px;
         height: 150px;
         top: 12%;
-        left: 0;
     }
 
     .club-offers2 img {
         height: 170px;
         width: 175px;
         top: 26%;
-        right: 0;
     }
 
     .club-offers3 img {
         width: 265px;
         height: 190px;
-        left: 4%;
     }
 
     .accodian-image1 img {
@@ -3071,45 +3054,49 @@ span {
     }
 
     .accodian-image2 img {
-        right: 0;
+
         top: 52%;
         height: 140px;
         width: 170px;
-        left: 0;
     }
 
     .accodian-image3 img {
         top: 52%;
-        right: 0;
         width: 150px;
         height: 120px;
     }
 
     .feature-player3 {
         top: 23%;
-        right: 0;
+
     }
 
     .feature-player1 {
-        top: 15%;
-        right: 0;
-        left: 0;
+        top: 8%;
+        left: -25%;
+    }
+
+    .button4 {
+        top: 10%;
+        right: 3%;
     }
 
     .button1 {
-        right: 66%;
+        top: 91%;
+        right: 67%;
     }
 
     .button2 {
-        right: 8%;
-    }
-
-
-    .button2 {
-        left: 50%;
-        top: 96%;
+        top: 93%;
         right: 6%;
     }
+
+    .button3 {
+        top: 71%;
+        right: -4%;
+    }
+
+
 
 }
 
@@ -3121,48 +3108,6 @@ span {
 
     .banner-data {
         padding-top: 60px;
-    }
-
-    .club-offers3 img {
-        left: 12%;
-    }
-
-    .accodian-image1 img {
-        top: 11%;
-        right: 20%;
-        height: 180px;
-        width: 230px;
-    }
-
-    .accodian-image3 img {
-        top: 50.5%;
-        right: 0;
-        width: 150px;
-        height: 120px;
-    }
-
-    .accodian-image2 img {
-        right: 0;
-        top: 50.5%;
-        height: 135px;
-        width: 165px;
-        left: 0;
-    }
-
-    .networking-images1 img {
-        height: 260px;
-        width: 207px;
-        left: 18%;
-    }
-
-    .networking-images2 img {
-        width: 130px;
-        height: 39px;
-    }
-
-    .networking-images3 img {
-        height: 40px;
-        width: 125px;
     }
 
     .banner {
@@ -3200,27 +3145,6 @@ span {
 
     .club-scouts {
         height: 280px;
-    }
-
-    .club-offers1 img {
-        width: 170px;
-        height: 140px;
-        top: 7%;
-        left: 0;
-    }
-
-    .club-offers2 img {
-        height: 155px;
-        width: 170px;
-        top: 22%;
-        right: 0;
-    }
-
-    .club-offers3 img {
-        left: 7%;
-        width: 235px;
-        height: 180px;
-        top: 43%;
     }
 
 
@@ -3338,22 +3262,6 @@ span {
         height: 40px;
     }
 
-    .feature-player1 {
-        top: 7%;
-        right: 0;
-        left: 0;
-    }
-
-    .feature-player2 {
-        top: 47%;
-        right: 34%;
-    }
-
-    .feature-player3 {
-        top: 18%;
-        right: 0;
-    }
-
     .button1 .mat-icon {
         font-size: 9px;
         width: 68px;
@@ -3398,26 +3306,6 @@ span {
         height: 22px;
     }
 
-    .button1 {
-        top: 59%;
-        left: 0;
-    }
-
-    .button2 {
-        left: 50%;
-        top: 100%;
-    }
-
-    .button3 {
-        top: 71%;
-        right: 10px;
-
-    }
-
-    .button4 {
-        top: 7%;
-        right: 7%;
-    }
 
     p.d-o-b {
         font-size: 9px;
@@ -3442,6 +3330,106 @@ span {
         height: 46px;
     }
 
+    //features1
+
+    .club-offers1 img {
+        width: 170px;
+        height: 140px;
+        top: 7%;
+        left: -6%;
+    }
+
+    .club-offers2 img {
+        height: 155px;
+        width: 170px;
+        top: 22%;
+        right: -6%;
+    }
+
+    .club-offers3 img {
+        left: 1%;
+        width: 235px;
+        height: 180px;
+        top: 38%;
+    }
+
+    .accodian-image1 img {
+        top: 11%;
+        right: 20%;
+        height: 180px;
+        width: 230px;
+    }
+
+    .accodian-image3 img {
+        top: 42.5%;
+        right: 0;
+        width: 150px;
+        height: 120px;
+    }
+
+    .accodian-image2 img {
+        right: 0;
+        top: 42.5%;
+        height: 135px;
+        width: 165px;
+        left: 0;
+    }
+
+    .networking-images1 img {
+        height: 260px;
+        width: 207px;
+        left: 18%;
+        top: 10%;
+    }
+
+    .networking-images2 img {
+        width: 130px;
+        height: 39px;
+        top: 23%;
+    }
+
+    .networking-images3 img {
+        height: 40px;
+        width: 125px;
+        top: 62%;
+    }
+
+    .feature-player1 {
+        top: 7%;
+        right: 0;
+        left: -27%;
+    }
+
+    .feature-player2 {
+        top: 39%;
+        right: 34%;
+    }
+
+    .feature-player3 {
+        top: 18%;
+        right: -8%;
+    }
+
+    .button1 {
+        top: 50%;
+        right: 86%;
+    }
+
+    .button2 {
+        top: 82%;
+    }
+
+    .button3 {
+        top: 60%;
+        right: -4%;
+
+    }
+
+    .button4 {
+        top: 7%;
+        right: 7%;
+    }
+
 
 }
 
@@ -3458,19 +3446,19 @@ span {
         height: 150px;
         width: 160px;
         top: 23%;
-        right: 0;
+    
     }
 
     .club-offers1 img {
         width: 165px;
         height: 135px;
         top: 8%;
-        left: 0;
+     
     }
 
     .accodian-image3 img {
         top: 50.5%;
-        right: 0;
+     
         width: 145px;
         height: 115px;
     }
@@ -3480,7 +3468,7 @@ span {
         top: 50.5%;
         height: 135px;
         width: 160px;
-        left: 0;
+     
     }
 }
 
@@ -3587,66 +3575,6 @@ span {
         height: 700px;
     }
 
-    .club-offers1 img {
-        width: 145px;
-        height: 122px;
-        top: 7%;
-        left: 0;
-    }
-
-    .club-offers2 img {
-        height: 135px;
-        width: 145px;
-        top: 22%;
-        right: 0;
-    }
-
-    .club-offers3 img {
-        left: 6%;
-        width: 200px;
-        height: 150px;
-        top: 46%;
-    }
-
-    .accodian-image2 img {
-        right: 0;
-        top: 50.5%;
-        height: 120px;
-        width: 145px;
-        left: 0;
-    }
-
-    .accodian-image1 img {
-        top: 11%;
-        right: 16%;
-        height: 160px;
-        width: 210px;
-    }
-
-    .accodian-image3 img {
-        top: 50.5%;
-        right: 0;
-        width: 120px;
-        height: 100px;
-    }
-
-    .networking-images1 img {
-        height: 240px;
-        width: 190px;
-        left: 15%;
-    }
-
-    .networking-images2 img {
-        width: 118px;
-        height: 35px;
-        top: 31%;
-    }
-
-    .networking-images3 img {
-        height: 35px;
-        width: 106px;
-        top: 85%;
-    }
 
     .player-img img {
         height: 110px;
@@ -3686,22 +3614,6 @@ span {
         height: 40px;
     }
 
-    .feature-player2 {
-        top: 46%;
-        right: 34%;
-    }
-
-    .button1 {
-        top: 97%;
-        left: 0;
-        right: 63%;
-    }
-
-    .button2 {
-        left: 50%;
-        top: 100%;
-        right: 5%;
-    }
 
     img.flag-img {
         height: 22px;
@@ -3729,5 +3641,110 @@ span {
 
     /*----------------------------------- accodian ------------------------------- */
 
+    //features
+
+    .accodian-box2-images,
+    .networking-images,
+    .feature-players,
+    .club-scout-box {
+        height: 260px;
+    }
+
+    .club-offers1 img {
+        width: 145px;
+        height: 122px;
+        top: 7%;
+        left: -8%;
+    }
+
+    .club-offers2 img {
+        height: 135px;
+        width: 145px;
+        top: 22%;
+        right: -8%;
+    }
+
+    .club-offers3 img {
+        left: 0;
+        width: 200px;
+        height: 150px;
+        top: 42%;
+
+    }
+
+    .accodian-image2 img {
+        right: 0;
+        top: 40.5%;
+        height: 120px;
+        width: 145px;
+        left: 0;
+    }
+
+    .accodian-image1 img {
+        top: 3%;
+        right: 16%;
+        height: 160px;
+        width: 210px;
+    }
+
+    .accodian-image3 img {
+        top: 40.5%;
+        right: 0;
+        width: 120px;
+        height: 100px;
+    }
+
+    .networking-images1 img {
+        height: 240px;
+        width: 190px;
+        left: 15%;
+    }
+
+    .networking-images2 img {
+        width: 118px;
+        height: 35px;
+        top: 26%;
+        right: -8%;
+    }
+
+    .networking-images3 img {
+        height: 35px;
+        width: 106px;
+        top: 74%;
+        left: -8%;
+    }
+
+    .feature-player2 {
+        top: 46%;
+        right: 34%;
+    }
+
+    .feature-player1 {
+        top: 7%;
+        right: 0;
+        left: -34%;
+    }
+
+    .button1 {
+        top: 93%;
+        right: 71%;
+    }
+
+    .button2 {
+        top: 94%;
+        right: 1%;
+
+    }
+
+    .button3 {
+        top: 66%;
+        right: -6%;
+    }
+
+    .button4 {
+        top: 7%;
+        right: 2%;
+
+    }
 
 }

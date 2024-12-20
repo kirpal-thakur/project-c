@@ -2,7 +2,7 @@
   <div class="footer-top">
     <div class="container">
       <div class="row">
-        <div class="col-lg-6 col-md-12 col-12 footer-contact">
+        <div class="col-lg-4 col-md-12 col-12 footer-contact">
           <div class="footer-logo">
             <img src="./assets/images/pink-logo.png">
           </div>
@@ -17,14 +17,14 @@
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-4  col-12 footer-links">
-          <h4>{{ 'footerTranslate.product' | translate }}</h4>
+        <div class="col-lg-3 col-md-4  col-12 footer-links">
+          <h4>{{ 'product' | translate }}</h4>
           <ul>
-            <li><a [routerLink]="'/pricing'">{{ 'footerTranslate.pricing' | translate }}</a></li>
+            <li><a [routerLink]="'/pricing'">{{ 'pricing' | translate }}</a></li>
             <li>
               <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
                 data-bs-target="#exampleModal-login">
-                {{ 'footerTranslate.signIn' | translate }}
+                {{ 'signIn' | translate }}
                 <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                 </svg>
@@ -32,51 +32,70 @@
             </li>
             <li>
               <a data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                {{ 'footerTranslate.createAccount' | translate }}</a>
+                {{ 'createAccount' | translate }}</a>
             </li>
-            <li><a [routerLink]="'/faq'">{{ 'footerTranslate.faq' | translate }}</a></li>
+            <li><a [routerLink]="'/faq'">{{ 'faq' | translate }}</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-2 col-md-4  col-12 footer-links">
-          <h4>{{ 'footerTranslate.company' | translate }}</h4>
+        <div class="col-lg-3 col-md-4  col-12 footer-links">
+          <h4>{{ 'company' | translate }}</h4>
           <ul>
-            <li><a [routerLink]="'/talent'">{{ 'footerTranslate.talents' | translate }}</a></li>
-            <li><a [routerLink]="'/club'">{{ 'footerTranslate.club$Scouts' | translate }}</a></li>
-            <li><a [routerLink]="'/about'">{{ 'footerTranslate.about' | translate }}</a></li>
-            <li><a [routerLink]="'/news'">{{ 'footerTranslate.news&Media' | translate }}</a></li>
-            <li><a [routerLink]="'/contact'">{{ 'footerTranslate.contact' | translate }}</a></li>
+            <li><a [routerLink]="'/talent'">{{ 'talents' | translate }}</a></li>
+            <li><a [routerLink]="'/club'">{{ 'clubsAndScouts' | translate }}</a></li>
+            <li><a [routerLink]="'/about'">{{ 'about' | translate }}</a></li>
+            <li><a [routerLink]="'/news'">{{ 'news&Media' | translate }}</a></li>
+            <li><a [routerLink]="'/contact'">{{ 'contact' | translate }}</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-md-4 col-12 footer-links">
-          <h4>{{ 'footerTranslate.legal' | translate }}</h4>
+          <h4>{{ 'legal' | translate }}</h4>
           <ul>
-            <li><a [routerLink]="'/imprint'">{{ 'footerTranslate.imprint' | translate }}</a></li>
-            <li><a [routerLink]="'/privacy'">{{ 'footerTranslate.privacy' | translate }}</a></li>
-            <li><a [routerLink]="'/terms'">{{ 'footerTranslate.terms' | translate }}</a></li>
-            <li><a [routerLink]="'/cookie'">{{ 'footerTranslate.cookiePolicy' | translate }}</a></li>
+            <li><a [routerLink]="'/imprint'">{{ 'imprint' | translate }}</a></li>
+            <li><a [routerLink]="'/privacy'">{{ 'privacy' | translate }}</a></li>
+            <li><a [routerLink]="'/terms'">{{ 'terms' | translate }}</a></li>
+            <li><a [routerLink]="'/cookie'">{{ 'cookiePolicy' | translate }}</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="select-country">
-        <a class="c-name">{{ 'footerTranslate.selectCountry' | translate }}</a>
+      <!-- <div class="select-country">
+        <a class="c-name">{{ 'selectCountry' | translate }}</a>
         <select class="form-select" aria-label="Default select example" (change)="onCountryChange($event)">
-          <option value="" disabled selected class="country">{{ 'footerTranslate.selectCountry' | translate }}</option>
-          <option *ngFor="let country of countries" [value]="country.id" [selected]="country.slug === 'ch'" class="options-country">
-            <!-- Use country.flag for the correct flag image -->
-            <img [src]="'https://api.socceryou.ch/uploads/logos/' + country.flag" width="30" height="24" class="me-2" />
-            {{ country.name }}
+          <option value="" disabled selected class="country">{{ 'selectCountry' | translate }}</option>
+          <option *ngFor="let domain of domains" [value]="country.id" [selected]="country.slug === 'ch'" class="options-country">
+            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+            {{ domain.name }}
           </option>
         </select>
+      </div> -->
+
+
+      <div class="form-select1">
+        <a class="form-select select-country" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ name }}
+        </a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <p class="country">{{ 'selectCountry' | translate }}</p>
+          <a href="#" *ngFor="let domain of domains" class="dropdown-item ai-icon options-country"
+            [class.selected]="name === domain.name" (click)="ChangeLang(domain.name)">
+            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
+            <span>{{ domain.name }}</span>
+          </a>
+        </div>
       </div>
+
+
+
+
+
 
     </div>
   </div>
 
   <div class="footer-bottom bgprimary">
     <div class="text-center text-white">
-      <p class="mb-0">{{ 'footerTranslate.copyright' | translate }}</p>
+      <p class="mb-0">{{ 'copyright' | translate }}</p>
     </div>
   </div>
 </footer>
