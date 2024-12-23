@@ -103,19 +103,19 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Fetch initial data
     this.getAllCountries();
     this.getAllClubs();
-    this.lang = localStorage.getItem('slug') || 'en';
+  
+    // Set default or stored language
+    this.slug = localStorage.getItem('slug') || 'en';
+    this.translateService.use(this.slug);
+  
+    // Retrieve and apply dark mode setting
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
-    const savedLanguage = localStorage.getItem('slug');
-
-    //flag-images
-    if (savedLanguage) {
-      this.slug = savedLanguage;
-      this.translateService.use(savedLanguage);  // Load the language using ngx-translate
-    }
-
+  
+    // Handle token verification from query params
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       if (this.token) {
@@ -137,13 +137,13 @@ export class HeaderComponent implements OnInit {
         );
       }
     });
-
+  
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
       this.initializeGoogleSignIn();
     }
   }
-
+  
   setActive(index: number): void {
     this.activeIndex = index; // Set the active index
     this.role = index === 1 ? 4 : index === 2 ? 2 : 3; // Update role based on activeIndex
@@ -168,19 +168,29 @@ export class HeaderComponent implements OnInit {
   // lang1: string = 'en'; // Default language
   slug: string = 'en';
 
-  ChangeLang(lang: any) { 
-    // Determine if the provided argument is a string or a language event object
-    const selectedLanguage = typeof lang !== 'string' ? lang.target.value : lang;
-    
-    // Update the class property for the language (optional, depending on your needs)
-    this.slug = selectedLanguage; 
-    
+  ChangeLang(lang: string | Event): void {
+    // Determine if lang is a string or an event object
+    const selectedLanguage = typeof lang === 'string'
+      ? lang
+      : (lang as Event).target instanceof HTMLSelectElement
+        ? (lang.target as HTMLSelectElement).value
+        : '';
+
+    if (!selectedLanguage) {
+      console.error('Invalid language selection');
+      return;
+    }
+
+    // Update the language
+    this.slug = selectedLanguage;
+
     // Store the selected language in localStorage
-    localStorage.setItem('lang', selectedLanguage); 
-    
-    // Use the translation service to update the language
+    localStorage.setItem('slug', selectedLanguage);
+
+    // Update the translation
     this.translateService.use(selectedLanguage);
-}
+  }
+  
 
 
 //   ChangeLang(event: Event): void {
@@ -495,11 +505,6 @@ export class HeaderComponent implements OnInit {
     console.log('Company Name:', this.companyName);
   }
 
-  // isNavbarExpanded = false;
-
-  // toggleNavbar() {
-  //   this.isNavbarExpanded = !this.isNavbarExpanded;
-  // }
 
   closeNavbar() {
     this.isNavbarExpanded = false;

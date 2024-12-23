@@ -280,10 +280,16 @@ a {
   width: 600px;
 }
 
+// .banner-btn .btn {
+//   padding: 10px 90px;
+//   border-radius: 20px;
+//   font-weight: 700;
+// }
 .banner-btn .btn {
-  padding: 10px 90px;
+  padding: 10px 0;
   border-radius: 20px;
   font-weight: 700;
+  width: 278px;
 }
 
 .banner-inner {
@@ -3182,7 +3188,8 @@ img.success-image {
 
   a.login-btn {
     color: white;
-    padding: 8px 80px;
+    padding: 8px 0;
+    width: 278px;
     background-color: transparent;
     border-radius: 20px;
     border: 1px solid white;
@@ -3954,7 +3961,7 @@ img.success-image {
   }
 
   a.login-btn {
-    padding: 10px 90px;
+    // padding: 10px 90px;
     font-size: 16px;
   }
 
@@ -4919,9 +4926,9 @@ img.success-image {
     font-size: 15px;
   }
 
-  a.login-btn {
-    padding: 8px 90px;
-  }
+  // a.login-btn {
+  //   padding: 8px 90px;
+  // }
 
   .joined-text h3 {
     font-size: 18px;
