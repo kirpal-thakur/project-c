@@ -87,6 +87,7 @@ import { AddHomePageComponent } from './website/web-pages/add-home-page/add-home
 import { AddContactPageComponent } from './website/web-pages/add-contact-page/add-contact-page.component';
 import { AddAboutPageComponent } from './website/web-pages/add-about-page/add-about-page.component';
 import { AddContentPageComponent } from './website/web-pages/add-content-page/add-content-page.component';
+import { AddNewsPageComponent } from './website/web-pages/add-news-page/add-news-page.component';
 import { AddFaqPageComponent } from './website/web-pages/add-faq-page/add-faq-page.component';
 export const MY_FORMATS = {
   parse: {
@@ -163,6 +164,7 @@ export const MY_FORMATS = {
     AddContactPageComponent,
     AddAboutPageComponent,
     AddContentPageComponent,
+    AddNewsPageComponent,
     AddFaqPageComponent
   ],
   imports: [
