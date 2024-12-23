@@ -1,5 +1,5 @@
 <!-- unlock page  -->
-<div class="unlock_page" *ngIf="!isPremium && isPremium">
+<div class="unlock_page" *ngIf="!isPremium ">
   <div class="table-responsive px-3 bg-0C3453" style="width: 100%;">
     <div class="new_performance">
     </div>
@@ -100,7 +100,7 @@
 </div>
 
 
-<div class="table-responsive px-3 bg-0C3453" style="width: 100%;"  >
+<div class="table-responsive px-3 bg-0C3453" style="width: 100%;"  *ngIf="isPremium ">
   <div class="new_performance">
     <button (click)="openAddDialog()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -118,7 +118,7 @@
         <div class="team_logo row justify-content-between align-items-center">
           <div class="col-lg-8 d-flex team-logos">
             <div class="team-logo-img">
-              <img src="{{performance.team_club_logo_path}}" alt=""/>                 
+              <img src="{{performance.team_club_logo_path}}" alt=""/>
             </div>
             <div class="team-names">
               <h6 class="details_2">{{'TalentsTranslate.team' | translate}}</h6>
@@ -147,9 +147,9 @@
         </div>
         <div class="d-flex align-items-center justify-content-between underline_gap">
           <td>
-            <div class="d-flex country-details">              
+            <div class="d-flex country-details">
               <div class="main-template" *ngIf="editableId != performance.id">
-                <img src="{{performance.country_flag_path}}"  alt=""> 
+                <img src="{{performance.country_flag_path}}"  alt="">
               </div>
               <div class="country_name">
                 <h6 class="details_2 m-0">{{'TalentsTranslate.country' | translate}}</h6>

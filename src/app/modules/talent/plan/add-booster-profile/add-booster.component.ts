@@ -17,7 +17,7 @@ export class AddBoosterComponent {
   @Input() audiences = [
     { role: "Clubs", id: 2 },
     { role: "Scouts", id: 3 },
-    { role: "Talents", id: 4 },
+    { role: "Player", id: 4 },
   ];     // List of all audiences
   selectedAudienceIds: number[] = []; // Store only audience IDs
   id: any;

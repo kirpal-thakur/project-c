@@ -1,24 +1,55 @@
 import { Component, HostListener } from '@angular/core';
-
+import { WebPages } from '../../../services/webpages.service';
+import { title } from 'process';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent {
-  images = [
-    { src: 'assets/images/slider-image.png', alt: 'Image 1' },
-    { src: 'assets/images/About-us-banner.png', alt: 'Image 2' },
-    { src: 'assets/images/banner-bg.png', alt: 'Image 3' }
-  ];
-
+ 
+  constructor(private webPages: WebPages) { }
   currentImageIndex = 0;
+  banner_title:string='';
+  news_title:string='';
+  slider_title:string='';
+  slider_date:string='';
+  slider_btn_txt:string='';
+  news_img_path:string='';
+  latestNewsData:any;
   intervalId: any;
   touchStartX: number = 0;
-
+  advertisemnetData:any;
+  advertisemnetUrl:string = '';
+  base_url:string= '';
+  images = [
+    { featured_image: 'assets/images/slider-image.png', title: 'Image 1' },
+    { featured_image: 'assets/images/About-us-banner.png', title: 'Image 2' },
+    { featured_image: 'assets/images/banner-bg.png', title: 'Image 3' }
+  ];
   ngOnInit() {
     this.startAutoplay();
     this.adVisible = [true, true, true, true, true];
+    this.webPages.languageId$.subscribe((data) => {
+      this.getPageData(data)
+    });
+  }
+  getPageData(languageId: any){
+    this.webPages.getDynamicContentPage('news',languageId).subscribe((res) => {
+      if(res.status){
+          this.advertisemnetData =  res.data.advertisemnetData;
+          this.advertisemnetUrl = res.data.advertisemnet_base_url;
+          this.slider_title = res.data.pageData.slider_title;
+          this.news_title = res.data.pageData.news_title;
+          this.latestNewsData = res.data.latestNewsData;
+          this.news_img_path = res.data.news_img_path;
+          this.slider_btn_txt = res.data.pageData.slider_btn_txt;
+          this.slider_date = res.data.pageData.slider_date;
+    
+          this.images = res.data.newsSliderData;
+          this.base_url =  res.data.base_url; 
+        }
+    });
   }
 
   ngOnDestroy() {
@@ -26,7 +57,7 @@ export class NewsComponent {
   }
 
   changeImage(imageSrc: string) {
-    this.currentImageIndex = this.images.findIndex(image => image.src === imageSrc);
+    this.currentImageIndex = this.images.findIndex(image => image.featured_image === imageSrc);
     this.resetAutoplay();
   }
 
@@ -80,7 +111,7 @@ export class NewsComponent {
   }
 
   get currentImage() {
-    return this.images[this.currentImageIndex].src;
+    return this.images[this.currentImageIndex].featured_image;
   }
 
   adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad visibility

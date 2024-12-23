@@ -9,12 +9,12 @@
 
 
       <div *ngIf="adVisible[0]" class="skyscraper-image">
-        <img src="./assets/images/skyscraper - 120x600.png">
+        <img src="{{advertisemnet_base_url + advertisemnetData[0].featured_image}}">
         <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div *ngIf="adVisible[1]" class="wide-skyscraper-image">
-        <img src="./assets/images/wide-skyscraper - 160x600.png">
+        <img src="{{advertisemnet_base_url + advertisemnetData[1].featured_image}}">
         <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -23,15 +23,16 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="banner-content" routerLink="/Admin">
-                <img class="home-banner-image" src="./assets/images/white-logo.png">
+                <img class="home-banner-image" src="{{imageBaseUrl+pageDetail.banner_img}}">
               </div>
               <div class="banner-btn text-center mt-5">
-                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ 'registerNow' | translate }}
+                <a href="{{ pageDetail.banner_btn_link }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail.banner_btn_txt }}
                 </a>
+                <!-- {{ 'registerNow' | translate }} -->
 
                 <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2"
-                    width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2" width="8" height="12" viewBox="0 0 8 12"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.34766 1.5L6.34766 6L1.34766 10.5" stroke="white" stroke-width="2"
                       stroke-linecap="round" />
                   </svg>
@@ -47,7 +48,7 @@
     </div>
     <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
       <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <img src="./assets/images/leaderboard - 728x90.png">
+        <img src="{{advertisemnet_base_url + advertisemnetData[2].featured_image}}">
         <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
@@ -59,10 +60,12 @@
       <div class="container">
         <div class="joined">
           <div class="joined-text">
-            <h3>Recently Joined</h3>
+            <!-- <h3>Recently Joined</h3> -->
+            <h3>{{pageDetail.slider_heading}}</h3>
           </div>
           <div class="joined-btn">
-            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">See all</button>
+            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail.slider_btn_txt}}</button>
+            <!-- <a href="{{pageDetail.slider_btn_link}}" type="button" class="btn btn-light">{{pageDetail.slider_btn_txt}}</a> -->
           </div>
         </div>
       </div>
@@ -71,161 +74,33 @@
         <div class="carousel-slide" #owlCarousel (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
           (touchstart)="onTouchStart()" (touchend)="onTouchEnd()">
           <owl-carousel-o [options]="customOptions">
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/Ronaldinho Gaúcho.png" class="player-image">
-                  </div>
-                  <p class="player-name">Ronaldinho Gaúcho
-                  </p>
+            @for (slider of sliderDetail.users; track $index) {
+              <ng-template carouselSlide>
+                <div class="player-carousel">
+                  <div class="player-border">
+                    <div class="player-img">
+                      <img src="{{slider.meta.profile_image_path}}" class="player-image">
+                    </div>
+                    <p class="player-name">{{slider.first_name + slider.last_name}}</p>
 
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag">
-                    <div class="flag-image">
-                      <img src="./assets/images/flag.svg" class="flag-img">
-                      <div class="bottom-line"></div>
-                      <div class="flag-bottom">
-                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                        <p class="d-o-b">2004</p>
+                    <div class="corner-image">
+                      <img src="./assets/images/FC Thun 1.png">
+                    </div>
+                    <div class="flag">
+                      <div class="flag-image">
+                        <!-- <img src="{{getFlagImage(slider.user_nationalities)}}" class="flag-img"> -->
+                        <div class="bottom-line"></div>
+                        <div class="flag-bottom">
+                          <img src="./assets/images/birthday.svg" class="birthday-img">
+                          <p class="d-o-b">{{getBirthYear(slider.meta.date_of_birth)}}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </ng-template>
+              </ng-template>
+            }
 
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/ziddane.png" class="player-image">
-                  </div>
-                  <p class="player-name">Ziddane</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag">
-                    <div class="flag-image">
-                      <img src="./assets/images/flag.svg" class="flag-img">
-                      <div class="bottom-line"></div>
-                      <div class="flag-bottom">
-                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                        <p class="d-o-b">2004</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/FC Thun 1.png" class="player-image1">
-                  </div>
-                  <p class="player-name">FC Thun</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag-image1">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/Gabriel Jesus.png" class="player-image">
-                  </div>
-                  <p class="player-name">Gabriel Jesus</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag">
-                    <div class="flag-image">
-                      <img src="./assets/images/flag.svg" class="flag-img">
-                      <div class="bottom-line"></div>
-                      <div class="flag-bottom">
-                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                        <p class="d-o-b">2004</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/E╠ütoile Carouge FC..png" class="player-image1">
-                  </div>
-                  <p class="player-name">Eütoile Carouge FC</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag-image1">
-                    <img src="./assets/images/flag.svg" class="flag-img">
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/Harry Kane.png" class="player-image">
-                  </div>
-                  <p class="player-name">Harry Kane</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag">
-                    <div class="flag-image">
-                      <img src="./assets/images/flag.svg" class="flag-img">
-                      <div class="bottom-line"></div>
-                      <div class="flag-bottom">
-                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                        <p class="d-o-b">2004</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template carouselSlide>
-              <div class="player-carousel">
-                <div class="player-border">
-                  <div class="player-img">
-                    <img src="./assets/images/Messi.png" class="player-image">
-                  </div>
-                  <p class="player-name">Messi</p>
-                  <div class="corner-image">
-                    <img src="./assets/images/FC Thun 1.png">
-                  </div>
-                  <div class="flag">
-                    <div class="flag-image">
-                      <img src="./assets/images/flag.svg" class=" flag-img">
-                      <div class="bottom-line"></div>
-                      <div class="flag-bottom">
-                        <img src="./assets/images/birthday.svg" class="birthday-img">
-                        <p class="d-o-b">2004</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ng-template>
           </owl-carousel-o>
         </div>
       </div>
@@ -235,22 +110,23 @@
     <!-- How It Works -->
     <div class="works py_0">
       <div class="container">
-        <h3>How it works</h3>
+
+        <h3>{{pageDetail?.tabs_data?.title}}</h3>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-12">
             <div class="work-banner">
               <div class="works-btn">
                 <div class="talent-btn">
-                  <button type="button" class="btn btn-success"
-                    [ngClass]="{'active-btn': selectedCategory === 'Talent'}" (click)="showCategory('Talent')">
-                    <p class="club-p">Talent</p>
+                  <button type="button" class="btn btn-success" [ngClass]="{'active-btn': selectedCategory === 'Talent'}"
+                    (click)="showCategory('Talent')">
+                    <p class="club-p">{{pageDetail?.tabs_data?.first_btn_txt}}</p>
                   </button>
                 </div>
                 <div class="club-btn">
                   <button type="button" class="btn btn-success"
                     [ngClass]="{'active-btn': selectedCategory === 'Clubs & Scouts'}"
                     (click)="showCategory('Clubs & Scouts')">
-                    <p class="club-s">Clubs and Scouts</p>
+                    <p class="club-s">{{pageDetail?.tabs_data?.sec_btn_txt}}</p>
                   </button>
                 </div>
               </div>
@@ -261,9 +137,11 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Sign-up & Profile Creation
+                    {{pageDetail?.tabs_data?.first_tab[0]?.title}}
                   </a>
-                  <p>Creates a comprehensive profile showcasing skills, achievements, and stats.</p>
+                  <p>
+                    {{pageDetail?.tabs_data?.first_tab[0]?.desc}}
+                  </p>
                 </div>
               </div>
 
@@ -274,9 +152,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Networking & Opportunity
+                    {{pageDetail?.tabs_data?.first_tab[1]?.title}}
                   </a>
-                  <p>Engage with other users, football clubs, and connect with scouts, managers, and coaches.</p>
+                  <p> {{pageDetail?.tabs_data?.first_tab[1]?.desc}}</p>
                 </div>
               </div>
 
@@ -287,9 +165,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Success & Progression
+                    {{pageDetail?.tabs_data?.first_tab[2]?.title}}
                   </a>
-                  <p>Impresses your favorite club and receives an offer for a professional contract.</p>
+                  <p>{{pageDetail?.tabs_data?.first_tab[2]?.title}}</p>
                 </div>
               </div>
 
@@ -300,10 +178,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Sign-up & Profile Creation
+                    {{pageDetail?.tabs_data?.second_tab[0]?.title}}
                   </a>
-                  <p>Accesses the database of player profiles, reports, and performance analytics to discover emerging
-                    players.</p>
+                  <p> {{pageDetail?.tabs_data?.second_tab[0]?.desc}}</p>
                 </div>
               </div>
 
@@ -314,10 +191,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Networking & Opportunity
+                    {{pageDetail?.tabs_data?.second_tab[1]?.title}}
                   </a>
-                  <p>Communicate with players and other stakeholders through the platform's messaging system, providing
-                    feedback on their performance and discussing contract negotiations.</p>
+                  <p>{{pageDetail?.tabs_data?.second_tab[1]?.desc}}</p>
                 </div>
               </div>
 
@@ -328,9 +204,9 @@
                 </div>
                 <div class="progress_btn">
                   <a>
-                    Decision Making & Action
+                    {{pageDetail?.tabs_data?.second_tab[2]?.title}}
                   </a>
-                  <p>Finalize contract offers and negotiate terms with potential recruits.</p>
+                  <p>{{pageDetail?.tabs_data?.second_tab[2]?.desc}}</p>
                 </div>
               </div>
             </div>
@@ -399,7 +275,7 @@
                           <div class="member2-image">
                             <img src="./assets/images/FC Thun 1.png" alt="Player Image">
                           </div>
-                          <p class="club_member1-name">FC Thun</p>
+                          <p class="club_member1-name">FC Thun </p>
 
                           <div class="flag-image">
                             <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -416,8 +292,7 @@
                             <div class="member3-image">
                               <img src="./assets/images/Ronaldinho Gaúcho.png" alt="Player Image">
                             </div>
-                            <p class="club_member3-name">Ronaldinho Gaúcho
-                            </p>
+                            <p class="club_member3-name">Ronaldinho Gaúcho</p>
                             <img src="assets/images/SC Bru╠êhl .png" class="Ronaldinho-image" alt="Corner Image">
                             <div class="flag-image">
                               <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -435,7 +310,7 @@
                             <div class="member2-image">
                               <img src="./assets/images/FC Rapperswil-Jona.png" alt="Player Image">
                             </div>
-                            <p class="club_member1-name">FC Rapperswil Jona</p>
+                            <p class="club_member1-name">FC Rapperswil Jona </p>
 
                             <div class="flag-image">
                               <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -593,14 +468,14 @@
 
     <div class="works-1 py_0">
       <div class="container">
-        <h3>How it works</h3>
+        <h3>how it works</h3>
         <div class="row">
           <div class="col-lg-6 col-md-12 col-12">
             <div class="work-banner">
               <div class="works-btn">
                 <div class="talent-btn">
-                  <button type="button" class="btn btn-success"
-                    [ngClass]="{'active-btn': selectedCategory === 'Talent'}" (click)="showCategory('Talent')">
+                  <button type="button" class="btn btn-success" [ngClass]="{'active-btn': selectedCategory === 'Talent'}"
+                    (click)="showCategory('Talent')">
                     <p class="club-p">Talent</p>
                   </button>
                 </div>
@@ -682,7 +557,7 @@
                               <div class="member1-image">
                                 <img src="./assets/images/ziddane.png" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">ziddane</p>
+                              <p class="club_member1-name">Ziddane</p>
                               <img src="./assets/images/FC Zu╠êrich.png" class="ziddane-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -699,7 +574,7 @@
                               <div class="member2-image">
                                 <img src="./assets/images/FC Thun 1.png" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">FC Thun</p>
+                              <p class="club_member1-name">FC Thun </p>
 
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -715,8 +590,7 @@
                               <div class="member3-image">
                                 <img src="./assets/images/Ronaldinho Gaúcho.png" alt="Player Image">
                               </div>
-                              <p class="club_member3-name">Ronaldinho Gaúcho
-                              </p>
+                              <p class="club_member3-name">Ronaldinho Gaúcho</p>
                               <img src="./assets/images/SC Bru╠êhl .png" class="Ronaldinho-image" alt="Corner Image">
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -732,7 +606,7 @@
                               <div class="member2-image">
                                 <img src="./assets/images/fussball.svg" alt="Player Image">
                               </div>
-                              <p class="club_member1-name">FC Rapperswil Jona</p>
+                              <p class="club_member1-name">FC Rapperswil Jona </p>
 
                               <div class="flag-image">
                                 <img src="./assets/images/flag.svg" class="flag-img" alt="Flag Image">
@@ -838,7 +712,9 @@
                         <a>
                           Sign-up & Profile Creation
                         </a>
-                        <p>Accesses the database of player profiles, reports, and performance analytics to discover emerging players.</p>
+                        <p>Accesses the database of player profiles, reports, and performance analytics to discover
+                          emerging
+                          players.</p>
                       </div>
                     </div>
                     <div class="player1">
@@ -880,7 +756,8 @@
                         <a>
                           Networking & Opportunity
                         </a>
-                        <p>Communicate with players and other stakeholders through the platform's messaging system, providing feedback on their performance and discussing contract negotiations.</p>
+                        <p>Communicate with players and other stakeholders through the platform's messaging system,
+                          providing feedback on their performance and discussing contract negotiations.</p>
                       </div>
                     </div>
                     <div class="player2">
@@ -911,7 +788,7 @@
                         <a>
                           Decision Making & Action
                         </a>
-                        <p>Finalize contract offers and negotiate terms with potential recruits.</p>
+                        <p>Impresses your favorite club and receives an offer for a professional contract.</p>
                       </div>
                     </div>
                     <div class="club-scouts">
@@ -950,27 +827,26 @@
         <div class="container1">
           <div class="advertisment">
             <div *ngIf="adVisible[3]" class="leaderboard-club-image">
-              <img src="./assets/images/leaderboard - 728x90.png">
+              <img src="{{advertisemnet_base_url + advertisemnetData[3].featured_image}}">
               <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <div *ngIf="adVisible[4]" class="small-sqaure-image">
-              <img src="./assets/images/small sqaure - 200x200.png">
+              <img src="{{advertisemnet_base_url + advertisemnetData[4].featured_image}}">
               <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
         </div>
 
         <div class="club_players">
-          <h3>Platform for Football</h3>
-          <h3>Players, Clubs and Scouts.</h3>
+          <h3>{{pageDetail.hero_heading_txt}}</h3>
           <div class="club-buttons">
             <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <div class="button-border">
                 <div class="join-text">
-                  <p>Join Now</p>
-                  <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
-                  <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
+                  <p> {{pageDetail.hero_btn_txt}}</p>
+                  <img class="join-btn check-image-dark" src="{{imageBaseUrl+pageDetail.hero_bg_img}}">
+                  <img class="join-btn check-image-light" src="{{imageBaseUrl+pageDetail.hero_bg_img}}">
                 </div>
               </div>
             </div>
@@ -983,4 +859,4 @@
     <app-footer></app-footer>
 
   </div>
-</section>
+  </section>

@@ -7,6 +7,7 @@ import { UserService } from '../../../services/user.service';
 import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
 import { goToActiveLog } from '../../../../utlis';
+import { SharedService } from '../../../services/shared.service';
 
 interface Notification {
   image: string;
@@ -22,18 +23,21 @@ interface Notification {
 })
 export class HeaderComponent {
   //constructor(private themeService: ThemeService) {}
-  constructor(private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private shareService:  SharedService, private userService: UserService, private themeService: ThemeService, private authService: AuthService, private router: Router, private translateService: TranslateService, private socketService: SocketService) { }
   loggedInUser: any = localStorage.getItem('userData');
   profileImgUrl: any = "";
   lang: string = '';
   domains: any = environment.domains; 
 
+  languages: any = localStorage.getItem('languages');
   liveNotification: any[] = [];
   showNotification: boolean = false;
   notificationCount: number = 0;
   isShowAllNotification : boolean = false;
 
   ngOnInit() {
+    this.languages = JSON.parse(this.languages);
+
     this.socketService.on('notification').subscribe((data) => {
       this.notificationCount += 1;
       // Create a new notification object
@@ -110,10 +114,27 @@ export class HeaderComponent {
       }
     }); 
   }
+
   ChangeLang(lang: any) {
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.translateService.use(selectedLanguage)
+
+    // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = selectedLanguage;
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.languages.find(
+      (lang: any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    localStorage.setItem('lang_id', selectedLanguageId);
+    this.shareService.updateData({
+      action:'lang_updated',
+      id:selectedLanguageId
+    })
 
   }
 
@@ -134,7 +155,6 @@ export class HeaderComponent {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
     document.getElementById('theme-text')!.textContent = this.themeText
-
   }
 
 

@@ -1,16 +1,20 @@
 export const environment = {
     production: false,
     googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
+
     targetDomain: {
-      domain: 'ch' 
+      name:'Switzerland', domain: "ch", id: 1, flag: "Switzerland.svg"
     },
+
     stripePublishableKey: 'pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a', // Your Stripe publishable key for production
+
     roles:[
       { role: "Admin", id: 1 },
       { role: "Club", id: 2 },
       { role: "Scout", id: 3 },
       { role: "Player", id: 4 },
     ],
+
     langs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
@@ -21,6 +25,7 @@ export const environment = {
       { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
       { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
     ],
+
     domains:[
       { name:'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg" },
       { name:'German', slug: "de", id: 2, flag: "Germany.svg" },
@@ -33,9 +38,9 @@ export const environment = {
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },
       { name:'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg" },
     ],
-
-    
-
+    pages:[
+      'home','talent','clubs_and_scouts','about_us','pricing','news','contact','imprint','privacy_policy','terms_and_conditions','cookie_policy','faq','content_page'
+    ],
     apiUrl:'https://api.socceryou.ch/api/',
     socketUrl:'https://alerts.socceryou.ch/',
     mailchimp: {

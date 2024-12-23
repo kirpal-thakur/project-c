@@ -30,21 +30,19 @@
             <div class="image-slider">
                 <div class="image-wrapper" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
                     (touchend)="onTouchEnd($event)">
-                    <img [src]="currentImage" [alt]="images[currentImageIndex].alt" />
+                    <img [src]="currentImage" [alt]="images[currentImageIndex].title" />
                     <div class="image-text">
-                        <p class="p-text">02.02.2024</p>
-                        <h3 class="text-heading">SoccerYou</h3>
-                        <h3 class="text-heading">Launched in 10</h3>
-                        <h3 class="text-heading">Countries</h3>
-                        <button class="learn-more" [routerLink]="'/learn-more'">Learn More</button>
+                        <p class="p-text">{{slider_date}}</p>
+                        <h3 class="text-heading">{{slider_title}}</h3>
+                        <button class="learn-more" [routerLink]="'/learn-more'">{{slider_btn_txt}}</button>
                     </div>
                 </div>
 
                 <div class="container">
                 <div class="thumbnail-scroll">
                     <div class="slider-image">
-                        <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt"
-                            (click)="changeImage(image.src)" [class.active]="image.src === currentImage"
+                        <img *ngFor="let image of images" [src]="image?.featured_image" [alt]="image?.title"
+                            (click)="changeImage(image.featured_image)" [class.active]="image.featured_image === currentImage"
                             class="thumbnail" />
                     </div>
                     </div>
@@ -56,48 +54,13 @@
 
     <div class="latest-news py_0">
         <div class="container">
-            <h4>Latest News</h4>
+            <h4>{{news_title}}</h4>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
+                <div  *ngFor="let newsData of latestNewsData; let i=index;" class="col-lg-4 col-md-6 col-12">
                     <div  [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news1.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>SoccerYou Hosts Charity Tournament in Germany</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news4.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Innovative Training Programs Launched to Boost Youth Talent</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news2.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Legendary Midfielder Joins SoccerYou as Global Ambassador</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news5.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Tech Meets Sport: Launch of the New Performance Analytics App</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news3.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Behind the Scenes: Exclusive Interview with the Head Coach</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news6.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Upcoming Talent Showcase: Scouts and Clubs Gather for Annual Event</p>
+                        <img src="{{news_img_path + newsData.featured_image}}">
+                        <p class="p-text">{{newsData.created_at}}</p>
+                        <p>{{newsData.title}}</p>
                     </div>
                 </div>
             </div>

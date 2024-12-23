@@ -129,39 +129,38 @@ export class FooterComponent implements OnInit{
         console.warn('Google API script is not fully loaded.');
         this.countries = environment.domains;
       }
-  this.route.queryParams.subscribe(params => {
-      this.token = params['confirm-token'] || '';
-      console.log('Magic Token:', this.token);
 
-      if (this.token) {
-        // Call authService to verify magic token
-        this.authService.magicLogin(this.token).subscribe(
-          (response: any) => {
-            console.log('Magic Login Response:', response);
-            if (response.success) {
-              this.tokenVerified = true;
-              this.openModal();
-            } else {
-              this.tokenVerified = false;
-              console.log('Token is not verified please check');
-              this.notverifyed();
-              console.log("popup is not open")
-            }
-          },
-          (error) => {
-            console.error('Error verifying token:', error);
-            this.tokenVerified = false;
-            this.notverifyed();
-          }
-        );
-      } else {
-        this.tokenVerified = false;
-        console.log('Token is not provided');
-      }
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.token = params['confirm-token'] || '';
+    //   console.log('Magic Token:', this.token);
 
-    
-   
+    //   if (this.token) {
+    //     // Call authService to verify magic token
+    //     this.authService.magicLogin(this.token).subscribe(
+    //       (response: any) => {
+    //         console.log('Magic Login Response:', response);
+    //         if (response.success) {
+    //           this.tokenVerified = true;
+    //           this.openModal();
+    //         } else {
+    //           this.tokenVerified = false;
+    //           console.log('Token is not verified please check');
+    //           this.notverifyed();
+    //           console.log("popup is not open")
+    //         }
+    //       },
+    //       (error) => {
+    //         console.error('Error verifying token:', error);
+    //         this.tokenVerified = false;
+    //         this.notverifyed();
+    //       }
+    //     );
+    //   } else {
+    //     this.tokenVerified = false;
+    //     console.log('Token is not provided');
+    //   }
+    // });
+
   }
 
   performMagicLogin(token: string) {
@@ -202,7 +201,6 @@ export class FooterComponent implements OnInit{
     event.preventDefault();
     this.themeService.toggleTheme();
   }
-
 
   login() {
     this.loginButtonClicked = true;
@@ -383,26 +381,28 @@ export class FooterComponent implements OnInit{
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
         console.log('Password recovery response:', response);
-        if (response.status === true) {
-            const magicToken = response.data.magic_link_url;
-            const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
-             console.log("Magic link URL:", magic_link_url);
-          this.authService.magicLogin(magic_link_url).subscribe(
-            magicLoginResponse => {
-              console.log('Magic login response:', magicLoginResponse);
-              if (magicLoginResponse.status === true) {
-                console.log('Auto-login successful.');
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                console.error('Auto-login failed:', magicLoginResponse.message);
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            magicLoginError => {
-              console.error('An error occurred during auto-login:', magicLoginError);
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
+        if (response.status) {
+            this.forgotPasswordMessage = response.message;
+
+            // const magicToken = response.data.magic_link_url;
+            // const magic_link_url = `http://localhost:4200/Index?confirm-token=${magicToken}`;
+            // console.log("Magic link URL:", magic_link_url);
+            // this.authService.magicLogin(magic_link_url).subscribe(
+            //   magicLoginResponse => {
+            //     console.log('Magic login response:', magicLoginResponse);
+            //     if (magicLoginResponse.status === true) {
+            //       console.log('Auto-login successful.');
+            //       this.router.navigate(['/Admin/Dashboard']);
+            //     } else {
+            //       console.error('Auto-login failed:', magicLoginResponse.message);
+            //       this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
+            //     }
+            //   },
+            //   magicLoginError => {
+            //     console.error('An error occurred during auto-login:', magicLoginError);
+            //     this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
+            //   }
+            // );
         } else {
           console.error('Password recovery failed:', response.message);
           this.forgotPasswordMessage = response.message;

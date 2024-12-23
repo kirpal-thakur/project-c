@@ -16,12 +16,4 @@ export class WebsiteComponent {
     this.tab = tab;
   }
 
-  
-  
-
-
-  
-
-
-
 }

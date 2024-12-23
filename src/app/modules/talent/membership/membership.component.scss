@@ -62,13 +62,13 @@ sub.premium-month_title {
   font-weight: 600;
 }
 button.premium-subscription_btn {
-  border: 1px solid red;
-  padding: 6px 8px;
+  border: 1px solid #FD5454;
+  padding: 8px 10px;
   background: #fff;
   font-size: 14px;
-  color: red;
+  color: #FD5454;
   font-weight: 500;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 button.premium-edit_btn,a.premium-edit_btn {
   border: none;
@@ -82,6 +82,7 @@ button.premium-edit_btn,a.premium-edit_btn {
   font-size: 14px;
   color: #fff;
   margin-top: 10px;
+  font-weight: 500;
 }
 .export-btn span svg{
   width: 30px;

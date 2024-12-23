@@ -1,7 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { trigger, transition, style, animate } from '@angular/animations';
-
+import { AdvertisementService } from '../../../services/advertisement.service';
+import { WebPages } from '../../../services/webpages.service';
+import { SharedService } from '../../../services/shared.service';
 export interface ClubMember {
   name: string;
   image: string;
@@ -59,8 +61,13 @@ export interface ClubMember {
 })
 export class IndexComponent {
   @ViewChild('owlCarousel') owlCarousel!: ElementRef;
-
-
+  selectedLangId:any = null;
+  pageDetail:any=null;
+  sliderDetail:any=null;
+  advertisemnetData:any=null;
+  
+  imageBaseUrl:string= '';
+  advertisemnet_base_url:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
     { name: 'Ziddane', image: './assets/images/ziddane.svg', year: '2004' },
@@ -166,6 +173,12 @@ export class IndexComponent {
   // Manage Navbar Expansion
   isNavbarExpanded = false;
 
+  constructor( private shareservice:SharedService,private advertisementService: AdvertisementService, private webPages: WebPages) {
+   
+  }
+
+ 
+
   toggleNavbar(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
   }
@@ -265,12 +278,50 @@ adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad vis
 ngOnInit() {
   // Initially, all ads are visible
   this.adVisible = [true, true, true, true, true];
+
+  this.webPages.languageId$.subscribe((data) => {
+    this.getPageDynamicData(data);
+    console.log('here is data',data)
+  });
+  this.shareservice.data$.subscribe((data) => {
+    if(data.action == 'updatedLang'){
+        this.getPageDynamicData(data.id);
+    }
+  });
 }
+
 
 closeAd(index: number) {
   this.adVisible[index] = false; // Set the specific ad to not visible based on index
 }
 
 
+getPageDynamicData(languageId:any){
+
+  this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
+    let pageData = res.data.pageData;
+    let sliderData = res.data.sliderData;
+    if(res.status){
+        this.pageDetail = pageData;
+        this.sliderDetail = sliderData;
+        this.advertisemnetData = res.data.advertisemnetData;
+        this.imageBaseUrl = res.data.base_url;
+        this.advertisemnet_base_url = res.data.advertisemnet_base_url;
+      }
+  });
+}
+
+getFlagImage(data:any){
+  let parseData = JSON.parse(data);
+  // console.log(parseData, 'parse-data');
+}
+
+getBirthYear(date:any){
+  if(date){
+    const birthYear = new Date(date); // Convert to Date object
+    return birthYear.getFullYear();
+  }
+  return 'N/A';
+}
 
 }

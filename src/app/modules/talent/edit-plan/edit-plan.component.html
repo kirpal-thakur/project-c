@@ -14,8 +14,13 @@
       <div class="form-group col-lg-4">
         <label for="select-countries">{{ 'Select Countries' | translate }}</label>
         <select class="form-select" id="select-countries" (change)="onCountrySelect($event)">
-          <option value="" disabled selected>{{'Select a country' | translate}}</option>
-          <option *ngFor="let country of countries" [selected]="selectedPlan.id == country.id" [value]="country.id"> {{ country.name }} </option>
+          <option value="" disabled selected>{{ 'Select a country' | translate }}</option>
+          <option
+            *ngFor="let country of countries"
+            [selected]="selectedPlan?.id == country.id"
+            [value]="country.id">
+            {{ country.package_name }}
+          </option>
         </select>
       </div>
 

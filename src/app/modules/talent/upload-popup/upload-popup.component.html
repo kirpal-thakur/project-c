@@ -23,7 +23,8 @@
                 <path d="M6.66406 15H11.9974" stroke="#787878" stroke-width="2" stroke-linecap="round"/>
             </svg>
         </div>
-            <p class="upload-file_name">{{'Drag and drop your files here or click to upload' | translate}}</p>
+            <p class="upload-file_name">{{'Drag and Drop files here ' | translate}}</p>
+            <p class="upload-file_name">{{'Files Supported: JPG, GIF, PNG , MP4' | translate}}</p>
             <input
                 type="file"
                 (change)="onFileSelect($event)"
@@ -32,12 +33,19 @@
                 hidden
                 #fileInput
             />
+
             <button type="button" (click)="fileInput.click()">{{'TalentsTranslate.chooseFile' | translate}}</button>
+            <p class="upload-file_name">{{'Maximum Size: 5 MB ' | translate}}</p>
+
         </div>
 
         <div class="file-list">
             <div *ngFor="let result of uploadResponse">
-                <span>{{ result }}</span>
+              <span
+                [ngStyle]="{'color': result.status ? 'green' : 'red'}"
+                class="result-text">
+                {{ result.message }}
+              </span>
             </div>
         </div>
     </div>

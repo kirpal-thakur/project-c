@@ -24,8 +24,8 @@ interface Plan {
   isYearly: boolean;
   quantity: number;
   includes: string[];
-  yearData: any;
-  monthData: any;
+  yearly: any;
+  monthly: any;
   is_package_active:any;
 }
 
@@ -90,7 +90,6 @@ export class PlanComponent implements OnInit, OnDestroy {
       if (result) {
         this.isCouponApplied = true; // Show that the coupon has been applied
         this.couponCode = result; // Store the coupon code entered by the user
-        console.log(this.couponCode);
         this.redirectToCheckout(planId);
       }
       if (result==null) {
@@ -102,12 +101,14 @@ export class PlanComponent implements OnInit, OnDestroy {
   // Redirect to Stripe Checkout with coupon code logic
   async redirectToCheckout(planId: string) {
     this.isLoadingCheckout = true;
-    this.toastr.info('Redirecting to payment...', 'Loading', { timeOut: 3000 });
+    this.toastr.info('Redirecting to payment...', 'Loading',{ disableTimeOut: true });
 
     try {
       const response = await this.paymentService.createCheckoutSession(planId, '', this.couponCode).toPromise();
 
       if (response?.data?.payment_intent?.id) {
+        this.toastr.clear();
+
         // Show success message after redirection attempt
         this.toastr.success('Redirected to Stripe Checkout successfully.', 'Success');
 
@@ -115,14 +116,19 @@ export class PlanComponent implements OnInit, OnDestroy {
         await stripe?.redirectToCheckout({ sessionId: response.data.payment_intent.id });
 
       } else {
+        this.toastr.clear();
+
         this.toastr.error('Failed to create checkout session. Please try again.', 'Error');
         console.error('Failed to create checkout session', response);
       }
     } catch (error) {
+      this.toastr.clear();
       // Show error message if API call fails
       this.toastr.error('Error creating Stripe Checkout session. Please try again later.', 'Error');
       console.error('Error creating Stripe Checkout session:', error);
     } finally {
+      this.toastr.clear();
+
       this.isLoadingCheckout = false;
     }
   }
@@ -145,6 +151,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
           const res = response.data;
 
+          let country_plans:any=[];
           // Iterate over the keys in the response object (e.g., premium, booster, country, demo)
           Object.keys(res).forEach((key) => {
 
@@ -161,6 +168,12 @@ export class PlanComponent implements OnInit, OnDestroy {
                 this.premiumPlans.currency = this.premiumPlans['yearly'].currency;
                 this.premiumPlans.includes = ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];
 
+                  this.premiumPlans.id = this.premiumPlans['monthly'].package_id;
+                  this.premiumPlans.month_package_id = this.premiumPlans['monthly'].id;
+                  this.premiumPlans.month_price = this.premiumPlans['monthly'].price;
+                  this.premiumPlans.year_package_id = this.premiumPlans['yearly'].id;
+                  this.premiumPlans.year_price = this.premiumPlans['yearly'].price;
+
             } else if (key.toLowerCase().includes('booster')) {
               this.boostedPlans = res[key];
               this.boostedPlans.isYearly = res[key].active_interval=='yearly';
@@ -173,20 +186,53 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.boostedPlans.priceYearly = this.boostedPlans['yearly'].price;
               this.boostedPlans.currency = this.boostedPlans['yearly'].currency;
 
+              this.boostedPlans.id = this.boostedPlans['monthly'].package_id;
+              this.boostedPlans.month_package_id = this.boostedPlans['monthly'].id;
+              this.boostedPlans.month_price = this.boostedPlans['monthly'].price;
+              this.boostedPlans.year_package_id = this.boostedPlans['yearly'].id;
+              this.boostedPlans.year_price = this.boostedPlans['yearly'].price;
+
 
             } else if (key.toLowerCase().includes('country')) {
-              this.countryPlans = res[key];
-              this.countryPlans = this.countryPlans || {};
-              Object.keys(res[key]?.plans || {}).forEach((planKey) => {
-                const plan = res[key].plans[planKey];
-                if (plan.location) {
-                  this.countryPlans[plan.location] = this.countryPlans[plan.location] || {};
-                  this.countryPlans[plan.location].plans = this.countryPlans[plan.location].plans || {};
-                  this.countryPlans[plan.location].plans[plan.interval] = plan;
-                }
+              this.countryPlans = res[key] || {};
+              this.countryPlans.data = this.countryPlans.data || {};
 
+              const plans = res[key]?.plans || {};
+
+              Object.keys(plans).forEach((planKey) => {
+                const plan = plans[planKey];
+
+                if (plan.location) {
+                  const locationData = this.countryPlans.data[plan.location] = this.countryPlans.data[plan.location] || {};
+
+                  locationData.plans = locationData.plans || {};
+                  locationData.plans[plan.interval] = plan;
+
+                  locationData.package_name = plan.package_name;
+                  locationData.currency = plan.currency;
+
+                  if (plan.interval === 'monthly') {
+                    locationData.id = plan.id;
+                    locationData.month_package_id = plan.package_id;
+                    locationData.month_price = plan.price;
+                  } else if (plan.interval === 'yearly') {
+                    locationData.year_id = plan.id;
+                    locationData.year_package_id = plan.package_id;
+                    locationData.year_price = plan.price;
+                  }
+
+                  country_plans[plan.location] = plan;
+                }
               });
-              this.countryPlans.includes = ["Present your profile to clubs and leagues in other countries.", "Higher chances to get hired globally.", "Build you global portfolio."];
+
+              this.countryPlans.includes = [
+                "Present your profile to clubs and leagues in other countries.",
+                "Higher chances to get hired globally.",
+                "Build your global portfolio."
+              ];
+
+              // Uncomment if `country_plans` assignment is needed elsewhere
+              // this.countryPlans.country_plans = country_plans;
             } else if (key.toLowerCase().includes('demo')) {
               this.demoPlans = res[key];
               this.demoPlans.isYearly = res[key].active_interval=='weekly';
@@ -194,22 +240,24 @@ export class PlanComponent implements OnInit, OnDestroy {
               Object.keys(this.demoPlans?.plans).forEach((key) => {
                 this.demoPlans[this.demoPlans.plans[key].interval] = this.demoPlans.plans[key];
               })
-              this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
               this.demoPlans.priceMonthly = this.demoPlans['daily'].price;
               this.demoPlans.priceYearly = this.demoPlans['weekly'].price;
               this.demoPlans.currency = this.demoPlans['weekly'].currency;
-
-
+              this.demoPlans.id = this.demoPlans['daily'].package_id;
+              this.demoPlans.month_package_id = this.demoPlans['daily'].id;
+              this.demoPlans.month_price = this.demoPlans['daily'].price;
+              this.demoPlans.year_package_id = this.demoPlans['weekly'].id;
+              this.demoPlans.year_price = this.demoPlans['weekly'].price;
+              this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
             }
           });
-
-          console.log(this.countryPlans)
+          console.log('demoPlans',this.demoPlans)
 
           // Set the default selected plan (first country plan or null if none exist)
           this.selectedPlan = this.countryPlans.plans[0] || null;
 
           // Fetch user cards
-          this.getUserCards();
+          // this.getUserCards();
 
           // Handle query parameters for country ID
           this.route.queryParams.subscribe((params) => {
@@ -236,8 +284,8 @@ export class PlanComponent implements OnInit, OnDestroy {
       const existingPlan = planArray[existingPlanIndex];
       existingPlan.priceMonthly = existingPlan.priceMonthly || newPlanData.priceMonthly;
       existingPlan.priceYearly = existingPlan.priceYearly || newPlanData.priceYearly;
-      existingPlan.yearData = existingPlan.yearData || newPlanData.yearData;
-      existingPlan.monthData = existingPlan.monthData || newPlanData.monthData;
+      existingPlan.yearly = existingPlan.yearly || newPlanData.yearly;
+      existingPlan.monthly = existingPlan.monthly || newPlanData.monthly;
     } else {
       planArray.push(newPlanData);
     }
@@ -324,7 +372,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
 
-  toggleBillingPlan(plan: Plan, isYearly: boolean, subscribeId: any): void {
+  toggleBillingPlan(plan: any, isYearly: boolean, subscribeId: any): void {
     const originalIsYearly = plan.isYearly;
 
     if (plan.isYearly != isYearly) {
@@ -332,12 +380,14 @@ export class PlanComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newPlanId = isYearly ? plan.yearData : plan.monthData;
+    plan.isYearly = originalIsYearly;
+    return;
+  }
 
-    if (newPlanId.is_package_active == 'active') {
-      plan.isYearly = !originalIsYearly;
-      return;
-    }
+  updatePlan(plan: any, isYearly: boolean, subscribeId: any){
+    const originalIsYearly = plan.isYearly;
+
+    const newPlanId = isYearly ? plan.yearly : plan.monthly;
 
     const dialogRef = this.dialog.open(UpdateConfirmationPlanComponent, {
       data: { plan, isYearly }
@@ -353,17 +403,26 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   updateSubscription(oldId: any, newId: any) {
+
+    this.toastr.info('Updating Plan, Please wait...', 'Loading',{ disableTimeOut: true });
+
+    this.getUserPlans();
+
     this.paymentService.upgradeSubscription(oldId, newId).subscribe(
       response => {
         if (response && response.status) {
-          this.toastr.success('Your subscription has been updated successfully.');
-          console.log('Subscription updated successfully:', response);
+
+          this.toastr.clear();
+          this.toastr.success('Plan has been updated successfully.');
+          this.getUserPlans();
         } else {
+          this.toastr.clear();
           this.toastr.error('Failed to update subscription. Please try again.');
           console.error('Failed to update subscription', response);
         }
       },
       error => {
+        this.toastr.clear();
         this.toastr.error('Error updating subscription. Please try again later.');
         console.error('Error updating subscription:', error);
       }
@@ -400,11 +459,11 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   editPlanPopup(plans:any,country:any) {
-    console.log(plans.plans)
+
     const dialogRef = this.dialog.open(EditPlanComponent, {
       width: '800px',
       data: {
-        plans: plans.plans ,
+        plans: plans.data ,
         selectedPlan :this.selectedPlan,
         defaultCard : this.defaultCard ,
         country : country ,

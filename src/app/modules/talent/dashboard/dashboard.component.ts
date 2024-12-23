@@ -1,4 +1,4 @@
-import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
+import { Component, OnInit ,EventEmitter, Output, OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,23 +13,25 @@ import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
 import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
-
+import { NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit , OnDestroy {
   lightboxIsOpen: boolean = false; // Track the state of the lightbox
   mainImage: { src: string } = { src: '' }; // Current main image source
   album: any[] = []; // Array for album images
   loggedInUser:any = localStorage.getItem('userData');
   countryFlagUrl : any;
-  
-  constructor(private route: ActivatedRoute,
+
+  constructor(
+    private route: ActivatedRoute,
     private userService: UserService,
-    private talentService: TalentService,    
+    private talentService: TalentService,
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
@@ -39,8 +41,8 @@ export class DashboardComponent implements OnInit {
   userId: any ;
   user: any = {};
   userNationalities: any = [];
-  coverImage: any = "";
-  profileImage: any = "";
+  coverImage: any ;
+  profileImage: any ;
   selectedFile : any;
   teams : any;
   highlights : any;
@@ -55,36 +57,59 @@ export class DashboardComponent implements OnInit {
   isPremium: any = false;
   StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
-  
+  private routeSubscription: Subscription | null = null; // Initialize with null
+  private introInstance: any; // Reference to the Intro.js instance
+
   loading: boolean = true;  // Add this line to track loading state
 
   async ngOnInit() {
+    this.introInstance = introJs();
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-    
+
     // Adding a slight delay to ensure elements are rendered before the tour starts
     this.getUserProfile(this.userId);
     this.getHighlightsData();
     this.loadCountries();
     this.getGalleryData();
-    
+
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
     });
 
     await this.getAllTeams();
-    
+
+    // Listen for route changes
+    this.routeSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.stopIntroTour(); // Stop the tour on navigation
+      }
+    });
   }
 
   ngAfterViewInit() {
   }
 
+  stopIntroTour() {
+    if (this.introInstance) {
+      this.introInstance.exit(); // Stop and clean up the tour
+      this.introInstance = null; // Reset the reference
+    }
+  }
+
+  ngOnDestroy() {
+    // Clean up subscription to avoid memory leaks
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+    this.stopIntroTour(); // Ensure the tour stops when the component is destroyed
+  }
+
   startIntroTour() {
-    
-    const intro = introJs();
-  
-    intro.setOptions({
+
+    this.introInstance.setOptions({
       steps: [
         {
           element: '.edit-profile',
@@ -120,75 +145,73 @@ export class DashboardComponent implements OnInit {
       doneLabel: 'Finish',
       tooltipPosition: 'auto',
     });
-  
-      // Add the "Don't show again" checkbox dynamically
-      intro.onafterchange(() => {
-        const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
-      
-        if (tooltipHeader) {
-          // Check if the "close-section" already exists
-          let closeSection = tooltipHeader.querySelector('.close-section') as HTMLElement;
-          if (!closeSection) {
-            // Create the "close-section" container div
-            closeSection = document.createElement('div');
-            closeSection.className = 'close-section';
-      
-            // Apply styling to align elements
-            closeSection.style.display = 'flex';
-            closeSection.style.alignItems = 'center';
-            closeSection.style.justifyContent = 'flex-end';
-      
-            // Add the checkbox and label
-            closeSection.innerHTML = `
-              <label style="font-size: 12px; display: flex; align-items: center; margin-right: 10px; color: white;">
-                <input type="checkbox" id="dontShowAgain" style="margin-right: 5px; cursor: pointer;" />
-                Don't show it again
-              </label>
-            `;
-      
-            // Append "close-section" outside the <h1> but inside the header
-            tooltipHeader.appendChild(closeSection);
-      
-            // Add event listener to the checkbox
-            const checkbox = closeSection.querySelector('#dontShowAgain') as HTMLInputElement;
-            if (checkbox) {
-              checkbox.addEventListener('click', (event) => {
-                event.stopPropagation(); // Ensure clicks do not propagate
-                console.log('Checkbox clicked:', checkbox.checked);
-                if (checkbox.checked) {
-                  console.log('User selected "Don’t show it again"');
-                  // Save the user's preference
-                  localStorage.setItem('dontShowIntroTour', 'true');
-                } else {
-                  console.log('User unchecked "Don’t show it again"');
-                  localStorage.removeItem('dontShowIntroTour');
-                }
-              });
-            }
+
+    // Add the "Don't show again" checkbox dynamically
+    this.introInstance.onafterchange(() => {
+      const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
+
+      if (tooltipHeader) {
+        // Check if the "close-section" already exists
+        let closeSection = tooltipHeader.querySelector('.close-section') as HTMLElement;
+        if (!closeSection) {
+          // Create the "close-section" container div
+          closeSection = document.createElement('div');
+          closeSection.className = 'close-section';
+
+          // Apply styling to align elements
+          closeSection.style.display = 'flex';
+          closeSection.style.alignItems = 'center';
+          closeSection.style.justifyContent = 'flex-end';
+
+          // Add the checkbox and label
+          closeSection.innerHTML = `
+            <label style="font-size: 12px; display: flex; align-items: center; margin-right: 10px; color: white;">
+              <input type="checkbox" id="dontShowAgain" style="margin-right: 5px; cursor: pointer;" />
+              Don't show it again
+            </label>
+          `;
+
+          // Append "close-section" outside the <h1> but inside the header
+          tooltipHeader.appendChild(closeSection);
+
+          // Add event listener to the checkbox
+          const checkbox = closeSection.querySelector('#dontShowAgain') as HTMLInputElement;
+          if (checkbox) {
+            checkbox.addEventListener('click', (event) => {
+              event.stopPropagation(); // Ensure clicks do not propagate
+              console.log('Checkbox clicked:', checkbox.checked);
+              if (checkbox.checked) {
+                console.log('User selected "Don’t show it again"');
+                // Save the user's preference
+                localStorage.setItem('dontShowIntroTour', 'true');
+              } else {
+                console.log('User unchecked "Don’t show it again"');
+                localStorage.removeItem('dontShowIntroTour');
+              }
+            });
           }
         }
-      });
-      
+      }
+    });
 
-  
     // Handle when the tour finishes
-    intro.oncomplete(() => this.handleTourExit());
-  
+    this.introInstance.oncomplete(() => this.handleTourExit());
+
     // Handle when the tour is exited manually
-    // intro.onexit(() => this.handleTourExit());
-  
-    intro.start();
+    // introInstance.onexit(() => this.handleTourExit());
+
+    this.introInstance.start();
   }
-  
+
   // Centralized handling of "Don't show again" logic
   handleTourExit() {
     const checkbox = document.getElementById('dontShowAgain') as HTMLInputElement;
     const dontShowAgain = checkbox?.checked || false;
-  
+
     // Call the API to update showTour (replace with your API call logic)
     this.updateShowTour(dontShowAgain ? 0 : 1);
   }
-  
+
   updateShowTour(showTour: number) {
     this.talentService.updateShowTour(this.userId, showTour).subscribe(
       () => {
@@ -243,17 +266,17 @@ export class DashboardComponent implements OnInit {
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
           this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
 
-          if (this.user.meta.profile_image_path) {
+          if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
           }
-          if (this.user.meta.cover_image_path) {
+          if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
 
           this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          if (this.userNationalities.length) {
+          if (this.userNationalities?.length) {
             // Fetch flag details for each nationality
             this.userNationalities.forEach((nat:any, index:any) => {
               this.getCountry(nat.flag_path, index);
@@ -277,7 +300,8 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
@@ -311,7 +335,8 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
     const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
     fetch(geocodingUrl)
@@ -376,15 +401,15 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  
+
   openHighlight() {
 
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
       width: '800px',
       data: {
           images: this.userImages ,
-          videos: this.userVideos , 
-          url: this.imageBaseUrl 
+          videos: this.userVideos ,
+          url: this.imageBaseUrl
       }
     });
 
@@ -392,19 +417,19 @@ export class DashboardComponent implements OnInit {
       this.getHighlightsData()
     });
 
-  }  
+  }
 
   getHighlightsData(){
     try {
       this.talentService.getHighlightsData().subscribe((response)=>{
         if (response && response.status && response.data && response.data.images) {
-          this.highlights = response.data; 
+          this.highlights = response.data;
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
@@ -436,10 +461,10 @@ export class DashboardComponent implements OnInit {
       console.warn("Main image not found in the album.");
       return;
     }
-  
+
     // Handle edge cases (first and last image)
     const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
-  
+
     // Update main image and handle potential wrapping
     this.mainImage = { src: this.album[newIndex].src };
   }
@@ -448,19 +473,19 @@ export class DashboardComponent implements OnInit {
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
-        if (response && response.status && response.data && response.data.userData) {          
-            this.coverImage = response.data.userData.cover_image_path;          
+        if (response?.data?.userData?.metaValue) {
+            this.coverImage = response.data.userData.cover_image_path;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
-    
+
   onProfileFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -488,7 +513,7 @@ export class DashboardComponent implements OnInit {
             }
           },
           (error) => {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading profile image:', error);
           },
@@ -504,7 +529,6 @@ export class DashboardComponent implements OnInit {
   sendMessage() {
     this.talentService.updatePicOnHeader(this.profileImage);
   }
-
 
   onCoverFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
