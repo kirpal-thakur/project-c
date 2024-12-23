@@ -17,11 +17,11 @@ interface Language {
 }
 
 @Component({
-  selector: 'app-add-content-page',
-  templateUrl: './add-content-page.component.html',
-  styleUrls: ['./add-content-page.component.scss']
+  selector: 'app-add-talent-page',
+  templateUrl: './add-talent-page.component.html',
+  styleUrls: ['./add-talent-page.component.scss']
 })
-export class AddContentPageComponent implements OnInit {
+export class AddTalentPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
   @Input() languages: Language[] = [];
@@ -52,7 +52,7 @@ export class AddContentPageComponent implements OnInit {
 
   bannerImagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddContentPageComponent>) {}
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddTalentPageComponent>) {}
 
   ngOnInit(): void {
     this.editor = new Editor();

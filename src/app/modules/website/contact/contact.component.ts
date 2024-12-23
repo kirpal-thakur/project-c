@@ -8,7 +8,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
+
 export class ContactComponent implements OnInit {
+  base_url: string = '';
+  address: string = '';
+  semail: string = '';
+  banner_title: string = '';
+  club_label_txt: string = '';
+  form_title: string = '';
+  scout_label_txt: string = '';
+  submit_btn_txt: string = '';
+  talent_label_txt: string = '';
+  txt_before_radio_btn: string = '';
+  advertisemnetData:any;
+  advertisemnetUrl:string = '';
   selectedOption = 'option1'; // Default option for some dropdown/radio buttons
   contactForm!: FormGroup; // Form group for the contact form
   isChecked = false; // Checkbox state
@@ -18,6 +31,7 @@ export class ContactComponent implements OnInit {
   responseMessage: string = '';
   messageType: string = '';  
   constructor(private route: ActivatedRoute, 
+    private webPages: WebPages,
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -33,8 +47,29 @@ export class ContactComponent implements OnInit {
       domain : window.location.hostname,
       lang : localStorage.getItem('lang'),
     });
+    this.webPages.languageId$.subscribe((data) => {
+      this.getPageData(data)
+    });
   }
 
+  getPageData(languageId: any){
+    this.webPages.getDynamicContentPage('contact',languageId).subscribe((res) => {
+      if(res.status){
+          this.address = res.data.pageData.address;
+          this.banner_title = res.data.pageData.banner_title;
+          this.club_label_txt = res.data.pageData.club_label_txt;
+          this.form_title = res.data.pageData.form_title;
+          this.scout_label_txt = res.data.pageData.scout_label_txt;
+          this.submit_btn_txt = res.data.pageData.submit_btn_txt;
+          this.talent_label_txt = res.data.pageData.talent_label_txt;
+          this.txt_before_radio_btn = res.data.pageData.txt_before_radio_btn;
+          this.semail= res.data.pageData.email;
+          this.advertisemnetData =  res.data.advertisemnetData;
+          this.advertisemnetUrl = res.data.advertisemnet_base_url;
+          this.base_url =  res.data.base_url; 
+        }
+    });
+  }
   // Form field getters for template validation
   get name() {
     return this.contactForm.get('name');

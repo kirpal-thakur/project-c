@@ -140,8 +140,9 @@ export class WebPagesComponent {
 
   createNewPage(){
     const addNewPage = this.dialog.open(AddPageComponent,{
-      width: '1500px',
-      height: '800px'
+      width: '80vw',
+      height: '80vh'
+
     })
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {
@@ -169,8 +170,9 @@ export class WebPagesComponent {
 
   editPage(page: any){
     const addNewPage = this.dialog.open(AddPageComponent,{
-      width: '1500px',
-      height: '800px',
+      panelClass: 'full-width-dialog',
+      width: '90vw',
+      height: '90vh',
       data : page
     })
     addNewPage.afterClosed().subscribe(result => {
