@@ -17,11 +17,11 @@ interface Language {
 }
 
 @Component({
-  selector: 'app-add-news-page',
-  templateUrl: './add-news-page.component.html',
-  styleUrls: ['./add-news-page.component.scss']
+  selector: 'app-add-clubnscout-page',
+  templateUrl: './add-clubnscout-page.component.html',
+  styleUrls: ['./add-clubnscout-page.component.scss']
 })
-export class AddNewsPageComponent implements OnInit {
+export class AddClubnScoutPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
   @Input() languages: Language[] = [];
@@ -58,7 +58,7 @@ export class AddNewsPageComponent implements OnInit {
 
   bannerImagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddNewsPageComponent>) {}
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddClubnScoutPageComponent>) {}
 
   ngOnInit(): void {
     this.editor = new Editor();

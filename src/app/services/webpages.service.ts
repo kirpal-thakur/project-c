@@ -101,6 +101,9 @@ export class WebPages {
     addContentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-content-page`, params);
     }
+    addNewsPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-newspage`, params);
+    }
 
     getPageByLangAndPageId(langId:any): Observable<any>{
         return this.http.get<{ status: boolean, message: string, data: {} }>(
