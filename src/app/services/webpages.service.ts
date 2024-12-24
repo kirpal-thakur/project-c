@@ -69,8 +69,12 @@ export class WebPages {
             `${this.frontendApiUrl}get-frontend-pages?lang_id=${langId}`
         );
     }
-
-
+    addTalentPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-talentpage`, params);
+    }
+    addClubnScoutPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-club-and-scout-page`, params);
+    }
     addHomePage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-homepage`, params);
     }

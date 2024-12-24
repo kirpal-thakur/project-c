@@ -35,41 +35,7 @@ export class AddTalentPageComponent implements OnInit {
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ];
   content: string = '';
-  first_tab : { title: string; desc: string; images: File[] }[] = [
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    }
-  ];
 
-  second_tab : { title: string; desc: string; images: File[] }[] = [
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    }
-  ];
   imageLoaded: boolean = false;
 
 
@@ -213,7 +179,7 @@ export class AddTalentPageComponent implements OnInit {
     });
 
     // Send the formData
-    this.webpages.addContentPage(formData).subscribe(
+    this.webpages.addTalentPage(formData).subscribe(
       response => {
         console.log('Page added successfully:', response);
         this.dialogRef.close({
