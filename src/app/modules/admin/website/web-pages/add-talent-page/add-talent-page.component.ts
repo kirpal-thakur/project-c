@@ -260,22 +260,16 @@ export class AddTalentPageComponent implements OnInit {
 
         // Map talent_section
         if (pageData.talent_section) {
-          this.formData.talent_section = {
-            first_tab: Array.isArray(pageData.talent_section.first_tab) ? pageData.talent_section.first_tab.map((tab: any) => ({
-              txt: tab.txt,
-              icon: null,
-            })) : [], // Default to empty array if not an array
-            sec_tab: Array.isArray(pageData.talent_section.sec_tab) ? pageData.talent_section.sec_tab.map((tab: any) => ({
-              txt: tab.txt,
-              icon: null,
-            })) : [],
-            third_tab: Array.isArray(pageData.talent_section.third_tab) ? pageData.talent_section.third_tab.map((tab: any) => ({
-              txt: tab.txt,
-              icon: null,
-            })) : [],
-          };
+          this.formData.talent_section.first_tab.txt = pageData.talent_section.first_tab.txt;
+          this.formData.talent_section.sec_tab.txt = pageData.talent_section.sec_tab.txt;
+          this.formData.talent_section.third_tab.txt = pageData.talent_section.third_tab.txt;
+
+          this.formData.talent_section.first_tab.icon = pageData.talent_section.first_tab.icon;
+          this.formData.talent_section.sec_tab.icon = pageData.talent_section.sec_tab.icon;
+          this.formData.talent_section.third_tab.icon = pageData.talent_section.third_tab.icon;
         }
 
+        console.log(this.formData)
         // Map feature_sctn
         if (pageData.feature_sctn) {
           this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
