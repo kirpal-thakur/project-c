@@ -155,7 +155,6 @@ export class AddTalentPageComponent implements OnInit {
 
   submitForm(): void {
     const formData = new FormData();
-    console.log('Form Data Before Appending:', this.formData);
 
     // Helper function to append nested objects to FormData
     const appendNestedObject = (prefix: string, obj: any) => {
@@ -206,7 +205,12 @@ export class AddTalentPageComponent implements OnInit {
       });
     }
 
-    console.log('Form Data After Appending:', formData);
+    // Append the feature_sctn images to the FormData object
+    this.formData.feature_sctn.forEach((feature: any, index: number) => {
+      if (feature.img) {
+        formData.append(`feature_sctn[${index}][img]`, feature.img, feature.img.name);
+      }
+    });
 
     // Send the formData
     this.webpages.addContentPage(formData).subscribe(
@@ -223,7 +227,20 @@ export class AddTalentPageComponent implements OnInit {
     );
   }
 
+  onFeatureFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Make sure to store the file in the right index of the feature_sctn array
+      this.formData.feature_sctn[index].img = file;
 
+      // Optionally, create a preview of the image for display
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.formData.feature_sctn[index].imgPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   getPageById(id: number): void {
     this.webpages.getPageById(id).subscribe((response) => {

@@ -222,12 +222,25 @@
               Remove
             </button>
           </div>
+
+          <!-- Add file input for images -->
+          <div class="col-md-6">
+            <label for="featureImg_{{ i }}" class="form-label">Feature Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="featureImg_{{ i }}"
+              (change)="onFeatureFileChange($event, i)"
+              accept="image/*"
+            />
+          </div>
         </div>
       </div>
       <button type="button" (click)="addFeature()" class="btn btn-primary btn-sm mt-2">
         Add Feature
       </button>
     </div>
+
 
     <!-- Pricing Section -->
     <div class="form-group mt-4">
