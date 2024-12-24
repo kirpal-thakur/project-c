@@ -1,85 +1,88 @@
 /*--------------------------------------------------------------
    banner
 --------------------------------------------------------------*/
-h4{
+.content_page h4 {
     font-size: 20px;
     color: white;
     font-weight: 700;
     margin-bottom: 30px;
 }
-p{
+
+.content_page p {
     font-size: 18px;
     color: white;
     font-weight: 400;
 }
-li{
+
+.content_page li {
     font-size: 18px;
     color: white;
     font-weight: 400;
     margin-top: 20px;
 }
 
-.py_0 {
-  padding-top: 50px;
-  padding-bottom: 50px;
+.content_page .py_0 {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 body {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 
 .main-bnr {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
 .bnr-media {
-  position: relative;
+    position: relative;
 }
 
 .bnr-media img {
-  width: 100%;
+    width: 100%;
 }
 
 .form-select:focus {
-  border-color: none;
-  outline: 0;
-  box-shadow: none;
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
 }
 
 .overlay {
-  position: absolute;
-  height: auto;
-  // background-color: #000;
+    position: absolute;
+    height: auto;
+    // background-color: #000;
 }
 
 .overlay {
-  position: absolute;
-  height: 100%;
-  right: 0;
-  left: 0;
-  top: 0;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    left: 0;
+    top: 0;
 }
 
-.main{
-  background-image: url("../../../../assets/images/Privacy\ Policy-banner.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 375px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.main {
+    background-image: url("../../../../assets/images/Privacy\ Policy-banner.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    // height: 375px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
 .header-transparent {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
 }
-.privacy-text{
+
+.privacy-text {
     font-size: 45px;
     font-weight: 700;
     color: white;
@@ -94,21 +97,25 @@ body {
 #  Banner
 --------------------------------------------------------------*/
 
-ul {
-    list-style-type: none; /* Remove default markers */
+.content_page ul {
+    list-style-type: none;
+    /* Remove default markers */
     padding: 0;
     margin: 0;
-    text-align: left; /* Center the list items */
+    text-align: left;
+    /* Center the list items */
 }
 
-li {
+.content_page li {
     display: inline-block;
     position: relative;
-    padding-left: 2rem; /* Space for the custom marker */
+    padding-left: 2rem;
+    /* Space for the custom marker */
 }
 
-li::before {
-    content: '•'; /* Custom marker */
+.content_page li::before {
+    content: '•';
+    /* Custom marker */
     position: absolute;
     font-size: 60px;
     // color: #E05263; /* Customize marker color */
@@ -117,7 +124,7 @@ li::before {
     transform: translateY(-50%);
 }
 
-.contact-text{
+.contact-text {
     margin-bottom: 20px;
 }
 
@@ -125,7 +132,7 @@ li::before {
 
 // advertisement
 
-.skyscraper-left{
+.skyscraper-left {
     height: 600px;
     width: 120px;
     content: "";
@@ -134,11 +141,13 @@ li::before {
     left: 1%;
     top: 43%;
 }
-.skyscraper-left img{
+
+.skyscraper-left img {
     height: 600px;
     width: 120px;
 }
-.skyscraper-right{
+
+.skyscraper-right {
     height: 600px;
     width: 120px;
     content: "";
@@ -147,15 +156,18 @@ li::before {
     right: 1%;
     top: 43%;
 }
-.skyscraper-right img{
+
+.skyscraper-right img {
     height: 600px;
     width: 120px;
 }
+
 .leaderboard-image img {
     height: 90px;
     width: 728px;
-  }
-  .leaderboard-image{
+}
+
+.leaderboard-image {
     position: relative;
     height: 90px;
     width: 728px;
@@ -164,41 +176,51 @@ li::before {
 }
 
 
-  // advertisement
+// advertisement
 
 @media (max-width: 1441px) {}
+
 @media (max-width: 1199px) {
     .main {
         height: 270px;
     }
+
     .privacy-text {
         font-size: 35px;
     }
-    h4{
+
+    h4 {
         font-size: 18px;
         margin-bottom: 20px;
     }
-    p{
+
+    p {
         font-size: 16px;
     }
-    li{
+
+    li {
         font-size: 16px;
     }
-    .py_0{
+
+    .content_page .py_0 {
         padding-top: 40px;
         padding-bottom: 40px;
     }
 }
+
 @media (max-width: 991px) {
     .main {
         height: 200px;
     }
+
     .privacy-text {
         font-size: 28px;
     }
+
     li::marker {
         font-size: 18px;
     }
+
     .leaderboard-club-image img,
     .small-sqaure-image img,
     .skyscraper-image img,
@@ -207,80 +229,95 @@ li::before {
     .leaderboard-image img,
     .banner-image img,
     .advertisement,
-    .advertisement1, 
+    .advertisement1,
     .skyscraper-left img,
-    .skyscraper-right img{
-      display: none;
+    .skyscraper-right img {
+        display: none;
     }
 
 }
+
 @media (max-width: 767px) {}
+
 @media (max-width: 575px) {
     .main {
         height: 250px;
         background-position: bottom;
     }
-    .information{
+
+    .information {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    .address{
+
+    .address {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    .py_0 {
+
+    .content_page .py_0 {
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    h4{
+
+    h4 {
         font-size: 16px;
         margin-bottom: 10px;
     }
+
     p {
         font-size: 14px;
     }
+
     li::marker {
         font-size: 19px;
     }
 }
+
 @media (max-width: 400px) {
     li::before {
         top: 13px;
         font-size: 45px;
     }
+
     li {
         padding-left: 25px;
     }
+
     p.list-text {
         padding-left: 25px;
     }
 }
+
 @media (max-width: 321px) {
-    h4{
+    h4 {
         font-size: 14px;
     }
+
     p {
         font-size: 12px;
     }
+
     li {
         font-size: 12px;
         margin-top: 10px;
     }
-   
+
     li {
         font-size: 12px;
         margin-top: 10px;
     }
+
     li::before {
         top: 11px;
         font-size: 35px;
     }
+
     li {
         padding-left: 20px;
     }
+
     p.list-text {
         padding-left: 20px;
     }
 }
-
-
