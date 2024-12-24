@@ -24,6 +24,7 @@ import { WebPages } from '../../../services/webpages.service';
 export class HeaderComponent implements OnInit {
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm;
+  slug: string = 'en';
 
 
   isNavbarExpanded = false;
@@ -110,7 +111,10 @@ export class HeaderComponent implements OnInit {
       private http: HttpClient,
       private toastr : ToastrService,
       private webpage: WebPages
-    ) {}
+    ) {
+      this.translateService.setDefaultLang('en'); // Set default language
+      this.translateService.use('en'); // Use default language
+    }
 
     isScrolled = false;
     serverBusy = false;
@@ -229,10 +233,14 @@ export class HeaderComponent implements OnInit {
   applyTheme() {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
-  // lang1: string = 'en'; // Default language
-  slug: string = 'en';
 
-  ChangeLang(event: Event): void {
+  ChangeLang(newSlug: string, event: Event): void {
+    this.translateService.use(newSlug);  // Switch translation language
+    console.log(`Language changed to: ${newSlug}`);
+
+    this.slug = newSlug;
+
+
     const selectElement = event.target as HTMLSelectElement;
     const selectedLanguage = selectElement.value;
     let selectedLanguageId : any = null;

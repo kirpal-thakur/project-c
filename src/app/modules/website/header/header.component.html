@@ -9,26 +9,29 @@
         </a>
 
         <div class="switch1">
-
             <label class="switch">
-                <input type="checkbox" (change)="toggleTheme($event)" id="themeToggle" [checked]="isDarkMode" />
-                <span class="slider round" (change)="ChangeLang($event)"
-                    [ngClass]="{'hidden': isNavbarExpanded}"></span>
+                <input type="checkbox" (change)="toggleTheme($event)" id="themeToggle"
+                    [checked]="isDarkMode" />
+                <span class="slider round"></span>
             </label>
         </div>
 
 
         <div class="coustom-select1">
             <a class="form-select custom-select1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ slug | uppercase }}
-            </a>
-            <div class="dropdown-menu dropdown-menu-end">
-              <a href="#" *ngFor="let domain of langs" class="dropdown-item ai-icon"
-                 [class.selected]="slug === domain.slug" (click)="ChangeLang(domain.slug)">
-                <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
-                <span style="text-transform: uppercase;">{{ domain.slug }}</span>
+                <!-- Display current language name -->
+                <span>{{ slug.toUpperCase() }}</span>
               </a>
-            </div>
+              <div class="dropdown-menu dropdown-menu-end">
+                <!-- Loop through langs array to display each language and flag -->
+                <a href="#" *ngFor="let lang of langs" class="dropdown-item ai-icon"
+                   [class.selected]="slug === lang.slug" (click)="ChangeLang(lang.slug, $event)">
+                  <!-- Display language flag -->
+                  <img src="https://api.socceryou.ch/uploads/logos/{{ lang.flag }}" width="30" height="24" class="me-3">
+                  <!-- Display language slug -->
+                  <span style="text-transform: uppercase;">{{ lang.slug }}</span>
+                </a>
+              </div>
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -173,19 +176,35 @@
                         </div>
                     </div>
 
-                    <div class="coustom-select">
+                    <!-- <div class="coustom-select">
                         <a class="form-select custom-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          {{ slug | uppercase }}
+                          {{ slug.toUpperCase() }}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                           <a href="#" *ngFor="let domain of langs" class="dropdown-item ai-icon"
-                             [class.selected]="slug === domain.slug" (click)="ChangeLang(domain.slug)">
+                             [class.selected]="slug === domain.slug" (click)="ChangeLang(domain.slug, $event)">
                             <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
                             <span style="text-transform: uppercase;">{{ domain.slug }}</span>
                           </a>
                         </div>
+                      </div> -->
+
+                      <div class="custom-select">
+                        <a class="form-select custom-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <!-- Display current language name -->
+                          <span>{{ slug.toUpperCase() }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <!-- Loop through langs array to display each language and flag -->
+                          <a href="#" *ngFor="let lang of langs" class="dropdown-item ai-icon"
+                             [class.selected]="slug === lang.slug" (click)="ChangeLang(lang.slug, $event)">
+                            <!-- Display language flag -->
+                            <img src="https://api.socceryou.ch/uploads/logos/{{ lang.flag }}" width="30" height="24" class="me-3">
+                            <!-- Display language slug -->
+                            <span style="text-transform: uppercase;">{{ lang.slug }}</span>
+                          </a>
+                        </div>
                       </div>
-                      
 
 
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"

@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 
+
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 
@@ -20,6 +21,7 @@ declare var google: any; // Declare google
 export class FooterComponent implements OnInit{
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
+  name: string = 'Switzerland';
 
 
   customOptions: OwlOptions = {
@@ -112,12 +114,15 @@ export class FooterComponent implements OnInit{
       private router: Router, 
       private translateService: TranslateService, 
       public dialog: MatDialog
-     ) {}
+     ) {
+       // Set default language (for example, Switzerland is defaulting to French)
+    this.translateService.setDefaultLang('fr'); // Set default language
+    this.translateService.use('fr'); // Use default language
+     }
 
   lang:string = '';
   token= '';
   tokenVerified = false;
-  name: string = 'Switzerland';
 
   ngOnInit(): void {
       // Check if the google.accounts.id library is loaded
@@ -182,20 +187,29 @@ export class FooterComponent implements OnInit{
     );
   }
 
-  ChangeLang(slug: string): void {
-    this.name = slug;
-
-    // Assuming the slug also represents the language (e.g., 'en', 'fr', 'de')
-    const selectedLanguage = slug; 
-
-    // Store the selected language in localStorage
-    localStorage.setItem('lang', selectedLanguage);
-
-    // Switch the language using ngx-translate
-    this.translateService.use(selectedLanguage);
-
-    console.log(`Country (and language) changed to: ${slug}`);
+  ChangeLang(domainSlug: string): void {
+    // Find the domain based on the slug
+    const selectedDomain = this.domains.find((domain: any) => domain.slug === domainSlug);
+  
+    if (selectedDomain) {
+      // Update the country name based on the selected domain
+      this.name = selectedDomain.name;
+  
+      // Store the selected language (slug) and country in localStorage
+      localStorage.setItem('lang', selectedDomain.slug);  // Store the language slug
+      localStorage.setItem('country', selectedDomain.name);  // Store the country name
+  
+      // Switch the language using ngx-translate
+      this.translateService.use(selectedDomain.slug);
+  
+      console.log(`Country changed to: ${selectedDomain.name}, Language changed to: ${selectedDomain.slug}`);
+    } else {
+      console.error(`No domain found for slug: ${domainSlug}`);
+    }
   }
+  
+  
+
 
   toggleTheme(event: Event) {
     event.preventDefault();
