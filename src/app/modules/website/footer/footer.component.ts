@@ -21,7 +21,20 @@ declare var google: any; // Declare google
 export class FooterComponent implements OnInit{
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
-  name: string = 'Switzerland';
+  
+  name: string = 'Switzerland'; // Current country name, update as needed
+  countrie = [
+    { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'United Kingdom', slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Estonia, Eswatini', slug: "es", id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Denmark', slug: "dk", id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
 
 
   customOptions: OwlOptions = {

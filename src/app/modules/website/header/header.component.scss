@@ -155,6 +155,9 @@ body {
     font-weight: 500;
     margin-bottom: 10px;
 }
+.custom-select {
+    margin-right: 10px;
+}
 .logo-image {
     display: flex;
     justify-content: center;  /* Centers the image horizontally */
@@ -1320,6 +1323,9 @@ select.form-select.custom-select1 {
         left: unset;
         right: 7%;
         top: 80%;
+    }
+    .custom-select {
+        margin-right: 0;
     }
     .sidebar {
         display: none;
