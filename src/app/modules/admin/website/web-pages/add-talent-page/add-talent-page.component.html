@@ -38,8 +38,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="banner_img" class="form-label">Banner Image</label>
-      <input type="file" id="banner_img" class="form-control" (change)="onFileChange($event, 'banner_img')" required />
+      <label for="banner_bg_img" class="form-label">Banner Image</label>
+      <input type="file" id="banner_bg_img" class="form-control" (change)="onFileChange($event, 'banner_bg_img')" required />
 
       <div *ngIf="bannerImagePreview" class="position-relative mt-2">
         <div class="image_cut">
@@ -53,7 +53,7 @@
           <div
             class="close_image"
             *ngIf="imageLoaded"
-            (click)="removeImage('banner_img')"
+            (click)="removeImage('banner_bg_img')"
           >
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
@@ -62,9 +62,17 @@
           </div>
         </div>
       </div>
-
     </div>
-
+    
+    <div class="mb-3">
+      <label for="banner_desc" class="form-label">Banner Description</label>
+      <textarea class="form-control" id="banner_desc" name="banner_desc" [(ngModel)]="formData.banner_desc" rows="3"></textarea>
+    </div>
+    
+    <div class="mb-3">
+      <label for="banner_btn_txt" class="form-label">Banner Button Text</label>
+      <input type="text" id="banner_btn_txt" class="form-control" name="banner_btn_txt" [(ngModel)]="formData.banner_btn_txt" required />
+    </div>
     <div class="mb-3">
       <label for="page_content" class="form-label">Description</label>
       <div class="NgxEditor__Wrapper">

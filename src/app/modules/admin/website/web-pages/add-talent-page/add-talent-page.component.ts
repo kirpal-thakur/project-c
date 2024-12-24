@@ -35,13 +35,52 @@ export class AddTalentPageComponent implements OnInit {
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ];
   content: string = '';
+  first_tab : { title: string; desc: string; images: File[] }[] = [
+    {
+      title: '',
+      desc : '',
+      images: []
+    },
+    {
+      title: '',
+      desc : '',
+      images: []
+    },
+    {
+      title: '',
+      desc : '',
+      images: []
+    }
+  ];
+  
+  second_tab : { title: string; desc: string; images: File[] }[] = [
+    {
+      title: '',
+      desc : '',
+      images: []
+    },
+    {
+      title: '',
+      desc : '',
+      images: []
+    },
+    {
+      title: '',
+      desc : '',
+      images: []
+    }
+  ];
   formData: any = {
     slug: '',
     meta_title: '',
     meta_description: '',
-    title: '',
     banner_title: '',
-    banner_img: null,
+    banner_bg_img: null,
+    banner_desc:'',
+    banner_btn_txt:'',
+    banner_imgs:[],
+    talent_section_title:'',
+    talent_section:[],
     page_content: '',
     page_id: '',
     page_type: '',
@@ -117,7 +156,7 @@ export class AddTalentPageComponent implements OnInit {
         this.formData.page_content = response.data.pageData.page_content;
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_img;
+        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
       }
     });
   }
