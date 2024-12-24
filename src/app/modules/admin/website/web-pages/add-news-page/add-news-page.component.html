@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
-    <h2>Content Page</h2>
+    <h2>News Page</h2>
 
     <!-- General Information Block -->
     <fieldset class="border p-3 mb-4" *ngIf="!pageId">
@@ -38,8 +38,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="banner_img" class="form-label">Banner Image</label>
-      <input type="file" id="banner_img" class="form-control" (change)="onFileChange($event, 'banner_img')" required />
+      <label for="banner_bg_img" class="form-label">Banner Image</label>
+      <input type="file" id="banner_bg_img" class="form-control" (change)="onFileChange($event, 'banner_bg_img')" required />
 
       <div *ngIf="bannerImagePreview" class="position-relative mt-2">
         <div class="image_cut">
@@ -53,7 +53,7 @@
           <div
             class="close_image"
             *ngIf="imageLoaded"
-            (click)="removeImage('banner_img')"
+            (click)="removeImage('banner_bg_img')"
           >
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
@@ -62,15 +62,16 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="mb-3">
-      <label for="page_content" class="form-label">Description</label>
-      <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
-        <ngx-editor [editor]="editor" class="editor-width" name="page_content" [(ngModel)]="formData.page_content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
-      </div>
+      <label for="banner_title" class="form-label">Slider Button Text</label>
+      <input type="text" id="banner_title" class="form-control" name="slider_btn_txt" [(ngModel)]="formData.slider_btn_txt" required />
+    </div>
+
+    <div class="mb-3">
+      <label for="banner_title" class="form-label">News Title</label>
+      <input type="text" id="banner_title" class="form-control" name="news_title" [(ngModel)]="formData.news_title" required />
     </div>
 
     <button type="submit" class="btn btn-primary w-100 mb-2 mt-2">Submit</button>

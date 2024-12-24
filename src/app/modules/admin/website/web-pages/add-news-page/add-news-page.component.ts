@@ -17,11 +17,11 @@ interface Language {
 }
 
 @Component({
-  selector: 'app-add-content-page',
-  templateUrl: './add-content-page.component.html',
-  styleUrls: ['./add-content-page.component.scss']
+  selector: 'app-add-news-page',
+  templateUrl: './add-news-page.component.html',
+  styleUrls: ['./add-news-page.component.scss']
 })
-export class AddContentPageComponent implements OnInit {
+export class AddNewsPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
   @Input() languages: Language[] = [];
@@ -41,8 +41,14 @@ export class AddContentPageComponent implements OnInit {
     meta_description: '',
     title: '',
     banner_title: '',
-    banner_img: null,
-    page_content: '',
+    banner_bg_img: null,
+    slider_btn_txt:'',
+    news_title:'',
+    //remove this 
+    slider_date: '02.02.2024',
+    slider_title:'',
+    slider_btn_link:'learrn-more',
+    //end here
     page_id: '',
     page_type: '',
     language: localStorage.getItem('lang'),
@@ -52,7 +58,7 @@ export class AddContentPageComponent implements OnInit {
 
   bannerImagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddContentPageComponent>) {}
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddNewsPageComponent>) {}
 
   ngOnInit(): void {
     this.editor = new Editor();
@@ -103,7 +109,7 @@ export class AddContentPageComponent implements OnInit {
     }
     console.log('content', this.content);
     console.log(this.formData, 'submit-form');
-    this.webpages.addContentPage(formData).subscribe(response => {
+    this.webpages.addNewsPage(formData).subscribe(response => {
       this.dialogRef.close({
         action: 'page-added-successfully'
       });
@@ -114,10 +120,13 @@ export class AddContentPageComponent implements OnInit {
     this.webpages.getPageById(id).subscribe(response => {
       if (response.status) {
         this.formData.banner_title = response.data.pageData.banner_title;
-        this.formData.page_content = response.data.pageData.page_content;
+        this.formData.news_title = response.data.pageData.news_title;
+        this.formData.slider_btn_txt = response.data.pageData.slider_btn_txt;
+        this.formData.slider_date = response.data.pageData.slider_date;
+        this.formData.slider_title = response.data.pageData.slider_title;
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_img;
+        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
       }
     });
   }

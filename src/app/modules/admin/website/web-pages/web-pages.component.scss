@@ -48,8 +48,3 @@
     border-left: .3em solid transparent;
 }
 
-.ck-editor__editable {
-    min-height: 300px; /* Set a default height */
-    max-height: 500px; /* Optional: Limit the maximum height */
-    overflow-y: auto; /* Enable scrolling if content exceeds height */
-  }

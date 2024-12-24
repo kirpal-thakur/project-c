@@ -52,6 +52,7 @@ export class HeaderComponent {
   currentIndex = 0;
   notificationsPerPage = 3;
   unseenCount = 0;
+  language : any;
 
   ngOnInit() {
 
@@ -124,7 +125,15 @@ export class HeaderComponent {
         this.profileImgUrl = "../../../assets/images/1.jpg";
       }
 
-      this.lang = localStorage.getItem('lang') || 'en'
+      this.lang = localStorage.getItem('lang') || 'en';
+
+      const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+      if (selectedLanguage) {
+        this.language = selectedLanguage;
+      }else{
+        this.language = this.domains[0];
+      }
+
       this.updateThemeText();
     });
 

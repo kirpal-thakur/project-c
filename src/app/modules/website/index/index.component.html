@@ -9,12 +9,12 @@
 
 
       <div *ngIf="adVisible[0]" class="skyscraper-image">
-        <img src="{{imageBaseUrl + advertisemnetData[0].featured_image}}">
+        <img src="{{advertisemnet_base_url + advertisemnetData[0].featured_image}}">
         <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div *ngIf="adVisible[1]" class="wide-skyscraper-image">
-        <img src="{{imageBaseUrl + advertisemnetData[1].featured_image}}">
+        <img src="{{advertisemnet_base_url + advertisemnetData[1].featured_image}}">
         <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -48,7 +48,7 @@
     </div>
     <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
       <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <img src="{{imageBaseUrl + advertisemnetData[2].featured_image}}">
+        <img src="{{advertisemnet_base_url + advertisemnetData[2].featured_image}}">
         <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
@@ -827,12 +827,12 @@
         <div class="container1">
           <div class="advertisment">
             <div *ngIf="adVisible[3]" class="leaderboard-club-image">
-              <img src="{{imageBaseUrl + advertisemnetData[3].featured_image}}">
+              <img src="{{advertisemnet_base_url + advertisemnetData[3].featured_image}}">
               <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
             <div *ngIf="adVisible[4]" class="small-sqaure-image">
-              <img src="{{imageBaseUrl + advertisemnetData[4].featured_image}}">
+              <img src="{{advertisemnet_base_url + advertisemnetData[4].featured_image}}">
               <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>

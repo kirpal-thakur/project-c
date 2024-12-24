@@ -174,14 +174,14 @@ export class AddHomePageComponent {
         formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
       });
     });
-    formData.append('lang', '1');
+    //formData.append('lang', '1');
 
     console.log(formData);
-    // this.webpages.addHomePageTabData(formData).subscribe((res) => {
-    //   this.dialogRef.close({
-    //     action: "page-added-successfully"
-    //   });
-    // });
+    this.webpages.addHomePageTabData(formData).subscribe((res) => {
+       this.dialogRef.close({
+       action: "page-added-successfully"
+       });
+     });
 
 
 

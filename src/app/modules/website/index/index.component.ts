@@ -67,6 +67,7 @@ export class IndexComponent {
   advertisemnetData:any=null;
   
   imageBaseUrl:string= '';
+  advertisemnet_base_url:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
     { name: 'Ziddane', image: './assets/images/ziddane.svg', year: '2004' },
@@ -305,6 +306,7 @@ getPageDynamicData(languageId:any){
         this.sliderDetail = sliderData;
         this.advertisemnetData = res.data.advertisemnetData;
         this.imageBaseUrl = res.data.base_url;
+        this.advertisemnet_base_url = res.data.advertisemnet_base_url;
       }
   });
 }

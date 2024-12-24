@@ -6,6 +6,10 @@ import { WebPages } from '../../../services/webpages.service';
   styleUrl: './imprint.component.scss'
 })
 export class ImprintComponent implements OnInit {
+  banner_title:any = null;
+  page_content:any=null;
+  banner_img:any=null;
+  base_url:any=null;
   adVisible: boolean[] = [true, true, true]; // Array to manage ad visibility
   constructor( private webPages: WebPages){
 
@@ -16,20 +20,18 @@ export class ImprintComponent implements OnInit {
     this.adVisible = [true, true, true];
     this.webPages.languageId$.subscribe((data) => {
       this.getPageData(data)
-      console.log('here is data',data)
+
     });
    
   }
 
   getPageData(languageId: any){
-    this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
-      let pageData = res.data.pageData;
-      let sliderData = res.data.sliderData;
+    this.webPages.getDynamicContentPage('imprint',languageId).subscribe((res) => {
       if(res.status){
-          // this.pageDetail = pageData;
-          // this.sliderDetail = sliderData;
-          // this.advertisemnetData = res.data.advertisemnetData;
-          // this.imageBaseUrl = res.data.base_url;
+          this.banner_title = res.data.pageData.banner_title;
+          this.page_content = res.data.pageData.page_content;
+          this.banner_img = res.data.pageData.banner_img;
+          this.base_url =  res.data.base_url;
         }
     });
   }
