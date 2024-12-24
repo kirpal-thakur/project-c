@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers:any = [];
   newRegistrationScouts:any = [];
   years:any = [];
+  language:any;
   loggedInUser:any = localStorage.getItem('userData');
   constructor(
     private themeService: ThemeService,
@@ -59,6 +60,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.getNewRegistrationsWithPlayers();
     this.generateYears();
     this.lang = localStorage.getItem('lang') || 'en';
+    
+
+    const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+    if (selectedLanguage) {
+      this.language = selectedLanguage;
+    }else{
+      this.language = this.domains[0];
+    }
+
     this.translateService.use(this.lang);
     Chart.register(...registerables);
     this.userService.getAdminProfile().subscribe((response)=>{
@@ -72,7 +82,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    
+
   }
   getNewRegistrations(){
     try {
