@@ -64,32 +64,14 @@ export class FooterComponent implements OnInit{
 
   isDropdownUp: boolean = false;
 
-  // onCountryChange(event: Event): void {
-  //   const selectElement = event.target as HTMLSelectElement;
-  //   this.selectedCountryId = selectElement.value;
-
-  //   // Check if we should flip the dropdown based on available space
-  //   this.isDropdownUp = this.shouldDropdownBeUp();
-  // }
-
   shouldDropdownBeUp(): boolean {
-    // Logic to determine if dropdown should be flipped
-    // Here we can simply return true for demonstration, adjust as necessary
     return true; // Replace with actual condition
   }
 
   countries = environment.domains; // Assuming the countries are defined in the environment
-  selectedCountryId: string = '';
-  domains: any = environment.domains;
+  // selectedCountryId: string = '';
+  // domains: any = environment.domains;
 
-
-  onCountryChange(event: any): void {
-    this.selectedCountryId = event.target.value;
-    console.log('Selected Country ID:', this.selectedCountryId);
-    // You can perform additional logic here, such as calling an API with the selected country ID
-  }
-
-  selectedCountry: number | null = null;
 
  activeIndex: number = 1; // -1 means no button is active initially
   isVisible: boolean = true;
@@ -128,9 +110,7 @@ export class FooterComponent implements OnInit{
       private translateService: TranslateService, 
       public dialog: MatDialog
      ) {
-       // Set default language (for example, Switzerland is defaulting to French)
-    this.translateService.setDefaultLang('fr'); // Set default language
-    this.translateService.use('fr'); // Use default language
+       
      }
 
   lang:string = '';
@@ -148,36 +128,7 @@ export class FooterComponent implements OnInit{
         this.countries = environment.domains;
       }
 
-    // this.route.queryParams.subscribe(params => {
-    //   this.token = params['confirm-token'] || '';
-    //   console.log('Magic Token:', this.token);
-
-    //   if (this.token) {
-    //     // Call authService to verify magic token
-    //     this.authService.magicLogin(this.token).subscribe(
-    //       (response: any) => {
-    //         console.log('Magic Login Response:', response);
-    //         if (response.success) {
-    //           this.tokenVerified = true;
-    //           this.openModal();
-    //         } else {
-    //           this.tokenVerified = false;
-    //           console.log('Token is not verified please check');
-    //           this.notverifyed();
-    //           console.log("popup is not open")
-    //         }
-    //       },
-    //       (error) => {
-    //         console.error('Error verifying token:', error);
-    //         this.tokenVerified = false;
-    //         this.notverifyed();
-    //       }
-    //     );
-    //   } else {
-    //     this.tokenVerified = false;
-    //     console.log('Token is not provided');
-    //   }
-    // });
+   
 
   }
 
@@ -199,29 +150,6 @@ export class FooterComponent implements OnInit{
       }
     );
   }
-
-  ChangeLang(domainSlug: string): void {
-    // Find the domain based on the slug
-    const selectedDomain = this.domains.find((domain: any) => domain.slug === domainSlug);
-  
-    if (selectedDomain) {
-      // Update the country name based on the selected domain
-      this.name = selectedDomain.name;
-  
-      // Store the selected language (slug) and country in localStorage
-      localStorage.setItem('lang', selectedDomain.slug);  // Store the language slug
-      localStorage.setItem('country', selectedDomain.name);  // Store the country name
-  
-      // Switch the language using ngx-translate
-      this.translateService.use(selectedDomain.slug);
-  
-      console.log(`Country changed to: ${selectedDomain.name}, Language changed to: ${selectedDomain.slug}`);
-    } else {
-      console.error(`No domain found for slug: ${domainSlug}`);
-    }
-  }
-  
-  
 
 
   toggleTheme(event: Event) {
@@ -272,20 +200,6 @@ export class FooterComponent implements OnInit{
             console.log('Token successfully saved to local storage.');
 
             this.translateService.use(selectedLanguage);
-
-            // const selectedLanguage = localStorage.getItem('lang');
-            // if (selectedLanguage) {
-            //   this.translateService.use(selectedLanguage);
-            // }
-
-            // let targetDomain = '';
-            //   if (selectedLanguage === 'en') {
-            //     targetDomain = environment.targetDomain.en;
-            //   } else if (selectedLanguage === 'de') {
-            //     targetDomain = environment.targetDomain.de;
-            //   }
-            //   console.log(targetDomain, "domain");
-            //   console.log(selectedLanguage, "check language")
 
             let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
             if (modal) {
@@ -539,12 +453,6 @@ export class FooterComponent implements OnInit{
       return null;
     }
   }
-
-
-//   editpassword():void  {
-//     console.log("hiii ")
-//   this.dialog.open(ConfirmPasswordComponent)
-// }
 
 openModal() {
   this.dialog.open(ConfirmPasswordComponent, {

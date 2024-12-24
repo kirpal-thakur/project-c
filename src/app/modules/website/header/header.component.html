@@ -191,20 +191,21 @@
 
                       <div class="custom-select">
                         <a class="form-select custom-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          <!-- Display current language name -->
+                          <!-- Display current language (slug is 'en' by default) -->
                           <span>{{ slug.toUpperCase() }}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                          <!-- Loop through langs array to display each language and flag -->
+                          <!-- Loop through langs array to display each language with its flag -->
                           <a href="#" *ngFor="let lang of langs" class="dropdown-item ai-icon"
                              [class.selected]="slug === lang.slug" (click)="ChangeLang(lang.slug, $event)">
                             <!-- Display language flag -->
                             <img src="https://api.socceryou.ch/uploads/logos/{{ lang.flag }}" width="30" height="24" class="me-3">
-                            <!-- Display language slug -->
+                            <!-- Display language slug (uppercase) -->
                             <span style="text-transform: uppercase;">{{ lang.slug }}</span>
                           </a>
                         </div>
                       </div>
+                      
 
 
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"

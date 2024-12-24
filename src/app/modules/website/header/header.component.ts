@@ -24,7 +24,9 @@ import { WebPages } from '../../../services/webpages.service';
 export class HeaderComponent implements OnInit {
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm;
-  slug: string = 'en';
+  
+  //default language
+  slug: string = 'en'; 
 
 
   isNavbarExpanded = false;
@@ -124,94 +126,36 @@ export class HeaderComponent implements OnInit {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
+
+
   ngOnInit(): void {
-
-    this.route.queryParams.subscribe(params => {
-      this.token = params['confirm-token'] || '';
-      if (this.token) {
-        this.toastr.info('Processing...', 'Please Wait!');
-
-        this.authService.magicLogin(this.token).subscribe(
-          response => {
-            if (response.status && response.data) {
-              const token = response.data.token;
-              const userData = response.data.user;
-              const userRole = userData.role;
-
-              localStorage.setItem('authToken', token);
-              localStorage.setItem('userRole', userRole);
-              localStorage.setItem('userData', JSON.stringify(userData));
-              this.tokenVerified = true;
-              this.openModal();
-
-            } else {
-              this.tokenVerified = false;
-              this.router.navigate(['/expired-link']);
-            }
-          },
-          error => {
-            console.error('Error verifying token:', error);
-            this.tokenVerified = false;
-            this.router.navigate(['/expired-link']);
-          }
-        );
-      }
-
-      this.verifyToken = params['token'];
-      this.verifyTime = params['time'];
-
-      if (this.verifyToken && this.verifyTime) {
-        this.toastr.info('Processing...', 'Please Wait!');
-
-        this.authService.verifyEmail(this.verifyToken,this.verifyTime).subscribe(
-          response => {
-            if (response.status) {
-              this.toastr.clear();
-
-              this.toastr.success('Email is verified. You can login now...', 'Email Verified!');
-
-              const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-              loginModal.show();
-
-            } else {
-              this.toastr.clear();
-
-              this.router.navigate(['/expired-link']);
-            }
-          },
-          error => {
-            this.toastr.clear();
-
-            this.router.navigate(['/expired-link']);
-          }
-        );
-      }
-
-
-    });
-
-
-    this.getAllCountries();
-    this.getAllClubs();
-    this.lang = localStorage.getItem('slug') || 'en';
+    // Ensure language is set to 'en' if it's not already in localStorage
+    this.lang = localStorage.getItem('slug') || 'en'; // Default to 'en' if no language is set
+  
+    // Set default language to English if not set
+    if (!this.lang || this.lang === '') {
+      this.lang = 'en';
+      localStorage.setItem('slug', this.lang); // Store default language in localStorage
+    }
+  
+    // Use the selected language (or 'en' if none)
+    this.translateService.use(this.lang);  // Set the language for ngx-translate
+  
+    // Apply dark mode from localStorage
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
-    const savedLanguage = localStorage.getItem('slug');
-
-    //flag-images
-    if (savedLanguage) {
-      this.slug = savedLanguage;
-      this.translateService.use(savedLanguage);  // Load the language using ngx-translate
-    }
-
+  
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
       this.initializeGoogleSignIn();
     }
-
+  
+    this.getAllCountries();
+    this.getAllClubs();
     this.getAllLanguage();
   }
 
+  
   setActive(index: number): void {
     this.activeIndex = index; // Set the active index
     this.role = index === 1 ? 4 : index === 2 ? 2 : 3; // Update role based on activeIndex
@@ -237,9 +181,10 @@ export class HeaderComponent implements OnInit {
   ChangeLang(newSlug: string, event: Event): void {
     this.translateService.use(newSlug);  // Switch translation language
     console.log(`Language changed to: ${newSlug}`);
-
-    this.slug = newSlug;
-
+    
+    this.slug = newSlug;  // Update the slug to the selected language
+    event.preventDefault(); // Prevent default action (e.g., preventing link navigation)
+  
 
     const selectElement = event.target as HTMLSelectElement;
     const selectedLanguage = selectElement.value;
