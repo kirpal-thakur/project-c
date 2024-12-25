@@ -23,7 +23,7 @@ export class CookieComponent implements OnInit {
   }
 
   getPageData(languageId: any){
-    this.webPages.getDynamicContentPage('privacy_policy',languageId).subscribe((res) => {
+    this.webPages.getDynamicContentPage('cookie_policy',languageId).subscribe((res) => {
       if(res.status){
           this.banner_title = res.data.pageData.banner_title;
           this.page_content = res.data.pageData.page_content;

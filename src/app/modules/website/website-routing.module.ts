@@ -18,6 +18,7 @@ import { TermsComponent } from './terms/terms.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TalentComponent } from './talent/talent.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { DetailPagesComponent } from './detail-pages/detail-pages.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
@@ -47,7 +48,7 @@ const routes: Routes = [
   { path: 'privacy', component: PrivacyComponent },
   { path: 'talent', component: TalentComponent },
   { path: 'learn-more', component: LearnMoreComponent },
-  { path: 'news/:slug', component: LearnMoreComponent },
+  { path: 'news/:slug', component: DetailPagesComponent },
   { path: 'player-list', component: PlayerListComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'thank-you', component: ThankuComponent },
