@@ -3,7 +3,7 @@
     <h2>Faq Page</h2>
 
         <!-- General Information Block -->
-        <fieldset class="border p-3 mb-4">
+        <fieldset class="border p-3 mb-4"   *ngIf="!pageId">
           <!-- <legend class="w-auto px-2">Language Information</legend> -->
           <div class="row">
             <div class="mb-3 col-md-12">
@@ -46,29 +46,7 @@
             </div>
           </div>
         </fieldset>
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input
-            type="text"
-            id="title"
-            class="form-control"
-            name="title"
-            [(ngModel)]="formData.title"
-            required
-          />
-        </div>
          <!-- About Banner Title -->
-    <div class="mb-3">
-      <label for="Slug" class="form-label">Slug</label>
-      <input
-        type="text"
-        id="slug"
-        class="form-control"
-        name="slug"
-        [(ngModel)]="formData.slug"
-        required
-      />
-    </div>
     <!-- About Banner Title -->
     <div class="mb-3">
       <label for="faq_banner_title" class="form-label">Faq Banner Title</label>
@@ -130,28 +108,118 @@
         />
       </div>
 
-     <!-- About Banner Background Image -->
-     <div class="mb-3">
-      <label for="banner_img" class="form-label"> Banner Image</label>
-      <input
-        type="file"
-        id="banner_img"
-        class="form-control"
-        (change)="onFileChange($event, 'banner_img')"
-        required
-      />
-    </div>
-
-    <!-- About Banner Description -->
-    <div class="mb-3">
-      <label for="page_content" class="form-label"> Description</label>
-      
-      <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" class="editor-width" name="page_content"[(ngModel)]="formData.page_content" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+      <!-- About Banner Title -->
+      <fieldset class="border p-3 mb-4">
+      <div *ngFor="let feature of formData.faq_first_btn_content; let i = index" class="card mb-3 p-3">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input
+              type="text"
+              [(ngModel)]="feature.title"
+              class="form-control"
+              name="title_{{ i }}"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="col-md-9">
+            <textarea
+              [(ngModel)]="feature.desc"
+              class="form-control"
+              name="desc_{{ i }}"
+              placeholder="Description"
+              required
+            ></textarea>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              (click)="removeFirstButtonContent(i)"
+              class="btn btn-danger btn-sm "
+            >
+              Remove
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-
+      <button type="button" (click)="addFirstButtonContent()" class="btn btn-primary btn-sm mt-2">
+       Add First Button Content
+      </button>
+      </fieldset>
+      <fieldset class="border p-3 mb-4">
+      <div *ngFor="let feature of formData.faq_second_btn_content; let i = index" class="card mb-3 p-3">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input
+              type="text"
+              [(ngModel)]="feature.title"
+              class="form-control"
+              name="title_{{ i }}"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="col-md-9">
+            <textarea
+              [(ngModel)]="feature.desc"
+              class="form-control"
+              name="desc_{{ i }}"
+              placeholder="Description"
+              required
+            ></textarea>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              (click)="removeSecondButtonContent(i)"
+              class="btn btn-danger btn-sm "
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="addSecondButtonContent()" class="btn btn-primary btn-sm mt-2">
+       Add Second Button Content
+      </button>
+      </fieldset>
+      <fieldset class="border p-3 mb-4">
+      <div *ngFor="let feature of formData.faq_third_btn_content; let i = index" class="card mb-3 p-3">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <input
+              type="text"
+              [(ngModel)]="feature.title"
+              class="form-control"
+              name="title_{{ i }}"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="col-md-9">
+            <textarea
+              [(ngModel)]="feature.desc"
+              class="form-control"
+              name="desc_{{ i }}"
+              placeholder="Description"
+              required
+            ></textarea>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              (click)="removeThirdButtonContent(i)"
+              class="btn btn-danger btn-sm "
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="addThirdButtonContent()" class="btn btn-primary btn-sm mt-2">
+       Add Third Button Content
+      </button>
+      </fieldset>
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary mb-3">Submit</button>
   </form>
