@@ -33,13 +33,13 @@
     </fieldset>
 
     <div class="mb-3">
-      <label for="banner_title" class="form-label">Banner Title</label>
-      <input type="text" id="banner_title" class="form-control" name="banner_title" [(ngModel)]="formData.banner_title" required />
+      <label for="faq_banner_title" class="form-label">Faq Banner Title</label>
+      <input type="text" id="faq_banner_title" class="form-control" name="faq_banner_title" [(ngModel)]="formData.faq_banner_title" required />
     </div>
 
     <div class="mb-3">
-      <label for="banner_bg_img" class="form-label">Banner Image</label>
-      <input type="file" id="banner_bg_img" class="form-control" (change)="onFileChange($event, 'banner_bg_img')" required />
+      <label for="faq_banner_img" class="form-label">Faq Banner Image</label>
+      <input type="file" id="faq_banner_img" class="form-control" (change)="onFileChange($event, 'faq_banner_img')" required />
 
       <div *ngIf="bannerImagePreview" class="position-relative mt-2">
         <div class="image_cut">
@@ -53,7 +53,7 @@
           <div
             class="close_image"
             *ngIf="imageLoaded"
-            (click)="removeImage('banner_bg_img')"
+            (click)="removeImage('faq_banner_img')"
           >
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
