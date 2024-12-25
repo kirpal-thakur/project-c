@@ -70,6 +70,11 @@ export class AddHomePageComponent {
       images: []
     }
   ];
+  imageLoaded: boolean = false;
+
+  bannerImagePreview: any = null;
+  heroBgImagePreview: any = null;
+  bannerBgImagePreview: any = null;
 
 
   constructor(private fb: FormBuilder, private webpages: WebPages, public dialogRef : MatDialogRef<AddHomePageComponent>,) {
@@ -100,29 +105,30 @@ export class AddHomePageComponent {
   }
 
   onSubmit(): void {
-    this.addHomePageForm.value.page_id = this.pageId;
- 
-    console.log(this.addHomePageForm.value)
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('page_id', this.pageId);
     formData.append('lang_id', this.addHomePageForm.value.lang);
-
-    if(this.addHomePageForm.value.banner_bg_img != null){
-      formData.append('banner_bg_img', this.addHomePageForm.value.banner_bg_img);
-      this.addHomePageForm.value.banner_bg_img = this.filesData.banner_bg_img;
-    
-    }
-    if(this.addHomePageForm.value.banner_img != null){
-      formData.append('banner_img', this.addHomePageForm.value.banner_img);
-      this.addHomePageForm.value.banner_img = this.filesData.banner_img;
-   
-    }
-    if(this.addHomePageForm.value.hero_bg_img != null){
-      formData.append('hero_bg_img', this.addHomePageForm.value.hero_bg_img);
-      this.addHomePageForm.value.hero_bg_img = this.filesData.hero_bg_img;
-
+  
+    // Append files
+    if (this.filesData.banner_bg_img) {
+      formData.append('banner_bg_img', this.filesData.banner_bg_img);
+    } else {
+      formData.append('banner_bg_img', 'remove_img');
     }
     
+    if (this.filesData.banner_img) {
+      formData.append('banner_img', this.filesData.banner_img);
+    } else {
+      formData.append('banner_img', 'remove_img');
+    }
+    
+    if (this.filesData.hero_bg_img) {
+      formData.append('hero_bg_img', this.filesData.hero_bg_img);
+    } else {
+      formData.append('hero_bg_img', 'remove_img');
+    }
+  
+    // Append text fields
     formData.append('banner_btn_txt', this.addHomePageForm.value.banner_btn_txt);
     formData.append('banner_btn_link', this.addHomePageForm.value.banner_btn_link);
     formData.append('slider_heading', this.addHomePageForm.value.slider_heading);
@@ -131,24 +137,14 @@ export class AddHomePageComponent {
     formData.append('hero_heading_txt', this.addHomePageForm.value.hero_heading_txt);
     formData.append('hero_btn_txt', this.addHomePageForm.value.hero_btn_txt);
     formData.append('hero_btn_link', this.addHomePageForm.value.hero_btn_link);
-    formData.append('meta_title', this.addHomePageForm.value.meta_title); // Include meta_title
-    formData.append('meta_description', this.addHomePageForm.value.meta_description); // Include meta_description
-    // formData.append('lang', '1');
-
+    formData.append('meta_title', this.addHomePageForm.value.meta_title);
+    formData.append('meta_description', this.addHomePageForm.value.meta_description);
+  
     this.webpages.addHomePage(formData).subscribe((res) => {
       this.showTabForm = true;
     });
-
   }
-
-  handleFileInput(files:any, fieldName:string){
-    const input = files.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.filesData[fieldName] = file;
-      console.log(this.filesData, fieldName);
-    }
-  }
+  
 
   onTabFormSubmit(){
     let formData = new FormData();
@@ -201,6 +197,7 @@ export class AddHomePageComponent {
   }
 
   getPagebyId(id:number){
+
     this.webpages.getPageById(id).subscribe(response => {
       if (response.status) {
          console.log('',response.data.pageData.tabs_data.title);
@@ -220,21 +217,60 @@ export class AddHomePageComponent {
           meta_title: response.data.meta_title,
           meta_description: response.data.meta_description,
         })
-       // this.addHomePageForm.value.lang_id = response.data.pageData.
+        // this.addHomePageForm.value.lang_id = response.data.pageData.
      
-          this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
-          this.filesData.banner_img = response.data.pageData.banner_img;
-          this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
-           
-          this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
-          this.first_tab = response.data.pageData.tabs_data.first_tab;
-          this.sec_btn_txt = response.data.pageData.tabs_data.sec_btn_txt;
-          this.second_tab = response.data.pageData.tabs_data.second_tab;
-          this.title = response.data.pageData.tabs_data.title;
-          this.baseUrl = response.data.base_url;
+        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
+        this.heroBgImagePreview = response.data.base_url + response.data.pageData.banner_img;
+        this.bannerBgImagePreview = response.data.base_url + response.data.pageData.hero_bg_img;
+
+        this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
+        this.filesData.banner_img = response.data.pageData.banner_img;
+        this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
+          
+        this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
+        this.first_tab = response.data.pageData.tabs_data.first_tab;
+        this.sec_btn_txt = response.data.pageData.tabs_data.sec_btn_txt;
+        this.second_tab = response.data.pageData.tabs_data.second_tab;
+        this.title = response.data.pageData.tabs_data.title;
+        this.baseUrl = response.data.base_url;
       }
     });
      
   }
+
+  handleFileInput(event: Event, fieldName: string): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.filesData[fieldName] = file;
+  
+      // For image preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (fieldName === 'banner_img') {
+          this.bannerImagePreview = reader.result;
+        } else if (fieldName === 'banner_bg_img') {
+          this.bannerBgImagePreview = reader.result;
+        } else if (fieldName === 'hero_bg_img') {
+          this.heroBgImagePreview = reader.result;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
+  
+  removeImage(fieldName: string): void {
+    this.filesData[fieldName] = null;
+    if (fieldName === 'banner_img') {
+      this.bannerImagePreview = null;
+    } else if (fieldName === 'banner_bg_img') {
+      this.bannerBgImagePreview = null;
+    } else if (fieldName === 'hero_bg_img') {
+      this.heroBgImagePreview = null;
+    }
+  }
+  
+  
 
 }
