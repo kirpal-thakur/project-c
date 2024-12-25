@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'app-club',
@@ -7,12 +7,25 @@ import { Component } from '@angular/core';
   styleUrl: './club.component.scss'
 })
 export class ClubComponent {
+  pageData:any = [{
+    banner_title:'',
+    banner_desc:'',
+    banner_btn_txt:'',
+    club_nd_scout_section_title:'',
+    club_nd_scout_section:[],
+    feature_sctn_title:'',
+    feature_sctn:[],
+    pricing_sctn_title:'',
+    pricing_tab:[],
+  }];
   isActive1 = true; // Premium Plan
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
 
   activeAccordionIndex = 1;
+  constructor( private webPages: WebPages){
 
+  }
   setActiveAccordion(index: number): void {
     this.activeAccordionIndex = index;
   }
@@ -27,8 +40,22 @@ export class ClubComponent {
        this.isActive1 = savedState1 === 'true' ? true : false;
        this.isActive2 = savedState2 === 'true' ? true : false;
        this.isActive3 = savedState2 === 'true' ? true : false;
+
+       this.webPages.languageId$.subscribe((data) => {
+        this.getPageData(data)
+      });
+
      }
    
+     getPageData(languageId: any){
+      this.webPages.getDynamicContentPage('clubs_and_scouts',languageId).subscribe((res) => {
+        if(res.status){
+            this.pageData = res.data.pageData;
+            console.log('club_nd_scout_section',res.data.pageData.club_nd_scout_section);
+
+          }
+      });
+    }
      toggle1() {
        this.isActive1 = !this.isActive1;
        // Save the new state to local storage

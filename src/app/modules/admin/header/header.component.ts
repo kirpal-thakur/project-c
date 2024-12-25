@@ -34,6 +34,7 @@ export class HeaderComponent {
   showNotification: boolean = false;
   notificationCount: number = 0;
   isShowAllNotification : boolean = false;
+  language : any;
 
   ngOnInit() {
     this.languages = JSON.parse(this.languages);
@@ -69,7 +70,15 @@ export class HeaderComponent {
         this.profileImgUrl = "../../../assets/images/1.jpg";
       }
 
-      this.lang = localStorage.getItem('lang') || 'en'
+      this.lang = localStorage.getItem('lang') || 'en';
+
+      const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+      if (selectedLanguage) {
+        this.language = selectedLanguage;
+      }else{
+        this.language = this.domains[0];
+      }
+
       this.updateThemeText();
 
       this.socketService.on('notification').subscribe((data) => {

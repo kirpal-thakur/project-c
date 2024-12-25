@@ -8,11 +8,10 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-12">
                             <div class="banner-left">
-                                <h2 class="banner-heading">Discover Talent</h2>
-                                <h5 class="banner-heading5">Browse a comprehensive database of football talents with
-                                    detailed profiles.</h5>
+                                <h2 class="banner-heading">{{pageData?.banner_title}}</h2>
+                                <h5 class="banner-heading5">{{pageData?.banner_desc}}</h5>
                                 <a class="btn btn-register" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1">Register Now
+                                    data-bs-target="#exampleModal1">{{pageData?.banner_btn_txt}}
                                 </a>
 
                             </div>
@@ -299,7 +298,7 @@
 
         <div class="club-scout py_0">
             <div class="container">
-                <h4 class="club-heading4">I’m a Club/scout</h4>
+                <h4 class="club-heading4">{{pageData?.club_nd_scout_section_title}}</h4>
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="club_text">
@@ -333,7 +332,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="left-accordion">
-                            <h3 class="feature-heading3">Features</h3>
+                            <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item" (click)="setActiveAccordion(1)">
                                     <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -581,7 +580,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="left-accordion">
-                            <h3 class="feature-heading3">Features</h3>
+                            <h3 class="feature-heading3">{{pageData?.pricing_sctn_title}}</h3>
                             <div class="accordion" id="accordionExample">
                                 <div class="accordion-item" (click)="setActiveAccordion(1)">
                                     <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"

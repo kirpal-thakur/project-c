@@ -2,11 +2,11 @@
 <app-header></app-header>
 <div class="main-bnr">
 
-  <div class="overlay"></div>
+  <div class="overlay" style="background-image: url('{{about_banner_bg_img}}');"></div>
   <div class="banner-inner py_0">
     <div class="container">
       <div class="about">
-        <h3 class="about-text">About Us</h3> 
+        <h3 class="about-text">{{about_banner_title}}</h3> 
       </div>
     </div>
   </div>
@@ -27,13 +27,13 @@
     <div class="row">
       <div class="col-lg-6 col-md-6 col-12">
         <div class="content-image">
-          <img src="./assets/images/about-page.png" alt="About Us" >
+          <img src="{{about_banner_img}}" alt="About Us" >
       </div>
       </div>
       <div class="col-lg-6 col-md-6 col-12">
         <p class="content-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        {{about_banner_desc}}
+      </p>
       </div>
     </div>
   </div>
@@ -41,20 +41,20 @@
 
 <div class="countries py_0">
   <div class="container">
-    <h2 class="country-available">Countries Available
+    <h2 class="country-available">{{country_section_title}}
     </h2>
     <div class="row">
       <div class="col-xxl-4 col-lg-6 col-md-6 col-12"> 
           
           <mat-list>
             <mat-list-item *ngFor="let country of countries" rel="noopener noreferrer">
-              <a class="custom-list-item country-name" [href]="country.url" target="_blank">{{ country.name }}</a>
+              <a class="custom-list-item country-name"  target="_blank">{{country}}</a>
             </mat-list-item>
           </mat-list> 
       </div>
       <div class="col-xxl-8 col-lg-6 col-md-6 col-12">
         <div class="map">
-          <img class="light-map" src="./assets/images/map.png" alt="Light Map">
+          <img class="light-map" src="{{country_section_banner_img}}" alt="Light Map">
           <img class="dark-map" src="./assets/images/dark-map.png" alt="Dark Map">
         </div>
       </div>
@@ -89,7 +89,7 @@
           <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
             <div class="button-border">
               <div class="join-text">
-               <p>Join Now</p>
+               <p>{{about_hero_btn_txt}}</p>
                <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png">
                <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
               </div>

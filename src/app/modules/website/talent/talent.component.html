@@ -1,19 +1,19 @@
 <section class="website-code">
-    <div class="main">
+    <div class="main"  >
 
         <app-header></app-header>
 
-        <div class="banner py-0">
+        <div class="banner py-0" style="background-image: url('{{baseUrl + pageData?.banner_bg_img}}');">
             <div class="overlay1"></div>
             <div class="container">
                 <div class="banner-data">
                     <div class="row">
                         <div class="col-lg-6 col-md-4 col-12">
                             <div class="banner-left">
-                                <h1 class="banner-heading">Showcase your profile</h1>
-                                <h4 class="banner-heading5">Get discovered by Clubs and Scouts from all around the world.
+                                <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
+                                <h4 class="banner-heading5">{{pageData?.banner_desc}}
                                 </h4>
-                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ 'registerNow' | translate }}
+                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt}}
                                 </a>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
 
     <div class="club-scout py_0">
         <div class="container">
-            <h3 class="club-heading4">I’m a Talent</h3>
+            <h3 class="club-heading4">{{pageData?.talent_section_title}}</h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="club_text">
@@ -98,7 +98,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="left-accordion">
-                        <h3 class="feature-heading3">Features</h3>
+                        <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item" (click)="setActiveAccordion(1)">
                                 <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"

@@ -1,5 +1,5 @@
 // Angular Component
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef,Component, Input, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { WebPages } from '../../../../../services/webpages.service';
@@ -39,26 +39,45 @@ export class AddClubnScoutPageComponent implements OnInit {
     slug: '',
     meta_title: '',
     meta_description: '',
-    title: '',
     banner_title: '',
     banner_bg_img: null,
-    slider_btn_txt:'',
-    news_title:'',
-    //remove this 
-    slider_date: '02.02.2024',
-    slider_title:'',
-    slider_btn_link:'learrn-more',
-    //end here
+    banner_desc: '',
+    banner_btn_txt: '',
+    banner_imgs: [],
+    club_nd_scout_section_title: '',
+    club_nd_scout_section: {
+      first_tab: [{ txt: '', icon: null }],
+      sec_tab: [{ txt: '', icon: null }],
+      third_tab: [{ txt: '', icon: null }],
+    },
+    feature_sctn: [
+      { title: '', desc: '', icon: null },
+    ],
+    feature_sctn_title:'',
+    pricing_tab: [
+      {
+        monthly_label: '',
+        yearly_label: '',
+        plan_name: '',
+        monthly_plan_price: '',
+        yearly_plan_price: '',
+        monthly_plan_price_currency: '',
+        yearly_plan_price_currency: '',
+        plan_feature_title: '',
+        plan_feature_desc: [],
+      },
+    ],
+    page_content: '',
     page_id: '',
     page_type: '',
     language: localStorage.getItem('lang'),
-    lang_id: localStorage.getItem('lang_id')
+    lang_id: localStorage.getItem('lang_id'),
   };
   imageLoaded: boolean = false;
 
   bannerImagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddClubnScoutPageComponent>) {}
+  constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddClubnScoutPageComponent>,private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.editor = new Editor();
@@ -67,7 +86,7 @@ export class AddClubnScoutPageComponent implements OnInit {
     }
     if (this.pageId) {
       this.formData.page_id = this.pageId;
-      this.getPagebyId(this.pageId);
+      this.getPageById(this.pageId);
     }
   }
 
@@ -98,36 +117,194 @@ export class AddClubnScoutPageComponent implements OnInit {
 
   submitForm(): void {
     const formData = new FormData();
+
+    // Helper function to append nested objects to FormData
+    const appendNestedObject = (prefix: string, obj: any) => {
+      for (const key in obj) {
+        if (Array.isArray(obj[key])) {
+          obj[key].forEach((item: any, index: number) => {
+            if (typeof item === 'object' && item !== null) {
+              appendNestedObject(`${prefix}[${key}][${index}]`, item);
+            } else {
+              formData.append(`${prefix}[${key}][${index}]`, item);
+            }
+          });
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+          appendNestedObject(`${prefix}[${key}]`, obj[key]);
+        } else {
+          formData.append(`${prefix}[${key}]`, obj[key]);
+        }
+      }
+    };
+
+    // Iterate over this.formData and append fields
     for (const key in this.formData) {
       if (Array.isArray(this.formData[key])) {
-        this.formData[key].forEach((item: string, index: number) => {
-          formData.append(`${key}[${index}]`, item);
+        this.formData[key].forEach((item: any, index: number) => {
+          if (typeof item === 'object' && item !== null) {
+            appendNestedObject(`${key}[${index}]`, item);
+          } else {
+            formData.append(`${key}[${index}]`, item);
+          }
         });
+      } else if (typeof this.formData[key] === 'object' && this.formData[key] !== null) {
+        appendNestedObject(key, this.formData[key]);
       } else {
         formData.append(key, this.formData[key]);
       }
     }
-    console.log('content', this.content);
-    console.log(this.formData, 'submit-form');
-    this.webpages.addNewsPage(formData).subscribe(response => {
-      this.dialogRef.close({
-        action: 'page-added-successfully'
+
+    // Append specific club_nd_scout_section values (if they exist)
+    const club_nd_scoutSection = this.formData?.club_nd_scout_section;
+    if (club_nd_scoutSection) {
+      ['first_tab', 'sec_tab', 'third_tab'].forEach(tab => {
+        if (club_nd_scoutSection[tab]?.txt) {
+          formData.append(`club_nd_scout_section[${tab}][txt]`, club_nd_scoutSection[tab].txt);
+        }
+        if (club_nd_scoutSection[tab]?.icon) {
+          formData.append(`club_nd_scout_section[${tab}][icon]`, club_nd_scoutSection[tab].icon);
+        }
       });
+    }
+
+    // Append the feature_sctn images to the FormData object
+    this.formData.feature_sctn.forEach((feature: any, index: number) => {
+      if (feature.img) {
+        formData.append(`feature_sctn[${index}][img]`, feature.img, feature.img.name);
+      }
     });
+
+    // Send the formData
+    this.webpages.addClubnScoutPage(formData).subscribe(
+      response => {
+        console.log('Page added successfully:', response);
+        this.dialogRef.close({
+          action: 'page-added-successfully',
+        });
+      },
+      error => {
+        console.error('Error adding page:', error);
+        // Optional: Show an error message to the user
+      }
+    );
   }
 
-  getPagebyId(id: number): void {
-    this.webpages.getPageById(id).subscribe(response => {
+  onFeatureFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Make sure to store the file in the right index of the feature_sctn array
+      this.formData.feature_sctn[index].img = file;
+
+      // Optionally, create a preview of the image for display
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.formData.feature_sctn[index].imgPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  getPageById(id: number): void {
+    
+    this.webpages.getPageById(id).subscribe((response) => {
       if (response.status) {
-        this.formData.banner_title = response.data.pageData.banner_title;
-        this.formData.news_title = response.data.pageData.news_title;
-        this.formData.slider_btn_txt = response.data.pageData.slider_btn_txt;
-        this.formData.slider_date = response.data.pageData.slider_date;
-        this.formData.slider_title = response.data.pageData.slider_title;
+        const pageData = response.data.pageData;
+
+        // Map basic fields
+        this.formData.page_type = response.data.page_type;
+        this.formData.slug = response.data.slug;
+        this.formData.page_content = pageData.page_content || '';
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
+        this.formData.banner_title = pageData.banner_title;
+        this.formData.banner_desc = pageData.banner_desc;
+        this.formData.banner_btn_txt = pageData.banner_btn_txt;
+        this.bannerImagePreview = response.data.base_url + pageData.banner_bg_img;
+
+        // Map club_nd_scout_section
+        if (pageData.club_nd_scout_section) {
+          this.formData.club_nd_scout_section.first_tab.txt = pageData.club_nd_scout_section.first_tab.txt;
+          this.formData.club_nd_scout_section.sec_tab.txt = pageData.club_nd_scout_section.sec_tab.txt;
+          this.formData.club_nd_scout_section.third_tab.txt = pageData.club_nd_scout_section.third_tab.txt;
+          this.formData.club_nd_scout_section_title =  pageData.club_nd_scout_section_title;
+          this.formData.club_nd_scout_section.first_tab.icon = pageData.club_nd_scout_section.first_tab.icon;
+          this.formData.club_nd_scout_section.sec_tab.icon = pageData.club_nd_scout_section.sec_tab.icon;
+          this.formData.club_nd_scout_section.third_tab.icon = pageData.club_nd_scout_section.third_tab.icon;
+        }
+
+        console.log(this.formData)
+        // Map feature_sctn
+        if (pageData.feature_sctn) {
+          this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
+            title: feature.title,
+            desc: feature.desc,
+            icon: feature.icon || null, // Initialize icon
+          }));
+        }
+
+        // Map pricing_tab
+        if (pageData.pricing_tab) {
+          this.formData.pricing_tab = pageData.pricing_tab.map((plan: any) => ({
+            monthly_label: plan.monthly_label,
+            yearly_label: plan.yearly_label,
+            plan_name: plan.plan_name,
+            monthly_plan_price: plan.monthly_plan_price,
+            yearly_plan_price: plan.yearly_plan_price,
+            monthly_plan_price_currency: plan.monthly_plan_price_currency,
+            yearly_plan_price_currency: plan.yearly_plan_price_currency,
+            plan_feature_title: plan.plan_feature_title,
+            plan_feature_desc: plan.plan_feature_desc || [],
+          }));
+        }
+
+        // Map additional sections if any
+        if (pageData.club_nd_scout_section_title) {
+          this.formData.club_nd_scout_section_title = pageData.club_nd_scout_section_title;
+        }
+        if (pageData.feature_sctn_title) {
+          this.formData.feature_sctn_title = pageData.feature_sctn_title;
+        }
+        if (pageData.pricing_sctn_title) {
+          this.formData.pricing_sctn_title = pageData.pricing_sctn_title;
+        }
+
+        // Trigger change detection after data is assigned
+        this.cdr.detectChanges();
       }
     });
   }
+
+
+  addFeature(): void {
+    this.formData.feature_sctn.push({ title: '', desc: '', icon: '' });
+  }
+
+  removeFeature(index: number): void {
+    this.formData.feature_sctn.splice(index, 1);
+  }
+
+  addPricingPlan(): void {
+    this.formData.pricing_tab.push({
+      plan_name: '',
+      monthly_plan_price: '',
+      yearly_plan_price: '',
+      monthly_plan_price_currency: '',
+      yearly_plan_price_currency: '',
+      plan_feature_desc: []
+    });
+  }
+
+  removePricingPlan(index: number): void {
+    this.formData.pricing_tab.splice(index, 1);
+  }
+
+  addPricingFeature(planIndex: number): void {
+    this.formData.pricing_tab[planIndex].plan_feature_desc.push('');
+  }
+
+  removePricingFeature(planIndex: number, featureIndex: number): void {
+    this.formData.pricing_tab[planIndex].plan_feature_desc.splice(featureIndex, 1);
+  }
+
+
 }
