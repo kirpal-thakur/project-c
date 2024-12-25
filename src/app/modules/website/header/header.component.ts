@@ -120,8 +120,9 @@ export class HeaderComponent implements OnInit {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
-  ngOnInit(): void {
 
+  
+  ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       if (this.token) {
