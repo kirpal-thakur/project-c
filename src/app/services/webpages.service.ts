@@ -69,6 +69,9 @@ export class WebPages {
             `${this.frontendApiUrl}get-frontend-pages?lang_id=${langId}`
         );
     }
+    addFaqPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-faqpage`, params);
+    }
     addTalentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-talentpage`, params);
     }
