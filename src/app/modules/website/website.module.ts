@@ -32,6 +32,7 @@ import { TermsComponent } from './terms/terms.component';
 import { CookieComponent } from './cookie/cookie.component';
 import { TalentComponent } from './talent/talent.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { DetailPagesComponent } from './detail-pages/detail-pages.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
@@ -71,6 +72,7 @@ import { ThemeService } from '../../services/theme.service';
     PlayerListComponent,
     FaqComponent,
     LearnMoreComponent,
+    DetailPagesComponent,
     ImprintComponent,
     TermsComponent,
     PrivacyComponent,
