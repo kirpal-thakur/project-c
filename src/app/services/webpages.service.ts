@@ -22,7 +22,7 @@ export class WebPages {
         this.apiUrl = environment?.apiUrl;
     }
 
-    getAllPages(lang_id:any): Observable<any> {
+    getAllPages(lang_id:any=1): Observable<any> {
 
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pages?lang_id=${lang_id}`
@@ -75,6 +75,11 @@ export class WebPages {
     addTalentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-talentpage`, params);
     }
+    
+    addPricingPage(params: any): Observable<any>{
+        return this.http.post<any>(`${this.frontendApiUrl}save-pricingpage`, params);
+    }
+
     addClubnScoutPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-club-and-scout-page`, params);
     }
@@ -108,6 +113,7 @@ export class WebPages {
     addContentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-content-page`, params);
     }
+
     addNewsPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-newspage`, params);
     }

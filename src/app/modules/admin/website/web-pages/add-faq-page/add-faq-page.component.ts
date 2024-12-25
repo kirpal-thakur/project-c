@@ -37,7 +37,6 @@ export class AddFaqPageComponent implements OnInit {
   ];
   content: string = '';
   formData: any = {
-    slug:'',
     meta_title:'',
     meta_description:'',
     title:'',
@@ -124,11 +123,12 @@ export class AddFaqPageComponent implements OnInit {
         formData.append(key, this.formData[key]);
       }
     }
-    console.log(formData);
-   /*  this.webpages.addFaqPage(formData).subscribe(response => {
+     // Append specific club_nd_scout_section values (if they exist)
+ 
+     this.webpages.addFaqPage(formData).subscribe(response => {
       this.dialogRef.close({
         action: 'page-added-successfully'
       });
-    });  */
+    }); 
   }
 }
