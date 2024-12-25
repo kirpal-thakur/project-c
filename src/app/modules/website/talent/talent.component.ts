@@ -10,6 +10,7 @@ export class TalentComponent {
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
   dynamicTexts: string[] = []
+  baseUrl:string='';
   pageData:any = [{
     banner_title:'',
     banner_desc:'',
@@ -48,8 +49,7 @@ export class TalentComponent {
       this.webPages.getDynamicContentPage('talent',languageId).subscribe((res) => {
         if(res.status){
             this.pageData = res.data.pageData;
-            console.log('talent',res.data.pageData.club_nd_scout_section);
-
+            this.baseUrl = res.data.base_url;
           }
       });
     }
