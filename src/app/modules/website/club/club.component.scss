@@ -2606,9 +2606,6 @@ span {
         margin-top: 100px;
     }
 
-
-
-
     .player1 {
         height: 230px;
         width: 220px;
@@ -2794,7 +2791,7 @@ span {
     }
 
     .button4 {
-        right: 57px;
+        right: 30px;
         top: 8%;
     }
 
@@ -2813,9 +2810,9 @@ span {
     }
 
     .club-offers3 img {
-        bottom: 10%;
-        width: 500px;
-        height: 320px;
+        bottom: 11%;
+        width: 450px;
+        height: 310px;
     }
 
     .club-offers1 img {
@@ -2828,6 +2825,8 @@ span {
     .accodian-image2 img {
         left: 0;
         top: 42%;
+        width: 247px;
+        height: 210px;
     }
 
     .networking-images3 img {
@@ -2835,10 +2834,15 @@ span {
     }
 
     .networking-images1 img {
-        left: 13%;
+        left: 11%;
         top: 8%;
-        width: 382px;
-        height: 492px;
+        width: 380px;
+        height: 480px;
+
+    }
+    .accodian-image3 img {
+        height: 170px;
+        width: 200px;
     }
 }
 
@@ -3949,6 +3953,68 @@ span {
     }
 
 }
+@media (max-width: 821px) {
+    .feature-player2 {
+        right: 46%;
+    }
+    .feature-player3 {
+        top: 13%;
+        right: 19%;
+    }
+    .button1 {
+        left: 5%;
+    }
+    .button3 {
+        top: 62%;
+        right: 175px;
+    }
+    .button4 {
+        top: 5%;
+        right: 32%;
+    }
+    .club-offers1 img {
+        top: 2%;
+        right: 0;
+        left: 6%;
+    }
+    .accodian-image2 img {
+        left: 17%;
+    }
+    .accodian-image1 img {
+        top: 17%;
+        right: 28%;
+    }
+    .accodian-image3 img {
+        right: 18%;
+    }
+    .networking-images2 img {
+        right: 16%;
+        top: 20%;
+    }
+
+}
+@media (max-width: 769px){
+    .feature-player2 {
+        top: 41%;
+        right: 42%;
+        height: 228px;
+        width: 228px;
+    }
+    .feature-player3 {
+        top: 13%;
+        right: 13%;
+        height: 228px;
+        width: 228px;
+    }
+    .button4 {
+        top: 5%;
+        right: 27%;
+    }
+    .feature-player3 .flag-image7, .feature-player2 .flag-image4, .feature-player1 .flag-image{
+        top: 125px;
+        right: 118px;
+    }
+}
 
 @media (max-width: 767px) {
     .banner {
@@ -4842,6 +4908,11 @@ span {
 
 
 
+}
+@media (max-width: 394px) {
+.btn {
+    padding: 8px 10px;
+}
 }
 
 @media (max-width: 391px) {

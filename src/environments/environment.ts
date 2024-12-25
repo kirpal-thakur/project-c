@@ -25,7 +25,7 @@ export const environment = {
       { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
       { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
     ],
-
+ 
     domains:[
       { name:'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg" },
       { name:'German', slug: "de", id: 2, flag: "Germany.svg" },

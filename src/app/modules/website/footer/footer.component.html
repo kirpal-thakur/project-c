@@ -59,17 +59,6 @@
         </div>
       </div>
 
-      <!-- <div class="select-country">
-        <a class="c-name">{{ 'selectCountry' | translate }}</a>
-        <select class="form-select" aria-label="Default select example" (change)="onCountryChange($event)">
-          <option value="" disabled selected class="country">{{ 'selectCountry' | translate }}</option>
-          <option *ngFor="let domain of domains" [value]="country.id" [selected]="country.slug === 'ch'" class="options-country">
-            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
-            {{ domain.name }}
-          </option>
-        </select>
-      </div> -->
-
 
       <div class="form-select1">
         <a class="form-select select-country" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -77,21 +66,15 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <p class="country">{{ 'selectCountry' | translate }}</p>
-          <a href="#" *ngFor="let domain of domains" class="dropdown-item ai-icon options-country"
-            [class.selected]="name === domain.name" (click)="ChangeLang(domain.name)">
-            <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
-            <span>{{ domain.name }}</span>
+          <a *ngFor="let country of countrie" href="{{ country.url }}" class="dropdown-item ai-icon options-country"
+            [class.selected]="name === country.name">
+            <img src="https://api.socceryou.ch/uploads/logos/{{country.flag}}" width="30" height="24" class="me-3">
+            <span>{{ country.name }}</span>
           </a>
         </div>
       </div>
-
-
-
-
-
-
     </div>
-  </div>
+  </div>    
 
   <div class="footer-bottom bgprimary">
     <div class="text-center text-white">

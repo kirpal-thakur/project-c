@@ -9,6 +9,7 @@ import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 
+
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 
@@ -20,6 +21,20 @@ declare var google: any; // Declare google
 export class FooterComponent implements OnInit{
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
+  
+  name: string = 'Switzerland'; // Current country name, update as needed
+  countrie = [
+    { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'United Kingdom', slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Estonia, Eswatini', slug: "es", id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Denmark', slug: "dk", id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
 
 
   customOptions: OwlOptions = {
@@ -49,32 +64,14 @@ export class FooterComponent implements OnInit{
 
   isDropdownUp: boolean = false;
 
-  // onCountryChange(event: Event): void {
-  //   const selectElement = event.target as HTMLSelectElement;
-  //   this.selectedCountryId = selectElement.value;
-
-  //   // Check if we should flip the dropdown based on available space
-  //   this.isDropdownUp = this.shouldDropdownBeUp();
-  // }
-
   shouldDropdownBeUp(): boolean {
-    // Logic to determine if dropdown should be flipped
-    // Here we can simply return true for demonstration, adjust as necessary
     return true; // Replace with actual condition
   }
 
   countries = environment.domains; // Assuming the countries are defined in the environment
-  selectedCountryId: string = '';
-  domains: any = environment.domains;
+  // selectedCountryId: string = '';
+  // domains: any = environment.domains;
 
-
-  onCountryChange(event: any): void {
-    this.selectedCountryId = event.target.value;
-    console.log('Selected Country ID:', this.selectedCountryId);
-    // You can perform additional logic here, such as calling an API with the selected country ID
-  }
-
-  selectedCountry: number | null = null;
 
  activeIndex: number = 1; // -1 means no button is active initially
   isVisible: boolean = true;
@@ -112,12 +109,13 @@ export class FooterComponent implements OnInit{
       private router: Router, 
       private translateService: TranslateService, 
       public dialog: MatDialog
-     ) {}
+     ) {
+       
+     }
 
   lang:string = '';
   token= '';
   tokenVerified = false;
-  name: string = 'Switzerland';
 
   ngOnInit(): void {
       // Check if the google.accounts.id library is loaded
@@ -130,36 +128,7 @@ export class FooterComponent implements OnInit{
         this.countries = environment.domains;
       }
 
-    // this.route.queryParams.subscribe(params => {
-    //   this.token = params['confirm-token'] || '';
-    //   console.log('Magic Token:', this.token);
-
-    //   if (this.token) {
-    //     // Call authService to verify magic token
-    //     this.authService.magicLogin(this.token).subscribe(
-    //       (response: any) => {
-    //         console.log('Magic Login Response:', response);
-    //         if (response.success) {
-    //           this.tokenVerified = true;
-    //           this.openModal();
-    //         } else {
-    //           this.tokenVerified = false;
-    //           console.log('Token is not verified please check');
-    //           this.notverifyed();
-    //           console.log("popup is not open")
-    //         }
-    //       },
-    //       (error) => {
-    //         console.error('Error verifying token:', error);
-    //         this.tokenVerified = false;
-    //         this.notverifyed();
-    //       }
-    //     );
-    //   } else {
-    //     this.tokenVerified = false;
-    //     console.log('Token is not provided');
-    //   }
-    // });
+   
 
   }
 
@@ -182,20 +151,6 @@ export class FooterComponent implements OnInit{
     );
   }
 
-  ChangeLang(slug: string): void {
-    this.name = slug;
-
-    // Assuming the slug also represents the language (e.g., 'en', 'fr', 'de')
-    const selectedLanguage = slug; 
-
-    // Store the selected language in localStorage
-    localStorage.setItem('lang', selectedLanguage);
-
-    // Switch the language using ngx-translate
-    this.translateService.use(selectedLanguage);
-
-    console.log(`Country (and language) changed to: ${slug}`);
-  }
 
   toggleTheme(event: Event) {
     event.preventDefault();
@@ -245,20 +200,6 @@ export class FooterComponent implements OnInit{
             console.log('Token successfully saved to local storage.');
 
             this.translateService.use(selectedLanguage);
-
-            // const selectedLanguage = localStorage.getItem('lang');
-            // if (selectedLanguage) {
-            //   this.translateService.use(selectedLanguage);
-            // }
-
-            // let targetDomain = '';
-            //   if (selectedLanguage === 'en') {
-            //     targetDomain = environment.targetDomain.en;
-            //   } else if (selectedLanguage === 'de') {
-            //     targetDomain = environment.targetDomain.de;
-            //   }
-            //   console.log(targetDomain, "domain");
-            //   console.log(selectedLanguage, "check language")
 
             let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
             if (modal) {
@@ -512,12 +453,6 @@ export class FooterComponent implements OnInit{
       return null;
     }
   }
-
-
-//   editpassword():void  {
-//     console.log("hiii ")
-//   this.dialog.open(ConfirmPasswordComponent)
-// }
 
 openModal() {
   this.dialog.open(ConfirmPasswordComponent, {

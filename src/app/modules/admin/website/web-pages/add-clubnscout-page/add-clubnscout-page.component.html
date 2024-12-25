@@ -66,11 +66,14 @@
 
     <div class="mb-3">
       <label for="banner_desc" class="form-label">Banner Description</label>
-      <div class="NgxEditor__Wrapper">
+      <textarea class="form-control" id="banner_desc" name="banner_desc" [(ngModel)]="formData.banner_desc" rows="3"></textarea>
+        
+      <!-- <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
         <ngx-editor [editor]="editor" class="editor-width" name="banner_desc" [(ngModel)]="formData.banner_desc" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
-      </div>
+      </div> -->
     </div>
+
 
     <div class="mb-3">
       <label for="banner_btn_txt" class="form-label">Banner Button Text</label>
