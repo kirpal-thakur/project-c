@@ -33,12 +33,12 @@
     </fieldset>
 
     <div class="mb-3">
-      <label for="faq_banner_title" class="form-label">Faq Banner Title</label>
+      <label for="faq_banner_title" class="form-label">Banner Title</label>
       <input type="text" id="faq_banner_title" class="form-control" name="faq_banner_title" [(ngModel)]="formData.faq_banner_title" required />
     </div>
 
     <div class="mb-3">
-      <label for="faq_banner_img" class="form-label">Faq Banner Image</label>
+      <label for="faq_banner_img" class="form-label">Banner Image</label>
       <input type="file" id="faq_banner_img" class="form-control" (change)="onFileChange($event, 'faq_banner_img')" required />
 
       <div *ngIf="bannerImagePreview" class="position-relative mt-2">
