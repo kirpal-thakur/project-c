@@ -91,6 +91,7 @@ import { AddTalentPageComponent } from './website/web-pages/add-talent-page/add-
 import { AddNewsPageComponent } from './website/web-pages/add-news-page/add-news-page.component';
 import { AddClubnScoutPageComponent } from './website/web-pages/add-clubnscout-page/add-clubnscout-page.component';
 import { AddFaqPageComponent } from './website/web-pages/add-faq-page/add-faq-page.component';
+import { AddPricingPageComponent } from './website/web-pages/add-pricing-page/add-pricing-page.component';
 export const MY_FORMATS = {
   parse: {
     dateInput: 'DD.MM.YYYY', // Parse input in DD.MM.YYYY format
@@ -169,7 +170,8 @@ export const MY_FORMATS = {
     AddTalentPageComponent,
     AddNewsPageComponent,
     AddClubnScoutPageComponent,
-    AddFaqPageComponent
+    AddFaqPageComponent,
+    AddPricingPageComponent
   ],
   imports: [
     CommonModule,

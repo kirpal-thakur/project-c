@@ -89,7 +89,7 @@ export class AddHomePageComponent {
       hero_btn_link: [''],
       meta_title: [''], // New input
       meta_description: [''], // New input
-      lang: 1,
+      lang: localStorage.getItem('lang_id'),
     });
   }
 
@@ -102,10 +102,10 @@ export class AddHomePageComponent {
   onSubmit(): void {
     this.addHomePageForm.value.page_id = this.pageId;
  
-
+    console.log(this.addHomePageForm.value)
     let formData = new FormData();
     formData.append('page_id', this.pageId);
-    formData.append('lang_id', this.addHomePageForm.value.lang_id);
+    formData.append('lang_id', this.addHomePageForm.value.lang);
 
     if(this.addHomePageForm.value.banner_bg_img != null){
       formData.append('banner_bg_img', this.addHomePageForm.value.banner_bg_img);
@@ -133,7 +133,7 @@ export class AddHomePageComponent {
     formData.append('hero_btn_link', this.addHomePageForm.value.hero_btn_link);
     formData.append('meta_title', this.addHomePageForm.value.meta_title); // Include meta_title
     formData.append('meta_description', this.addHomePageForm.value.meta_description); // Include meta_description
-    formData.append('lang', '1');
+    // formData.append('lang', '1');
 
     this.webpages.addHomePage(formData).subscribe((res) => {
       this.showTabForm = true;
@@ -181,9 +181,7 @@ export class AddHomePageComponent {
        this.dialogRef.close({
        action: "page-added-successfully"
        });
-     });
-
-
+    });
 
   }
 
