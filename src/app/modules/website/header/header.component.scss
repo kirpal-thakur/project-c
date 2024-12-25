@@ -155,6 +155,9 @@ body {
     font-weight: 500;
     margin-bottom: 10px;
 }
+.custom-select {
+    margin-right: 10px;
+}
 .logo-image {
     display: flex;
     justify-content: center;  /* Centers the image horizontally */
@@ -1242,6 +1245,22 @@ select.form-select.custom-select1 {
     }
 }
 
+@media (min-width: 2560px){
+.dropdown-menu {
+    left: unset;
+    right: 28%;
+    top: 80%;
+}
+}
+
+@media (min-width: 1920px) {
+    .dropdown-menu {
+        left: unset;
+        right: 21%;
+        top: 74%;
+    }
+}
+
 
 @media (min-width: 1536px){
 .dropdown-menu {
@@ -1251,9 +1270,21 @@ select.form-select.custom-select1 {
 }
 }
 
+@media (max-width: 1441px) {
+    .dropdown-menu {
+        left: unset;
+        right: 14%;
+        top: 70%;
+    }
+}
 
 
 @media (max-width: 1281px) {
+    .dropdown-menu {
+        left: unset;
+        right: 14%;
+        top: 70%;
+    }
     option {
         font-size: 14px;
     }
@@ -1288,6 +1319,14 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 1199px) {
+    .dropdown-menu {
+        left: unset;
+        right: 7%;
+        top: 80%;
+    }
+    .custom-select {
+        margin-right: 0;
+    }
     .sidebar {
         display: none;
     }
@@ -1348,6 +1387,11 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 991px) {
+    .dropdown-menu {
+        left: unset;
+        right: 2%;
+        top: 80%;
+    }
     .navbar-collapse {
         background-color: transparent;
         padding-bottom: 10px;

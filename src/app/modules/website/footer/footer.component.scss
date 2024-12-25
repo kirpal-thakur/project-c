@@ -796,6 +796,7 @@ img.ng-star-inserted {
   border: none;
   opacity: 75%;
 }
+
 .footer-contact img {
   margin-bottom: 20px;
   width: 218px;
@@ -980,8 +981,11 @@ img.vector-img {
   // border: 1px solid #E05263;
   filter: none;
 }
+
 p.country {
-  font-size: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 300;
 }
 
 
@@ -1338,11 +1342,12 @@ option.countary {
     margin-bottom: 0;
     font-size: 16px;
   }
+
   .footer-contact img {
     margin-bottom: 20px;
     width: 180px;
     height: 82px;
-}
+  }
 
   p {
     font-size: 12px;

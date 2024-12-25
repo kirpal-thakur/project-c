@@ -51,7 +51,18 @@ export class PlayerListComponent implements OnInit {
     { name: 'Zidane', image: './assets/images/ziddane.png', class: 'midfielder', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972},
     { name: 'Kasper Schmeichel', image: './assets/images/kasper.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
     { name: 'Elton Prince Morina', image: './assets/images/Elton Prince Morina.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
-   
+    { name: 'Adam Lallana', image: './assets/images/Adam Lallana.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Harry Kane', image: './assets/images/Harry Kane.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Kasper Schmeichel', image: './assets/images/kasper.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Elton Prince Morina', image: './assets/images/Elton Prince Morina.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Jermain Defoe', image: './assets/images/Jermain Defoe.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Mohamed Salah', image: './assets/images/mohamad.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Bukayo Saka', image: './assets/images/Bukayo Saka.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Kevin De Bruyne', image: './assets/images/kevin.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Jamie Vardy', image: './assets/images/jammie.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    { name: 'Aaron Ramsey', image: './assets/images/aaron.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
+    
   ];
 
   clubPlayers: Player[] = [
@@ -92,7 +103,7 @@ export class PlayerListComponent implements OnInit {
 
   ngOnInit() {
     // Set itemsPerPage to 16 when the component initializes or refreshes
-    this.itemsPerPage = 16;
+    this.itemsPerPage = 8;
   }
 
   selectTab(tab: 'talent' | 'club' | 'scouts'): void {
@@ -157,7 +168,7 @@ goToPage(page: number) {
   }
 
   getNumbers(): number[] {
-    return [16, 32, 84, 100]; // List of options for "items per page"
+    return [8, 16, 24, 32, 84, 100]; // List of options for "items per page"
   }
 
   onItemsPerPageChange() {

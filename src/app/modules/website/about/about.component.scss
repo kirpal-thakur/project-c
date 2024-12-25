@@ -521,6 +521,15 @@ img.join-btn {
   }
 
 }
+
+@media (max-width: 1281px) {
+.map img {
+  height: 680px;
+  width: 730px;
+}
+}
+
+
 @media (max-width: 1200px) {
 .content-text {
   padding: 50px 50px 0 50px;
@@ -578,9 +587,9 @@ img.join-btn {
     width: 520px;
   }
 
-  .club-banner {
-    padding: 30%;
-}
+//   .club-banner {
+//     padding: 30%;
+// }
 }
 
 @media (max-width: 991px) {
@@ -873,10 +882,6 @@ img.join-btn {
   }
 
 }
-
-
-
-
 
 .mat-mdc-list-item-unscoped-content {
   color: white !important;
