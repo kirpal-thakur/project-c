@@ -6,9 +6,9 @@
         <button [routerLink]="'/news'" class="back-button">
             <img src="./assets/images/back-image.svg">
             Back to News & Media</button>
-       <h1>SoccerYou launched in 10 countries</h1>
-       <p class="p-text">02.02.2024</p>
-       <img class="banner-image" src="./assets/images/slider.png">
+       <h1>{{news.title}}</h1>
+       <p class="p-text">{{news.created_at | date:'dd.MM.yy'}}</p>
+       <img class="banner-image" src="{{news.featured_image}}">
     </div>
 
     <div *ngIf="adVisible[0]" class="skyscraper-left">
@@ -24,35 +24,7 @@
 </div>
 </div>
 <div class="learn py_0">
-<div class="container">
-    <p>SoccerYou, the innovative platform designed to connect aspiring soccer talents with scouts and clubs, has made a significant leap by launching in 10 countries. This expansion marks a new era for the platform, aimed at revolutionizing how young players gain visibility and opportunities in the competitive world of soccer.</p>
-
-    <h3>Expanding Horizons</h3>
-    <p>The launch in multiple countries reflects SoccerYou’s commitment to democratizing access to soccer opportunities. By bridging the gap between emerging talents and professional scouts, the platform offers a unique space where players can showcase their skills, track their progress, and get noticed by top clubs and scouts worldwide.</p>
-
-    <h3>Features and Benefits</h3>
-    <p>SoccerYou is equipped with several key features to enhance the experience for its users:</p>
-
-    <ul>
-        <li>Player Profiles: Young athletes can create detailed profiles highlighting their skills, stats, and achievements.</li>
-        <li>Video Uploads: Players can upload videos of their matches and training sessions, providing scouts with a comprehensive view of their abilities.</li>
-        <li>Performance Analytics: Advanced analytics tools help players and scouts analyze performance metrics, aiding in talent identification and development.</li>
-    </ul>
-
-    <h3>For Clubs and Scouts</h3>
-    <p>The platform is not just beneficial for players but also for clubs and scouts. It offers:</p>
-
-    <ul>
-        <li>Talent Pool Access: Easy access to a global pool of emerging talents. </li>
-        <li>Scouting Tools: Advanced tools to track and compare player performances. </li>
-        <li>Engagement: Direct engagement with potential recruits through the platform’s messaging and feedback systems.</li>
-    </ul>
-
-    <h3>The Global Impact</h3>
-    <p>By launching in 10 countries, SoccerYou aims to create a more inclusive and diverse soccer community. This global reach allows players from various backgrounds and regions to gain the exposure they need to advance their careers.</p>
-
-    <h3>Looking Ahead</h3>
-    <p>With this expansion, SoccerYou is poised to become a leading platform in the soccer industry. The next steps involve continuous improvement of the platform’s features, expanding into more countries, and forging partnerships with more clubs and scouts to enhance the opportunities available to young talents.</p>
+<div class="container" [innerHTML]="news.content"  >
 
 </div>
 

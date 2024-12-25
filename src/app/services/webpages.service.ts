@@ -101,7 +101,11 @@ export class WebPages {
             `${this.frontendApiUrl}get-page-by-slug?page_type=${content}&lang_id=${langId}`
         );
     }
-
+    getNewsContentPage(id:any,langId:any):Observable<any>{
+        return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-single-news/${id}`
+        );
+    }
     addContactPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-contactpage`, params);
     }
