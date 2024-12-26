@@ -139,6 +139,8 @@ export class HeaderComponent implements OnInit {
     }
     this.lang_id = localStorage.getItem('lang_id');
   
+
+    
     if (!this.lang_id || this.lang_id === '') {
       this.lang_id = environment.targetDomain.default_lang;
       localStorage.setItem('lang', this.lang_id); // Store default language in localStorage
