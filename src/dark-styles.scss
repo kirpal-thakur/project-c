@@ -455,7 +455,7 @@ box-shadow: none !important;
 
 .dark-theme .sidebar_menu a:hover p {
   background: #BDE34F;
-  // padding: 10px 10px 10px 0px !important;
+  padding: 10px !important;
   border-radius: 10px;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -2368,7 +2368,7 @@ color: #fff;
   h3,h6,sub,span,.premium_list label{
     color: #072944 !important;
   }
-} 
+}
 .dark-theme .choose-plan-btn{
   background: rgba(23, 91, 7, 1);
 }
@@ -2455,7 +2455,4 @@ color: #fff;
 .dark-theme button.premium-subscription_btn{
   background: #FD5454 !important;
   color: #fff !important;
-}
-.dark-theme .suggestion-list{
-  background: #072944 !important;
 }

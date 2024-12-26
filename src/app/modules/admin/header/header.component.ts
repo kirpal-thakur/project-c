@@ -8,6 +8,9 @@ import { environment } from '../../../../environments/environment';
 import { SocketService } from '../../../services/socket.service';
 import { goToActiveLog } from '../../../../utlis';
 import { SharedService } from '../../../services/shared.service';
+import { FormControl } from '@angular/forms';
+import { filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 
 interface Notification {
   image: string;
@@ -36,6 +39,13 @@ export class HeaderComponent {
   isShowAllNotification : boolean = false;
   language : any;
 
+  searchResults: any[] = [];
+  searchUser: any;
+  showSuggestions: boolean = false;
+  searchControl = new FormControl('');
+  filteredUsers: any[] = [];
+  isLoading: boolean = false; // Flag to track loading state
+
   ngOnInit() {
     this.languages = JSON.parse(this.languages);
 
@@ -53,6 +63,7 @@ export class HeaderComponent {
       this.liveNotification.push(obj); // Keep only the latest notification
       this.showNotification = true;
     });
+
     this.userService.adminImageUrl.subscribe((newUrl) => {
       console.log(newUrl, 'testing...', this.loggedInUser.profile_image_path)
       if (newUrl == 'default') {
@@ -103,6 +114,34 @@ export class HeaderComponent {
         }, 7000); // 3000 ms = 3 seconds
       });
     });
+
+
+    this.searchControl.valueChanges
+    .pipe(
+      filter((value): value is string => value !== null && value.trim().length > 0), // Exclude null or empty strings
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((searchText: string) => {
+        this.isLoading = true;
+        return this.userService.searchUser(searchText).pipe(
+          finalize(() => (this.isLoading = false))
+        );
+      })
+    )
+    .subscribe(
+      (response: any) => {
+        if (response && response.status && response.data?.userData) {
+          this.filteredUsers = response.data.userData;
+        } else {
+          console.error('Invalid API response structure:', response);
+          this.filteredUsers = [];
+        }
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+        this.filteredUsers = [];
+      }
+    );
 
     this.userService.getAdminProfile().subscribe((response)=>{
       if (response && response.status) {
@@ -164,6 +203,40 @@ export class HeaderComponent {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
     document.getElementById('theme-text')!.textContent = this.themeText
+  }
+
+
+  onSearch() {
+    if (this.searchUser.trim().length === 0) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.userService.searchUser(this.searchUser).subscribe((response: any) => {
+      if (response && response.status && response.data && response.data.userData) {
+        this.searchResults = response.data.userData;
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
+
+
+  selectUser(user: any): void {
+
+    this.searchControl.setValue(`${user.first_name} ${user.last_name}`, {
+      emitEvent: false,
+    });
+
+    this.filteredUsers = [];
+    // Navigate or perform actions with the selected user
+    this.exploreUser(user.role_name, user.id);
+  }
+
+  exploreUser(slug:string, id:Number): void {
+    let pageRoute = 'admin/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
   }
 
 
@@ -236,6 +309,7 @@ export class HeaderComponent {
     //     time: '18 hours ago'
     //   }
     // ];
+
     localStorage.setItem('makeActiveTab', 'activity');
     setTimeout(() => {
       this.router.navigate(['/admin/setting']);
@@ -249,6 +323,7 @@ export class HeaderComponent {
       this.notificationCount = 0;
       this.isShowAllNotification = false;
     }, 5000); // 3000 ms = 3 seconds
+
   }
 
   accountSetting(){
