@@ -5,7 +5,21 @@
 .dark-theme .custom-list-item.country-name:hover {
   color: #BDE34E !important;
 }
+// .dark-theme .dropdown-item:focus, .dropdown-item:hover {
+//   color: #072944;
+//   background-color: var(--bs-dropdown-link-hover-bg);
+// }
+.dark-theme .website-code .dropdown-item:focus, .dark-theme .dropdown-item:hover {
+  background: var(--bs-dropdown-link-hover-bg) !important;
+  color: #072944;
+}
+.dark-theme .website-code .dropdown-item{
+  color: #072944;
+}
 
+a.dropdown-item.ai-icon.selected {
+  background: var(--bs-dropdown-link-hover-bg) !important;
+}
 
 
 
@@ -17,6 +31,10 @@
 
 .dark-theme .website-code .navbar-nav .nav-link.active::after {
   background-color: #BDE34E;
+}
+
+.dark-theme .register .form-select {
+  filter: brightness(0) invert(1) !important;
 }
 
 .dark-theme .website-code #footer .footer-top .footer-links ul li a:hover {
@@ -518,14 +536,17 @@ button.faq-scout-button {
 
 .dark-theme .website-code .privacy {
   background-color: #072944;
+  color: white;
 }
 
 .dark-theme .website-code .terms {
   background-color: #072944;
+  color: white;
 }
 
 .dark-theme .website-code .cookie-policy {
   background-color: #072944;
+  color: white;
 }
 
 .dark-theme .website-code a.btn.btn-register {
@@ -2310,7 +2331,6 @@ button.faq-scout-button {
   .dark-theme a.nav-link:hover {
     color: #bde34f;
   }
-
   .dark-vector-img {
     margin-top: 9px;
     margin-left: 10px;

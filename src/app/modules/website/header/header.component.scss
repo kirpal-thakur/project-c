@@ -276,10 +276,18 @@ ul {
     color: #fff;
 }
 
-.modal-dialog {
-    max-width: 600px;
-    margin-right: auto;
-    margin-left: auto;
+// .modal-dialog {
+//     // max-width: 600px;
+//     margin-right: auto;
+//     margin-left: auto;
+// }
+.register .modal {
+    --bs-modal-zindex: 1055;
+    --bs-modal-width: 600px;
+}
+.reg-model .modal-dialog.modal-dialog-centered {
+    transform: none;
+    max-width: 600px !important;
 }
 
 .modal-content {
@@ -1245,11 +1253,13 @@ select.form-select.custom-select1 {
     }
 }
 
-@media (min-width: 2560px){
+
+
+@media (min-width: 1536px){
 .dropdown-menu {
     left: unset;
-    right: 28%;
-    top: 80%;
+    right: 13.5%;
+    top: 70%;
 }
 }
 
@@ -1260,16 +1270,13 @@ select.form-select.custom-select1 {
         top: 74%;
     }
 }
-
-
-@media (min-width: 1536px){
-.dropdown-menu {
-    left: unset;
-    right: 12%;
-    top: 70%;
-}
-}
-
+@media (min-width: 2560px){
+    .dropdown-menu {
+        left: unset;
+        right: 28.2%;
+        top: 80%;
+    }
+    }
 @media (max-width: 1441px) {
     .dropdown-menu {
         left: unset;
@@ -1282,7 +1289,7 @@ select.form-select.custom-select1 {
 @media (max-width: 1281px) {
     .dropdown-menu {
         left: unset;
-        right: 14%;
+        right: 15.6%;
         top: 70%;
     }
     option {
