@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { WebPages } from '../../../services/webpages.service';
 @Component({
   selector: 'app-talent',
   templateUrl: './talent.component.html',
@@ -10,14 +10,27 @@ export class TalentComponent {
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
   dynamicTexts: string[] = []
-
+  baseUrl:string='';
+  pageData:any = [{
+    banner_title:'',
+    banner_desc:'',
+    banner_btn_txt:'',
+    talent_section_title:'',
+    talent_section:[],
+    feature_sctn_title:'',
+    feature_sctn:[],
+    pricing_sctn_title:'',
+    pricing_tab:[],
+  }];
   activeAccordionIndex = 1;
 
   setActiveAccordion(index: number): void {
     this.activeAccordionIndex = index;
   }
   
-   
+  constructor( private webPages: WebPages){
+
+  }
      ngOnInit() {
        // Retrieve the states from local storage
        const savedState1 = localStorage.getItem('toggleState1');
@@ -28,8 +41,18 @@ export class TalentComponent {
        this.isActive2 = savedState2 === 'true' ? true : false;
        this.isActive3 = savedState2 === 'true' ? true : false;
        this.adVisible = [true, true, true, true, true, true, true];
+       this.webPages.languageId$.subscribe((data) => {
+        this.getPageData(data)
+      });
      }
-
+     getPageData(languageId: any){
+      this.webPages.getDynamicContentPage('talent',languageId).subscribe((res) => {
+        if(res.status){
+            this.pageData = res.data.pageData;
+            this.baseUrl = res.data.base_url;
+          }
+      });
+    }
      toggle1() {
        this.isActive1 = !this.isActive1;
        // Save the new state to local storage

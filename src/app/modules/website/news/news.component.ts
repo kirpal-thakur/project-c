@@ -31,8 +31,10 @@ export class NewsComponent {
     this.startAutoplay();
     this.adVisible = [true, true, true, true, true];
     this.webPages.languageId$.subscribe((data) => {
+      console.log('coming here 1, ',data);
       this.getPageData(data)
     });
+
   }
   getPageData(languageId: any){
     this.webPages.getDynamicContentPage('news',languageId).subscribe((res) => {

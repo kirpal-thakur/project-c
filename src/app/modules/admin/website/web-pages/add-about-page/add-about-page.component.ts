@@ -106,13 +106,13 @@ export class AddAboutPageComponent implements OnInit {
   removeImage(fieldName: string): void {
     this.formData[fieldName] = 'remove_image';
     if(fieldName == 'about_banner_bg_img'){
-      this.about_banner_bg_img = null;
+      this.about_banner_bg_img = 'remove_image';
       this.bannerBgimageLoaded = false;
     }else if(fieldName == 'about_banner_img'){
-      this.about_banner_img = null;
+      this.about_banner_img = 'remove_image';
       this.aboutBannerImagePreview = false;
     }else if(fieldName == 'country_section_banner_img'){
-      this.country_section_banner_img = null;
+      this.country_section_banner_img = 'remove_image';
       this.aboutCountryBannerImagePreview = false;
     }
     //this.about_banner_bg_img = null;

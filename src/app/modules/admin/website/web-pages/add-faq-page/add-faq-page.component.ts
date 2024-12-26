@@ -37,13 +37,19 @@ export class AddFaqPageComponent implements OnInit {
   ];
   content: string = '';
   formData: any = {
-    slug:'',
     meta_title:'',
     meta_description:'',
     title:'',
-    banner_title: '',
+    faq_banner_title: '',
     banner_img: null,
     page_content: '',
+    faq_collapse_titile:'',
+    faq_first_btn_txt:'',
+    faq_sec_btn_txt:'',
+    faq_third_btn_txt:'',
+    faq_first_btn_content:[{ title: '', desc: ''}],
+    faq_second_btn_content:[{ title: '', desc: ''}],
+    faq_third_btn_content:[{ title: '', desc: ''}],
     page_id: '',
     page_type:'',
     language: localStorage.getItem('lang'),
@@ -57,6 +63,10 @@ export class AddFaqPageComponent implements OnInit {
     if(this.pageType){
       this.formData.page_type = this.pageType;
     }
+    if (this.pageId) {
+      this.formData.page_id = this.pageId;
+      this.getPageById(this.pageId);
+    }
   }
 
   ngOnDestroy(): void {
@@ -67,7 +77,41 @@ export class AddFaqPageComponent implements OnInit {
   onFileChange(event: any, fieldName: string): void {
     this.formData[fieldName] = event.target.files[0];
   }
+  addFirstButtonContent(){
+    this.formData.faq_first_btn_content.push({ title: '', desc: ''});
+  }
+  addSecondButtonContent(){
+    this.formData.faq_second_btn_content.push({ title: '', desc: ''});
+  }
+  addThirdButtonContent(){
+    this.formData.faq_second_btn_content.push({ title: '', desc: ''});
+  }
 
+  removeFirstButtonContent(i:number): void {
+    this.formData.faq_first_btn_content.splice(i, 1);
+  }
+  removeSecondButtonContent(i:number): void {
+    this.formData.faq_third_btn_content.splice(i, 1);
+  }
+  removeThirdButtonContent(i:number): void {
+    this.formData.faq_third_btn_content.splice(i, 1);
+  }
+  getPageById(id: number): void {
+    this.webpages.getPageById(id).subscribe(response => {
+      if (response.status) {
+        this.formData.faq_banner_title = response.data.pageData.faq_banner_title;
+        this.formData.faq_collapse_titile = response.data.pageData.faq_collapse_titile;
+        this.formData.faq_first_btn_content = response.data.pageData.faq_first_btn_content;
+        this.formData.faq_first_btn_txt = response.data.pageData.faq_first_btn_txt;
+        this.formData.faq_sec_btn_content = response.data.pageData.faq_sec_btn_content;
+        this.formData.faq_sec_btn_txt = response.data.pageData.faq_sec_btn_txt;
+        this.formData.faq_third_btn_content= response.data.pageData.faq_third_btn_content;
+        this.formData.faq_third_btn_txt = response.data.pageData.faq_third_btn_content;
+        this.formData.meta_title = response.data.meta_title;
+        this.formData.meta_description = response.data.meta_description;
+      }
+    });
+  }
   submitForm(): void {
     const formData = new FormData();
     for (const key in this.formData) {
@@ -79,9 +123,9 @@ export class AddFaqPageComponent implements OnInit {
         formData.append(key, this.formData[key]);
       }
     }
-    console.log('content',this.content);
-    console.log(this.formData, 'submit-form');
-    this.webpages.addContentPage(formData).subscribe(response => {
+     // Append specific club_nd_scout_section values (if they exist)
+ 
+     this.webpages.addFaqPage(formData).subscribe(response => {
       this.dialogRef.close({
         action: 'page-added-successfully'
       });

@@ -130,12 +130,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     // Ensure language is set to 'en' if it's not already in localStorage
-    this.lang = localStorage.getItem('slug') || 'en'; // Default to 'en' if no language is set
+    this.lang = localStorage.getItem('lang') || 'en'; // Default to 'en' if no language is set
   
     // Set default language to English if not set
     if (!this.lang || this.lang === '') {
       this.lang = 'en';
-      localStorage.setItem('slug', this.lang); // Store default language in localStorage
+      localStorage.setItem('lang', this.lang); // Store default language in localStorage
     }
   
     // Use the selected language (or 'en' if none)
@@ -185,22 +185,19 @@ export class HeaderComponent implements OnInit {
     this.slug = newSlug;  // Update the slug to the selected language
     event.preventDefault(); // Prevent default action (e.g., preventing link navigation)
   
-
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedLanguage = selectElement.value;
     let selectedLanguageId : any = null;
-    let getLanguageIndex = this.allLanguage.findIndex((val:any) => {
-      if(val.slug == selectedLanguage){
+    let getLanguageIndex = this.languages.findIndex((val:any) => {
+      if(val.slug == newSlug){
         selectedLanguageId = val.id
         return val;
       }
     });
-    this.webpage.updateData(selectedLanguageId);
+   
     this.selectedLanguageId = selectedLanguageId;
-    localStorage.setItem('lang', selectedLanguage);
+    localStorage.setItem('lang', newSlug);
 
     // Retrieve the selected language code from localStorage
-    const selectedLanguageSlug = selectedLanguage;
+    const selectedLanguageSlug = newSlug;
     // Find the corresponding language ID from the langs array
     const selectedLanguageObj = this.languages.find(
       (lang: any) => lang.slug === selectedLanguageSlug
@@ -208,6 +205,8 @@ export class HeaderComponent implements OnInit {
 
     // Default to a specific language ID if none is found (e.g., English)
     selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    console.log('selectedLanguageId',selectedLanguageId);
+    this.webpage.updateData(selectedLanguageId);
     localStorage.setItem('lang_id', selectedLanguageId);
     console.log('lang_id',selectedLanguageId);
     this.sharedservice.updateData({
@@ -215,7 +214,8 @@ export class HeaderComponent implements OnInit {
       id:selectedLanguageId
     });
 
-    this.translateService.use(selectedLanguage);
+
+    this.translateService.use(newSlug);
 
     const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
     if (target) {
