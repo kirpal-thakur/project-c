@@ -31,17 +31,10 @@
 <div class="file">
 <div class="container">
     <div class="files">
-        <h3 class="attachments">Attachments</h3>
-        <a href="https://www.example.com/dummy.pdf" target="_blank" download>
+        <h3 class="attachments"  *ngIf="news.attachments" >Attachments</h3>
+        <a *ngFor="let attachment of news.attachments"   href="https://www.example.com/dummy.pdf" target="_blank" download>
             <img class="dark-files" src="./assets/images/pdf.png" alt="PDF Icon">
         </a>
-    <a href="../../../../assets/images/bnr.jpg" target="_blank">
-    <img  class="dark-files" src="./assets/images/jpg.png">
-    </a>
-
-    <a href="./../../../../assets/images/About-us-banner.png" target="_blank">
-    <img class="dark-files" src="./assets/images/png.png">
-    </a>
 </div>
 </div>
 </div>
@@ -85,29 +78,11 @@
     <div class="container">
         <h4>More News</h4>
         <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                <div [routerLink]="'/learn-more'" class="news-box">
-                    <img src="./assets/images/news1.png">
-                    <p class="p-text">02.02.2024</p>
-                    <p>SoccerYou Hosts Charity Tournament in Germany</p>
-                </div>
-
-            </div >
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-
-                <div [routerLink]="'/learn-more'" class="news-box">
-                    <img src="./assets/images/news2.png">
-                    <p class="p-text">02.02.2024</p>
-                    <p>Legendary Midfielder Joins SoccerYou  as Global Ambassador</p>
-                </div>
-
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                <div [routerLink]="'/learn-more'" class="news-box">
-                    <img src="./assets/images/news3.png">
-                    <p class="p-text">02.02.2024</p>
-                    <p>Behind the Scenes: Exclusive Interview with the Head Coach</p>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-12" *ngFor="let new of moreNews"  >
+                <div routerLink="{{'/news'+new.id}}" class="news-box">
+                    <img src="{{news.news_img_path + new.featured_image}}">
+                    <p class="p-text">{{new.created_at | date:'dd.MM.yy'}}</p>
+                    <p>{{new.content}}</p>
                 </div>
             </div>
         </div>

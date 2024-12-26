@@ -9,6 +9,7 @@ import { WebPages } from '../../../services/webpages.service';
 export class DetailPagesComponent {
   id!: string;
   news:any = [{content:'',title:'',featured_image:'',created_at:''}]
+  moreNews:any = [];
   adVisible: boolean[] = [true, true, true,true, true, true]; // Array to manage ad visibility
   constructor(private route: ActivatedRoute,private webPages: WebPages) {}
 
@@ -28,6 +29,7 @@ export class DetailPagesComponent {
     this.webPages.getNewsContentPage(this.id,languageId).subscribe((res) => {
       if(res.status){
           this.news = res.data.news;
+          this.moreNews = res.data.moreNews;
           this.news.featured_image = res.data.news_img_path + res.data.news.featured_image;
       }
     });
