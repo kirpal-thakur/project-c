@@ -10,6 +10,10 @@ import { DashboardService } from '../../../services/dashboard.service';
 import { ViewportScroller } from '@angular/common';
 import { environment } from '../../../../environments/environment';
 import { goToActiveLog } from '../../../../utlis';
+import { FormControl } from '@angular/forms';
+import { filter } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -37,6 +41,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   years:any = [];
   language:any;
   loggedInUser:any = localStorage.getItem('userData');
+
+  searchResults: any[] = [];
+  searchUser: any;
+  showSuggestions: boolean = false;
+  searchControl = new FormControl('');
+  filteredUsers: any[] = [];
+  isLoading: boolean = false; // Flag to track loading state
+
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
@@ -79,6 +91,35 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         console.error('Invalid API response structure:', response);
       }
     });
+
+
+        this.searchControl.valueChanges
+        .pipe(
+          filter((value): value is string => value !== null && value.trim().length > 0), // Exclude null or empty strings
+          debounceTime(300),
+          distinctUntilChanged(),
+          switchMap((searchText: string) => {
+            this.isLoading = true;
+            return this.userService.searchUser(searchText).pipe(
+              finalize(() => (this.isLoading = false))
+            );
+          })
+        )
+        .subscribe(
+          (response: any) => {
+            if (response && response.status && response.data?.userData) {
+              this.filteredUsers = response.data.userData;
+            } else {
+              console.error('Invalid API response structure:', response);
+              this.filteredUsers = [];
+            }
+          },
+          (error) => {
+            console.error('Error fetching users:', error);
+            this.filteredUsers = [];
+          }
+        );
+
   }
 
   ngAfterViewInit() {
@@ -373,6 +414,41 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   removeDecimals(data:any){
     const modifiedData = data.map((value:any) => value.replace('.00', ''));
     return modifiedData;
+  }
+
+
+  onSearch() {
+    if (this.searchUser.trim().length === 0) {
+      this.searchResults = [];
+      return;
+    }
+
+    this.userService.searchUser(this.searchUser).subscribe((response: any) => {
+      if (response && response.status && response.data && response.data.userData) {
+        this.searchResults = response.data.userData;
+      } else {
+        // this.isLoading = false;
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
+
+
+  selectUser(user: any): void {
+
+    this.searchControl.setValue(`${user.first_name} ${user.last_name}`, {
+      emitEvent: false,
+    });
+
+    this.filteredUsers = [];
+    // Navigate or perform actions with the selected user
+    this.exploreUser(user.role_name, user.id);
+
+  }
+
+  exploreUser(slug:string, id:Number): void {
+    let pageRoute = 'admin/'+slug.toLowerCase();
+    this.router.navigate([pageRoute, id]);
   }
 
   redirectUser(slug:string, id:Number): void {
