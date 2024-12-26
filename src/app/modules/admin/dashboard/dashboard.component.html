@@ -21,28 +21,60 @@
           </svg>
         </div> -->
         <span class="page-heading"> {{ 'Dashboard' | translate }}</span>
-
-    </div>
+      </div>
 
       <div class="navbar-search">
-        <form>
-    
 
-          <div class="input-group search-area">
-            <span class="input-group-text"><a href="javascript:void(0)">
-              <svg id="search-icon" width="17" height="16" viewBox="0 0 17 16" fill="none" stroke="white" xmlns="http://www.w3.org/2000/svg">
-              <g opacity="0.5">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.6939 11.9861C12.4237 10.826 13.6962 7.67253 12.5361 4.94269C11.3759 2.21286 8.22245 0.940375 5.49261 2.10053C2.76278 3.26068 1.49029 6.41414 2.65045 9.14398C3.8106 11.8738 6.96406 13.1463 9.6939 11.9861Z" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M11.3906 10.8408L15.556 15.0067" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
+        <label for="search-text" class="input-group search-area d-flex align-items-center">
+          <span class="input-group-text "><a href="javascript:void(0)">
+              <svg id="search-icon" width="17" height="16" viewBox="0 0 17 16" fill="none" stroke="white"
+                xmlns="http://www.w3.org/2000/svg">
+                <g opacity="0.5">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M9.6939 11.9861C12.4237 10.826 13.6962 7.67253 12.5361 4.94269C11.3759 2.21286 8.22245 0.940375 5.49261 2.10053C2.76278 3.26068 1.49029 6.41414 2.65045 9.14398C3.8106 11.8738 6.96406 13.1463 9.6939 11.9861Z"
+                    stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M11.3906 10.8408L15.556 15.0067" stroke="black" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </g>
               </svg>
-              </a></span>
+            </a>
+          </span>
 
-            <input type="text"  name="search"  class="form-control" id="Search-text" placeholder="Search" />
+          <div class="search-container ms-2">
+            <!-- <mat-form-field class="w-100"> -->
+            <input matInput placeholder="Search" [formControl]="searchControl" [matAutocomplete]="auto"
+              class="form-control w-100" />
+            <mat-autocomplete class="suggestion-list" #auto="matAutocomplete"
+              (optionSelected)="selectUser($event.option.value)">
+              <!-- Show loader while loading -->
+              <mat-option *ngIf="isLoading" class="loading-option" disabled>
+                <div>
+                  Loading...
+                </div>
+              </mat-option>
 
+              <!-- Show user list -->
+              <mat-option *ngFor="let user of filteredUsers" [value]="user">
+                <img width="20" height="20" class="img-list me-2" src="{{
+                      user?.profile_image
+                        ? user?.profile_image
+                        : '../../../../assets/images/default/talent-profile-default.png'
+                    }}" />
+                <span>
+                  {{ user.first_name }} {{ user.last_name }}
+                </span>
+              </mat-option>
+
+              <!-- Show "No results found" if no users are available -->
+              <mat-option *ngIf="!isLoading && filteredUsers.length === 0" disabled>
+                <div>
+                  No results found.
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+            <!-- </mat-form-field> -->
           </div>
-
-        </form>
+        </label>
       </div>
 
       <div class="navbarcollapse" >
@@ -216,7 +248,8 @@
           </li>
         </ul>
       </div>
-      </nav>
+    </nav>
+
     </div>
       <div class="main-wrapper ">
         <div class="dashboard_table pb-4 " >
