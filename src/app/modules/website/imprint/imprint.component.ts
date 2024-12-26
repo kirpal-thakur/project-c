@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WebPages } from '../../../services/webpages.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-imprint',
   templateUrl: './imprint.component.html',
-  styleUrl: './imprint.component.scss'
+  styleUrl: './imprint.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class ImprintComponent implements OnInit {
   banner_title:any = null;
@@ -11,7 +14,7 @@ export class ImprintComponent implements OnInit {
   banner_img:any=null;
   base_url:any=null;
   adVisible: boolean[] = [true, true, true]; // Array to manage ad visibility
-  constructor( private webPages: WebPages){
+  constructor( private webPages: WebPages, private sanitizer: DomSanitizer){
 
   }
 
@@ -30,7 +33,7 @@ export class ImprintComponent implements OnInit {
       if(res.status){
           this.banner_title = res.data.pageData.banner_title;
           this.page_content = res.data.pageData.page_content;
-          this.banner_img = res.data.pageData.banner_img;
+          this.banner_img = this.sanitizer.bypassSecurityTrustHtml(res.data.pageData.banner_img);
           this.base_url =  res.data.base_url;
         }
     });

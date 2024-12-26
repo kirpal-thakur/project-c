@@ -1,6 +1,7 @@
 <section class="website-code">
 <app-header></app-header>
-<div class="main" style="background-image: url('{{base_url+banner_img}}');">
+<div class="main">
+<div class="main1" style="background-image: url('{{base_url+banner_img}}');">
   <div class="overlay"></div>
   <div class="banner-inner py_0">
     <div class="container">
@@ -22,7 +23,7 @@
 </div>
 
   <div class="cookie-policy">
-      <div class="container"  [innerHTML]="page_content" >
+      <div class="container content_page" [innerHTML]="page_content" >
 
       <!-- <div class="cookie py_0">
       <h4>Cookie Policy</h4>
@@ -84,6 +85,7 @@
       </div>
       </div>
   </div> -->
+  </div>
   </div>
   </div>
   <app-footer></app-footer>

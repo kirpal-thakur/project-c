@@ -64,16 +64,18 @@ body {
     top: 0;
 }
 
-.main {
-    background-image: url("../../../../assets/images/Privacy\ Policy-banner.png");
+.main1 {
+    // background-image: url("../../../../assets/images/Privacy\ Policy-banner.png");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: 375px;
+    // height: 375px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    height: auto;
+    min-height: 400px;
 }
 
 .header-transparent {
@@ -102,6 +104,7 @@ body {
     /* Remove default markers */
     padding: 0;
     margin: 0;
+    display: grid;
     text-align: left;
     /* Center the list items */
 }
@@ -181,7 +184,7 @@ body {
 @media (max-width: 1441px) {}
 
 @media (max-width: 1199px) {
-    .main {
+    .main1 {
         height: 270px;
     }
 
@@ -209,7 +212,7 @@ body {
 }
 
 @media (max-width: 991px) {
-    .main {
+    .main1 {
         height: 200px;
     }
 
@@ -240,7 +243,7 @@ body {
 @media (max-width: 767px) {}
 
 @media (max-width: 575px) {
-    .main {
+    .main1 {
         height: 250px;
         background-position: bottom;
     }

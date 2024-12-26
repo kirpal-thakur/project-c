@@ -1,6 +1,6 @@
 <section class="website-code">
-  <div class="main">
     <app-header></app-header>
+    <div class="main">
     <div class="main-bnr"  style="background-image: url('{{base_url+banner_img}}');">
     <div class="overlay"></div>
     <div class="banner-inner py_0">
@@ -21,7 +21,7 @@
     </div>
   </div>
   
-  <div class="imprint" [innerHTML]="page_content">
+  <div class="imprint content_page " [innerHTML]="page_content">
 
     <div class="container">
         <!-- <div class="imprint-cols">
@@ -104,6 +104,6 @@
           
     </div>
   </div>
+</div>
   <app-footer></app-footer>
-  </div>
   </section>
