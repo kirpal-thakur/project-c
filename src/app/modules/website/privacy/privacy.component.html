@@ -1,6 +1,7 @@
 <section class="website-code">
   <app-header></app-header>
-  <div class="main" style="background-image: url('{{base_url+banner_img}}');" >
+  <!-- <div class="main"> -->
+    <div class="main" style="background-image: url('{{base_url+banner_img}}');" >
     <div class="overlay"></div>
     <div class="banner-inner py_0">
       <div class="container">
@@ -13,17 +14,17 @@
       <img src="./assets/images/skyscraper - 120x600.png">
       <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
     </div>
-  
+
     <div *ngIf="adVisible[1]" class="skyscraper-right">
       <img src="./assets/images/skyscraper - 120x600.png">
       <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
-  
+
   <div class="privacy">
-    <div class="container"  [innerHTML]="page_content">
-  
-  <!--     <div class="py_0">
+    <div class="container content_page" [innerHTML]="page_content">
+
+      <!--     <div class="py_0">
         <h4>Privacy Policy</h4>
         <p>At SoccerYou, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use,
           and safeguard your personal information when you use our website and services.</p>
@@ -90,14 +91,14 @@
         <p>CH-8404 Winterthur</p>
         <p>Switzerland</p>
       </div> -->
-  
+
       <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
-      <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <img src="./assets/images/leaderboard - 728x90.png">
-        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-      </div>
+        <div *ngIf="adVisible[2]" class="leaderboard-image">
+          <img src="./assets/images/leaderboard - 728x90.png">
+          <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
       </div>
     </div>
   </div>
   <app-footer></app-footer>
-  </section>
+</section>
