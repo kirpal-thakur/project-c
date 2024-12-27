@@ -3,7 +3,7 @@ export const environment = {
     googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
 
     targetDomain: {
-      name:'Switzerland', domain: "ch", id: 1, flag: "Switzerland.svg"
+      name:'Switzerland', domain: "ch", id: 1, default_lang: 1, flag: "Switzerland.svg"
     },
 
     stripePublishableKey: 'pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a', // Your Stripe publishable key for production

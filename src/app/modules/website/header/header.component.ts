@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   
   //default language
   slug: string = 'en'; 
-
+  lang_id:any = 1;
 
   isNavbarExpanded = false;
   isDarkMode: boolean = false;
@@ -137,7 +137,12 @@ export class HeaderComponent implements OnInit {
       this.lang = 'en';
       localStorage.setItem('lang', this.lang); // Store default language in localStorage
     }
-  
+
+    this.lang_id = localStorage.getItem('lang_id');
+    if (this.lang_id == null) {
+      this.lang_id = environment.targetDomain.default_lang; 
+      localStorage.setItem('lang_id', this.lang_id); // Store default language in localStorage
+    }
     // Use the selected language (or 'en' if none)
     this.translateService.use(this.lang);  // Set the language for ngx-translate
   
@@ -246,7 +251,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    const selectedLanguage = localStorage.getItem('lang') || '';
+    const selectedLanguage = localStorage.getItem('lang') || environment.targetDomain?.default_lang;
     const domain = environment.targetDomain?.domain || 'ch';
 
     const loginData = {
