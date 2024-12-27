@@ -131,7 +131,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Ensure language is set to 'en' if it's not already in localStorage
     this.lang = localStorage.getItem('lang') || 'en'; // Default to 'en' if no language is set
-  
+    this.slug = this.lang;
     // Set default language to English if not set
     if (!this.lang || this.lang === '') {
       this.lang = 'en';
