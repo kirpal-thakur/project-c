@@ -1,6 +1,6 @@
-<div class="container mt-5">
+<div class="container my-2">
   <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
-    <h2>Content Page</h2>
+    <h2>Pricing Page</h2>
 
     <!-- General Information Block -->
     <fieldset class="border p-3 mb-4" *ngIf="!pageId">
@@ -37,7 +37,7 @@
       <input type="text" id="banner_title" class="form-control" name="banner_title" [(ngModel)]="formData.banner_title" required />
     </div>
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <label for="banner_img" class="form-label">Banner Image</label>
       <input type="file" id="banner_img" class="form-control" (change)="onFileChange($event, 'banner_img')" required />
 
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Pricing Fields -->
     <div class="form-group">
@@ -119,11 +119,11 @@
         <div class="form-group mb-3" >
           <label>Free Features</label>
           <div *ngFor="let feature of formData.first_tab.free_features_desc; let i = index" class="mb-2">
-            <input type="text" class="form-control" [(ngModel)]="formData.first_tab.free_features_desc[i]" name="firstTabFeature{{ i }}" placeholder="Enter feature" />
-            <button type="button" class="btn btn-danger mt-2" (click)="removeFirstTabDescFeature(i)" *ngIf="formData.first_tab.free_features_desc.length > 1">Remove Feature</button>
+            <input type="text" class="form-control " [(ngModel)]="formData.first_tab.free_features_desc[i]" name="firstTabFeature{{ i }}" placeholder="Enter feature" />
+            <button type="button" class="btn btn-danger mt-2 " (click)="removeFirstTabDescFeature(i)" *ngIf="formData.first_tab.free_features_desc.length > 1">Remove Feature</button>
           </div>
           <button type="button" class="btn btn-success" (click)="addFirstTabDescFeature()">Add Feature</button>
-        </div>        
+        </div>
 
         <!-- New Premium Features Title Field -->
         <div class="form-group mb-3" >
@@ -259,6 +259,100 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+
+    <!-- Third Tab Inputs -->
+    <div class="card my-3">
+      <div class="card-header">Third Tab</div>
+      <div class="card-body">
+        <div class="form-group mb-3" >
+          <label for="thirdTabMonthlyLabel">Monthly Label</label>
+          <input id="thirdTabMonthlyLabel" type="text" class="form-control" name="third_tab.monthly_label" [(ngModel)]="formData.third_tab.monthly_label"/>
+        </div>
+
+        <div class="form-group mb-3" >
+          <label for="thirdTabYearlyLabel">Yearly Label</label>
+          <input id="thirdTabYearlyLabel" type="text" class="form-control" name="third_tab.yearly_label" [(ngModel)]="formData.third_tab.yearly_label"/>
+        </div>
+
+        <div class="form-group mb-3" >
+          <label for="thirdTabPlanName">Plan Name</label>
+          <input id="thirdTabPlanName" type="text" class="form-control" name="third_tab.plan_name" [(ngModel)]="formData.third_tab.plan_name"/>
+        </div>
+
+        <!-- New Fields for Third Tab -->
+        <div class="form-group mb-3" >
+          <label for="thirdTabMonthlyPrice">Monthly Price</label>
+          <input id="thirdTabMonthlyPrice" type="number" class="form-control" name="third_tab.monthly_price" [(ngModel)]="formData.third_tab.monthly_price"/>
+        </div>
+
+        <div class="form-group mb-3" >
+          <label for="thirdTabMonthlyPriceCurrency">Monthly Price Currency</label>
+          <input id="thirdTabMonthlyPriceCurrency" type="text" class="form-control" name="third_tab.monthly_price_currency" [(ngModel)]="formData.third_tab.monthly_price_currency"/>
+        </div>
+
+        <div class="form-group mb-3" >
+          <label for="thirdTabYearlyPrice">Yearly Price</label>
+          <input id="thirdTabYearlyPrice" type="number" class="form-control" name="third_tab.yearly_price" [(ngModel)]="formData.third_tab.yearly_price"/>
+        </div>
+
+        <div class="form-group mb-3" >
+          <label for="thirdTabYearlyPriceCurrency">Yearly Price Currency</label>
+          <input id="thirdTabYearlyPriceCurrency" type="text" class="form-control" name="third_tab.yearly_price_currency" [(ngModel)]="formData.third_tab.yearly_price_currency"/>
+        </div>
+
+
+        <!-- Features Section -->
+        <div class="form-group mb-3" >
+          <label>Free Features</label>
+          <div *ngFor="let feature of formData.third_tab.free_features_desc; let i = index" class="mb-2">
+            <input type="text" class="form-control " [(ngModel)]="formData.third_tab.free_features_desc[i]" name="thirdTabFeature{{ i }}" placeholder="Enter feature" />
+            <button type="button" class="btn btn-danger mt-2 " (click)="removeThirdTabDescFeature(i)" *ngIf="formData.third_tab.free_features_desc.length > 1">Remove Feature</button>
+          </div>
+          <button type="button" class="btn btn-success" (click)="addThirdTabDescFeature()">Add Feature</button>
+        </div>
+
+        <!-- New Premium Features Title Field -->
+        <div class="form-group mb-3" >
+          <label for="thirdTabPremiumFeaturesTitle">Premium Features Title</label>
+          <input
+            id="thirdTabPremiumFeaturesTitle"
+            type="text"
+            class="form-control"
+            name="third_tab.premium_features_title"
+            [(ngModel)]="formData.third_tab.premium_features_title"
+          />
+        </div>
+
+        <!-- New Premium Features Description Fields -->
+        <div class="form-group mt-3">
+          <label>Premium Features Description</label>
+          <div *ngFor="let feature of formData.third_tab.premium_features_desc; let i = index" class="mb-2">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="formData.third_tab.premium_features_desc[i]"
+              name="thirdTabPremiumFeatureDesc{{ i }}"
+              placeholder="Enter feature description"
+            />
+            <button
+              type="button"
+              class="btn btn-danger mt-2"
+              (click)="remove_premium_features_desc(i)"
+              *ngIf="formData.third_tab.premium_features_desc.length > 1"
+            >
+              Remove Feature
+            </button>
+          </div>
+          <button type="button" class="btn btn-success" (click)="add_premium_features_desc()">Add Feature</button>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="thirdTabButtonTxt">Button Text</label>
+          <input id="thirdTabButtonTxt" type="text" class="form-control" name="third_tab.btn_txt" [(ngModel)]="formData.third_tab.btn_txt"/>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mb-2">Save</button>
   </form>
 </div>
