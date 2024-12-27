@@ -17,6 +17,7 @@ export const environment = {
 
     langs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
+      { language:'Switzerland', slug: "ch", id: 2, flag: "Switzerland.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
       { language:'Italian', slug: "it", id: 3, flag: "Italy.svg"},
       { language:'French', slug: "fr", id: 4, flag: "France.svg"},
@@ -24,6 +25,7 @@ export const environment = {
       { language:'Portuguese', slug: "pt", id: 6, flag: "Portugal.svg" },
       { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
       { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
+      { language:'Belgium', slug: "be", id: 4, flag: "Belgium.svg" },
     ],
  
     domains:[
