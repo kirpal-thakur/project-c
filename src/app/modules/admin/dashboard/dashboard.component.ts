@@ -75,11 +75,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.lang = localStorage.getItem('lang') || 'en';
     
 
-    const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+    const selectedLanguage = this.envlangs.find((lang:any) => lang.slug === this.lang);
     if (selectedLanguage) {
       this.language = selectedLanguage;
     }else{
-      this.language = this.domains[0];
+      this.language = this.envlangs[0];
     }
 
     this.translateService.use(this.lang);
@@ -358,8 +358,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   ChangeLang(lang: any) {
     const selectedLanguage = typeof lang !== 'string' ? lang.target.value : lang;
-    localStorage.setItem('lang', selectedLanguage);
+   localStorage.setItem('lang', selectedLanguage);
     const selectedLang = this.envlangs.find((lang:any) => lang.slug === selectedLanguage);
+    this.language = selectedLang;
+    console.log('language',this.language );
     let selectedLandId = selectedLang ? selectedLang.id : 1;
     localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage);
