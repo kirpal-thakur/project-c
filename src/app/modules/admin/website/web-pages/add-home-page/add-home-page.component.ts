@@ -112,20 +112,14 @@ export class AddHomePageComponent {
     // Append files
     if (this.filesData.banner_bg_img) {
       formData.append('banner_bg_img', this.filesData.banner_bg_img);
-    } else {
-      formData.append('banner_bg_img', 'remove_img');
     }
     
     if (this.filesData.banner_img) {
       formData.append('banner_img', this.filesData.banner_img);
-    } else {
-      formData.append('banner_img', 'remove_img');
     }
     
     if (this.filesData.hero_bg_img) {
       formData.append('hero_bg_img', this.filesData.hero_bg_img);
-    } else {
-      formData.append('hero_bg_img', 'remove_img');
     }
   
     // Append text fields
@@ -223,10 +217,10 @@ export class AddHomePageComponent {
         this.heroBgImagePreview = response.data.base_url + response.data.pageData.banner_img;
         this.bannerBgImagePreview = response.data.base_url + response.data.pageData.hero_bg_img;
 
-        this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
-        this.filesData.banner_img = response.data.pageData.banner_img;
-        this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
-          
+        // this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
+        // this.filesData.banner_img = response.data.pageData.banner_img;
+        // this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
+
         this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
         this.first_tab = response.data.pageData.tabs_data.first_tab;
         this.sec_btn_txt = response.data.pageData.tabs_data.sec_btn_txt;
@@ -261,7 +255,7 @@ export class AddHomePageComponent {
   
   
   removeImage(fieldName: string): void {
-    this.filesData[fieldName] = null;
+    this.filesData[fieldName] = 'remove_img';
     if (fieldName === 'banner_img') {
       this.bannerImagePreview = null;
     } else if (fieldName === 'banner_bg_img') {

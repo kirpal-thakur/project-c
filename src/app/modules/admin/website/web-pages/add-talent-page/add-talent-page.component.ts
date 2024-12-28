@@ -25,6 +25,7 @@ export class AddTalentPageComponent implements OnInit {
   @Input() pageId: any;
   @Input() pageType: any;
   @Input() languages: Language[] = [];
+
   editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -38,7 +39,6 @@ export class AddTalentPageComponent implements OnInit {
 
   imageLoaded: boolean = false;
 
-
   formData: any = {
     slug: '',
     meta_title: '',
@@ -50,27 +50,16 @@ export class AddTalentPageComponent implements OnInit {
     banner_imgs: [],
     talent_section_title: '',
     talent_section: {
-      first_tab: [{ txt: '', icon: null }],
-      sec_tab: [{ txt: '', icon: null }],
-      third_tab: [{ txt: '', icon: null }],
+      first_tab: [],
+      sec_tab: [],
+      third_tab: [],
     },
     feature_sctn: [
       { title: '', desc: '', icon: null },
     ],
-    feature_sctn_title:'',
-    pricing_tab: [
-      {
-        monthly_label: '',
-        yearly_label: '',
-        plan_name: '',
-        monthly_plan_price: '',
-        yearly_plan_price: '',
-        monthly_plan_price_currency: '',
-        yearly_plan_price_currency: '',
-        plan_feature_title: '',
-        plan_feature_desc: [],
-      },
-    ],
+    feature_sctn_imgs: [], // Correctly added the 'imgs' array for feature section
+    feature_sctn_title: '',
+    pricing_tab: [],
     page_content: '',
     page_id: '',
     page_type: '',
@@ -78,7 +67,8 @@ export class AddTalentPageComponent implements OnInit {
     lang_id: localStorage.getItem('lang_id'),
   };
 
-
+  bannerBgImagePreview: string | ArrayBuffer | null = null;
+  bannerImagesPreviews: string[] = [];
   bannerImagePreview: string | ArrayBuffer | null = null;
 
   constructor(private webpages: WebPages, public dialogRef: MatDialogRef<AddTalentPageComponent>,private cdr: ChangeDetectorRef) {}
@@ -98,26 +88,56 @@ export class AddTalentPageComponent implements OnInit {
     this.editor.destroy();
   }
 
-  onFileChange(event: any, fieldName: string): void {
+  handleFileInput(event: any, fieldName: string): void {
     const file = event.target.files[0];
     if (file) {
-      this.formData[fieldName] = file;
-
       const reader = new FileReader();
       reader.onload = () => {
-        this.bannerImagePreview = reader.result;
+
+        if (fieldName === 'banner_bg_img') {
+          this.bannerBgImagePreview = reader.result; // Preview for the background image
+        }
       };
       reader.readAsDataURL(file);
+      this.formData[fieldName] = file;
+
     }
   }
 
-  // Update the `removeImage` method to reset the `imageLoaded` property.
   removeImage(fieldName: string): void {
-    this.formData[fieldName] = 'remove_image';
-    this.bannerImagePreview = null;
-    this.imageLoaded = false;
+    if (fieldName === 'banner_bg_img') {
+      this.formData.banner_bg_img = 'remove_image';
+      this.bannerBgImagePreview = null; // Clear the preview
+    }
+    this.imageLoaded = false; // Reset the image loaded state
   }
 
+  onFileChange(event: any): void {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      Array.from(files).forEach((file: any) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.bannerImagesPreviews.push(reader.result as string); // Add preview
+        };
+        reader.readAsDataURL(file);
+        this.formData.banner_imgs.push(file); // Add file to formData
+      });
+    }
+  }
+
+  removeSingleImage(index: number): void {
+    this.formData.banner_imgs.splice(index, 1); // Remove file from formData
+    this.bannerImagesPreviews.splice(index, 1); // Remove preview
+  }
+
+  removeImages(fieldName: string): void {
+    if (fieldName === 'banner_imgs') {
+      this.formData.banner_imgs = []; // Clear all files
+      this.bannerImagesPreviews = []; // Clear all previews
+    }
+    this.imageLoaded = false; // Reset the image loaded state
+  }
 
   submitForm(): void {
     const formData = new FormData();
@@ -135,7 +155,8 @@ export class AddTalentPageComponent implements OnInit {
           });
         } else if (typeof obj[key] === 'object' && obj[key] !== null) {
           appendNestedObject(`${prefix}[${key}]`, obj[key]);
-        } else {
+        } else if (key !== 'iconPreview') {
+          // Exclude `iconPreview`
           formData.append(`${prefix}[${key}]`, obj[key]);
         }
       }
@@ -143,6 +164,7 @@ export class AddTalentPageComponent implements OnInit {
 
     // Iterate over this.formData and append fields
     for (const key in this.formData) {
+      if (key == 'banner_bg_img' || key == 'banner_imgs' || key == 'talent_section' ||   key == 'feature_sctn') continue;
       if (Array.isArray(this.formData[key])) {
         this.formData[key].forEach((item: any, index: number) => {
           if (typeof item === 'object' && item !== null) {
@@ -171,12 +193,26 @@ export class AddTalentPageComponent implements OnInit {
       });
     }
 
-    // Append the feature_sctn images to the FormData object
+    // Append feature section images and icons, excluding iconPreview
     this.formData.feature_sctn.forEach((feature: any, index: number) => {
+      if (feature.icon) {
+        formData.append(`feature_sctn[${index}][icon]`, feature.icon);
+      }
       if (feature.img) {
-        formData.append(`feature_sctn[${index}][img]`, feature.img, feature.img.name);
+        formData.append(`feature_sctn[imgs][]`, feature.img);
+      }
+      if (feature.title) {
+        formData.append(`feature_sctn[${index}][title]`, feature.title);
+      }
+      if (feature.desc) {
+        formData.append(`feature_sctn[${index}][desc]`, feature.desc);
       }
     });
+
+    formData.append(`banner_bg_img`, this.formData.banner_bg_img);
+    for (const key in this.formData.banner_imgs) {
+      formData.append('banner_imgs[]', this.formData.banner_imgs[key]);
+    }
 
     // Send the formData
     this.webpages.addTalentPage(formData).subscribe(
@@ -196,8 +232,6 @@ export class AddTalentPageComponent implements OnInit {
   onFeatureFileChange(event: any, index: number): void {
     const file = event.target.files[0];
     if (file) {
-      // Make sure to store the file in the right index of the feature_sctn array
-      this.formData.feature_sctn[index].img = file;
 
       // Optionally, create a preview of the image for display
       const reader = new FileReader();
@@ -213,65 +247,66 @@ export class AddTalentPageComponent implements OnInit {
       if (response.status) {
         const pageData = response.data.pageData;
 
-        // Map basic fields
+        // Map general fields
         this.formData.page_type = response.data.page_type;
         this.formData.slug = response.data.slug;
-        this.formData.page_content = pageData.page_content || '';
+        // this.formData.page_content = pageData.page_content || '';
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
-        this.formData.banner_title = pageData.banner_title;
+        this.formData.banner_title = pageData.banner_title || '';
         this.formData.banner_desc = pageData.banner_desc;
         this.formData.banner_btn_txt = pageData.banner_btn_txt;
-        this.bannerImagePreview = response.data.base_url + pageData.banner_bg_img;
+        this.bannerBgImagePreview = response.data.base_url + pageData.banner_bg_img;
+
+        // Map banner images if any
+        if (pageData.banner_imgs) {
+          this.formData.banner_imgs = pageData.banner_imgs;
+          this.bannerImagesPreviews = pageData.banner_imgs.map((img: string) => response.data.base_url + img);
+        }
 
         // Map talent_section
         if (pageData.talent_section) {
-          this.formData.talent_section.first_tab.txt = pageData.talent_section.first_tab.txt;
-          this.formData.talent_section.sec_tab.txt = pageData.talent_section.sec_tab.txt;
-          this.formData.talent_section.third_tab.txt = pageData.talent_section.third_tab.txt;
-
-          this.formData.talent_section.first_tab.icon = pageData.talent_section.first_tab.icon;
-          this.formData.talent_section.sec_tab.icon = pageData.talent_section.sec_tab.icon;
-          this.formData.talent_section.third_tab.icon = pageData.talent_section.third_tab.icon;
+          ['first_tab', 'sec_tab', 'third_tab'].forEach(tab => {
+            if (pageData.talent_section[tab]) {
+              this.formData.talent_section[tab].txt = pageData.talent_section[tab].txt;
+              this.formData.talent_section[tab].iconPreview = response.data.base_url + pageData.talent_section[tab].icon;
+            }
+          });
         }
 
-        console.log(this.formData)
+
         // Map feature_sctn
         if (pageData.feature_sctn) {
           this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
             title: feature.title,
             desc: feature.desc,
-            icon: feature.icon || null, // Initialize icon
+            iconPreview: response.data.base_url + feature.icon,
           }));
         }
 
         // Map pricing_tab
         if (pageData.pricing_tab) {
           this.formData.pricing_tab = pageData.pricing_tab.map((plan: any) => ({
-            monthly_label: plan.monthly_label,
-            yearly_label: plan.yearly_label,
+            monthly_label: plan.monthly_label || '',
+            yearly_label: plan.yearly_label || '',
             plan_name: plan.plan_name,
             monthly_plan_price: plan.monthly_plan_price,
             yearly_plan_price: plan.yearly_plan_price,
+            monthly_plan_label: plan.monthly_plan_label,
+            yearly_plan_label: plan.yearly_plan_label,
             monthly_plan_price_currency: plan.monthly_plan_price_currency,
             yearly_plan_price_currency: plan.yearly_plan_price_currency,
-            plan_feature_title: plan.plan_feature_title,
+            plan_feature_title: plan.plan_feature_title || '',
             plan_feature_desc: plan.plan_feature_desc || [],
           }));
         }
 
-        // Map additional sections if any
-        if (pageData.talent_section_title) {
-          this.formData.talent_section_title = pageData.talent_section_title;
-        }
-        if (pageData.feature_sctn_title) {
-          this.formData.feature_sctn_title = pageData.feature_sctn_title;
-        }
-        if (pageData.pricing_sctn_title) {
-          this.formData.pricing_sctn_title = pageData.pricing_sctn_title;
-        }
+        // Map section titles
+        this.formData.talent_section_title = pageData.talent_section_title || '';
+        this.formData.feature_sctn_title = pageData.feature_sctn_title || '';
+        this.formData.pricing_sctn_title = pageData.pricing_sctn_title || '';
 
-        // Trigger change detection after data is assigned
+        // Trigger change detection after assigning data
         this.cdr.detectChanges();
       }
     });
@@ -308,5 +343,40 @@ export class AddTalentPageComponent implements OnInit {
   removePricingFeature(planIndex: number, featureIndex: number): void {
     this.formData.pricing_tab[planIndex].plan_feature_desc.splice(featureIndex, 1);
   }
+
+  onIconFileChange(event: any, tabName: string): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.formData.talent_section[tabName].iconPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+      this.formData.talent_section[tabName].icon = file; // Save the file
+    }
+  }
+
+  removeIcon(tabName: string): void {
+    this.formData.talent_section[tabName].icon = 'remove_image'; // Reset the icon file
+    this.formData.talent_section[tabName].iconPreview = null; // Reset the preview
+  }
+
+  removeFeatureIcon(index: number): void {
+    this.formData.feature_sctn[index].icon = 'remove_image';
+    this.formData.feature_sctn[index].iconPreview = null;
+  }
+
+  onFeatureIconFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.formData.feature_sctn[index].iconPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+      this.formData.feature_sctn[index].icon = file; // Save the file
+    }
+  }
+
 
 }
