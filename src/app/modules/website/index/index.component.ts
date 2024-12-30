@@ -278,15 +278,9 @@ adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad vis
 ngOnInit() {
   // Initially, all ads are visible
   this.adVisible = [true, true, true, true, true];
-
   this.webPages.languageId$.subscribe((data) => {
     this.getPageDynamicData(data);
     console.log('here is data',data)
-  });
-  this.shareservice.data$.subscribe((data) => {
-    if(data.action == 'updatedLang'){
-        this.getPageDynamicData(data.id);
-    }
   });
 }
 
