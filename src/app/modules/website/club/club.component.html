@@ -69,21 +69,11 @@
                                             <div class="player-img3">
                                                 <img src="./assets/images/blue-tshirt.png">
                                             </div>
-                                            <!-- <p class="player-name1">Cristiano Ronaldo</p> -->
+                                            <p class="player-name1">Cristiano Ronaldo</p>
                                         </div>
                                         <div class="corner-image3">
                                             <img src="./assets/images/FC Thun 1.png">
                                         </div>
-                                        <!-- <div class="flag">
-                                        <div class="flag-image1">
-                                            <img src="./assets/images/flag.svg" class="flag-img">
-                                            <div class="bottom-line"></div>
-                                            <div class="flag-bottom">
-                                                <img src="./assets/images/birthday.svg" class="birthday-img">
-                                                <p class="d-o-b">2004</p>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                     </div>
                                 </div>
 
@@ -304,23 +294,21 @@
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group1.svg">
                             <img class="dark-images" src="./assets/images/dark-group1.svg">
-                            <p class="club-text1">Search player profiles and bookmark for future reference.</p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section['first_tab'].txt}}</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group2.svg">
                             <img class="dark-images" src="./assets/images/dark-group2.svg">
-                            <p class="club-text1">Download talent profile in pdf format.</p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section['sec_tab'].txt}}</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group3.svg">
                             <img class="dark-images" src="./assets/images/dark-group3.svg">
-                            <p class="club-text1"> Manage potential recruits status, save time and stress during your
-                                hiring.
-                            </p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section['third_tab'].txt}}</p>
                         </div>
                     </div>
                 </div>
@@ -334,94 +322,30 @@
                         <div class="left-accordion">
                             <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                             <div class="accordion" id="accordionExample">
-                                <div class="accordion-item" (click)="setActiveAccordion(1)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
-                                        <img class="light-feature1" src="./assets/images/feature-img1.svg">
-                                        <img class="dark-feature1" src="./assets/images/dark-club1.svg">
-                                        <h2 class="accordion-header">
-                                            Access to Talent Database
-                                        </h2>
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
-                                        </button>
-                                    </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p class="feature-text">Browse a comprehensive database of football talents
-                                                with detailed profiles and filtering options.
-                                            </p>
+                                <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
+                                    <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
+                                        <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                            <img class="light-feature1" src="./assets/images/feature-img1.svg">
+                                            <img class="dark-feature1" src="./assets/images/dark-club1.svg">
+                                            <h2 class="accordion-header">
+                                                {{feature.title}}
+                                            </h2>
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                            </button>
+                                        </div>
+                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                            data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p class="feature-text">{{feature.desc}}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </ng-container>
 
-                                <div class="accordion-item" (click)="setActiveAccordion(2)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo">
-                                        <img class="light-feature2" src="./assets/images/feature-img2.svg">
-                                        <img class="dark-feature2" src="./assets/images/dark-club2.svg">
-                                        <h2 class="accordion-header">Detailed Player Profiles</h2>
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                            aria-expanded="false" aria-controls="collapseTwo">
-                                        </button>
-                                    </div>
-                                    <div id="collapseTwo" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p class="feature-text">View in-depth profiles of players, including
-                                                statistics, achievements, and personal information.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item" (click)="setActiveAccordion(3)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                        <img class="light-feature3" src="./assets/images/feature-img3.svg">
-                                        <img class="dark-feature3" src="./assets/images/dark-club3.svg">
-                                        <h2 class="accordion-header">
-                                            Highlight Videos and Match Reports
-                                        </h2>
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                            aria-expanded="false" aria-controls="collapseThree">
-                                        </button>
-                                    </div>
-                                    <div id="collapseThree" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p class="feature-text">Access highlight videos and match reports to stay
-                                                updated on player performances.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item" (click)="setActiveAccordion(4)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                        aria-expanded="false" aria-controls="collapseFour">
-                                        <img class="light-feature4" src="./assets/images/feature-img4.svg">
-                                        <img class="dark-feature4" src="./assets/images/dark-club4.svg">
-                                        <h2 class="accordion-header">
-                                            Global Networking Opportunities
-                                        </h2>
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                            aria-expanded="false" aria-controls="collapseFour">
-                                        </button>
-                                    </div>
-                                    <div id="collapseFour" class="accordion-collapse collapse"
-                                        data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <p class="feature-text">Connect with clubs, scouts, and players from around
-                                                the world for unique networking opportunities.</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -847,122 +771,47 @@
             <div class="container">
                 <h3 class="price-heading3">Pricing</h3>
 
-                <!-- Toggle for Premium Plan -->
-                <div>
+                <!-- <div class="billed">
+                    <p class="billed-text">2 months free on yearly plan</p>
+                </div> -->
+                <div *ngFor="let plan of pageData.pricing_tab; let i = index">
                     <div class="billed">
-                        <p class="billed-text">2 months free on yearly plan</p>
-                    </div>
-                    <div class="billed1">
-                        <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
-                            Billed Monthly</p>
-                        <div class="toggle-button" [ngClass]="{ 'active': isActive1, 'inactive': !isActive1 }"
-                            (click)="toggle1()"></div>
-                        <p [ngClass]="{ 'active-text': !isActive1, 'inactive-text': isActive1 }">
-                            Billed Yearly</p>
+                        <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }" class="billed-monthly">
+                            Billed Monthly
+                        </p>
+                        <div class="toggle-button" [ngClass]="{ 'active': isActivePlan[i], 'inactive': !isActivePlan[i] }"
+                            (click)="togglePlan(i)">
+                        </div>
+                        <p [ngClass]="{ 'active-text': !isActivePlan[i], 'inactive-text': isActivePlan[i] }">
+                            Billed Yearly
+                        </p>
                     </div>
 
                     <div class="premium">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-img">
-                                    <img class="bg-image" src="./assets/images/feature-image.svg">
-                                    <h2 class="premium-heading2">Premium <span
-                                            class="premium-text-data">For Clubs and Scouts</span></h2>
-                                    <h3 class="premium-heading3">
-                                        {{ isActive1 ? '470' : '47' }}<span>.- CHF / {{ isActive1 ? 'Year' : 'Month'
-                                            }}</span>
-                                    </h3>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-col-right">
-                                    <h5 class="premium-heading5">Premium Includes</h5>
-                                    <div class="premium-text" *ngFor="let feature of premiumFeatures">
-                                        <img src="./assets/images/mdi_tick.svg">
-                                        <p>{{ feature }}</p>
-                                    </div>
-                                </div>
-                            </div>
-
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="premium-img">
+                            <img class="bg-image" src="./assets/images/feature-image.svg">
+                            <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
+                            <h3 class="premium-heading3">
+                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
+                            <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
+                                / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
+                            </h3>
                         </div>
-                    </div>
-                </div>
+                        </div>
 
-                <!-- Toggle for Multi-Country Plan -->
-                <div>
-                    <div class="billed">
-                        <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">
-                            Billed Monthly</p>
-                        <div class="toggle-button" [ngClass]="{ 'active': isActive2, 'inactive': !isActive2 }"
-                            (click)="toggle2()"></div>
-                        <p [ngClass]="{ 'active-text': !isActive2, 'inactive-text': isActive2 }">
-                            Billed Yearly</p>
-                    </div>
-
-                    <div class="premium">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-img">
-                                    <img class="bg-image" src="./assets/images/feature-image.svg">
-                                    <h2 class="premium-heading2">Multi-Country <span
-                                            class="premium-text-data">For Scouts</span>
-                                    </h2>
-                                    <h3 class="premium-heading3">
-                                        {{ isActive2 ? '110' : '11' }}<span>.- CHF / {{ isActive2 ? 'Year' : 'Month'
-                                            }}</span>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-col-right">
-                                    <h5 class="premium-heading5">Multi-Country</h5>
-                                    <div class="premium-text" *ngFor="let feature of multiCountryFeatures">
-                                        <img src="./assets/images/mdi_tick.svg">
-                                        <p>{{ feature }}</p>
-                                    </div>
-                                </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                        <div class="premium-col-right">
+                            <h5 class="premium-heading5">{{ plan.plan_name }} Includes</h5>
+                            <div class="premium-text" *ngFor="let feature of plan.plan_feature_desc">
+                            <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
+                            <p>{{ feature }}</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="billed">
-                        <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">
-                            Billed Monthly</p>
-                        <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }"
-                            (click)="toggle3()"></div>
-                        <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">
-                            Billed Yearly</p>
-                    </div>
-
-                    <div class="premium">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-img">
-                                    <img class="bg-image" src="./assets/images/feature-image.svg">
-                                    <h2 class="premium-heading2">Boost profile <span
-                                            class="premium-text-data">For Scouts</span>
-                                    </h2>
-                                    <h3 class="premium-heading3">
-                                        {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month'
-                                            }}</span>
-                                    </h3>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="premium-col-right">
-                                    <h5 class="premium-heading5">Boost profile</h5>
-                                    <div class="premium-text" *ngFor="let feature of boosterFeatures">
-                                        <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
-                                        <p>{{ feature }}</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
+                    </div>
                 </div>
             </div>
         </div>

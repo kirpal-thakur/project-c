@@ -126,9 +126,72 @@ export class HeaderComponent implements OnInit {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
-
-
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      this.token = params['confirm-token'] || '';
+      if (this.token) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
+        this.authService.magicLogin(this.token).subscribe(
+          response => {
+            if (response.status && response.data) {
+              const token = response.data.token;
+              const userData = response.data.user;
+              const userRole = userData.role;
+
+              localStorage.setItem('authToken', token);
+              localStorage.setItem('userRole', userRole);
+              localStorage.setItem('userData', JSON.stringify(userData));
+              this.tokenVerified = true;
+              this.openModal();
+
+            } else {
+              this.tokenVerified = false;
+              this.router.navigate(['/expired-link']);
+            }
+          },
+          error => {
+            console.error('Error verifying token:', error);
+            this.tokenVerified = false;
+            this.router.navigate(['/expired-link']);
+          }
+        );
+      }
+
+      this.verifyToken = params['token'];
+      this.verifyTime = params['time'];
+
+      if (this.verifyToken && this.verifyTime) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
+        this.authService.verifyEmail(this.verifyToken,this.verifyTime).subscribe(
+          response => {
+            if (response.status) {
+              this.toastr.clear();
+
+              this.toastr.success('Email is verified. You can login now...', 'Email Verified!');
+
+              const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+              loginModal.show();
+
+            } else {
+              this.toastr.clear();
+
+              this.router.navigate(['/expired-link']);
+            }
+          },
+          error => {
+            this.toastr.clear();
+
+            this.router.navigate(['/expired-link']);
+          }
+        );
+      }
+
+
+    });
+
     // Ensure language is set to 'en' if it's not already in localStorage
     this.lang = localStorage.getItem('lang') || 'en'; // Default to 'en' if no language is set
     this.slug = this.lang;
@@ -140,27 +203,27 @@ export class HeaderComponent implements OnInit {
 
     this.lang_id = localStorage.getItem('lang_id');
     if (this.lang_id == null) {
-      this.lang_id = environment.targetDomain.default_lang; 
+      this.lang_id = environment.targetDomain.default_lang;
       localStorage.setItem('lang_id', this.lang_id); // Store default language in localStorage
     }
     // Use the selected language (or 'en' if none)
     this.translateService.use(this.lang);  // Set the language for ngx-translate
-  
+
     // Apply dark mode from localStorage
     this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
     this.applyTheme();
-  
+
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
       this.initializeGoogleSignIn();
     }
-  
+
     this.getAllCountries();
     this.getAllClubs();
     this.getAllLanguage();
   }
 
-  
+
   setActive(index: number): void {
     this.activeIndex = index; // Set the active index
     this.role = index === 1 ? 4 : index === 2 ? 2 : 3; // Update role based on activeIndex
@@ -185,11 +248,11 @@ export class HeaderComponent implements OnInit {
 
   ChangeLang(newSlug: string, event: Event): void {
     this.translateService.use(newSlug);  // Switch translation language
-    console.log(`Language changed to: ${newSlug}`);
-    
+
+
     this.slug = newSlug;  // Update the slug to the selected language
     event.preventDefault(); // Prevent default action (e.g., preventing link navigation)
-  
+
     let selectedLanguageId : any = null;
     let getLanguageIndex = this.languages.findIndex((val:any) => {
       if(val.slug == newSlug){
@@ -197,7 +260,7 @@ export class HeaderComponent implements OnInit {
         return val;
       }
     });
-   
+
     this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', newSlug);
 
@@ -210,10 +273,12 @@ export class HeaderComponent implements OnInit {
 
     // Default to a specific language ID if none is found (e.g., English)
     selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
-    console.log('selectedLanguageId',selectedLanguageId);
+
+
     this.webpage.updateData(selectedLanguageId);
     localStorage.setItem('lang_id', selectedLanguageId);
-    console.log('lang_id',selectedLanguageId);
+
+
     this.sharedservice.updateData({
       action:'updatedLang',
       id:selectedLanguageId
