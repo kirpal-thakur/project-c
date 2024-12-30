@@ -75,6 +75,21 @@ export class AddPricingPageComponent implements OnInit, OnDestroy {
       premium_features_desc: [['Access to the complete talent profiles with detailed performance data.']],
       btn_txt: ['Join Today']
     },
+    third_tab: {
+      monthly_label: ['Billed Monthly'],
+      yearly_label: ['Billed Yearly'],
+      plan_name: ['Multi-Country'],
+      monthly_price: ['11'],
+      monthly_price_currency: ['CHF/Month'],
+      yearly_price: ['110'],
+      yearly_price_currency: ['CHF/Yearly'],
+      features_title: ['Club/Scout Features'],
+      free_features_sub_title: ['Free Features:'],
+      free_features_desc: [['Create a personal profile showcasing history, players and sighting information.']],
+      premium_features_title: ['Premium Features:'],
+      premium_features_desc: [['Access to the complete talent profiles with detailed performance data.']],
+      btn_txt: ['Join Today']
+    },
     language: localStorage.getItem('lang'),
     lang_id: localStorage.getItem('lang_id')
   };
@@ -202,6 +217,21 @@ export class AddPricingPageComponent implements OnInit, OnDestroy {
             premium_features_title: pageData.sec_tab_premium_features_title || 'Premium Features', // Add missing field
             premium_features_desc: pageData.sec_tab_premium_features_desc || [], // Default to empty array
           },
+          third_tab: {
+            monthly_label: pageData.third_tab_monthly_label,
+            yearly_label: pageData.third_tab_yearly_label,
+            plan_name: pageData.third_tab_plan_name,
+            monthly_price: pageData.third_tab_monthly_price,
+            monthly_price_currency: pageData.third_tab_monthly_price_currency,
+            yearly_price: pageData.third_tab_yearly_price,
+            yearly_price_currency: pageData.third_tab_yearly_price_currency,
+            free_features_sub_title: pageData.third_tab_free_features_sub_title,
+            free_features_desc: pageData.third_tab_free_features_desc,
+            btn_txt: pageData.third_tab_btn_txt,
+            features_title: pageData.third_tab_features_title || 'Features', // Add missing field
+            premium_features_title: pageData.third_tab_premium_features_title || 'Premium Features', // Add missing field
+            premium_features_desc: pageData.third_tab_premium_features_desc || [], // Default to empty array
+          },
           page_type: response.data.page_type,
         };
   
@@ -253,5 +283,32 @@ export class AddPricingPageComponent implements OnInit, OnDestroy {
 
   remove_premium_features_desc(index: number): void {
     this.formData.first_tab.premium_features_desc.splice(index, 1);
+  }
+
+
+  // Add feature for the second tab (premium features)
+  addThirdTabPremiumFeature() {
+    if (!this.formData.third_tab.premium_features_desc) {
+      this.formData.third_tab.premium_features_desc = []; // Ensure it's initialized
+    }
+    this.formData.third_tab.premium_features_desc.push('');
+  }
+
+  // Remove a feature from the thirdond tab (premium features)
+  removeThirdTabPremiumFeature(index: number) {
+    this.formData.third_tab.premium_features_desc.splice(index, 1);
+  }
+
+  // Add feature for the first tab (free features)
+  addThirdTabDescFeature() {
+    if (!this.formData.third_tab.free_features_desc) {
+      this.formData.third_tab.free_features_desc = []; // Ensure it's initialized
+    }
+    this.formData.third_tab.free_features_desc.push('');
+  }
+
+  // Remove a feature from the first tab (free features)
+  removeThirdTabDescFeature(index: number) {
+    this.formData.third_tab.free_features_desc.splice(index, 1);
   }
 }
