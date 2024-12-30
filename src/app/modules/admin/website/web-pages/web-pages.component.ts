@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { WebPages } from '../../../../services/webpages.service';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { Router } from '@angular/router';
 import { AddPageComponent } from './add-page/add-page.component';
@@ -28,13 +30,18 @@ interface WebPage {
 })
 
 export class WebPagesComponent {
+  displayedColumns: string[] = ['#','Name', 'Language', 'Published', 'Last Modified','Status', 'Edit'];
   allPages : WebPage[] =  [];
   idsToProceed: any = [];
+  filterValue: string = '';
   allSelected: boolean = false;
   selectedIds:any = [];
   getPageDetail:any = [];
   pages:any = [];
   lang_id: any = localStorage.getItem('lang_id');
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private sharedservice:SharedService, private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
@@ -50,8 +57,20 @@ export class WebPagesComponent {
     //lang_updated
   }
 
+  applyFilter(filterValue:any) {
+    this.filterValue = filterValue.target?.value.trim().toLowerCase();
+    if(this.filterValue.length >= 3){
+      this.getAllPagesData();
+     } else if(this.filterValue.length == 0){
+      this.getAllPagesData();
+     }
+  }
+
   getAllPagesData(){
-    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
+    let params:any = {};
+    params.search = this.filterValue;
+   
+    this.webpages.getAllPages(this.lang_id,params).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.map((page: any) => ({
           ...page,
@@ -77,7 +96,10 @@ export class WebPagesComponent {
 
   getPublishOrDraftFilterData(type:string){
     this.allPages = [];
-    this.webpages.getAllPages(this.lang_id).subscribe((response) => {
+    let params:any = {};
+    params.search = this.filterValue;
+   
+    this.webpages.getAllPages(this.lang_id,params).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.filter((page: any) => {
             if(page.status == type){

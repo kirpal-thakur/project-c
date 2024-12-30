@@ -40,6 +40,7 @@
               placeholder="Search Message"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              (keyup)="applyFilter($event)"
               class="form-control ps-0"
             />
           </div>
