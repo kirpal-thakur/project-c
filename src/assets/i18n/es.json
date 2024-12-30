@@ -1,5 +1,6 @@
 {
   "talents": "Talentos",
+  "about": "Acerca de",
   "news&Media": "Noticias y medios",
   "club": "Clubes y Scouts",
   "feature": "Características",
@@ -23,8 +24,8 @@
   "terms": "Términos",
   "cookiePolicy": "Política de cookies",
   "copyright": "© 2024 SoccerYou Group, Todos los derechos reservados.",
-  "welcomeBack": "Bienvenido de vuelta a SoccerYou",
-  "loginMessage": "Inicia sesión en tu cuenta a continuación",
+  "welcomeBack": "Willkommen zurück - SoccerYou wartet!",
+  "loginMessage": "Inicia sesión y empieza ahora.",
   "emailLabel": "Correo electrónico",
   "emailPlaceholder": "ejemplo@email.es",
   "passwordLabel": "Contraseña",

@@ -1,5 +1,6 @@
 {
   "talents": "Talanger",
+  "about": "Om",
   "news&Media": "Nyheter & media",
   "club": "Klubbar och Scouter",
   "feature": "Funktioner",
@@ -23,8 +24,8 @@
   "terms": "Villkor",
   "cookiePolicy": "Cookie-policy",
   "copyright": "© 2024 SoccerYou Group, Alla rättigheter förbehålls.",
-  "welcomeBack": "Välkommen tillbaka till SoccerYou",
-  "loginMessage": "Logga in på ditt konto nedan",
+  "welcomeBack": "Välkommen tillbaka – SoccerYou väntar!",
+  "loginMessage": "Logga in och sätt igång!",
   "emailLabel": "Email",
   "emailPlaceholder": "exempel@email.se",
   "passwordLabel": "Lösenord",

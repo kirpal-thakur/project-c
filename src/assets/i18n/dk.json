@@ -1,5 +1,6 @@
 {
   "talents": "Talenter",
+  "about": "Om",
   "news&Media": "Nyheder & medier",
   "club": "Klubber og Spejdere",
   "feature": "Funktioner",
@@ -23,8 +24,8 @@
   "terms": "Vilkår",
   "cookiePolicy": "Cookiepolitik",
   "copyright": "© 2024 SoccerYou Group, Alle rettigheder forbeholdes.",
-  "welcomeBack": "Velkommen tilbage til SoccerYou",
-  "loginMessage": "Log ind på din konto nedenfor",
+  "welcomeBack": "Velkommen tilbage – SoccerYou venter!",
+  "loginMessage": "Log ind og kom i gang!",
   "emailLabel": "Email",
   "emailPlaceholder": "eksempel@email.dk",
   "passwordLabel": "Adgangskode",
