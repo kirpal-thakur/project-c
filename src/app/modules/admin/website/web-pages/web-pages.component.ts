@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { Router } from '@angular/router';
 import { AddPageComponent } from './add-page/add-page.component';
-
+import { SharedService } from '../../../../services/shared.service';
 interface WebPage {
   id: string;
   user_id: string;
@@ -36,10 +36,18 @@ export class WebPagesComponent {
   pages:any = [];
   lang_id: any = localStorage.getItem('lang_id');
 
-  constructor(private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
+  constructor(private sharedservice:SharedService, private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
   ngOnInit(){
     this.getAllPagesData();
     this.getFrontendPages();
+    this.sharedservice.data$.subscribe((data) => {
+        if(data.action == 'lang_updated'){
+            this.lang_id = data.id;
+            this.getAllPagesData();
+        }
+    });
+    //this.sharedservice.data$
+    //lang_updated
   }
 
   getAllPagesData(){
