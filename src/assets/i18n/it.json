@@ -39,7 +39,7 @@
   "dontHaveAccount": "Non hai un account?",
   "register": "Registrati",
   "passwordRecovery": "Recupero password",
-  "passwordRecoveryDescription": "Inserisci l'email che hai usato per creare l'account SoccerYou e ti invieremo un link di reset",
+  "passwordRecoveryDescription": "Inserisci l'email che hai usato per creare il tuo profilo SoccerYou e ti invieremo un link per reimpostare la tua password.",
   "resetButton": "Reset",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Torna al Login",

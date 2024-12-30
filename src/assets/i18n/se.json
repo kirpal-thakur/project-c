@@ -38,7 +38,7 @@
   "dontHaveAccount": "Har du inget konto?",
   "register": "Registrera",
   "passwordRecovery": "Återställning av lösenord",
-  "passwordRecoveryDescription": "Fyll i e-postadressen du har använt för att skapa ditt SoccerYou-konto, så skickar vi en återställningslänk till dig",
+  "passwordRecoveryDescription": "Skriv in den e-postadress du använde för att skapa ditt SoccerYou-konto så skickar vi en länk för att återställa ditt lösenord.",
   "resetButton": "Återställ",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Tillbaka till inloggningen",

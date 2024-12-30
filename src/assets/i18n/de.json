@@ -38,7 +38,7 @@
   "dontHaveAccount": "Sie haben noch kein Konto?",
   "register": "Registrieren",
   "passwordRecovery": "Passwortwiederherstellung",
-  "passwordRecoveryDescription": "Geben Sie die E-Mail-Adresse ein, die Sie für Ihr SoccerYou-Konto verwendet haben, und wir senden Ihnen einen Zurücksetzungslink",
+  "passwordRecoveryDescription": "Gib die E-Mail ein, die du zur Erstellung deines SoccerYou-Profils verwendet hast und wir schicken dir einen Link zum Passwort zurücksetzen.",
   "resetButton": "Zurücksetzen",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Zurück zur Anmeldung",

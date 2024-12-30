@@ -38,7 +38,7 @@
   "dontHaveAccount": "Não tem uma conta?",
   "register": "Registrar-se",
   "passwordRecovery": "Recuperação de senha",
-  "passwordRecoveryDescription": "Digite o email que você usou para criar sua conta no SoccerYou e enviaremos um link de redefinição",
+  "passwordRecoveryDescription": "Digite o e-mail que você usou para criar seu perfil no SoccerYou e enviaremos um link para redefinir sua senha.",
   "resetButton": "Redefinir",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Voltar para o Login",

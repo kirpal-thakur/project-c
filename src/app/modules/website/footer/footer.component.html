@@ -74,11 +74,11 @@
 
 
       <div class="form-select1">
+        <p class="country">{{ 'selectCountry' | translate }}</p>
         <a class="form-select select-country" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           {{ name }}
         </a>
         <div class="dropdown-menu dropdown-menu-end">
-          <p class="country">{{ 'selectCountry' | translate }}</p>
           <a *ngFor="let country of countrie" href="{{ country.url }}" class="dropdown-item ai-icon options-country"
             [class.selected]="name === country.name">
             <img src="https://api.socceryou.ch/uploads/logos/{{country.flag}}" width="30" height="24" class="me-3">

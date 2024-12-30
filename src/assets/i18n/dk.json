@@ -38,7 +38,7 @@
   "dontHaveAccount": "Har du ikke en konto?",
   "register": "Opret konto",
   "passwordRecovery": "Nulstil adgangskode",
-  "passwordRecoveryDescription": "Indtast den e-mail, du har brugt til at oprette din SoccerYou-konto, og vi sender dig et nulstillingslink",
+  "passwordRecoveryDescription": "Indtast den e-mail, du brugte til at oprette din SoccerYou-profil, og vi sender dig et link til at nulstille din adgangskode.",
   "resetButton": "Nulstil",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Tilbage til login",
