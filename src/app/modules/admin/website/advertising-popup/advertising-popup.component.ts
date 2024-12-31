@@ -60,10 +60,9 @@ export class AdvertisingPopupComponent   {
 
     this._locale.set('fr');
     this._adapter.setLocale(this._locale()); 
-    
+    this.getAdvertisement();
     if(this.data.action == "update" || this.data.action == "view"){
       let existingRecord = this.data.ad;
-      console.log(existingRecord)
       this.idToEdit = existingRecord.id;
       this.name = existingRecord.title;
       this.redirect = existingRecord.redirect_url;
@@ -79,6 +78,7 @@ export class AdvertisingPopupComponent   {
         this.disableEndDate = true;
         this.noEndDate = true;
       }
+
       this.maxViews = existingRecord.views;
       this.maxClicks = existingRecord.clicks;
 
@@ -91,8 +91,16 @@ export class AdvertisingPopupComponent   {
       this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
     }
 
+  
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+  getAdvertisement(): void {
     this.advertisementService.getPageAds().subscribe((response) => {
       let {pages} = response.data;
+      console.log('pages',pages)
       // pageOptions
       this.pageOptions = pages.map((value: any) => {
         return {
@@ -102,11 +110,7 @@ export class AdvertisingPopupComponent   {
       });
     });
   }
-
-  close(): void {
-    this.dialogRef.close();
-  }
-
+  
   onDateChange(dateType:any, event: MatDatepickerInputEvent<Date>): void {
     const selectedDate = event.value;
     let date = this.formatDate(selectedDate);
