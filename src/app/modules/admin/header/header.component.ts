@@ -31,7 +31,7 @@ export class HeaderComponent {
   profileImgUrl: any = "";
   lang: string = '';
   domains: any = environment.domains; 
-
+  envLang:any = environment.adminLangs; 
   languages: any = localStorage.getItem('languages');
   liveNotification: any[] = [];
   showNotification: boolean = false;
@@ -83,11 +83,11 @@ export class HeaderComponent {
 
       this.lang = localStorage.getItem('lang') || 'en';
 
-      const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
+      const selectedLanguage = this.envLang.find((lang:any) => lang.slug === this.lang);
       if (selectedLanguage) {
         this.language = selectedLanguage;
       }else{
-        this.language = this.domains[0];
+        this.language = this.envLang[0];
       }
 
       this.updateThemeText();
@@ -167,14 +167,14 @@ export class HeaderComponent {
 
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage)
-
+    this.translateService.use(selectedLanguage);
     // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = selectedLanguage;
     // Find the corresponding language ID from the langs array
-    const selectedLanguageObj = this.languages.find(
+    const selectedLanguageObj = this.envLang.find(
       (lang: any) => lang.slug === selectedLanguageSlug
     );
+    this.language = selectedLanguageObj;
 
     // Default to a specific language ID if none is found (e.g., English)
     const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;

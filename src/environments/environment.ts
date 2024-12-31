@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
+    googleApiKey: 'gfdgfhgfhfj',
 
     targetDomain: {
       name:'Switzerland', domain: "ch", id: 1, default_lang: 1, flag: "Switzerland.svg"
@@ -14,10 +14,12 @@ export const environment = {
       { role: "Scout", id: 3 },
       { role: "Player", id: 4 },
     ],
-
+    adminLangs:[
+      { language:'English', slug: "en", id: 1, flag: "England.svg" },
+      { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
+    ],
     langs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
-      { language:'Switzerland', slug: "ch", id: 2, flag: "Switzerland.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
       { language:'Italian', slug: "it", id: 3, flag: "Italy.svg"},
       { language:'French', slug: "fr", id: 4, flag: "France.svg"},
@@ -25,7 +27,6 @@ export const environment = {
       { language:'Portuguese', slug: "pt", id: 6, flag: "Portugal.svg" },
       { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
       { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
-      { language:'Belgium', slug: "be", id: 4, flag: "Belgium.svg" },
     ],
  
     domains:[

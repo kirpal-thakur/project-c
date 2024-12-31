@@ -214,6 +214,7 @@ export class AddTalentPageComponent implements OnInit {
       formData.append('banner_imgs[]', this.formData.banner_imgs[key]);
     }
 
+    console.log(formData)
     // Send the formData
     this.webpages.addTalentPage(formData).subscribe(
       response => {

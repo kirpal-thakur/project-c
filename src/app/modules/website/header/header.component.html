@@ -62,9 +62,7 @@
                     <!---------logo sidebar ----------->
                     <div class="navbar-logo1" (click)="closeNavbar()">
                         <div class="logo1" [routerLink]="''">
-
                             <img width="197" height="79" src="./assets/images/light-logo.svg">
-
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -72,8 +70,6 @@
                             aria-label="Toggle navigation">
                             <span class="icon-cross"></span>
                         </button>
-
-
                     </div>
                     <!---------logo sidebar ----------->
                     <div class="navbar-list">
@@ -143,12 +139,10 @@
                             <li>
                                 <a><img src="./assets/images/arrow-image.svg" (click)="closeNavbar()"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal1"></a>
-
                             </li>
                             <li>
                                 <a><img src="./assets/images/arrow-image.svg" (click)="closeNavbar()"
                                         [routerLink]="'/faq'"></a>
-
                             </li>
                         </ul>
                     </div>
@@ -165,7 +159,7 @@
             <form class="d-flex">
                 <div class="extra-nav d-flex align-items-center">
                     <div class="theme_btn d-flex align-items-center">
-                        <span class="light-text">{{ 'mode' | translate }}</span>
+                        <span class="light-text">{{ 'lightMode' | translate }}</span>
                         <span class="dark-text">{{ 'darkMode' | translate }}</span>
                         <div>
                             <label class="switch">
@@ -196,7 +190,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                           <!-- Loop through langs array to display each language with its flag -->
-                          <a href="#" *ngFor="let lang of langs" class="dropdown-item ai-icon"
+                          <a href="" *ngFor="let lang of langs" class="dropdown-item ai-icon"
                              [class.selected]="slug === lang.slug" (click)="ChangeLang(lang.slug, $event)">
                             <!-- Display language flag -->
                             <img src="https://api.socceryou.ch/uploads/logos/{{ lang.flag }}" width="30" height="24" class="me-3">
@@ -205,7 +199,6 @@
                           </a>
                         </div>
                       </div>
-                      
 
 
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
@@ -671,11 +664,11 @@
                             </div>
 
                             <!-- <div *ngIf="registerFormSubmitted && !isFormValid()" class="text-danger">
-                            Please fill in all required fields
-                        </div>
-                        <div *ngIf="registerError" class="text-danger">
-                            Registration failed. Please try again.
-                        </div> -->
+                                    Please fill in all required fields
+                                </div>
+                                <div *ngIf="registerError" class="text-danger">
+                                    Registration failed. Please try again.
+                                </div> -->
 
                             <div *ngIf="registerFormSubmitted && !isFormValid()" class="text-danger">
                                 {{ 'requiredFieldsMessage' | translate }}
