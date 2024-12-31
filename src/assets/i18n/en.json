@@ -386,7 +386,14 @@
         
         "left": "Left",
         "right": "Right",
-        "both": "Both"
+        "both": "Both",
+        "renewsOn": "Renews on Nov. 21, 2024",
+        "editPlan": "Edit Plan",
+        "cancelSubscription": "Cancel subscription",
+        "renewSubscription": "Renew subscription",
+        "2_countries": "2 Countries Selected",
+        "expireOn": "Expires on"
+
     },
     "ScoutTranslate": {
         "dashboard": "Dashboard",
