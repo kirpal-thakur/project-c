@@ -197,6 +197,9 @@
   "companyName": "Företagets namn (valfritt)",
   "selectLanguage": "Välj ett språk",
   "country": "Land",
+  "billedMonthly": "Månad",
+  "billedYearly": "År",
+  "month": "Month",
   "TalentsTranslate": {
     "dashboard": "Dashboard",
     "profileTab": "Profilflik",
