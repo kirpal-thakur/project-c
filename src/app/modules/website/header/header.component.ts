@@ -508,7 +508,6 @@ export class HeaderComponent implements OnInit {
     ].every(field => fieldType.includes(typeof field)) &&
     this.role > 0 && // Assuming role should be a positive number
     this.language.trim() !== '' && // Ensure language is a non-empty string
-    this.newsletter && // Ensure this boolean value is checked as needed
     this.userDomain.trim() !== ''; // Assuming userDomain is a string
   }
 

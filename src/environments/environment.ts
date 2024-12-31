@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    googleApiKey: 'AIzaSyDTYy_yjGzg_FN54cp9KiqRH2w60fc0PUs',
+    googleApiKey: 'gfdgfhgfhfj',
 
     targetDomain: {
       name:'Switzerland', domain: "ch", id: 1, default_lang: 1, flag: "Switzerland.svg"
