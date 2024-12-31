@@ -986,9 +986,10 @@ img.vector-img {
 }
 
 p.country {
-  font-size: 18px;
-  text-align: center;
-  font-weight: 300;
+  font-size: 14px;
+  text-align: left;
+  font-weight: 700;
+  
 }
 
 
@@ -1094,7 +1095,7 @@ option.countary {
     margin-bottom: 40px;
   }
 
-  .select-country {
+  .select-country, p.country {
     margin-left: 119px;
   }
 
@@ -1118,6 +1119,9 @@ option.countary {
     text-align: left;
     margin-left: 119px;
     margin-bottom: 20px;
+  }
+  p.country{
+    margin-left: 119px;
   }
 
   .footer-logo {
@@ -1220,6 +1224,9 @@ option.countary {
     margin-left: 119px;
     margin-bottom: 20px;
   }
+  p.country{
+    margin-left: 119px;
+  }
 
   .footer-logo {
     height: 87px;
@@ -1318,7 +1325,7 @@ option.countary {
     margin-bottom: 20px;
   }
 
-  .select-country {
+  .select-country,  p.country {
     margin-left: 90px;
   }
 
@@ -1366,7 +1373,7 @@ option.countary {
     margin-top: 0;
   }
 
-  .select-country {
+  .select-country,  p.country {
     margin-left: 70px;
   }
 

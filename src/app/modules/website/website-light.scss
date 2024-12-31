@@ -58,15 +58,15 @@
 //   color: white ;
 // }
 
-.mdc-list-item__primary-text {
+.website-code .mdc-list-item__primary-text {
   font-weight: 600 !important;
 }
 
-.mdc-list-item.mdc-list-item--with-one-line {
+.website-code .mdc-list-item.mdc-list-item--with-one-line {
   height: 40px !important;
 }
 
-.pricing .mat-mdc-card {
+.website-code .pricing .mat-mdc-card {
   border-radius: var(--mdc-elevated-card-container-shape);
   background-color: transparent !important;
   border-width: 0;
@@ -75,28 +75,28 @@
   box-shadow: none !important;
 }
 
-.sidebar .website-code .mb-1 {
+.website-code .sidebar .website-code .mb-1 {
   color: white;
   font-weight: 400;
 }
 
-.mdc-line-ripple::before,
-.mdc-line-ripple::after {
+.website-code .mdc-line-ripple::before,
+.website-code .mdc-line-ripple::after {
   display: none !important;
 }
 
-.mdc-text-field {
+.website-code .mdc-text-field {
   padding: 0 !important;
 }
 
-.mat-mdc-button[disabled],
-.mat-mdc-button.mat-mdc-button-disabled {
+.website-code .mat-mdc-button[disabled],
+.website-code .mat-mdc-button.mat-mdc-button-disabled {
   cursor: pointer !important;
   pointer-events: fill !important;
   color: var(--mdc-text-button-disabled-label-text-color);
 }
 
-.mat-mdc-form-field-subscript-wrapper {
+.website-code .mat-mdc-form-field-subscript-wrapper {
   box-sizing: border-box;
   width: 100%;
   position: relative;
@@ -145,17 +145,17 @@
   color: #E05263;
 }
 
-.mat-mdc-list-item:not(.mat-mdc-list-item-interactive),
-.mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
+.website-code .mat-mdc-list-item:not(.mat-mdc-list-item-interactive),
+.website-code .mat-mdc-list-option:not(.mat-mdc-list-item-interactive) {
   cursor: pointer !important;
 }
 
-.mdc-list-item:hover::before {
+.website-code .mdc-list-item:hover::before {
   background-color: transparent !important;
   opacity: unset !important;
 }
 
-.light-theme .mdc-list-item__primary-text:hover {
+.light-theme .website-code  .mdc-list-item__primary-text:hover {
   color: #e05263 !important;
   font-size: 18px;
 }
