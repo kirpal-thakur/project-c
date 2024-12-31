@@ -204,7 +204,6 @@
   "country": "Land",
 "TalentsTranslate": {
     "_comment": "Dieser Abschnitt enthält Übersetzungen für das Talente-Modul.",
-    "dashboard": "Dashboard",
     "profile": "Profil",
     "editPersonalDetails": "Persönliche Daten bearbeiten",
     "editGeneralDetails": "Allgemeine Details bearbeiten",
@@ -228,6 +227,7 @@
     "favorites": "Favoriten",
     "membership": "Mitgliedschaft",
     "latestTransaction": "Letzte Transaktion",
+    "dashboard": "Dashboard",
     "paymentMethod": "Zahlungsart",
     "boostYourProfile": "Profil boosten",
     "plans": "Pläne",
@@ -402,7 +402,14 @@
     "cancelSubscription": "Abonnement kündigen",
     "renewSubscription": "Abonnement erneuern",
     "2_countries": "2 Länder ausgewählt",
-    "expireOn": "Läuft ab am"
+    "expireOn": "Läuft ab am",
+    "lightmode": "Tag",
+  "darkMode": "Nacht",
+
+    "search": "Suche",
+    "talent": "Talente",
+     "viewMyProfile": "Mein Profil ansehen",
+     "signOut": "Abmelden"
 },
 
   "ScoutTranslate": {

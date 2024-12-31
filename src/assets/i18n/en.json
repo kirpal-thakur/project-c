@@ -392,7 +392,14 @@
         "cancelSubscription": "Cancel subscription",
         "renewSubscription": "Renew subscription",
         "2_countries": "2 Countries Selected",
-        "expireOn": "Expires on"
+        "expireOn": "Expires on",
+        "lightMode": "Light Mode",
+        "darkMode": "Dark Mode",
+
+        "search": "Search",
+        "talent": "Talent",
+        "viewMyProfile": "View my Profile",
+        "signOut": "Sign out"
 
     },
     "ScoutTranslate": {
