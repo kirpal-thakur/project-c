@@ -4,7 +4,8 @@
       <div class="row">
         <div class="col-lg-4 col-md-12 col-12 footer-contact">
           <div class="footer-logo">
-            <img src="./assets/images/pink-logo.png">
+            <img class="light-images" src="./assets/images/pink-logo.png">
+            <img class="dark-images" src="./assets/images/yellow1-logo.png">
           </div>
 
           <!-- <ul class="social-link">
@@ -74,11 +75,11 @@
 
 
       <div class="form-select1">
+        <p class="country">{{ 'selectCountry' | translate }}</p>
         <a class="form-select select-country" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           {{ name }}
         </a>
         <div class="dropdown-menu dropdown-menu-end">
-          <p class="country">{{ 'selectCountry' | translate }}</p>
           <a *ngFor="let country of countrie" href="{{ country.url }}" class="dropdown-item ai-icon options-country"
             [class.selected]="name === country.name">
             <img src="https://api.socceryou.ch/uploads/logos/{{country.flag}}" width="30" height="24" class="me-3">

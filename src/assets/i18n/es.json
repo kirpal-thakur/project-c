@@ -1,11 +1,13 @@
 {
   "talents": "Talentos",
+  "about": "Acerca de",
   "news&Media": "Noticias y medios",
   "club": "Clubes y Scouts",
   "feature": "Características",
-  "mode": "Modo claro",
+  "darkMode": "Modo oscuro",
+  "lightMode": "Modo claro",
   "login": "Iniciar sesión",
-  "registerNow": "Registrarse ahora",
+  "registerNow": "Regístrate ahora",
   "product": "Producto",
   "pricing": "Precios",
   "signIn": "Iniciar sesión",
@@ -23,8 +25,8 @@
   "terms": "Términos",
   "cookiePolicy": "Política de cookies",
   "copyright": "© 2024 SoccerYou Group, Todos los derechos reservados.",
-  "welcomeBack": "Bienvenido de vuelta a SoccerYou",
-  "loginMessage": "Inicia sesión en tu cuenta a continuación",
+  "welcomeBack": "Willkommen zurück - SoccerYou wartet!",
+  "loginMessage": "Inicia sesión y empieza ahora.",
   "emailLabel": "Correo electrónico",
   "emailPlaceholder": "ejemplo@email.es",
   "passwordLabel": "Contraseña",
@@ -37,7 +39,7 @@
   "dontHaveAccount": "¿No tienes una cuenta?",
   "register": "Registrarse",
   "passwordRecovery": "Recuperación de contraseña",
-  "passwordRecoveryDescription": "Ingrese el correo electrónico que utilizó para crear su cuenta SoccerYou y le enviaremos un enlace para restablecer la contraseña",
+  "passwordRecoveryDescription": "Ingresa el correo electrónico que usaste para crear tu perfil en SoccerYou y te enviaremos un enlace para restablecer tu contraseña.",
   "resetButton": "Restablecer",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Volver al inicio de sesión",
@@ -189,13 +191,13 @@
   "MovingTo": "Mudanza a",
   "ExportXLS": "Exportar XLS",
   "selectCountry": "Seleccionar país",
-  "darkMode": "Modo oscuro",
   "provideEmailAddress": "Indique una dirección de correo electrónico válida.",
   "save": "Guardar",
   "clubDetails": "Datos del club",
   "companyName": "Nombre de la empresa (opcional)",
   "selectLanguage": "Seleccione un idioma",
   "country": "País",
+
   "TalentsTranslate": {
     "dashboard": "Dashboard",
     "profileTab": "Pestaña de perfil",
@@ -387,6 +389,7 @@
     "inTheTalentOverviewYouWillAppearInTheFirstPositionsForMatchingSearchParameters": "En el resumen de talentos, aparecerá en las primeras posiciones para los parámetros de búsqueda coincidentes.",
     "higherChancesOfBeingDiscoveredByAScoutOrClub": "Mayores posibilidades de ser descubierto por un ojeador o un club."
   },
+  
   "ScoutTranslate": {
     "dashboard": "Cuadro de mandos",
     "profile": "Perfil",

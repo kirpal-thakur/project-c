@@ -31,7 +31,7 @@ export class HeaderComponent {
   profileImgUrl: any = "";
   lang: string = '';
   domains: any = environment.domains; 
-  envLang:any = environment.langs; 
+  envLang:any = environment.adminLangs; 
   languages: any = localStorage.getItem('languages');
   liveNotification: any[] = [];
   showNotification: boolean = false;

@@ -14,7 +14,10 @@ export const environment = {
       { role: "Scout", id: 3 },
       { role: "Player", id: 4 },
     ],
-
+    adminLangs:[
+      { language:'English', slug: "en", id: 1, flag: "England.svg" },
+      { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
+    ],
     langs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
