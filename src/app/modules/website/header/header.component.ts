@@ -248,26 +248,26 @@ export class HeaderComponent implements OnInit {
 
   ChangeLang(newSlug: string, event: Event): void {
     this.translateService.use(newSlug);  // Switch translation language
-
+    console.log('working',newSlug);
 
     this.slug = newSlug;  // Update the slug to the selected language
     event.preventDefault(); // Prevent default action (e.g., preventing link navigation)
 
     let selectedLanguageId : any = null;
-    let getLanguageIndex = this.languages.findIndex((val:any) => {
+    let getLanguageIndex = this.langs.findIndex((val:any) => {
       if(val.slug == newSlug){
         selectedLanguageId = val.id
         return val;
       }
     });
-
+    
     this.selectedLanguageId = selectedLanguageId;
     localStorage.setItem('lang', newSlug);
 
     // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = newSlug;
     // Find the corresponding language ID from the langs array
-    const selectedLanguageObj = this.languages.find(
+    const selectedLanguageObj = this.langs.find(
       (lang: any) => lang.slug === selectedLanguageSlug
     );
 
@@ -278,7 +278,7 @@ export class HeaderComponent implements OnInit {
     this.webpage.updateData(selectedLanguageId);
     localStorage.setItem('lang_id', selectedLanguageId);
 
-
+    console.log('selectedLanguageId',selectedLanguageId);
     this.sharedservice.updateData({
       action:'updatedLang',
       id:selectedLanguageId
