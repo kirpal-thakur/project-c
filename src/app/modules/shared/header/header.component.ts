@@ -39,7 +39,7 @@ export class HeaderComponent {
   loggedInUser: any = localStorage.getItem('userInfo');
   profileImgUrl: any = "";
   lang: string = '';
-  domains: any = environment.domains;
+  domains: any = environment.langs;
   message: string = '';
   isLoading: boolean = false; // Flag to track loading state
   language : any;
@@ -80,8 +80,7 @@ export class HeaderComponent {
       this.profileImgUrl = msg;
     });
 
-    this.lang = localStorage.getItem('lang') || 'en'
-
+    this.lang = localStorage.getItem('lang') || 'en';
     const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
     if (selectedLanguage) {
       this.language = selectedLanguage;
@@ -238,8 +237,14 @@ export class HeaderComponent {
 
 
   ChangeLang(lang: any) {
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
+    
+    const selectedLang = this.domains.find((lang:any) => lang.slug === selectedLanguage);
+    this.language = selectedLang;
+    let selectedLandId = selectedLang ? selectedLang.id : 1;
+    localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
   }
 

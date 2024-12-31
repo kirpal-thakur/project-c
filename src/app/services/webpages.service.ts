@@ -23,8 +23,9 @@ export class WebPages {
     }
 
     getAllPages(lang_id:any=1,params:any): Observable<any> {
+        //?lang_id=${lang_id}
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.apiUrl}admin/get-pages?lang_id=${lang_id}`, {params}
+            `${this.apiUrl}admin/get-pages`, {params}
         );
 
 
