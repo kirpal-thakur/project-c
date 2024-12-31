@@ -279,10 +279,11 @@
 
       <div class="mb-3">
         <label for="feature_sctn_title" class="form-label">Feature Section Title:</label>
-        <input type="text" class="form-control" id="feature_sctn_title" name="feature_sctn_title" value="I’m a Talent" />
+        <input type="text" class="form-control" id="feature_sctn_title" name="feature_sctn_title" value="" />
       </div>
 
       <div *ngFor="let feature of formData.feature_sctn; let i = index" class="card mb-3 p-3">
+
         <div class="row g-3">
           <div class="col-md-6">
             <label for="feature_title_{{ i }}" class="form-label">Feature Title</label>

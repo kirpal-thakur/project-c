@@ -242,6 +242,76 @@ export class AddClubnScoutPageComponent implements OnInit {
     }
   }
 
+  // getPageById(id: number): void {
+  //   this.webpages.getPageById(id).subscribe((response) => {
+  //     if (response.status) {
+  //       const pageData = response.data.pageData;
+
+  //       // Map general fields
+  //       this.formData.page_type = response.data.page_type;
+  //       this.formData.slug = response.data.slug;
+  //       // this.formData.page_content = pageData.page_content || '';
+  //       this.formData.meta_title = response.data.meta_title;
+  //       this.formData.meta_description = response.data.meta_description;
+  //       this.formData.banner_title = pageData.banner_title || '';
+  //       this.formData.banner_desc = pageData.banner_desc;
+  //       this.formData.banner_btn_txt = pageData.banner_btn_txt;
+  //       this.bannerBgImagePreview = response.data.base_url + pageData.banner_bg_img;
+
+  //       // Map banner images if any
+  //       if (pageData.banner_imgs) {
+  //         this.formData.banner_imgs = pageData.banner_imgs;
+  //         this.bannerImagesPreviews = pageData.banner_imgs.map((img: string) => response.data.base_url + img);
+  //       }
+
+  //       // Map club_nd_scout_section
+  //       if (pageData.club_nd_scout_section) {
+  //         ['first_tab', 'sec_tab', 'third_tab'].forEach(tab => {
+  //           if (pageData.club_nd_scout_section[tab]) {
+  //             this.formData.club_nd_scout_section[tab].txt = pageData.club_nd_scout_section[tab].txt;
+  //             this.formData.club_nd_scout_section[tab].iconPreview = response.data.base_url + pageData.club_nd_scout_section[tab].icon;
+  //           }
+  //         });
+  //       }
+
+
+  //       // Map feature_sctn
+  //       if (pageData.feature_sctn) {
+  //         this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
+  //           title: feature.title,
+  //           desc: feature.desc,
+  //           iconPreview: response.data.base_url + feature.icon,
+  //         }));
+  //       }
+
+  //       // Map pricing_tab
+  //       if (pageData.pricing_tab) {
+  //         this.formData.pricing_tab = pageData.pricing_tab.map((plan: any) => ({
+  //           monthly_label: plan.monthly_label || '',
+  //           yearly_label: plan.yearly_label || '',
+  //           plan_name: plan.plan_name,
+  //           monthly_plan_price: plan.monthly_plan_price,
+  //           yearly_plan_price: plan.yearly_plan_price,
+  //           monthly_plan_label: plan.monthly_plan_label,
+  //           yearly_plan_label: plan.yearly_plan_label,
+  //           monthly_plan_price_currency: plan.monthly_plan_price_currency,
+  //           yearly_plan_price_currency: plan.yearly_plan_price_currency,
+  //           plan_feature_title: plan.plan_feature_title || '',
+  //           plan_feature_desc: plan.plan_feature_desc || [],
+  //         }));
+  //       }
+
+  //       // Map section titles
+  //       this.formData.club_nd_scout_section_title = pageData.club_nd_scout_section_title || '';
+  //       this.formData.feature_sctn_title = pageData.feature_sctn_title || '';
+  //       this.formData.pricing_sctn_title = pageData.pricing_sctn_title || '';
+
+  //       // Trigger change detection after assigning data
+  //       this.cdr.detectChanges();
+  //     }
+  //   });
+  // }
+
   getPageById(id: number): void {
     this.webpages.getPageById(id).subscribe((response) => {
       if (response.status) {
@@ -250,55 +320,61 @@ export class AddClubnScoutPageComponent implements OnInit {
         // Map general fields
         this.formData.page_type = response.data.page_type;
         this.formData.slug = response.data.slug;
-        // this.formData.page_content = pageData.page_content || '';
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
         this.formData.banner_title = pageData.banner_title || '';
-        this.formData.banner_desc = pageData.banner_desc;
-        this.formData.banner_btn_txt = pageData.banner_btn_txt;
+        this.formData.banner_desc = pageData.banner_desc || '';
+        this.formData.banner_btn_txt = pageData.banner_btn_txt || '';
         this.bannerBgImagePreview = response.data.base_url + pageData.banner_bg_img;
 
         // Map banner images if any
         if (pageData.banner_imgs) {
-          this.formData.banner_imgs = pageData.banner_imgs;
-          this.bannerImagesPreviews = pageData.banner_imgs.map((img: string) => response.data.base_url + img);
+          this.formData.banner_imgs = pageData.banner_imgs.split(','); // Convert comma-separated string to array
+          this.bannerImagesPreviews = this.formData.banner_imgs.map((img: string) => response.data.base_url + img);
+        } else {
+          this.formData.banner_imgs = [];
+          this.bannerImagesPreviews = [];
         }
 
         // Map club_nd_scout_section
         if (pageData.club_nd_scout_section) {
           ['first_tab', 'sec_tab', 'third_tab'].forEach(tab => {
             if (pageData.club_nd_scout_section[tab]) {
-              this.formData.club_nd_scout_section[tab].txt = pageData.club_nd_scout_section[tab].txt;
-              this.formData.club_nd_scout_section[tab].iconPreview = response.data.base_url + pageData.club_nd_scout_section[tab].icon;
+              this.formData.club_nd_scout_section[tab] = {
+                txt: pageData.club_nd_scout_section[tab].txt || '',
+                icon: pageData.club_nd_scout_section[tab].icon || null,
+                iconPreview: response.data.base_url + pageData.club_nd_scout_section[tab].icon,
+              };
             }
           });
         }
 
-
-        // Map feature_sctn
+        // Map feature section
         if (pageData.feature_sctn) {
           this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
-            title: feature.title,
-            desc: feature.desc,
+            title: feature.title || '',
+            desc: feature.desc || '',
+            icon: feature.icon || null,
             iconPreview: response.data.base_url + feature.icon,
           }));
+        } else {
+          this.formData.feature_sctn = [];
         }
 
-        // Map pricing_tab
+        // Map pricing tab
         if (pageData.pricing_tab) {
           this.formData.pricing_tab = pageData.pricing_tab.map((plan: any) => ({
-            monthly_label: plan.monthly_label || '',
-            yearly_label: plan.yearly_label || '',
-            plan_name: plan.plan_name,
-            monthly_plan_price: plan.monthly_plan_price,
-            yearly_plan_price: plan.yearly_plan_price,
-            monthly_plan_label: plan.monthly_plan_label,
-            yearly_plan_label: plan.yearly_plan_label,
-            monthly_plan_price_currency: plan.monthly_plan_price_currency,
-            yearly_plan_price_currency: plan.yearly_plan_price_currency,
-            plan_feature_title: plan.plan_feature_title || '',
+            plan_name: plan.plan_name || '',
+            monthly_plan_price: plan.monthly_plan_price || '',
+            yearly_plan_price: plan.yearly_plan_price || '',
+            monthly_plan_price_currency: plan.monthly_plan_price_currency || '',
+            yearly_plan_price_currency: plan.yearly_plan_price_currency || '',
+            monthly_label: plan.monthly_plan_label || '',
+            yearly_label: plan.yearly_plan_label || '',
             plan_feature_desc: plan.plan_feature_desc || [],
           }));
+        } else {
+          this.formData.pricing_tab = [];
         }
 
         // Map section titles
@@ -347,77 +423,6 @@ export class AddClubnScoutPageComponent implements OnInit {
   }
 
 
-  // getPageById(id: number): void {
-    
-  //   this.webpages.getPageById(id).subscribe((response) => {
-  //     if (response.status) {
-  //       const pageData = response.data.pageData;
-
-  //       // Map basic fields
-  //       this.formData.page_type = response.data.page_type;
-  //       this.formData.slug = response.data.slug;
-  //       this.formData.page_content = pageData.page_content || '';
-  //       this.formData.meta_title = response.data.meta_title;
-  //       this.formData.meta_description = response.data.meta_description;
-  //       this.formData.banner_title = pageData.banner_title;
-  //       this.formData.banner_desc = pageData.banner_desc;
-  //       this.formData.banner_btn_txt = pageData.banner_btn_txt;
-  //       this.bannerImagePreview = response.data.base_url + pageData.banner_bg_img;
-
-  //       // Map club_nd_scout_section
-  //       if (pageData.club_nd_scout_section) {
-  //         this.formData.club_nd_scout_section.first_tab.txt = pageData.club_nd_scout_section.first_tab.txt;
-  //         this.formData.club_nd_scout_section.sec_tab.txt = pageData.club_nd_scout_section.sec_tab.txt;
-  //         this.formData.club_nd_scout_section.third_tab.txt = pageData.club_nd_scout_section.third_tab.txt;
-  //         this.formData.club_nd_scout_section_title =  pageData.club_nd_scout_section_title;
-  //         this.formData.club_nd_scout_section.first_tab.icon = pageData.club_nd_scout_section.first_tab.icon;
-  //         this.formData.club_nd_scout_section.sec_tab.icon = pageData.club_nd_scout_section.sec_tab.icon;
-  //         this.formData.club_nd_scout_section.third_tab.icon = pageData.club_nd_scout_section.third_tab.icon;
-  //       }
-
-  //       console.log(this.formData)
-  //       // Map feature_sctn
-  //       if (pageData.feature_sctn) {
-  //         this.formData.feature_sctn = pageData.feature_sctn.map((feature: any) => ({
-  //           title: feature.title,
-  //           desc: feature.desc,
-  //           icon: feature.icon || null, // Initialize icon
-  //         }));
-  //       }
-
-  //       // Map pricing_tab
-  //       if (pageData.pricing_tab) {
-  //         this.formData.pricing_tab = pageData.pricing_tab.map((plan: any) => ({
-  //           monthly_label: plan.monthly_label,
-  //           yearly_label: plan.yearly_label,
-  //           plan_name: plan.plan_name,
-  //           monthly_plan_price: plan.monthly_plan_price,
-  //           yearly_plan_price: plan.yearly_plan_price,
-  //           monthly_plan_price_currency: plan.monthly_plan_price_currency,
-  //           yearly_plan_price_currency: plan.yearly_plan_price_currency,
-  //           plan_feature_title: plan.plan_feature_title,
-  //           plan_feature_desc: plan.plan_feature_desc || [],
-  //         }));
-  //       }
-
-  //       // Map additional sections if any
-  //       if (pageData.club_nd_scout_section_title) {
-  //         this.formData.club_nd_scout_section_title = pageData.club_nd_scout_section_title;
-  //       }
-  //       if (pageData.feature_sctn_title) {
-  //         this.formData.feature_sctn_title = pageData.feature_sctn_title;
-  //       }
-  //       if (pageData.pricing_sctn_title) {
-  //         this.formData.pricing_sctn_title = pageData.pricing_sctn_title;
-  //       }
-
-  //       // Trigger change detection after data is assigned
-  //       this.cdr.detectChanges();
-  //     }
-  //   });
-  // }
-
-
   addFeature(): void {
     this.formData.feature_sctn.push({ title: '', desc: '', icon: '' });
   }
@@ -448,6 +453,5 @@ export class AddClubnScoutPageComponent implements OnInit {
   removePricingFeature(planIndex: number, featureIndex: number): void {
     this.formData.pricing_tab[planIndex].plan_feature_desc.splice(featureIndex, 1);
   }
-
 
 }
