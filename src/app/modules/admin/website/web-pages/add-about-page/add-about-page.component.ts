@@ -120,7 +120,29 @@ export class AddAboutPageComponent implements OnInit {
   }
 
   onFileChange(event: any, fieldName: string): void {
-    this.formData[fieldName] = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageUrl = reader.result as string;
+
+        // Assign the preview URL to the corresponding field
+        if (fieldName === 'about_banner_bg_img') {
+          this.about_banner_bg_img = imageUrl;
+          this.bannerBgimageLoaded = true;
+        } else if (fieldName === 'about_banner_img') {
+          this.about_banner_img = imageUrl;
+          this.aboutBannerImagePreview = true;
+        } else if (fieldName === 'country_section_banner_img') {
+          this.country_section_banner_img = imageUrl;
+          this.aboutCountryBannerImagePreview = true;
+        }
+      };
+      reader.readAsDataURL(file);
+
+      // Update formData
+      this.formData[fieldName] = file;
+    }
   }
 
   submitForm(): void {
