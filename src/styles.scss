@@ -13,6 +13,21 @@ img.admin-logo {
   width: 52px;
   height: 40px;
 }
+// .mdc-list-item__primary-text {
+//   font-weight: normal !important;
+//   font-size: 16px !important;
+// }
+.mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate {
+  background-color: #148DE4 !important;
+  border-color: rgba(0, 0, 0, 0);
+}
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: black !important;
+}
+ .mat-pseudo-checkbox-full {
+  margin-right: 10px !important;
+  flex-shrink: 0;
+}
 
 
 ul,

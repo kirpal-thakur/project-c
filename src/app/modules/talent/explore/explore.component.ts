@@ -74,6 +74,10 @@ export class ExploreComponent implements OnInit {
     this.loadTrackedViews();
   }
 
+  displayPosition = (): string => {
+    return 'Position'; // Static display value
+  };
+
   private loadTrackedViews() {
     const views = sessionStorage.getItem('viewsTracked');
     if (views) {
