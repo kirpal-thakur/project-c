@@ -2040,7 +2040,7 @@ a {
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
-  width: 100%;
+  width: 6rem;
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;
@@ -2614,6 +2614,6 @@ a {
   }
 }
 
-.custom-border{
-  border: none !important;
+div.mat-mdc-dialog-panel {
+  height: unset !important;
 }

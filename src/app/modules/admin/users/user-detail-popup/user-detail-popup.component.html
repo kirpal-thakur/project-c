@@ -111,7 +111,7 @@
       </div>
     </div>
 
-    <div class="list-view mb-3">
+    <div class="list-view mb-3" style="border: none;">
       <div class="form-check" *ngIf="user.status == '1' || user.status == '3'">
         <label class="form-check-label pointer" for="flexCheckDefault1">
           <input
@@ -136,7 +136,7 @@
       </div>
     </div>
   </div>
-  <div class="offcanvas-footer">
+  <div class="offcanvas-footer p-3">
     <div class="d-flex align-items-center justify-content-between">
       <span class="text-danger pointer" (click)="closePopup(user.role_name, user.id)">Edit Account</span>   
       <button class="btn btn-success btn-sm web-create-bg" (click)="save()">Save</button>
