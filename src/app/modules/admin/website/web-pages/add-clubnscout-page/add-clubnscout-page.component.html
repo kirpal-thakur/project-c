@@ -135,6 +135,7 @@
           class="form-control"
           id="club_nd_scoutSectionTitle"
           name="club_nd_scout_section_title"
+          [(ngModel)]="formData.club_nd_scout_section_title" required
         />
       </div>
 
@@ -279,7 +280,7 @@
 
       <div class="mb-3">
         <label for="feature_sctn_title" class="form-label">Feature Section Title:</label>
-        <input type="text" class="form-control" id="feature_sctn_title" name="feature_sctn_title" value="" />
+        <input type="text" class="form-control" id="feature_sctn_title" name="feature_sctn_title" [(ngModel)]="formData.club_nd_scout_section_title" required  />
       </div>
 
       <div *ngFor="let feature of formData.feature_sctn; let i = index" class="card mb-3 p-3">

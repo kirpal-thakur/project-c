@@ -29,7 +29,7 @@ export class ChatComponent  {
         id: this.userData.id,
         name: this.userData.first_name,
         email: this.userData.username,
-        photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+        photoUrl: this.userData.profile_image_path,
         welcomeMessage: "Hi!",
         role: (this.userData.role == '1') ? "hidden" : "default"
       };
@@ -83,7 +83,7 @@ export class ChatComponent  {
               id: user.id,
               name: user.first_name,
               email: user.username,
-              photoUrl: "https://talkjs.com/new-web/avatar-7.jpg",
+              photoUrl: user.profile_image_path,
             })
         }
         if(this.users.length == 1){

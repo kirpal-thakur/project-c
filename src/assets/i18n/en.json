@@ -191,6 +191,10 @@
     "companyName": "Company Name (optional)",
     "selectLanguage": "Select a language",
     "country": "Country",
+    "billedMonthly": "Billed Monthly",
+    "billedYearly": "Billed Yearly",
+    "month": "Month",
+
     "TalentsTranslate": {
         "_comment": "This section contains translations for the talents module.",
         "dashboard": "Dashboard",
@@ -556,7 +560,7 @@
         "choosePlan": "Choose Plan",
         "youAreOnPremiumPlan": "You are on Premium Plan",
         "inviteTalents": "You can invite talents and add them to your portfolio.",
-        " favoritesList": "Create your favorites list.",
+        "favoritesList": "Create your favorites list.",
         "favoriteByTalents": "Be saved as a favorite by talents.",
         "CaptureAdditional": "Capture additional pictures, videos and highlights.",
         "highlightYourBestPhotos": "Highlight your best photos and videos in your profile. ",
