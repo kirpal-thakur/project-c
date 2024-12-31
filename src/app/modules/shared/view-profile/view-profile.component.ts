@@ -64,16 +64,16 @@ export class ViewProfileComponent implements OnInit {
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.profileImage = this.user.meta.profile_image_path || this.profileImage;
           this.coverImage = this.user.meta.cover_image_path || this.coverImage;
-          if(this.user?.meta?.place_of_birth){
-            this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
-          }
+          // if(this.user?.meta?.place_of_birth){
+          //   this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          // }
 
-          if (this.userNationalities?.length) {
-            // Fetch flag details for each nationality
-            this.userNationalities.forEach((nat:any, index:any) => {
-              this.getCountry(nat.flag_path, index);
-            });
-          }
+          // if (this.userNationalities?.length) {
+          //   // Fetch flag details for each nationality
+          //   this.userNationalities.forEach((nat:any, index:any) => {
+          //     this.getCountry(nat.flag_path, index);
+          //   });
+          // }
 
           // Set isFavorite status based on user data or API response
           this.isFavorite = this.user.marked_favorite; // Assuming API returns this

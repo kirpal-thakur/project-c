@@ -274,14 +274,14 @@ export class DashboardComponent implements OnInit , OnDestroy {
             this.coverImage = this.user.meta.cover_image_path;
           }
 
-          this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          // this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          if (this.userNationalities?.length) {
-            // Fetch flag details for each nationality
-            this.userNationalities.forEach((nat:any, index:any) => {
-              this.getCountry(nat.flag_path, index);
-            });
-          }
+          // if (this.userNationalities?.length) {
+          //   // Fetch flag details for each nationality
+          //   this.userNationalities.forEach((nat:any, index:any) => {
+          //     this.getCountry(nat.flag_path, index);
+          //   });
+          // }
 
         }
 
@@ -293,40 +293,40 @@ export class DashboardComponent implements OnInit , OnDestroy {
     }
   }
 
-  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
+  // getCountryFromPlaceOfBirth(placeOfBirth: string): void {
+  //   if (!placeOfBirth) {
+  //     console.error("Place of birth is empty.");
+  //     return;
+  //   }
 
 
-    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
+  //   // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
+  //   const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
+  //   const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
 
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
+  //   fetch(geocodingUrl)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.status === 'OK' && data.results.length > 0) {
+  //         const addressComponents = data.results[0].address_components;
 
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
+  //         // Extract country from address components
+  //         const countryComponent = addressComponents.find((component: any) =>
+  //           component.types.includes('country')
+  //         );
 
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            this.getCountryFlag(country);
-          } else {
-            console.error("Country not found in placeOfBirth.");
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
+  //         if (countryComponent) {
+  //           const country = countryComponent.short_name;  // Set country name, use short_name for country code
+  //           this.getCountryFlag(country);
+  //         } else {
+  //           console.error("Country not found in placeOfBirth.");
+  //         }
+  //       } else {
+  //         console.error("Geocoding API error:", data.status, data.error_message);
+  //       }
+  //     })
+  //     .catch(error => console.error("Error fetching geocoding data:", error));
+  // }
 
   getCountry(placeOfBirth: string ,key : any): void {
     if (!placeOfBirth) {
@@ -367,15 +367,15 @@ export class DashboardComponent implements OnInit , OnDestroy {
       .catch(error => console.error("Error fetching geocoding data:", error));
   }
 
-  getCountryFlag(countryCode: string) {
-    console.log("Country found:", countryCode);
+  // getCountryFlag(countryCode: string) {
+  //   console.log("Country found:", countryCode);
 
-    // Using Flagpedia API for flag images
-    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
+  //   // Using Flagpedia API for flag images
+  //   const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
 
-    // Set the URL to an <img> element in your template or save it in a variable
-    this.countryFlagUrl = flagUrl;
-  }
+  //   // Set the URL to an <img> element in your template or save it in a variable
+  //   this.countryFlagUrl = flagUrl;
+  // }
 
   // After loading, mark countries as loaded and check if both are ready
   loadCountries() {
