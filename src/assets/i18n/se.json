@@ -1,11 +1,11 @@
 {
   "talents": "Talanger",
+  "lightMode": "Ljust läge",
+  "darkMode": "Mörkt läge",
   "about": "Om",
   "news&Media": "Nyheter & media",
   "club": "Klubbar och Scouter",
   "feature": "Funktioner",
-  "darkMode": "Mörkt läge",
-  "lightMode": "Ljust läge",
   "login": "Logga in",
   "registerNow": "Registrera dig nu",
   "product": "Produkt",
