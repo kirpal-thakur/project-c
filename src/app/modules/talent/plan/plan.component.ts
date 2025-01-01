@@ -163,6 +163,7 @@ export class PlanComponent implements OnInit, OnDestroy {
                 Object.keys(this.premiumPlans?.plans).forEach((key) => {
                     this.premiumPlans[this.premiumPlans.plans[key].interval] = this.premiumPlans.plans[key];
                 })
+
                 this.premiumPlans.priceMonthly = this.premiumPlans['monthly'].price;
                 this.premiumPlans.priceYearly = this.premiumPlans['yearly'].price;
                 this.premiumPlans.currency = this.premiumPlans['yearly'].currency;
@@ -232,7 +233,7 @@ export class PlanComponent implements OnInit, OnDestroy {
               ];
 
               // Uncomment if `country_plans` assignment is needed elsewhere
-              // this.countryPlans.country_plans = country_plans;
+              this.countryPlans.country_plans = country_plans;
             } else if (key.toLowerCase().includes('demo')) {
               this.demoPlans = res[key];
               this.demoPlans.isYearly = res[key].active_interval=='weekly';
@@ -251,7 +252,7 @@ export class PlanComponent implements OnInit, OnDestroy {
               this.demoPlans.includes =  ["The complete talent profile with all stages of his career and performance data.", "Export data in excel and pdf formats.", "Create your favorite list.", "Highlight your best photos and videos on your profile."];;
             }
           });
-          console.log('demoPlans',this.demoPlans)
+          console.log('jgfdkhg',this.countryPlans)
 
           // Set the default selected plan (first country plan or null if none exist)
           this.selectedPlan = this.countryPlans.plans[0] || null;
@@ -264,7 +265,7 @@ export class PlanComponent implements OnInit, OnDestroy {
             const selectedCountryId = params['countryId'];
             if (selectedCountryId) {
               this.onSelectPlan(selectedCountryId);
-              this.editPlanPopup(this.countryPlans, this.country);
+              this.editPlanPopup(this.countryPlans.plans, this.country);
             }
           });
         }

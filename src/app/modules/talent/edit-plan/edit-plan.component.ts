@@ -50,6 +50,7 @@ export class EditPlanComponent implements OnInit {
   }
 
   populateCountries() {
+    console.log(this.data)
     // Transform the 'plans' object into an array
     this.countries = Object.keys(this.data.plans).map(key => {
       const plan = this.data.plans[key];
