@@ -59,7 +59,7 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <button class="choose-plan-btn" [disabled]="( premiumPlans?.package_name == premium?.package_name )"
-                      (click)="openCouponDialog(premiumPlans.isYearly ? premiumPlans.yearData.id : premiumPlans.monthData.id)">
+                      (click)="openCouponDialog(premiumPlans.isYearly ? premiumPlans.year_package_id : premiumPlans.month_package_id)">
                       {{'TalentsTranslate.choosePlan' | translate}}
                     </button>
                   </div>
@@ -108,7 +108,7 @@
                   <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
 
                   <!-- Display this only if there is an active premium plan -->
-                  <div class="premium_button py-1 px-3" *ngIf="(( demoPlans?.package_name==premium?.package_name ))">
+                  <div class="premium_button py-1 px-3" *ngIf="(( demoPlans?.package_name==demo?.package_name ))">
                     <span class="px-1">
                       <svg width="22" height="23" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path
@@ -125,8 +125,7 @@
                 <div class="premium-currency">
                   <h6>
                     {{ demoPlans.isYearly ? demoPlans.priceYearly : demoPlans.priceMonthly }}
-                    <sub class="premium-month_title">.-{{ demoPlans.currency }}/{{ demoPlans.isYearly || (premium &&
-                      premium.interval == 'yearly') ? 'Year' : 'Month' }}</sub>
+                    <sub class="premium-month_title">.-{{ demoPlans.currency }}/{{ demoPlans.isYearly || (premium && premium.interval == 'yearly') ? 'Year' : 'Month' }}</sub>
                   </h6>
                 </div>
 
@@ -134,7 +133,7 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <button class="choose-plan-btn" [disabled]="( demoPlans?.package_name == premium?.package_name )"
-                      (click)="openCouponDialog(demoPlans.isYearly ? demoPlans.yearData.id : demoPlans.monthData.id)">
+                      (click)="openCouponDialog(demoPlans.isYearly ? demoPlans.year_package_id : demoPlans.month_package_id)">
                       {{'TalentsTranslate.choosePlan' | translate}}
                     </button>
                   </div>
@@ -176,7 +175,7 @@
             <div class="premium-plan_box ">
               <div class="plan_box">
                 <div class="d-flex align-items-center justify-content-between gap-2">
-                  <h3>{{'TalentsTranslate.boostProfile' | translate}}</h3>
+                  <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
                   <div class="premium_button  py-1 px-3" *ngIf="getActiveMultiCountryPlanCount() > 0">
                     <span class="px-1">
                       <svg width="22" height="23" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -185,9 +184,8 @@
                         </path>
                       </svg>
                     </span>
-                    <span class="ps-2">{{getActiveMultiCountryPlanCount()}} {{'TalentsTranslate.activeMulti-CountryPlan'
-                      | translate}}</span>
-                    <button class="premium_btn" (click)="editPlanPopup(countryPlans,country)">
+                    <span class="ps-2">{{getActiveMultiCountryPlanCount()}} {{'TalentsTranslate.activeMulti-CountryPlan'| translate}}</span>
+                    <button class="premium_btn" (click)="editPlanPopup(countryPlans.plans,country)">
                       <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                           d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z"
@@ -206,7 +204,7 @@
                 <div class="row  multi-country-select ">
                   <div class="col-lg-12 plan-2">
                     <button class="choose-plan-btn"
-                      (click)="editPlanPopup(countryPlans.plans,country)">{{'TalentsTranslate.choosePlan' |
+                      (click)="editPlanPopup(countryPlans,country)">{{'TalentsTranslate.choosePlan' |
                       translate}}</button>
                   </div>
                 </div>
@@ -215,7 +213,7 @@
               <hr class="premium_list-line">
 
               <div class="plan_box premium-plan-list">
-                <h3>{{'TalentsTranslate.boostProfile' | translate}}</h3>
+                <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
                 <ul class="premium_list">
                   <li *ngFor="let feature of countryPlans?.includes">
                     <label>
@@ -281,8 +279,7 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <button class="choose-plan-btn" [disabled]="(boostedPlans?.is_package_active=='active') "
-                      (click)="addBoostPopup(boostedPlans.isYearly==true ? boostedPlans.yearData.id : boostedPlans.monthData.id )">{{'Choose
-                      Plan' | translate}}</button>
+                      (click)="addBoostPopup(boostedPlans.isYearly==true ? boostedPlans.year_package_id : boostedPlans.month_package_id )">{{'Choose Plan' | translate}}</button>
                   </div>
                 </div>
               </div>
