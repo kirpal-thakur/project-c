@@ -30,7 +30,7 @@ const routes: Routes = [
       { path: 'player/:id', component: PlayerDetailComponent},
       { path: 'gallery-detail', component: GalleryTabComponent },
       { path: 'scout/:id', component: ScoutDetailComponent },
-      { path: 'club/:id', component: ClubDetailComponent },
+      { path: 'club/:id', component: ClubDetailComponent }
     ]
   }
 
