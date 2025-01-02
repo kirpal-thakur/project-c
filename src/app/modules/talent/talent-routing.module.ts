@@ -10,7 +10,6 @@ import { ChatComponent } from './chat/chat.component';
 import { PlanComponent } from './plan/plan.component';
 import { CountriesComponent } from './countries/countries.component';
 import { SettingComponent } from './setting/setting.component';
-import { ViewProfileComponent } from '../shared/view-profile/view-profile.component';
 
 const routes: Routes = [
   {

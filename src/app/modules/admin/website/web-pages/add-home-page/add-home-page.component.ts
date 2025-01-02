@@ -92,8 +92,8 @@ export class AddHomePageComponent {
       hero_heading_txt: [''],
       hero_btn_txt: [''],
       hero_btn_link: [''],
-      meta_title: [''], // New input
-      meta_description: [''], // New input
+      meta_title: [''],
+      meta_description: [''],
       lang: localStorage.getItem('lang_id'),
     });
   }
@@ -138,7 +138,7 @@ export class AddHomePageComponent {
       this.showTabForm = true;
     });
   }
-  
+
 
   onTabFormSubmit(){
     let formData = new FormData();
@@ -164,9 +164,7 @@ export class AddHomePageComponent {
         formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
       });
     });
-    //formData.append('lang', '1');
 
-    console.log(formData);
     this.webpages.addHomePageTabData(formData).subscribe((res) => {
        this.dialogRef.close({
        action: "page-added-successfully"
@@ -178,9 +176,8 @@ export class AddHomePageComponent {
   handleTabFilesInput(files: Event, index:number, type:string) {
     const input = files.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      console.log(input.files[0], 'tstinlksdlksdj');
       const selectedFiles = Array.from(input.files);
-      console.log([input.files[0], input.files[1], input.files[2]], 'sdkjdskjsdf');
+
       if(type == 'first_tab'){
         this.first_tab[index].images = [...selectedFiles];
         console.log(this.first_tab, 'testing...');
@@ -194,7 +191,7 @@ export class AddHomePageComponent {
 
     this.webpages.getPageById(id).subscribe(response => {
       if (response.status) {
-         console.log('',response.data.pageData.tabs_data.title);
+
          this.addHomePageForm.patchValue({
          // banner_bg_img: response.data.pageData.banner_bg_img,
          // banner_img: response.data.pageData.banner_img,
