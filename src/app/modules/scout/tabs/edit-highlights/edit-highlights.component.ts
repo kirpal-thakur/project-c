@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-highlights',
@@ -19,15 +20,17 @@ export class EditHighlightsComponent {
   totalSelected: number = 0; // Track total selected files
   loggedInUser:any = localStorage.getItem('userData');
   userId:any;
+  isLoading: boolean = false;
 
   constructor(
+    private toastr: ToastrService,
     public dialogRef: MatDialogRef<EditHighlightsComponent>,
     private talentService: TalentService,
     @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    
+
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
     this.images = this.data.images || [];
@@ -49,6 +52,24 @@ export class EditHighlightsComponent {
         this.totalSelected++; // Increment total selected count
       }
     });
+  }
+
+  getGalleryData() {
+    try {
+      this.talentService.getGalleryData().subscribe((response) => {
+        if (response && response.status && response.data) {
+          this.images = response.data.images;
+          this.videos = response.data.videos;
+          this.url = response.data.file_path;
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+
+    }
   }
 
   // Called when an image checkbox is toggled
@@ -89,18 +110,26 @@ export class EditHighlightsComponent {
     }
   }
 
+
   // Called when the save button is clicked
   onSubmit(): void {
     const selectedData = [...this.selectedImageIds, ...this.selectedVideoIds];
 
-    // Send the selected IDs to your API or handle them as needed
-    console.log('Selected Data:', selectedData);
+    // Show loading notification
+    const loadingToast = this.toastr.info('Saving selected files...', 'Please wait', { disableTimeOut: true });
 
-    // Example: If you use a service to send data
-    this.talentService.toggleFeaturedFiles(selectedData).subscribe(response => {
-      // Handle the response
-      console.log('Save successful', response);
-      this.dialogRef.close();  // Close the dialog if needed
+    // Send the selected IDs to your API or handle them as needed
+    this.talentService.toggleFeaturedFiles(selectedData).subscribe({
+      next: (response) => {
+        this.toastr.clear(loadingToast.toastId); // Clear loading notification
+        this.toastr.success('Files saved successfully!', 'Success'); // Show success notification
+        this.dialogRef.close(); // Close the dialog if needed
+      },
+      error: (error) => {
+        this.toastr.clear(loadingToast.toastId); // Clear loading notification
+        this.toastr.error('Failed to save files. Please try again.', 'Error'); // Show error notification
+        console.error('Error saving files:', error);
+      }
     });
   }
 
@@ -111,7 +140,7 @@ export class EditHighlightsComponent {
       const files = Array.from(input.files);
 
       if (this.totalSelected + files.length > this.maxUploads) {
-        alert(`You can only upload a maximum of ${this.maxUploads} files.`);
+        this.toastr.warning(`You can only upload a maximum of ${this.maxUploads} files.`, 'Upload Limit Exceeded');
         return;
       }
 
@@ -133,10 +162,11 @@ export class EditHighlightsComponent {
 
         reader.readAsDataURL(file);
       });
+
+      this.toastr.success(`${files.length} file(s) added successfully.`, 'Files Uploaded');
     }
   }
 
-  
   addPhotosPopup(){
     const messageDialog = this.dialog.open(UploadPopupComponent,{
       width: '500px',
@@ -151,11 +181,10 @@ export class EditHighlightsComponent {
     messageDialog.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if(result.files.length){
-          console.log(result.files)
-         this.images = [...result.files, ...this.images];
-         console.log(this.images)
+          this.getGalleryData()
         }
       }
     });
   }
+
 }

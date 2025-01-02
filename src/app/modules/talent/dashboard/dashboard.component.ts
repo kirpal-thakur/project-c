@@ -7,7 +7,6 @@ import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
-import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
@@ -15,6 +14,7 @@ import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
 import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -293,41 +293,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
     }
   }
 
-  // getCountryFromPlaceOfBirth(placeOfBirth: string): void {
-  //   if (!placeOfBirth) {
-  //     console.error("Place of birth is empty.");
-  //     return;
-  //   }
-
-
-  //   // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-  //   const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
-  //   const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-  //   fetch(geocodingUrl)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.status === 'OK' && data.results.length > 0) {
-  //         const addressComponents = data.results[0].address_components;
-
-  //         // Extract country from address components
-  //         const countryComponent = addressComponents.find((component: any) =>
-  //           component.types.includes('country')
-  //         );
-
-  //         if (countryComponent) {
-  //           const country = countryComponent.short_name;  // Set country name, use short_name for country code
-  //           this.getCountryFlag(country);
-  //         } else {
-  //           console.error("Country not found in placeOfBirth.");
-  //         }
-  //       } else {
-  //         console.error("Geocoding API error:", data.status, data.error_message);
-  //       }
-  //     })
-  //     .catch(error => console.error("Error fetching geocoding data:", error));
-  // }
-
   getCountry(placeOfBirth: string ,key : any): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");
@@ -366,16 +331,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
       })
       .catch(error => console.error("Error fetching geocoding data:", error));
   }
-
-  // getCountryFlag(countryCode: string) {
-  //   console.log("Country found:", countryCode);
-
-  //   // Using Flagpedia API for flag images
-  //   const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
-
-  //   // Set the URL to an <img> element in your template or save it in a variable
-  //   this.countryFlagUrl = flagUrl;
-  // }
 
   // After loading, mark countries as loaded and check if both are ready
   loadCountries() {
@@ -534,7 +489,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-      
+
       // Set loading state and display info toast
       this.toastr.info('Uploading cover image...', 'Please wait', { disableTimeOut: true });
 
@@ -615,7 +570,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       }
     });
   }
-  
+
   showMatDialog(message:string, action:string){
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
@@ -642,7 +597,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       this.teams = data;
     });
   }
-  
+
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string
     const birthDate = new Date(dob);
@@ -654,7 +609,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     // Adjust the age if the current date is before the birthday
     const monthDifference = today.getMonth() - birthDate.getMonth();
     const dayDifference = today.getDate() - birthDate.getDate();
-    
+
     if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
       age--;
     }

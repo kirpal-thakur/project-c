@@ -2,10 +2,10 @@
     <div class="close_buttons text-end">
         <button class="close-btn" (click)="cancel()">X</button>
     </div>
-    <h2 class="delete-confirmation">Once information is deleted, it can’t be undone. Do you want to delete?</h2>   
+    <h2 class="delete-confirmation">{{'TalentsTranslate.ConfirmDeleteinformation' | translate}}</h2>   
     
     <div class="dialog-actions">
-      <button class="confirmation_delete-button" (click)="confirmDelete()">Delete</button>
+      <button class="confirmation_delete-button" (click)="confirmDelete()">{{'TalentsTranslate.delete' | translate}}</button>
     </div>
 </div>
   

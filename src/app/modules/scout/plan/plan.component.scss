@@ -14,7 +14,7 @@
     width: 58px;
     background: gainsboro;
     -webkit-appearance: none;
-    height: 32px;
+    height: 31px;
     background: #ccc;
     outline: none;
     border-radius: 30px;
@@ -23,9 +23,8 @@
 }
 .subscription-switch input[type="checkbox"]:checked{
     background:#329b1a;
-    }
+}
 
-  
 .subscription-switch input[type="checkbox"]:before{
     content: '';
     position: absolute;
@@ -37,19 +36,38 @@
     border-radius: 50%;
     top: 6px;
     transform: scale(1.1);transition: 0.5s;
-    }
-    
+}
+
 .subscription-switch input[type="checkbox"]:checked:before{
     left:30px;
-    }
-    .subscription-plan h2 {
-        font-size: 20px;
-        color: #707070;
-        font-weight: 800;
-    }
+}
+.choose-plan-select {
+    width: 100%;
+    padding: 11px 8px;
+    border: none;
+    border: 1px solid #2a822a;
+    color: #fff;
+    border-radius: 6px;
+    background: rgb(96, 182, 110);
+    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
+}
+.subscription-plan h2 {
+    font-size: 20px;
+    color: #707070;
+    font-weight: 800;
+}
+
 .subscription-plan{
     padding: 15px 20px;
-    background: #ebffeb;
+    background: rgb(240,255,236);
+    background: linear-gradient(180deg, rgba(240,255,236,1) 0%, rgba(255,255,255,1) 100%);
+    position: relative;
+}
+
+.football-icon{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 .premium-plan_box h3 {
     font-size: 20px;
@@ -71,21 +89,28 @@
     opacity: 42%;
 }
 .premium-plan_box {
-    background: #75bb63;
+    background: #6FB95D;
     border-radius: 10px;
-    border:1px solid #9d0808;
+    border:1px solid #c2a64a;
+    height: calc(100% - 42px) ;
+    position: relative;
+}
+.premium-football_icon{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .premium_button {
     width: fit-content;
     background: #fcc704;
     padding: 1px 8px;
     display: flex;
-    gap: 8px;
+    // gap: 8px;
     align-items: center;
     border-radius: 20px;
 }
 .premium_button svg {
-    width: 18px;
+    width: 14px;
 }
 .premium_button svg path{
     fill: #000;
@@ -95,7 +120,7 @@
     border: none;
 }
 .premium_button span {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
 }
 .premium-currency h6 {
@@ -107,16 +132,28 @@ sub.premium-month_title {
     font-size: 14px;
     font-weight: 400;
 }
-.choose-plan-btn{
+
+.choose-plan-btn {
     width: 100%;
     padding: 8px;
-    border: none;
     border: 1px solid #2a822a;
     color: #fff;
     border-radius: 6px;
-    background: rgb(96, 182, 110);
-    background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61 149 75) 40%);
-}
+    background: rgb(111,185,93);
+    background: linear-gradient(180deg, rgba(111,185,93,1) 0%, rgba(35,97,21,1) 100%);
+
+    &:disabled {
+      background: #ccc; // Light gray background
+      border-color: #175B07 ; // Lighter gray border
+      color: #e6e4e4; // Darker gray text
+      cursor: not-allowed; // Change cursor to indicate it's disabled
+      opacity: 0.6; // Reduce opacity for a "disabled" look
+      border-radius: 6px;
+      background: rgb(111,185,93);
+      background: linear-gradient(180deg, rgba(111,185,93,1) 0%, rgba(35,97,21,1) 100%);
+    }
+  }
+
 .premium-plan-list h3{
     font-size: 20px;
     color: #fff;
@@ -128,8 +165,8 @@ sub.premium-month_title {
     color: #fff;
     text-decoration: line-through;
   }
-  
-  .premium_list li.checked::before {
+
+.premium_list li.checked::before {
     content: '';
     position: absolute;
     border-color: #fff;
@@ -140,61 +177,62 @@ sub.premium-month_title {
     transform: rotate(45deg);
     height: 15px;
     width: 7px;
-  }
-  
-  .premium_list label {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 20px;
-      cursor: pointer;
-      font-size: 17px;
-      color: #fff;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-  }
-  
-  .premium_list label input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-  }
+}
 
-  .premium_list label .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 24px;
-      width: 24px;
-      border: 1px solid #2196F3;
-      border-radius: 50%
-  }
-  
-  .premium_list label:hover input ~ .checkmark {
-      background-color: #ccc;
-  }
-  
-  .premium_list label input:checked ~ .checkmark {
-      background-color: #fff;
-      border: 1px solid #2196F3;
-  }
-  
-  .premium_list label .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-  }
-  
-  .premium_list label input:checked ~ .checkmark:after {
-      display: block;
-  }
-  .premium_list {
+.premium_list label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.premium_list label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.premium_list label .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 26px;
+    border: 1px solid #2196F3;
+    border-radius: 50%
+}
+
+.premium_list label:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.premium_list label input:checked ~ .checkmark {
+    background-color: #fff;
+    border: 1px solid #2196F3;
+}
+
+.premium_list label .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.premium_list label input:checked ~ .checkmark:after {
+    display: block;
+}
+.premium_list {
     list-style: none;
     padding: 0;
 }
-  .premium_list label .checkmark:after {
+.premium_list label .checkmark:after {
     left: 9px;
     top: 5px;
     width: 6px;
@@ -204,10 +242,9 @@ sub.premium-month_title {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-  }
-  
+}
 
-  .quantity {
+.quantity {
     display: flex;
     background: rgb(96, 182, 110);
     background: linear-gradient(180deg, rgb(96, 182, 110) 0%, rgb(61, 149, 75) 40%);
@@ -215,9 +252,9 @@ sub.premium-month_title {
     overflow: hidden;
     border: 1px solid #2a822a;
     justify-content: space-between;
-  }
-  
-  .quantity button {
+}
+
+.quantity button {
     background: none;
     color: #044a0f;
     border: none;
@@ -227,9 +264,9 @@ sub.premium-month_title {
     height: auto;
     text-align: center;
     transition: background-color 0.2s;
-  }
-  
-  .input-box {
+}
+
+.input-box {
     width: 40px;
     text-align: center;
     border: none;
@@ -238,19 +275,45 @@ sub.premium-month_title {
     font-size: 16px;
     outline: none;
     background: none;
-  }
-  
-  .input-box::-webkit-inner-spin-button,
-  .input-box::-webkit-outer-spin-button {
+}
+
+.input-box::-webkit-inner-spin-button,
+.input-box::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
-  
-  .input-box[type="number"] {
+}
+
+.input-box[type="number"] {
     -moz-appearance: textfield;
-  }
-  .premium-gap{
+}
+.premium-gap{
     gap: 10px;
+}
+.multi-country-select option{
+    color: #000;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @media (max-width:1024px) and (min-width:769px) {
@@ -265,7 +328,12 @@ sub.premium-month_title {
         color: #fff;
         font-weight: 700;
     }
-   
+    .subscription-plan .col-lg-4 {
+        padding: 0px 6px !important;
+    }
+   .plan-2{
+    padding: 0 !important;
+   }
 }
 @media (max-width:768px) {
     .plus_button {
@@ -277,5 +345,8 @@ sub.premium-month_title {
     }
     .premium-box{
         row-gap: 40px;
+    }
+    .multi-country-select{
+        row-gap: 10px;
     }
 }

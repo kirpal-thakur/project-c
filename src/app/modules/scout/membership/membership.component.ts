@@ -2,12 +2,15 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ScoutService } from '../../../services/scout.service';
+import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { PaymentsPopupComponent } from '../payments-popup/payments-popup.component';
-import { CommonModule } from '@angular/common';
+import { PaymentService } from '../../../services/payment.service';
+import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
+import { CancelCountryPlanComponent } from './cancel-country-plan/cancel-country-plan.component';
+
 @Component({
   selector: 'app-membership',
   templateUrl: './membership.component.html',
@@ -18,34 +21,30 @@ export class MembershipComponent {
   userId: any = '';
   userPurchases: any = [];
   userCards: any = [];
-  // imageBaseUrl: any = "";
+  userPlans: any = [];
   allSelected: boolean = false;
   idsToDownload: any = [];
-  selectedIds: number[] = [];
-  
+  selectedIds: number[] = [];  
   totalItems: number = 0; // Total number of items for pagination
   pageSize: number = 10; // Number of items per page
   currentPage: number = 1; // Current page index
-
-  plans = [
-    { id: 1, name: 'Basic', price: 9.99, features: ['Feature 1', 'Feature 2'] },
-    { id: 2, name: 'Pro', price: 19.99, features: ['Feature 1', 'Feature 2'] },
-  ];
-
-  subscribe(plan: any) {
-    console.log(`Subscribed to: ${plan.name}`);
-  }
-
+  premium : any =[];
+  country: any=[];
+  booster: any=[];
+  demo: any=[];
+  stats: any;
+  exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private scoutService: ScoutService, public dialog: MatDialog,private router: Router) { }
-
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
       this.getUserPurchases();
+      this.getUserPlans();
       this.getUserCards();
+      this.getBoosterData()
     });
   }
 
@@ -54,23 +53,63 @@ export class MembershipComponent {
     const pageNumber = this.currentPage != 0 ? this.currentPage : 1;
     const pageSize = this.pageSize;
 
-    this.scoutService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
+    this.talentService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
       if (response && response.status && response.data) {
         this.userPurchases = response.data.purchaseHistory;
         this.totalItems = response.data.totalCount; // Assuming API returns the total number of purchases
         console.log(this.userPurchases)
       } else {
-        console.error('data is not found:', response);
+        console.error('Invalid API response:', response);
       }
     }, error => {
       console.error('Error fetching user purchases:', error);
     });
   }
 
-  
+  exportData(): void {
+    this.talentService.getExportLinkPurchaseData().subscribe(
+      (response) => {
+        if (response?.status && response?.data?.file_path) {
+          const filePath = response.data.file_path;
+
+          // Open the file path in a new tab
+          window.open(filePath, '_blank');
+        } else {
+          console.error('Invalid API response:', response);
+        }
+      },
+      (error) => {
+        console.error('Error fetching user purchases:', error);
+      }
+    );
+  }
+
+
+
+  // Fetch purchases from API with pagination parameters
+  getUserPlans(): void {
+
+    this.talentService.getUserPlans().subscribe(response => {
+      if (response && response.status && response.data) {
+        this.userPlans = response.data.packages;
+        this.premium = this.userPlans.premium[0];
+        this.booster = this.userPlans.booster[0];
+        this.demo = this.userPlans.demo[0];
+        this.country = this.userPlans.country;
+        this.country.count = this.userPlans.country.length;
+        console.log('userPlans',this.userPlans)
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    }, error => {
+      console.error('Error fetching user purchases:', error);
+    });
+
+  }
+
   // Fetch purchases from API with pagination parameters
   getUserCards(): void {
-    this.scoutService.getCards().subscribe(response => {
+    this.talentService.getCards().subscribe(response => {
       if (response && response.status && response.data) {
         this.userCards = response.data.paymentMethod;
         console.log(this.userCards)
@@ -105,7 +144,7 @@ export class MembershipComponent {
       data: {
         invoice_number: userPurchase.invoice_number,
         category: userPurchase.payment_method,
-        plan: '',
+        plan: userPurchase.package_name,
         duration: userPurchase.plan_interval,
         valid_until: userPurchase.plan_period_end,
         price: userPurchase.plan_amount,
@@ -113,26 +152,33 @@ export class MembershipComponent {
         total: userPurchase.amount_paid,
         currency : userPurchase.amount_paid_currency,
         download_path: userPurchase.invoice_file_path,
+        tax_percentage:userPurchase.tax_percentage,
+        tax:userPurchase.tax_amount
       }
     });
   }
 
+  async getBoosterData(){
+    try {
+      const response = await this.talentService.getBoosterData().toPromise();
+      if (response?.data) {
+        this.stats = response.data;
+        console.log(this.stats)
+        // Ensure the selectedAudienceIds array is cleared and populated with the correct data
+      } else {
+        console.error('Failed to create checkout session', response);
+      }
+    } catch (error) {
+      console.error('Error creating Stripe Checkout session:', error);
+    }
+  }
+
+
   editMembershipDialog(id:any) {
 
     const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
-      width: '800px',
-      data: {
-        invoice_number: '',
-        category: '',
-        plan: '',
-        duration: '',
-        valid_until: '',
-        price: '',
-        subtotal: '',
-        total: '',
-        currency : '',
-        downlaod_path: '',
-      }
+      width: '1000px',
+      data: { stats : this.stats }
     });
 
   }
@@ -164,7 +210,7 @@ export class MembershipComponent {
   }
 
   async downloadInvoice(invoideId:any, invoiceUrl:any){
-     // use the fetch/blob method because single download isn't working 
+    // use the fetch/blob method because single download isn't working 
     fetch(invoiceUrl)
       .then(response => {
         if (!response.ok) {
@@ -184,7 +230,7 @@ export class MembershipComponent {
       })
       .catch(error => {
         console.error('There was an error downloading the file:', error);
-      });
+    });
   }
 
   downloadAll():any{
@@ -201,7 +247,9 @@ export class MembershipComponent {
       // Return the image link if the user is found, otherwise return null or undefined
       return purchase ? purchase.invoice_file_path : null;
     });
+    
     this.downloadAllFiles(allLinksToDownload);
+
   }
 
   async downloadAllFiles(allLinksToDownload:any) {
@@ -215,6 +263,93 @@ export class MembershipComponent {
 
   getSubscriptionById(id: string) {
     return this.userPurchases.find((subscription:any) => subscription.id === id);
+  }
+
+
+  confirmAndCancelSubscription(subscriptionId: string): void {
+    const dialogRef = this.dialog.open(MessagePopupComponent, {
+      width: '600px',
+      data: {
+        action: 'delete-confirmation',
+        message: 'Are you sure you want to cancel this subscription? This action cannot be undone.'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed') {
+        this.cancelSubscription(subscriptionId);
+      }
+    });
+  }
+
+  private cancelSubscription(subscriptionId: string): void {
+    this.paymentService.cancelSubscription(subscriptionId).subscribe(
+      (response: any) => {
+        if (response && response.status) {
+          // Open the MessagePopupComponent with a success message
+          this.dialog.open(MessagePopupComponent, {
+            width: '600px',
+            data: {
+              action: 'display',
+              message: 'Subscription canceled successfully.'
+            }
+          });
+          console.log('Subscription canceled successfully:', response);
+          this.getUserPlans();
+
+        } else {
+          console.error('Failed to cancel subscription', response);
+          this.getUserPlans();
+
+        }
+      },
+      error => {
+        console.error('Error cancelling subscription:', error);
+      }
+    );
+  }
+
+  confirmCountryPlanCancellation(country:any) {
+    const dialogRef = this.dialog.open(CancelCountryPlanComponent, {
+      width: '600px',
+      data: {
+        action: 'select-country-cancellation',
+        countries: country // Pass the list of country plans
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.action === 'delete-confirmed' && result.selectedCountryId) {
+        this.cancelSubscription(result.selectedCountryId);
+      }
+    });
+  }
+
+  getActiveMultiCountryPlanCount(): number {
+    return this.country.length;
+  }
+
+  getActivePremiumCount(): number {
+    return this.premium.length;
+  }
+
+  getActiveboosterCount(): number {
+    return this.booster.length;
+  }
+
+  editBooster(data:any){
+
+    const dialogRef = this.dialog.open(EditMembershipProfileComponent, {
+      width: '1000px',
+      data: { stats : this.stats
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result ) {
+        this.getBoosterData()
+      }
+    });
   }
 
 }

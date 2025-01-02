@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTransferComponent } from './add-transfer.component';
+import { LightboxDialogComponent } from './lightbox-dialog.component';
 
-describe('AddTransferComponent', () => {
-  let component: AddTransferComponent;
-  let fixture: ComponentFixture<AddTransferComponent>;
+describe('LightboxDialogComponent', () => {
+  let component: LightboxDialogComponent;
+  let fixture: ComponentFixture<LightboxDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddTransferComponent]
+      declarations: [LightboxDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddTransferComponent);
+    fixture = TestBed.createComponent(LightboxDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
