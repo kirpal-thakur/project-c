@@ -18,7 +18,6 @@ export class IndexComponent implements OnInit{
     private router: Router,
   ){
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
-      console.log("look here", event)
       if (event instanceof NavigationStart) {
         console.log("NavigationStart event:", event);
         this.path = event.url;
