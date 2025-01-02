@@ -43,7 +43,7 @@
           <!-- Show loader while loading -->
           <mat-option *ngIf="isLoading" class="loading-option" disabled>
             <div>
-              Loading...
+              {{ 'TalentsTranslate.loading' | translate }}
             </div>
           </mat-option>
 
@@ -62,7 +62,7 @@
           <!-- Show "No results found" if no users are available -->
           <mat-option *ngIf="!isLoading && filteredUsers.length === 0" disabled>
             <div>
-              No results found.
+              {{ 'TalentsTranslate.noResultFound' | translate }}
             </div>
           </mat-option>
         </mat-autocomplete>
@@ -105,7 +105,7 @@
             </div>
 
             <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
-              <h6>Notification</h6>
+              <h6>{{ 'SharedTranslate.notification' | translate }}</h6>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
                 height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -211,7 +211,7 @@
                 </div>
               </div>
               <div class="load_more" *ngIf="currentIndex < allNotifications.length && !something">
-                <span (click)="loadMoreNotifications()" style="cursor: pointer;">View all notifications</span>
+                <span (click)="loadMoreNotifications()" style="cursor: pointer;">{{ 'SharedTranslate.viewAllNotifications' | translate }}</span>
               </div>
             </div>
           </div>
@@ -264,7 +264,7 @@
             <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
             <span class="badgewarning">{{ 'TalentsTranslate.talent' | translate }}</span>
             <br>
-            <a routerLink="/talent/dashboard" class="header-view-profile"> {{ 'TalentsTranslate.viewMyProfile' | translate }}</a>
+            <a routerLink="/talent/dashboard" class="header-view-profile"> {{ 'SharedTranslate.viewMyProfile' | translate }}</a>
 
             <a (click)="navigateToTab('activity')"
               class="cursor-pointer dropdown-item ai-icon px-0 py-2 border-bottom ">
