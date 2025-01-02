@@ -128,25 +128,25 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
   
   ngAfterViewInit(): void {
-    this.initGooglePlacesAutocomplete();
+    // this.initGooglePlacesAutocomplete();
   }
 
-  initGooglePlacesAutocomplete(): void {
-    
-    if (this.placeOfBirthInput) {
-      const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
-        types: ['(cities)'],
-      });
+  // initGooglePlacesAutocomplete(): void {
 
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place && place.address_components) {
-          this.placeOfBirth = place.formatted_address || '';
-        }
-      });
-    }
-    
-  }
+  //   if (this.placeOfBirthInput) {
+  //     const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
+  //       types: ['(cities)'],
+  //     });
+
+  //     autocomplete.addListener('place_changed', () => {
+  //       const place = autocomplete.getPlace();
+  //       if (place && place.address_components) {
+  //         this.placeOfBirth = place.formatted_address || '';
+  //       }
+  //     });
+  //   }
+
+  // }
   
   // ngAfterViewInit(): void {
   //   this.setupPlaceAutocomplete();

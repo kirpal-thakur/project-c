@@ -198,6 +198,9 @@
   "companyName": "Nom de la société (optionnel)",
   "selectLanguage": "Sélectionnez une langue",
   "country": "Pays",
+  "billedMonthly": "Mois",
+  "billedYearly": "Année",
+  "month": "Month",
   "TalentsTranslate": {
     "dashboard": "Tableau de bord",
     "profileTab": "Onglet Profil",

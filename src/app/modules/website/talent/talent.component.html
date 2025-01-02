@@ -339,18 +339,18 @@
 
     <div class="pricing py_0">
         <div class="container">
-            <h3 class="price-heading3">Pricing</h3>
+            <h3 class="price-heading3">{{'pricing' | translate}}</h3>
 
             <div *ngFor="let plan of pageData.pricing_tab; let i = index">
                 <div class="billed">
                     <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }" class="billed-monthly">
-                    Billed Monthly
+                        {{'billedMonthly' | translate}}
                     </p>
                     <div class="toggle-button" [ngClass]="{ 'active': isActivePlan[i], 'inactive': !isActivePlan[i] }"
                     (click)="togglePlan(i)">
                     </div>
                     <p [ngClass]="{ 'active-text': !isActivePlan[i], 'inactive-text': isActivePlan[i] }">
-                    Billed Yearly
+                        {{'billedYearly' | translate}}
                     </p>
                 </div>
 

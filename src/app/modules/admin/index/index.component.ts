@@ -18,15 +18,18 @@ export class IndexComponent implements OnInit{
     private router: Router,
   ){
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
+      console.log("look here", event)
       if (event instanceof NavigationStart) {
+        console.log("NavigationStart event:", event);
         this.path = event.url;
-        console.log(this.path);
+        console.log("Current path:", this.path);
       }
     });
   }
 
   ngOnInit(): void {
-    
+    this.path = this.router.url; 
+    console.log('Initial Path:', this.path);
   }
 
 }

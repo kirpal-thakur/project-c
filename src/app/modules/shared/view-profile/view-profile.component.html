@@ -78,13 +78,13 @@
                           <img *ngIf="user?.pre_current_club_logo_path" src="{{user?.pre_current_club_logo_path}}" class="fc-club-img" alt="">
                         </div>
                         <div class="team-badge_content col-lg-9 p-0">
-                          <h6 class="title_2 mb-1">{{ 'CurrentClub' | translate}}</h6>
+                          <h6 class="title_2 mb-1">{{ 'TalentsTranslate.currentClub' | translate}}</h6>
                           <h5 class="title-1">{{user?.pre_current_club_name |translate }} </h5>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <h6 class="title_2 mb-1">{{ 'Nationality' | translate }}</h6>
+                      <h6 class="title_2 mb-1">{{ 'TalentsTranslate.nationality' | translate }}</h6>
                       <div class="d-flex align-items-center gap-2 mb-1" *ngFor="let nation of userNationalities">
                         <div class="col-lg-3 team-badge_image">
                           <img src="{{nation.flag_path}}" alt="">
@@ -101,7 +101,7 @@
                           </svg>                                                  
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">                        
-                          <h6 class="title_2">{{ 'Date of birth' | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.dateOfBirth' | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.date_of_birth | date:'MMM d, y' }}</h5>
                         </div>
                       </div>
@@ -112,7 +112,7 @@
                           <img src="{{countryFlagUrl}}" alt="" />
                         </div>
                         <div class=" col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2"> {{"Place of birth" | translate }}</h6>
+                          <h6 class="title_2"> {{"TalentsTranslate.placeOfBirth" | translate }}</h6>
                           <h5 class="title-1">{{user?.meta?.place_of_birth}}</h5>
                         </div>
                       </div>
@@ -133,7 +133,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Height' | translate }}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.height' | translate }}</h6>
                           <h5  *ngIf="user.meta && user.meta.height" class="title-1">{{user.meta.height}} {{user.meta.height_unit}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.height">NA</h5>
                         </div>
@@ -149,7 +149,7 @@
   
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Weight' | translate }}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.weight' | translate }}</h6>
                           <h5  *ngIf="user.meta && user.meta.weight" class="title-1">{{user.meta.weight}} {{user.meta.weight_unit}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.weight">NA</h5>
                         </div>
@@ -177,7 +177,7 @@
                             
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Contract' | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.contract' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.contract_start">{{user?.meta?.contract_start | date:'y' }} - {{user?.meta?.contract_end | date:'y' }}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.contract_start">NA</h5>
                         </div>
@@ -200,7 +200,7 @@
                             
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'League Level' | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.leagueLevel' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user.league_name">{{user.league_name}}</h5>
                           <h5 class="title-1" *ngIf="!user.league_name">NA</h5>
                         </div>
@@ -223,7 +223,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0  team-badge_content">
-                          <h6 class="title_2">{{ 'Foot'  | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.foot'  | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.foot}}</h5>                        
                         </div>
                       </div>
@@ -249,7 +249,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Age' | translate}}</h6>
+                          <h6 class="title_2">{{ 'TalentsTranslate.age' | translate}}</h6>
                           <h5 class="title-1">{{calculateAge(user?.meta?.date_of_birth)}}</h5>                        
                         </div>
                       </div>
@@ -263,8 +263,8 @@
                 <div class="col-lg-12 image-gallery mt-4 bg-color p-3 favourite_images">
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="Feature_images">
-                      <h2>HIGHLIGHTS</h2>
-                      <p>Feature up to 6 photos/videos.</p>
+                      <h2>{{ 'TalentsTranslate.highlights' | translate }}</h2>
+                      <p>{{ 'TalentsTranslate.featureUpTo6PhotosVideos' | translate }}</p>
                     </div>
                   </div>
                   <div class="unlock-view">
@@ -302,7 +302,7 @@
                       </defs>
                       </svg>
                     
-                      Upgrade to unlock
+                      {{ 'TalentsTranslate.upgradeToUnlock' | translate }}
                     </button>
                 </div> 
                 </div>
@@ -311,8 +311,8 @@
               <div class="col-lg-12 image-gallery mt-4 bg-color p-3 favourite_images"  *ngIf="isPremium">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="Feature_images">
-                    <h2>HIGHLIGHTS</h2>
-                    <p>Feature up to 6 photos/videos.</p>
+                    <h2>{{ 'TalentsTranslate.highlights' | translate }}</h2>
+                    <p>{{ 'TalentsTranslate.featureUpTo6PhotosVideos' | translate }}</p>
                   </div>
                 </div>
                 <div class="d-flex w-100 m-auto image_gallery-box mt-2">
@@ -358,7 +358,7 @@
                           d="M12 0.125C14.0599 0.125 15.974 0.644531 17.7422 1.68359C19.4557 2.6862 20.8138 4.04427 21.8164 5.75781C22.8555 7.52604 23.375 9.4401 23.375 11.5C23.375 13.5599 22.8555 15.474 21.8164 17.2422C20.8138 18.9557 19.4557 20.3138 17.7422 21.3164C15.974 22.3555 14.0599 22.875 12 22.875C9.9401 22.875 8.02604 22.3555 6.25781 21.3164C4.54427 20.3138 3.1862 18.9557 2.18359 17.2422C1.14453 15.474 0.625 13.5599 0.625 11.5C0.625 9.4401 1.14453 7.52604 2.18359 5.75781C3.1862 4.04427 4.54427 2.6862 6.25781 1.68359C8.02604 0.644531 9.9401 0.125 12 0.125ZM12 1.875C10.25 1.875 8.6276 2.3125 7.13281 3.1875C5.69271 4.04427 4.54427 5.19271 3.6875 6.63281C2.8125 8.1276 2.375 9.75 2.375 11.5C2.375 13.25 2.8125 14.8724 3.6875 16.3672C4.54427 17.8073 5.69271 18.9557 7.13281 19.8125C8.6276 20.6875 10.25 21.125 12 21.125C13.75 21.125 15.3724 20.6875 16.8672 19.8125C18.3073 18.9557 19.4557 17.8073 20.3125 16.3672C21.1875 14.8724 21.625 13.25 21.625 11.5C21.625 9.75 21.1875 8.1276 20.3125 6.63281C19.4557 5.19271 18.3073 4.04427 16.8672 3.1875C15.3724 2.3125 13.75 1.875 12 1.875ZM12 4.5C12.7839 4.5 13.513 4.70052 14.1875 5.10156C14.862 5.48438 15.3906 6.01302 15.7734 6.6875C16.1745 7.36198 16.375 8.09115 16.375 8.875C16.375 9.51302 16.2383 10.1237 15.9648 10.707C15.6914 11.2721 15.3086 11.7643 14.8164 12.1836C15.819 12.694 16.6211 13.4414 17.2227 14.4258C17.8242 15.3919 18.125 16.4583 18.125 17.625H16.375C16.375 16.8229 16.1745 16.0938 15.7734 15.4375C15.3906 14.763 14.862 14.2344 14.1875 13.8516C13.5312 13.4505 12.8021 13.25 12 13.25C11.1979 13.25 10.4596 13.4505 9.78516 13.8516C9.12891 14.2344 8.60026 14.763 8.19922 15.4375C7.81641 16.0938 7.625 16.8229 7.625 17.625H5.875C5.875 16.4583 6.17578 15.3919 6.77734 14.4258C7.37891 13.4414 8.18099 12.694 9.18359 12.1836C8.69141 11.7643 8.30859 11.2721 8.03516 10.707C7.76172 10.1237 7.625 9.51302 7.625 8.875C7.625 8.09115 7.81641 7.36198 8.19922 6.6875C8.60026 6.01302 9.13802 5.48438 9.8125 5.10156C10.487 4.70052 11.2161 4.5 12 4.5ZM12 6.25C11.2708 6.25 10.651 6.50521 10.1406 7.01562C9.63021 7.52604 9.375 8.14583 9.375 8.875C9.375 9.60417 9.63021 10.224 10.1406 10.7344C10.651 11.2448 11.2708 11.5 12 11.5C12.7292 11.5 13.349 11.2448 13.8594 10.7344C14.3698 10.224 14.625 9.60417 14.625 8.875C14.625 8.14583 14.3698 7.52604 13.8594 7.01562C13.349 6.50521 12.7292 6.25 12 6.25Z"
                           fill="#023A4A" />
                       </svg>
-                      {{ "Profile" | translate }}
+                      {{ "TalentsTranslate.profile" | translate }}
                     </button>
                   </li>
                   <li class="nav-item" role="presentation">
@@ -372,7 +372,7 @@
                           d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
                           fill="#023A4A" />
                       </svg>
-                      {{ "Performance" | translate }}
+                      {{ "TalentsTranslate.performance" | translate }}
                     </button>
                   </li>
                   <li class="nav-item" role="presentation">
@@ -386,7 +386,7 @@
                           d="M16.375 0H23.375V21H16.375V0ZM18.125 1.75V19.25H21.625V1.75H18.125ZM0.625 5.25H7.625V21H0.625V5.25ZM2.375 7V19.25H5.875V7H2.375ZM8.5 10.5H15.5V21H8.5V10.5ZM10.25 12.25V19.25H13.75V12.25H10.25Z"
                           fill="#023A4A" />
                       </svg>
-                      {{ "Performance Analysis" | translate }}
+                      {{ "TalentsTranslate.performanceAnalysis" | translate }}
                     </button>
                   </li>
                   <li class="nav-item" role="presentation">
@@ -400,7 +400,7 @@
                           d="M17.4141 0.496094L23.293 6.375L17.4141 12.2539L16.1836 10.9961L19.9297 7.25H1.5V5.5H19.9297L16.1836 1.75391L17.4141 0.496094ZM6.58594 12.7461L7.81641 14.0039L4.07031 17.75H22.5V19.5H4.07031L7.81641 23.2461L6.58594 24.5039L0.707031 18.625L6.58594 12.7461Z"
                           fill="#023A4A" />
                       </svg>
-                      {{ "Transfers" | translate }}
+                      {{ "TalentsTranslate.transfers" | translate }}
                     </button>
                   </li>
                   <li class="nav-item" role="presentation">
@@ -413,7 +413,7 @@
                           d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
                           fill="#023A4A" />
                       </svg>
-                      {{ "Gallery" | translate }}
+                      {{ "TalentsTranslate.gallery" | translate }}
                     </button>
                   </li>
                 </ul>

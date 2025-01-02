@@ -194,6 +194,9 @@
   "companyName": "Virksomhedens navn (valgfrit)",
   "selectLanguage": "Vælg et sprog",
   "country": "Land",
+  "billedMonthly": "Måned",
+  "billedYearly": "År",
+  "month": "Month",
   "TalentsTranslate": {
     "dashboard": "Dashboard",
     "profileTab": "Profil Tab",

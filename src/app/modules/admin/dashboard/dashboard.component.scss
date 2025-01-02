@@ -123,7 +123,14 @@ tbody td:first-child {
 
 .user-dash-table tbody tr:hover{
   border: none !important;
-  outline: 1px solid #236115 ;
+  outline: 2px solid transparent ;
+  border-radius: 10px;
+}
+
+
+.user-dash-table tbody tr:hover{
+  border: none !important;
+  outline: 2px solid #236115 ;
   border-radius: 10px;
 }
 .header-view{

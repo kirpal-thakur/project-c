@@ -925,10 +925,20 @@ input:checked+.slider:before {
 
 }
 
+// .canvas {
+//   max-width: 100%;
+//   max-height: 300px;
+//   margin-bottom: 15px;
+// }
+
 .canvas {
   max-width: 100%;
   max-height: 300px;
-  margin-bottom: 15px;
+  border-left: 2px solid #072a10;
+  border-right: 2px solid #072a10;
+  border-top: 2px solid #072a10;
+  border-radius: 20px 20px 0 0;
+  padding: 26px;
 }
 
 .right-sidebar {
