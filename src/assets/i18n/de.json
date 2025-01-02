@@ -474,8 +474,6 @@
   "note": "Hinweis: Du musst nur deinen Benutzernamen hinzufügen.",
   "companyMembers": "Firmenmitglieder:",
   "roles": "Rolle",
-  "addTeamMember": "Teammitglied hinzufügen",
-  "siteRole": "Seitenrolle",
   "select": "Auswählen",
   "invite": "Einladen",
   "aboutMe": "Über mich",
@@ -623,12 +621,21 @@
   "newMessageReceived": "Ihr habt eine neue Nachricht von [Name of the Role] erhalten.",
   "maximumSize": "Maximale Größe: 5MB",
   "fileSupported": "Unterstützte Dateien: JPG, PNG, PDF",
-   "fileSupported1": "Unterstützte Dateien: JPG, GIF, PNG , MP4",
+  "fileSupported1": "Unterstützte Dateien: JPG, GIF, PNG , MP4",
   "addPerformaceDetails": "Leistungsdetails hinzufügen",
   "invoice": "Rechnung",
   "invoiceNumber": "Rechnungsnummer",
   "pos": "Pos.",
   "duration": "Dauer",
   "subTotal": "Zwischensumme",
-  "downloadPDF": "PDF herunterladen"
+  "downloadPDF": "PDF herunterladen",
+  "success!": "Erfolgreich!",
+  "subscriptionSuccessful": "Ihre Anmeldung war erfolgreich.",
+  "browserDoesNotSupport": "Ihr Browser unterstützt das Video-Tag nicht.",
+
+  "ADMINSCREEN": "ADMINSCREEN",
+  "addTeamMember": "Neues Teammitglied hinzufügen",
+  "editTeamMember": "Team-Mitglied bearbeiten",
+  "siteRole": "Seitenrolle",
+  "designation": "Designation"
 }
