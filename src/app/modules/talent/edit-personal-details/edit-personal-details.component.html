@@ -1,7 +1,7 @@
 <div class="dialog-container">
   <div class="personal_edit">
     <div class="dialog-header m-auto">
-      <h2>{{'TalentsTranslate.editUserPersonalDetails' | translate}}</h2>
+      <h2>{{'editUserPersonalDetails' | translate}}</h2>
     </div>
     <div class="close_buttons">
       <button class="close-btn" (click)="onCancel()">X</button>
@@ -14,7 +14,7 @@
       <div class="row">
         <!-- First Name -->
         <div class="form-group col-lg-6">
-          <label for="first_name">{{'TalentsTranslate.firstName' | translate}}:</label>
+          <label for="first_name">{{'firstName' | translate}}:</label>
           <input
             type="text"
             id="first_name"
@@ -25,13 +25,13 @@
           />
           <!-- Validation message -->
           <div *ngIf="firstNameField.invalid && (firstNameField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.firstNameRequired' | translate}}
+            {{'firstNameRequired' | translate}}
           </div>
         </div>
 
         <!-- Last Name -->
         <div class="form-group col-lg-6">
-          <label for="last_name">{{'TalentsTranslate.lastName' | translate}}:</label>
+          <label for="last_name">{{'lastName' | translate}}:</label>
           <input
             type="text"
             id="last_name"
@@ -42,7 +42,7 @@
           />
           <!-- Validation message -->
           <div *ngIf="lastNameField.invalid && (lastNameField.touched || myForm.submitted)" class="alert text-danger my-0 pb-0 px-0">
-            {{'TalentsTranslate.lastNameRequired' | translate}}
+            {{'lastNameRequired' | translate}}
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@
           />
           <!-- Validation message -->
           <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.clubnameRequired' | translate}}
+            {{'clubnameRequired' | translate}}
           </div>
         
           <!-- Club suggestions -->
@@ -77,7 +77,7 @@
         
         <!-- Nationality (Updated for multiple selection) -->
         <div class="form-group col-lg-6 position_inputs">
-          <label for="nationality" class="form-label">{{'TalentsTranslate.nationality' | translate}}:</label>
+          <label for="nationality" class="form-label">{{'nationality' | translate}}:</label>
           <mat-select
             [(ngModel)]="nationality"
             class="form-select"
@@ -93,7 +93,7 @@
           </mat-select>
           <!-- Validation message -->
           <div *ngIf="nationalityField.invalid && (nationalityField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.nationalityRequired' | translate}}
+            {{'nationalityRequired' | translate}}
           </div>
         </div>
             
@@ -103,7 +103,7 @@
       <div class="row">
         <!-- Date of Birth -->
         <div class="form-group col-lg-6">
-          <label for="dateOfBirth">{{'TalentsTranslate.dateOfBirth' | translate}}:</label>
+          <label for="dateOfBirth">{{'dateOfBirth' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
             <input
               matInput
@@ -119,14 +119,14 @@
           </div>
           <!-- Validation message -->
           <div *ngIf="dateOfBirth.invalid && (dateOfBirth.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.dobRequired' | translate}}
+            {{'dobRequired' | translate}}
           </div>
 
         </div>
 
         <!-- Place of Birth -->
         <div class="form-group col-lg-6">
-          <label for="placeOfBirth">{{'TalentsTranslate.placeOfBirth' | translate}}:</label>
+          <label for="placeOfBirth">{{'placeOfBirth' | translate}}:</label>
           <input
             type="text"
             id="placeOfBirth"
@@ -142,7 +142,7 @@
           </ul> -->
           <!-- Validation message -->
           <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.placeOfBirthRequired' | translate}}
+            {{'placeOfBirthRequired' | translate}}
           </div>
         </div>
 
@@ -151,7 +151,7 @@
       <div class="row">
         <!-- Height -->
         <div class="form-group col-lg-6">
-          <label for="height">{{'TalentsTranslate.height' | translate}}(cm):</label>
+          <label for="height">{{'height' | translate}}(cm):</label>
           <input
             type="number"
             id="height"
@@ -163,13 +163,13 @@
           />
           <!-- Validation message -->
           <div *ngIf="heightField.invalid && (heightField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.heightIsRequired' | translate}}
+            {{'heightIsRequired' | translate}}
           </div>
         </div>
 
         <!-- Weight -->
         <div class="form-group col-lg-6">
-          <label for="weight">{{'TalentsTranslate.weight' | translate}}(kgs):</label>
+          <label for="weight">{{'weight' | translate}}(kgs):</label>
           <input
             type="number"
             id="weight"
@@ -181,7 +181,7 @@
           />
           <!-- Validation message -->
           <div *ngIf="weightField.invalid && (weightField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.weightIsRequired' | translate}}
+            {{'weightIsRequired' | translate}}
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
       <div class="row">
         <!-- Contract Start Date -->
         <div class="form-group col-lg-6">
-          <label for="contractStart">{{'TalentsTranslate.contractStartDate' | translate}}:</label>
+          <label for="contractStart">{{'contractStartDate' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
             <input
               matInput
@@ -207,7 +207,7 @@
       
         <!-- Contract End Date -->
         <div class="form-group col-lg-6">
-          <label for="contractEnd">{{'TalentsTranslate.contractEndDate' | translate}}:</label>
+          <label for="contractEnd">{{'contractEndDate' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
             <input
               matInput
@@ -227,7 +227,7 @@
       <div class="row">
         <!-- League Level -->
         <div class="form-group col-lg-6">
-          <label for="leagueLevel">{{'TalentsTranslate.leagueLevel' | translate}}:</label>
+          <label for="leagueLevel">{{'leagueLevel' | translate}}:</label>
           <input
             type="text"
             id="leagueLevel"
@@ -239,7 +239,7 @@
       
         <!-- Dominant Foot -->
         <div class="form-group col-lg-6">
-          <label for="dominantFoot">{{'TalentsTranslate.dominantFoot' | translate}}:</label>
+          <label for="dominantFoot">{{'dominantFoot' | translate}}:</label>
           <select
             id="dominantFoot"
             name="dominantFoot"
@@ -247,21 +247,21 @@
             #dominantFootField="ngModel"
             required
           >
-            <option value="Right">{{'TalentsTranslate.right' | translate}}</option>
-            <option value="Left">{{'TalentsTranslate.left' | translate}}</option>
-            <option value="Both">{{'TalentsTranslate.both' | translate}}</option>
+            <option value="Right">{{'right' | translate}}</option>
+            <option value="Left">{{'left' | translate}}</option>
+            <option value="Both">{{'both' | translate}}</option>
           </select>
           <!-- Validation message -->
           <div *ngIf="dominantFootField.invalid && (dominantFootField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
-            {{'TalentsTranslate.dominantFootRequired' | translate}}.
+            {{'dominantFootRequired' | translate}}.
           </div>
         </div>
       </div>
             
     </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between">
-      <button class="cancel-btn" type="button" (click)="onCancel()">{{'TalentsTranslate.cancel' | translate}}</button>
-      <button class="save-btn" type="submit">{{'TalentsTranslate.save' | translate}}</button>
+      <button class="cancel-btn" type="button" (click)="onCancel()">{{'cancel' | translate}}</button>
+      <button class="save-btn" type="submit">{{'save' | translate}}</button>
     </div>
   </form>
 </div>

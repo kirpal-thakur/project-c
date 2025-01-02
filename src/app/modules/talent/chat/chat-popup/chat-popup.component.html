@@ -2,7 +2,7 @@
 
   <div class="chat_box">
     <div class="p-3 w-100">
-      <div><h4 class="text-center mb-3 title-text">{{'TalentsTranslate.newMessage' | translate}}</h4></div>
+      <div><h4 class="text-center mb-3 title-text">{{'newMessage' | translate}}</h4></div>
       <div class="close-img" (click)="close()"></div>
     </div>
   
@@ -12,7 +12,7 @@
             <!-- <mat-label>To:</mat-label> -->
              <!-- <span>To:</span> -->
             <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector messanger-selector-name bg-color-2 w-100 " >
-              <p>{{'TalentsTranslate.to' | translate}}</p>
+              <p>{{'to' | translate}}</p>
               @for (user of users; track $index) {
                 <mat-chip-row (removed)="remove(user)">
                   <img width="20" height="20" class="img-list" src="{{user?.meta?.profile_image_path ? user?.meta?.profile_image_path :'../../../../../assets/images/default/talent-profile-default.png'}}">
@@ -21,7 +21,7 @@
                 </mat-chip-row>
               }
               <input
-                placeholder="{{'TalentsTranslate.searchUser' | translate}}"
+                placeholder="{{'searchUser' | translate}}"
                 #userInput
                 [matAutocomplete]="auto"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

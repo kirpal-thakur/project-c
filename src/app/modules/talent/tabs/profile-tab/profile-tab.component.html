@@ -1,36 +1,36 @@
 <!-- unlock page  -->
 <div class="unlock_page" *ngIf="!isPremium">
     <div class="general_titels d-flex align-items-center">
-        <h2>{{ 'TalentsTranslate.generalDetails' | translate}}</h2>
+        <h2>{{ 'generalDetails' | translate}}</h2>
         <div class="edit_button">
             <button class="tour-general-details" matTooltip="Edit General Details" matTooltipPosition="right" >
                 <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
                     </svg>
-                <span>{{ 'TalentsTranslate.edit' | translate}}</span>
+                <span>{{ 'edit' | translate}}</span>
             </button>
         </div>
     </div>
     <div class="unlock-view">
         <div class="d-flex justify-content-between mt-4 details_info">
             <div class="general_details">
-                <h6 class="details_2">{{ 'TalentsTranslate.inTheTeamSince' | translate}}</h6>
+                <h6 class="details_2">{{ 'inTheTeamSince' | translate}}</h6>
                 <h5 class="details-1">--</h5>
             </div>
             <div class="general_details">            
-                <h6 class="details_2"> {{ 'TalentsTranslate.topSpeed' | translate}}</h6>
+                <h6 class="details_2"> {{ 'topSpeed' | translate}}</h6>
                 <h5 class="details-1" >NA</h5>
             </div>
             <div class="general_details">
-                <h6 class="details_2">{{ 'TalentsTranslate.internationalPlayer' | translate}}</h6>
+                <h6 class="details_2">{{ 'internationalPlayer' | translate}}</h6>
                 <span class="m-2">--</span>
             </div>
             <div class="general_details">
-                <h6 class="details_2"> {{ 'TalentsTranslate.marketValue' | translate}}</h6>
+                <h6 class="details_2"> {{ 'marketValue' | translate}}</h6>
                 <h5 class="details-1" >NA</h5>
             </div>
             <div class="general_details">            
-                <h6 class="details_2"> {{ 'TalentsTranslate.lastChange' | translate}}</h6>
+                <h6 class="details_2"> {{ 'lastChange' | translate}}</h6>
                 <h5 class="details-1" >--</h5>
             </div>
         </div>
@@ -41,18 +41,18 @@
             </div>
             <div class="col-lg-6 d-flex flex-column justify-content-between">
                 <div class="main-position">
-                    <h6 class="details_2"> {{ 'TalentsTranslate.mainPosition' | translate}}</h6>
+                    <h6 class="details_2"> {{ 'mainPosition' | translate}}</h6>
                     <h5 class="details-1">--</h5>
                 </div>
                 <div class="main-position">
-                <h6 class="details_2"> {{ 'TalentsTranslate.otherPositions' | translate}}</h6>
+                <h6 class="details_2"> {{ 'otherPositions' | translate}}</h6>
                 <h5 class="details-1">--</h5>
                 </div>
             </div>
             </div>
             <div class="col-lg-6 p-3">
                 <div class="main-position">
-                    <h6 class="details_2">{{ 'TalentsTranslate.socialMedia' | translate}}</h6>
+                    <h6 class="details_2">{{ 'socialMedia' | translate}}</h6>
                     <div class="social_icons my-2">
                         <span class="me-2">                    
                             <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
@@ -92,7 +92,7 @@
                     </clipPath>
                     </defs>
                 </svg>    
-                {{'TalentsTranslate.upgradeToUnlock'|translate}}
+                {{'upgradeToUnlock'|translate}}
               </a>
         </div> 
     </div>    
@@ -100,7 +100,7 @@
 
 <ng-container *ngIf="isPremium">
     <div class="general_titels d-flex align-items-center">
-        <h2>{{ 'TalentsTranslate.generalDetails' | translate}}</h2>
+        <h2>{{ 'generalDetails' | translate}}</h2>
         <div class="edit_button">
             <button (click)="openEditGeneralDialog()" class="tour-general-details"
             matTooltip="Edit General Details" matTooltipPosition="right"
@@ -108,32 +108,32 @@
                 <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
                     </svg>
-                <span>{{ 'TalentsTranslate.edit' | translate}}</span>
+                <span>{{ 'edit' | translate}}</span>
             </button>
         </div>
     </div>
     <div class="d-flex justify-content-between mt-4 details_info">
         <div class="general_details">
-            <h6 class="details_2">{{ 'TalentsTranslate.inTheTeamSince' | translate}}</h6>
+            <h6 class="details_2">{{ 'inTheTeamSince' | translate}}</h6>
             <h5 class="details-1">{{user?.meta?.in_team_since | date:'dd.MM.yyyy' }}</h5>
         </div>
         <div class="general_details">            
-            <h6 class="details_2"> {{ 'TalentsTranslate.topSpeed' | translate}}</h6>
+            <h6 class="details_2"> {{ 'topSpeed' | translate}}</h6>
             <h5 class="details-1" *ngIf="user.meta && user.meta.top_speed">{{user.meta.top_speed}} {{user.meta.top_speed_unit}}</h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta.top_speed">NA</h5>
         </div>
         <div class="general_details">
-            <h6 class="details_2">{{ 'TalentsTranslate.internationalPlayer' | translate}}</h6>
+            <h6 class="details_2">{{ 'internationalPlayer' | translate}}</h6>
             <img *ngIf="user.int_player_country_logo_path" src="{{user.int_player_country_logo_path}}" alt="">
             <span class="m-2">{{user?.int_player_country}}</span>
         </div>
         <div class="general_details">
-            <h6 class="details_2"> {{ 'TalentsTranslate.marketValue' | translate}}</h6>
+            <h6 class="details_2"> {{ 'marketValue' | translate}}</h6>
             <h5 class="details-1" *ngIf="user.meta && user.meta.market_value">€{{user.meta.market_value}} </h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta.market_value">NA</h5>
         </div>
         <div class="general_details">            
-            <h6 class="details_2"> {{ 'TalentsTranslate.lastChange' | translate}}</h6>
+            <h6 class="details_2"> {{ 'lastChange' | translate}}</h6>
             <h5 class="details-1" *ngIf="user.meta && user.meta?.last_change">{{user.meta?.last_change |date:'dd.MM.yyyy'}} </h5>
             <h5 class="details-1" *ngIf="!user.meta || !user.meta?.last_change">NA</h5>
         </div>
@@ -177,18 +177,18 @@
         </div>
         <div class="col-lg-6 d-flex flex-column justify-content-between">
             <div class="main-position">
-                <h6 class="details_2"> {{ 'TalentsTranslate.mainPosition' | translate}}</h6>
+                <h6 class="details_2"> {{ 'mainPosition' | translate}}</h6>
                 <h5 class="details-1">{{mainPosition}}</h5>
             </div>
             <div class="main-position">
-            <h6 class="details_2"> {{ 'TalentsTranslate.otherPositions' | translate}}</h6>
+            <h6 class="details_2"> {{ 'otherPositions' | translate}}</h6>
             <h5 class="details-1">{{otherPositions}}</h5>
             </div>
         </div>
         </div>
         <div class="col-lg-6 p-3">
             <div class="main-position">
-                <h6 class="details_2">{{ 'TalentsTranslate.socialMedia' | translate}}</h6>
+                <h6 class="details_2">{{ 'socialMedia' | translate}}</h6>
 
                 <div class="social_icons my-2" *ngIf="user?.meta?.sm_facebook" >
 
@@ -330,12 +330,12 @@
     <div class="forms_details">
         <form class="d-flex align-items-center form-boxs">
             <div class="email_box">
-                <label for="email">{{ 'TalentsTranslate.email' | translate}}</label><br>
+                <label for="email">{{ 'email' | translate}}</label><br>
                 <div>{{user.email}}</div>
             </div>
             <div class="password_box">
                 <label for="password"></label>
-                <label for="pass"> {{ 'TalentsTranslate.password' | translate}}</label><br>
+                <label for="pass"> {{ 'password' | translate}}</label><br>
                 <input type="password"  id="pass" name="password" minlength="8" value="***************" required readonly />
                 <input class="password" type="reset" value="Reset Password"  (click)="openResetDialog()">
             </div>
