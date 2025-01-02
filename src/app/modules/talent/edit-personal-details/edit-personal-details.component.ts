@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { catchError, Observable, of, tap,fromEvent } from 'rxjs';
+import { catchError, Observable, of, tap, fromEvent } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 // the `default as` syntax.
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {default as _rollupMoment} from 'moment';
+import { default as _rollupMoment } from 'moment';
 import { ToastrService } from 'ngx-toastr';
 
 const moment = _rollupMoment || _moment;
@@ -28,7 +28,7 @@ declare const google: any;
 })
 
 export class EditPersonalDetailsComponent implements OnInit {
-  
+
   @ViewChild('placeOfBirthInput') placeOfBirthInput!: ElementRef;
   placeSuggestions: any[] = [];
   readonly date = new FormControl(moment());
@@ -55,10 +55,11 @@ export class EditPersonalDetailsComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   nationality: any[] = [];  // Ensure nationality is initialized as an array
+  birthCountry: any;
   currentClubId: any;
-  userData:any
-  playerClubsListing:any;
-  takenBy:any;
+  userData: any
+  playerClubsListing: any;
+  takenBy: any;
 
   dateOfBirth: FormControl = new FormControl(null);  // Initialize with null or the correct date format
   contractStart: FormControl = new FormControl(null);
@@ -67,37 +68,44 @@ export class EditPersonalDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
     private talentService: TalentService,
-    private toastr : ToastrService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   countriesLoaded: boolean = false;
   profileLoaded: boolean = false;
-  
+
   ngOnInit(): void {
-    this.userData =this.user = { ...this.data.user };
-  
+    this.userData = this.user = { ...this.data.user };
+
     this.countries = this.data.countries;
     // this.user = JSON.parse(localStorage.getItem('userInfo') || '{}');
     this.loggedInUser = JSON.parse(localStorage.getItem('userData') || '{}');
     this.userId = this.loggedInUser.id;
 
     this.getUserProfile(this.userId);
-    this.getClubsForPlayer();
-      
+    // this.getClubsForPlayer();
+
+    let clubsString = localStorage.getItem('clubs');
+    if (clubsString) {
+      this.playerClubsListing = JSON.parse(clubsString);
+    } else {
+      this.playerClubsListing = [];  // Default to empty array if no clubs in localStorage
+    }
+
     if (this.user.meta) {
       this.dateOfBirth = new FormControl(
         this.user?.meta?.dateOfBirth ? new Date(this.user.meta.dateOfBirth) : null
       );
-     
+
       this.contractStart = new FormControl(
         this.user?.meta?.contract_start ? new Date(this.user.meta.contract_start) : null
       );
       this.contractEnd = new FormControl(
         this.user?.meta?.contract_end ? new Date(this.user.meta.contract_end) : null
       );
-      
-      console.log('user',this.contractStart)
+
+      console.log('user', this.contractStart)
       this.height = this.user.meta.height || 0;
       this.heightUnit = this.user.meta.height_unit || 'cm';
       this.weight = this.user.meta.weight || 0;
@@ -108,31 +116,34 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.currentClub = this.user.pre_current_club_name || '';
       this.firstName = this.user.first_name || '';
       this.lastName = this.user.last_name || '';
+      this.currentClubId = this.user.meta.pre_club_id || '';
       this.dateOfBirth.setValue(this.user.meta.date_of_birth ? new Date(this.user.meta.date_of_birth) : null);
       this.contractStart.setValue(this.user.meta.contract_start ? new Date(this.user.meta.contract_start) : null);
       this.contractEnd.setValue(this.user.meta.contract_end ? new Date(this.user.meta.contract_end) : null);
-    
+
       this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
-      
+
       // Ensure userNationalities is parsed correctly as an array of IDs only
       this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
-      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => 
-           String(item.country_id)
+      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item =>
+        String(item.country_id)
       ) : [];
 
-      if (this.user.meta && this.user.meta.pre_club_id) {
-        this.currentClubId = this.user.meta.pre_club_id;
-      }
+      this.birthCountry = this.user.meta.birth_country || '3';
+
+      // if (this.user.meta && this.user.meta.pre_club_id) {
+      //   this.currentClubId = this.user.meta.pre_club_id;
+      // }
     }
-    
+
   }
-  
+
   ngAfterViewInit(): void {
-    this.initGooglePlacesAutocomplete();
+    // this.initGooglePlacesAutocomplete();
   }
 
   initGooglePlacesAutocomplete(): void {
-    
+
     if (this.placeOfBirthInput) {
       const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
         types: ['(cities)'],
@@ -145,9 +156,9 @@ export class EditPersonalDetailsComponent implements OnInit {
         }
       });
     }
-    
+
   }
-  
+
   // ngAfterViewInit(): void {
   //   this.setupPlaceAutocomplete();
   // }
@@ -190,20 +201,21 @@ export class EditPersonalDetailsComponent implements OnInit {
   onCancel(): void {
     this.dialogRef.close();
   }
-  
-  getClubsForPlayer(){
+
+  getClubsForPlayer() {
     this.talentService.getClubsForPlayer().subscribe(
       response => {
-        if(response.status){
+        if (response.status) {
           this.playerClubsListing = response.data.clubs;
+          console.log(this.playerClubsListing);
 
-          let index = this.playerClubsListing.findIndex((x:any) => x.id == this.user.meta.pre_club_id);
-          if(this.playerClubsListing[index]?.is_taken == "yes"){            
-            this.takenBy = this.playerClubsListing[index].taken_by;            
+          let index = this.playerClubsListing.findIndex((x: any) => x.id == this.user.meta.pre_club_id);
+          if (this.playerClubsListing[index]?.is_taken == "yes") {
+            this.takenBy = this.playerClubsListing[index].taken_by;
           }
-          
-        }else{
-          
+
+        } else {
+
         }
       },
       error => {
@@ -219,7 +231,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.filteredClubs = [];
       return;
     }
-  
+
     this.talentService.searchClubs(this.currentClub).subscribe(
       (response: any) => {
         if (response && response.data) {
@@ -232,18 +244,18 @@ export class EditPersonalDetailsComponent implements OnInit {
       }
     );
   }
-  
+
   // Function to handle the selection of a club
   onSelectClub(club: any): void {
     this.currentClub = club.club_name;  // Set the selected club's name to the input
     this.currentClubId = club.id;  // Set the selected club's name to the input
-    this.filteredClubs = [];  // Clear the suggestion list
+    //this.filteredClubs = [];  // Clear the suggestion list
   }
 
   getUserProfile(userId: any) {
     if (this.userData) {
       this.user = this.userData;
-  
+
       if (this.user.meta) {
         this.dateOfBirth = this.user.meta.date_of_birth || '';
         this.height = this.user.meta.height || 0;
@@ -259,7 +271,7 @@ export class EditPersonalDetailsComponent implements OnInit {
         this.firstName = this.user.first_name || '';
         this.lastName = this.user.last_name || '';
         this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
-        
+
         // Ensure userNationalities is parsed correctly as an array of IDs only
         this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
         this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map((nation: any) => nation.country_id) : [];
@@ -272,15 +284,15 @@ export class EditPersonalDetailsComponent implements OnInit {
       console.error('Invalid API this.userData structure:', this.userData);
     }
   }
-  
-  
+
+
   onSubmit(form: NgForm) {
     if (form.valid) {
       // Enable loading state and notify user
       this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
 
       const formData = new FormData();
-      
+
       // Handling the `current_club` and `pre_club_id`
       let index = this.playerClubsListing.findIndex((x: any) => x.id === this.currentClubId);
       if (this.playerClubsListing[index]?.is_taken === "yes") {
@@ -293,11 +305,11 @@ export class EditPersonalDetailsComponent implements OnInit {
 
       // Append remaining form fields
       // Format dates before submission
-    const formattedDateOfBirth = moment(this.dateOfBirth.value).format('YYYY-MM-DD');
-    const formattedContractStart = moment(this.contractStart.value).format('YYYY-MM-DD');
-    const formattedContractEnd = moment(this.contractEnd.value).format('YYYY-MM-DD');
+      const formattedDateOfBirth = moment(this.dateOfBirth.value).format('YYYY-MM-DD');
+      const formattedContractStart = moment(this.contractStart.value).format('YYYY-MM-DD');
+      const formattedContractEnd = moment(this.contractEnd.value).format('YYYY-MM-DD');
 
-    // Append formatted dates to formData
+      // Append formatted dates to formData
       formData.append('user[date_of_birth]', formattedDateOfBirth);
       formData.append('user[contract_start]', formattedContractStart);
       formData.append('user[contract_end]', formattedContractEnd);
@@ -313,6 +325,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[foot]', this.dominantFoot);
       formData.append('user[first_name]', this.firstName);
       formData.append('user[last_name]', this.lastName);
+      formData.append('user[birth_country]', this.birthCountry);
 
       // Append nationality array
       this.nationality.forEach((nation: any) => {
@@ -343,7 +356,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.toastr.warning('Please fill out all required fields.', 'Form Incomplete');
     }
   }
-  
+
   // onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
 
   //   const selectedDate = event.value;
