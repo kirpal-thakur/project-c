@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from
 import { UserEditPopupComponent } from '../../user-edit-popup/user-edit-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
-import { environment } from '../../../../../environments/environment';
+
 @Component({
   selector: 'app-profile-tab',
   templateUrl: './profile-tab.component.html',
