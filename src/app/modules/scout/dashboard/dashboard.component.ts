@@ -3,9 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
-import { ScoutService } from '../../../services/scout.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
-import { EditGeneralDetailsComponent } from '../edit-general-details/edit-general-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
 import { TalentService } from '../../../services/talent.service';
@@ -15,6 +13,7 @@ import 'intro.js/introjs.css'; // Import the styles for Intro.js
 import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
 import { Subscription } from 'rxjs';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +30,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private talentService: TalentService,
+    private talentService: ScoutService,
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,

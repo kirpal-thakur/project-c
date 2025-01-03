@@ -1,6 +1,5 @@
 import { Component, Inject, Output, EventEmitter, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
 import { PaymentService } from '../../../services/payment.service';
 import { environment } from '../../../../environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
@@ -9,6 +8,7 @@ import { UpdateConfirmationPlanComponent } from '../membership/update-confirmati
 import { ActivatedRoute } from '@angular/router';
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-edit-plan',
@@ -29,7 +29,7 @@ export class EditPlanComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<EditPlanComponent>,
-    public talentService: TalentService,
+    public scoutService: ScoutService,
     private stripeService: PaymentService,
     private paymentService:PaymentService,
     public dialog: MatDialog,
@@ -266,7 +266,7 @@ export class EditPlanComponent implements OnInit {
 
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
-    this.talentService.getUserPlans().subscribe(
+    this.scoutService.getUserPlans().subscribe(
       response => {
         if (response?.status && response?.data) {
           const userPlans = response.data.packages;

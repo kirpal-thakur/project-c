@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { SocketService } from '../../../services/socket.service';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'scout-explore',
@@ -52,7 +53,7 @@ export class ExploreComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    private talentService: TalentService,
+    private ScoutService: ScoutService,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private socketService: SocketService
@@ -91,7 +92,7 @@ export class ExploreComponent implements OnInit {
     // Check if we have profiles to track
     if (profilesToTrack.length > 0) {
       // Send the array of profile IDs in a single API call
-      this.talentService.trackProfiles(this.loggedInUser.id, profilesToTrack, 'view').subscribe({
+      this.ScoutService.trackProfiles(this.loggedInUser.id, profilesToTrack, 'view').subscribe({
         next: () => {
           console.log(`Views tracked for profiles: ${profilesToTrack.join(', ')}`);
 
@@ -117,7 +118,7 @@ export class ExploreComponent implements OnInit {
     const id: number[] = [profileId];  // Create an array of profileId
 
     if (!this.viewsTracked[profileId]?.clicked) {
-      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
+      this.ScoutService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
         next: () => {
           console.log(`Click tracked for profile ${profileId}`);
           this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
@@ -208,7 +209,7 @@ export class ExploreComponent implements OnInit {
 
 
     // Call service to fetch filtered data
-    this.talentService.getExploresData(params).subscribe({
+    this.ScoutService.getExploresData(params).subscribe({
       next: (response) => {
         if (response?.status && response?.data) {
           this.players = response.data.userData.users;
@@ -242,7 +243,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getDomains().subscribe(
+    this.ScoutService.getDomains().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.domains;
@@ -255,7 +256,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadPositions(): void {
-    this.talentService.getPositions().subscribe(
+    this.ScoutService.getPositions().subscribe(
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
@@ -270,7 +271,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadLeagues(): void {
-    this.talentService.getLeagues().subscribe(
+    this.ScoutService.getLeagues().subscribe(
       (response: any) => {
         if (response.status) {
           this.leagues = response.data.leagues;
@@ -285,7 +286,7 @@ export class ExploreComponent implements OnInit {
   }
 
   loadClubs(): void {
-    this.talentService.getClubs().subscribe(
+    this.ScoutService.getClubs().subscribe(
       (response: any) => {
         if (response.status) {
           this.clubs = response.data.clubs;

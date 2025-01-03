@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditGeneralDetailsComponent } from '../../edit-general-details/edit-general-details.component';
 import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
 import { TalentService } from '../../../../services/talent.service';
+import { ScoutService } from '../../../../services/scout.service';
 
 @Component({
   selector: 'scout-profile-tab',
@@ -20,7 +21,7 @@ export class ProfileTabComponent {
   @Input() userData: any;
   @Input() isPremium: any;
 
-  constructor( public dialog: MatDialog,private talentService: TalentService) { 
+  constructor( public dialog: MatDialog,private scoutService: ScoutService) {
     // If you want to load the user data from localStorage during initialization    
   }
 
@@ -80,7 +81,7 @@ export class ProfileTabComponent {
 
   getUserProfile() {
     try {
-      this.talentService.getProfileData().subscribe((response) => {
+      this.scoutService.getProfileData().subscribe((response) => {
         if (response && response.status && response.data && response.data.user_data) {
           
           localStorage.setItem('userInfo', JSON.stringify(response.data.user_data));

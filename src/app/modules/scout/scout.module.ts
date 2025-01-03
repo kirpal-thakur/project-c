@@ -44,9 +44,7 @@ import { SettingComponent } from './setting/setting.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
 import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
-import { EditPerformanceDetailsComponent } from './edit-performance-details/edit-performance-details.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
-import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
@@ -95,8 +93,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     EditGeneralDetailsComponent,
     GalleryTabComponent,
     MessagePopupComponent,
-    EditTransferDetailsComponent,
-    EditPerformanceDetailsComponent,
     AddCardComponent,
     HistoryTabComponent,
     LoaderComponent,

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TalentService } from '../../../../services/talent.service';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../../services/scout.service';
 
 @Component({
   selector: 'scout-gallery-tab',
@@ -29,7 +30,7 @@ export class GalleryTabComponent {
   constructor(
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     public dialog: MatDialog) { }
   
   ngOnInit(): void {
@@ -46,7 +47,7 @@ export class GalleryTabComponent {
 
   getGalleryData(){
     try {
-      this.talentService.getGalleryData().subscribe((response)=>{
+      this.scoutService.getGalleryData().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.userImages = response.data.images; 
           this.userVideos = response.data.videos; 
@@ -72,7 +73,7 @@ export class GalleryTabComponent {
         const formdata = new FormData();
         formdata.append("cover_image", this.selectedFile);
 
-        this.talentService.uploadCoverImage(formdata).subscribe((response)=>{
+        this.scoutService.uploadCoverImage(formdata).subscribe((response)=>{
           if (response && response.status) {
             this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
@@ -91,7 +92,7 @@ export class GalleryTabComponent {
 
   deleteCoverImage(){
     try {
-      this.talentService.deleteCoverImage().subscribe((response)=>{
+      this.scoutService.deleteCoverImage().subscribe((response)=>{
         if (response && response.status) {
           setTimeout(() => {
             this.coverImage = './media/palyers.png';
@@ -141,7 +142,7 @@ export class GalleryTabComponent {
       const loadingToast = this.toastr.info('Deleting image...', 'Please wait', { disableTimeOut: true });
       let params = { id: [id] };
   
-      this.talentService.deleteGalleryImage(params).subscribe({
+      this.scoutService.deleteGalleryImage(params).subscribe({
         next: (response) => {
           this.toastr.clear(loadingToast.toastId);
           if (response && response.status) {

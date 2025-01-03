@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { TalentService } from '../../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { ScoutService } from '../../../../services/scout.service';
 
 @Component({
   selector: 'app-app-setting',
@@ -11,7 +11,7 @@ import { MessagePopupComponent } from '../../message-popup/message-popup.compone
 export class AppSettingComponent {
   loggedInUser: any = localStorage.getItem('userData'); // User data from local storage
 
-  constructor(private talentService: TalentService, public dialog: MatDialog) {}
+  constructor(private scoutService: ScoutService, public dialog: MatDialog) {}
 
   ngOnInit() {
     // Parse user data from localStorage
@@ -50,7 +50,7 @@ export class AppSettingComponent {
   updateNewsletter(event: any) {
     const newsletter = event.target.checked ? 1 : 0;
 
-    this.talentService.updateNewsletter({ newsletter }).subscribe(
+    this.scoutService.updateNewsletter({ newsletter }).subscribe(
       (response) => {
         if (response?.status && response?.data) {
           // Update local storage only if API call is successful

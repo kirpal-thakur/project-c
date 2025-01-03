@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TalentService } from '../../../services/talent.service';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'reset-password',
@@ -19,7 +20,7 @@ export class ResetPasswordComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ResetPasswordComponent>,
-    public talentService : TalentService,
+    public scoutService : ScoutService,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -49,7 +50,7 @@ export class ResetPasswordComponent {
     this.toastr.info('Submitting your request...', 'Please wait', { disableTimeOut: true });
 
     // Call the service to change the password
-    this.talentService.changePassword(this.password, this.confirm_password).subscribe(
+    this.scoutService.changePassword(this.password, this.confirm_password).subscribe(
       (response) => {
         // Clear any persistent loading messages
         this.toastr.clear();

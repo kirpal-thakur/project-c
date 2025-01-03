@@ -5,6 +5,7 @@ import { TalentService } from '../../../../services/talent.service';
 import { PaymentService } from '../../../../services/payment.service';
 import { CouponCodeAlertComponent } from '../../../shared/coupon-code-alert/coupon-code-alert.component';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../../services/scout.service';
 
 @Component({
   selector: 'add-booster',
@@ -25,7 +26,7 @@ export class AddBoosterComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddBoosterComponent>,
-    public talentService: TalentService,
+    public scoutService: ScoutService,
     private toastr: ToastrService,
     private paymentService: PaymentService,
     public dialog: MatDialog,

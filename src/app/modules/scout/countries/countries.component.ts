@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCountryComponent } from './add-country/add-country.component';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-countries',
@@ -25,7 +26,7 @@ export class CountriesComponent {
   userInfo : any=[];
   filteredCountries:any;
 
-  constructor( private talentService: TalentService ,public dialog: MatDialog)  {}
+  constructor( private talentService: ScoutService ,public dialog: MatDialog)  {}
 
   ngOnInit() {
     this.userInfo = localStorage.getItem('userInfo');

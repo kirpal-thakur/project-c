@@ -13,6 +13,7 @@ import { AddBoosterComponent } from './add-booster-profile/add-booster.component
 import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-code-alert.component';
 import { ToastrService } from 'ngx-toastr';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
+import { ScoutService } from '../../../services/scout.service';
 
 
 interface Plan {
@@ -63,7 +64,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   stripePromise = loadStripe(environment.stripePublishableKey);
 
   constructor(
-    private talentService: TalentService,
+    private ScoutService: ScoutService,
     private paymentService: PaymentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -144,7 +145,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   fetchPlans() {
-    this.plansSubscription = this.talentService.getPackages().subscribe({
+    this.plansSubscription = this.ScoutService.getPackages().subscribe({
       next: (response) => {
         if (response?.status) {
           // Initialize plan arrays
@@ -294,7 +295,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   getUserCards(): void {
     this.isLoadingCards = true;
-    this.talentService.getCards().subscribe(response => {
+    this.ScoutService.getCards().subscribe(response => {
       if (response?.status && response?.data?.paymentMethod) {
         this.userCards = response.data.paymentMethod;
         this.defaultCard = this.userCards.find((card: any) => card.is_default === "1") || null;
@@ -338,7 +339,7 @@ export class PlanComponent implements OnInit, OnDestroy {
         paymentMethodId: this.defaultCard.stripe_payment_method_id,
         planId: plan.id,
       };
-      const response = await this.talentService.subscribeToPlan(subscriptionData).toPromise();
+      const response = await this.ScoutService.subscribeToPlan(subscriptionData).toPromise();
 
       if (response?.status === 'success') {
         console.log('Subscription successful!', response.subscription);
@@ -351,7 +352,7 @@ export class PlanComponent implements OnInit, OnDestroy {
   }
 
   getUserPlans(): void {
-    this.talentService.getUserPlans().subscribe({
+    this.ScoutService.getUserPlans().subscribe({
       next: (response) => {
         if (response?.status && response?.data?.packages) {
           const userPlans = response.data.packages;
@@ -529,7 +530,7 @@ export class PlanComponent implements OnInit, OnDestroy {
 
   async getBoosterData(){
     try {
-      const response = await this.talentService.getBoosterData().toPromise();
+      const response = await this.ScoutService.getBoosterData().toPromise();
       if (response?.data) {
         this.stats = response.data;
         console.log(this.stats)

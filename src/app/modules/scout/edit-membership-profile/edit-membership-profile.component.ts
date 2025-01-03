@@ -1,8 +1,7 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
-import { PaymentService } from '../../../services/payment.service';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-edit-membership-profile',
@@ -27,7 +26,7 @@ export class EditMembershipProfileComponent {
 
   constructor(
     public dialogRef: MatDialogRef<EditMembershipProfileComponent>,
-    public talentService: TalentService,
+    public scoutService: ScoutService,
     public dialog: MatDialog,
     private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -108,7 +107,7 @@ export class EditMembershipProfileComponent {
 
     try {
       // Make API call to save the booster audience
-      this.talentService.updateBoosterAudience(this.selectedAudienceIds).subscribe(
+      this.scoutService.updateBoosterAudience(this.selectedAudienceIds).subscribe(
         (response) => {
           if (response?.status) {
             // Success: Notify the user and close the dialog

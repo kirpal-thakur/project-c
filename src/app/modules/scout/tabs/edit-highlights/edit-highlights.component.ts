@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { TalentService } from '../../../../services/talent.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
 import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../../services/scout.service';
 
 @Component({
   selector: 'app-edit-highlights',
@@ -25,7 +25,7 @@ export class EditHighlightsComponent {
   constructor(
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<EditHighlightsComponent>,
-    private talentService: TalentService,
+    private ScoutService: ScoutService,
     @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog
   ) {}
 
@@ -56,7 +56,7 @@ export class EditHighlightsComponent {
 
   getGalleryData() {
     try {
-      this.talentService.getGalleryData().subscribe((response) => {
+      this.ScoutService.getGalleryData().subscribe((response) => {
         if (response && response.status && response.data) {
           this.images = response.data.images;
           this.videos = response.data.videos;
@@ -119,7 +119,7 @@ export class EditHighlightsComponent {
     const loadingToast = this.toastr.info('Saving selected files...', 'Please wait', { disableTimeOut: true });
 
     // Send the selected IDs to your API or handle them as needed
-    this.talentService.toggleFeaturedFiles(selectedData).subscribe({
+    this.ScoutService.toggleFeaturedFiles(selectedData).subscribe({
       next: (response) => {
         this.toastr.clear(loadingToast.toastId); // Clear loading notification
         this.toastr.success('Files saved successfully!', 'Success'); // Show success notification

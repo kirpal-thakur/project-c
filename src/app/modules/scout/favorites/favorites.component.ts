@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
 import { PlayerProfileComponent } from '../player-profile/player-profile.component';
+import { ScoutService } from '../../../services/scout.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class FavoritesComponent {
   // Filters and UI variables (other code omitted for brevity)
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private scoutService: ScoutService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
@@ -57,7 +58,7 @@ export class FavoritesComponent {
       };
 
       // Make the API request with query parameters
-      this.talentService.getFavoritesData(params).subscribe((response) => {
+      this.scoutService.getFavoritesData(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.userFavorites = response.data[0].favorites;
           this.totalFavorites = response.data[0].totalCount;
@@ -150,7 +151,7 @@ export class FavoritesComponent {
     const id: number[] = [profileId];  // Create an array of profileId
 
     if (!this.viewsTracked[profileId]?.clicked) {
-      this.talentService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
+      this.scoutService.trackProfiles(this.loggedInUser.id, id, 'click').subscribe({
         next: () => {
           console.log(`Click tracked for profile ${profileId}`);
           this.viewsTracked[profileId] = { ...this.viewsTracked[profileId], clicked: true };
@@ -192,7 +193,7 @@ export class FavoritesComponent {
 
     let params = {id:this.idsToDelete};
 
-    this.talentService.removeFavorites(params).subscribe(
+    this.scoutService.removeFavorites(params).subscribe(
       response => {
         if(response.status){
           this.getUserFavorites();

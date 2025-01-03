@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { EditPlanComponent } from '../../edit-plan/edit-plan.component';
-import { TalentService } from '../../../../services/talent.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +11,6 @@ import { Router } from '@angular/router';
 export class AddCountryComponent {
 
   constructor(
-    private talentService: TalentService, 
     public dialogRef: MatDialogRef<AddCountryComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
@@ -42,7 +40,7 @@ export class AddCountryComponent {
   // Method to handle the confirm button click
   onConfirm() {
     // Assuming you need to navigate to '/packages' and pass the selected country info
-    this.router.navigate(['/talent/plans'], { queryParams: { countryId: this.country.id } });
+    this.router.navigate(['/scout/plans'], { queryParams: { countryId: this.country.id } });
     this.dialogRef.close(); // Close the dialog after confirming
   }
 }
