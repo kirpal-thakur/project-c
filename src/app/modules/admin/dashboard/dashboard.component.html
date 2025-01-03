@@ -49,8 +49,8 @@
 
           <div class="search-container ms-2">
             <!-- <mat-form-field class="w-100"> -->
-            <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl" [matAutocomplete]="auto"
-              class="form-control w-100" />
+            <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl"
+              [matAutocomplete]="auto" class="form-control w-100" />
             <mat-autocomplete class="suggestion-list" #auto="matAutocomplete"
               (optionSelected)="selectUser($event.option.value)">
               <!-- Show loader while loading -->
@@ -89,15 +89,15 @@
 
           <li class="nav-item dropdown theme_dropdown me-3">
 
-              <div class="d-flex align-items-center light-theme">
+            <div class="d-flex align-items-center light-theme">
 
               <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
               <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
-               <label  class="switch" >
-                  <input type="checkbox" (change)="toggleTheme($event)" />
-                  <span class="slider round"></span>
-                </label>
-              </div>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleTheme($event)" />
+                <span class="slider round"></span>
+              </label>
+            </div>
 
           </li>
           <li class="nav-item dropdown notification_dropdown">
@@ -287,14 +287,14 @@
         </ul>
       </div>
     </nav>
-    
+
   </div>
   <div class="main-wrapper ">
     <div class="dashboard_table pb-4 ">
 
       <div class="table_title p-3">
         <div class="d-flex align-items-center">
-          <p>Overview</p>
+          <p>{{ 'overview' | translate }}</p>
 
 
         </div>
@@ -334,7 +334,7 @@
             data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"
             (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p>{{ 'Total Users' | translate }} </p>
+              <p>{{ 'totalUsers' | translate }} </p>
               <h6>{{chartData?.users?.total}}</h6>
             </div>
           </button>
@@ -344,7 +344,7 @@
             data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
             aria-selected="false" (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p> {{ 'Total Sales' | translate}}</p>
+              <p> {{ 'totalSales' | translate}}</p>
               <h6>{{chartData?.sales?.total}}</h6>
 
             </div>
@@ -355,7 +355,7 @@
             data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
             aria-selected="false" (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p>{{ 'Total Subscriptions' | translate }}</p>
+              <p>{{ 'totalSubscriptions' | translate }}</p>
               <h6>{{chartData?.subscriptions?.total}}</h6>
 
             </div>
@@ -381,7 +381,7 @@
       <div class="table_title table-main-header">
         <div class="d-flex">
           <div>
-            <p>New Registrations</p>
+            <p>{{ 'newRegistrations' | translate }}</p>
           </div>
           <!-- <div >
                 <select name="" id="">
@@ -393,7 +393,7 @@
               </div> -->
         </div>
         <div class="view-all text-end ">
-          <a href="admin/users">{{ 'View' | translate }} </a>
+          <a href="admin/users">{{ 'view' | translate }} </a>
         </div>
 
       </div>
@@ -401,12 +401,12 @@
         <thead class="dashboard-table-2-table-head">
           <tr>
 
-            <th scope="col-2">{{ 'Name' | translate }}</th>
-            <th scope="col">{{ 'User Type' | translate }}</th>
-            <th scope="col">{{ 'Language' | translate }}</th>
-            <th scope="col">{{ 'Location' | translate }}</th>
-            <th scope="col">{{ 'Date-Time' | translate }}</th>
-            <th scope="col">{{ 'Status' | translate }}</th>
+            <th scope="col-2">{{ 'name' | translate }}</th>
+            <th scope="col">{{ 'userType' | translate }}</th>
+            <th scope="col">{{ 'language' | translate }}</th>
+            <th scope="col">{{ 'location' | translate }}</th>
+            <th scope="col">{{ 'dateTime' | translate }}</th>
+            <th scope="col">{{ 'status' | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -424,9 +424,9 @@
             <td> {{ user.user_location }}</td>
             <td> {{ user.created_at}}</td>
             <td class="main-table-2">
-              <span *ngIf="user.status==1" class="bg_pending">{{ 'Pending' | translate }} </span>
-              <span *ngIf="user.status==2" class="bg_success approved"> {{ 'Approved' | translate }}</span>
-              <span *ngIf="user.status==3" class="bg_reject"> {{ 'Rejected' | translate }} </span>
+              <span *ngIf="user.status==1" class="bg_pending">{{ 'pending' | translate }} </span>
+              <span *ngIf="user.status==2" class="bg_success approved"> {{ 'approved' | translate }}</span>
+              <span *ngIf="user.status==3" class="bg_reject"> {{ 'rejected' | translate }} </span>
 
             </td>
           </tr>
@@ -440,8 +440,8 @@
 <div class="right-sidebar">
   <div class="card pt-0 ">
     <div class="card-header d-flex align-items-center justify-content-between border-0">
-      <h4>{{ 'Registrations' | translate }}</h4>
-      <a href="admin/users">{{ 'View' | translate }} </a>
+      <h4>{{ 'registrations' | translate }}</h4>
+      <a href="admin/users">{{ 'view' | translate }} </a>
     </div>
     <div class="card-body card-tabs overflow-auto registered-content">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
