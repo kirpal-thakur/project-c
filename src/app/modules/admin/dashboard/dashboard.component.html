@@ -49,8 +49,8 @@
 
           <div class="search-container ms-2">
             <!-- <mat-form-field class="w-100"> -->
-            <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl" [matAutocomplete]="auto"
-              class="form-control w-100" />
+            <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl"
+              [matAutocomplete]="auto" class="form-control w-100" />
             <mat-autocomplete class="suggestion-list" #auto="matAutocomplete"
               (optionSelected)="selectUser($event.option.value)">
               <!-- Show loader while loading -->
@@ -88,14 +88,17 @@
         <ul class="navbar-nav align-items-center mobile-nav">
 
           <li class="nav-item dropdown theme_dropdown me-3">
-              <div class="d-flex align-items-center light-theme">
-                <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
-                <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
-                <label  class="switch" >
-                    <input type="checkbox" (change)="toggleTheme($event)" />
-                    <span class="slider round"></span>
-                  </label>
-              </div>
+
+            <div class="d-flex align-items-center light-theme">
+
+              <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
+              <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
+              <label class="switch">
+                <input type="checkbox" (change)="toggleTheme($event)" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+
           </li>
           <li class="nav-item dropdown notification_dropdown">
             <a class="nav-link nav-action" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -293,17 +296,16 @@
         <div class="d-flex align-items-center">
           <p>{{ 'overview' | translate }}</p>
 
-            </div>
-            <span> 
-              <div>
-                <select name="selectedYear" id="" [(ngModel)]="selectedYear" (ngModelChange)="setSelectedYear($event)">
-                  <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
-                </select>
-              </div>
-          </span>
+
+        </div>
+        <span>
+          <div>
+            <select name="" id="">
+              <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
+            </select>
           </div>
+        </span>
       </div>
-      
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
           tabindex="0">
@@ -432,8 +434,8 @@
       </table>
     </div>
     <app-footer></app-footer>
+  </div>
 </div>
-
 
 <div class="right-sidebar">
   <div class="card pt-0 ">
@@ -505,7 +507,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script>
