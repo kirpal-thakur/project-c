@@ -222,7 +222,7 @@
         <li class="nav-item dropdown notification_dropdown">
           <a class="nav-link nav-action" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" [ngClass]="{'bell-animate' : unseenCount > 0, 'new-bell-animate' : showNotification}" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.4524 25.6682C11.0605 27.0357 12.409 28 14.0005 28C15.592 28 16.9405 27.0357 17.5487 25.6682C16.4265 25.7231 15.2594 25.76 14.0005 25.76C12.7417 25.76 11.5746 25.723 10.4524 25.6682Z"
                 fill="#737B8B"></path>
@@ -230,15 +230,20 @@
                 d="M26.3532 19.74C24.877 17.8785 22.3996 14.2195 22.3996 10.64C22.3996 7.09073 20.1193 3.89758 16.7996 2.72382C16.7593 1.21406 15.5183 0 14.0007 0C12.482 0 11.2422 1.21406 11.2018 2.72382C7.88101 3.89758 5.6007 7.09073 5.6007 10.64C5.6007 14.2207 3.1244 17.8785 1.64712 19.74C1.15433 20.3616 1.00197 21.1825 1.24058 21.9363C1.47354 22.6721 2.05367 23.2422 2.79288 23.4595C4.08761 23.8415 6.20997 24.2715 9.44682 24.491C10.8479 24.5851 12.3543 24.64 14.0008 24.64C15.646 24.64 17.1525 24.5851 18.5535 24.491C21.7915 24.2715 23.9128 23.8415 25.2086 23.4595C25.9478 23.2422 26.5268 22.6722 26.7598 21.9363C26.9983 21.1825 26.8449 20.3616 26.3532 19.74Z"
                 fill="#737B8B"></path>
             </svg>
-            <span class="badge light text-white bg-danger rounded-circle">{{notificationCount}}</span>
+            <span *ngIf="unseenCount>0" class="badge light text-white bg-danger rounded-circle">{{unseenCount}}</span>
           </a>
 
 
 
-          <div class="dropdown-menu py-0 notification-box" (click)="$event.stopPropagation()">
+          <div class="dropdown-menu py-0 notification-box" id="notification-box-id" (click)="$event.stopPropagation()" (scroll)="onScroll()">
+
+            <div *ngIf="isScrolledBeyond && clickedNewNotification" class="go-to-top-btn my-animate"
+              style="position: sticky; top: 0; z-index: 10;">
+              <button class="btn btn-primary" (click)="scrollToTop()" style="width: 100%;">New Notification</button>
+            </div>
 
             <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
-              <h6>Notification</h6>
+              <h6>Notification1</h6>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
                 height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -254,7 +259,7 @@
             </div>
 
             <div>
-              <div id="notifications">
+              <!-- <div id="notifications">
                 <div *ngFor="let notification of liveNotification; let i = index">
                   <div class="d-flex bg-light p-3 justify-content-between border-bottom"
                     *ngIf="isShowAllNotification || i <= 2">
@@ -276,11 +281,97 @@
 
 
                 </div>
+              </div> -->
+
+              <div id="notifications">
+                <!-- <div class="d-flex bg-light p-3 justify-content-between border-bottom"
+                  *ngFor="let notification of notifications">
+                  <div>
+                    <img src="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
+                      alt="">
+                  </div>
+                  <div style="padding-left: 10px;">
+                    <h6>{{ notification.title }}</h6>
+                    <p>{{ notification.content }}</p>
+                    <small>{{ notification.time }}</small>
+                  </div>
+                  <span>
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
+                    </svg>
+                  </span>
+                </div> -->
+
+
+
+
+
+                <div class="row bg-light p-3 justify-content-between border-bottom"
+                  [ngClass]="{'my-animate' : notification.shouldAnimate}" *ngFor="let notification of notifications">
+                  <div class="col-2">
+                    <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
+                      alt="">
+                  </div>
+                  <!-- <div class="col-9">
+                    <h6>{{ notification.title }}</h6>
+                    <p>{{ notification.content }}</p>
+                    <small>{{ notification.time }}</small>
+                  </div> -->
+                  <div class="col-9">
+                    <h6 [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.title }}
+                    </h6>
+                    <p class="pb-3" [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.content }}
+                    </p>
+                    <small [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.relativeTime }}
+                    </small>
+                  </div>
+
+                  <div class="col-1">
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
+                    </svg>
+                  </div>
+                </div>
+
+                <div *ngIf="notifications.length<=0 || something" style="text-align: center;margin:10px 0;">
+                  <span class="loader"></span>
+                </div>
               </div>
-              <div *ngIf="notificationCount > 3 || !isShowAllNotification" class="load_more">
-                <p (click)="loadMoreNotifications()">View all notifications</p>
+              <div class="load_more" *ngIf="currentIndex < allNotifications.length && !something">
+                <span (click)="loadMoreNotifications()" style="cursor: pointer;">View all notifications</span>
               </div>
 
+            </div>
+          </div>
+
+          <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show live-notification-box"
+            data-bs-popper="static" style="z-index: 0;">
+            <div>
+              <div id="notifications">
+                <div class="row bg-light p-3 justify-content-between" *ngFor="let notification of liveNotification">
+                  <div class="col-2">
+                    <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
+                      alt="">
+                  </div>
+                  <div class="col-9">
+                    <h6>{{ notification.title }}</h6>
+                    <p>{{ notification.content }}</p>
+                    <small>{{ notification.time }}</small>
+                  </div>
+                  <div class="col-1">
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </li>
