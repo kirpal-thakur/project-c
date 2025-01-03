@@ -142,23 +142,23 @@ export class EditPersonalDetailsComponent implements OnInit {
     // this.initGooglePlacesAutocomplete();
   }
 
-  initGooglePlacesAutocomplete(): void {
+  // initGooglePlacesAutocomplete(): void {
 
-    if (this.placeOfBirthInput) {
-      const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
-        types: ['(cities)'],
-      });
+  //   if (this.placeOfBirthInput) {
+  //     const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
+  //       types: ['(cities)'],
+  //     });
 
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        if (place && place.address_components) {
-          this.placeOfBirth = place.formatted_address || '';
-        }
-      });
-    }
+  //     autocomplete.addListener('place_changed', () => {
+  //       const place = autocomplete.getPlace();
+  //       if (place && place.address_components) {
+  //         this.placeOfBirth = place.formatted_address || '';
+  //       }
+  //     });
+  //   }
 
-  }
-
+  // }
+  
   // ngAfterViewInit(): void {
   //   this.setupPlaceAutocomplete();
   // }

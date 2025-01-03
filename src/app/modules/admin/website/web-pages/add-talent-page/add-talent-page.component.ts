@@ -230,19 +230,6 @@ export class AddTalentPageComponent implements OnInit {
     );
   }
 
-  onFeatureFileChange(event: any, index: number): void {
-    const file = event.target.files[0];
-    if (file) {
-
-      // Optionally, create a preview of the image for display
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.formData.feature_sctn[index].imgPreview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
   getPageById(id: number): void {
     this.webpages.getPageById(id).subscribe((response) => {
       if (response.status) {
@@ -274,7 +261,6 @@ export class AddTalentPageComponent implements OnInit {
             }
           });
         }
-
 
         // Map feature_sctn
         if (pageData.feature_sctn) {
@@ -377,6 +363,27 @@ export class AddTalentPageComponent implements OnInit {
       reader.readAsDataURL(file);
       this.formData.feature_sctn[index].icon = file; // Save the file
     }
+  }
+
+
+
+  onFeatureFileChange(event: any, index: number): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Assign preview for the feature image
+        this.formData.feature_sctn[index].imgPreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+      // Save the file
+      this.formData.feature_sctn[index].img = file;
+    }
+  }
+
+  removeFeatureImage(index: number): void {
+    this.formData.feature_sctn[index].img = 'remove_image'; // Mark for removal
+    this.formData.feature_sctn[index].imgPreview = null; // Clear the preview
   }
 
 

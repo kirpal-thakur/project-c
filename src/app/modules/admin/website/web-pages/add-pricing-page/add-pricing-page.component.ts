@@ -234,7 +234,7 @@ export class AddPricingPageComponent implements OnInit, OnDestroy {
           },
           page_type: response.data.page_type,
         };
-  
+
         console.log(this.formData)
         // Update banner image preview
         this.bannerImagePreview = response.data.base_url + pageData.banner_img;

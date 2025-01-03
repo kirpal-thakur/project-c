@@ -199,6 +199,9 @@
   "companyName": "Nome della società (opzionale)",
   "selectLanguage": "Selezionare una lingua",
   "country": "Paese",
+  "billedMonthly": "Mese",
+  "billedYearly": "Anno",
+  "month": "Month",
   "TalentsTranslate": {
     "dashboard": "Dashboard",
     "profileTab": "Scheda Profilo",
