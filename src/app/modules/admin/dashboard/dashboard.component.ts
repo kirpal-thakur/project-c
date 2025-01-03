@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers:any = [];
   newRegistrationScouts:any = [];
   years:any = [];
+  selectedYear: any = new Date().getFullYear();
   language:any;
   loggedInUser:any = localStorage.getItem('userData');
 
@@ -59,11 +60,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private viewportScroller: ViewportScroller,
     private userService: UserService
   ) {
-    this.getChardData();
+   
   }
 
   ngOnInit() {
-    
+    this.getChardData(this.selectedYear);
     this.loggedInUser = JSON.parse(this.loggedInUser);
     console.log(this.loggedInUser)
     this.updateThemeText();
@@ -178,18 +179,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         console.error('Error fetching users:', error);
       }
   }
-
-  getChardData(){
+  setSelectedYear(year:any){
+    this.getChardData(year);
+  }
+  getChardData(year:any){
     try {
-    this.dashboardApi.getChartData(2024).subscribe((response)=>{
+    this.dashboardApi.getChartData(year).subscribe((response)=>{
       if (response && response.status && response.data) {
-        this.chartData = response.data;
+       this.chartData = response.data;    
         setTimeout(() => {
-          this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1',response.data.users.labels,response.data.users.values)!;
-          this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2',response.data.sales.labels,this.removeDecimals(response.data.sales.values))!;
-          this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3',response.data.subscriptions.labels,response.data.subscriptions.values)!;
-          // this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
-          this.updateChartBackgroundColor();
+           this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1',response.data.users.labels,response.data.users.values)!;
+           this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2',response.data.sales.labels,response.data.sales.values)!;
+            this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3',response.data.subscriptions.labels,response.data.subscriptions.values)!;
+           //this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
+            this.updateChartBackgroundColor();
             
         }, 1000);
        
@@ -406,7 +409,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   generateYears() {
     const startYear = 2024;
     const currentYear = new Date().getFullYear();
-
+    console.log('currentYear',currentYear);
     // Populate the years array from startYear to currentYear
     for (let year = startYear; year <= currentYear; year++) {
       this.years.push(year);
@@ -418,6 +421,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   removeDecimals(data:any){
+    console.log('this one');
     const modifiedData = data.map((value:any) => value.replace('.00', ''));
     return modifiedData;
   }
