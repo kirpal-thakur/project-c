@@ -41,7 +41,7 @@
   "register": "Registrieren",
   "passwordRecovery": "Passwortwiederherstellung",
   "passwordRecoveryDescription": "Gib die E-Mail ein, die du zur Erstellung deines SoccerYou-Profils verwendet hast und wir schicken dir einen Link zum Passwort zurücksetzen.",
-  "resetButton": "Zurücksetzen",
+  "reset": "Zurücksetzen",
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Zurück zur Anmeldung",
   "createAccountTitle": "Konto erstellen",
@@ -683,5 +683,6 @@
   "clickDirectUrl": "Beim Klicken zu URL weiterleiten:",
   "dimensions": "Abmessungen: 160 x 600 px",
   "don'tsetAnEnd": "Kein Enddatum festlegen",
-  "maxViews": "Maximale Ansichten"
+  "maxViews": "Maximale Ansichten",
+  "editProfile": "Profil bearbeiten"
 }

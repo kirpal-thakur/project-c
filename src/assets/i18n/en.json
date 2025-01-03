@@ -35,7 +35,7 @@
     "requiredFieldsMessage": "Please fill in all required fields.",
     "orText": "or",
     "signInWithGoogle": "Sign In with Google",
-    "resetButton": "Reset",
+    "reset": "Reset",
     "backToLogin": "Back to Login",
     "firstNameLabel": "First Name",
     "lastNameLabel": "Last Name",
@@ -723,5 +723,6 @@
     "clickDirectUrl": " On click redirect to url:",
     "dimensions": "Dimension: 160 x 600 px",
     "don'tsetAnEnd": "Don't set an end date",
-    "maxViews": "Max Views"
+    "maxViews": "Max Views",
+    "editProfile": "edit Profile"
 }
