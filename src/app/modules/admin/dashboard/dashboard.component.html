@@ -88,14 +88,17 @@
         <ul class="navbar-nav align-items-center mobile-nav">
 
           <li class="nav-item dropdown theme_dropdown me-3">
+
               <div class="d-flex align-items-center light-theme">
-                <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
-                <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
-                <label  class="switch" >
-                    <input type="checkbox" (change)="toggleTheme($event)" />
-                    <span class="slider round"></span>
-                  </label>
+
+              <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
+              <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
+               <label  class="switch" >
+                  <input type="checkbox" (change)="toggleTheme($event)" />
+                  <span class="slider round"></span>
+                </label>
               </div>
+
           </li>
           <li class="nav-item dropdown notification_dropdown">
             <a class="nav-link nav-action" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -284,26 +287,25 @@
         </ul>
       </div>
     </nav>
-
+    
   </div>
   <div class="main-wrapper ">
     <div class="dashboard_table pb-4 ">
 
       <div class="table_title p-3">
         <div class="d-flex align-items-center">
-          <p>{{ 'overview' | translate }}</p>
+          <p>Overview</p>
 
-            </div>
-            <span> 
-              <div>
-                <select name="selectedYear" id="" [(ngModel)]="selectedYear" (ngModelChange)="setSelectedYear($event)">
-                  <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
-                </select>
-              </div>
-          </span>
+
+        </div>
+        <span>
+          <div>
+            <select name="" id="">
+              <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
+            </select>
           </div>
+        </span>
       </div>
-      
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
           tabindex="0">
@@ -332,7 +334,7 @@
             data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true"
             (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p>{{ 'totalUsers' | translate }} </p>
+              <p>{{ 'Total Users' | translate }} </p>
               <h6>{{chartData?.users?.total}}</h6>
             </div>
           </button>
@@ -342,7 +344,7 @@
             data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
             aria-selected="false" (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p> {{ 'totalSales' | translate}}</p>
+              <p> {{ 'Total Sales' | translate}}</p>
               <h6>{{chartData?.sales?.total}}</h6>
 
             </div>
@@ -353,7 +355,7 @@
             data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
             aria-selected="false" (click)="scrollToTop()">
             <div class="navtabs_button">
-              <p>{{ 'totalSubscriptions' | translate }}</p>
+              <p>{{ 'Total Subscriptions' | translate }}</p>
               <h6>{{chartData?.subscriptions?.total}}</h6>
 
             </div>
@@ -379,7 +381,7 @@
       <div class="table_title table-main-header">
         <div class="d-flex">
           <div>
-            <p>{{ 'newRegistrations' | translate }}</p>
+            <p>New Registrations</p>
           </div>
           <!-- <div >
                 <select name="" id="">
@@ -391,7 +393,7 @@
               </div> -->
         </div>
         <div class="view-all text-end ">
-          <a href="admin/users">{{ 'view' | translate }} </a>
+          <a href="admin/users">{{ 'View' | translate }} </a>
         </div>
 
       </div>
@@ -399,12 +401,12 @@
         <thead class="dashboard-table-2-table-head">
           <tr>
 
-            <th scope="col-2">{{ 'name' | translate }}</th>
-            <th scope="col">{{ 'userType' | translate }}</th>
-            <th scope="col">{{ 'language' | translate }}</th>
-            <th scope="col">{{ 'location' | translate }}</th>
-            <th scope="col">{{ 'dateTime' | translate }}</th>
-            <th scope="col">{{ 'status' | translate }}</th>
+            <th scope="col-2">{{ 'Name' | translate }}</th>
+            <th scope="col">{{ 'User Type' | translate }}</th>
+            <th scope="col">{{ 'Language' | translate }}</th>
+            <th scope="col">{{ 'Location' | translate }}</th>
+            <th scope="col">{{ 'Date-Time' | translate }}</th>
+            <th scope="col">{{ 'Status' | translate }}</th>
           </tr>
         </thead>
         <tbody>
@@ -422,9 +424,9 @@
             <td> {{ user.user_location }}</td>
             <td> {{ user.created_at}}</td>
             <td class="main-table-2">
-              <span *ngIf="user.status==1" class="bg_pending">{{ 'pending' | translate }} </span>
-              <span *ngIf="user.status==2" class="bg_success approved"> {{ 'approved' | translate }}</span>
-              <span *ngIf="user.status==3" class="bg_reject"> {{ 'rejected' | translate }} </span>
+              <span *ngIf="user.status==1" class="bg_pending">{{ 'Pending' | translate }} </span>
+              <span *ngIf="user.status==2" class="bg_success approved"> {{ 'Approved' | translate }}</span>
+              <span *ngIf="user.status==3" class="bg_reject"> {{ 'Rejected' | translate }} </span>
 
             </td>
           </tr>
@@ -432,14 +434,14 @@
       </table>
     </div>
     <app-footer></app-footer>
+  </div>
 </div>
-
 
 <div class="right-sidebar">
   <div class="card pt-0 ">
     <div class="card-header d-flex align-items-center justify-content-between border-0">
-      <h4>{{ 'registrations' | translate }}</h4>
-      <a href="admin/users">{{ 'view' | translate }} </a>
+      <h4>{{ 'Registrations' | translate }}</h4>
+      <a href="admin/users">{{ 'View' | translate }} </a>
     </div>
     <div class="card-body card-tabs overflow-auto registered-content">
       <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -505,7 +507,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 
   <script>
