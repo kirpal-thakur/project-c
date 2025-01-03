@@ -14,6 +14,7 @@ import { filter } from 'rxjs/operators';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 
 interface Notification {
+  id: number;
   image: string;
   title: string;
   content: string;
@@ -65,7 +66,18 @@ export class HeaderComponent {
   searchControl = new FormControl('');
   filteredUsers: any[] = [];
 
+  notificationSeen : boolean = false;
+
   ngOnInit() {
+
+    let notificationStatus = localStorage.getItem("notificationSeen");
+    if (notificationStatus) {
+      let jsonData = JSON.parse(notificationStatus);
+      this.notificationSeen = jsonData; 
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
 
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -78,7 +90,7 @@ export class HeaderComponent {
     }
 
     this.fetchNotifications(userId);
-    this.languages = JSON.parse(this.languages);
+    this.languages = JSON.parse(this.languages); 
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -90,6 +102,7 @@ export class HeaderComponent {
       console.log("data", data);
 
       const obj = {
+        id: 0,
         image: data.senderProfileImage,
         title: data.senderName,
         content: data.message,
@@ -204,6 +217,8 @@ export class HeaderComponent {
   }
 
   toggleDropdown() {
+    this.notificationSeen = true;
+    localStorage.setItem('notificationSeen', 'true');
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -217,8 +232,28 @@ export class HeaderComponent {
     console.log(this.currentIndex)
 
     this.isClosed = !this.isClosed;
+  }
 
-    
+  notificationClicked(id:number, seen: number, notification: any){
+    if(!notification.seen){
+      this.talentService.updateNotificationSeen(notification.id, 1).subscribe({
+        next: (response) => {
+          if(response.status){
+            notification.seen = 1;
+            console.log('Message from API:', response.message);
+          }
+          else{
+            console.log("something went wrong");
+          }
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        }
+      });
+    }
+    else{
+      console.log("already seen");
+    }
   }
 
   ChangeLang(lang: any) {
@@ -354,6 +389,7 @@ export class HeaderComponent {
   
           // Map fetched notifications to the Notification interface
           this.allNotifications = response.notifications.map((notif: any) => ({
+            id: notif.id,
             image: notif.senderProfileImage || '../../../assets/images/default.jpg',
             title: notif.senderName || 'Unknown',
             content: notif.message,

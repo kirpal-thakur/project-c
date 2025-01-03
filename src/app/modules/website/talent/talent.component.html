@@ -1,5 +1,5 @@
 <section class="website-code">
-    <div class="main"  >
+    <div class="main">
 
         <app-header></app-header>
 
@@ -13,7 +13,8 @@
                                 <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
                                 <h4 class="banner-heading5">{{pageData?.banner_desc}}
                                 </h4>
-                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt}}
+                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{
+                                    pageData?.banner_btn_txt}}
                                 </a>
                             </div>
                         </div>
@@ -64,7 +65,7 @@
 
     <div class="club-scout py_0">
         <div class="container">
-            <h3 class="club-heading4">{{pageData?.talent_section_title}}</h3>
+            <h3 class="club-heading4 pb-4">{{pageData?.talent_section_title}}</h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="club_text">
@@ -99,20 +100,21 @@
                         <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                         <div class="accordion" id="accordionExample">
                             <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
-                                <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
+                                <div class="accordion-item" (click)="setActiveAccordion(i+1)">
+                                    <div class="accordion-flex" data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#collapse' + i" aria-expanded="false"
+                                        [attr.aria-controls]="'collapse' + i">
                                         <img class="light-feature1" src="./assets/images/feature-img1.svg">
                                         <img class="dark-feature1" src="./assets/images/dark-club1.svg">
                                         <h2 class="accordion-header">
                                             {{feature.title}}
                                         </h2>
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
+                                            [attr.data-bs-target]="'#collapse' + i" aria-expanded="false"
+                                            [attr.aria-controls]="'collapse' + i">
                                         </button>
                                     </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                    <div [id]="'collapse' + i" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <p class="feature-text">{{feature.desc}}
@@ -291,7 +293,7 @@
                         <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                         <div class="accordion" id="accordionExample">
                             <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
-                                <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
+                                <div class="accordion-item" (click)="setActiveAccordion(i+1)">
                                     <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                         aria-expanded="true" aria-controls="collapseOne">
                                         <img class="light-feature1" src="./assets/images/feature-img1.svg">
@@ -343,11 +345,12 @@
 
             <div *ngFor="let plan of pageData.pricing_tab; let i = index">
                 <div class="billed">
-                    <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }" class="billed-monthly">
+                    <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }"
+                        class="billed-monthly">
                         {{'billedMonthly' | translate}}
                     </p>
                     <div class="toggle-button" [ngClass]="{ 'active': isActivePlan[i], 'inactive': !isActivePlan[i] }"
-                    (click)="togglePlan(i)">
+                        (click)="togglePlan(i)">
                     </div>
                     <p [ngClass]="{ 'active-text': !isActivePlan[i], 'inactive-text': isActivePlan[i] }">
                         {{'billedYearly' | translate}}
@@ -356,27 +359,28 @@
 
                 <div class="premium">
                     <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-img">
-                        <img class="bg-image" src="./assets/images/feature-image.svg">
-                        <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
-                        <h3 class="premium-heading3">
-                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
-                            <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
-                            / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
-                        </h3>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
+                                <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
+                                <h3 class="premium-heading3">
+                                    {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
+                                    <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency :
+                                        plan.yearly_plan_price_currency }}
+                                        / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
+                                </h3>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-col-right">
-                        <h5 class="premium-heading5">{{ plan.plan_name }} Includes</h5>
-                        <div class="premium-text" *ngFor="let feature of plan.plan_feature_desc">
-                            <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
-                            <p>{{ feature }}</p>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-col-right">
+                                <h5 class="premium-heading5">{{ plan.plan_name }} Includes</h5>
+                                <div class="premium-text" *ngFor="let feature of plan.plan_feature_desc">
+                                    <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
+                                    <p>{{ feature }}</p>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
