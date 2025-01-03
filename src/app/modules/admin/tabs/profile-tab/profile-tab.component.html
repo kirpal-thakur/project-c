@@ -1,18 +1,18 @@
 
 <div class="user-right-content">
     <div class="d-flex align-items-center">
-        <h6 class="mb-0 me-2 main-template"> {{ 'GeneralDetails' | translate}} </h6>
+        <h6 class="mb-0 me-2 main-template"> {{ 'generalDetails' | translate}} </h6>
         <a class="btn btn-outline-white main-template" (click)="editPlayer(userData, 'general')">
         <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
             </svg>
 
-            {{ 'Edit' | translate}}</a>
+            {{ 'edit' | translate}}</a>
     </div>
     <div class="row">
         <div class="col-lg-3">
         <div class="team-details">
-            <p>{{ 'CurrentClub' | translate}}</p>
+            <p>{{ 'currentClub' | translate}}</p>
             <h6>
                 <img *ngIf="userData.pre_current_club_logo_path" src="{{userData.pre_current_club_logo_path}}" class="fc-club-img" alt=""> 
                 {{userData?.pre_current_club_name |translate }}
@@ -21,14 +21,14 @@
         </div>
         <div class="col-lg-3">
         <div class="team-details">
-            <p> {{ 'League level ' | translate }}</p>
+            <p> {{ 'leagueLevel' | translate }}</p>
             <h6 *ngIf="userData.league_name">{{ userData.league_name | translate }}</h6>
             <h6 *ngIf="!userData.league_name">NA</h6>
         </div>
         </div>
         <div class="col-lg-3">
         <div class="team-details">
-            <p> {{ 'Nationality' | translate }}</p>
+            <p> {{ 'nationality' | translate }}</p>
             <div class="d-flex align-items-center mb-2" *ngFor="let nation of userNationalities">
             <img src="{{nation.flag_path}}" alt="">
             <h6> {{nation.country_name | translate }} </h6>
@@ -37,14 +37,14 @@
         </div>
         <div class="col-lg-3">
         <div class="team-details">
-            <p> {{ 'Position' | translate}}</p>
+            <p> {{ 'position' | translate}}</p>
             <h6 *ngIf="userData.positions">{{ getPosition(userData.positions) }}</h6>
             <h6 *ngIf="!userData.positions">NA</h6>
         </div>
         </div>
         <div class="col-lg-3 mt-3">
         <div class="team-details">
-            <p> {{ 'InternationalPlayer' | translate}}</p>
+            <p> {{ 'internationalPlayer' | translate}}</p>
             <div class="d-flex align-items-center">
             <img *ngIf="userData.int_player_country_logo_path" src="{{userData.int_player_country_logo_path}}" alt="">
             <h6>{{userData?.int_player_country}}</h6>
@@ -56,48 +56,48 @@
      
 <div class="user-right-content">
     <div class="d-flex align-items-center">
-        <h6 class="mb-0 me-2 main-template"> {{ 'PersonalDetails' | translate}}</h6>
+        <h6 class="mb-0 me-2 main-template"> {{ 'personalDetails' | translate}}</h6>
         <a class="btn btn-outline-white  main-template" (click)="editPlayer(userData, 'personal')">
         <svg id="users-icon" class="me-1" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 17.7495V21.4995H6.75L17.81 10.4395L14.06 6.68951L3 17.7495ZM20.71 7.53951C20.8027 7.447 20.8762 7.33711 20.9264 7.21614C20.9766 7.09517 21.0024 6.96548 21.0024 6.83451C21.0024 6.70355 20.9766 6.57386 20.9264 6.45289C20.8762 6.33192 20.8027 6.22203 20.71 6.12951L18.37 3.78951C18.2775 3.69681 18.1676 3.62326 18.0466 3.57308C17.9257 3.5229 17.796 3.49707 17.665 3.49707C17.534 3.49707 17.4043 3.5229 17.2834 3.57308C17.1624 3.62326 17.0525 3.69681 16.96 3.78951L15.13 5.61951L18.88 9.36951L20.71 7.53951Z" fill="#787878"/>
             </svg>
 
-            {{ 'Edit' | translate}}</a>
+            {{ 'edit' | translate}}</a>
     </div>
     <div class="row">
         <div class="col-lg-3">
             <div class="team-details style-1">
-                <p> {{ 'FullName' | translate}}</p>
+                <p> {{ 'fullName' | translate}}</p>
                 <h6>{{userData.first_name}} {{userData.last_name}}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details style-1">
-                <p> {{ 'Date of birth' | translate}}</p>
+                <p> {{ 'dateOfBirth' | translate}}</p>
                 <h6>{{userData?.meta?.date_of_birth | date:'MMM d, y' }}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details style-1">
-                <p> {{ 'Foot'  | translate}}</p>
+                <p> {{ 'foot'  | translate}}</p>
                 <h6>{{userData?.meta?.foot}}</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p>{{ 'In the team since' | translate}}</p>
+                <p>{{ 'inTheTeamSince' | translate}}</p>
                 <h6>{{userData?.meta?.in_team_since | date:'MMM d, y' }}</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p>{{ 'Age' | translate}}</p>
+                <p>{{ 'age' | translate}}</p>
                 <h6>{{calculateAge(userData?.meta?.date_of_birth)}}</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3 ">
             <div class="team-details style-1">
-                <p> {{"Place of birth" | translate }}</p>
+                <p> {{"placeOfBirth" | translate }}</p>
                 <div class="d-flex align-items-center gap-1">
                 <h6>{{userData?.meta?.place_of_birth}}</h6>
                 <div class="col-lg-3 team-badge_image">
@@ -108,35 +108,35 @@
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p>{{ 'ContractUntil' | translate}}</p>
+                <p>{{ 'contractUntil' | translate}}</p>
                 <h6 *ngIf="userData.meta && userData.meta.contract_end">{{userData.meta.contract_end | date:'MMM d, y' }}</h6>
                 <h6 *ngIf="!userData.meta || !userData.meta.contract_end">NA</h6> 
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p> {{ 'TopSpeed' | translate}}</p>
+                <p> {{ 'topSpeed' | translate}}</p>
                 <h6 *ngIf="userData.meta && userData.meta.top_speed">{{userData.meta.top_speed}} {{userData.meta.top_speed_unit}}</h6>
                 <h6 *ngIf="!userData.meta || !userData.meta.top_speed">NA</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p> {{ 'Height' | translate }}</p>
+                <p> {{ 'height' | translate }}</p>
                 <h6 *ngIf="userData.meta && userData.meta.height">{{userData.meta.height}} {{userData.meta.height_unit}}</h6>
                 <h6 *ngIf="!userData.meta || !userData.meta.height">NA</h6>
             </div>
         </div>
         <div class="col-lg-3 mt-3">
             <div class="team-details style-1">
-                <p> {{ 'Other Position' | translate }}</p>
+                <p> {{ 'otherPositions' | translate }}</p>
                 <h6 *ngIf="userData.meta && userData.meta.other_position">{{userData.meta.other_position}}</h6>
                 <h6 *ngIf="!userData.meta || !userData.meta.other_position">NA</h6>
             </div>
         </div>
         <div class="col-lg-4 mt-3">
             <div class="team-details style-1">
-                <p> {{'SocialMedia' | translate }}</p>
+                <p> {{'socialMedia' | translate }}</p>
                 <div class="d-flex align-items-center team-details-sub" *ngIf="userData.meta && userData.meta.sm_x">
                 <h6>
                     <!-- <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
@@ -209,13 +209,13 @@
         </div>
         <div class="col-lg-3">
             <div class="team-details">
-                <p> {{ 'Email' | translate }}</p>
+                <p> {{ 'email' | translate }}</p>
                 <h6>{{userData.email}}</h6>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="team-details">
-                <p> {{ 'Password' | translate }}</p>
+                <p> {{ 'password' | translate }}</p>
                 <h6>***************</h6>
             </div>
         </div>

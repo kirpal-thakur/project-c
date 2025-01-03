@@ -2,7 +2,7 @@
 <div class="unlock_page" *ngIf="!isPremium">
     <div class="gallery-parent">
       <div class="d-flex justify-content-between ">
-        <p class="gallery-photo">{{'Photos' | translate }} </p>
+        <p class="gallery-photo">{{'photos' | translate }} </p>
       </div>
       
       <div class="row mt-3">
@@ -12,14 +12,14 @@
       </div>
     
       <div class="d-flex justify-content-between mt-4">
-        <p class="gallery-photo">{{'Videos' | translate }} </p>
+        <p class="gallery-photo">{{'videos' | translate }} </p>
       </div>
       
       <div class="row mt-3">
         <div class="col-md-2 position-relative w-20" *ngFor="let image of userVideos">
           <video class="img-fluid" controls>
             <source src="{{imageBaseUrl}}{{image.file_name}}" type="video/mp4">
-            Your browser does not support the video tag.
+            {{ 'browserDoesNotSupport' | translate }}
           </video>        
         </div>
       </div>
@@ -37,14 +37,14 @@
         </clipPath>
         </defs>
         </svg>    
-        Upgrade to unlock
+       {{ 'upgradeToUnlock' | translate }}
       </button>
     </div> 
 </div>
 
 <div class="gallery-parent" *ngIf="isPremium">
     <div class="d-flex justify-content-between ">
-      <p class="gallery-photo">{{'Photos' | translate }} </p>
+      <p class="gallery-photo">{{'photos' | translate }} </p>
     </div>
     
     <div class="row mt-3">
@@ -54,14 +54,14 @@
     </div>
   
     <div class="d-flex justify-content-between mt-4">
-      <p class="gallery-photo">{{'Videos' | translate }} </p>
+      <p class="gallery-photo">{{'videos' | translate }} </p>
     </div>
     
     <div class="row mt-3">
       <div class="col-md-2 position-relative w-20" *ngFor="let image of userVideos">
         <video class="img-fluid" controls>
           <source src="{{imageBaseUrl}}{{image.file_name}}" type="video/mp4">
-          Your browser does not support the video tag.
+          {{ 'browserDoesNotSupport' | translate }}
         </video>        
       </div>
     </div>  

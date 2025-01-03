@@ -22,6 +22,30 @@ img.admin-logo {
   border-width: 2px;
   border-style: solid;
 }
+.dark-theme #theme-text{
+  display: none;
+}
+// .light-theme #dark-theme-text{
+//   display: none;
+// }
+.light-theme p#dark-theme-text {
+  display: none;
+}
+.dark-theme p#dark-theme-text {
+  display: block;
+  color: white;
+  margin-right: 5px;
+}
+.dark-theme p#light-theme-text {
+  display: none;
+}
+.light-theme .footer_main_inner a{
+  color: black;
+}
+.dark-theme .footer_main_inner a{
+  color: white;
+}
+
 .mat-pseudo-checkbox-full.mat-pseudo-checkbox-checked, .mat-pseudo-checkbox-full.mat-pseudo-checkbox-indeterminate {
   background-color: #148DE4 !important;
   border-color: rgba(0, 0, 0, 0);
@@ -1631,6 +1655,7 @@ input:checked+.slider:before {
   font-family: sans-serif, Poppins;
   font-size: 12px;
   font-weight: 400;
+  margin-right: 5px;
 }
 
 .view-all a {

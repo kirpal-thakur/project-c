@@ -1,64 +1,46 @@
 <div class="container mt-5">
   <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
-    <h2>About Page Form</h2>
+    <h2>{{ 'aboutPageForm' | translate }}</h2>
 
 
 
     <fieldset class="border p-3 mb-4">
       <div class="row">
         <div class="mb-3 col-md-6">
-          <label for="metaTitle" class="form-label">Meta Title</label>
+          <label for="metaTitle" class="form-label">{{ 'metaTitle' | translate }}</label>
           <input type="text" class="form-control" id="metaTitle" name="meta_title" [(ngModel)]="formData.meta_title" />
         </div>
         <div class="mb-3 col-md-6">
-          <label for="metaDescription" class="form-label">Meta Description</label>
-          <textarea class="form-control" id="metaDescription" name="meta_description" [(ngModel)]="formData.meta_description" rows="3"></textarea>
+          <label for="metaDescription" class="form-label">{{ 'metaDescription' | translate }}</label>
+          <textarea class="form-control" id="metaDescription" name="meta_description"
+            [(ngModel)]="formData.meta_description" rows="3"></textarea>
         </div>
       </div>
     </fieldset>
 
     <!-- About Banner Title -->
     <div class="mb-3">
-      <label for="about_banner_title" class="form-label">About Banner Title</label>
-      <input
-        type="text"
-        id="about_banner_title"
-        class="form-control"
-        name="about_banner_title"
-        [(ngModel)]="formData.about_banner_title"
-        required
-      />
+      <label for="about_banner_title" class="form-label">{{ 'aboutBannerTitle' | translate }}</label>
+      <input type="text" id="about_banner_title" class="form-control" name="about_banner_title"
+        [(ngModel)]="formData.about_banner_title" required />
     </div>
 
 
     <!-- About Banner Background Image -->
     <div class="mb-3">
-      <label for="about_banner_bg_img" class="form-label">About Banner Background Image</label>
-      <input
-        type="file"
-        id="about_banner_bg_img"
-        class="form-control"
-        (change)="onFileChange($event, 'about_banner_bg_img')"
-        required
-      />
-      
+      <label for="about_banner_bg_img" class="form-label">{{ 'aboutBannerBackgroundImage' | translate }}</label>
+      <input type="file" id="about_banner_bg_img" class="form-control"
+        (change)="onFileChange($event, 'about_banner_bg_img')" required />
+
       <div *ngIf="bannerBgimageLoaded" class="position-relative mt-2">
         <div class="image_cut">
-          <img
-            [src]="about_banner_bg_img"
-            alt="Preview"
-            class="img-thumbnail p-0"
-            style="max-width: 150px;"
-            (load)="bannerBgimageLoaded = true"
-          />
-          <div
-            class="close_image"
-            *ngIf="bannerBgimageLoaded"
-            (click)="removeImage('about_banner_bg_img')"
-          >
+          <img [src]="about_banner_bg_img" alt="Preview" class="img-thumbnail p-0" style="max-width: 150px;"
+            (load)="bannerBgimageLoaded = true" />
+          <div class="close_image" *ngIf="bannerBgimageLoaded" (click)="removeImage('about_banner_bg_img')">
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
-              <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+              <path
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
             </svg>
           </div>
         </div>
@@ -67,61 +49,37 @@
 
     <!-- About Banner Image -->
     <div class="mb-3">
-      <label for="about_banner_img" class="form-label">About Banner Image</label>
-      <input
-        type="file"
-        id="about_banner_img"
-        class="form-control"
-        (change)="onFileChange($event, 'about_banner_img')"
-        required
-      />
+      <label for="about_banner_img" class="form-label">{{ 'aboutBannerImage' | translate }}</label>
+      <input type="file" id="about_banner_img" class="form-control" (change)="onFileChange($event, 'about_banner_img')"
+        required />
       <div *ngIf="aboutBannerImagePreview" class="position-relative mt-2">
         <div class="image_cut">
-          <img
-            [src]="about_banner_img"
-            alt="Preview"
-            class="img-thumbnail p-0"
-            style="max-width: 150px;"
-            (load)="aboutBannerImagePreview = true"
-          />
-          <div
-            class="close_image"
-            *ngIf="aboutBannerImagePreview"
-            (click)="removeImage('about_banner_img')"
-          >
+          <img [src]="about_banner_img" alt="Preview" class="img-thumbnail p-0" style="max-width: 150px;"
+            (load)="aboutBannerImagePreview = true" />
+          <div class="close_image" *ngIf="aboutBannerImagePreview" (click)="removeImage('about_banner_img')">
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
-              <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+              <path
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
             </svg>
           </div>
         </div>
       </div>
     </div>
-   
+
 
     <!-- Countries Section Title -->
     <div class="mb-3">
-      <label for="country_section_title" class="form-label">Countries Section Title</label>
-      <input
-        type="text"
-        id="country_section_title"
-        class="form-control"
-        name="country_section_title"
-        [(ngModel)]="formData.country_section_title"
-        required
-      />
+      <label for="country_section_title" class="form-label">{{ 'countriesSectionTitle' | translate }}</label>
+      <input type="text" id="country_section_title" class="form-control" name="country_section_title"
+        [(ngModel)]="formData.country_section_title" required />
     </div>
 
     <!-- Country Names -->
     <div class="mb-3">
       <label class="form-label">Country Names</label>
       <mat-form-field class="w-100">
-        <mat-select
-          multiple
-          name="about_country_names"
-          [(ngModel)]="formData.about_country_names"
-          required
-        >
+        <mat-select multiple name="about_country_names" [(ngModel)]="formData.about_country_names" required>
           <mat-option *ngFor="let country of countries" [value]="country">
             {{ country }}
           </mat-option>
@@ -132,30 +90,18 @@
     <!-- Country Section Banner Image -->
     <div class="mb-3">
       <label for="country_section_banner_img" class="form-label">Country Section Banner Image</label>
-      <input
-        type="file"
-        id="country_section_banner_img"
-        class="form-control"
-        (change)="onFileChange($event, 'country_section_banner_img')"
-        required
-      />
+      <input type="file" id="country_section_banner_img" class="form-control"
+        (change)="onFileChange($event, 'country_section_banner_img')" required />
       <div *ngIf="aboutCountryBannerImagePreview" class="position-relative mt-2">
         <div class="image_cut">
-          <img
-            [src]="country_section_banner_img"
-            alt="Preview"
-            class="img-thumbnail p-0"
-            style="max-width: 150px;"
-            (load)="aboutCountryBannerImagePreview = true"
-          />
-          <div
-            class="close_image"
-            *ngIf="aboutCountryBannerImagePreview"
-            (click)="removeImage('country_section_banner_img')"
-          >
+          <img [src]="country_section_banner_img" alt="Preview" class="img-thumbnail p-0" style="max-width: 150px;"
+            (load)="aboutCountryBannerImagePreview = true" />
+          <div class="close_image" *ngIf="aboutCountryBannerImagePreview"
+            (click)="removeImage('country_section_banner_img')">
             <svg width="26px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
               <!-- SVG Content -->
-              <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+              <path
+                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
             </svg>
           </div>
         </div>
@@ -165,48 +111,31 @@
     <!-- Hero Heading Text -->
     <div class="mb-3">
       <label for="about_hero_heading_txt" class="form-label">Hero Heading Text</label>
-      <input
-        type="text"
-        id="about_hero_heading_txt"
-        class="form-control"
-        name="about_hero_heading_txt"
-        [(ngModel)]="formData.about_hero_heading_txt"
-        required
-      />
+      <input type="text" id="about_hero_heading_txt" class="form-control" name="about_hero_heading_txt"
+        [(ngModel)]="formData.about_hero_heading_txt" required />
     </div>
 
     <!-- Hero Button Text -->
     <div class="mb-3">
       <label for="about_hero_btn_txt" class="form-label">Hero Button Text</label>
-      <input
-        type="text"
-        id="about_hero_btn_txt"
-        class="form-control"
-        name="about_hero_btn_txt"
-        [(ngModel)]="formData.about_hero_btn_txt"
-        required
-      />
+      <input type="text" id="about_hero_btn_txt" class="form-control" name="about_hero_btn_txt"
+        [(ngModel)]="formData.about_hero_btn_txt" required />
     </div>
 
     <!-- Hero Button Link -->
     <div class="mb-3">
       <label for="about_hero_btn_link" class="form-label">Hero Button Link</label>
-      <input
-        type="text"
-        id="about_hero_btn_link"
-        class="form-control"
-        name="about_hero_btn_link"
-        [(ngModel)]="formData.about_hero_btn_link"
-        required
-      />
+      <input type="text" id="about_hero_btn_link" class="form-control" name="about_hero_btn_link"
+        [(ngModel)]="formData.about_hero_btn_link" required />
     </div>
 
-     <!-- About Banner Description -->
-     <div class="mb-3">
+    <!-- About Banner Description -->
+    <div class="mb-3">
       <label for="about_banner_desc" class="form-label">About Banner Description</label>
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
-        <ngx-editor [editor]="editor" class="editor-width" name="address" [(ngModel)]="formData.about_banner_desc" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <ngx-editor [editor]="editor" class="editor-width" name="address" [(ngModel)]="formData.about_banner_desc"
+          [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
       </div>
 
     </div>
