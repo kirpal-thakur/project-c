@@ -1,8 +1,8 @@
 <div appClickOutside (clickOutside)="onClickOutside()" class="p-0 parent-popup">
   <div class="p-4 bg-0C3453">
 
-    <h4 class="text-center title-text" *ngIf="!data">Create New Pop Up</h4>
-    <h4 class="text-center title-text" *ngIf="data">Edit Pop Up</h4>
+    <h4 class="text-center title-text" *ngIf="!data">{{ 'createNewPopUp' | translate }}</h4>
+    <h4 class="text-center title-text" *ngIf="data">{{ 'editPopUp' | translate }}</h4>
 
     <div class="close-img" (click)="close()">
     </div>
@@ -19,7 +19,7 @@
 
     <div class="d-flex  main-popup-div py-2 px-3 bg-0C3453">
         <div class="d-flex align-items-baseline ">
-          <h4 class="text-size fw-bold">For:</h4>
+          <h4 class="text-size fw-bold">{{ 'for:' | translate }}</h4>
           <!-- <div class="btn-group">
             <mat-select [(ngModel)]="selectedRole">
                 <mat-option [value]="0">All</mat-option>
@@ -54,7 +54,7 @@
           
         </div>
         <div  class="d-flex align-items-baseline" >
-         <h4 class="text-size fw-bold">Language:</h4>
+         <h4 class="text-size fw-bold">{{ 'language:' | translate }}</h4>
          <div class="btn-group">
             <mat-select [(ngModel)]="selectedLang" class="mat-select-div">
                 @for (lang of langs; track lang) {
@@ -68,7 +68,7 @@
           </div>
         </div>
         <div  class="d-flex align-items-baseline">
-          <h4 class="text-size fw-bold">Location:</h4>
+          <h4 class="text-size fw-bold">{{ 'location:' | translate }}</h4>
           <div class="btn-group">
               <mat-select [(ngModel)]="selectedLocation" class="mat-select-div">
                   @for (location of locations; track location) {
@@ -87,7 +87,7 @@
         <div>
             <mat-form-field class="marketing-calender-field">
                 <mat-date-range-picker #picker></mat-date-range-picker>
-                <mat-label class="label-enter-date-range">Enter a date range</mat-label>
+                <mat-label class="label-enter-date-range">{{ 'enterADateRange' | translate }}</mat-label>
                 <mat-date-range-input [rangePicker]="picker">
                   <input matStartDate placeholder="Start date" [(ngModel)]="startDate"  (dateChange)="onDateChange($event, 'startDate')">
                   <input matEndDate placeholder="End date" [(ngModel)]="endDate" (dateChange)="onDateChange($event, 'endDate')">
@@ -100,7 +100,7 @@
 
         </div> 
         <div class="d-flex align-items-center">
-            <h4 class="text-size fw-bold"> Display Freq: </h4>
+            <h4 class="text-size fw-bold"> {{ 'displayFreq:' | translate }} </h4>
             <div class="btn-group">
               <mat-select [(ngModel)]="selectedFrequency" class="mat-select-div">
                   @for (freq of frequency; track freq) {
@@ -126,11 +126,11 @@
       <div class=" d-flex justify-content-around bg-0C3453 p-3">
     
        <div>
-         <a class="btn btn-delete text-danger" (click)="close()">Cancel</a>
+         <a class="btn btn-delete text-danger" (click)="close()">{{ 'cancel' | translate }}</a>
        </div>
        <div>
-         <a class="btn Launch px-5" (click)="createPopup()" *ngIf="!data">Create and Launch</a>
-         <a class="btn Launch px-5" (click)="updatePopup()" *ngIf="data">Update</a>
+         <a class="btn Launch px-5" (click)="createPopup()" *ngIf="!data">{{ 'createAndLaunch' | translate }}</a>
+         <a class="btn Launch px-5" (click)="updatePopup()" *ngIf="data">{{ 'update' | translate }}</a>
        </div>
       </div>
     </div>

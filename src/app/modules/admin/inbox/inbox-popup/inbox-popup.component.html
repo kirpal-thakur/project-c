@@ -1,7 +1,7 @@
 <div class="position-relative w-100">
 
   <div class="p-3 w-100">
-    <div><h4 class="text-center mb-3 title-text">New Message</h4></div>
+    <div><h4 class="text-center mb-3 title-text">{{ 'newMessage' | translate }}</h4></div>
 
     <div class="close-img" (click)="close()">
     </div>
@@ -13,7 +13,7 @@
           <!-- <mat-label>To:</mat-label> -->
            <!-- <span>To:</span> -->
           <mat-chip-grid #chipGrid aria-label="Fruit selection " class="messanger-selector bg-white w-100 " >
-            <p>To:</p>
+            <p>{{ 'to:' | translate }}</p>
             @for (user of users; track $index) {
               <mat-chip-row (removed)="remove(user)">
                 <img width="20" height="20" class="img-list" src="../../../../../assets/images/1.jpg">
@@ -22,7 +22,7 @@
               </mat-chip-row>
             }
             <input
-              placeholder="Search users..."
+              placeholder="{{ 'searchUser' | translate }}"
               #userInput
               [matAutocomplete]="auto"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

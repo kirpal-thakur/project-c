@@ -38,13 +38,16 @@
     <h5 class="filter-text mb-1">{{ 'userType' | translate }}</h5>
     <div class="d-flex gap-3">
       <label class="btn btn-light filter-button-2" [class.activefilter]="userFilters['role'] == '4'">
-        <input type="radio" name="userType" value="Talent" hidden (click)="setFilter('role', '4')"> {{ 'talent' | translate }}
+        <input type="radio" name="userType" value="Talent" hidden (click)="setFilter('role', '4')"> {{ 'talent' |
+        translate }}
       </label>
       <label class="btn btn-light filter-button-2" [class.activefilter]="userFilters['role'] == '2'">
-        <input type="radio" name="userType" value="Club" hidden (click)="setFilter('role', '2')"> {{ 'club' | translate }}
+        <input type="radio" name="userType" value="Club" hidden (click)="setFilter('role', '2')"> {{ 'club' | translate
+        }}
       </label>
       <label class="btn btn-light filter-button-2" [class.activefilter]="userFilters['role'] == '3'">
-        <input type="radio" name="userType" value="Scout" hidden (click)="setFilter('role', '3')"> {{ 'scout' | translate }}
+        <input type="radio" name="userType" value="Scout" hidden (click)="setFilter('role', '3')"> {{ 'scout' |
+        translate }}
       </label>
     </div>
   </div>
@@ -52,10 +55,12 @@
     <h5 class="filter-text mb-1">{{ 'newsletterSubscription' | translate }}</h5>
     <div class="d-flex gap-3">
       <label class="btn btn-light filter-button-2" [class.activefilter]="userFilters['newsletter'] == '1'">
-        <input type="radio" name="newsletterSubscription" value="Yes" hidden (click)="setFilter('newsletter', '1')"> {{ 'yes' | translate }}
+        <input type="radio" name="newsletterSubscription" value="Yes" hidden (click)="setFilter('newsletter', '1')"> {{
+        'yes' | translate }}
       </label>
       <label class="btn btn-light filter-button-2" [class.activefilter]="userFilters['newsletter'] == '0'">
-        <input type="radio" name="newsletterSubscription" value="No" hidden (click)="setFilter('newsletter', '0')"> {{ 'no' | translate }}
+        <input type="radio" name="newsletterSubscription" value="No" hidden (click)="setFilter('newsletter', '0')"> {{
+        'no' | translate }}
       </label>
     </div>
   </div>
@@ -76,20 +81,23 @@
     <h5 class="filter-text mb-1">{{ 'userStatus' | translate }}</h5>
     <div class="d-flex gap-3">
       <label class="btn btn-light filter-button" [class.activefilter]="userFilters['status'] == '2'">
-        <input type="radio" name="userStatus" value="Approved" hidden (click)="setFilter('status', '2')"> {{ 'approved' | translate }}
+        <input type="radio" name="userStatus" value="Approved" hidden (click)="setFilter('status', '2')"> {{ 'approved'
+        | translate }}
       </label>
       <label class="btn btn-light filter-button" [class.activefilter]="userFilters['status'] == '1'">
-        <input type="radio" name="userStatus" value="Pending" hidden (click)="setFilter('status', '1')"> Pending
+        <input type="radio" name="userStatus" value="Pending" hidden (click)="setFilter('status', '1')"> {{ 'pending' |
+        translate }}
       </label>
       <label class="btn btn-light filter-button" [class.activefilter]="userFilters['status'] == '3'">
-        <input type="radio" name="userStatus" value="Rejected" hidden (click)="setFilter('status', '3')"> Rejected
+        <input type="radio" name="userStatus" value="Rejected" hidden (click)="setFilter('status', '3')">{{ 'rejected' |
+        translate }}
       </label>
     </div>
   </div>
   <div class="filter-bottom-button">
     <div class="filetr-child-button">
-      <button type="button" class="btn btn-delete" (click)="resetUserFilter()">Reset</button>
-      <button type="button" class="btn Launch" (click)="applyUserFilter()">Show Results</button>
+      <button type="button" class="btn btn-delete" (click)="resetUserFilter()">{{ 'reset' | translate }}</button>
+      <button type="button" class="btn Launch" (click)="applyUserFilter()">{{ 'showResults' | translate }}</button>
     </div>
   </div>
 </div>

@@ -36,7 +36,7 @@
           </g>
           </svg>
           </h6> -->
-      <span class="page-heading"> {{ 'TalentsTranslate.dashboard' | translate }}</span>
+      <span class="page-heading"> {{ 'dashboard' | translate }}</span>
     </div>
 
     <!-- <div class="input-group search-area">
@@ -73,14 +73,14 @@
 
       <div class="search-container w-75 ms-2">
         <!-- <mat-form-field class="w-100"> -->
-        <input matInput placeholder="Search" [formControl]="searchControl" [matAutocomplete]="auto"
+        <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl" [matAutocomplete]="auto"
           class="form-control w-100" />
         <mat-autocomplete class="suggestion-list" #auto="matAutocomplete"
           (optionSelected)="selectUser($event.option.value)">
           <!-- Show loader while loading -->
           <mat-option *ngIf="isLoading" class="loading-option" disabled>
             <div>
-              Loading...
+              {{ 'loading' | translate }}
             </div>
           </mat-option>
 
@@ -99,7 +99,7 @@
           <!-- Show "No results found" if no users are available -->
           <mat-option *ngIf="!isLoading && filteredUsers.length === 0" disabled>
             <div>
-              No results found.
+              {{ 'noResultFound' | translate }}
             </div>
           </mat-option>
         </mat-autocomplete>
@@ -239,7 +239,7 @@
           <div class="dropdown-menu py-0 notification-box" (click)="$event.stopPropagation()">
 
             <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
-              <h6>Notification</h6>
+              <h6>{{ 'notification' | translate }}</h6>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
                 height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -279,7 +279,7 @@
                 </div>
               </div>
               <div *ngIf="notificationCount > 3 || !isShowAllNotification" class="load_more">
-                <p (click)="loadMoreNotifications()">View all notifications</p>
+                <p (click)="loadMoreNotifications()">{{ 'viewAllNotifications' | translate }}</p>
               </div>
 
             </div>
@@ -291,7 +291,7 @@
             <img src="https://api.socceryou.ch/uploads/logos/{{language.flag}}" width="45" height="30" class="me-3">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <h6 class="mx-3 border-bottom pb-2 fs-15">Select Language</h6>
+            <h6 class="mx-3 border-bottom pb-2 fs-15">{{ 'selectALanguage' | translate }}</h6>
             <a href="javascript:void(0)" *ngFor="let domain of envLang" class="dropdown-item ai-icon "
               [class.selected]="lang===domain.slug" (click)="ChangeLang(domain.slug)">
               <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
@@ -306,9 +306,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
-            <span class="badgewarning">Super Admin</span>
+            <span class="badgewarning">{{ 'superAdmin' | translate }}</span>
             <br>
-            <a routerLink="/admin/setting" class="header-view-profile">View my Profile</a>
+            <a routerLink="/admin/setting" class="header-view-profile">{{ 'viewMyProfile' | translate }}</a>
 
             <a routerLink="/admin/setting" class="dropdown-item ai-icon px-0 py-2 border-bottom ">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
@@ -320,7 +320,7 @@
                     fill="#c2c2c2"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15">Activity Log</span>
+              <span class="ms-1 fs-15">{{ 'activityLog' | translate }}</span>
             </a>
             <a (click)="accountSetting()" class="dropdown-item ai-icon px-0 py-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
@@ -335,7 +335,7 @@
                     fill="#000000"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15">Account Setting</span>
+              <span class="ms-1 fs-15">{{ 'accountSettings' | translate }}</span>
             </a>
             <a href="#" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
               <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -344,7 +344,7 @@
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" y1="12" x2="9" y2="12"></line>
               </svg>
-              <span class="ms-1 fs-14">Sign out </span>
+              <span class="ms-1 fs-14">{{ 'signOut' | translate }}</span>
             </a>
 
 
