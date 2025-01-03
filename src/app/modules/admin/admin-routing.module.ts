@@ -19,18 +19,18 @@ const routes: Routes = [
     path:"",
     component: IndexComponent,
     children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-      {path: 'users', component: UsersComponent},
-      {path: 'inbox', component: InboxComponent},
-      {path: 'templates', component: TemplatesComponent},
-      {path: 'marketing', component: MarketingComponent},
-      {path: 'website', component: WebsiteComponent},
-      {path: 'setting', component: SettingComponent},
-      {path: 'player/:id', component: PlayerDetailComponent},
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'users', component: UsersComponent},
+      { path: 'inbox', component: InboxComponent},
+      { path: 'templates', component: TemplatesComponent},
+      { path: 'marketing', component: MarketingComponent},
+      { path: 'website', component: WebsiteComponent},
+      { path: 'setting', component: SettingComponent},
+      { path: 'player/:id', component: PlayerDetailComponent},
       { path: 'gallery-detail', component: GalleryTabComponent },
       { path: 'scout/:id', component: ScoutDetailComponent },
-      { path: 'club/:id', component: ClubDetailComponent },
+      { path: 'club/:id', component: ClubDetailComponent }
     ]
   }
 
