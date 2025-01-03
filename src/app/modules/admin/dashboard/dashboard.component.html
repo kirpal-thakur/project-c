@@ -298,15 +298,15 @@
 
             </div>
             <span> 
-              <div >
+              <div>
                 <select name="selectedYear" id="" [(ngModel)]="selectedYear" (ngModelChange)="setSelectedYear($event)">
                   <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
                 </select>
               </div>
           </span>
           </div>
-        </span>
       </div>
+      
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
           tabindex="0">
@@ -436,7 +436,6 @@
     </div>
     <app-footer></app-footer>
   </div>
-</div>
 
 <div class="right-sidebar">
   <div class="card pt-0 ">
@@ -508,6 +507,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <script>
