@@ -181,7 +181,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   getChardData(){
     try {
-    this.dashboardApi.getChartData(2024).subscribe((response)=>{
+    this.dashboardApi.getChartData(2025).subscribe((response)=>{
       if (response && response.status && response.data) {
        console.log('data',response.data)
        this.chartData = response.data;
