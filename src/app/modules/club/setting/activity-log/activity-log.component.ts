@@ -5,8 +5,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { ActivityService } from '../../../../services/activity';
-import {MatProgressSpinnerModule, ProgressSpinnerMode} from '@angular/material/progress-spinner';
-import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'talent-activity-log',
@@ -24,10 +22,6 @@ export class ActivityLogComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   idsToDelete: any = [];
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'indeterminate';
-  spinnerValue = 100;
-  dataloading: boolean = true;
 
   constructor(private activityService: ActivityService, public dialog: MatDialog){}
 
@@ -53,7 +47,7 @@ export class ActivityLogComponent {
       if (response && response.status && response.data && response.data.userData) {
         this.activities = response.data.userData; 
         this.paginator.length = response.data.totalCount;
-        this.dataloading = this.isLoading = false;
+        this.isLoading = false;
       } else {
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
@@ -93,14 +87,10 @@ export class ActivityLogComponent {
       this.showMessage('Select activity(s) first.');
       return false;
     }
+
     this.idsToDelete = this.selectedIds;
-    this.showDeleteConfirmationPopup();
+    this.showMatDialog("Are you sure you want to delete this Activity?","delete-activity-confirmation");
   }
-
-  showDeleteConfirmationPopup(){
-    this.showMatDialog("", "delete-activity-confirmation");
-  }
-
 
   deleteActivity():any {
     let params = {id:this.idsToDelete};
@@ -123,6 +113,7 @@ export class ActivityLogComponent {
   }
 
   showMatDialog(message:string, action:string){
+
     const messageDialog = this.dialog.open(MessagePopupComponent,{
       width: '500px',
       position: {
@@ -145,6 +136,6 @@ export class ActivityLogComponent {
 
   confirmSingleDeletion(id:any){
     this.idsToDelete = [id];
-    this.showMatDialog("Are you want to sure to delete this item?", "delete-favorite-confirmation");
+    this.showMatDialog("Are you sure you want to delete this Activity?", "delete-activity-confirmation");
   }
 }
