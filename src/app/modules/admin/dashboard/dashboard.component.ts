@@ -314,7 +314,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         },
       },
     });
+
   }
+
   updateChartBackgroundColor() {
     const isDarkMode = this.themeService.isDarkMode();
     const charts = [this.chart1, this.chart2, this.chart3];
@@ -349,7 +351,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode' : 'Light Mode';
-    document.getElementById('theme-text')!.textContent = this.themeText;
+   // document.getElementById('theme-text')!.textContent = this.themeText;
   }
 
   logout() {
