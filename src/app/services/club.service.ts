@@ -56,6 +56,15 @@ export class ClubService {
   private stripe!: any;
   private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
 
+  // Method to create common headers for all requests
+  private headers(): HttpHeaders {
+    return new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`,
+      // 'Domain': this.domain,
+      // 'Lang': this.lang
+    });
+  }
+
   async getStripe() {
     return await this.stripePromise;
   }
@@ -99,14 +108,6 @@ export class ClubService {
   }
 
 
-  // Method to create common headers for all requests
-  private headers(): HttpHeaders {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.userToken}`,
-      // 'Domain': this.domain,
-      // 'Lang': this.lang
-    });
-  }
 
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);

@@ -261,9 +261,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
-            <span class="badgewarning">Talent</span>
+            <span class="badgewarning">{{role.name}}</span>
             <br>
-            <a routerLink="/talent/dashboard" class="header-view-profile">View my Profile</a>
+            <a routerLink="/{{role.slug}}/dashboard" class="header-view-profile">View my Profile</a>
 
             <a (click)="navigateToTab('activity')"
               class="cursor-pointer dropdown-item ai-icon px-0 py-2 border-bottom ">

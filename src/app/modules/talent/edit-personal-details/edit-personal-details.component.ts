@@ -89,7 +89,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.dateOfBirth = new FormControl(
         this.user?.meta?.dateOfBirth ? new Date(this.user.meta.dateOfBirth) : null
       );
-     
+
       this.contractStart = new FormControl(
         this.user?.meta?.contract_start ? new Date(this.user.meta.contract_start) : null
       );
@@ -111,12 +111,12 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.dateOfBirth.setValue(this.user.meta.date_of_birth ? new Date(this.user.meta.date_of_birth) : null);
       this.contractStart.setValue(this.user.meta.contract_start ? new Date(this.user.meta.contract_start) : null);
       this.contractEnd.setValue(this.user.meta.contract_end ? new Date(this.user.meta.contract_end) : null);
-    
+
       this.userNationalities = JSON.parse(this.user.user_nationalities) || [];
-      
+
       // Ensure userNationalities is parsed correctly as an array of IDs only
       this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
-      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item => 
+      this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item =>
            String(item.country_id)
       ) : [];
 
@@ -124,48 +124,12 @@ export class EditPersonalDetailsComponent implements OnInit {
         this.currentClubId = this.user.meta.pre_club_id;
       }
     }
-    
+
   }
-  
+
   ngAfterViewInit(): void {
     // this.initGooglePlacesAutocomplete();
   }
-
-  // initGooglePlacesAutocomplete(): void {
-
-  //   if (this.placeOfBirthInput) {
-  //     const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
-  //       types: ['(cities)'],
-  //     });
-
-  //     autocomplete.addListener('place_changed', () => {
-  //       const place = autocomplete.getPlace();
-  //       if (place && place.address_components) {
-  //         this.placeOfBirth = place.formatted_address || '';
-  //       }
-  //     });
-  //   }
-
-  // }
-  
-  // ngAfterViewInit(): void {
-  //   this.setupPlaceAutocomplete();
-  // }
-
-  // setupPlaceAutocomplete() {
-  //   fromEvent(this.placeOfBirthInput.nativeElement, 'input')
-  //     .pipe(
-  //       debounceTime(300),          // Wait for 300ms pause in events
-  //       distinctUntilChanged(),      // Only emit if the value has changed
-  //       switchMap((event: any) => {
-  //         const input = event.target.value;
-  //         return this.authService.getPlacePredictions(input);
-  //       })
-  //     )
-  //     .subscribe((response: any) => {
-  //       this.placeSuggestions = response.predictions || [];
-  //     });
-  // }
 
   onSelectSuggestion(place: any): void {
     this.placeOfBirthInput.nativeElement.value = place.description;

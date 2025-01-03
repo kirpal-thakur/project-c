@@ -9,10 +9,10 @@ export const environment = {
     stripePublishableKey: 'pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a', // Your Stripe publishable key for production
 
     roles:[
-      { role: "Admin", id: 1 },
-      { role: "Club", id: 2 },
-      { role: "Scout", id: 3 },
-      { role: "Player", id: 4 },
+      { role: "Admin", name: "Admin", slug:"admin", id: 1 },
+      { role: "Club", name: "Club", slug:"club", id: 2 },
+      { role: "Scout", name: "Scout", slug:"scout", id: 3 },
+      { role: "Player", name: "Talent", slug:"talent", id: 4 },
     ],
     adminLangs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
