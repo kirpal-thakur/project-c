@@ -777,5 +777,14 @@
     "paid": "Bezahlt",
     "free": "Kostenlos"
   },
-    "uses": "verwendet"
+  "editors": {
+    "placeholder": "Tippen Sie hier..."
+  },
+  "tooltip": {
+    "totalUsers": "Gesamte Benutzer: {{count}}",
+    "totalSales": "Gesamtverkäufe: {{count}}",
+    "totalSubscriptions": "Gesamtabonnements: {{count}}"
+  },
+    "uses": "verwendet",
+    "news": "Nachrichten"
 }

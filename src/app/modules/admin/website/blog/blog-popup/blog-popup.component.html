@@ -37,7 +37,7 @@
 
   </div>
   <div class="d-flex align-items-baseline py-2 bg-0C3453 px-3 template-name-input">
-    <h4 class="text-size" style="margin-right: 5px;">Meta Description:</h4>
+    <h4 class="text-size" style="margin-right: 5px;">{{ 'metaDescription' | translate }}:</h4>
     <input type="text" class="template-name-inputField add_custom_width" [(ngModel)]="meta_description">
   </div>
   <div *ngIf="errorMsg.meta_description" class="error-msg" style="padding-left:60px;">{{errorMsg.meta_description}}
@@ -107,7 +107,7 @@
       </div>
     </div>
     <div class="d-flex align-items-baseline">
-      <h4 class="text-size fw-bold">{{ featuredImage' | translate }}:</h4>
+      <h4 class="text-size fw-bold">{{ 'featuredImage' | translate }}: </h4>
       <div class="btn-group">
         <input type="file" class="form-control" (change)="onImageChange($event)" accept="image/*" />
       </div>
@@ -119,7 +119,7 @@
   <div class="NgxEditor__Wrapper">
     <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
     <ngx-editor [editor]="editor" class="editor-width" [(ngModel)]="content" [disabled]="false"
-      [placeholder]="'Type here...'"></ngx-editor>
+      [placeholder]="'editors.placeholder' | translate"></ngx-editor>
     <div *ngIf="errorMsg.content" class="error-msg" style="padding-left:20px;">{{errorMsg.content}}</div>
   </div>
 

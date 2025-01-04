@@ -303,12 +303,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
             },
 
             callbacks: {
-              label: function (tooltipItem: any) {
-                return  "Total Users:" + ` ${tooltipItem.raw}`;
-              },
-
-
+              label: (tooltipItem: any) => {
+                return this.translateService.instant('tooltip.totalUsers', { count: tooltipItem.raw });
+              }
             },
+            
             displayColors: false,
           },
         },

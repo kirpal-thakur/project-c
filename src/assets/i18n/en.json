@@ -819,5 +819,15 @@
     "paid": "Paid",
     "free": "Free"
   },
-  "uses": "Uses"
+  "editors": {
+    "placeholder": "Type here..."
+  },
+  "tooltip": {
+    "totalUsers": "Total Users: {{count}}",
+    "totalSales": "Total Sales: {{count}}",
+    "totalSubscriptions": "Total Subscriptions: {{count}}"
+    
+  },
+  "uses": "Uses",
+  "news": "News"
 }
