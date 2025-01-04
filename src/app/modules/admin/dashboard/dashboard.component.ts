@@ -409,7 +409,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   generateYears() {
-    const startYear = 2024;
+    const startYear = this.selectedYear;
     const currentYear = new Date().getFullYear();
     console.log('currentYear',currentYear);
     // Populate the years array from startYear to currentYear
