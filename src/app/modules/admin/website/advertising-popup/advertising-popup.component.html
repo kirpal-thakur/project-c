@@ -135,7 +135,7 @@
                 (change)="onNoEndDateChange($event)"
               />
             </label>
-          </span> {{ 'don'tsetAnEnd' | translate }}
+          </span> {{ 'dontsetAnEnd' | translate }}
         </div>
 
       </div>
@@ -189,14 +189,14 @@
      <div class="d-flex mb-3 add-banners ">
       <div>
       <p  class="code-text">
-        Max Views
+        {{ 'maxViews' | translate }}
       </p>
         <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
         <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
       </div>
       <div class="ms-3">
         <p  class="code-text">
-          Max Clicks
+          {{ 'maxClicks' | translate }}
         </p>
         <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
         <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
@@ -247,7 +247,7 @@
     <div class="p-0 code-parent">
       <div class="bg-0C3453 p-4">
         <h6 class=" code-text text-center " >
-         Advertising
+          {{ 'advertising' | translate }}
         </h6>
         <div (click)="close()" class="close-img mb-1" >
        </div>
@@ -262,7 +262,7 @@
       <div class="d-flex mb-3">
         <div>
         <p  class="code-text">
-         Name
+          {{ 'name' | translate }}
         </p>
           <div class="cupen-btn-1  code-text">
             {{name}}
@@ -270,7 +270,7 @@
         </div>
         <div class="ms-5">
           <p  class="code-text">
-            On click redirect to url:
+            {{ 'clickDirectUrl' | translate }}
           </p>
             <div class="cupen-btn-1  code-text">
               {{redirect}}
@@ -281,7 +281,7 @@
        <div class="d-flex mb-3">
         <div>
           <p  class="code-text">
-          Page
+            {{ 'page' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{pageName}}
@@ -289,7 +289,7 @@
         </div>
         <div class="ms-5">
           <p  class="code-text">
-          Type
+            {{ 'type' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{typeForView}}
@@ -308,7 +308,7 @@
 
       <div class="mb-3">
         <p  class="code-text">
-          Display Duration
+          {{ 'displayDuration' | translate }}
         </p>
         <div class="d-flex">
 
@@ -395,7 +395,7 @@
                   [(ngModel)]="noEndDate"
                 />
               </label>
-            </span> Don't set an end date
+            </span> {{ 'don'tSetDate' | translate }}
           </div>
 
         </div>
@@ -413,7 +413,7 @@
         </div>
         <div class="ms-3">
           <p  class="code-text">
-            Max Clicks
+            {{ 'maxClicks' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{maxClicks}}
