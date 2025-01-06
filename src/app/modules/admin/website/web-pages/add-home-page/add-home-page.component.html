@@ -1,6 +1,9 @@
 @if(!showTabForm){
-  <div class="container mt-5">
+  <div class="container mt-3">
+    <h2 class="mb-3">Home Page</h2>
+
     <form [formGroup]="addHomePageForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+
       <!-- General Information Block -->
       <fieldset *ngIf="!pageId" class="border p-3 mb-4">
         <legend class="w-auto px-2">Language Information</legend>
@@ -10,9 +13,9 @@
             <select class="form-select" id="langId" formControlName="lang_id">
               <option value="" disabled selected>Select a language</option>
               @if(languages && languages.length > 0){
-              @for (language of languages; track $index) {
-              <option value="{{language.id}}">{{language.language}}</option>
-              }
+                @for (language of languages; track $index) {
+                  <option value="{{language.id}}">{{language.language}}</option>
+                }
               }
             </select>
           </div>
@@ -203,10 +206,13 @@
       <!-- Submit Button -->
       <button type="submit" class="btn btn-primary mb-3">Next</button>
     </form>
+
   </div>
   }@else{
 
-    <div class="container mt-5">
+    <div class="container mt-3">
+      <h2 class="mb-3">Tab Section</h2>
+
       <form (ngSubmit)="onTabFormSubmit()" #myForm="ngForm" enctype="multipart/form-data">
         <!-- Tab Section -->
         <fieldset class="border p-3 mb-4">
@@ -230,41 +236,58 @@
         <!-- First Tab Section -->
         <fieldset class="border p-3 mb-4">
           <legend class="w-auto px-2">First Tab Section</legend>
-          <div *ngFor="let tab of first_tab; let index = index" class="row">
+          <div *ngFor="let firstTab of first_tab; let firstIndex = index" class="row">
             <div class="mb-3 col-md-6">
               <label class="form-label">Images</label>
               <input
                 type="file"
                 class="form-control"
-                (change)="handleTabFilesInput($event, index, 'first_tab')"
+                (change)="handleTabFilesInput($event, firstIndex, 'first_tab')"
                 multiple
               />
               <!-- Preview Images -->
               <div class="mt-2">
-                <div *ngFor="let preview of tab.imagePreviews; let i = index" class="d-inline-block position-relative me-2">
-                  <img [src]="preview" alt="Preview" class="img-thumbnail" style="width: 100px; height: 100px;" />
+                <div
+                  *ngFor="let preview of firstTab.imagePreviews; let i = index"
+                  class="d-inline-block position-relative me-2"
+                >
+                  <img
+                    [src]="preview"
+                    alt="Preview"
+                    class="img-thumbnail"
+                    style="width: 100px; height: 100px;"
+                  />
                   <div
                     class="close_image"
-                    (click)="removeTabImage('first_tab', index, i)"
+                    (click)="removeTabImage('first_tab', firstIndex, i)"
                     style="position: absolute; top: 0; right: 0; cursor: pointer;"
                   >
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26px">
-                    <path
-                      d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-                    />
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26px">
+                      <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label">Title</label>
-              <input type="text" class="form-control" [(ngModel)]="tab.title" [name]="'title' + index" />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="firstTab.title"
+                [name]="'first_tab_title_' + firstIndex"
+              />
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label">Description</label>
-              <input type="text" class="form-control" [(ngModel)]="tab.desc" [name]="'desc' + index" />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="firstTab.desc"
+                [name]="'first_tab_desc_' + firstIndex"
+              />
             </div>
           </div>
         </fieldset>
@@ -272,41 +295,58 @@
         <!-- Second Tab Section -->
         <fieldset class="border p-3 mb-4">
           <legend class="w-auto px-2">Second Tab Section</legend>
-          <div *ngFor="let tab of second_tab; let index = index" class="row">
+          <div *ngFor="let secondTab of second_tab; let secondIndex = index" class="row">
             <div class="mb-3 col-md-6">
               <label class="form-label">Images</label>
               <input
                 type="file"
                 class="form-control"
-                (change)="handleTabFilesInput($event, index, 'second_tab')"
+                (change)="handleTabFilesInput($event, secondIndex, 'second_tab')"
                 multiple
               />
               <!-- Preview Images -->
               <div class="mt-2">
-                <div *ngFor="let preview of tab.imagePreviews; let i = index" class="d-inline-block position-relative me-2">
-                  <img [src]="preview" alt="Preview" class="img-thumbnail" style="width: 100px; height: 100px;" />
+                <div
+                  *ngFor="let preview of secondTab.imagePreviews; let i = index"
+                  class="d-inline-block position-relative me-2"
+                >
+                  <img
+                    [src]="preview"
+                    alt="Preview"
+                    class="img-thumbnail"
+                    style="width: 100px; height: 100px;"
+                  />
                   <div
                     class="close_image"
-                    (click)="removeTabImage('second_tab', index, i)"
+                    (click)="removeTabImage('second_tab', secondIndex, i)"
                     style="position: absolute; top: 0; right: 0; cursor: pointer;"
                   >
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26px">
-                    <path
-                      d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-                    />
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="26px">
+                      <path
+                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label">Title</label>
-              <input type="text" class="form-control" [(ngModel)]="tab.title" [name]="'title' + index" />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="secondTab.title"
+                [name]="'second_tab_title_' + secondIndex"
+              />
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label">Description</label>
-              <input type="text" class="form-control" [(ngModel)]="tab.desc" [name]="'desc' + index" />
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="secondTab.desc"
+                [name]="'second_tab_desc_' + secondIndex"
+              />
             </div>
           </div>
         </fieldset>
@@ -314,6 +354,7 @@
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary mb-3">Update Page</button>
       </form>
+
     </div>
 
 

@@ -24,16 +24,7 @@ export class AdvertisingPopupComponent   {
               '160 x 600 - Wide Skyscraper'
           ];
   
-  pageOptions: any = [
-    {id:1, page:'Home'},
-    {id:1, page:'Talents'},
-    {id:1, page:'Clubs & Scouts'},
-    {id:1, page:'About'},
-    {id:1, page:'Blog'},
-    {id:1, page:'Contact'},
-    {id:1, page:'Login'},
-    {id:1, page:'Sign Up'}
-  ];
+  pageOptions: any = [];
   idToEdit:any = '';
   name: any = "";
   redirect:any = "";
@@ -116,6 +107,7 @@ export class AdvertisingPopupComponent   {
     let date = this.formatDate(selectedDate);
     if(dateType == 'start'){
       this.startDate = date;
+      console.log(this.startDate)
     }else if(dateType == 'end'){
       this.endDate = date;
     }
@@ -156,7 +148,7 @@ export class AdvertisingPopupComponent   {
       // formdata.append("profile_image", this.imageToUpload);
       // this.imageLoading = true;
       // this.userService.updateAdminImage(formdata).subscribe((response)=>{
-      //   if (response && response.status) {        
+      //   if (response && response.status) {
       //     // this.isLoading = false;
       //     this.imageLoading = false;
       //     this.showMatDialog("Profile image updated successfully!", 'display')
@@ -166,7 +158,7 @@ export class AdvertisingPopupComponent   {
       //     console.error('Invalid API response structure:', response);
       //     this.showMatDialog("Error in uploading image", 'display')
       //   }
-      // }); 
+      // });
     }
   }
 
