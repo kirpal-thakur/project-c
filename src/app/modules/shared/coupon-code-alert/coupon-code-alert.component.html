@@ -9,14 +9,8 @@
   <div class="modal-body">
     <!-- Form field for coupon code -->
     <div class="my-2">
-      <input
-        type="text"
-        class="form-control"
-        id="couponCode"
-        [(ngModel)]="couponCode"
-        placeholder="{{'Enter your coupon code' | translate}}"
-        (input)="onCouponInput()"
-      />
+      <input type="text" class="form-control" id="couponCode" [(ngModel)]="couponCode"
+        placeholder="{{'Enter your coupon code' | translate}}" (input)="onCouponInput()" />
 
       <!-- Display error message if coupon is invalid -->
       <div *ngIf="couponError" class="text-danger mt-2">
@@ -40,13 +34,8 @@
   <!-- Dialog footer -->
   <div class="modal-footer mt-1">
     <!-- Disable Apply button if the coupon code is invalid or empty -->
-    <button
-      *ngIf="!couponApplied"
-      type="button"
-      class="btn btn-success coupon-btn"
-      [disabled]="!couponCode.trim()"
-      (click)="applyCoupon()"
-    >
+    <button *ngIf="!couponApplied" type="button" class="btn btn-success coupon-btn" [disabled]="!couponCode.trim()"
+      (click)="applyCoupon()">
       {{ 'checkCoupon' | translate }}
     </button>
 
