@@ -25,6 +25,7 @@ export class CommonFilterPopupComponent {
 
   selectedRoleId:any = "";
   selectedLanguageId:any = "";
+  selectedLanguage:any = "";
   selectedFrequency:any = "";
   selectedLocation: any = "";
   selectedPage:any = "";
@@ -71,7 +72,7 @@ export class CommonFilterPopupComponent {
 
     }
 
-    
+
     if(this.page == "advertisement"){
       this.pages = data.pages;
       this.types = data.types;
@@ -81,6 +82,15 @@ export class CommonFilterPopupComponent {
       }
       if(this.userFilters['type']){
         this.selectedtype = this.userFilters['type'];
+      }
+    }
+
+    if(this.page == "webpages"){
+      this.languages = data.languages;
+      this.types = data.types;
+
+      if(this.userFilters['language']){
+        this.selectedLanguage = this.userFilters['language'];
       }
     }
     // this.userFilters = data.filters;

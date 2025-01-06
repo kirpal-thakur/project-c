@@ -27,19 +27,17 @@ export class WebPages {
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pages`, {params}
         );
-
-
     }
 
-    getFrontendPages(lang_id:any): Observable<any> {
+    getFrontendPages(lang_id:any,status:any=''): Observable<any> {
 
         if(lang_id)
-        return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}`
+            return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}&status=${status}`
         );
         else
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}`
+            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}&status=${status}`
         );
 
     }

@@ -41,30 +41,36 @@ export class AdvertisingComponent {
     '160 x 600 - Wide Skyscraper'
   ];
 
-  pageOptions: any = [
-    {id:1, page:'Home'},
-    {id:1, page:'Talents'},
-    {id:1, page:'Clubs & Scouts'},
-    {id:1, page:'About'},
-    {id:1, page:'Blog'},
-    {id:1, page:'Contact'},
-    {id:1, page:'Login'},
-    {id:1, page:'Sign Up'}
-  ];
+  pageOptions: any = [  ];
 
   constructor(private advertisementService: AdvertisementService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     
      this.getAdvertisements();
+     this.getPagesList();
+  }
+
+  getPagesList(){
+
+    this.advertisementService.getPageAds().subscribe((response) => {
+      let {pages} = response.data;
+
+      this.pageOptions = pages.map((value: any) => {
+        return {
+          id: value.id,
+          page: value.title
+        }
+      });
+    });
+
   }
 
   getAdvertisements(filterApplied:boolean = false) {
+
     this.isLoading = true;
     let params:any = {};
-    // params.offset = page;
     params.search = this.filterValue;
-    // params.limit  = pageSize;  
 
     if(this.customFilters['page_name']){
       params = {...params, "whereClause[page_name]" : this.customFilters['page_name']};
@@ -77,7 +83,7 @@ export class AdvertisingComponent {
     if(this.customFilters['type']){
       params = {...params, "whereClause[type]" : this.customFilters['type']};
     }
-    
+
     try {
      this.advertisementService.getAdvertisements(params).subscribe((response)=>{
       if (response && response.status && response.data && response.data.advertisements) {
@@ -94,6 +100,7 @@ export class AdvertisingComponent {
       this.isLoading = false;
       console.error('Error fetching advertisements:', error);
     }
+
   }
 
 
