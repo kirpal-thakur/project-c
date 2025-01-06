@@ -98,7 +98,7 @@ export class WebPagesComponent {
     }
 
     if(this.customFilters['status']){
-      params = {...params, "whereClause[status]" : this.customFilters['status']};
+      params = {...params, "status" : this.customFilters['status']};
     }
 
     this.webpages.getAllPages(this.lang_id,params).subscribe((response) => {
