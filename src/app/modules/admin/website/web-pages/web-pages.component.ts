@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { WebPages } from '../../../../services/webpages.service';
 import { DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +8,7 @@ import { MessagePopupComponent } from '../../message-popup/message-popup.compone
 import { Router } from '@angular/router';
 import { AddPageComponent } from './add-page/add-page.component';
 import { SharedService } from '../../../../services/shared.service';
+import { CommonFilterPopupComponent } from '../../common-filter-popup/common-filter-popup.component';
 interface WebPage {
   id: string;
   user_id: string;
@@ -40,6 +41,8 @@ export class WebPagesComponent {
   pages:any = [];
   lang_id: any = localStorage.getItem('lang_id');
 
+  customFilters:any = [];
+  languages:any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -53,8 +56,28 @@ export class WebPagesComponent {
             this.getAllPagesData();
         }
     });
+
+    this.getAllLanguages();
     //this.sharedservice.data$
     //lang_updated
+  }
+
+  getAllLanguages(){
+    this.webpages.getAllLanguage().subscribe((response) => {
+      if(response.status){
+        console.log(response);
+        let languages = response.data.languages;
+
+
+        this.languages = languages.map((value: any) => {
+          return {
+            id: value.id,
+            language: value.language
+          }
+        });
+        console.log(this.languages)
+      }
+    });
   }
 
   applyFilter(filterValue:any) {
@@ -69,7 +92,15 @@ export class WebPagesComponent {
   getAllPagesData(){
     let params:any = {};
     params.search = this.filterValue;
-   
+
+    if(this.customFilters['language']){
+      params = {...params, "lang_id" : this.customFilters['language']};
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
     this.webpages.getAllPages(this.lang_id,params).subscribe((response) => {
       if(response.status){
         this.allPages = response.data.pages.map((page: any) => ({
@@ -77,6 +108,32 @@ export class WebPagesComponent {
           created_at: this.formatDate(page.created_at),
           updated_at: this.formatDate(page.updated_at),
         }));
+      }
+    });
+  }
+
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '225px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'webpages',
+        appliedfilters:this.customFilters,
+        languages: this.languages,
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
       }
     });
   }
@@ -216,11 +273,29 @@ export class WebPagesComponent {
   }
 
   getFrontendPages(){
+
+    let params:any = {};
+    params.search = this.filterValue;
+
+    if(this.customFilters['language']){
+      this.lang_id =  this.customFilters['language'];
+    }
+
+    if(this.customFilters['status']){
+      params = {...params, "whereClause[status]" : this.customFilters['status']};
+    }
+
     this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
       if (response.status) {
         this.pages = response.data.pages;
       }
     });
+  }
+
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getAllPagesData();
   }
 
 }

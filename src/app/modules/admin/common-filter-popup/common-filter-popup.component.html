@@ -65,11 +65,6 @@
 </div>
 
 
-
-
-
-
-
 <div class="p-1" *ngIf="page == 'template'">
     <div class="shadow-sm p-1 mb-1 bg-body rounded">
         <h5 class="filter-text mb-1">{{ 'userType' | translate }}</h5>
@@ -141,48 +136,83 @@
   
 <div class="p-1" *ngIf="page == 'advertisement'">
 
-    <div class="shadow-sm p-1 mb-1 bg-body rounded">
-        <h5 class="filter-text mb-1">{{ 'page' | translate }}</h5>
-        <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['page_name']">
-          <select [(ngModel)]="selectedPage" class="location-filter" [class.activefilter] = "userFilters['page_name']" (change)="onChange($event, 'page_name')">
-            <option value="">{{ 'selectPage' | translate }}</option>
-            <option *ngFor="let page of pages" [value]="page.page" 
-                    [selected]="page.page == selectedPage">{{ page.page }}</option>
-          </select>
-        </label>
-    </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+      <h5 class="filter-text mb-1">{{ 'page' | translate }}</h5>
+      <label class="btn btn-light filter-button w-100" [class.activefilter] = "userFilters['page_name']">
+        <select [(ngModel)]="selectedPage" class="location-filter " [class.activefilter] = "userFilters['page_name']" (change)="onChange($event, 'page_name')">
+          <option value="">{{ 'selectPage' | translate }}</option>
+          <option *ngFor="let page of pages" [value]="page.page" 
+                  [selected]="page.page == selectedPage">{{ page.page }}</option>
+        </select>
+      </label>
+  </div>
 
-    <div class="shadow-sm p-1 mb-1 bg-body rounded">
-        <h5 class="filter-text mb-1">{{ 'type' | translate }}</h5>
-        <label class="btn btn-light filter-button" style="width:215px;" [class.activefilter] = "userFilters['type']">
-          <select [(ngModel)]="selectedtype" class="location-filter" [class.activefilter] = "userFilters['type']" (change)="onChange($event, 'type')">
-            <option value="">{{ 'selectType' | translate }}</option>
-            <option *ngFor="let type of types" [value]="type" 
-                    [selected]="type == selectedtype">{{ type }}</option>
-          </select>
-        </label>
-    </div>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+      <h5 class="filter-text mb-1">{{ 'type' | translate }}</h5>
+      <label class="btn btn-light filter-button" style="width:215px;" [class.activefilter] = "userFilters['type']">
+        <select [(ngModel)]="selectedtype" class="location-filter" [class.activefilter] = "userFilters['type']" (change)="onChange($event, 'type')">
+          <option value="">{{ 'selectType' | translate }}</option>
+          <option *ngFor="let type of types" [value]="type" 
+                  [selected]="type == selectedtype">{{ type }}</option>
+        </select>
+      </label>
+  </div>
 
-    <div class="shadow-sm p-1 mb-1 bg-body rounded">
-        <h5 class="filter-text mb-1">{{ 'status' | translate }}</h5>
-        <div class="d-flex gap-3">
-            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'published'">
-              <input type="radio" name="status" value="published" hidden (click)="setFilter('status', 'published')">{{ 'published' | translate }}
-            </label>
-            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'draft'">
-              <input type="radio" name="status" value="draft" hidden (click)="setFilter('status', 'draft')"> {{ 'draft' | translate }}
-            </label>
-            <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'expired'">
-                <input type="radio" name="status" value="expired" hidden (click)="setFilter('status', 'expired')"> {{ 'expired' | translate }}
-            </label>
-        </div>
-    </div>
-
-    <div class="filter-bottom-button">
-      <div class="filetr-child-button">
-        <button type="button" class="btn btn-delete" (click)="resetUserFilter()">{{ 'reset' | translate }}</button>
-        <button type="button" class="btn Launch" (click)="applyUserFilter()">{{ 'showResults' | translate }}</button>
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+      <h5 class="filter-text mb-1">{{ 'status' | translate }}</h5>
+      <div class="d-flex gap-3">
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'published'">
+            <input type="radio" name="status" value="published" hidden (click)="setFilter('status', 'published')">{{ 'published' | translate }}
+          </label>
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'draft'">
+            <input type="radio" name="status" value="draft" hidden (click)="setFilter('status', 'draft')"> {{ 'draft' | translate }}
+          </label>
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'expired'">
+              <input type="radio" name="status" value="expired" hidden (click)="setFilter('status', 'expired')"> {{ 'expired' | translate }}
+          </label>
       </div>
+  </div>
+
+  <div class="filter-bottom-button">
+    <div class="filetr-child-button">
+      <button type="button" class="btn btn-delete" (click)="resetUserFilter()">{{ 'reset' | translate }}</button>
+      <button type="button" class="btn Launch" (click)="applyUserFilter()">{{ 'showResults' | translate }}</button>
     </div>
+  </div>
 </div>
-  
+
+<div class="p-2 mt-3" *ngIf="page == 'webpages'">
+
+  <div class="shadow-sm p-1 mb-1 bg-body rounded">
+      <h5 class="filter-text mb-1">{{ 'language' | translate }}</h5>
+      <label class="btn btn-light filter-button w-100" [class.activefilter] = "userFilters['language']">
+        <select [(ngModel)]="selectedLanguage" class="location-filter " [class.activefilter] = "userFilters['language']" (change)="onChange($event, 'language')">
+          <option value="">{{ 'selectLanguage' | translate }}</option>
+          <option *ngFor="let page of languages" [value]="page.id"
+                  [selected]="page.id == selectedLanguage">{{ page.language }}</option>
+        </select>
+      </label>
+  </div>
+
+  <div class="shadow-sm p-1 mb-3 bg-body rounded">
+      <h5 class="filter-text mb-1">{{ 'status' | translate }}</h5>
+      <div class="d-flex gap-3">
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'published'">
+            <input type="radio" name="status" value="published" hidden (click)="setFilter('status', 'published')">{{ 'published' | translate }}
+          </label>
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'draft'">
+            <input type="radio" name="status" value="draft" hidden (click)="setFilter('status', 'draft')"> {{ 'draft' | translate }}
+          </label>
+          <label class="btn btn-light filter-button" [class.activefilter] = "userFilters['status'] == 'expired'">
+              <input type="radio" name="status" value="expired" hidden (click)="setFilter('status', 'expired')"> {{ 'expired' | translate }}
+          </label>
+      </div>
+  </div>
+
+  <div class="filter-bottom-button">
+    <div class="filetr-child-button">
+      <button type="button" class="btn btn-delete" (click)="resetUserFilter()">{{ 'reset' | translate }}</button>
+      <button type="button" class="btn Launch" (click)="applyUserFilter()">{{ 'showResults' | translate }}</button>
+    </div>
+  </div>
+</div>

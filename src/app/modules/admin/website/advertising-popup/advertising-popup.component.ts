@@ -92,7 +92,7 @@ export class AdvertisingPopupComponent   {
     this.advertisementService.getPageAds().subscribe((response) => {
       let {pages} = response.data;
       console.log('pages',pages)
-      // pageOptions
+
       this.pageOptions = pages.map((value: any) => {
         return {
           id: value.id,
@@ -107,7 +107,6 @@ export class AdvertisingPopupComponent   {
     let date = this.formatDate(selectedDate);
     if(dateType == 'start'){
       this.startDate = date;
-      console.log(this.startDate)
     }else if(dateType == 'end'){
       this.endDate = date;
     }

@@ -27,8 +27,6 @@ export class WebPages {
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pages`, {params}
         );
-
-
     }
 
     getFrontendPages(lang_id:any): Observable<any> {
