@@ -29,6 +29,7 @@ export class TemplatePopupComponent  implements OnInit, OnDestroy  {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
   content: string = '';
   isLoading:boolean = false
   error:boolean = false
