@@ -280,9 +280,9 @@ export class AddHomePageComponent {
         })
         // this.addHomePageForm.value.lang_id = response.data.pageData.
 
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
-        this.heroBgImagePreview = response.data.base_url + response.data.pageData.banner_img;
-        this.bannerBgImagePreview = response.data.base_url + response.data.pageData.hero_bg_img;
+        this.bannerBgImagePreview = response?.data?.pageData?.banner_bg_img ? response.data.base_url + response.data.pageData.banner_bg_img : null;
+        this.bannerImagePreview  = response?.data?.pageData?.banner_img ? response.data.base_url + response.data.pageData.banner_img : null;
+        this.heroBgImagePreview = response?.data?.pageData?.hero_bg_img ? response.data.base_url + response.data.pageData.hero_bg_img : null;
 
         this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
         this.first_tab = response.data.pageData.tabs_data.first_tab;
@@ -339,7 +339,7 @@ export class AddHomePageComponent {
 
 
   removeImage(fieldName: string): void {
-    this.filesData[fieldName] = 'remove_img';
+    this.filesData[fieldName] = 'remove_image';
     if (fieldName === 'banner_img') {
       this.bannerImagePreview = null;
     } else if (fieldName === 'banner_bg_img') {
