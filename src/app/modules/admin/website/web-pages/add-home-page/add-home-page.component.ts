@@ -20,6 +20,7 @@ interface Language {
   templateUrl: './add-home-page.component.html',
   styleUrl: './add-home-page.component.scss'
 })
+
 export class AddHomePageComponent {
   @Input() pageId: any;
   @Input() languages: Language[] = [];
@@ -278,7 +279,6 @@ export class AddHomePageComponent {
           meta_title: response.data.meta_title,
           meta_description: response.data.meta_description,
         })
-        // this.addHomePageForm.value.lang_id = response.data.pageData.
 
         this.bannerBgImagePreview = response?.data?.pageData?.banner_bg_img ? response.data.base_url + response.data.pageData.banner_bg_img : null;
         this.bannerImagePreview  = response?.data?.pageData?.banner_img ? response.data.base_url + response.data.pageData.banner_img : null;
