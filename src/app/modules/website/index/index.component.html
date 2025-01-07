@@ -9,12 +9,12 @@
 
       <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image}}">
-        <button (click)="closeAd(advertisemnetData?.skyscraper)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div *ngIf="!isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.wide_skyscraper?.featured_image}}">
-        <button (click)="closeAd(advertisemnetData?.wide_skyscraper)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <button (click)="closeAd('wide_skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="banner-inner">
@@ -25,7 +25,7 @@
                 <img class="home-banner-image" src="{{banner_bg_img}}">
               </div>
               <div class="banner-btn text-center mt-5">
-                <a href="{{ pageDetail.banner_btn_link }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail.banner_btn_txt }}
+                <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail?.banner_btn_txt }}
                 </a>
                 <!-- {{ 'registerNow' | translate }} -->
 
@@ -46,7 +46,7 @@
     <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
       <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image}}">
-        <button (click)="closeAd(this)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <button (click)="closeAd('leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
 
@@ -58,10 +58,10 @@
         <div class="joined">
           <div class="joined-text">
             <!-- <h3>Recently Joined</h3> -->
-            <h3>{{pageDetail.slider_heading}}</h3>
+            <h3>{{pageDetail?.slider_heading}}</h3>
           </div>
           <div class="joined-btn">
-            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail.slider_btn_txt}}</button>
+            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail?.slider_btn_txt}}</button>
             <!-- <a href="{{pageDetail.slider_btn_link}}" type="button" class="btn btn-light">{{pageDetail.slider_btn_txt}}</a> -->
           </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="carousel-slide" #owlCarousel (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
           (touchstart)="onTouchStart()" (touchend)="onTouchEnd()">
           <owl-carousel-o [options]="customOptions">
-            @for (slider of sliderDetail.users; track $index) {
+            @for (slider of sliderDetail?.users; track $index) {
               <ng-template carouselSlide>
                 <div class="player-carousel">
                   <div class="player-border">
@@ -825,22 +825,22 @@
           <div class="advertisment">
             <div *ngIf="!isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.large_leaderboard?.featured_image}}">
-              <button (click)="closeAd(advertisemnetData?.large_leaderboard)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+              <button (click)="closeAd('large_leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
            <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.small_square?.featured_image}}">
-              <button (click)="closeAd(advertisemnetData?.small_square)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+              <button (click)="closeAd('small_square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
         </div>
 
         <div class="club_players">
-          <h3>{{pageDetail.hero_heading_txt}}</h3>
+          <h3>{{pageDetail?.hero_heading_txt}}</h3>
           <div class="club-buttons">
             <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <div class="button-border">
                 <div class="join-text">
-                  <p> {{pageDetail.hero_btn_txt}}</p>
+                  <p> {{pageDetail?.hero_btn_txt}}</p>
                   <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png"> 
                   <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
                 </div>
