@@ -284,12 +284,29 @@ ngOnInit() {
 }
 
 
-closeAd(object: object) {
- //object = [];
- //object = []; 
- object = [];
- console.log('advertisemnetData',this.advertisemnetData);  
-   // Set the specific ad to not visible based on index
+closeAd(object: any) {
+  
+  switch(object){  
+    case 'skyscraper':  
+        this.advertisemnetData.skyscraper = [];
+        break; 
+    case 'wide_skyscraper':  
+        this.advertisemnetData.wide_skyscraper = [];
+        break;  
+    case 'leaderboard':  
+        this.advertisemnetData.leaderboard = [];
+        break;
+    case 'large_leaderboard':  
+        this.advertisemnetData.large_leaderboard = [];
+        break;
+    case 'small_square':  
+        this.advertisemnetData.small_square = [];
+        break;
+    default:  
+        //when no case is matched, this block will be executed;  
+        break;  //optional  
+    }  
+
 }
 
 isEmptyObject(obj:any) {
