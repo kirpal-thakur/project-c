@@ -65,8 +65,8 @@ export class IndexComponent {
   pageDetail:any=null;
   sliderDetail:any=null;
   advertisemnetData:any=null;
-  
   imageBaseUrl:string= '';
+  banner_bg_img:string= '';
   advertisemnet_base_url:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
@@ -280,16 +280,21 @@ ngOnInit() {
   this.adVisible = [true, true, true, true, true];
   this.webPages.languageId$.subscribe((data) => {
     this.getPageDynamicData(data);
-    console.log('here is data',data)
   });
 }
 
 
-closeAd(index: number) {
-  this.adVisible[index] = false; // Set the specific ad to not visible based on index
+closeAd(object: object) {
+ //object = [];
+ //object = []; 
+ object = [];
+ console.log('advertisemnetData',this.advertisemnetData);  
+   // Set the specific ad to not visible based on index
 }
 
-
+isEmptyObject(obj:any) {
+  return (obj && (Object.keys(obj).length === 0));
+}
 getPageDynamicData(languageId:any){
 
   this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
@@ -297,8 +302,10 @@ getPageDynamicData(languageId:any){
     let sliderData = res.data.sliderData;
     if(res.status){
         this.pageDetail = pageData;
+        this.banner_bg_img =  res.data.base_url + pageData.banner_bg_img;
         this.sliderDetail = sliderData;
         this.advertisemnetData = res.data.advertisemnetData;
+
         this.imageBaseUrl = res.data.base_url;
         this.advertisemnet_base_url = res.data.advertisemnet_base_url;
       }
