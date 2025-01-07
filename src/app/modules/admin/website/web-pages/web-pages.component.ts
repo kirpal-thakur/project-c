@@ -47,6 +47,7 @@ export class WebPagesComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private sharedservice:SharedService, private webpages: WebPages, private datePipe: DatePipe, public dialog: MatDialog, private router: Router) {}
+
   ngOnInit(){
     this.getAllPagesData();
     this.getFrontendPages();
@@ -229,8 +230,8 @@ export class WebPagesComponent {
     const addNewPage = this.dialog.open(AddPageComponent,{
       width: '80vw',
       height: '80vh'
-
     })
+
     addNewPage.afterClosed().subscribe(result => {
       if (result !== undefined) {
         if(result.action == "page-added-successfully"){

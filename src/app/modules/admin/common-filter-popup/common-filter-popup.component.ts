@@ -85,7 +85,7 @@ export class CommonFilterPopupComponent {
       }
     }
 
-    if(this.page == "webpages"){
+    if(this.page == "webpages" || this.page == "blog"){
       this.languages = data.languages;
       this.types = data.types;
 
