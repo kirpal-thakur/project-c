@@ -7,39 +7,38 @@ import { Observable, BehaviorSubject } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
+
 export class WebPages {
+
     private apiUrl;
     private frontendApiUrl = 'https://api.socceryou.ch/frontend/';
-    private langId =  localStorage.getItem('lang_id') || '1'; 
+    private langId =  localStorage.getItem('lang_id') || '1';
     private languageId = new BehaviorSubject<string>(this.langId); // Initial value
     languageId$ = this.languageId.asObservable(); // Expose as observable
 
-  updateData(data: string) {
-    this.languageId.next(data); // Update the shared data
-  }
+    updateData(data: string) {
+        this.languageId.next(data); // Update the shared data
+    }
 
     constructor(private http: HttpClient) {
         this.apiUrl = environment?.apiUrl;
     }
 
     getAllPages(lang_id:any=1,params:any): Observable<any> {
-        //?lang_id=${lang_id}
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pages`, {params}
         );
-
-
     }
 
-    getFrontendPages(lang_id:any): Observable<any> {
+    getFrontendPages(lang_id:any,status:any=''): Observable<any> {
 
         if(lang_id)
-        return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}`
+            return this.http.get<{ status: boolean, message: string, data: {} }>(
+            `${this.frontendApiUrl}get-frontend-pages?lang_id=${lang_id}&status=${status}`
         );
         else
         return this.http.get<{ status: boolean, message: string, data: {} }>(
-            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}`
+            `${this.frontendApiUrl}/get-frontend-pages?lang_id=${lang_id}&status=${status}`
         );
 
     }
@@ -132,7 +131,5 @@ export class WebPages {
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.apiUrl}admin/get-pagecontent/${id}`
         );
-
-
     }
 }

@@ -264,13 +264,36 @@
             <label for="monthly_plan_label_{{ i }}" class="form-label">{{ 'monthlyLabel' | translate }}</label>
             <input type="text" [(ngModel)]="plan.monthly_plan_label" class="form-control"
               name="monthly_plan_label_{{ i }}" id="monthly_plan_label_{{ i }}" placeholder="Monthly label" required />
+            <label for="monthly_plan_label_{{ i }}" class="form-label">Monthly label</label>
+            <input
+              type="text"
+              [(ngModel)]="plan.monthly_label"
+              class="form-control"
+              name="monthly_plan_label_{{ i }}"
+              id="monthly_plan_label_{{ i }}"
+              placeholder="Monthly label"
+              required
+            />
           </div>
 
           <!-- Yearly label -->
           <div class="col-md-6">
+<<<<<<< HEAD
             <label for="yearly_plan_label_{{ i }}" class="form-label">{{ 'yearlyLabel' | translate }}</label>
             <input type="text" [(ngModel)]="plan.yearly_plan_label" class="form-control"
               name="yearly_plan_label_{{ i }}" id="yearly_plan_label_{{ i }}" placeholder="Yearly label" required />
+=======
+            <label for="yearly_plan_label_{{ i }}" class="form-label">Yearly label</label>
+            <input
+              type="text"
+              [(ngModel)]="plan.yearly_label"
+              class="form-control"
+              name="yearly_plan_label_{{ i }}"
+              id="yearly_plan_label_{{ i }}"
+              placeholder="Yearly label"
+              required
+            />
+>>>>>>> 36a95b2851254c36eaf5d8bbe3dfefc79ee8f95b
           </div>
 
           <!-- Monthly Price -->

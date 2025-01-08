@@ -20,6 +20,7 @@ interface Language {
   templateUrl: './add-home-page.component.html',
   styleUrl: './add-home-page.component.scss'
 })
+
 export class AddHomePageComponent {
   @Input() pageId: any;
   @Input() languages: Language[] = [];
@@ -54,6 +55,7 @@ export class AddHomePageComponent {
       imagePreviews: [] as string[], // Specify the type of the previews array
     },
   ];
+
   // first_tab: { title: string; desc: string; images: File[]; imagePreviews: string[] }[] = [
   //   {
   //     title: '',
@@ -183,10 +185,10 @@ export class AddHomePageComponent {
     });
 
     // Add second_tab data with files
-    this.second_tab.forEach((tab, index) => {
-      formData.append(`second_tab[${index}][title]`, tab.title);
-      formData.append(`second_tab[${index}][desc]`, tab.desc);
-      tab.images.forEach((file, fileIndex) => {
+    this.second_tab.forEach((sec_tab, index) => {
+      formData.append(`second_tab[${index}][title]`, sec_tab.title);
+      formData.append(`second_tab[${index}][desc]`, sec_tab.desc);
+      sec_tab.images.forEach((file, fileIndex) => {
         formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
       });
     });
@@ -277,15 +279,10 @@ export class AddHomePageComponent {
           meta_title: response.data.meta_title,
           meta_description: response.data.meta_description,
         })
-        // this.addHomePageForm.value.lang_id = response.data.pageData.
 
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
-        this.heroBgImagePreview = response.data.base_url + response.data.pageData.banner_img;
-        this.bannerBgImagePreview = response.data.base_url + response.data.pageData.hero_bg_img;
-
-        // this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
-        // this.filesData.banner_img = response.data.pageData.banner_img;
-        // this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
+        this.bannerBgImagePreview = response?.data?.pageData?.banner_bg_img ? response.data.base_url + response.data.pageData.banner_bg_img : null;
+        this.bannerImagePreview  = response?.data?.pageData?.banner_img ? response.data.base_url + response.data.pageData.banner_img : null;
+        this.heroBgImagePreview = response?.data?.pageData?.hero_bg_img ? response.data.base_url + response.data.pageData.hero_bg_img : null;
 
         this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
         this.first_tab = response.data.pageData.tabs_data.first_tab;
@@ -297,11 +294,9 @@ export class AddHomePageComponent {
 
         // Assign images to preview arrays for both tabs
         this.first_tab.forEach((tab, index) => {
-          console.log('tab',tab)
           // Check if there are images for the tab
           if (tab.images && tab.images.length > 0) {
             tab.imagePreviews = tab.images.map((image: any) => {
-              console.log('img',image)
               return this.baseUrl + image;
             });
           }
@@ -344,7 +339,7 @@ export class AddHomePageComponent {
 
 
   removeImage(fieldName: string): void {
-    this.filesData[fieldName] = 'remove_img';
+    this.filesData[fieldName] = 'remove_image';
     if (fieldName === 'banner_img') {
       this.bannerImagePreview = null;
     } else if (fieldName === 'banner_bg_img') {
@@ -353,7 +348,6 @@ export class AddHomePageComponent {
       this.heroBgImagePreview = null;
     }
   }
-
 
 
   // Remove an image from the list

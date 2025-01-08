@@ -469,11 +469,9 @@
   "type": "Type",
   "page": "Page",
   "displayDuration": "Display Duration",
-  "maxViews": "Max Views",
   "maxClicks": "Max Clicks",
   "setPersonalInfo": "Set your personal information.",
   "profile": "Profile",
-  "editProfile": "Edit Profile",
   "laura": "Laura",
   "schneider": "Schneider",
   "emailid": "lauraschneider@socceryou.ch",
@@ -993,7 +991,7 @@
     "addPricingPlan": " Add Pricing Plan",
     "contactUs": "Contact Us",
     "bannerTitle": "Banner Title",
-    "Banner Background Image": "Banner Background Image",
+    "bannerBackgroundImage": "Banner Background Image",
     "formTitle": "Form Title",
     "beforeProfileText": "Before Profile Text",
     "talentLabelText": "Talent label Text",
@@ -1065,6 +1063,9 @@
   "editPerformaceDetails": "Edit Performace Details",
   "getStartedNow": "Get started now",
   "signup": "Sign-up",
-  "createProfile": "Create Profile"
-  
+  "createProfile": "Create Profile",
+    "dimensions:": "Dimension:",
+    "don'tsetAnEnd": "Don't set an end date",
+    "maxViews": "Max Views",
+    "editProfile": "edit Profile"
 }

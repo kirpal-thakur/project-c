@@ -815,6 +815,8 @@
   "clickDirectUrl": "Beim Klicken zu URL weiterleiten:",
   "dimensions": "Abmessungen: 160 x 600 px",
   "dontsetAnEnd": "Kein Enddatum festlegen",
+  "dimensions:": "Abmessungen:",
+  "don'tsetAnEnd": "Kein Enddatum festlegen",
   "maxViews": "Maximale Ansichten",
   "maxClicks": "Maximale Klicks",
   "editProfile": "Profil bearbeiten",
