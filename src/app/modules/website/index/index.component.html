@@ -3,8 +3,8 @@
 
     <app-header></app-header>
 
-    <div class="main-bnr">
-      <div class="overlay">
+    <div class="main-bnr" style="background-image: url('{{banner_bg_img}}');">
+      <div class="overlay" >
       </div>
 
       <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="banner-content" routerLink="/admin">
-                <img class="home-banner-image" src="{{banner_bg_img}}">
+                <img class="home-banner-image" src="{{banner_img}}">
               </div>
               <div class="banner-btn text-center mt-5">
                 <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail?.banner_btn_txt }}
@@ -76,7 +76,7 @@
                 <div class="player-carousel">
                   <div class="player-border">
                     <div class="player-img">
-                      <img src="{{slider.meta.profile_image_path}}" class="player-image">
+                      <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
                     </div>
                     <p class="player-name">{{slider.first_name + slider.last_name}}</p>
 
@@ -214,19 +214,23 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player1" *ngIf="selectedContent === 'Sign-up & Profile Creation'" @slideIn>
                 <div class="row">
+                    
                   <div class="player-list-image">
-                    <div class="col-lg-4 col-md-6 col-4">
-                      <div class="talent-img1">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[0]?.images}}">
+                    
+                    <!-- <div class="col-lg-4 col-md-6 col-4">
+                      
+                       <div class="talent-img1">
                         <img src="./assets/images/Frame 3863.png">
                         <img class="dark-images" src="./assets/images/dark-works3.png">
                       </div>
                       <div class="talent-img2">
                         <img src="./assets/images/Gallery-Highlight.png">
                         <img class="dark-images" src="./assets/images/dark-works2.png">
-                      </div>
-                    </div>
+                      </div> 
+                    </div> -->
 
-                    <div class="col-lg-8 col-md-6 col-8">
+                    <!-- <div class="col-lg-8 col-md-6 col-8">
                       <img class="image3" src="./assets/images/talent-banner-image.png">
                       <div class="talent-img3">
                         <img src="./assets/images/talent-banner-image.png">
@@ -237,7 +241,7 @@
                         <img src="./assets/images/table-image.png">
                         <img class="dark-images" src="./assets/images/dark-works4.png">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -247,7 +251,9 @@
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
                 <div class="row">
                   <div class="football-club">
-                    <div class="col-4">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[1]?.images}}">
+                    
+                    <!-- <div class="col-4">
                       <div class="network1">
                         <div class="club_member1">
                           <div class="member1-image">
@@ -280,9 +286,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                       <div class="network_1">
                         <div class="network3">
                           <div class="club_member3">
@@ -369,7 +375,7 @@
                         </div>
                       </div>
 
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -379,14 +385,16 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player3" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
                 <div class="message-panels">
-                  <div class="message-panel">
+                  <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[2]?.images}}">
+                    
+                  <!-- <div class="message-panel">
                     <img src="./assets/images/Message Panel (1).png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel.png">
                   </div>
                   <div class="message-panel1">
                     <img src="./assets/images/Messages Panel1.png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -396,7 +404,10 @@
               <div class="player1" *ngIf="selectedContent === 'Sign-up & Profile Creation'" @slideIn>
                 <div class="row">
                   <div class="player-list-images">
-                    <div class="col-md-6 col-4">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[0]?.images}}">
+                    
+                    <!-- <div class="col-md-6 col-4">
+                        
                       <div class="talent-img1">
                         <img src="./assets/images/club-scouts1.png">
                         <img class="dark-images" src="./assets/images/dark-club3.png">
@@ -408,17 +419,15 @@
                     </div>
 
                     <div class="col-md-6 col-8">
-                      <!-- <img class="image3" src="./assets/images/talent-banner.svg"> -->
                       <div class="talent-img3">
                         <img src="./assets/images/club-scouts2.png">
                         <img class="dark-images" src="./assets/images/dark-club2.png">
                       </div>
-                      <!-- <img class="image4" src="./assets/images/talent-main-content (1).svg"> -->
                       <div class="talent-img4">
                         <img src="./assets/images/club-scouts4.png">
                         <img class="dark-images" src="./assets/images/dark-club4.png">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -427,14 +436,16 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
                 <div class="message-panels">
-                  <div class="message-panel">
+                  <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[1]?.images}}">
+                    
+                  <!-- <div class="message-panel">
                     <img class="light-images" src="./assets/images/Message Panel (1).png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel.png">
                   </div>
                   <div class="message-panel1">
                     <img class="light-images" src="./assets/images/Messages Panel1.png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -442,7 +453,9 @@
 
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="club-scouts" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
-                <div class="club-offers1">
+                <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[2]?.images}}">
+                    
+                <!-- <div class="club-offers1">
                   <img class="light-images" src="./assets/images/club-scouts5.png">
                   <img class="dark-images" src="./assets/images/dark-design5.PNG">
 
@@ -454,7 +467,7 @@
                 <div class="club-offers3">
                   <img class="light-images" src="./assets/images/club-scouts7.png">
                   <img class="dark-images" src="./assets/images/dark-design4.PNG">
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -815,7 +828,7 @@
     <!-- How It Works-->
 
     <!-- Club-->
-    <div class="club py_0">
+    <div class="club py_0" style="background-image: url('{{hero_bg_img}}');">
 
       <div class="club-overlay"></div>
 
