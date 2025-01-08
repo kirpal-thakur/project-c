@@ -1,4 +1,10 @@
 {
+  "privacyPolicy": "Política de privacidade",
+  "terms&Conditions": "Termos e condições",
+  "cookies": "Cookies",
+
+  "createProfile": "Criar perfil",
+  "signup": "Inscrever-se",
   "premium": "Premium",
   "club&scout": "Clubes e olheiros",
   "boostProfileActive": "Perfil de impulso ativo",
@@ -9,6 +15,7 @@
   "dateOfBirth": "Aniversário",
   "placeOfBirth": "Local de nascimento",
   "height": "Tamanho",
+  "getStartedNow": "Comece agora",
   "weight": "Peso",
   "contract": "Contrato",
   "league": "Liga",

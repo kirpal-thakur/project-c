@@ -43,11 +43,7 @@
                 fill="#646464" />
             </svg>
           </button>
-          <!-- <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul> -->
+          
         </div>
         <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('Published')">
           <svg id="users-icon" width="24" height="24" viewBox="0 0 24 25" fill="none"
@@ -408,7 +404,8 @@
           <td>{{page?.created_at}}</td>
           <td>{{page?.updated_at}}</td>
           <td>
-            <span [ngClass]="getStatusClass(page?.status)">{{page?.status}}</span>
+            <span [ngClass]="getStatusClass(page?.status)" *ngIf="page?.status == 'published'">{{ 'published' | translate }}</span>
+            <span [ngClass]="getStatusClass(page?.status)" *ngIf="page?.status == 'draft'">{{ 'draft' | translate }}</span>
           </td>
           <!-- <td class="c_pointer text-center view" >
                   <svg id="users-icon"

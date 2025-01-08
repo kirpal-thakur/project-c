@@ -2,11 +2,19 @@
   "talents": "Talente",
   "about": "Über uns",
   "userDetail": "Benutzer-Details",
+  "getStartedNow": "Jetzt durchstarten",
+  "signup": "Anmelden",
+  "createProfile": "Profil erstellen",
+  "privacyPolicy": "Datenschutz",
+  "terms&Conditions": "AGB",
+  "cookies": "Cookies",
+  "homePage": "Hauptseite",
+  "bannerSection": "Abschnitt Banner",
 
 
 
-  
-  "club&scout": "Vereine & Pfadfinder",
+
+  "club&scout": "Clubs & Scouts",
   "premium": "Premium",
   "boostProfileActive": "Boost-Profil aktiv",
   "eltonPrince": "Elton Prince",

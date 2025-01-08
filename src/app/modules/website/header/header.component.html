@@ -117,12 +117,11 @@
 
                     <div class=" footer-links">
                         <ul class="footer-links1">
-                            <li><a (click)="closeNavbar()" [routerLink]="'/pricing'">PRICING </a></li>
+                            <li><a (click)="closeNavbar()" [routerLink]="'/pricing'">{{ 'pricing' | translate }}PRICING </a></li>
                             <li><a (click)="closeNavbar()" href="javascript:void(0);" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal-login">SIGN IN</a></li>
-                            <li><a (click)="closeNavbar()" data-bs-toggle="modal" data-bs-target="#exampleModal1">CREATE
-                                    ACCOUNT</a>
-                            <li><a (click)="closeNavbar()" [routerLink]="'/faq'">FAQ</a></li>
+                                    data-bs-target="#exampleModal-login">{{ 'signIn' | translate }}</a></li>
+                            <li><a (click)="closeNavbar()" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ 'createProfile' | translate }}</a>
+                            <li><a (click)="closeNavbar()" [routerLink]="'/faq'">{{ 'faq' | translate }}</a></li>
                         </ul>
                         <ul class="footer-links2">
                             <li>
@@ -202,7 +201,7 @@
 
 
                     <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal-login">{{ 'login' | translate }}<svg class="ms-2" width="8"
+                        data-bs-target="#exampleModal-login">{{ 'loginButton' | translate }}<svg class="ms-2" width="8"
                             height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.34766 1.5L6.34766 6L1.34766 10.5" stroke="white" stroke-width="2"
                                 stroke-linecap="round" />
