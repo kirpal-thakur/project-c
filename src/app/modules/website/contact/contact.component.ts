@@ -111,6 +111,16 @@ export class ContactComponent implements OnInit {
   // Handle form submission
   onSubmit(): void {  
     // return false;
+    let role ;
+    if(this.selectedOption === 'option1'){
+      role = 1;
+    }
+    else if(this.selectedOption === 'option2'){
+      role = 2;
+    }
+    else{
+      role = 3;
+    }
     if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
       const formData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
       const result = {};
@@ -132,7 +142,10 @@ export class ContactComponent implements OnInit {
         console.error('Form is invalid:', this.contactForm.errors);
       }
     }
-    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
+    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };
+
+    console.log(ContactformData);
+    return;
     
     this.http.post<any>('https://api.socceryou.ch/frontend/save-contact-form', ContactformData).subscribe(
       (response) => {
