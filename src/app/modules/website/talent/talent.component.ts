@@ -23,6 +23,8 @@ export class TalentComponent {
     pricing_tab:[],
   }];
   activeAccordionIndex = 1;
+  advertisemnetData:any=null;
+  advertisemnet_base_url:string= '';
 
   setActiveAccordion(index: number): void {
     this.activeAccordionIndex = index;
@@ -53,12 +55,39 @@ export class TalentComponent {
       if(res.status){
           this.pageData = res.data.pageData;
           this.baseUrl = res.data.base_url;
+          this.advertisemnetData = res.data.advertisemnetData;
+
           // Initialize toggle states for pricing plans with Monthly active (false)
           this.pageData.pricing_tab.forEach((_: any, index: number) => {
             this.isActivePlan[index] = false; // Default to "Monthly"
           });
         }
     });
+  }
+
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'wide_skyscraper':
+          this.advertisemnetData.wide_skyscraper = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
 
   toggle1() {
@@ -111,7 +140,8 @@ export class TalentComponent {
     this.isActivePlan[index] = !this.isActivePlan[index];
   }
 
-  closeAd(index: number) {
-    this.adVisible[index] = false; // Set the specific ad to not visible based on index
+  isEmptyObject(obj:any) {
+    return (obj && (Object.keys(obj).length === 0));
   }
+
 }
