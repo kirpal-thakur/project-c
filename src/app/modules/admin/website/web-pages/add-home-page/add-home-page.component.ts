@@ -171,7 +171,7 @@ export class AddHomePageComponent {
   onTabFormSubmit() {
     let formData = new FormData();
     formData.append('page_id', this.pageId);
-    formData.append('lang_id', this.addHomePageForm.value.lang_id);
+    formData.append('lang_id', this.addHomePageForm.value.lang);
     formData.append('title', this.title);
     formData.append('first_btn_txt', this.first_btn_txt);
     formData.append('sec_btn_txt', this.sec_btn_txt);
