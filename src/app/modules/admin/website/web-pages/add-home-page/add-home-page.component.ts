@@ -168,7 +168,7 @@ export class AddHomePageComponent {
   }
 
 
-  onTabFormSubmit(){
+  onTabFormSubmit() {
     let formData = new FormData();
     formData.append('page_id', this.pageId);
     formData.append('lang_id', this.addHomePageForm.value.lang_id);
@@ -176,30 +176,39 @@ export class AddHomePageComponent {
     formData.append('first_btn_txt', this.first_btn_txt);
     formData.append('sec_btn_txt', this.sec_btn_txt);
 
+    // Add first_tab data with changed files
     this.first_tab.forEach((tab, index) => {
       formData.append(`first_tab[${index}][title]`, tab.title);
       formData.append(`first_tab[${index}][desc]`, tab.desc);
-      tab.images.forEach((file, fileIndex) => {
-        formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
-      });
+      if (tab.images && tab.images.length > 0) {
+        tab.images.forEach((file, fileIndex) => {
+          if (file instanceof File) { // Only append if the file is newly changed
+            formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
+          }
+        });
+      }
     });
 
-    // Add second_tab data with files
+    // Add second_tab data with changed files
     this.second_tab.forEach((sec_tab, index) => {
       formData.append(`second_tab[${index}][title]`, sec_tab.title);
       formData.append(`second_tab[${index}][desc]`, sec_tab.desc);
-      sec_tab.images.forEach((file, fileIndex) => {
-        formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
-      });
+      if (sec_tab.images && sec_tab.images.length > 0) {
+        sec_tab.images.forEach((file, fileIndex) => {
+          if (file instanceof File) { // Only append if the file is newly changed
+            formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
+          }
+        });
+      }
     });
 
     this.webpages.addHomePageTabData(formData).subscribe((res) => {
-       this.dialogRef.close({
-       action: "page-added-successfully"
-       });
+      this.dialogRef.close({
+        action: "page-added-successfully",
+      });
     });
-
   }
+
 
   handleTabFilesInput(event: Event, index: number, type: string): void {
     const input = event.target as HTMLInputElement;
