@@ -1,7 +1,7 @@
 <div class="p-0 code-parent">
   <div class="bg-0C3453 p-4">
     <h6 class=" code-text text-center " >
-     Advertising
+      {{ 'advertising' | translate }}
     </h6>
     <div (click)="close()" class="close-img mb-1" >
    </div>
@@ -16,15 +16,15 @@
   <div class="d-flex mb-3">
     <div>
     <p  class="code-text">
-     Name
+     {{ 'name' | translate }}
     </p>
       <div class="cupen-btn-1  code-text">
-        puma
+        {{ 'puma' | translate }}
       </div>
     </div>
     <div class="ms-3">
       <p  class="code-text">
-        On click redirect to url:
+        {{ 'clickDirectUrl' | translate }}
       </p>
         <div class="cupen-btn-1">
           _blank
@@ -36,24 +36,24 @@
    <div class="d-flex mb-3">
     <div>
     <p  class="code-text">
-     Type
+      {{ 'type' | translate }}
     </p>
     <select class="cupen-btn-1 form-select" aria-label="Default select example">
-      <option selected>Select</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option selected>{{ 'select' | translate }}</option>
+      <option value="1">{{ 'one' | translate }}</option>
+      <option value="2">{{ 'two' | translate }}</option>
+      <option value="3">{{ 'three' | translate }}</option>
     </select>
     </div>
     <div class="ms-3">
       <p  class="code-text">
-      Page
+      {{ 'page' | translate }}
       </p>
       <select class="cupen-btn-1 form-select" aria-label="Default select example">
-        <option selected>Select</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option selected>{{ 'select' | translate }}</option>
+        <option value="1">{{ 'one' | translate }}</option>
+        <option value="2">{{ 'two' | translate }}</option>
+        <option value="3">{{ 'three' | translate }}</option>
       </select>
       </div>
   
@@ -68,14 +68,14 @@
   </svg>
     
     <h5 class="heading-text mb-1 mt-2">
-      Drag and Drop files here
+      {{ 'dragAndDropFileHere' | translate }}
     </h5>
     <p class="main-upload-text mb-2">
-    <span class="mr-4">Dimension: 160 x 600 px</span> Files supported: JPG, GIF, PNG,  MP4
+    <span class="mr-4">{{ 'Dimension: 160 x 600 px' | translate }}</span> {{ 'fileSupported1' | translate }}
     </p>
-    <button type="button" class="btn btn-secondary upload-btn mb-2 mt-2">Choose File</button>
+    <button type="button" class="btn btn-secondary upload-btn mb-2 mt-2">{{ 'chooseFile' | translate }}</button>
     <p class="main-upload-text mb-1">
-      Maximum Size: 5MB
+      {{ 'maximumSize5MB' | translate }}
     </p>
   </div>
   
@@ -84,7 +84,7 @@
   
   <div class="mb-3">
     <p  class="code-text">
-      Valid Between
+      {{ 'validBetween' | translate }}
     </p>
     <div class="d-flex"> 
       
@@ -94,7 +94,7 @@
           <div class="cupen-btn-date">
             <!-- <svg id="users-icon"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>  May 8, 2024 -->
             <mat-form-field class="meta-date">
-              <mat-label>Choose a date</mat-label>
+              <mat-label>{{ 'chooseADate' | translate }}</mat-label>
               <input matInput [matDatepicker]="picker1">
               <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
               <mat-datepicker-toggle matIconPrefix [for]="picker1" ></mat-datepicker-toggle>
@@ -107,7 +107,7 @@
             <div class="cupen-btn-date-1">
               <!-- <svg id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>   May 8, 2024 -->
               <mat-form-field class="meta-date"> 
-                <mat-label>Choose a date</mat-label>
+                <mat-label>{{ 'chooseADate' | translate }}</mat-label>
                 <input matInput [matDatepicker]="picker2">
                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconPrefix [for]="picker2"></mat-datepicker-toggle>
@@ -125,7 +125,7 @@
             id="defaultCheck1"
             class="form-check-input"
           /> <label for="defaultCheck1" class="form-check-label"> </label>
-        </span> Don't set an end date
+        </span> {{ 'don'tSetDate' | translate }}
       </div>
   
     </div>
@@ -179,7 +179,7 @@
    <div class="d-flex mb-3">
     <div>
     <p  class="code-text">
-      Max Views
+      {{ 'maxViews' | translate }}
     </p>
       <div class="cupen-btn-1  code-text">
         500
@@ -187,7 +187,7 @@
     </div>
     <div class="ms-3">
       <p  class="code-text">
-        Max Clicks
+        {{ 'maxClicks' | translate }}
       </p>
         <div class="cupen-btn-1">
           500
@@ -218,10 +218,10 @@
   <div class=" d-flex justify-content-around bg-0C3453 p-3">
 
    <div>
-     <a class="btn btn-delete text-danger ">Delete</a>
+     <a class="btn btn-delete text-danger ">{{ 'delete' | translate }}</a>
    </div>
    <div>
-     <a class="btn Launch px-5" >Create and Launch</a>
+     <a class="btn Launch px-5" >{{ 'createAndLaunch' | translate }}</a>
    </div>
 
   </div>

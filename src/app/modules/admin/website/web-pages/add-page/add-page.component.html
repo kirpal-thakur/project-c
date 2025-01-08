@@ -1,7 +1,7 @@
 @if(!pageDetail){
 <div class="container mt-5">
   <!-- <h2 class="mb-4">Add Page</h2> -->
-  <div (click)="close()" class="close-img mb-1" ></div>
+  <div (click)="close()" class="close-img mb-1"></div>
   <form (ngSubmit)="onSubmit()" #myForm="ngForm" enctype="multipart/form-data">
     <div class="row mb-3">
       <!-- <div class="col-md-12">
@@ -66,15 +66,25 @@
       </ckeditor>
     </div> -->
     <!-- <button type="submit" class="btn btn-primary mb-2">Add Page</button> -->
-    <app-add-home-page *ngIf="selectedPageType == 'home'" [pageId]="selectedPageId" [languages]="languages"></app-add-home-page>
-    <app-add-talent-page *ngIf="selectedPageType == 'talent'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-talent-page>
-    <app-add-clubnscout-page *ngIf="selectedPageType == 'clubs_and_scouts'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-clubnscout-page>
-    <app-add-about-page *ngIf="selectedPageType == 'about_us' " [pageId]="selectedPageId" [languages]="languages"></app-add-about-page>
-    <app-add-pricing-page *ngIf="selectedPageType == 'pricing'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-pricing-page>
-    <app-add-news-page *ngIf="selectedPageType == 'news'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-news-page>
-    <app-add-contact-page *ngIf="selectedPageType == 'contact'" [pageId]="selectedPageId" [languages]="languages"></app-add-contact-page>
-    <app-add-content-page *ngIf="selectedPageType == 'imprint' ||  selectedPageType == 'privacy_policy' ||  selectedPageType == 'terms_and_conditions' ||  selectedPageType == 'cookie_policy' ||  selectedPageType == 'content_page'" [pageType]="selectedPageType"  [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
-    <app-add-faq-page *ngIf="selectedPageType == 'faq'" [pageId]="selectedPageId" [languages]="languages"></app-add-faq-page>
+    <app-add-home-page *ngIf="selectedPageType == 'home'" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-home-page>
+    <app-add-talent-page *ngIf="selectedPageType == 'talent'" [pageType]="selectedPageType" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-talent-page>
+    <app-add-clubnscout-page *ngIf="selectedPageType == 'clubs_and_scouts'" [pageType]="selectedPageType"
+      [pageId]="selectedPageId" [languages]="languages"></app-add-clubnscout-page>
+    <app-add-about-page *ngIf="selectedPageType == 'about_us' " [pageId]="selectedPageId"
+      [languages]="languages"></app-add-about-page>
+    <app-add-pricing-page *ngIf="selectedPageType == 'pricing'" [pageType]="selectedPageType" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-pricing-page>
+    <app-add-news-page *ngIf="selectedPageType == 'news'" [pageType]="selectedPageType" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-news-page>
+    <app-add-contact-page *ngIf="selectedPageType == 'contact'" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-contact-page>
+    <app-add-content-page
+      *ngIf="selectedPageType == 'imprint' ||  selectedPageType == 'privacy_policy' ||  selectedPageType == 'terms_and_conditions' ||  selectedPageType == 'cookie_policy' ||  selectedPageType == 'content_page'"
+      [pageType]="selectedPageType" [pageId]="selectedPageId" [languages]="languages"></app-add-content-page>
+    <app-add-faq-page *ngIf="selectedPageType == 'faq'" [pageId]="selectedPageId"
+      [languages]="languages"></app-add-faq-page>
   </form>
 </div>
 }@else {

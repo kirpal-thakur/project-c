@@ -5,8 +5,8 @@
                 <h4 class="card-billing ">Billing</h4>
                 <div class="d-flex align-items-center justify-content-between marketing-header-bar">
                     <div class="d-flex align-items-end justify-content-between w-100">
-                        <h2 class="card-title mb-0 me-3">{{'Subscription plan' | translate}}</h2>
-                        <button class="payments-btn"  (click)="paymentDialog()">{{'Manage Payments' | translate}}</button>
+                        <h2 class="card-title mb-0 me-3">{{'subscriptionPlan' | translate}}</h2>
+                        <button class="payments-btn"  (click)="paymentDialog()">{{'managePayments' | translate}}</button>
                     </div>
                 </div>
 
@@ -32,39 +32,39 @@
                     <div class="col-lg-4">
                         <div class="premium-card ">
                             <div class="d-flex align-items-end justify-content-between">
-                                <h5>{{'Premium' | translate}}</h5>
+                                <h5>{{'premium' | translate}}</h5>
                                 <h6> {{'517' | translate}}<sub class="premium-month_title">{{'.-CHF/Month' | translate}}</sub></h6>
                             </div>
-                            <p>{{'Renews on Nov.21,2024' | translate}}</p>
+                            <p>{{'renewsOn' | translate}}</p>
                             <div class="d-flex align-items-center justify-content-between mt-4">
-                                <button class="premium-edit_btn"  (click)="editMembershipDialog(1)">{{'Edit Plan' | translate}}</button>
-                                <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
+                                <button class="premium-edit_btn"  (click)="editMembershipDialog(1)">{{'editPlan' | translate}}</button>
+                                <button class="premium-subscription_btn">{{'cancelSubscription' | translate}}</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="premium-card ">
                             <div class="d-flex align-items-end justify-content-between">
-                                <h5>{{'Premium' | translate}}</h5>
+                                <h5>{{'premium' | translate}}</h5>
                                 <h6>{{'517' | translate}} <sub class="premium-month_title">{{'.-CHF/Month' | translate}}</sub></h6>
                             </div>
-                            <p>{{'Renews on Nov.21,2024' | translate}}</p>
+                            <p>{{'renewsOn' | translate}}</p>
                             <div class="d-flex align-items-center justify-content-between mt-4">
-                                <button class="premium-edit_btn" (click)="editMembershipDialog(1)">{{'Edit Plan' | translate}}</button>
-                                <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
+                                <button class="premium-edit_btn" (click)="editMembershipDialog(1)">{{'editPlan' | translate}}</button>
+                                <button class="premium-subscription_btn">{{'cancelSubscription' | translate}}</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="premium-card">
                             <div class="d-flex align-items-end justify-content-between">
-                                <h5>{{'Premium' | translate}}</h5>
+                                <h5>{{'premium' | translate}}</h5>
                                 <h6> {{'517' | translate}}<sub class="premium-month_title">{{'.-CHF/Month' | translate}}</sub></h6>
                             </div>
-                            <p>{{'Renews on Nov.21,2024' | translate}}</p>
+                            <p>{{'renewsOn' | translate}}</p>
                             <div class="d-flex align-items-center justify-content-between mt-4">
-                                <button class="premium-edit_btn"  (click)="editMembershipDialog(1)">{{'Edit Plan' | translate}}</button>
-                                <button class="premium-subscription_btn">{{'Cancel subscription' | translate}}</button>
+                                <button class="premium-edit_btn"  (click)="editMembershipDialog(1)">{{'editPlan' | translate}}</button>
+                                <button class="premium-subscription_btn">{{'cancelSubscription' | translate}}</button>
                             </div>
                         </div>
                     </div>
@@ -77,14 +77,14 @@
                 <div class="purchase-parent bg-0C3453">
                     <div class="d-flex align-items-center justify-content-between transaction_box mb-2">
                         <div class="d-flex align-items-center ">
-                          <h2 class="card-title mb-0 me-3 ">{{'Latest Transaction' | translate}}</h2>
+                          <h2 class="card-title mb-0 me-3 ">{{'latestTransaction' | translate}}</h2>
                         </div>
                   
                         <div class="d-flex align-items-center ">
                           <a class="btn btn-outline-white ms-2 delete-text" id="users-icon" (click)="downloadAll()">                      
                             <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M12 16.5L7 11.5L8.4 10.05L11 12.65V4.5H13V12.65L15.6 10.05L17 11.5L12 16.5ZM4 20.5V15.5H6V18.5H18V15.5H20V20.5H4Z" fill="#787878"  class="td-icon-purchase"/>
-                            </svg> {{'ExportXLS' | translate }} 
+                            </svg> {{'exportXLS' | translate }} 
                           </a>
                           
                           <div class="d-flex align-items-center">
@@ -102,12 +102,12 @@
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th scope="col">{{'Name' | translate}}</th>
-                            <th scope="col">{{'Date' | translate}}</th>
-                            <th scope="col">{{'VoucherCode' | translate}}</th>
-                            <th scope="col">{{'Amount' | translate}}</th>
-                            <th scope="col" class="text-center">{{'View' | translate}}</th>
-                            <th scope="col" class="text-center">{{'Download' | translate}}</th>
+                            <th scope="col">{{'name' | translate}}</th>
+                            <th scope="col">{{'date' | translate}}</th>
+                            <th scope="col">{{'voucherCode' | translate}}</th>
+                            <th scope="col">{{'amount' | translate}}</th>
+                            <th scope="col" class="text-center">{{'view' | translate}}</th>
+                            <th scope="col" class="text-center">{{'download' | translate}}</th>
                           </tr>
                         </thead>
                         <tbody>
