@@ -9,17 +9,17 @@
         }
         @else if (data.action == 'delete-confirmation') {
             <div class="display-message">
-                Once user is deleted, it can’t be undone. <br> Do you want to delete?
+               {{ 'confirmDeleteUser' | translate }} <br>{{ 'confirmDeleteUser1' | translate }} 
                 <div class="popup-delete-btn">
-                    <span (click)="deleteConfirmed()">Delete Account</span>
+                    <span (click)="deleteConfirmed()">{{ 'deleteAccount' | translate }}</span>
                 </div>
             </div>
         }
         @else if (data.action == 'delete-favorite-confirmation') {
             <div class="display-message">
-                Are to sure to remove?
+                {{ 'areToSure' | translate }}
                 <div class="popup-delete-btn">
-                    <span (click)="deleteConfirmed()">Remove</span>
+                    <span (click)="deleteConfirmed()">{{ 'remove' | translate }}</span>
                 </div>
             </div>
         }
