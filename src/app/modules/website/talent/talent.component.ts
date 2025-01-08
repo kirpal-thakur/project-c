@@ -56,7 +56,7 @@ export class TalentComponent {
           this.pageData = res.data.pageData;
           this.baseUrl = res.data.base_url;
           this.advertisemnetData = res.data.advertisemnetData;
-
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
           // Initialize toggle states for pricing plans with Monthly active (false)
           this.pageData.pricing_tab.forEach((_: any, index: number) => {
             this.isActivePlan[index] = false; // Default to "Monthly"
@@ -71,8 +71,8 @@ export class TalentComponent {
       case 'skyscraper':
           this.advertisemnetData.skyscraper = [];
           break;
-      case 'wide_skyscraper':
-          this.advertisemnetData.wide_skyscraper = [];
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
           break;
       case 'leaderboard':
           this.advertisemnetData.leaderboard = [];
@@ -80,8 +80,15 @@ export class TalentComponent {
       case 'large_leaderboard':
           this.advertisemnetData.large_leaderboard = [];
           break;
-      case 'small_square':
-          this.advertisemnetData.small_square = [];
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
           break;
       default:
           //when no case is matched, this block will be executed;
