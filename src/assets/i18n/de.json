@@ -1,11 +1,11 @@
 {
   "talents": "Talente",
   "about": "Über uns",
+  "userDetail": "Benutzer-Details",
 
 
 
-
-
+  
   "club&scout": "Vereine & Pfadfinder",
   "premium": "Premium",
   "boostProfileActive": "Boost-Profil aktiv",
@@ -984,7 +984,7 @@
   "youthAcademy": "Der Club hat eine traditionsreiche Jugendakademie, die sich der Förderung einheimischer Talente widmet und ihnen die Werte des Clubs von klein auf vermittelt.",
   "achievements": "In Bezug auf Erfolge kann GFC auf eine beeindruckende Trophäensammlung verweisen, mit zahlreichen Bundesliga-Titeln und DFB-Pokal-Siegen.",
   "communityEngagement": "Abseits des Platzes ist GFC tief in die lokale Gemeinschaft verwurzelt und führt verschiedene Initiativen und Outreach-Programme durch, um den Amateurfußball und soziale Verantwortung zu fördern.",
- "overall": "Insgesamt steht der German Football Club als Leuchtturm der Exzellenz im deutschen Fußball und verkörpert das reiche fußballerische Erbe der Nation sowie ihre Bestrebungen nach Erfolg sowohl im Inland als auch international.",
+  "overall": "Insgesamt steht der German Football Club als Leuchtturm der Exzellenz im deutschen Fußball und verkörpert das reiche fußballerische Erbe der Nation sowie ihre Bestrebungen nach Erfolg sowohl im Inland als auch international.",
   "to:": "An:",
   "rubenVetrovs": "Ruben Vetrovs",
   "lind": "Lind",

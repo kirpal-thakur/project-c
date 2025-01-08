@@ -54,14 +54,14 @@
             <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
               <input type="hidden" name="domain" ng-model="contactForm.domain" />
               <div>
-                <input id="name" formControlName="name" placeholder="Name" ng-model="contactForm.name"/>
+                <input id="name" formControlName="name" [placeholder]="name_placeholder" ng-model="contactForm.name"/>
                 <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
                   <div *ngIf="name?.errors?.['required']">Name is required.</div>
                 </div>
               </div>
   
               <div>
-                <input id="email" type="email" formControlName="email" placeholder="E-Mail" ng-model="contactForm.email"/>
+                <input id="email" type="email" formControlName="email" placeholder="{{email_placeholder}}" ng-model="contactForm.email"/>
                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
                   <div *ngIf="email?.errors?.['required']">Email is required.</div>
                   <div *ngIf="email?.errors?.['email']">Invalid email address.</div>

@@ -30,6 +30,10 @@ export class ContactComponent implements OnInit {
   recaptchaToken: string | null = null; // Captcha token for backend validation
   responseMessage: string = '';
   messageType: string = '';  
+  name_placeholder: string = '';
+  email_placeholder: string = '';
+  phone_placeholder: string = '';
+  message_placeholder: string = '';
   constructor(private route: ActivatedRoute, 
     private webPages: WebPages,
     private fb: FormBuilder,
@@ -66,7 +70,11 @@ export class ContactComponent implements OnInit {
           this.semail= res.data.pageData.email;
           this.advertisemnetData =  res.data.advertisemnetData;
           this.advertisemnetUrl = res.data.advertisemnet_base_url;
-          this.base_url =  res.data.base_url; 
+          this.base_url =  res.data.base_url;
+          this.name_placeholder = res.data.pageData.name_placeholder;
+          this.phone_placeholder = res.data.pageData.phone_placeholder;
+          this.email_placeholder = res.data.pageData.email_placeholder;
+          this.message_placeholder = res.data.pageData.message_placeholder;
         }
     });
   }
