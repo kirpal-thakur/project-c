@@ -49,7 +49,7 @@
                 <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul> -->
         </div>
-        <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('published')">
+        <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('Published')">
           <svg id="users-icon" width="24" height="24" viewBox="0 0 24 25" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -81,7 +81,7 @@
               font-size: 14px;
               font-weight: 500;
             ">
-          {{allPages.length}} {{(allPages.length > 1) ? "Items" : 'Item'}}
+          {{allPages.length}} {{ allPages.length > 1 ? ('items' | translate) : ('item' | translate) }}
         </div>
 
       </div>

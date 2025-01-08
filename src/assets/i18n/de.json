@@ -1,4 +1,12 @@
 {
+  "talents": "Talente",
+  "about": "Über uns",
+
+
+
+
+
+  "club&scout": "Vereine & Pfadfinder",
   "premium": "Premium",
   "boostProfileActive": "Boost-Profil aktiv",
   "eltonPrince": "Elton Prince",
@@ -81,7 +89,6 @@
   "appSettings": "Einstellungen",
   "customizeYourExperience": "Einstellungen anpassen",
   "generals": "Allgemeines",
-  "talents": "Talente",
   "clubs": "Clubs",
   "scouts": "Scouts",
   "leagues": "Ligen",
@@ -284,7 +291,6 @@
   "activityLogPopup": "Aktivitäten überprüfen",
   "teamMembersPopup": "Teammitglieder",
   "inviteOrManagePopup": "Lade deine Teammitglieder ein und verwalte sie.",
-  "about": "Über uns",
   "lightMode": "Tag",
   "darkMode": "Nacht",
   "news&Media": "Neuigkeiten und Medien",

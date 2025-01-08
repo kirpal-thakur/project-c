@@ -80,14 +80,14 @@
            font-size: 14px;
             font-weight: 500;
           ">
-          {{advertisements.length}} Items
+          {{advertisements.length}} {{'items' | translate}}
         </div>
 
       </div>
     </div>
   </div>
 
-  <div class="table-responsive">
+  <div class="table-responsive">{{'items' | translate}}
     <table mat-table [dataSource]="advertisements" class="table table-hover table-striped table-users ">
 
       <!-- Position Column -->
