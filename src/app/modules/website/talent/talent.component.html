@@ -11,8 +11,7 @@
                         <div class="col-lg-6 col-md-4 col-12">
                             <div class="banner-left">
                                 <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
-                                <h4 class="banner-heading5">{{pageData?.banner_desc}}
-                                </h4>
+                                <h4 class="banner-heading5">{{pageData?.banner_desc}}</h4>
                                 <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt}}
                                 </a>
                             </div>
@@ -46,8 +45,6 @@
                         </div>
                     </div>
                     <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
-
-                    {{advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image}}
                         <img src="{{ advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image }}" alt="Skyscraper-Image Ad">
                         <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
@@ -157,7 +154,6 @@
                                     <img class="light-images" src="./assets/images/accodian3.png">
                                     <img class="dark-images" src="./assets/images/dark-accodian3.png">
                                 </div>
-
                             </div>
                         </div>
 
@@ -359,13 +355,13 @@
                     <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="premium-img">
-                        <img class="bg-image" src="./assets/images/feature-image.svg">
-                        <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
-                        <h3 class="premium-heading3">
-                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
-                            <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
-                            / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
-                        </h3>
+                            <img class="bg-image" src="./assets/images/feature-image.svg">
+                            <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
+                            <h3 class="premium-heading3">
+                                {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
+                                <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
+                                / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
+                            </h3>
                         </div>
                     </div>
 
