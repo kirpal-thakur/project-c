@@ -325,19 +325,19 @@
                             <div class="accordion" id="accordionExample">
                                 <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
                                     <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
-                                        <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">
+                                        <div class="accordion-flex" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + (i + 1)"
+                                            aria-expanded="false" [attr.aria-controls]="'collapse' + (i + 1)">
                                             <img class="light-feature1" src="./assets/images/feature-img1.svg">
                                             <img class="dark-feature1" src="./assets/images/dark-club1.svg">
                                             <h2 class="accordion-header">
                                                 {{feature.title}}
                                             </h2>
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                [attr.data-bs-target]="'#collapse' + (i + 1)" aria-expanded="false"
+                                                [attr.aria-controls]="'collapse' + (i + 1)">
                                             </button>
                                         </div>
-                                        <div id="collapseOne" class="accordion-collapse collapse show"
+                                        <div id="collapse{{i + 1}}" class="accordion-collapse collapse"
                                             data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
                                                 <p class="feature-text">{{feature.desc}}

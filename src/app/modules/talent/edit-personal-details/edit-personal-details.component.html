@@ -8,7 +8,7 @@
     </div>
   </div>
   <hr>
-  
+
   <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <div class="overflow-card">
       <div class="row">
@@ -50,31 +50,39 @@
       <div class="row">
 
         <!-- Current Club -->
-        <div class="form-group col-lg-6">
+        <div class="form-group col-lg-6 position_inputs">
           <label for="currentClub">{{'Current Club'}}:</label>
-          <input
+
+          <mat-select [(ngModel)]="currentClubId" class="form-select" id="currentClub" name="currentClub"
+            #currentClubField="ngModel" required>
+            <mat-option *ngFor="let club of playerClubsListing" [value]="club.id">
+              {{ club.club_name }}
+            </mat-option>
+          </mat-select>
+
+          <!-- <input
             type="text"
             id="currentClub"
             name="currentClub"
             placeholder="Type to Search"
-            [(ngModel)]="currentClub"
+            [(ngModel)]="currentClub" 
             #currentClubField="ngModel"
             (input)="onSearchClubs()"
             required
-          />
+          /> -->
           <!-- Validation message -->
           <div *ngIf="currentClubField.invalid && (currentClubField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
             {{'clubnameRequired' | translate}}
           </div>
-        
+
           <!-- Club suggestions -->
-          <ul *ngIf="filteredClubs.length > 0 && currentClub.length >= 2" class="suggestions-list">
+          <!-- <ul *ngIf="filteredClubs.length > 0 && currentClub.length >= 2" class="suggestions-list">
             <li *ngFor="let club of filteredClubs" (click)="onSelectClub(club)">
               {{ club.club_name }}
             </li>
-          </ul>
+          </ul> -->
         </div>
-        
+
         <!-- Nationality (Updated for multiple selection) -->
         <div class="form-group col-lg-6 position_inputs">
           <label for="nationality" class="form-label">{{'nationality' | translate}}:</label>
@@ -96,7 +104,7 @@
             {{'nationalityRequired' | translate}}
           </div>
         </div>
-            
+
       </div>
 
 
@@ -105,15 +113,8 @@
         <div class="form-group col-lg-6">
           <label for="dateOfBirth">{{'dateOfBirth' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
-            <input
-              matInput
-              id="dateOfBirth"
-              name="dateOfBirth"
-              [matDatepicker]="dp"
-              [formControl]="dateOfBirth"
-              placeholder="DD.MM.YYYY"
-              required
-            />
+            <input matInput id="dateOfBirth" name="dateOfBirth" [matDatepicker]="dp" [formControl]="dateOfBirth"
+              placeholder="DD.MM.YYYY" required />
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp></mat-datepicker>
           </div>
@@ -144,6 +145,7 @@
           <div *ngIf="placeOfBirthField.invalid && (placeOfBirthField.touched || myForm.submitted)" class="alert text-danger my-0 px-0">
             {{'placeOfBirthRequired' | translate}}
           </div>
+
         </div>
 
       </div>
@@ -191,39 +193,25 @@
         <div class="form-group col-lg-6">
           <label for="contractStart">{{'contractStartDate' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
-            <input
-              matInput
-              id="contractStart"
-              name="contractStart"
-              [matDatepicker]="contractStartPicker"
-              [formControl]="contractStart"
-              placeholder="DD.MM.YYYY"
-              required
-            />
+            <input matInput id="contractStart" name="contractStart" [matDatepicker]="contractStartPicker"
+              [formControl]="contractStart" placeholder="DD.MM.YYYY" required />
             <mat-datepicker-toggle matSuffix [for]="contractStartPicker"></mat-datepicker-toggle>
             <mat-datepicker #contractStartPicker></mat-datepicker>
           </div>
         </div>
-      
+
         <!-- Contract End Date -->
         <div class="form-group col-lg-6">
           <label for="contractEnd">{{'contractEndDate' | translate}}:</label>
           <div class="d-flex align-items-center justify-content-center">
-            <input
-              matInput
-              id="contractEnd"
-              name="contractEnd"
-              [matDatepicker]="contractEndPicker"
-              [formControl]="contractEnd"
-              placeholder="DD.MM.YYYY"
-              required
-            />
+            <input matInput id="contractEnd" name="contractEnd" [matDatepicker]="contractEndPicker"
+              [formControl]="contractEnd" placeholder="DD.MM.YYYY" required />
             <mat-datepicker-toggle matSuffix [for]="contractEndPicker"></mat-datepicker-toggle>
             <mat-datepicker #contractEndPicker></mat-datepicker>
           </div>
         </div>
       </div>
-      
+
       <div class="row">
         <!-- League Level -->
         <div class="form-group col-lg-6">
@@ -236,7 +224,7 @@
             required
           />
         </div>
-      
+
         <!-- Dominant Foot -->
         <div class="form-group col-lg-6">
           <label for="dominantFoot">{{'dominantFoot' | translate}}:</label>
@@ -257,7 +245,7 @@
           </div>
         </div>
       </div>
-            
+
     </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between">
       <button class="cancel-btn" type="button" (click)="onCancel()">{{'cancel' | translate}}</button>
