@@ -36,7 +36,7 @@
           </g>
           </svg>
           </h6> -->
-      <span class="page-heading">{{ 'ClubTranslate.dashboard' | translate }}</span>
+      <span class="page-heading">{{ 'dashboard' | translate }}</span>
     </div>
 
     <div class="input-group search-area">
@@ -53,7 +53,7 @@
           </svg>
         </a></span>
 
-      <input type="text" name="search" class="form-control" id="Search-text" placeholder="Search" />
+      <input type="text" name="search" class="form-control" id="Search-text" placeholder="{{ 'search' | translate }}" />
 
     </div>
 
@@ -84,7 +84,8 @@
         <li class="nav-item dropdown theme_dropdown me-3">
           <div class="d-flex align-items-center light-theme">
             <!-- (click)="toggleTheme($event)" -->
-            <p id="theme-text"> {{ 'lightMode' | translate }}</p>
+            <p id="light-theme-text" class="mode-text"> {{ 'lightMode' | translate }}</p>
+            <p id="dark-theme-text" class="mode-text"> {{ 'darkMode' | translate }}</p>
             <label class="switch">
               <input type="checkbox" (change)="toggleTheme($event)" />
               <span class="slider round"></span>
@@ -189,7 +190,7 @@
                 </div>
               </div>
               <div class="load_more">
-                <p (click)="loadMoreNotifications()">View all notifications</p>
+                <p (click)="loadMoreNotifications()">{{ 'viewAllNotifications' | translate }}</p>
               </div>
 
             </div>
@@ -305,9 +306,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <h6>Laura Schneider</h6>
-            <span class="badgewarning">Super Admin</span>
+            <span class="badgewarning">{{ 'superAdmin' | translate }}</span>
             <br>
-            <a href="scout/setting" class="header-view-profile">View my Profile</a>
+            <a href="scout/setting" class="header-view-profile">{{ 'viewMyProfile' | translate }}</a>
 
             <a href="scout/setting" class="dropdown-item ai-icon px-0 py-2 border-bottom ">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
@@ -319,7 +320,7 @@
                     fill="#c2c2c2"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15"> {{ 'ClubTranslate.activityLog' | translate }}</span>
+              <span class="ms-1 fs-15"> {{ 'activityLog' | translate }}</span>
             </a>
             <a href="javascript:void(0);" class="dropdown-item ai-icon px-0 py-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
@@ -334,7 +335,7 @@
                     fill="#000000"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15">{{ 'ClubTranslate.accountSettings' | translate }}</span>
+              <span class="ms-1 fs-15">{{ 'accountSettings' | translate }}</span>
             </a>
             <a href="#" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
               <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -343,7 +344,7 @@
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" y1="12" x2="9" y2="12"></line>
               </svg>
-              <span class="ms-1 fs-14">Sign out </span>
+              <span class="ms-1 fs-14">{{ 'signOut' | translate }} </span>
             </a>
 
 

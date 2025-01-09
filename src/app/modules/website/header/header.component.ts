@@ -217,7 +217,7 @@ export class HeaderComponent implements OnInit {
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
-      this.initializeGoogleSignIn();
+    //  this.initializeGoogleSignIn();
     }
 
     this.getAllCountries();

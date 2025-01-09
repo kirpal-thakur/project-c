@@ -20,6 +20,7 @@ interface Language {
   templateUrl: './add-home-page.component.html',
   styleUrl: './add-home-page.component.scss'
 })
+
 export class AddHomePageComponent {
   @Input() pageId: any;
   @Input() languages: Language[] = [];
@@ -35,41 +36,68 @@ export class AddHomePageComponent {
   first_btn_txt: string = '';
   sec_btn_txt: string = '';
   title: string = '';
-  first_tab : { title: string; desc: string; images: File[] }[] = [
+
+  // Define the tab type
+  first_tab = [
     {
       title: '',
-      desc : '',
-      images: []
+      desc: '',
+      images: [] as File[], // Specify the type of the images array
+      imagePreviews: [] as string[], // Specify the type of the previews array
     },
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    }
   ];
 
-  second_tab : { title: string; desc: string; images: File[] }[] = [
+  second_tab = [
     {
       title: '',
-      desc : '',
-      images: []
+      desc: '',
+      images: [] as File[], // Specify the type of the images array
+      imagePreviews: [] as string[], // Specify the type of the previews array
     },
-    {
-      title: '',
-      desc : '',
-      images: []
-    },
-    {
-      title: '',
-      desc : '',
-      images: []
-    }
   ];
+
+  // first_tab: { title: string; desc: string; images: File[]; imagePreviews: string[] }[] = [
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   },
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   },
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   }
+  // ];
+
+  // second_tab: { title: string; desc: string; images: File[]; imagePreviews: string[] }[] = [
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   },
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   },
+  //   {
+  //     title: '',
+  //     desc: '',
+  //     images: [],
+  //     imagePreviews: []
+  //   }
+  // ]
+
   imageLoaded: boolean = false;
 
   bannerImagePreview: any = null;
@@ -108,20 +136,20 @@ export class AddHomePageComponent {
     const formData = new FormData();
     formData.append('page_id', this.pageId);
     formData.append('lang_id', this.addHomePageForm.value.lang);
-  
+
     // Append files
     if (this.filesData.banner_bg_img) {
       formData.append('banner_bg_img', this.filesData.banner_bg_img);
     }
-    
+
     if (this.filesData.banner_img) {
       formData.append('banner_img', this.filesData.banner_img);
     }
-    
+
     if (this.filesData.hero_bg_img) {
       formData.append('hero_bg_img', this.filesData.hero_bg_img);
     }
-  
+
     // Append text fields
     formData.append('banner_btn_txt', this.addHomePageForm.value.banner_btn_txt);
     formData.append('banner_btn_link', this.addHomePageForm.value.banner_btn_link);
@@ -133,59 +161,111 @@ export class AddHomePageComponent {
     formData.append('hero_btn_link', this.addHomePageForm.value.hero_btn_link);
     formData.append('meta_title', this.addHomePageForm.value.meta_title);
     formData.append('meta_description', this.addHomePageForm.value.meta_description);
-  
+
     this.webpages.addHomePage(formData).subscribe((res) => {
       this.showTabForm = true;
     });
   }
 
 
-  onTabFormSubmit(){
+  onTabFormSubmit() {
     let formData = new FormData();
     formData.append('page_id', this.pageId);
-    formData.append('lang_id', this.addHomePageForm.value.lang_id);
+    formData.append('lang_id', this.addHomePageForm.value.lang);
     formData.append('title', this.title);
     formData.append('first_btn_txt', this.first_btn_txt);
     formData.append('sec_btn_txt', this.sec_btn_txt);
 
+    // Add first_tab data with changed files
     this.first_tab.forEach((tab, index) => {
       formData.append(`first_tab[${index}][title]`, tab.title);
       formData.append(`first_tab[${index}][desc]`, tab.desc);
-      tab.images.forEach((file, fileIndex) => {
-        formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
-      });
+      if (tab.images && tab.images.length > 0) {
+        tab.images.forEach((file, fileIndex) => {
+          if (file instanceof File) { // Only append if the file is newly changed
+            formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
+          }
+        });
+      }
     });
-    
-    // Add second_tab data with files
-    this.second_tab.forEach((tab, index) => {
-      formData.append(`second_tab[${index}][title]`, tab.title);
-      formData.append(`second_tab[${index}][desc]`, tab.desc);
-      tab.images.forEach((file, fileIndex) => {
-        formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
-      });
+
+    // Add second_tab data with changed files
+    this.second_tab.forEach((sec_tab, index) => {
+      formData.append(`second_tab[${index}][title]`, sec_tab.title);
+      formData.append(`second_tab[${index}][desc]`, sec_tab.desc);
+      if (sec_tab.images && sec_tab.images.length > 0) {
+        sec_tab.images.forEach((file, fileIndex) => {
+          if (file instanceof File) { // Only append if the file is newly changed
+            formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
+          }
+        });
+      }
     });
 
     this.webpages.addHomePageTabData(formData).subscribe((res) => {
-       this.dialogRef.close({
-       action: "page-added-successfully"
-       });
+      this.dialogRef.close({
+        action: "page-added-successfully",
+      });
     });
-
   }
 
-  handleTabFilesInput(files: Event, index:number, type:string) {
-    const input = files.target as HTMLInputElement;
+
+  handleTabFilesInput(event: Event, index: number, type: string): void {
+    const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const selectedFiles = Array.from(input.files);
 
-      if(type == 'first_tab'){
-        this.first_tab[index].images = [...selectedFiles];
-        console.log(this.first_tab, 'testing...');
-      }else{
-        this.second_tab[index].images = [...selectedFiles];
-      }      
+      selectedFiles.forEach((file) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result;
+
+          if (type === 'first_tab') {
+            // Ensure the object and arrays are initialized
+            if (!this.first_tab[index]) {
+              this.first_tab[index] = { title: '', desc: '', images: [], imagePreviews: [] };
+            }
+            if (!this.first_tab[index].images) {
+              this.first_tab[index].images = [];
+            }
+            if (!this.first_tab[index].imagePreviews) {
+              this.first_tab[index].imagePreviews = [];
+            }
+
+            // Push file and preview
+            this.first_tab[index].images.push(file);
+            if (result) {
+              this.first_tab[index].imagePreviews.push(result as string);
+            }
+          } else if (type === 'second_tab') {
+            // Ensure the object and arrays are initialized
+            if (!this.second_tab[index]) {
+              this.second_tab[index] = { title: '', desc: '', images: [], imagePreviews: [] };
+            }
+            if (!this.second_tab[index].images) {
+              this.second_tab[index].images = [];
+            }
+            if (!this.second_tab[index].imagePreviews) {
+              this.second_tab[index].imagePreviews = [];
+            }
+
+            // Push file and preview
+            this.second_tab[index].images.push(file);
+            if (result) {
+              this.second_tab[index].imagePreviews.push(result as string);
+            }
+          }
+        };
+        reader.onerror = (e) => {
+          console.error('Error reading file:', e);
+        };
+        reader.readAsDataURL(file);
+      });
+    } else {
+      console.warn('No files selected or input is null.');
     }
   }
+
 
   getPagebyId(id:number){
 
@@ -208,15 +288,10 @@ export class AddHomePageComponent {
           meta_title: response.data.meta_title,
           meta_description: response.data.meta_description,
         })
-        // this.addHomePageForm.value.lang_id = response.data.pageData.
-     
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
-        this.heroBgImagePreview = response.data.base_url + response.data.pageData.banner_img;
-        this.bannerBgImagePreview = response.data.base_url + response.data.pageData.hero_bg_img;
 
-        // this.filesData.banner_bg_img = response.data.pageData.banner_bg_img;
-        // this.filesData.banner_img = response.data.pageData.banner_img;
-        // this.filesData.hero_bg_img = response.data.pageData.hero_bg_img;
+        this.bannerBgImagePreview = response?.data?.pageData?.banner_bg_img ? response.data.base_url + response.data.pageData.banner_bg_img : null;
+        this.bannerImagePreview  = response?.data?.pageData?.banner_img ? response.data.base_url + response.data.pageData.banner_img : null;
+        this.heroBgImagePreview = response?.data?.pageData?.hero_bg_img ? response.data.base_url + response.data.pageData.hero_bg_img : null;
 
         this.first_btn_txt = response.data.pageData.tabs_data.first_btn_txt;
         this.first_tab = response.data.pageData.tabs_data.first_tab;
@@ -224,9 +299,30 @@ export class AddHomePageComponent {
         this.second_tab = response.data.pageData.tabs_data.second_tab;
         this.title = response.data.pageData.tabs_data.title;
         this.baseUrl = response.data.base_url;
+        this.baseUrl = response.data.base_url;
+
+        // Assign images to preview arrays for both tabs
+        this.first_tab.forEach((tab, index) => {
+          // Check if there are images for the tab
+          if (tab.images && tab.images.length > 0) {
+            tab.imagePreviews = tab.images.map((image: any) => {
+              return this.baseUrl + image;
+            });
+          }
+        });
+
+        this.second_tab.forEach((tab, index) => {
+          // Check if there are images for the tab
+          if (tab.images && tab.images.length > 0) {
+            tab.imagePreviews = tab.images.map((image: any) => {
+              return this.baseUrl + image;
+            });
+          }
+        });
+
       }
     });
-     
+
   }
 
   handleFileInput(event: Event, fieldName: string): void {
@@ -234,7 +330,7 @@ export class AddHomePageComponent {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.filesData[fieldName] = file;
-  
+
       // For image preview
       const reader = new FileReader();
       reader.onload = () => {
@@ -249,10 +345,10 @@ export class AddHomePageComponent {
       reader.readAsDataURL(file);
     }
   }
-  
-  
+
+
   removeImage(fieldName: string): void {
-    this.filesData[fieldName] = 'remove_img';
+    this.filesData[fieldName] = 'remove_image';
     if (fieldName === 'banner_img') {
       this.bannerImagePreview = null;
     } else if (fieldName === 'banner_bg_img') {
@@ -261,7 +357,17 @@ export class AddHomePageComponent {
       this.heroBgImagePreview = null;
     }
   }
-  
-  
+
+
+  // Remove an image from the list
+  removeTabImage(type: string, tabIndex: number, imageIndex: number): void {
+    if (type === 'first_tab') {
+      this.first_tab[tabIndex].images.splice(imageIndex, 1);
+      this.first_tab[tabIndex].imagePreviews.splice(imageIndex, 1);
+    } else {
+      this.second_tab[tabIndex].images.splice(imageIndex, 1);
+      this.second_tab[tabIndex].imagePreviews.splice(imageIndex, 1);
+    }
+  }
 
 }

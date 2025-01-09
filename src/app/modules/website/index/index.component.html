@@ -3,30 +3,29 @@
 
     <app-header></app-header>
 
-    <div class="main-bnr">
-      <div class="overlay">
+    <div class="main-bnr" style="background-image: url('{{banner_bg_img}}');">
+      <div class="overlay" >
       </div>
 
-
-      <div *ngIf="adVisible[0]" class="skyscraper-image">
-        <img src="{{advertisemnet_base_url + advertisemnetData[0].featured_image}}">
-        <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+      <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+        <img src="{{advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image}}">
+        <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div *ngIf="adVisible[1]" class="wide-skyscraper-image">
-        <img src="{{advertisemnet_base_url + advertisemnetData[1].featured_image}}">
-        <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+      <div *ngIf="!isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
+        <img src="{{advertisemnet_base_url + advertisemnetData?.wide_skyscraper?.featured_image}}">
+        <button (click)="closeAd('wide_skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="banner-inner">
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
-              <div class="banner-content" routerLink="/Admin">
-                <img class="home-banner-image" src="{{imageBaseUrl+pageDetail.banner_img}}">
+              <div class="banner-content" routerLink="/admin">
+                <img class="home-banner-image" src="{{banner_img}}">
               </div>
               <div class="banner-btn text-center mt-5">
-                <a href="{{ pageDetail.banner_btn_link }}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail.banner_btn_txt }}
+                <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1"> {{ pageDetail?.banner_btn_txt }}
                 </a>
                 <!-- {{ 'registerNow' | translate }} -->
 
@@ -44,10 +43,10 @@
       </div>
 
     </div>
-    <div class="advertisment" [ngClass]="{'hidden': !adVisible[2]}">
-      <div *ngIf="adVisible[2]" class="leaderboard-image">
-        <img src="{{advertisemnet_base_url + advertisemnetData[2].featured_image}}">
-        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+    <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
+      <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+        <img src="{{advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image}}">
+        <button (click)="closeAd('leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
 
@@ -59,10 +58,10 @@
         <div class="joined">
           <div class="joined-text">
             <!-- <h3>Recently Joined</h3> -->
-            <h3>{{pageDetail.slider_heading}}</h3>
+            <h3>{{pageDetail?.slider_heading}}</h3>
           </div>
           <div class="joined-btn">
-            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail.slider_btn_txt}}</button>
+            <button type="button" [routerLink]="'/player-list'" class="btn btn-light">{{pageDetail?.slider_btn_txt}}</button>
             <!-- <a href="{{pageDetail.slider_btn_link}}" type="button" class="btn btn-light">{{pageDetail.slider_btn_txt}}</a> -->
           </div>
         </div>
@@ -72,12 +71,12 @@
         <div class="carousel-slide" #owlCarousel (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
           (touchstart)="onTouchStart()" (touchend)="onTouchEnd()">
           <owl-carousel-o [options]="customOptions">
-            @for (slider of sliderDetail.users; track $index) {
+            @for (slider of sliderDetail?.users; track $index) {
               <ng-template carouselSlide>
                 <div class="player-carousel">
                   <div class="player-border">
                     <div class="player-img">
-                      <img src="{{slider.meta.profile_image_path}}" class="player-image">
+                      <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
                     </div>
                     <p class="player-name">{{slider.first_name + slider.last_name}}</p>
 
@@ -165,7 +164,7 @@
                   <a>
                     {{pageDetail?.tabs_data?.first_tab[2]?.title}}
                   </a>
-                  <p>{{pageDetail?.tabs_data?.first_tab[2]?.title}}</p>
+                  <p>{{pageDetail?.tabs_data?.first_tab[2]?.desc}}</p>
                 </div>
               </div>
 
@@ -215,19 +214,23 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player1" *ngIf="selectedContent === 'Sign-up & Profile Creation'" @slideIn>
                 <div class="row">
+                    
                   <div class="player-list-image">
-                    <div class="col-lg-4 col-md-6 col-4">
-                      <div class="talent-img1">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[0]?.images}}">
+                    
+                    <!-- <div class="col-lg-4 col-md-6 col-4">
+                      
+                       <div class="talent-img1">
                         <img src="./assets/images/Frame 3863.png">
                         <img class="dark-images" src="./assets/images/dark-works3.png">
                       </div>
                       <div class="talent-img2">
                         <img src="./assets/images/Gallery-Highlight.png">
                         <img class="dark-images" src="./assets/images/dark-works2.png">
-                      </div>
-                    </div>
+                      </div> 
+                    </div> -->
 
-                    <div class="col-lg-8 col-md-6 col-8">
+                    <!-- <div class="col-lg-8 col-md-6 col-8">
                       <img class="image3" src="./assets/images/talent-banner-image.png">
                       <div class="talent-img3">
                         <img src="./assets/images/talent-banner-image.png">
@@ -238,7 +241,7 @@
                         <img src="./assets/images/table-image.png">
                         <img class="dark-images" src="./assets/images/dark-works4.png">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -248,7 +251,9 @@
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
                 <div class="row">
                   <div class="football-club">
-                    <div class="col-4">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[1]?.images}}">
+                    
+                    <!-- <div class="col-4">
                       <div class="network1">
                         <div class="club_member1">
                           <div class="member1-image">
@@ -281,9 +286,9 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-4">
+                    <!-- <div class="col-4">
                       <div class="network_1">
                         <div class="network3">
                           <div class="club_member3">
@@ -370,7 +375,7 @@
                         </div>
                       </div>
 
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -380,14 +385,16 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player3" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
                 <div class="message-panels">
-                  <div class="message-panel">
+                  <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[2]?.images}}">
+                    
+                  <!-- <div class="message-panel">
                     <img src="./assets/images/Message Panel (1).png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel.png">
                   </div>
                   <div class="message-panel1">
                     <img src="./assets/images/Messages Panel1.png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -397,7 +404,10 @@
               <div class="player1" *ngIf="selectedContent === 'Sign-up & Profile Creation'" @slideIn>
                 <div class="row">
                   <div class="player-list-images">
-                    <div class="col-md-6 col-4">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[0]?.images}}">
+                    
+                    <!-- <div class="col-md-6 col-4">
+                        
                       <div class="talent-img1">
                         <img src="./assets/images/club-scouts1.png">
                         <img class="dark-images" src="./assets/images/dark-club3.png">
@@ -409,17 +419,15 @@
                     </div>
 
                     <div class="col-md-6 col-8">
-                      <!-- <img class="image3" src="./assets/images/talent-banner.svg"> -->
                       <div class="talent-img3">
                         <img src="./assets/images/club-scouts2.png">
                         <img class="dark-images" src="./assets/images/dark-club2.png">
                       </div>
-                      <!-- <img class="image4" src="./assets/images/talent-main-content (1).svg"> -->
                       <div class="talent-img4">
                         <img src="./assets/images/club-scouts4.png">
                         <img class="dark-images" src="./assets/images/dark-club4.png">
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -428,14 +436,16 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
                 <div class="message-panels">
-                  <div class="message-panel">
+                  <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[1]?.images}}">
+                    
+                  <!-- <div class="message-panel">
                     <img class="light-images" src="./assets/images/Message Panel (1).png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel.png">
                   </div>
                   <div class="message-panel1">
                     <img class="light-images" src="./assets/images/Messages Panel1.png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -443,7 +453,9 @@
 
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="club-scouts" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
-                <div class="club-offers1">
+                <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[2]?.images}}">
+                    
+                <!-- <div class="club-offers1">
                   <img class="light-images" src="./assets/images/club-scouts5.png">
                   <img class="dark-images" src="./assets/images/dark-design5.PNG">
 
@@ -455,7 +467,7 @@
                 <div class="club-offers3">
                   <img class="light-images" src="./assets/images/club-scouts7.png">
                   <img class="dark-images" src="./assets/images/dark-design4.PNG">
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -816,7 +828,7 @@
     <!-- How It Works-->
 
     <!-- Club-->
-    <div class="club py_0">
+    <div class="club py_0" style="background-image: url('{{hero_bg_img}}');">
 
       <div class="club-overlay"></div>
 
@@ -824,25 +836,24 @@
 
         <div class="container1">
           <div class="advertisment">
-            <div *ngIf="adVisible[3]" class="leaderboard-club-image">
-              <img src="{{advertisemnet_base_url + advertisemnetData[3].featured_image}}">
-              <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            <div *ngIf="!isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
+              <img src="{{advertisemnet_base_url + advertisemnetData?.large_leaderboard?.featured_image}}">
+              <button (click)="closeAd('large_leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <div *ngIf="adVisible[4]" class="small-sqaure-image">
-              <img src="{{advertisemnet_base_url + advertisemnetData[4].featured_image}}">
-              <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+           <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+              <img src="{{advertisemnet_base_url + advertisemnetData?.small_square?.featured_image}}">
+              <button (click)="closeAd('small_square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
         </div>
 
         <div class="club_players">
-          <h3>{{pageDetail.hero_heading_txt}}</h3>
+          <h3>{{pageDetail?.hero_heading_txt}}</h3>
           <div class="club-buttons">
             <div data-bs-toggle="modal" data-bs-target="#exampleModal1">
               <div class="button-border">
                 <div class="join-text">
-                  <p> {{pageDetail.hero_btn_txt}}</p>
+                  <p> {{pageDetail?.hero_btn_txt}}</p>
                   <img class="join-btn check-image-dark" src="./assets/images/dark-join-now.png"> 
                   <img class="join-btn check-image-light" src="./assets/images/light-join-now.png">
                 </div>

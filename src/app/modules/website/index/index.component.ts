@@ -61,12 +61,16 @@ export interface ClubMember {
 })
 export class IndexComponent {
   @ViewChild('owlCarousel') owlCarousel!: ElementRef;
+  fallbackImage: string = 'assets/images/1.jpg'; // Path to your fallback image
+
   selectedLangId:any = null;
   pageDetail:any=null;
   sliderDetail:any=null;
   advertisemnetData:any=null;
-  
   imageBaseUrl:string= '';
+  banner_img:string= '';
+  banner_bg_img:string= '';
+  hero_bg_img:string= '';
   advertisemnet_base_url:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
@@ -178,7 +182,10 @@ export class IndexComponent {
   }
 
  
-
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.fallbackImage;
+  }
   toggleNavbar(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
   }
@@ -280,16 +287,38 @@ ngOnInit() {
   this.adVisible = [true, true, true, true, true];
   this.webPages.languageId$.subscribe((data) => {
     this.getPageDynamicData(data);
-    console.log('here is data',data)
   });
 }
 
 
-closeAd(index: number) {
-  this.adVisible[index] = false; // Set the specific ad to not visible based on index
+closeAd(object: any) {
+  
+  switch(object){  
+    case 'skyscraper':  
+        this.advertisemnetData.skyscraper = [];
+        break; 
+    case 'wide_skyscraper':  
+        this.advertisemnetData.wide_skyscraper = [];
+        break;  
+    case 'leaderboard':  
+        this.advertisemnetData.leaderboard = [];
+        break;
+    case 'large_leaderboard':  
+        this.advertisemnetData.large_leaderboard = [];
+        break;
+    case 'small_square':  
+        this.advertisemnetData.small_square = [];
+        break;
+    default:  
+        //when no case is matched, this block will be executed;  
+        break;  //optional  
+    }  
+
 }
 
-
+isEmptyObject(obj:any) {
+  return (obj && (Object.keys(obj).length === 0));
+}
 getPageDynamicData(languageId:any){
 
   this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
@@ -297,8 +326,13 @@ getPageDynamicData(languageId:any){
     let sliderData = res.data.sliderData;
     if(res.status){
         this.pageDetail = pageData;
+        this.banner_img =  res.data.base_url + pageData.banner_img;
+        this.banner_bg_img =  res.data.base_url + pageData.banner_bg_img;
+        this.hero_bg_img =  res.data.base_url + pageData.hero_bg_img;
+        
         this.sliderDetail = sliderData;
         this.advertisemnetData = res.data.advertisemnetData;
+
         this.imageBaseUrl = res.data.base_url;
         this.advertisemnet_base_url = res.data.advertisemnet_base_url;
       }

@@ -6,9 +6,9 @@
     <fieldset class="border p-3 mb-4" *ngIf="!pageId">
       <div class="row">
         <div class="mb-3 col-md-12">
-          <label for="langId" class="form-label">Select Language</label>
+          <label for="langId" class="form-label">{{ 'selectLanguage' | translate }}</label>
           <select class="form-select" id="langId" name="language" [(ngModel)]="formData.language">
-            <option value="" disabled selected>Select a language</option>
+            <option value="" disabled selected>{{ 'selectALanguage' | translate }}</option>
             <ng-container *ngIf="languages && languages.length > 0">
               <ng-container *ngFor="let language of languages; let i = index">
                 <option [value]="language.id">{{ language.language }}</option>
@@ -18,23 +18,25 @@
         </div>
       </div>
     </fieldset>
-    
+
     <fieldset class="border p-3 mb-4">
       <div class="row">
         <div class="mb-3 col-md-6">
-          <label for="metaTitle" class="form-label">Meta Title</label>
+          <label for="metaTitle" class="form-label">{{ 'metaTitle' | translate }}</label>
           <input type="text" class="form-control" id="metaTitle" name="meta_title" [(ngModel)]="formData.meta_title" />
         </div>
         <div class="mb-3 col-md-6">
-          <label for="metaDescription" class="form-label">Meta Description</label>
-          <textarea class="form-control" id="metaDescription" name="meta_description" [(ngModel)]="formData.meta_description" rows="3"></textarea>
+          <label for="metaDescription" class="form-label">{{ 'metaDescription' | translate }}</label>
+          <textarea class="form-control" id="metaDescription" name="meta_description"
+            [(ngModel)]="formData.meta_description" rows="3"></textarea>
         </div>
       </div>
     </fieldset>
 
     <div class="mb-3">
-      <label for="banner_title" class="form-label">Banner Title</label>
-      <input type="text" id="banner_title" class="form-control" name="banner_title" [(ngModel)]="formData.banner_title" required />
+      <label for="banner_title" class="form-label">{{ 'bannerTitle' | translate }}</label>
+      <input type="text" id="banner_title" class="form-control" name="banner_title" [(ngModel)]="formData.banner_title"
+        required />
     </div>
 
     <!-- <div class="mb-3">
@@ -65,196 +67,193 @@
 
     <!-- Pricing Fields -->
     <div class="form-group">
-      <label for="pricingTitle">Pricing Title</label>
-      <input id="pricingTitle" type="text" class="form-control" name="pricing_title" [(ngModel)]="formData.pricing_title"/>
+      <label for="pricingTitle">{{'pricingTitle' | translate }}</label>
+      <input id="pricingTitle" type="text" class="form-control" name="pricing_title"
+        [(ngModel)]="formData.pricing_title" />
     </div>
 
     <div class="form-group">
-      <label for="pricingTabsTitle">Pricing Tabs Title</label>
-      <input id="pricingTabsTitle" type="text" class="form-control" name="pricing_tabs_title" [(ngModel)]="formData.pricing_tabs_title"/>
+      <label for="pricingTabsTitle">{{ 'pricingTabsTitle' | translate }}</label>
+      <input id="pricingTabsTitle" type="text" class="form-control" name="pricing_tabs_title"
+        [(ngModel)]="formData.pricing_tabs_title" />
     </div>
 
     <!-- First Tab Inputs -->
     <div class="card my-3">
-      <div class="card-header">First Tab</div>
+      <div class="card-header">{{ 'firstTab' | translate }}</div>
       <div class="card-body">
-        <div class="form-group mb-3" >
-          <label for="firstTabMonthlyLabel">Monthly Label</label>
-          <input id="firstTabMonthlyLabel" type="text" class="form-control" name="first_tab.monthly_label" [(ngModel)]="formData.first_tab.monthly_label"/>
+        <div class="form-group mb-3">
+          <label for="firstTabMonthlyLabel">{{ 'monthlyLabel' | translate }}</label>
+          <input id="firstTabMonthlyLabel" type="text" class="form-control" name="first_tab.monthly_label"
+            [(ngModel)]="formData.first_tab.monthly_label" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="firstTabYearlyLabel">Yearly Label</label>
-          <input id="firstTabYearlyLabel" type="text" class="form-control" name="first_tab.yearly_label" [(ngModel)]="formData.first_tab.yearly_label"/>
+        <div class="form-group mb-3">
+          <label for="firstTabYearlyLabel">{{ 'yearlyLabel' | translate }}</label>
+          <input id="firstTabYearlyLabel" type="text" class="form-control" name="first_tab.yearly_label"
+            [(ngModel)]="formData.first_tab.yearly_label" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="firstTabPlanName">Plan Name</label>
-          <input id="firstTabPlanName" type="text" class="form-control" name="first_tab.plan_name" [(ngModel)]="formData.first_tab.plan_name"/>
+        <div class="form-group mb-3">
+          <label for="firstTabPlanName">{{ 'planName' | translate }}</label>
+          <input id="firstTabPlanName" type="text" class="form-control" name="first_tab.plan_name"
+            [(ngModel)]="formData.first_tab.plan_name" />
         </div>
 
         <!-- New Fields for First Tab -->
-        <div class="form-group mb-3" >
-          <label for="firstTabMonthlyPrice">Monthly Price</label>
-          <input id="firstTabMonthlyPrice" type="number" class="form-control" name="first_tab.monthly_price" [(ngModel)]="formData.first_tab.monthly_price"/>
+        <div class="form-group mb-3">
+          <label for="firstTabMonthlyPrice">{{ 'monthlyPrice' | translate }}</label>
+          <input id="firstTabMonthlyPrice" type="number" class="form-control" name="first_tab.monthly_price"
+            [(ngModel)]="formData.first_tab.monthly_price" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="firstTabMonthlyPriceCurrency">Monthly Price Currency</label>
-          <input id="firstTabMonthlyPriceCurrency" type="text" class="form-control" name="first_tab.monthly_price_currency" [(ngModel)]="formData.first_tab.monthly_price_currency"/>
+        <div class="form-group mb-3">
+          <label for="firstTabMonthlyPriceCurrency">{{ 'monthlyPriceCurrency' | translate }}</label>
+          <input id="firstTabMonthlyPriceCurrency" type="text" class="form-control"
+            name="first_tab.monthly_price_currency" [(ngModel)]="formData.first_tab.monthly_price_currency" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="firstTabYearlyPrice">Yearly Price</label>
-          <input id="firstTabYearlyPrice" type="number" class="form-control" name="first_tab.yearly_price" [(ngModel)]="formData.first_tab.yearly_price"/>
+        <div class="form-group mb-3">
+          <label for="firstTabYearlyPrice">{{ 'yearlyPrice' | translate }}</label>
+          <input id="firstTabYearlyPrice" type="number" class="form-control" name="first_tab.yearly_price"
+            [(ngModel)]="formData.first_tab.yearly_price" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="firstTabYearlyPriceCurrency">Yearly Price Currency</label>
-          <input id="firstTabYearlyPriceCurrency" type="text" class="form-control" name="first_tab.yearly_price_currency" [(ngModel)]="formData.first_tab.yearly_price_currency"/>
+        <div class="form-group mb-3">
+          <label for="firstTabYearlyPriceCurrency">{{ 'yearlyPriceCurrency' | translate }}</label>
+          <input id="firstTabYearlyPriceCurrency" type="text" class="form-control"
+            name="first_tab.yearly_price_currency" [(ngModel)]="formData.first_tab.yearly_price_currency" />
         </div>
 
 
         <!-- Features Section -->
-        <div class="form-group mb-3" >
-          <label>Free Features</label>
+        <div class="form-group mb-3">
+          <label>{{ 'freeFeatures' | translate }}</label>
           <div *ngFor="let feature of formData.first_tab.free_features_desc; let i = index" class="mb-2">
-            <input type="text" class="form-control " [(ngModel)]="formData.first_tab.free_features_desc[i]" name="firstTabFeature{{ i }}" placeholder="Enter feature" />
-            <button type="button" class="btn btn-danger mt-2 " (click)="removeFirstTabDescFeature(i)" *ngIf="formData.first_tab.free_features_desc.length > 1">Remove Feature</button>
+            <input type="text" class="form-control " [(ngModel)]="formData.first_tab.free_features_desc[i]"
+              name="firstTabFeature{{ i }}" placeholder="Enter feature" />
+            <button type="button" class="btn btn-danger mt-2 " (click)="removeFirstTabDescFeature(i)"
+              *ngIf="formData.first_tab.free_features_desc.length > 1">Remove Feature</button>
           </div>
-          <button type="button" class="btn btn-success" (click)="addFirstTabDescFeature()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="addFirstTabDescFeature()"> {{ 'addFeature' | translate
+            }}</button>
         </div>
 
         <!-- New Premium Features Title Field -->
-        <div class="form-group mb-3" >
-          <label for="firstTabPremiumFeaturesTitle">Premium Features Title</label>
-          <input
-            id="firstTabPremiumFeaturesTitle"
-            type="text"
-            class="form-control"
-            name="first_tab.premium_features_title"
-            [(ngModel)]="formData.first_tab.premium_features_title"
-          />
+        <div class="form-group mb-3">
+          <label for="firstTabPremiumFeaturesTitle">{{ 'premiumFeaturesTitle' | translate }}</label>
+          <input id="firstTabPremiumFeaturesTitle" type="text" class="form-control"
+            name="first_tab.premium_features_title" [(ngModel)]="formData.first_tab.premium_features_title" />
         </div>
 
         <!-- New Premium Features Description Fields -->
         <div class="form-group mt-3">
-          <label>Premium Features Description</label>
+          <label>{{ 'premiumFeaturesDescription' | translate }}</label>
           <div *ngFor="let feature of formData.first_tab.premium_features_desc; let i = index" class="mb-2">
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="formData.first_tab.premium_features_desc[i]"
-              name="firstTabPremiumFeatureDesc{{ i }}"
-              placeholder="Enter feature description"
-            />
-            <button
-              type="button"
-              class="btn btn-danger mt-2"
-              (click)="remove_premium_features_desc(i)"
-              *ngIf="formData.first_tab.premium_features_desc.length > 1"
-            >
-              Remove Feature
+            <input type="text" class="form-control" [(ngModel)]="formData.first_tab.premium_features_desc[i]"
+              name="firstTabPremiumFeatureDesc{{ i }}" placeholder="Enter feature description" />
+            <button type="button" class="btn btn-danger mt-2" (click)="remove_premium_features_desc(i)"
+              *ngIf="formData.first_tab.premium_features_desc.length > 1">
+              {{ 'removeFeature' | translate }}
             </button>
           </div>
-          <button type="button" class="btn btn-success" (click)="add_premium_features_desc()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="add_premium_features_desc()">{{ 'addFeature' |
+            translate }}</button>
         </div>
 
         <div class="form-group mt-3">
-          <label for="firstTabButtonTxt">Button Text</label>
-          <input id="firstTabButtonTxt" type="text" class="form-control" name="first_tab.btn_txt" [(ngModel)]="formData.first_tab.btn_txt"/>
+          <label for="firstTabButtonTxt">{{ 'buttonText' | translate }}</label>
+          <input id="firstTabButtonTxt" type="text" class="form-control" name="first_tab.btn_txt"
+            [(ngModel)]="formData.first_tab.btn_txt" />
         </div>
       </div>
     </div>
 
     <!-- Second Tab Inputs -->
     <div class="card my-3">
-      <div class="card-header">Second Tab</div>
+      <div class="card-header">{{ 'secondTab' | translate }}</div>
       <div class="card-body">
         <div class="form-group mb-3">
-          <label for="secTabMonthlyLabel">Monthly Label</label>
-          <input id="secTabMonthlyLabel" type="text" class="form-control" name="sec_tab.monthly_label" [(ngModel)]="formData.sec_tab.monthly_label"/>
+          <label for="secTabMonthlyLabel">{{ 'monthlyLabel' | translate }}</label>
+          <input id="secTabMonthlyLabel" type="text" class="form-control" name="sec_tab.monthly_label"
+            [(ngModel)]="formData.sec_tab.monthly_label" />
         </div>
 
         <div class="form-group mb-3">
-          <label for="secTabYearlyLabel">Yearly Label</label>
-          <input id="secTabYearlyLabel" type="text" class="form-control" name="sec_tab.yearly_label" [(ngModel)]="formData.sec_tab.yearly_label"/>
+          <label for="secTabYearlyLabel">{{ 'yearlyLabel' | translate }}</label>
+          <input id="secTabYearlyLabel" type="text" class="form-control" name="sec_tab.yearly_label"
+            [(ngModel)]="formData.sec_tab.yearly_label" />
         </div>
 
         <div class="form-group mb-3">
-          <label for="secTabPlanName">Plan Name</label>
-          <input id="secTabPlanName" type="text" class="form-control" name="sec_tab.plan_name" [(ngModel)]="formData.sec_tab.plan_name"/>
+          <label for="secTabPlanName">{{ 'planName' | translate }}</label>
+          <input id="secTabPlanName" type="text" class="form-control" name="sec_tab.plan_name"
+            [(ngModel)]="formData.sec_tab.plan_name" />
         </div>
 
         <!-- New Fields for Second Tab -->
         <div class="form-group mb-3">
-          <label for="secTabMonthlyPrice">Monthly Price</label>
-          <input id="secTabMonthlyPrice" type="number" class="form-control" name="sec_tab.monthly_price" [(ngModel)]="formData.sec_tab.monthly_price"/>
+          <label for="secTabMonthlyPrice">{{ 'monthlyPrice' | translate }}</label>
+          <input id="secTabMonthlyPrice" type="number" class="form-control" name="sec_tab.monthly_price"
+            [(ngModel)]="formData.sec_tab.monthly_price" />
         </div>
 
         <div class="form-group mb-3">
-          <label for="secTabMonthlyPriceCurrency">Monthly Price Currency</label>
-          <input id="secTabMonthlyPriceCurrency" type="text" class="form-control" name="sec_tab.monthly_price_currency" [(ngModel)]="formData.sec_tab.monthly_price_currency"/>
+          <label for="secTabMonthlyPriceCurrency">{{ 'monthlyPriceCurrency' | translate }}</label>
+          <input id="secTabMonthlyPriceCurrency" type="text" class="form-control" name="sec_tab.monthly_price_currency"
+            [(ngModel)]="formData.sec_tab.monthly_price_currency" />
         </div>
 
         <div class="form-group mb-3">
-          <label for="secTabYearlyPrice">Yearly Price</label>
-          <input id="secTabYearlyPrice" type="number" class="form-control" name="sec_tab.yearly_price" [(ngModel)]="formData.sec_tab.yearly_price"/>
+          <label for="secTabYearlyPrice">{{ 'yearlyPrice' | translate }}</label>
+          <input id="secTabYearlyPrice" type="number" class="form-control" name="sec_tab.yearly_price"
+            [(ngModel)]="formData.sec_tab.yearly_price" />
         </div>
 
         <div class="form-group mb-3">
-          <label for="secTabYearlyPriceCurrency">Yearly Price Currency</label>
-          <input id="secTabYearlyPriceCurrency" type="text" class="form-control" name="sec_tab.yearly_price_currency" [(ngModel)]="formData.sec_tab.yearly_price_currency"/>
+          <label for="secTabYearlyPriceCurrency">{{ 'yearlyPriceCurrency' | translate }}</label>
+          <input id="secTabYearlyPriceCurrency" type="text" class="form-control" name="sec_tab.yearly_price_currency"
+            [(ngModel)]="formData.sec_tab.yearly_price_currency" />
         </div>
 
         <!-- Additional Feature Sections for Second Tab -->
         <div class="form-group mb-3">
-          <label>Free Features</label>
+          <label>{{ 'freeFeatures' | translate }}</label>
           <div *ngFor="let feature of formData.sec_tab.free_features_desc; let i = index" class="mb-2">
-            <input type="text" class="form-control" [(ngModel)]="formData.sec_tab.free_features_desc[i]" name="secTabFeature{{ i }}" placeholder="Enter feature" />
-            <button type="button" class="btn btn-danger mt-2" (click)="removeSecTabDescFeature(i)" *ngIf="formData.sec_tab.free_features_desc.length > 1">Remove Feature</button>
+            <input type="text" class="form-control" [(ngModel)]="formData.sec_tab.free_features_desc[i]"
+              name="secTabFeature{{ i }}" placeholder="Enter feature" />
+            <button type="button" class="btn btn-danger mt-2" (click)="removeSecTabDescFeature(i)"
+              *ngIf="formData.sec_tab.free_features_desc.length > 1">Remove Feature</button>
           </div>
-          <button type="button" class="btn btn-success" (click)="addSecTabDescFeature()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="addSecTabDescFeature()">{{ 'addFeature' | translate
+            }}</button>
         </div>
 
         <!-- New Premium Features Title Field -->
         <div class="form-group mb-3">
-          <label for="secTabPremiumFeaturesTitle">Premium Features Title</label>
-          <input
-            id="secTabPremiumFeaturesTitle"
-            type="text"
-            class="form-control"
-            name="sec_tab.premium_features_title"
-            [(ngModel)]="formData.sec_tab.premium_features_title"
-          />
+          <label for="secTabPremiumFeaturesTitle">{{ 'premiumFeaturesTitle' | translate }}</label>
+          <input id="secTabPremiumFeaturesTitle" type="text" class="form-control" name="sec_tab.premium_features_title"
+            [(ngModel)]="formData.sec_tab.premium_features_title" />
         </div>
 
         <!-- New Premium Features Description Fields -->
         <div class="form-group mt-3">
-          <label>Premium Features Description</label>
+          <label>{{ 'premiumFeaturesDescription' | translate }}</label>
           <div *ngFor="let feature of formData.sec_tab.premium_features_desc; let i = index" class="mb-2">
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="formData.sec_tab.premium_features_desc[i]"
-              name="secTabPremiumFeatureDesc{{ i }}"
-              placeholder="Enter feature description"
-            />
-            <button
-              type="button"
-              class="btn btn-danger mt-2"
-              (click)="removeSecTabPremiumFeature(i)"
-              *ngIf="formData.sec_tab.premium_features_desc.length > 1"
-            >
-              Remove Feature
+            <input type="text" class="form-control" [(ngModel)]="formData.sec_tab.premium_features_desc[i]"
+              name="secTabPremiumFeatureDesc{{ i }}" placeholder="Enter feature description" />
+            <button type="button" class="btn btn-danger mt-2" (click)="removeSecTabPremiumFeature(i)"
+              *ngIf="formData.sec_tab.premium_features_desc.length > 1">
+              {{ 'removeFeature' | translate }}
             </button>
           </div>
-          <button type="button" class="btn btn-success" (click)="addSecTabPremiumFeature()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="addSecTabPremiumFeature()">{{ 'addFeature' | translate }}</button>
         </div>
         <!-- Button Text -->
         <div class="form-group mt-3">
-          <label for="secTabButtonTxt">Button Text</label>
-          <input id="secTabButtonTxt" type="text" class="form-control" name="sec_tab.btn_txt" [(ngModel)]="formData.sec_tab.btn_txt"/>
+          <label for="secTabButtonTxt">{{ 'buttonText' | translate }}</label>
+          <input id="secTabButtonTxt" type="text" class="form-control" name="sec_tab.btn_txt"
+            [(ngModel)]="formData.sec_tab.btn_txt" />
         </div>
       </div>
     </div>
@@ -262,97 +261,93 @@
 
     <!-- Third Tab Inputs -->
     <div class="card my-3">
-      <div class="card-header">Third Tab</div>
+      <div class="card-header">{{ 'thirdTab' | translate }}</div>
       <div class="card-body">
-        <div class="form-group mb-3" >
-          <label for="thirdTabMonthlyLabel">Monthly Label</label>
-          <input id="thirdTabMonthlyLabel" type="text" class="form-control" name="third_tab.monthly_label" [(ngModel)]="formData.third_tab.monthly_label"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabMonthlyLabel">{{ 'monthlyLabel' | translate }}</label>
+          <input id="thirdTabMonthlyLabel" type="text" class="form-control" name="third_tab.monthly_label"
+            [(ngModel)]="formData.third_tab.monthly_label" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="thirdTabYearlyLabel">Yearly Label</label>
-          <input id="thirdTabYearlyLabel" type="text" class="form-control" name="third_tab.yearly_label" [(ngModel)]="formData.third_tab.yearly_label"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabYearlyLabel">{{ 'yearlyLabel' | translate }}</label>
+          <input id="thirdTabYearlyLabel" type="text" class="form-control" name="third_tab.yearly_label"
+            [(ngModel)]="formData.third_tab.yearly_label" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="thirdTabPlanName">Plan Name</label>
-          <input id="thirdTabPlanName" type="text" class="form-control" name="third_tab.plan_name" [(ngModel)]="formData.third_tab.plan_name"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabPlanName">{{ 'planName' | translate }}</label>
+          <input id="thirdTabPlanName" type="text" class="form-control" name="third_tab.plan_name"
+            [(ngModel)]="formData.third_tab.plan_name" />
         </div>
 
         <!-- New Fields for Third Tab -->
-        <div class="form-group mb-3" >
-          <label for="thirdTabMonthlyPrice">Monthly Price</label>
-          <input id="thirdTabMonthlyPrice" type="number" class="form-control" name="third_tab.monthly_price" [(ngModel)]="formData.third_tab.monthly_price"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabMonthlyPrice">{{ 'monthlyPrice' | translate }}</label>
+          <input id="thirdTabMonthlyPrice" type="number" class="form-control" name="third_tab.monthly_price"
+            [(ngModel)]="formData.third_tab.monthly_price" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="thirdTabMonthlyPriceCurrency">Monthly Price Currency</label>
-          <input id="thirdTabMonthlyPriceCurrency" type="text" class="form-control" name="third_tab.monthly_price_currency" [(ngModel)]="formData.third_tab.monthly_price_currency"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabMonthlyPriceCurrency">{{ 'monthlyPriceCurrency' | translate }}</label>
+          <input id="thirdTabMonthlyPriceCurrency" type="text" class="form-control"
+            name="third_tab.monthly_price_currency" [(ngModel)]="formData.third_tab.monthly_price_currency" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="thirdTabYearlyPrice">Yearly Price</label>
-          <input id="thirdTabYearlyPrice" type="number" class="form-control" name="third_tab.yearly_price" [(ngModel)]="formData.third_tab.yearly_price"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabYearlyPrice">{{ 'yearlyPrice' | translate }}</label>
+          <input id="thirdTabYearlyPrice" type="number" class="form-control" name="third_tab.yearly_price"
+            [(ngModel)]="formData.third_tab.yearly_price" />
         </div>
 
-        <div class="form-group mb-3" >
-          <label for="thirdTabYearlyPriceCurrency">Yearly Price Currency</label>
-          <input id="thirdTabYearlyPriceCurrency" type="text" class="form-control" name="third_tab.yearly_price_currency" [(ngModel)]="formData.third_tab.yearly_price_currency"/>
+        <div class="form-group mb-3">
+          <label for="thirdTabYearlyPriceCurrency">{{ 'yearlyPriceCurrency' | translate }}</label>
+          <input id="thirdTabYearlyPriceCurrency" type="text" class="form-control"
+            name="third_tab.yearly_price_currency" [(ngModel)]="formData.third_tab.yearly_price_currency" />
         </div>
 
 
         <!-- Features Section -->
-        <div class="form-group mb-3" >
+        <div class="form-group mb-3">
           <label>Free Features</label>
           <div *ngFor="let feature of formData.third_tab.free_features_desc; let i = index" class="mb-2">
-            <input type="text" class="form-control " [(ngModel)]="formData.third_tab.free_features_desc[i]" name="thirdTabFeature{{ i }}" placeholder="Enter feature" />
-            <button type="button" class="btn btn-danger mt-2 " (click)="removeThirdTabDescFeature(i)" *ngIf="formData.third_tab.free_features_desc.length > 1">Remove Feature</button>
+            <input type="text" class="form-control " [(ngModel)]="formData.third_tab.free_features_desc[i]"
+              name="thirdTabFeature{{ i }}" placeholder="Enter feature" />
+            <button type="button" class="btn btn-danger mt-2 " (click)="removeThirdTabDescFeature(i)"
+              *ngIf="formData.third_tab.free_features_desc.length > 1">{{ 'removeFeature' | translate }}</button>
           </div>
-          <button type="button" class="btn btn-success" (click)="addThirdTabDescFeature()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="addThirdTabDescFeature()">{{ 'addFeature' | translate }}</button>
         </div>
 
         <!-- New Premium Features Title Field -->
-        <div class="form-group mb-3" >
-          <label for="thirdTabPremiumFeaturesTitle">Premium Features Title</label>
-          <input
-            id="thirdTabPremiumFeaturesTitle"
-            type="text"
-            class="form-control"
-            name="third_tab.premium_features_title"
-            [(ngModel)]="formData.third_tab.premium_features_title"
-          />
+        <div class="form-group mb-3">
+          <label for="thirdTabPremiumFeaturesTitle">{{ 'premiumFeaturesTitle' | translate }}</label>
+          <input id="thirdTabPremiumFeaturesTitle" type="text" class="form-control"
+            name="third_tab.premium_features_title" [(ngModel)]="formData.third_tab.premium_features_title" />
         </div>
 
         <!-- New Premium Features Description Fields -->
         <div class="form-group mt-3">
-          <label>Premium Features Description</label>
+          <label>{{ 'premiumFeaturesDescription' | translate }}</label>
           <div *ngFor="let feature of formData.third_tab.premium_features_desc; let i = index" class="mb-2">
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="formData.third_tab.premium_features_desc[i]"
-              name="thirdTabPremiumFeatureDesc{{ i }}"
-              placeholder="Enter feature description"
-            />
-            <button
-              type="button"
-              class="btn btn-danger mt-2"
-              (click)="remove_premium_features_desc(i)"
-              *ngIf="formData.third_tab.premium_features_desc.length > 1"
-            >
-              Remove Feature
+            <input type="text" class="form-control" [(ngModel)]="formData.third_tab.premium_features_desc[i]"
+              name="thirdTabPremiumFeatureDesc{{ i }}" placeholder="Enter feature description" />
+            <button type="button" class="btn btn-danger mt-2" (click)="remove_premium_features_desc(i)"
+              *ngIf="formData.third_tab.premium_features_desc.length > 1">
+              {{ 'removeFeature' | translate }}
             </button>
           </div>
-          <button type="button" class="btn btn-success" (click)="add_premium_features_desc()">Add Feature</button>
+          <button type="button" class="btn btn-success" (click)="add_premium_features_desc()">{{ 'addFeature' | translate }}</button>
         </div>
 
         <div class="form-group mt-3">
-          <label for="thirdTabButtonTxt">Button Text</label>
-          <input id="thirdTabButtonTxt" type="text" class="form-control" name="third_tab.btn_txt" [(ngModel)]="formData.third_tab.btn_txt"/>
+          <label for="thirdTabButtonTxt">{{ 'buttonText' | translate }}</label>
+          <input id="thirdTabButtonTxt" type="text" class="form-control" name="third_tab.btn_txt"
+            [(ngModel)]="formData.third_tab.btn_txt" />
         </div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mb-2">Save</button>
+    <button type="submit" class="btn btn-primary mb-2">{{ 'save' | translate }}</button>
   </form>
 </div>

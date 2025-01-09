@@ -1,27 +1,27 @@
 <div class="dialog-container">
   <div class="personal_edit">
     <div class="dialog-header m-auto">
-      <h2>Edit User Personal Details</h2>
+      <h2>{{ 'editUserPersonalDetails' | translate }}</h2>
     </div>
     <div class="close_buttons">
       <button class="close-btn" (click)="onCancel()">X</button>
     </div>
   </div>
   <hr>
-  
-    
-    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-      <div class="overflow-card">
+
+
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="overflow-card">
       <div class="row">
         <!-- First Name -->
         <div class="form-group col-lg-6">
-          <label for="first_name">First Name:</label>
+          <label for="first_name">{{ 'firstName' | translate }}:</label>
           <input type="text" id="first_name" name="first_name" [(ngModel)]="firstName" required>
         </div>
 
         <!-- Last Name -->
         <div class="form-group col-lg-6">
-          <label for="last_name">Last Name:</label>
+          <label for="last_name">{{ 'lastName' | translate }}:</label>
           <input type="text" id="last_name" name="last_name" [(ngModel)]="lastName" required>
         </div>
       </div>
@@ -29,7 +29,7 @@
       <div class="row">
         <!-- Current Club -->
         <div class="form-group col-lg-6">
-          <label for="currentClub">Current Club:</label>
+          <label for="currentClub">{{ 'currentClub' | translate }}:</label>
           <select id="currentClub" name="currentClub" [(ngModel)]="currentClub" required>
             <option *ngFor="let team of teams; let last = last" [value]="team.id"
               [selected]="team.id === currentClub || last && !currentClub">
@@ -40,7 +40,7 @@
 
         <!-- Nationality -->
         <div class="form-group col-lg-6">
-          <label for="nationality">Nationality:</label>
+          <label for="nationality">{{ 'nationality' | translate }}:</label>
           <select id="nationality" name="nationality" [(ngModel)]="user.nationality" required>
             <option *ngFor="let country of countries" [value]="country.id">{{ country.country_name }}</option>
           </select>
@@ -50,13 +50,13 @@
       <div class="row">
         <!-- Date of Birth -->
         <div class="form-group col-lg-6">
-          <label for="dateOfBirth">Date of Birth:</label>
+          <label for="dateOfBirth">{{ 'dateOfBirth' | translate }}:</label>
           <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="dateOfBirth" required>
         </div>
 
         <!-- Place of Birth -->
         <div class="form-group col-lg-6">
-          <label for="placeOfBirth">Place of Birth:</label>
+          <label for="placeOfBirth">{{ 'placeOfBirth' | translate }}:</label>
           <input type="text" id="placeOfBirth" name="placeOfBirth" [(ngModel)]="placeOfBirth" required>
         </div>
       </div>
@@ -65,14 +65,14 @@
         <!-- Height -->
         <div class="form-group col-lg-6 d-flex align-items-center">
           <div class="col-lg-7 gap_inputs mobile-input">
-            <label for="height">Height:</label>
+            <label for="height">{{'height' | translate}}:</label>
             <input type="number" id="height" name="height" [(ngModel)]="height" placeholder="Enter value" required>
           </div>
           <div class="col-lg-5 mobile-input">
-            <label for="heightUnit">Select Unit</label>
+            <label for="heightUnit">{{'selectUnit' | translate}}</label>
             <select name="heightUnit" id="heightUnit" [(ngModel)]="heightUnit" required>
-              <option value="cm">Centimeters</option>
-              <option value="in">Inches</option>
+              <option value="cm">{{'centimeters' | translate}}</option>
+              <option value="in">{{'inches' | translate}}</option>
             </select>
           </div>
         </div>
@@ -80,14 +80,14 @@
         <!-- Weight -->
         <div class="form-group col-lg-6 d-flex align-items-center">
           <div class="col-lg-7 gap_inputs mobile-input">
-            <label for="weight">Weight:</label>
+            <label for="weight">{{'weight' | translate}}:</label>
             <input type="number" id="weight" name="weight" [(ngModel)]="weight" placeholder="Enter value" required>
           </div>
           <div class="col-lg-5 mobile-input">
-            <label for="weightUnit">Select Unit</label>
+            <label for="weightUnit">{{'selectUnit' | translate}}</label>
             <select name="weightUnit" id="weightUnit" [(ngModel)]="weightUnit" required>
-              <option value="kg">Kilograms</option>
-              <option value="lb">Pounds</option>
+              <option value="kg">{{'kilograms' | translate}}</option>
+              <option value="lb">{{'pounds' | translate}}</option>
             </select>
           </div>
         </div>
@@ -96,7 +96,7 @@
       <div class="row">
         <!-- Contract Dates -->
         <div class="form-group date_inputs col-lg-9 ">
-          <label for="contractStart">Contract Start</label>
+          <label for="contractStart">{{'contractStart' | translate}}</label>
           <input type="number" id="contractStart" class="start_bate mobile-input" name="contractStart"
             [(ngModel)]="contractStart" required>
           <input type="number" id="contractEnd" class="end_bate mobile-input" name="contractEnd"
@@ -107,25 +107,25 @@
       <div class="row">
         <!-- League Level -->
         <div class="form-group col-lg-6">
-          <label for="leagueLevel">League Level:</label>
+          <label for="leagueLevel">{{'leagueLevel' | translate}}:</label>
           <input type="text" id="leagueLevel" name="leagueLevel" [(ngModel)]="leagueLevel" required>
         </div>
 
         <!-- Dominant Foot -->
         <div class="form-group col-lg-6">
-          <label for="dominantFoot">Dominant Foot:</label>
+          <label for="dominantFoot">{{'dominantFoot' | translate}}:</label>
           <select id="dominantFoot" name="dominantFoot" [(ngModel)]="dominantFoot" required>
-            <option value="Right">Right</option>
-            <option value="Left">Left</option>
-            <option value="Both">Both</option>
+            <option value="Right">{{'right' | translate}}</option>
+            <option value="Left">{{'left' | translate}}</option>
+            <option value="Both">{{'both' | translate}}</option>
           </select>
         </div>
       </div>
     </div>
     <div class="dialog-actions align-items-center d-flex justify-content-between">
-      <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
-      <button class="save-btn" type="submit">Save</button>
+      <button class="cancel-btn" type="button" (click)="onCancel()">{{'cancel' | translate}}</button>
+      <button class="save-btn" type="submit">{{'save' | translate}}</button>
     </div>
-    </form>
-   
+  </form>
+
 </div>

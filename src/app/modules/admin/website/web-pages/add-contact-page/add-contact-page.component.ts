@@ -81,7 +81,7 @@ export class AddContactPageComponent {
         this.formData.submit_btn_txt = response.data.pageData.submit_btn_txt;
         this.formData.address = response.data.pageData.address;
         this.formData.email = response.data.pageData.email;
-        if(response.data.pageData.banner_bg_img != ''){
+        if(response.data?.pageData?.banner_bg_img != ''){
           this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_bg_img;
         }else{
           this.imageLoaded = false;
@@ -96,8 +96,18 @@ export class AddContactPageComponent {
     this.imageLoaded = false;
   }
 
+
   onFileChange(event: any): void {
-    this.formData.banner_bg_img = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.formData.banner_bg_img = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.bannerImagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   submitForm(): void {

@@ -120,11 +120,11 @@ export class FooterComponent implements OnInit{
   ngOnInit(): void {
       // Check if the google.accounts.id library is loaded
       if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
-        // Initialize Google Sign-In
-        this.initializeGoogleSignIn();
+      // Initialize Google Sign-In
+     //   this.initializeGoogleSignIn();
       } else {
         // Google API script might not be loaded yet; wait for it to load
-        console.warn('Google API script is not fully loaded.');
+      //  console.warn('Google API script is not fully loaded.');
         this.countries = environment.domains;
       }
 
