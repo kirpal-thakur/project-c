@@ -37,13 +37,15 @@ export class AddHomePageComponent {
   sec_btn_txt: string = '';
   title: string = '';
 
-  // Define the tab type
+  // Update the tab data structure
   first_tab = [
     {
       title: '',
       desc: '',
-      images: [] as File[], // Specify the type of the images array
-      imagePreviews: [] as string[], // Specify the type of the previews array
+      images: [] as File[],
+      imagePreviews: [] as string[],
+      darkImages: [] as File[], // New field for dark images
+      darkImagePreviews: [] as string[], // New field for dark image previews
     },
   ];
 
@@ -51,52 +53,12 @@ export class AddHomePageComponent {
     {
       title: '',
       desc: '',
-      images: [] as File[], // Specify the type of the images array
-      imagePreviews: [] as string[], // Specify the type of the previews array
+      images: [] as File[],
+      imagePreviews: [] as string[],
+      darkImages: [] as File[], // New field for dark images
+      darkImagePreviews: [] as string[], // New field for dark image previews
     },
   ];
-
-  // first_tab: { title: string; desc: string; images: File[]; imagePreviews: string[] }[] = [
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   },
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   },
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   }
-  // ];
-
-  // second_tab: { title: string; desc: string; images: File[]; imagePreviews: string[] }[] = [
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   },
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   },
-  //   {
-  //     title: '',
-  //     desc: '',
-  //     images: [],
-  //     imagePreviews: []
-  //   }
-  // ]
 
   imageLoaded: boolean = false;
 
@@ -168,49 +130,50 @@ export class AddHomePageComponent {
   }
 
 
-  onTabFormSubmit() {
-    let formData = new FormData();
-    formData.append('page_id', this.pageId);
-    formData.append('lang_id', this.addHomePageForm.value.lang);
-    formData.append('title', this.title);
-    formData.append('first_btn_txt', this.first_btn_txt);
-    formData.append('sec_btn_txt', this.sec_btn_txt);
+  // onTabFormSubmit() {
+  //   let formData = new FormData();
+  //   formData.append('page_id', this.pageId);
+  //   formData.append('lang_id', this.addHomePageForm.value.lang);
+  //   formData.append('title', this.title);
+  //   formData.append('first_btn_txt', this.first_btn_txt);
+  //   formData.append('sec_btn_txt', this.sec_btn_txt);
 
-    // Add first_tab data with changed files
-    this.first_tab.forEach((tab, index) => {
-      formData.append(`first_tab[${index}][title]`, tab.title);
-      formData.append(`first_tab[${index}][desc]`, tab.desc);
-      if (tab.images && tab.images.length > 0) {
-        tab.images.forEach((file, fileIndex) => {
-          if (file instanceof File) { // Only append if the file is newly changed
-            formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
-          }
-        });
-      }
-    });
+  //   // Add first_tab data with changed files
+  //   this.first_tab.forEach((tab, index) => {
+  //     formData.append(`first_tab[${index}][title]`, tab.title);
+  //     formData.append(`first_tab[${index}][desc]`, tab.desc);
+  //     if (tab.images && tab.images.length > 0) {
+  //       tab.images.forEach((file, fileIndex) => {
+  //         if (file instanceof File) { // Only append if the file is newly changed
+  //           formData.append(`first_tab[${index}][images][${fileIndex}]`, file);
+  //         }
+  //       });
+  //     }
+  //   });
 
-    // Add second_tab data with changed files
-    this.second_tab.forEach((sec_tab, index) => {
-      formData.append(`second_tab[${index}][title]`, sec_tab.title);
-      formData.append(`second_tab[${index}][desc]`, sec_tab.desc);
-      if (sec_tab.images && sec_tab.images.length > 0) {
-        sec_tab.images.forEach((file, fileIndex) => {
-          if (file instanceof File) { // Only append if the file is newly changed
-            formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
-          }
-        });
-      }
-    });
+  //   // Add second_tab data with changed files
+  //   this.second_tab.forEach((sec_tab, index) => {
+  //     formData.append(`second_tab[${index}][title]`, sec_tab.title);
+  //     formData.append(`second_tab[${index}][desc]`, sec_tab.desc);
+  //     if (sec_tab.images && sec_tab.images.length > 0) {
+  //       sec_tab.images.forEach((file, fileIndex) => {
+  //         if (file instanceof File) { // Only append if the file is newly changed
+  //           formData.append(`second_tab[${index}][images][${fileIndex}]`, file);
+  //         }
+  //       });
+  //     }
+  //   });
 
-    this.webpages.addHomePageTabData(formData).subscribe((res) => {
-      this.dialogRef.close({
-        action: "page-added-successfully",
-      });
-    });
-  }
+  //   this.webpages.addHomePageTabData(formData).subscribe((res) => {
+  //     this.dialogRef.close({
+  //       action: "page-added-successfully",
+  //     });
+  //   });
+  // }
 
+  // Update the file handler
 
-  handleTabFilesInput(event: Event, index: number, type: string): void {
+  handleTabFilesInput(event: Event, index: number, type: string, field: string = 'images'): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const selectedFiles = Array.from(input.files);
@@ -220,49 +183,65 @@ export class AddHomePageComponent {
         reader.onload = (e) => {
           const result = e.target?.result;
 
+          // Ensure the structure exists before accessing
           if (type === 'first_tab') {
-            // Ensure the object and arrays are initialized
             if (!this.first_tab[index]) {
-              this.first_tab[index] = { title: '', desc: '', images: [], imagePreviews: [] };
+              this.first_tab[index] = { title: '', desc: '', images: [], imagePreviews: [], darkImages: [], darkImagePreviews: [] };
             }
-            if (!this.first_tab[index].images) {
+
+            // Initialize the arrays if missing
+            if (!Array.isArray(this.first_tab[index].images)) {
               this.first_tab[index].images = [];
             }
-            if (!this.first_tab[index].imagePreviews) {
+            if (!Array.isArray(this.first_tab[index].imagePreviews)) {
               this.first_tab[index].imagePreviews = [];
             }
+            if (!Array.isArray(this.first_tab[index].darkImages)) {
+              this.first_tab[index].darkImages = [];
+            }
+            if (!Array.isArray(this.first_tab[index].darkImagePreviews)) {
+              this.first_tab[index].darkImagePreviews = [];
+            }
 
-            // Push file and preview
-            this.first_tab[index].images.push(file);
-            if (result) {
-              this.first_tab[index].imagePreviews.push(result as string);
+            if (field === 'images') {
+              this.first_tab[index].images.push(file);
+              if (result) this.first_tab[index].imagePreviews.push(result as string);
+            } else if (field === 'darkImages') {
+              this.first_tab[index].darkImages.push(file);
+              if (result) this.first_tab[index].darkImagePreviews.push(result as string);
             }
           } else if (type === 'second_tab') {
-            // Ensure the object and arrays are initialized
             if (!this.second_tab[index]) {
-              this.second_tab[index] = { title: '', desc: '', images: [], imagePreviews: [] };
-            }
-            if (!this.second_tab[index].images) {
-              this.second_tab[index].images = [];
-            }
-            if (!this.second_tab[index].imagePreviews) {
-              this.second_tab[index].imagePreviews = [];
+              this.second_tab[index] = { title: '', desc: '', images: [], imagePreviews: [], darkImages: [], darkImagePreviews: [] };
             }
 
-            // Push file and preview
-            this.second_tab[index].images.push(file);
-            if (result) {
-              this.second_tab[index].imagePreviews.push(result as string);
+            // Initialize the arrays if missing
+            if (!Array.isArray(this.second_tab[index].images)) {
+              this.second_tab[index].images = [];
+            }
+            if (!Array.isArray(this.second_tab[index].imagePreviews)) {
+              this.second_tab[index].imagePreviews = [];
+            }
+            if (!Array.isArray(this.second_tab[index].darkImages)) {
+              this.second_tab[index].darkImages = [];
+            }
+            if (!Array.isArray(this.second_tab[index].darkImagePreviews)) {
+              this.second_tab[index].darkImagePreviews = [];
+            }
+
+            if (field === 'images') {
+              this.second_tab[index].images.push(file);
+              if (result) this.second_tab[index].imagePreviews.push(result as string);
+            } else if (field === 'darkImages') {
+              this.second_tab[index].darkImages.push(file);
+              if (result) this.second_tab[index].darkImagePreviews.push(result as string);
             }
           }
         };
-        reader.onerror = (e) => {
-          console.error('Error reading file:', e);
-        };
+
+        reader.onerror = (e) => console.error('Error reading file:', e);
         reader.readAsDataURL(file);
       });
-    } else {
-      console.warn('No files selected or input is null.');
     }
   }
 
@@ -302,7 +281,7 @@ export class AddHomePageComponent {
         this.baseUrl = response.data.base_url;
 
         // Assign images to preview arrays for both tabs
-        this.first_tab.forEach((tab, index) => {
+        this.first_tab?.forEach((tab, index) => {
           // Check if there are images for the tab
           if (tab.images && tab.images.length > 0) {
             tab.imagePreviews = tab.images.map((image: any) => {
@@ -311,7 +290,7 @@ export class AddHomePageComponent {
           }
         });
 
-        this.second_tab.forEach((tab, index) => {
+        this.second_tab?.forEach((tab, index) => {
           // Check if there are images for the tab
           if (tab.images && tab.images.length > 0) {
             tab.imagePreviews = tab.images.map((image: any) => {
@@ -359,15 +338,52 @@ export class AddHomePageComponent {
   }
 
 
-  // Remove an image from the list
-  removeTabImage(type: string, tabIndex: number, imageIndex: number): void {
+  // Update the removal logic
+  removeTabImage(type: string, index: number, imageIndex: number, field: string = 'images'): void {
     if (type === 'first_tab') {
-      this.first_tab[tabIndex].images.splice(imageIndex, 1);
-      this.first_tab[tabIndex].imagePreviews.splice(imageIndex, 1);
-    } else {
-      this.second_tab[tabIndex].images.splice(imageIndex, 1);
-      this.second_tab[tabIndex].imagePreviews.splice(imageIndex, 1);
+      if (field === 'images') {
+        this.first_tab[index].images.splice(imageIndex, 1);
+        this.first_tab[index].imagePreviews.splice(imageIndex, 1);
+      } else if (field === 'darkImages') {
+        this.first_tab[index].darkImages.splice(imageIndex, 1);
+        this.first_tab[index].darkImagePreviews.splice(imageIndex, 1);
+      }
+    } else if (type === 'second_tab') {
+      if (field === 'images') {
+        this.second_tab[index].images.splice(imageIndex, 1);
+        this.second_tab[index].imagePreviews.splice(imageIndex, 1);
+      } else if (field === 'darkImages') {
+        this.second_tab[index].darkImages.splice(imageIndex, 1);
+        this.second_tab[index].darkImagePreviews.splice(imageIndex, 1);
+      }
     }
   }
+
+  // Update the form submission to include dark images
+  onTabFormSubmit() {
+    let formData = new FormData();
+    formData.append('page_id', this.pageId);
+
+    // Process first_tab
+    this.first_tab.forEach((tab, index) => {
+      formData.append(`first_tab[${index}][title]`, tab.title);
+      formData.append(`first_tab[${index}][desc]`, tab.desc);
+      tab.images.forEach((file, i) => formData.append(`first_tab[${index}][images][${i}]`, file));
+      tab.darkImages.forEach((file, i) => formData.append(`first_tab[${index}][darkImages][${i}]`, file)); // Include dark images
+    });
+
+    // Process second_tab
+    this.second_tab.forEach((tab, index) => {
+      formData.append(`second_tab[${index}][title]`, tab.title);
+      formData.append(`second_tab[${index}][desc]`, tab.desc);
+      tab.images.forEach((file, i) => formData.append(`second_tab[${index}][images][${i}]`, file));
+      tab.darkImages.forEach((file, i) => formData.append(`second_tab[${index}][darkImages][${i}]`, file)); // Include dark images
+    });
+
+    this.webpages.addHomePageTabData(formData).subscribe(() => {
+      this.dialogRef.close({ action: "page-added-successfully" });
+    });
+  }
+
 
 }
