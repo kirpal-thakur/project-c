@@ -4,18 +4,16 @@
       <h6 class=" code-text text-center " >
         {{ 'advertising' | translate }}
       </h6>
-      <div (click)="close()" class="close-img mb-1" >
-     </div>
+      <div (click)="close()" class="close-img mb-1"> </div>
 
     </div>
-  <hr class="m-0">
-
+    <hr class="m-0">
 
   <div class="p-3 create-new_popup">
 
-
     <div class="d-flex mb-3 add-banners">
       <div>
+
       <p  class="code-text">
         {{ 'name' | translate }}
       </p>
@@ -29,40 +27,40 @@
           <input class="cupen-btn-1" [(ngModel)]="redirect">
           <div *ngIf="errorMsg.redirect" class="error-msg">{{errorMsg.redirect}}</div>
         </div>
-     </div>
+    </div>
 
-     <div class="d-flex mb-3 add-banners">
-      <div>
-        <p  class="code-text">
-          {{ 'page' | translate }}
-        </p>
-        <div class="btn-group">
-          <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="page" (change)="onChange($event)">
+    <div class="d-flex mb-3 add-banners">
+    <div>
+      <p  class="code-text">
+        {{ 'page' | translate }}
+      </p>
+      <div class="btn-group">
+        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="page" (change)="onChange($event)">
+          <option value="">{{ 'select' | translate }}</option>
+          <option *ngFor="let option of pageOptions" [value]="option.id">{{option.page}}</option>
+        </select>
+        <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+        </svg>
+      </div>
+      <div *ngIf="errorMsg.page" class="error-msg">{{errorMsg.page}}</div>
+    </div>
+    <div class="ms-5">
+      <p  class="code-text">
+        {{ 'type' | translate }}
+      </p>
+      <div class="btn-group">
+          <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="type">
             <option value="">{{ 'select' | translate }}</option>
-            <option *ngFor="let option of pageOptions" [value]="option.id">{{option.page}}</option>
+            <option *ngFor="let option of typeOptions" value="{{option}}">{{option}}</option>
           </select>
           <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
           </svg>
-        </div>
-        <div *ngIf="errorMsg.page" class="error-msg">{{errorMsg.page}}</div>
       </div>
-      <div class="ms-5">
-        <p  class="code-text">
-          {{ 'type' | translate }}
-        </p>
-        <div class="btn-group">
-            <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="type">
-              <option value="">{{ 'select' | translate }}</option>
-              <option *ngFor="let option of typeOptions" value="{{option}}">{{option}}</option>
-            </select>
-            <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
-            </svg>
-        </div>
-        <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
-      </div>
-     </div>
+      <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
+    </div>
+    </div>
     <div class="upload-img mb-3">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.0007 29.3347H6.66732C5.93094 29.3347 5.33398 28.7377 5.33398 28.0013V4.0013C5.33398 3.26492 5.93094 2.66797 6.66732 2.66797H25.334C26.0704 2.66797 26.6673 3.26492 26.6673 4.0013V16.0013" stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -84,7 +82,6 @@
         {{ 'maximumSize5MB' | translate }}
       </p>
     </div>
-
 
     <!-- fjghkdhfg -->
 
@@ -182,28 +179,27 @@
        </div>
 
      </div> -->
+
      <div class="d-flex mb-3 add-banners ">
-      <div>
+    <div>
+    <p  class="code-text">
+      {{ 'maxViews' | translate }}
+    </p>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
+      <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
+    </div>
+    <div class="ms-3">
       <p  class="code-text">
-        {{ 'maxViews' | translate }}
+        {{ 'maxClicks' | translate }}
       </p>
-        <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
-        <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
-      </div>
-      <div class="ms-3">
-        <p  class="code-text">
-          {{ 'maxClicks' | translate }}
-        </p>
-        <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
-        <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
-      </div>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
+      <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
+    </div>
 
-     </div>
-
+    </div>
   </div>
 
   <hr class="m-0">
-
 
   <!--  <div>
     <div class="upload"> -->
@@ -211,16 +207,13 @@
      <!-- <div style=" margin-left: 52px;">
       <a class="btn btn-delete text-danger code-text">Delete</a>
      </div>
-
       <div>
       <a class="btn Launch" >Create and Launch</a>
      </div>
-
   </div> -->
 
   <div>
     <div class=" d-flex justify-content-around bg-0C3453 p-3">
-
      <div>
        <a class="btn btn-delete text-danger" (click)="close()">{{ 'cancel' | translate }}</a>
      </div>
@@ -228,7 +221,6 @@
        <a class="btn Launch px-5" *ngIf="data.action == 'create'" (click)="createAd()">{{ 'createAndLaunch' | translate }}</a>
        <a class="btn Launch px-5" *ngIf="data.action == 'update'" (click)="updateAd()">{{ 'update' | translate }}</a>
      </div>
-
     </div>
   </div>
 
@@ -391,7 +383,7 @@
                   [(ngModel)]="noEndDate"
                 />
               </label>
-            </span> {{ 'don'tSetDate' | translate }}
+            </span> {{ "don'tSetDate" | translate }}
           </div>
 
         </div>

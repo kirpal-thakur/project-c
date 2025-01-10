@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AdvertisementService } from '../../../../services/advertisement.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-AdvertisingPopupComponent',
   templateUrl: './advertising-popup.component.html',
@@ -44,7 +45,7 @@ export class AdvertisingPopupComponent   {
   pageName:any = "";
   imageUrl:any = ""
   constructor(
-    public dialogRef: MatDialogRef<AdvertisingPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private advertisementService: AdvertisementService
+    public dialogRef: MatDialogRef<AdvertisingPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private advertisementService: AdvertisementService, private toastr : ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -82,12 +83,12 @@ export class AdvertisingPopupComponent   {
       this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
     }
 
-  
   }
 
   close(): void {
     this.dialogRef.close();
   }
+
   getAdvertisement(): void {
     this.advertisementService.getPageAds().subscribe((response) => {
       let {pages} = response.data;
@@ -191,7 +192,7 @@ export class AdvertisingPopupComponent   {
       this.errorMsg.maxViews = "Max views is required";
     }
     
-    if(this.maxClicks == ""){      
+    if(this.maxClicks == ""){
       this.error = true;
       this.errorMsg.maxClicks = "Max clicks is required";
     }
@@ -230,8 +231,10 @@ export class AdvertisingPopupComponent   {
           this.dialogRef.close({
             action: 'added'
           });
-        }else{
+        }else if(response.data?.error){
           this.errorMsg = response.data.error
+        }else{
+          this.toastr.error(response.message, 'Ad Not Created');
         }
       },
       error => {
