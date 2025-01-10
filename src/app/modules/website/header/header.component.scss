@@ -57,23 +57,25 @@ p {
 body {
     background-color: #fff;
 }
+
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 32px;
-  width: 33px;
-  left: 0px;
-  bottom: 0px;
-  transition: 0.4s;
+    position: absolute;
+    content: "";
+    height: 32px;
+    width: 33px;
+    left: 0px;
+    bottom: 0px;
+    transition: 0.4s;
 }
 
 .switch1 {
     display: none;
 }
- .btn-close {
+
+.btn-close {
     filter: brightness(0) invert(1);
     background-color: transparent;
-  }
+}
 
 .login-btn {
     font-size: 16px;
@@ -155,19 +157,26 @@ body {
     font-weight: 500;
     margin-bottom: 10px;
 }
+
 .custom-select {
     margin-right: 10px;
 }
+
 .logo-image {
     display: flex;
-    justify-content: center;  /* Centers the image horizontally */
-    align-items: center;      /* Centers the image vertically */
-    height: 100px;            /* Optional: Adjust container height if needed */
+    justify-content: center;
+    /* Centers the image horizontally */
+    align-items: center;
+    /* Centers the image vertically */
+    height: 100px;
+    /* Optional: Adjust container height if needed */
 }
 
 .logo-image img {
-    height: 80px;             /* Image height */
-    width: 120px;              /* Image width */
+    height: 80px;
+    /* Image height */
+    width: 120px;
+    /* Image width */
 }
 
 .register .form-label {
@@ -285,6 +294,7 @@ ul {
     --bs-modal-zindex: 1055;
     --bs-modal-width: 600px;
 }
+
 .reg-model .modal-dialog.modal-dialog-centered {
     transform: none;
     max-width: 600px !important;
@@ -600,11 +610,11 @@ button.create-account.d-block {
 //   color: #e05263;
 // }
 
- .navbar-brand img {
-        width: 261px;
-        height: 116px;
-        object-fit: cover;
-    }
+.navbar-brand img {
+    width: 261px;
+    height: 116px;
+    object-fit: cover;
+}
 
 
 .banner-content svg {
@@ -636,11 +646,13 @@ button.create-account.d-block {
     margin-right: 10px;
     padding-right: 0;
 }
+
 .dropdown-menu {
     left: unset;
     right: 10%;
     top: 70%;
 }
+
 .coustom-select1 {
     display: none;
 }
@@ -1242,25 +1254,28 @@ select.form-select.custom-select1 {
         left: 0;
         width: 100%;
         z-index: 1000;
-        background-color: #fff; /* Optional: background color */
+        background-color: #fff;
+        /* Optional: background color */
     }
 
     /* Optionally, adjust the sidebar if it's causing issues */
     .sidebar {
         height: 100vh;
-        overflow-y: auto; /* Ensure the sidebar scrolls if needed */
-        z-index: 1000; /* Ensure sidebar is behind the navbar */
+        overflow-y: auto;
+        /* Ensure the sidebar scrolls if needed */
+        z-index: 1000;
+        /* Ensure sidebar is behind the navbar */
     }
 }
 
 
 
-@media (min-width: 1536px){
-.dropdown-menu {
-    left: unset;
-    right: 13.5%;
-    top: 70%;
-}
+@media (min-width: 1536px) {
+    .dropdown-menu {
+        left: unset;
+        right: 13.5%;
+        top: 70%;
+    }
 }
 
 @media (min-width: 1920px) {
@@ -1270,13 +1285,15 @@ select.form-select.custom-select1 {
         top: 74%;
     }
 }
-@media (min-width: 2560px){
+
+@media (min-width: 2560px) {
     .dropdown-menu {
         left: unset;
         right: 28.2%;
         top: 80%;
     }
-    }
+}
+
 @media (max-width: 1441px) {
     .dropdown-menu {
         left: unset;
@@ -1292,34 +1309,43 @@ select.form-select.custom-select1 {
         right: 15.6%;
         top: 70%;
     }
+
     option {
         font-size: 14px;
     }
+
     .navbar-brand {
 
-     margin-right: 0; 
-      
+        margin-right: 0;
+
     }
-    li.nav-item{
+
+    li.nav-item {
         margin-left: 10px;
     }
+
     .login-btn {
         font-size: 15px;
     }
+
     .theme_btn span {
         padding-right: 5px;
     }
+
     .navbar-brand img {
         width: 230px;
         height: 100px;
     }
+
     .coustom-select .form-select {
         margin-right: 5px;
         width: 70px;
     }
-    .nav-link{
+
+    .nav-link {
         font-size: 19px;
     }
+
     .switch {
         margin-right: 5px;
     }
@@ -1331,12 +1357,15 @@ select.form-select.custom-select1 {
         right: 7%;
         top: 80%;
     }
+
     .custom-select {
         margin-right: 0;
     }
+
     .sidebar {
         display: none;
     }
+
     .slider:before {
         height: 28.5px;
         width: 28.5px;
@@ -1399,10 +1428,12 @@ select.form-select.custom-select1 {
         right: 2%;
         top: 80%;
     }
+
     .navbar-collapse {
         background-color: transparent;
         padding-bottom: 10px;
     }
+
     .coustom-select1 {
         display: block;
     }
@@ -1431,6 +1462,7 @@ select.form-select.custom-select1 {
         min-height: 100vh;
         /* Ensures the footer is at the bottom */
     }
+
     .slider:before {
         height: 27.5px;
         width: 27.5px;
@@ -1439,11 +1471,13 @@ select.form-select.custom-select1 {
     .sidebar.sidebar-expanded {
         transform: translateY(0);
     }
+
     a:not([href]):not([class]) {
         color: white;
         text-decoration: none;
         cursor: pointer;
     }
+
     a:not([href]):not([class]):hover {
         color: white;
         text-decoration: none;
@@ -1801,6 +1835,7 @@ select.form-select.custom-select1 {
         margin-top: 10px;
         height: 44px;
     }
+
     ul.social-links i {
         font-size: 32px;
         color: white;
@@ -1886,10 +1921,11 @@ select.form-select.custom-select1 {
         height: 60px;
         width: 70px;
     }
-    
+
     .register .form-select {
         height: 44px;
     }
+
     .navbar-brand img {
         width: 130px;
         height: 58px;
@@ -2288,7 +2324,7 @@ select.form-select.custom-select1 {
         margin-left: 10px;
         margin-right: 10px;
     }
-   
+
     .login .modal-btn .socail_btn {
         margin-top: 0;
     }
@@ -2310,8 +2346,7 @@ select.form-select.custom-select1 {
 
 }
 
-@media (max-width: 415px) {
-}
+@media (max-width: 415px) {}
 
 @media (max-width: 400px) {
 
@@ -2333,6 +2368,7 @@ select.form-select.custom-select1 {
         top: 33px;
         width: 51px;
     }
+
     .logo1 img {
         height: 72px;
         width: 200px;
@@ -2382,7 +2418,7 @@ select.form-select.custom-select1 {
 }
 
 @media (max-width: 376px) {
-    
+
     .switch1 .switch {
         width: 50px;
         height: 30px;
@@ -2396,17 +2432,18 @@ select.form-select.custom-select1 {
     }
 }
 
-@media(max-width: 361px) {
-}
+@media(max-width: 361px) {}
 
 @media (max-width: 321px) {
     input:checked+.slider:before {
         transform: translateX(21px);
     }
+
     .navbar-brand img {
         width: 115px;
         height: 50px;
     }
+
     .logo svg {
         height: 40px;
         width: 90px;
@@ -2417,6 +2454,7 @@ select.form-select.custom-select1 {
         font-size: 14px;
         padding: 0px 0px 0px 10px;
     }
+
     .logo1 img {
         height: 65px;
         width: 220px;
@@ -2637,4 +2675,54 @@ select.form-select.custom-select1 {
         font-weight: 400;
     }
 
+}
+
+
+
+.toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.toggle-slot {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border: 2px solid #e4e7ec;
+    border-radius: 10em;
+    background-color: white;
+    transition: background-color 250ms;
+}
+
+.toggle-checkbox:checked~.toggle-slot {
+    background-color: #BDE34E;
+}
+
+.toggle-button {
+    position: absolute;
+    height: 90%;
+    top: 50%;
+    transform: translate(10%, -50%);
+    width: 45%;
+    border-radius: 50%;
+    background-color: #ffbb52;
+    background-image: url('../../../../assets/images/light-green/sun-icon-removebg-preview.png');
+    background-size: cover;
+    background-position: center;
+    transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(0.26, 2, 0.46, 0.71);
+}
+
+.toggle-checkbox:checked~.toggle-slot .toggle-button {
+    background-color: white;
+    transform: translate(110%, -50%);
+}
+
+
+.new{
+    width: 50px;
+    height: 30px;
+    margin-right: 10px;
 }
