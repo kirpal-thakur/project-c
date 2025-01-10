@@ -35,7 +35,7 @@ export const environment = {
       { name:'Italy', slug: "it", id: 3, flag: "Italy.svg" },
       { name:'French Republic', slug: "fr", id: 4, flag: "France.svg" },
       { name:'United Kingdom', slug: "uk", id: 5, flag: "England.svg" },
-      { name:'Estonia, Eswatini', slug: "es", id: 6, flag: "Spain.svg" },
+      { name:'Spain', slug: "es", id: 6, flag: "Spain.svg" },
       { name:'Portugal', slug: "pt", id: 7, flag: "Portugal.svg" },
       { name:'Belgium', slug: "be", id: 8, flag: "Belgium.svg" },
       { name:'Denmark', slug: "dk", id: 9, flag: "Denmark.svg" },

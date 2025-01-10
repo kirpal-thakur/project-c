@@ -1142,7 +1142,9 @@ button.btn.btn-success.active-btn .club-s {
   border-radius: 9px;
   // border: 0.89px solid #E5E5E5;
 }
-
+.player-list-image img,.player-list-images img{
+  width: 100% ;
+}
 .player-list-images .talent-img2 img {
   position: absolute;
   top: 62%;

@@ -8,8 +8,9 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-12">
                             <div class="banner-left">
+
                                 <h2 class="banner-heading">{{pageData?.banner_title}}</h2>
-                                <h5 class="banner-heading5">{{pageData?.banner_desc}}</h5>
+                                <h5 class="banner-heading5" [innerHTML]="pageData?.banner_desc"></h5>
                                 <a class="btn btn-register" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal1">{{pageData?.banner_btn_txt}}
                                 </a>
