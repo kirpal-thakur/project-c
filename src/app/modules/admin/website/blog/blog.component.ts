@@ -226,6 +226,7 @@ export class BlogComponent {
 
   confirmSingleDeletion(couponId:any){
     this.idsToProceed = [couponId];
+    this.showDeleteConfirmationPopup();
   }
 
   deactivateCoupon(couponId:any){
