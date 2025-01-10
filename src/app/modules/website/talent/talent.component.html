@@ -11,7 +11,7 @@
                         <div class="col-lg-6 col-md-4 col-12">
                             <div class="banner-left">
                                 <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
-                                <h4 class="banner-heading5">{{pageData?.banner_desc}}</h4>
+                                <h4 class="banner-heading5" [innerHTML]="pageData?.banner_desc"></h4>
                                 <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt}}
                                 </a>
                             </div>
