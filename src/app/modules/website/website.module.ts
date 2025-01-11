@@ -47,6 +47,7 @@ import { PasswordResetLinkComponent } from './password-reset-link/password-reset
 // Import services
 import { AuthService } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -79,7 +80,8 @@ import { ThemeService } from '../../services/theme.service';
     CookieComponent,
     ThankuComponent,
     ErrorComponent,
-    LoaderComponent
+    LoaderComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

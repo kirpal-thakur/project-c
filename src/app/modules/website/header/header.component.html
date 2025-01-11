@@ -10,8 +10,18 @@
 
         <div class="switch1">
             <label class="switch">
-                <input type="checkbox" (change)="toggleTheme($event)" id="themeToggle" [checked]="isDarkMode" />
-                <span class="slider round"></span>
+                <input class='toggle-checkbox' type='checkbox' (change)="toggleTheme($event)" id="themeToggle"
+                [checked]="isDarkMode"/>
+                <div class='toggle-slot'>
+                    <div class='sun-icon-wrapper'>
+                        <div class="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
+                    </div>
+                    <div class='toggle-button'></div>
+                    <div class='moon-icon-wrapper'>
+                        <div class="iconify moon-icon" data-icon="feather-moon" data-inline="false">
+                        </div>
+                    </div>
+                </div>
             </label>
         </div>
 
@@ -159,16 +169,9 @@
             <form class="d-flex">
                 <div class="extra-nav d-flex align-items-center">
                     <div class="theme_btn d-flex align-items-center">
-                        <span class="light-text">{{ 'lightMode' | translate }}</span>
-                        <span class="dark-text">{{ 'darkMode' | translate }}</span>
-                        <div>
-                            <label class="switch">
-                                <input type="checkbox" (change)="toggleTheme($event)" id="themeToggle"
-                                    [checked]="isDarkMode" />
-                                <span class="slider round"></span>
-                            </label>
+                        <div class="d-flex">
 
-                            <label class="new">
+                            <label class="switch">
                                 <input class='toggle-checkbox' type='checkbox' (change)="toggleTheme($event)" id="themeToggle"
                                 [checked]="isDarkMode"/>
                                 <div class='toggle-slot'>
