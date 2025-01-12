@@ -38,7 +38,8 @@ export class HeaderComponent {
   profileImgUrl: any = "";
   lang: string = '';
   domains: any = environment.domains; 
-  envLang:any = environment.adminLangs; 
+  envLang:any = environment.adminLangs;
+  isDarkMode: boolean = false;
 
   notificationCount: number = 0;
 
@@ -69,6 +70,8 @@ export class HeaderComponent {
   notificationSeen : boolean = false;
 
   ngOnInit() {
+
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
 
     let notificationStatus = localStorage.getItem("notificationSeen");
     if (notificationStatus) {
@@ -289,12 +292,13 @@ export class HeaderComponent {
   toggleTheme(event: Event) {
     event.preventDefault();
     this.themeService.toggleTheme();
-    this.updateThemeText()
+    this.updateThemeText();
   }
-
+  
   updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
+    localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
     document.getElementById('theme-text')!.textContent = this.themeText
   }
 

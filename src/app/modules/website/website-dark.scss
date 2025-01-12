@@ -10,7 +10,7 @@
 //   background-color: var(--bs-dropdown-link-hover-bg);
 // }
 .dark-theme .website-code .dropdown-item:focus, .dark-theme .dropdown-item:hover {
-  background: var(--bs-dropdown-link-hover-bg) !important;
+  // background: var(--bs-dropdown-link-hover-bg) !important;
   color: #072944;
 }
 .dark-theme .website-code .dropdown-item{
@@ -576,6 +576,14 @@ button.faq-scout-button {
   background-color: #092E01;
 }
 
+.dark-theme .all-page-content .footer_main {
+  background-color: #0C3453 !important;
+}
+
+.light-theme .all-page-content .footer_main {
+  background-color: #f0f0f0 !important;
+}
+
 .dark-theme .website-code .accordion-item {
   background-color: #072944;
 }
@@ -622,7 +630,7 @@ button.faq-scout-button {
   display: none;
 }
 
-.dark-theme .website-code .main {
+.dark-theme .website-code .main .main1 {
   background-color: #072944;
 }
 
