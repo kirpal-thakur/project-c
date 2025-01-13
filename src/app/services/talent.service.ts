@@ -69,6 +69,12 @@ export class TalentService {
     );
   }
 
+  updateNotificationSeen(id: number, seen: number): Observable<any> {
+    return this.http.get<{ status: boolean, message: string }>(
+      `${this.apiUrl3}updateNotificationSeen?id=${id}&seen=${seen}`,
+    );
+  }
+
   getProfileData(userId: any = 1): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(

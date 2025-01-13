@@ -1,7 +1,7 @@
 <section class="website-code">
   <div class="main">
 
-    <app-header></app-header>
+    <!-- <app-header></app-header> -->
 
     <div class="main-bnr" style="background-image: url('{{banner_bg_img}}');">
       <div class="overlay" >
@@ -214,10 +214,10 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player1" *ngIf="selectedContent === 'Sign-up & Profile Creation'" @slideIn>
                 <div class="row">
-                    
+
                   <div class="player-list-image">
                     <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[0]?.images}}">
-                    
+
                     <!-- <div class="col-lg-4 col-md-6 col-4">
                       
                        <div class="talent-img1">
@@ -250,7 +250,7 @@
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
                 <div class="row">
-                  <div class="football-club">
+                  <div class="football-club player-list-image">
                     <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[1]?.images}}">
                     
                     <!-- <div class="col-4">
@@ -384,9 +384,9 @@
 
             <div class="talent-scroll" *ngIf="selectedCategory === 'Talent'">
               <div class="player3" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
-                <div class="message-panels">
+                <div class="message-panels player-list-image">
                   <img src="{{imageBaseUrl + pageDetail?.tabs_data?.first_tab[2]?.images}}">
-                    
+
                   <!-- <div class="message-panel">
                     <img src="./assets/images/Message Panel (1).png">
                     <img class="dark-images" src="./assets/images/dark-Message Panel.png">
@@ -435,17 +435,19 @@
 
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="player2" *ngIf="selectedContent === 'Networking & Opportunity'" @slideIn>
-                <div class="message-panels">
-                  <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[1]?.images}}">
-                    
-                  <!-- <div class="message-panel">
-                    <img class="light-images" src="./assets/images/Message Panel (1).png">
-                    <img class="dark-images" src="./assets/images/dark-Message Panel.png">
+                <div class="row">
+                  <div class="player-list-image">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[1]?.images}}">
+
+                    <!-- <div class="message-panel">
+                      <img class="light-images" src="./assets/images/Message Panel (1).png">
+                      <img class="dark-images" src="./assets/images/dark-Message Panel.png">
+                    </div>
+                    <div class="message-panel1">
+                      <img class="light-images" src="./assets/images/Messages Panel1.png">
+                      <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
+                    </div> -->
                   </div>
-                  <div class="message-panel1">
-                    <img class="light-images" src="./assets/images/Messages Panel1.png">
-                    <img class="dark-images" src="./assets/images/dark-Message Panel-1.png">
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -453,21 +455,26 @@
 
             <div class="talent-scroll" *ngIf="selectedCategory === 'Clubs & Scouts'">
               <div class="club-scouts" *ngIf="selectedContent === 'Success & Progression'" @slideIn>
-                <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[2]?.images}}">
-                    
-                <!-- <div class="club-offers1">
-                  <img class="light-images" src="./assets/images/club-scouts5.png">
-                  <img class="dark-images" src="./assets/images/dark-design5.PNG">
+                <div class="row">
 
+                  <div class="player-list-image">
+                    <img src="{{imageBaseUrl + pageDetail?.tabs_data?.second_tab[2]?.images}}">
+                  </div>
+
+                  <!-- <div class="club-offers1">
+                    <img class="light-images" src="./assets/images/club-scouts5.png">
+                    <img class="dark-images" src="./assets/images/dark-design5.PNG">
+
+                  </div>
+                  <div class="club-offers2">
+                    <img class="light-images" src="./assets/images/club-scouts6.png">
+                    <img class="dark-images" src="./assets/images/dark-design6.PNG">
+                  </div>
+                  <div class="club-offers3">
+                    <img class="light-images" src="./assets/images/club-scouts7.png">
+                    <img class="dark-images" src="./assets/images/dark-design4.PNG">
+                  </div> -->
                 </div>
-                <div class="club-offers2">
-                  <img class="light-images" src="./assets/images/club-scouts6.png">
-                  <img class="dark-images" src="./assets/images/dark-design6.PNG">
-                </div>
-                <div class="club-offers3">
-                  <img class="light-images" src="./assets/images/club-scouts7.png">
-                  <img class="dark-images" src="./assets/images/dark-design4.PNG">
-                </div> -->
               </div>
             </div>
           </div>
@@ -553,9 +560,7 @@
                         <p>2</p>
                       </div>
                       <div class="progress_btn">
-                        <a>
-                          Networking & Opportunity
-                        </a>
+                        <a>Networking & Opportunity</a>
                         <p>Engage with other users, football clubs, and connect with scouts, managers, and coaches.</p>
                       </div>
                     </div>
@@ -865,7 +870,7 @@
       </div>
     </div>
 
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
 
   </div>
   </section>

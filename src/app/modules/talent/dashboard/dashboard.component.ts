@@ -87,7 +87,27 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.stopIntroTour(); // Stop the tour on navigation
       }
     });
+
+    this.getClubsForPlayer();
   }
+
+  getClubsForPlayer(){
+    this.talentService.getClubsForPlayer().subscribe(
+      response => {
+        if(response.status){
+          let clubs = response.data.clubs;
+          localStorage.setItem('clubs', JSON.stringify(clubs));
+          
+        }else{
+          
+        }
+      },
+      error => {
+        console.error('Error publishing advertisement:', error);
+      }
+    );
+  }
+
 
   ngAfterViewInit() {
   }
