@@ -1,7 +1,15 @@
 {
+  "privacyPolicy": "Politique de confidentialité",
+  "terms&Conditions": "Terms and Conditions",
+  "cookies": "Cookies",
+
+  "createProfile": "Créer un profil",
+  "signup": "S'inscrire",
+  "club&scout": "Clubs et scouts",
   "premium": "Premium",
   "boostProfileActive": "Profil Boost actif",
   "eltonPrince": "Elton Prince",
+  "getStartedNow": "Commencez maintenant",
   "edit": "Éditer",
   "currentClub": "Club actuel",
   "nationality": "Nationalité",

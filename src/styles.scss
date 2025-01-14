@@ -853,7 +853,8 @@ input:checked+.slider:before {
 
 .page-header .navbarcollapse .navbar-nav {
   margin-left: auto;
-  padding-right: 30px;
+  // padding-right: 30px;
+  padding: 0 !important;
 }
 
 .light-theme .page-header #nav-search {

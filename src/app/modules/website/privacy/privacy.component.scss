@@ -26,10 +26,13 @@
     padding-bottom: 50px;
 }
 
-body {
-    background-color: #fff;
-}
+// body {
+//     background-color: #fff;
+// }
 
+.main{
+    background: linear-gradient(180deg,#236115 0%,#6fb95d 100%);
+}
 
 .main-bnr {
     position: relative;
@@ -76,6 +79,11 @@ body {
     position: relative;
     height: auto;
     min-height: 400px;
+    background-color: #092e01;
+}
+
+.light-theme .all-page-content .website-code .main1 {
+    background-color: unset;
 }
 
 .header-transparent {
@@ -197,9 +205,9 @@ body {
         margin-bottom: 20px;
     }
 
-    p {
-        font-size: 16px;
-    }
+    // p {
+    //     font-size: 16px;
+    // }
 
     li {
         font-size: 16px;
