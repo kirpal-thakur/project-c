@@ -522,7 +522,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12 mb-3">
-                                        <select class="form-select" (change)="onClubChange($event)">
+                                        <select class="form-select" (change)="onClubChange($event)" [disabled]="!selectedCountry">
                                             <option value="" disabled selected>{{ 'clubRole' | translate }}
                                             </option>
                                             <option *ngFor="let club of clubs" [value]="club.id">{{ club.name }}
