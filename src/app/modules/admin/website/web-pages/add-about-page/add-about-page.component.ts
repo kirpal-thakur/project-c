@@ -41,6 +41,9 @@ export class AddAboutPageComponent implements OnInit {
   aboutBannerImagePreview: boolean = false;
   aboutCountryBannerImagePreview: boolean = false;
 
+  dark_theme_banner_img: any;
+  darkThemeImagePreview: boolean = false;
+
   formData: any = {
     meta_title: '',
     meta_description: '',
@@ -114,6 +117,9 @@ export class AddAboutPageComponent implements OnInit {
     }else if(fieldName == 'country_section_banner_img'){
       this.country_section_banner_img = 'remove_image';
       this.aboutCountryBannerImagePreview = false;
+    }else if (fieldName === 'dark_theme_banner_img') {
+      this.dark_theme_banner_img = 'remove_image';
+      this.darkThemeImagePreview = false;
     }
     //this.about_banner_bg_img = null;
     //this.bannerBgimageLoaded = false;
@@ -136,6 +142,9 @@ export class AddAboutPageComponent implements OnInit {
         } else if (fieldName === 'country_section_banner_img') {
           this.country_section_banner_img = imageUrl;
           this.aboutCountryBannerImagePreview = true;
+        } else if (fieldName === 'dark_theme_banner_img') {
+          this.dark_theme_banner_img = imageUrl;
+          this.darkThemeImagePreview = true;
         }
       };
       reader.readAsDataURL(file);
