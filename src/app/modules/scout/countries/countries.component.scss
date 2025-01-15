@@ -1,56 +1,56 @@
 .country-card {
-    border: 2px solid transparent;
-    text-align: center;
-    padding: 15px;
-    cursor: pointer;
-  
-    .country-info {
-      margin-top: 10px;
-    }
-  
-    img {
-      max-width: 100px;
-      margin: 10px auto;
-    }
-  
-    &.selected {
-      border-color: red;
-      background-color: #f8d7da;
-    }
-    
-    .badge {
-      margin-top: 5px;
-    }
+  border: 2px solid transparent;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+
+  .country-info {
+    margin-top: 10px;
   }
-  .contries-flag-image {
-    background-image: url('/assets/images/flag-background-image.png'); /* Correct the path */
+
+  img {
+    max-width: 100px;
+    margin: 10px auto;
+  }
+
+  &.selected {
+    border-color: red;
+    background-color: #f8d7da;
+  }
+
+  .badge {
+    margin-top: 5px;
+  }
+}
+.contries-flag-image {
+  background-image: url('/assets/images/flag-background-image.png'); /* Correct the path */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 248px; 
+  height: 248px;
   text-align: center;
   display: flex;
   align-items: center;
   background-color: #fff;
   position: relative;
-  }
-  .contries-flag-image img{
-    max-width: 100% !important;
-  }
-  .country-flag-box {
-    background: #9F9F9F;
-    border-radius: 5px;
-  }
-  .country-info h4{
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
-  }
-  .countries-box-list .col-md-3{
-    padding: 0px 29px !important;
-  }
- .countries-box-list {
-    row-gap: 23px;
+}
+.contries-flag-image img{
+  max-width: 100% !important;
+}
+.country-flag-box {
+  background: #9F9F9F;
+  border-radius: 5px;
+}
+.country-info h4{
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+.countries-box-list .col-md-3{
+  padding: 0px 29px !important;
+}
+.countries-box-list {
+  row-gap: 23px;
 }
 .multi-country-box{
   background: #6FB95D;
@@ -108,10 +108,4 @@
   .countries-box-list .col-md-3 {
     width: 100%;
   }
-}
-
-.countries-loader{
-  position: absolute;
-  z-index: 9;
-  left: 50%;
 }

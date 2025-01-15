@@ -127,7 +127,7 @@ export const MY_FORMATS = {
     UpdateCountryPlanComponent,
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
-    AddBoosterComponent
+    AddBoosterComponent,
   ],
   imports: [
 

@@ -1,27 +1,31 @@
 <div class="card mb-3">
-    <div class="card-header border-0">
-      <div>
-        <h6 class="card-title">App Setting</h6>
-        <p>{{'Customize Your experience' | translate}}</p>
-      </div>
+  <div class="card-header border-0">
+    <div>
+      <h6 class="card-title">{{'TalentsTranslate.appSettings' | translate}}</h6>
+      <p>{{'TalentsTranslate.customizeExperience' | translate}}</p>
     </div>
   </div>
+</div>
 
-
-  <div class="card">
-    <div class="card-header header-activity-log">
-      <h6  class="card-title">
-        {{'General Permissions'|translate}}
-      </h6>
-    </div>
-    <div class="card-body ">
-      <div class="permission-item d-flex align-items-center justify-content-between ">
-          <label for="newsletter" class="mb-0"><b>Newsletter</b></label>
-          <label class="switch ">
-              <input type="checkbox" id="newsletter" name="newsletter" [checked]="loggedInUser.newsletter==1">
-              <span class="slider round"></span>
-          </label>
-      </div>
-      <p>Receive our monthly newsletter for industry updates.</p>    
-    </div>
+<div class="card">
+  <div class="card-header header-activity-log">
+    <h6 class="card-title">
+      {{'General Permissions' | translate}}
+    </h6>
   </div>
+  <div class="card-body">
+    <div class="permission-item d-flex align-items-center justify-content-between">
+      <label for="newsletter" class="mb-0"><b>{{'Newsletter' | translate}}</b></label>
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="newsletter"
+          name="newsletter"
+          [checked]="loggedInUser.newsletter == 1"
+          (change)="onNewsletterToggle($event)">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <p>{{'Receive our monthly newsletter for industry updates.' | translate}}</p>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -35,7 +35,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -53,7 +53,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   loadTeams(): void {
-    this.talentService.getClubs().subscribe(
+    this.scoutService.getClubs().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.teams = response.data.clubs;
@@ -67,7 +67,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.scoutService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
@@ -81,7 +81,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   getUserProfile(userId: any) {
-    this.talentService.getProfileData(userId).subscribe((response: any) => {
+    this.scoutService.getProfileData(userId).subscribe((response: any) => {
       if (response && response.status && response.data && response.data.user_data) {
         this.user = response.data.user_data;
 
@@ -130,7 +130,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[userNationalities]', this.nationality);
       formData.append('lang', 'en');
 
-      this.talentService.updateUserProfile(formData).subscribe(
+      this.scoutService.updateUserProfile(formData).subscribe(
         (response: any) => {
           console.log('Form submitted successfully:', response);
           this.dialogRef.close(response.data);

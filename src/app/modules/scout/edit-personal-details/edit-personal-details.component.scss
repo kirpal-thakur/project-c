@@ -116,6 +116,21 @@
   border-radius: 10px;
 }
 
+.social_network{
+  position: relative;
+}
+.social_icon{
+  position: absolute;
+  top: 10px;
+  left: 46px;
+}
+.social_network input {
+  padding-left: 44px !important;
+}
+span.social_heddig {
+  font-size: 16px;
+  font-weight: 700;
+}
 @media(max-width:768px){
   .mobile-input{
     width: 50% !important;

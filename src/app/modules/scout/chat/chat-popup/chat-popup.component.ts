@@ -2,11 +2,10 @@ import { LiveAnnouncer} from '@angular/cdk/a11y';
 import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, Inject,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
-import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { inject } from '@angular/core';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UserService } from '../../../../services/user.service';
-import { TalentService } from '../../../../services/talent.service';
+import { ScoutService } from '../../../../services/scout.service';
 @Component({
   selector: 'app-chat-popup',
   templateUrl: './chat-popup.component.html',
@@ -23,7 +22,7 @@ export class ChatPopupComponent {
 
   constructor(
     private userService: UserService,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     public dialogRef: MatDialogRef<ChatPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -35,7 +34,7 @@ export class ChatPopupComponent {
   async fetchUsers(): Promise<void> {
     try {
       //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
-       this.talentService.getAllUses().subscribe((response)=>{
+       this.scoutService.getAllUses().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
           this.allUsers = response.data.userData.users; 
         
