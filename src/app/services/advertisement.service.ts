@@ -9,10 +9,11 @@ import { environment } from '../../environments/environment';
 })
 export class AdvertisementService {
     private apiUrl;
+
     constructor(private http: HttpClient) {
         this.apiUrl = environment?.apiUrl;
-    
     }
+
     getAdvertisements(params:any): Observable<{ status: boolean, message: string, data: any }> {
         return this.http.get<{ status: boolean, message: string, data: any }>(
             `${this.apiUrl}admin/get-advertisements`, {params}

@@ -14,10 +14,12 @@ export const environment = {
       { role: "Scout", id: 3 },
       { role: "Player", id: 4 },
     ],
+
     adminLangs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
     ],
+
     langs:[
       { language:'English', slug: "en", id: 1, flag: "England.svg" },
       { language:'German', slug: "de", id: 2, flag: "Germany.svg" },
@@ -28,7 +30,7 @@ export const environment = {
       { language:'Danish', slug: "dk", id: 7, flag: "Denmark.svg" },
       { language:'Swedish', slug: "se", id: 8, flag: "Sweden-sweden.svg"},
     ],
- 
+
     domains:[
       { name:'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg" },
       { name:'German', slug: "de", id: 2, flag: "Germany.svg" },
@@ -44,7 +46,7 @@ export const environment = {
     pages:[
       'home','talent','clubs_and_scouts','about_us','pricing','news','contact','imprint','privacy_policy','terms_and_conditions','cookie_policy','faq','content_page'
     ],
-    apiUrl:'https://api.socceryou.ch/api/',
+    apiUrl:'https://apitest.socceryou.ch/api/',
     socketUrl:'https://alerts.socceryou.ch/',
     mailchimp: {
       apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',

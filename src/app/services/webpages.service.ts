@@ -10,8 +10,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 export class WebPages {
 
-    private apiUrl;
-    private frontendApiUrl = 'https://api.socceryou.ch/frontend/';
+    private apiUrl = environment?.apiUrl;
+    private frontendApiUrl = this.apiUrl + 'frontend/';
     private langId =  localStorage.getItem('lang_id') || '1';
     private languageId = new BehaviorSubject<string>(this.langId); // Initial value
     languageId$ = this.languageId.asObservable(); // Expose as observable
