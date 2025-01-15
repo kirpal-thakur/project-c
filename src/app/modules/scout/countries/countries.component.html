@@ -3,9 +3,9 @@
         <div class="card bg-color pb-3 px-3">
 
             <!-- Subscription message -->
-            <h4 class="card-billing">{{'TalentsTranslate.multiCountryVisibility' | translate }}</h4>
-            <div *ngIf="filteredCountries?.length>0" class="alert alert-success multi-country-box mt-4">
-                {{'TalentsTranslate.alertMessage' | translate }}
+            <h4 class="card-billing ">{{ 'multiCountryVisibility' | translate }}</h4>
+            <div class="alert alert-success multi-country-box mt-4">
+                {{ 'alertMessage' | translate }}
             </div>
 
             <!-- Country Cards -->
@@ -38,10 +38,14 @@
                                 </div>
                                 <a href="/scout/explore">{{'Start Exploring' | translate}}</a>
                             </div>
+                            <a href="#">{{ 'startExploring' | translate }}</a>
                         </div>
-                        <div class="country-info">
-                            <h4>{{ country.location }}</h4>
-                        </div>
+                    </div>
+                    <div class="country-info">
+                        <h4>{{ country.location }}</h4>
+                        <span *ngIf="country.isDefault" class="badge badge-warning">{{ 'default' | translate }}</span>
+                        <span *ngIf="country.isPurchased" class="badge badge-success">{{ 'purchased' | translate }}</span>
+                        <span *ngIf="country.isExpiring" class="badge badge-danger">{{ 'startExploring' | translate }}</span>
                     </div>
                 </div>
             </div>

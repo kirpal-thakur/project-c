@@ -15,6 +15,7 @@ import { SharedService } from '../../../services/shared.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
 import { WebPages } from '../../../services/webpages.service';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-header',
@@ -112,7 +113,8 @@ export class HeaderComponent implements OnInit {
       private commonDataService: CommonDataService,
       private http: HttpClient,
       private toastr : ToastrService,
-      private webpage: WebPages
+      private webpage: WebPages,
+      private socketService: SocketService
     ) {
       this.translateService.setDefaultLang('en'); // Set default language
       this.translateService.use('en'); // Use default language
@@ -215,7 +217,7 @@ export class HeaderComponent implements OnInit {
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
-      this.initializeGoogleSignIn();
+    //  this.initializeGoogleSignIn();
     }
 
     this.getAllCountries();
@@ -424,6 +426,13 @@ export class HeaderComponent implements OnInit {
       (response) => {
         console.log('Registration response:', response);
         if (response.status === true) {
+          // sending registration notification to admin
+          let senderId = response.data.userInfo?.id ;
+          if(senderId){
+            this.socketService.emit('userRegistered', {senderId: senderId, receiverId: "1"});
+            console.log("work done");
+          }
+
           this.toastr.clear();
 
           this.serverBusy = false;

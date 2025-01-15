@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AdvertisementService } from '../../../../services/advertisement.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-AdvertisingPopupComponent',
   templateUrl: './advertising-popup.component.html',
@@ -24,16 +25,7 @@ export class AdvertisingPopupComponent   {
               '160 x 600 - Wide Skyscraper'
           ];
   
-  pageOptions: any = [
-    {id:1, page:'Home'},
-    {id:1, page:'Talents'},
-    {id:1, page:'Clubs & Scouts'},
-    {id:1, page:'About'},
-    {id:1, page:'Blog'},
-    {id:1, page:'Contact'},
-    {id:1, page:'Login'},
-    {id:1, page:'Sign Up'}
-  ];
+  pageOptions: any = [];
   idToEdit:any = '';
   name: any = "";
   redirect:any = "";
@@ -53,7 +45,7 @@ export class AdvertisingPopupComponent   {
   pageName:any = "";
   imageUrl:any = ""
   constructor(
-    public dialogRef: MatDialogRef<AdvertisingPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private advertisementService: AdvertisementService
+    public dialogRef: MatDialogRef<AdvertisingPopupComponent>,@Inject(MAT_DIALOG_DATA) public data: any, private advertisementService: AdvertisementService, private toastr : ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -91,17 +83,17 @@ export class AdvertisingPopupComponent   {
       this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
     }
 
-  
   }
 
   close(): void {
     this.dialogRef.close();
   }
+
   getAdvertisement(): void {
     this.advertisementService.getPageAds().subscribe((response) => {
       let {pages} = response.data;
       console.log('pages',pages)
-      // pageOptions
+
       this.pageOptions = pages.map((value: any) => {
         return {
           id: value.id,
@@ -156,7 +148,7 @@ export class AdvertisingPopupComponent   {
       // formdata.append("profile_image", this.imageToUpload);
       // this.imageLoading = true;
       // this.userService.updateAdminImage(formdata).subscribe((response)=>{
-      //   if (response && response.status) {        
+      //   if (response && response.status) {
       //     // this.isLoading = false;
       //     this.imageLoading = false;
       //     this.showMatDialog("Profile image updated successfully!", 'display')
@@ -166,7 +158,7 @@ export class AdvertisingPopupComponent   {
       //     console.error('Invalid API response structure:', response);
       //     this.showMatDialog("Error in uploading image", 'display')
       //   }
-      // }); 
+      // });
     }
   }
 
@@ -200,7 +192,7 @@ export class AdvertisingPopupComponent   {
       this.errorMsg.maxViews = "Max views is required";
     }
     
-    if(this.maxClicks == ""){      
+    if(this.maxClicks == ""){
       this.error = true;
       this.errorMsg.maxClicks = "Max clicks is required";
     }
@@ -239,8 +231,10 @@ export class AdvertisingPopupComponent   {
           this.dialogRef.close({
             action: 'added'
           });
-        }else{
+        }else if(response.data?.error){
           this.errorMsg = response.data.error
+        }else{
+          this.toastr.error(response.message, 'Ad Not Created');
         }
       },
       error => {

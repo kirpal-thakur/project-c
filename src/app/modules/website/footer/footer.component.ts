@@ -29,13 +29,12 @@ export class FooterComponent implements OnInit{
     { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
     { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
     { name: 'United Kingdom', slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
-    { name: 'Estonia, Eswatini', slug: "es", id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Spain', slug: "es", id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
     { name: 'Portugal', slug: "pt", id: 7, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
     { name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
     { name: 'Denmark', slug: "dk", id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
     { name: 'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
   ];
-
 
   customOptions: OwlOptions = {
     loop: true,
@@ -120,11 +119,11 @@ export class FooterComponent implements OnInit{
   ngOnInit(): void {
       // Check if the google.accounts.id library is loaded
       if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
-        // Initialize Google Sign-In
-        this.initializeGoogleSignIn();
+      // Initialize Google Sign-In
+     //   this.initializeGoogleSignIn();
       } else {
         // Google API script might not be loaded yet; wait for it to load
-        console.warn('Google API script is not fully loaded.');
+      //  console.warn('Google API script is not fully loaded.');
         this.countries = environment.domains;
       }
 

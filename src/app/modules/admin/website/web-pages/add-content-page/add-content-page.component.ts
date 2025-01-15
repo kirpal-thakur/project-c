@@ -117,7 +117,7 @@ export class AddContentPageComponent implements OnInit {
         this.formData.page_content = response.data.pageData.page_content;
         this.formData.meta_title = response.data.meta_title;
         this.formData.meta_description = response.data.meta_description;
-        this.bannerImagePreview = response.data.base_url + response.data.pageData.banner_img;
+        this.bannerImagePreview = response.data?.pageData?.banner_img ? response.data.base_url + response.data.pageData.banner_img : null;
       }
     });
   }

@@ -61,12 +61,16 @@ export interface ClubMember {
 })
 export class IndexComponent {
   @ViewChild('owlCarousel') owlCarousel!: ElementRef;
+  fallbackImage: string = 'assets/images/1.jpg'; // Path to your fallback image
+
   selectedLangId:any = null;
   pageDetail:any=null;
   sliderDetail:any=null;
   advertisemnetData:any=null;
-  
   imageBaseUrl:string= '';
+  banner_img:string= '';
+  banner_bg_img:string= '';
+  hero_bg_img:string= '';
   advertisemnet_base_url:string= '';
   players = [
     { name: 'Ronaldinho Gaúcho', image: './assets/images/Ronaldinho Gaúcho.svg', year: '2004' },
@@ -178,7 +182,10 @@ export class IndexComponent {
   }
 
  
-
+  handleImageError(event: Event) {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.fallbackImage;
+  }
   toggleNavbar(): void {
     this.isNavbarExpanded = !this.isNavbarExpanded;
   }
@@ -230,92 +237,76 @@ export class IndexComponent {
     this.selectedContent = content;
   }
 
-  //   // Determine the ID of the target element
-  //   let elementId = '';
-  //   switch (content) {
-  //     case 'Sign-up & Profile Creation':
-  //       elementId = 'sign-up';
-  //       break;
-  //     case 'Networking & Opportunity':
-  //       elementId = 'networking';
-  //       break;
-  //     case 'Success & Progression':
-  //       elementId = 'success';
-  //       break;
-  //   }
+  adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad visibility
 
-  //   // Smooth scroll to the target element over 3 seconds (3000 milliseconds)
-  //   if (elementId) {
-  //     const element = document.getElementById(elementId);
-  //     if (element) {
-  //       const startPosition = window.pageYOffset; // Current scroll position
-  //       const targetPosition = element.getBoundingClientRect().top + startPosition; // Target position
-  //       const distance = targetPosition - startPosition; // Distance to scroll
-  //       const duration = 3000; // Duration of the scroll in milliseconds (3 seconds)
-  //       let startTime: number | null = null;
-
-  //       // Animation function
-  //       const animation = (currentTime: number) => {
-  //         if (startTime === null) startTime = currentTime;
-  //         const timeElapsed = currentTime - startTime;
-  //         const progress = Math.min(timeElapsed / duration, 1); // Normalize progress to [0, 1]
-  //         window.scrollTo(0, startPosition + distance * progress); // Scroll to current position
-
-  //         // Apply translateY effect
-  //         element.style.transform = `translateY(${(2 * progress)}px)`;
-
-  //         if (timeElapsed < duration) requestAnimationFrame(animation); // Continue animation if not finished
-  //       };
-
-  //       requestAnimationFrame(animation); // Start the animation
-  //     }
-  //   }
-  // }
-
-
-adVisible: boolean[] = [true, true, true, true, true]; // Array to manage ad visibility
-
-ngOnInit() {
-  // Initially, all ads are visible
-  this.adVisible = [true, true, true, true, true];
-  this.webPages.languageId$.subscribe((data) => {
-    this.getPageDynamicData(data);
-    console.log('here is data',data)
-  });
-}
-
-
-closeAd(index: number) {
-  this.adVisible[index] = false; // Set the specific ad to not visible based on index
-}
-
-
-getPageDynamicData(languageId:any){
-
-  this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
-    let pageData = res.data.pageData;
-    let sliderData = res.data.sliderData;
-    if(res.status){
-        this.pageDetail = pageData;
-        this.sliderDetail = sliderData;
-        this.advertisemnetData = res.data.advertisemnetData;
-        this.imageBaseUrl = res.data.base_url;
-        this.advertisemnet_base_url = res.data.advertisemnet_base_url;
-      }
-  });
-}
-
-getFlagImage(data:any){
-  let parseData = JSON.parse(data);
-  // console.log(parseData, 'parse-data');
-}
-
-getBirthYear(date:any){
-  if(date){
-    const birthYear = new Date(date); // Convert to Date object
-    return birthYear.getFullYear();
+  ngOnInit() {
+    // Initially, all ads are visible
+    this.adVisible = [true, true, true, true, true];
+    this.webPages.languageId$.subscribe((data) => {
+      this.getPageDynamicData(data);
+    });
   }
-  return 'N/A';
-}
+
+
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'wide_skyscraper':
+          this.advertisemnetData.wide_skyscraper = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
+  }
+
+  isEmptyObject(obj:any) {
+    return (obj && (Object.keys(obj).length === 0));
+  }
+  getPageDynamicData(languageId:any){
+
+    this.webPages.getDynamicHomePage(languageId).subscribe((res) => {
+      let pageData = res.data.pageData;
+      let sliderData = res.data.sliderData;
+      if(res.status){
+          this.pageDetail = pageData;
+          this.banner_img =  res.data.base_url + pageData.banner_img;
+          this.banner_bg_img =  res.data.base_url + pageData.banner_bg_img;
+          this.hero_bg_img =  res.data.base_url + pageData.hero_bg_img;
+
+          this.sliderDetail = sliderData;
+          this.advertisemnetData = res.data.advertisemnetData;
+          console.log('advertisemnetData',this.advertisemnetData);
+          this.imageBaseUrl = res.data.base_url;
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
+        }
+    });
+  }
+
+  getFlagImage(data:any){
+    let parseData = JSON.parse(data);
+    // console.log(parseData, 'parse-data');
+  }
+
+  getBirthYear(date:any){
+    if(date){
+      const birthYear = new Date(date); // Convert to Date object
+      return birthYear.getFullYear();
+    }
+    return 'N/A';
+  }
 
 }

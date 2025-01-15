@@ -7,6 +7,7 @@ import { WebPages } from '../../../services/webpages.service';
   styleUrl: './club.component.scss'
 })
 export class ClubComponent {
+  baseUrl:string='';
   pageData:any = [{
     banner_title:'',
     banner_desc:'',
@@ -18,13 +19,18 @@ export class ClubComponent {
     pricing_sctn_title:'',
     pricing_tab:[],
   }];
+  advertisemnetData:any=null;
+  advertisemnet_base_url:string= '';
+
   isActive1 = true; // Premium Plan
   isActive2 = true; // Multi-Country Plan
   isActive3 = true; // Multi-Country Plan
 
   activeAccordionIndex = 1;
 
-  constructor( private webPages: WebPages){ }
+  constructor( private webPages: WebPages){ 
+
+  }
 
   setActiveAccordion(index: number): void {
     this.activeAccordionIndex = index;
@@ -53,7 +59,11 @@ export class ClubComponent {
     this.webPages.getDynamicContentPage('clubs_and_scouts',languageId).subscribe((res) => {
       if(res.status){
           this.pageData = res.data.pageData;
-
+          this.baseUrl = res.data.base_url;
+         
+          this.advertisemnetData = res.data.advertisemnetData;
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
+        
           // Initialize toggle states for pricing plans with Monthly active (false)
           this.pageData.pricing_tab.forEach((_: any, index: number) => {
             this.isActivePlan[index] = false; // Default to "Monthly"
@@ -61,6 +71,38 @@ export class ClubComponent {
 
         }
     });
+  }
+
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
 
   togglePlan(index: number) {
@@ -106,9 +148,12 @@ export class ClubComponent {
   ];
 
   adVisible: boolean[] = [true, true, true, true, true, true, true]; // Array to manage ad visibility
-
-  closeAd(index: number) {
-    this.adVisible[index] = false; // Set the specific ad to not visible based on index
+  
+  isEmptyObject(obj:any) {
+    if(typeof obj != 'undefined'){
+      return (obj && (Object.keys(obj).length === 0));
+    }
+    return true;
   }
 
 }

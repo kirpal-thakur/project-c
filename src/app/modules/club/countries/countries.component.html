@@ -1,11 +1,11 @@
 <div class="page-content">
     <div class="main-wrapper">
-        <div class="card bg-color pb-3 px-3">
+        <div class="card bg-color pb-0 px-3">
 
             <!-- Subscription message -->
-            <h4 class="card-billing">{{'TalentsTranslate.multiCountryVisibility' | translate }}</h4>
+            <h4 class="card-billing ">{{ 'multiCountryVisibility' | translate }}</h4>
             <div *ngIf="filteredCountries?.length>0" class="alert alert-success multi-country-box mt-4">
-                {{'TalentsTranslate.alertMessage' | translate }}
+                {{ 'alertMessage' | translate }}
             </div>
 
             <!-- Country Cards -->

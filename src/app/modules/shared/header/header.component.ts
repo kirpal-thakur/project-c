@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 
 interface Notification {
+  id: number;
   image: string;
   title: string;
   content: string;
@@ -57,10 +58,25 @@ export class HeaderComponent {
   currentIndex = 0;
   notificationsPerPage = 3;
   unseenCount = 0;
+<<<<<<< HEAD
   role:any;
   roles:any= environment.roles;
+=======
+  showAll : boolean = true;
+
+  notificationSeen : boolean = false;
+>>>>>>> f672bae076ce0b96ab78dcc52f9960eb249133bb
 
   ngOnInit() {
+
+    let notificationStatus = localStorage.getItem("notificationSeen");
+    if (notificationStatus) {
+      let jsonData = JSON.parse(notificationStatus);
+      this.notificationSeen = jsonData; 
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
 
     let jsonData = localStorage.getItem("userData");
     let userId;
@@ -105,9 +121,8 @@ export class HeaderComponent {
       //   this.fetchNotifications(userId);
       // }
 
-      console.log("data", data);
-
       const obj = {
+        id: 0,
         image: data.senderProfileImage,
         title: data.senderName,
         content: data.message,
@@ -126,8 +141,6 @@ export class HeaderComponent {
       }
       
       this.notifications.unshift(obj);
-      
-      console.log('New notification:', data.message);
 
       // Hide the notification after 3 seconds
       setTimeout(() => {
@@ -210,6 +223,8 @@ export class HeaderComponent {
   // }
 
   toggleDropdown() {
+    this.notificationSeen = true;
+    localStorage.setItem('notificationSeen', 'true');
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -220,11 +235,29 @@ export class HeaderComponent {
       console.log("No data found in localStorage.");
     }
 
-    console.log(this.currentIndex)
-
     this.isClosed = !this.isClosed;
+  }
 
-    
+  notificationClicked(id:number, seen: number, notification: any){
+    if(!notification.seen){
+      this.talentService.updateNotificationSeen(notification.id, 1).subscribe({
+        next: (response) => {
+          if(response.status){
+            notification.seen = 1;
+            console.log('Message from API:', response.message);
+          }
+          else{
+            console.log("something went wrong");
+          }
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        }
+      });
+    }
+    else{
+      console.log("already seen");
+    }
   }
 
   // Method to set the page title on the initial load
@@ -353,7 +386,6 @@ export class HeaderComponent {
   }
 
   onScroll(): void {
-    console.log("something")
     const notificationBox = document.getElementById('notification-box-id');
     if (notificationBox) {
       // Check if scroll position is greater than 300
@@ -387,6 +419,7 @@ export class HeaderComponent {
   
           // Map fetched notifications to the Notification interface
           this.allNotifications = response.notifications.map((notif: any) => ({
+            id: notif.id,
             image: notif.senderProfileImage || '../../../assets/images/default.jpg',
             title: notif.senderName || 'Unknown',
             content: notif.message,
@@ -422,7 +455,7 @@ export class HeaderComponent {
     setTimeout(() => {
       this.something = false;
       this.notifications = [...this.notifications, ...nextNotifications];
-    }, 2000);
+    }, 1000);
 
     this.currentIndex += this.notificationsPerPage;
     if(this.notificationsPerPage>=3){
@@ -448,7 +481,6 @@ export class HeaderComponent {
     });
 
   }
-
 
   selectUser(user: any): void {
 

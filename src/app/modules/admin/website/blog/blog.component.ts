@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { BlogService } from '../../../../services/blog.service';
 import { BlogPopupComponent } from './blog-popup/blog-popup.component';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
+import { WebPages } from '../../../../services/webpages.service';
+import { CommonFilterPopupComponent } from '../../common-filter-popup/common-filter-popup.component';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -24,14 +26,33 @@ export class BlogComponent {
   idsToProceed: any = [];
   selectedIds:any = [];
   customFilters:any = [];
+  languages:any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private blogService: BlogService, public dialog: MatDialog) {}
+  constructor(private blogService: BlogService,private webpages:WebPages, public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.getAllLanguages();
     this.getBlogs();
+  }
 
+
+  getAllLanguages(){
+    this.webpages.getAllLanguage().subscribe((response) => {
+      if(response.status){
+        console.log('languages',response);
+        let languages = response.data.languages;
+
+
+        this.languages = languages.map((value: any) => {
+          return {
+            id: value.id,
+            language: value.language
+          }
+        });
+      }
+    });
   }
 
   getBlogs(filterApplied:boolean = false) {
@@ -39,14 +60,18 @@ export class BlogComponent {
     let params:any = {};
     // params.offset = page;
     params.search = this.filterValue;
-    // params.limit  = pageSize;  
-    
-    if(this.customFilters['discount_type']){
-      params = {...params, "whereClause[discount_type]" : this.customFilters['discount_type']};
+    // params.limit  = pageSize;
+
+    if(this.customFilters['language']){
+      params = {...params, "lang_id" : this.customFilters['language']};
     }
 
     if(this.customFilters['status']){
-      params = {...params, "whereClause[status]" : this.customFilters['status']};
+      params = {...params, "status" : this.customFilters['status']};
+    }
+
+    if(this.customFilters['discount_type']){
+      params = {...params, "whereClause[discount_type]" : this.customFilters['discount_type']};
     }
 
     try {
@@ -65,6 +90,7 @@ export class BlogComponent {
       this.isLoading = false;
       console.error('Error fetching coupons:', error);
     }
+
   }
 
   publishBlogs(): any{
@@ -80,7 +106,6 @@ export class BlogComponent {
           this.getBlogs();
           this.selectedIds = [];
           this.allSelected = false;
-          // console.log('Coupons deleted successfully:', response);
           this.showMatDialog('Blog(s) published successfully!.', 'display');
         }else{
           this.showMatDialog('Error in publishing blog. Please try again.', 'display');
@@ -91,6 +116,7 @@ export class BlogComponent {
       }
     );
   }
+
   applyFilter(filterValue:any) {
     this.filterValue = filterValue.target?.value.trim().toLowerCase();
     if(this.filterValue.length >= 3){
@@ -99,6 +125,7 @@ export class BlogComponent {
       this.getBlogs();
      }
   }
+
   draftBlogs(): any{
     if(this.selectedIds.length == 0){
       this.showMatDialog('Select Blog(s) first.', 'display');
@@ -123,6 +150,7 @@ export class BlogComponent {
       }
     );
   }
+
   confirmDeletion():any {
     if(this.selectedIds.length == 0){
     //  this.showMatDialog('Select coupon(s) first.', 'display');
@@ -156,6 +184,7 @@ export class BlogComponent {
       }
     });
   }
+
   deleteBlogs(){
     let params = {id:this.idsToProceed};
     this.blogService.deleteBlog(params).subscribe(
@@ -175,6 +204,7 @@ export class BlogComponent {
       }
     );
   }
+
   selectAllBlogs() {
     this.allSelected = !this.allSelected;
     if (this.allSelected) {
@@ -196,13 +226,13 @@ export class BlogComponent {
 
   confirmSingleDeletion(couponId:any){
     this.idsToProceed = [couponId];
-   // this.showMatDialog("", "delete-coupon-confirmation");
+    this.showDeleteConfirmationPopup();
   }
 
   deactivateCoupon(couponId:any){
     let params = {id:[couponId]};
-  
   }
+
   editBlog(element:any){
     const dialogRef = this.dialog.open(BlogPopupComponent,{
       height: '90vh',
@@ -218,18 +248,38 @@ export class BlogComponent {
         }
       }
     });
-    // edit coupon not available in stripe
-    
-    // const updateCouponDialog = this.dialog.open(CoupenPopupComponent,{
-    //   height: '598px',
-    //   width: '600px',
-    //   panelClass: 'cutam-cupen',
-    //   data : {
-    //     action: 'update',
-    //     couponData: element
-    //   }
-    // });
   }
 
+
+  applyUserFilter(filters:any){
+    this.customFilters = filters;
+    this.getBlogs();
+  }
+
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '225px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'blog',
+        appliedfilters:this.customFilters,
+        languages: this.languages,
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.applyUserFilter(result);
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
+  }
 
 }

@@ -1,7 +1,7 @@
 <section class="website-code">
-    <div class="main"  >
+    <div class="main">
 
-        <app-header></app-header>
+        <!-- <app-header></app-header> -->
 
         <div class="banner py-0" style="background-image: url('{{baseUrl + pageData?.banner_bg_img}}');">
             <div class="overlay1"></div>
@@ -11,9 +11,11 @@
                         <div class="col-lg-6 col-md-4 col-12">
                             <div class="banner-left">
                                 <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
-                                <h4 class="banner-heading5">{{pageData?.banner_desc}}
-                                </h4>
-                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt}}
+
+                                <h4 class="banner-heading5" [innerHTML]="pageData?.banner_desc"></h4>
+                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{
+                                    pageData?.banner_btn_txt}}
+
                                 </a>
                             </div>
                         </div>
@@ -45,46 +47,49 @@
                             </div>
                         </div>
                     </div>
-
-                    <div *ngIf="adVisible[0]" class="skyscraper-image">
-                        <img src="./assets/images/skyscraper - 120x600.png">
-                        <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+                        <img src="{{ advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image }}"
+                            alt="Skyscraper-Image Ad">
+                        <button (click)="closeAd('skyscraper')" class="ad-close-button"><i
+                                class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="advertisment" [ngClass]="{'hidden': !adVisible[1]}">
-            <div *ngIf="adVisible[1]" class="leaderboard-image">
-                <img src="./assets/images/leaderboard - 728x90.png">
-                <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
+            <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+                <img [src]="advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image"
+                    alt="Leaderboard-image Ad">
+                <button (click)="closeAd('leaderboard')" class="ad-close-button"><i
+                        class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
     </div>
 
     <div class="club-scout py_0">
         <div class="container">
-            <h3 class="club-heading4">{{pageData?.talent_section_title}}</h3>
+            <h3 class="club-heading4 pb-4">{{pageData?.talent_section_title}}</h3>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="club_text">
                         <img class="light-images" src="./assets/images/talent-icon1.svg">
                         <img class="dark-images" src="./assets/images/dark-talent-icon1.svg">
-                        <p class="club-text1">{{pageData?.talent_section['first_tab'].txt}}</p>
+                        <p class="club-text1">{{pageData?.talent_section?.first_tab?.txt}}</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="club_text">
                         <img class="light-images" src="./assets/images/talent-icon2.svg">
                         <img class="dark-images" src="./assets/images/dark-talent-icon2.svg">
-                        <p class="club-text1">{{pageData?.talent_section['sec_tab'].txt}}</p>
+                        <p class="club-text1">{{pageData?.talent_section?.sec_tab?.txt}}</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-4">
                     <div class="club_text">
                         <img class="light-images" src="./assets/images/talent-icon3.svg">
                         <img class="dark-images" src="./assets/images/dark-talent-icon3.svg">
-                        <p class="club-text1">{{pageData?.talent_section['third_tab'].txt}}</p>
+                        <p class="club-text1">{{pageData?.talent_section?.third_tab?.txt}}</p>
                     </div>
                 </div>
             </div>
@@ -99,20 +104,21 @@
                         <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                         <div class="accordion" id="accordionExample">
                             <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
-                                <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
-                                    <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                        aria-expanded="true" aria-controls="collapseOne">
+                                <div class="accordion-item" (click)="setActiveAccordion(i+1)">
+                                    <div class="accordion-flex" data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#collapse' + i" aria-expanded="false"
+                                        [attr.aria-controls]="'collapse' + i">
                                         <img class="light-feature1" src="./assets/images/feature-img1.svg">
                                         <img class="dark-feature1" src="./assets/images/dark-club1.svg">
                                         <h2 class="accordion-header">
                                             {{feature.title}}
                                         </h2>
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#collapseOne" aria-expanded="true"
-                                            aria-controls="collapseOne">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + i"
+                                            aria-expanded="false" [attr.aria-controls]="'collapse' + i">
                                         </button>
                                     </div>
-                                    <div id="collapseOne" class="accordion-collapse collapse show"
+                                    <div [id]="'collapse' + i" class="accordion-collapse collapse"
                                         data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <p class="feature-text">{{feature.desc}}
@@ -156,7 +162,6 @@
                                     <img class="light-images" src="./assets/images/accodian3.png">
                                     <img class="dark-images" src="./assets/images/dark-accodian3.png">
                                 </div>
-
                             </div>
                         </div>
 
@@ -283,7 +288,7 @@
     </div>
 
     <!-- mobile-features -->
-    <div class="features1 py_0">
+    <div class="features1 py_0 ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12">
@@ -291,7 +296,7 @@
                         <h3 class="feature-heading3">{{pageData?.feature_sctn_title}}</h3>
                         <div class="accordion" id="accordionExample">
                             <ng-container *ngFor="let feature of pageData.feature_sctn; let i = index">
-                                <div class="accordion-item"   (click)="setActiveAccordion(i+1)">
+                                <div class="accordion-item" (click)="setActiveAccordion(i+1)">
                                     <div class="accordion-flex" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                         aria-expanded="true" aria-controls="collapseOne">
                                         <img class="light-feature1" src="./assets/images/feature-img1.svg">
@@ -322,16 +327,18 @@
     </div>
     <!-- mobile-features -->
 
-    <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
+    <div class="advertisement" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.small_square)}">
         <div class="container">
             <div class="adv">
-                <div *ngIf="adVisible[2]" class="small-sqaure-image">
-                    <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
-                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.small_square?.featured_image">
+                    <button (click)="closeAd('small_square')" class="ad-close-button"><i
+                            class="fa-solid fa-xmark"></i></button>
                 </div>
-                <div *ngIf="adVisible[3]" class="banner-image">
-                    <img src="./assets/images/banner - 468x60.png">
-                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <div *ngIf="!isEmptyObject(advertisemnetData?.banner_image)" class="banner-image">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.banner_image?.featured_image">
+                    <button (click)="closeAd('banner_image')" class="ad-close-button"><i
+                            class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
         </div>
@@ -343,11 +350,12 @@
 
             <div *ngFor="let plan of pageData.pricing_tab; let i = index">
                 <div class="billed">
-                    <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }" class="billed-monthly">
+                    <p [ngClass]="{ 'active-text': isActivePlan[i], 'inactive-text': !isActivePlan[i] }"
+                        class="billed-monthly">
                         {{'billedMonthly' | translate}}
                     </p>
                     <div class="toggle-button" [ngClass]="{ 'active': isActivePlan[i], 'inactive': !isActivePlan[i] }"
-                    (click)="togglePlan(i)">
+                        (click)="togglePlan(i)">
                     </div>
                     <p [ngClass]="{ 'active-text': !isActivePlan[i], 'inactive-text': isActivePlan[i] }">
                         {{'billedYearly' | translate}}
@@ -356,85 +364,70 @@
 
                 <div class="premium">
                     <div class="row">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-img">
-                        <img class="bg-image" src="./assets/images/feature-image.svg">
-                        <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
-                        <h3 class="premium-heading3">
-                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
-                            <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
-                            / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
-                        </h3>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="premium-col-right">
-                        <h5 class="premium-heading5">{{ plan.plan_name }} Includes</h5>
-                        <div class="premium-text" *ngFor="let feature of plan.plan_feature_desc">
-                            <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
-                            <p>{{ feature }}</p>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-img">
+                                <img class="bg-image" src="./assets/images/feature-image.svg">
+                                <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
+                                <h3 class="premium-heading3">
+                                    {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
+                                    <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency :
+                                        plan.yearly_plan_price_currency }}
+                                        / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
+                                </h3>
+                            </div>
                         </div>
+
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="premium-col-right">
+                                <h5 class="premium-heading5">{{ plan.plan_name }} Includes</h5>
+                                <div class="premium-text" *ngFor="let feature of plan.plan_feature_desc">
+                                    <img src="./assets/images/mdi_tick.svg" alt="Checkmark">
+                                    <p>{{ feature }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="">
         <div class="container">
-            <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
+            <!-- Advertisement Section -->
+            <div class="advertisement1" *ngIf="advertisemnetData"
+                [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.large_rectangle) && isEmptyObject(advertisemnetData?.inline_rectangle) && isEmptyObject(advertisemnetData?.square)}">
 
-
-                <div *ngIf="adVisible[4]" class="large-rectangle">
-                    <img src="./assets/images/large rectangle - 336x280 .png">
-                    <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <!-- Large Rectangle Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.large_rectangle)" class="large-rectangle">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.large_rectangle?.featured_image"
+                        alt="Large Rectangle Ad">
+                    <button (click)="closeAd('large_rectangle')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
 
-                <div *ngIf="adVisible[5]" class="inline-rectangle">
-                    <img src="./assets/images/inline rectangle - 300x250.png">
-                    <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <!-- Inline Rectangle Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.inline_rectangle)" class="inline-rectangle">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.inline_rectangle?.featured_image"
+                        alt="Inline Rectangle Ad">
+                    <button (click)="closeAd('inline_rectangle')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
 
-                <div *ngIf="adVisible[6]" class="square">
-                    <img src="./assets/images/sqaure - 250x250.png">
-                    <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <!-- Square Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.square)" class="square">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.square?.featured_image" alt="Square Ad">
+                    <button (click)="closeAd('square')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- <div>
-        <div class="container">
-            <div class="add" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
-            <div class="row ">
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div *ngIf="adVisible[4]" class="large-rectangle">
-                        <img src="./assets/images/large rectangle - 336x280 .png">
-                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div *ngIf="adVisible[5]" class="inline-rectangle">
-                        <img src="./assets/images/inline rectangle - 300x250.png">
-                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    
-                </div>
-                <div class="col-lg-4 col-md-4 col-4">
-                    <div *ngIf="adVisible[6]" class="square">
-                        <img src="./assets/images/sqaure - 250x250.png">
-                        <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-                    
-                </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
-    <app-footer></app-footer>
+    <!-- <app-footer></app-footer> -->
 </section>

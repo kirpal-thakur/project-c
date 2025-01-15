@@ -4,7 +4,7 @@
     <div class="col-md-12 p-0">
       <div class="personal_edit">
         <div class="dialog-header m-auto">
-          <h2>{{'TalentsTranslate.editGeneralDetails' | translate}}</h2>
+          <h2>{{'editGeneralDetails' | translate}}</h2>
         </div>
         
         <div class="close_buttons">
@@ -18,7 +18,7 @@
           <!-- In the team since -->
           <div class="row">
             <div class="form-group col-lg-4">
-            <label for="teamSince" class="form-label">{{'TalentsTranslate.inTheTeamSince' | translate}}</label>
+            <label for="teamSince" class="form-label">{{'inTheTeamSince' | translate}}</label>
             <div class="d-flex align-items-center justify-content-center">
                 <input
                 matInput
@@ -37,14 +37,14 @@
             <!-- Top speed -->
             <div class="form-group speed_inputs col-lg-4 d-flex align-items-center">
               <div class="col-lg-12 mobile-input">
-                <label for="topSpeed" class="form-label">{{'Top speed(km/h)' | translate}}</label>
+                <label for="topSpeed" class="form-label">{{'topSpeed' | translate}}(km/h)</label>
                 <input type="text" class="form-control" id="topSpeed" name="top_speed" placeholder="Enter Value" [(ngModel)]="top_speed" />
               </div>
             </div>
   
             <!-- International player -->
             <div class=" form-group col-lg-4">
-              <label for="internationalPlayer" class="form-label">{{'TalentsTranslate.internationalPlayer' | translate}}</label>
+              <label for="internationalPlayer" class="form-label">{{'internationalPlayer' | translate}}</label>
               <select class="form-select" id="internationalPlayer" name="international_player" [(ngModel)]="international_player">              
                 <option *ngFor="let country of countries" [value]="country.id" [selected]="user?.meta?.international_player==country.id">{{ country.country_name }}</option>
               </select>
@@ -56,7 +56,7 @@
             <div class="form-group col-lg-4 ">
               <div class="d-flex market_input-gap align-items-center">
                 <div class="col-lg-12 mobile-input">
-                  <label for="marketValue" class="form-label">{{'Market value (EUR)' | translate}}</label>
+                  <label for="marketValue" class="form-label">{{'marketValue' | translate}}(EUR)</label>
                   <input type="text" class="form-control" id="marketValue" name="market_value" placeholder="Enter value" [(ngModel)]="market_value" />
                 </div>
               </div>
@@ -97,7 +97,7 @@
             <div class="form-group col-lg-4 mb-2">
               <!-- Last change -->
               <div class="position_inputs">
-                <label for="lastChange" class="form-label">{{'TalentsTranslate.lastChange' | translate}}</label>
+                <label for="lastChange" class="form-label">{{'lastChange' | translate}}</label>
                   <div class="d-flex align-items-center justify-content-center">
                     <input
                     matInput
@@ -115,7 +115,7 @@
   
               <!-- Main Position -->
               <div class="position_inputs">
-                <label for="mainPosition" class="form-label">{{'TalentsTranslate.mainPosition' | translate}}</label>
+                <label for="mainPosition" class="form-label">{{'mainPosition' | translate}}</label>
                 
                 <mat-select
                   [(ngModel)]="main_position"
@@ -135,7 +135,7 @@
 
               <!-- Other Positions -->
               <div class="position_inputs">
-                <label for="otherPositions" class="form-label">{{'TalentsTranslate.otherPositions' | translate}}</label>
+                <label for="otherPositions" class="form-label">{{'otherPositions' | translate}}</label>
                 <mat-select
                   [(ngModel)]="other_positions"
                   class="form-select"
@@ -158,8 +158,8 @@
   
             <!-- Social media usernames -->
           <div class="social_form-box">
-            <span class="social_heading" >{{'TalentsTranslate.socialMedia' | translate}}</span>
-            <span class="note_titles">{{'Note:You only need to add your username.' | translate}}</span>
+            <span class="social_heading" >{{'socialMedia' | translate}}</span>
+            <span class="note_titles">{{'note' | translate}}</span>
           </div>
           <div class="row">
             <div class=" col-lg-6">
@@ -323,8 +323,8 @@
   
           <!-- Save and Cancel buttons -->
           <div class="dialog-actions align-items-center d-flex justify-content-between">
-            <button class="cancel-btn" (click)="onCancel()">{{'TalentsTranslate.cancel' | translate}}</button>
-            <button class="save-btn">{{'TalentsTranslate.save' | translate}}</button>
+            <button class="cancel-btn" (click)="onCancel()">{{'cancel' | translate}}</button>
+            <button class="save-btn">{{'save' | translate}}</button>
           </div>
         </form>
       
