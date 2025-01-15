@@ -369,7 +369,7 @@ export class AddHomePageComponent {
       formData.append(`first_tab[${index}][title]`, tab.title);
       formData.append(`first_tab[${index}][desc]`, tab.desc);
       tab.images.forEach((file, i) => formData.append(`first_tab[${index}][images][${i}]`, file));
-      tab.darkImages.forEach((file, i) => formData.append(`first_tab[${index}][darkImages][${i}]`, file)); // Include dark images
+      tab.darkImages.forEach((file, i) => formData.append(`first_tab[${index}][images_dark_mode][${i}]`, file)); // Include dark images
     });
 
     // Process second_tab
@@ -377,7 +377,7 @@ export class AddHomePageComponent {
       formData.append(`second_tab[${index}][title]`, tab.title);
       formData.append(`second_tab[${index}][desc]`, tab.desc);
       tab.images.forEach((file, i) => formData.append(`second_tab[${index}][images][${i}]`, file));
-      tab.darkImages.forEach((file, i) => formData.append(`second_tab[${index}][darkImages][${i}]`, file)); // Include dark images
+      tab.darkImages.forEach((file, i) => formData.append(`second_tab[${index}][images_dark_mode][${i}]`, file)); // Include dark images
     });
 
     this.webpages.addHomePageTabData(formData).subscribe(() => {
