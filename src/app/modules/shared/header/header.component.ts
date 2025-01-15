@@ -58,6 +58,8 @@ export class HeaderComponent {
   currentIndex = 0;
   notificationsPerPage = 3;
   unseenCount = 0;
+  role:any;
+  roles:any= environment.roles;
   showAll : boolean = true;
 
   notificationSeen : boolean = false;
@@ -83,15 +85,18 @@ export class HeaderComponent {
       console.log("No data found in localStorage.");
     }
 
+    let userRole = localStorage.getItem("userRole");
+
+    // Find the role based on the id
+    this.role = this.roles.find((role:any) => role.id == userRole);
     this.fetchNotifications(userId);
-
     this.loggedInUser = JSON.parse(this.loggedInUser);
-
-    this.profileImgUrl = this.loggedInUser.profile_image_path;
 
     this.talentService.message$.subscribe(msg => {
       this.profileImgUrl = msg;
     });
+    this.profileImgUrl = this.loggedInUser?.meta?.profile_image_path;
+
 
     this.lang = localStorage.getItem('lang') || 'en';
     const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
@@ -262,7 +267,7 @@ export class HeaderComponent {
     }
   }
   navigateToTab(tab: string) {
-    this.router.navigate(['/talent/setting'], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
+    this.router.navigate([`/${this.role.slug}/setting`], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
   }
 
 
@@ -279,6 +284,7 @@ export class HeaderComponent {
   }
 
   logout() {
+
     this.authService.logout();
   }
 

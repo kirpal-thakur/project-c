@@ -553,7 +553,7 @@ export class TalentService {
 
     // Send the HTTP GET request with both params and headers
     return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}users-frontend`,
+      `${this.apiUrl}users-frontend-with-login`,
       { params: queryParams, headers } // Combine params and headers here
     );
   }

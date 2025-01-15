@@ -2,8 +2,7 @@ import { Component, Inject } from '@angular/core';
 import {
   MatDialogRef,MAT_DIALOG_DATA
 } from '@angular/material/dialog';
-import { UserService } from '../../../services/user.service';
-import { TalentService } from '../../../services/talent.service';
+import { ScoutService } from '../../../services/scout.service';
 
 
 @Component({
@@ -16,7 +15,7 @@ export class UploadPopupComponent {
   userId: any = '';
   uploadedFiles:any = [];
   uploadResponse:any = [];
-  constructor(private userService: TalentService, public dialogRef : MatDialogRef<UploadPopupComponent>,
+  constructor(private scoutService: ScoutService, public dialogRef : MatDialogRef<UploadPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       this.userId = data.userId;
   }
@@ -79,7 +78,7 @@ export class UploadPopupComponent {
     console.log('formdata')
     console.log(formdata)
 
-    this.userService.uploadGalleryImages(formdata).subscribe((response)=>{
+    this.scoutService.uploadGalleryImages(formdata).subscribe((response)=>{
       console.log(response)
       response.forEach((row:any) => {
         console.log(row);

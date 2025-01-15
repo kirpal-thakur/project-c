@@ -24,8 +24,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { NgxEditorModule } from 'ngx-editor';
 import { ProfileTabComponent } from './tabs/profile-tab/profile-tab.component';
-import { PerformanceTabComponent } from './tabs/performance-tab/performance-tab.component';
-import { TransfersTabComponent } from './tabs/transfers-tab/transfers-tab.component';
 import { GalleryTabComponent } from './tabs/gallery-tab/gallery-tab.component';
 import { UploadPopupComponent } from './upload-popup/upload-popup.component';
 import { EditPersonalDetailsComponent } from './edit-personal-details/edit-personal-details.component';
@@ -33,7 +31,6 @@ import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
-import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
 import { ExploreComponent } from './explore/explore.component';
 import { CountriesComponent } from './countries/countries.component';
 import { ChatComponent } from './chat/chat.component';
@@ -47,12 +44,7 @@ import { SettingComponent } from './setting/setting.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
 import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
-import { EditPerformanceDetailsComponent } from './edit-performance-details/edit-performance-details.component';
-import { AddPerformanceComponent } from './tabs/performance-tab/add-performance/add-performance.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
-import { EditTransferDetailsComponent } from './edit-transfer-details/edit-transfer-details.component';
-import { AddTransferComponent } from './tabs/transfers-tab/add-transfer/add-transfer.component';
-import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/add-perfomance-report/add-perfomance-report.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
@@ -62,6 +54,15 @@ import { LoaderComponent } from './loader/loader.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
 import { AddNewTalentComponent } from './tabs/portfolio-tab/add-new-talent/add-new-talent.component';
 import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edit-new-talent.component';
+import { LightboxModule } from 'ngx-lightbox';
+import { GuidedTourModule } from 'ngx-guided-tour';
+import { SharedModule } from '../shared/shared.module';
+import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
+import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
+import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -70,7 +71,6 @@ import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edi
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
-    FooterComponent,
     FavoritesComponent,
     ProfileTabComponent,
     PlayerProfileComponent,
@@ -93,22 +93,20 @@ import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edi
     DeletePopupComponent,
     EditGeneralDetailsComponent,
     GalleryTabComponent,
-    PerformanceTabComponent,
-    TransfersTabComponent,
     MessagePopupComponent,
-    EditTransferDetailsComponent,
-    AddTransferComponent,
-    EditPerformanceDetailsComponent,
-    AddPerformanceComponent,
-    AddPerfomanceReportComponent,
-    AddCardComponent,   
-    PerformanceAnalysisTabComponent,
+    AddCardComponent,
     HistoryTabComponent,
     LoaderComponent,
     PortfolioTabComponent,
     AddNewTalentComponent,
+    CancelCountryPlanComponent,
     EditNewTalentComponent,
-    // ResetPasswordComponent,
+    AddBoosterComponent,
+    UpdateConfirmationPlanComponent,
+    AddCountryComponent,
+    ResetPasswordComponent,
+    FooterComponent,
+    AddRepresentatorPopupComponent
   ],
   imports: [
     CommonModule,
@@ -116,7 +114,7 @@ import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edi
     TranslateModule.forChild(),
     RouterModule,
     RouterOutlet,
-    MatPaginator,    
+    MatPaginator,
     FormsModule,
     MatDialogModule,
     MatIconModule,
@@ -133,7 +131,10 @@ import { EditNewTalentComponent } from './tabs/portfolio-tab/edit-new-talent/edi
     MatToolbarModule,
     MatTableModule,
     NgxEditorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    LightboxModule,
+    GuidedTourModule,
+    SharedModule
     // NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })

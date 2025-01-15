@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ViewMembershipPopupComponent } from '../view-membership-popup/view-membership-popup.component';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-player-profile',
