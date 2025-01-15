@@ -63,9 +63,6 @@ export class UserService {
 
     return this.http.post<any>(`${this.apiUrl2}/update-user-status`, { id: userIds, status: newStatus }, { headers });
   }
-  
-
-
 
   // getProfileData(): Observable<any> {
   //   const authToken = localStorage.getItem('authToken'); 
