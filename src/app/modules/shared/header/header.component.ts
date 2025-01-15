@@ -58,14 +58,11 @@ export class HeaderComponent {
   currentIndex = 0;
   notificationsPerPage = 3;
   unseenCount = 0;
-<<<<<<< HEAD
   role:any;
   roles:any= environment.roles;
-=======
   showAll : boolean = true;
 
   notificationSeen : boolean = false;
->>>>>>> f672bae076ce0b96ab78dcc52f9960eb249133bb
 
   ngOnInit() {
 

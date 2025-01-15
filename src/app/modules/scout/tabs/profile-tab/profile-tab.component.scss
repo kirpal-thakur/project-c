@@ -483,27 +483,98 @@
   }
    
 .edit_button button {
-    border: 1px solid #918f8f;
-    background: no-repeat;
-    padding: 5px 8px;
-    border-radius: 4px;
-  }
-  .edit_button span {
-    font-size: 14px;
-    color: #918f8f;
-    padding-left: 6px;
-    font-weight: 400;
-  }
-  .edit_icon {
-    width: 20px;
-    fill: #6d6d6d;
-  }
-  .general_titels h2 {
-    font-size: 16px;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: #565555;
-  }
-  .edit_button {
+  border: 1px solid #918f8f;
+  background: no-repeat;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
+.edit_button span {
+  font-size: 14px;
+  color: #918f8f;
+  padding-left: 6px;
+  font-weight: 400;
+}
+.edit_icon {
+  width: 20px;
+  fill: #6d6d6d;
+}
+.general_titels h2 {
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #565555;
+}
+.edit_button {
     margin-left: 14px;
+}
+
+td{
+  font-size: 14px;
+}
+
+.table thead  {
+  border-radius: 10px ;
+  overflow: hidden;
+}
+
+.border-table-thead thead{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.table-scout-profile{
+  border-radius:10px ;
+  border: 1px solid #E5E5E5;
+}
+
+tbody tr:first-child {
+  border-top: 2px solid #e5e5e5; /* Adjust color and thickness as needed */
+}
+
+tbody {
+  border-top: 2px solid #e5e5e5; /* Adjust color and thickness as needed */
+}
+
+.custom-select {
+  min-width: 114px;
+  height: 26px;
+  width: 176px;
+}
+
+.custom-select select {
+  appearance: none;
+  width: 100%;
+  min-width: 114px;
+  height: 26px;
+  // width: 60%;
+  background-color: #caced1;
+  border: 0px solid #caced1;
+  border-radius: 0.25rem;
+  color: #148DE4;
+  cursor: pointer;
+}
+
+
+.custom-select {
+  min-width: 114px;
+  height: 26px;
+  width: 50% !important;
+  padding-left: 8px ;
+  border: 0px solid #caced1;
+  color: #148DE4;
+  cursor: pointer;
+  background-color: #23611500;
+  border-radius: 10px;
+}
+
+.custom-select:focus-visible {
+outline: 0 !important ;
+}
+
+.custom-select:after { 
+border-radius: 50%;
+}
+
+.pointer{
+cursor: pointer;
 }

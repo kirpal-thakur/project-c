@@ -33,11 +33,11 @@
                       <path
                         d="M464 0H112c-4 0-7.8 2-10 5.4L2 152.6c-2.9 4.4-2.6 10.2 .7 14.2l276 340.8c4.8 5.9 13.8 5.9 18.6 0l276-340.8c3.3-4.1 3.6-9.8 .7-14.2L474.1 5.4C471.8 2 468.1 0 464 0zm-19.3 48l63.3 96h-68.4l-51.7-96h56.8zm-202.1 0h90.7l51.7 96H191l51.6-96zm-111.3 0h56.8l-51.7 96H68l63.3-96zm-43 144h51.4L208 352 88.3 192zm102.9 0h193.6L288 435.3 191.2 192zM368 352l68.2-160h51.4L368 352z" />
                     </svg>
-                    <span>{{'TalentsTranslate.premium' | translate}}</span>
+                    <span>{{'premium' | translate}}</span>
                   </div>
                   <div class="boost_profile d-flex align-items-center" *ngIf="booster">
-                    <span>{{'TalentsTranslate.boostProfile' | translate}}</span>
-                    <span class="active_btn">{{'TalentsTranslate.active' | translate}}</span>
+                    <span>{{'boostProfile' | translate}}</span>
+                    <span class="active_btn">{{'active' | translate}}</span>
                     <a href="scout/plans" class="cursor-pointer" >
                       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -72,7 +72,7 @@
                               d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z"
                               fill="#787878" />
                           </svg>
-                          <span>{{'TalentsTranslate.edit' | translate}}</span>
+                          <span>{{'edit' | translate}}</span>
                         </div>
                       </button>
                     </div>
@@ -88,13 +88,13 @@
                             class="fc-club-img" alt="">
                         </div>
                         <div class="team-badge_content col-lg-9 p-0">
-                          <h6 class="title_2 mb-1">{{ 'TalentsTranslate.currentClub' | translate}}</h6>
+                          <h6 class="title_2 mb-1">{{ 'currentClub' | translate}}</h6>
                           <h5 class="title-1">{{user?.pre_current_club_name |translate }} </h5>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-6 team-logos">
-                      <h6 class="title_2 mb-1">{{ 'TalentsTranslate.nationality' | translate }}</h6>
+                      <h6 class="title_2 mb-1">{{ 'nationality' | translate }}</h6>
                       <div class="d-flex align-items-center gap-2 mb-1 " *ngFor="let nation of userNationalities">
                         <div class="team-badge_image">
                           <img *ngIf="nation.flag_path" [src]="nation.flag_path" alt="">
@@ -116,7 +116,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.dateOfBirth' | translate}}</h6>
+                          <h6 class="title_2">{{ 'dateOfBirth' | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.date_of_birth | date:'dd.MM.yyyy' }}</h5>
                         </div>
                       </div>
@@ -127,7 +127,7 @@
                           <img [src]="countryFlagUrl" alt="" />
                         </div>
                         <div class=" col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2"> {{"TalentsTranslate.placeOfBirth" | translate }}</h6>
+                          <h6 class="title_2"> {{"placeOfBirth" | translate }}</h6>
                           <h5 class="title-1">{{user?.meta?.place_of_birth}}</h5>
                         </div>
                       </div>
@@ -153,7 +153,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.height' | translate }}</h6>
+                          <h6 class="title_2">{{ 'height' | translate }}</h6>
                           <h5 *ngIf="user.meta && user.meta.height" class="title-1">{{user.meta.height}}
                             {{user.meta.height_unit}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.height">NA</h5>
@@ -170,7 +170,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.weight' | translate }}</h6>
+                          <h6 class="title_2">{{ 'weight' | translate }}</h6>
                           <h5 *ngIf="user.meta && user.meta.weight" class="title-1">{{user.meta.weight}}
                             {{user.meta.weight_unit}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.weight">NA</h5>
@@ -204,7 +204,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.contract' | translate}}</h6>
+                          <h6 class="title_2">{{ 'contract' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.contract_start">{{user?.meta?.contract_start | date:'y'
                             }} - {{user?.meta?.contract_end | date:'y' }}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.contract_start">NA</h5>
@@ -231,7 +231,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.leagueLevel' | translate}}</h6>
+                          <h6 class="title_2">{{ 'leagueLevel' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.league_level">{{user?.meta?.league_level}}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.league_level">NA</h5>
                         </div>
@@ -290,7 +290,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0  team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.foot' | translate}}</h6>
+                          <h6 class="title_2">{{ 'foot' | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.foot}}</h5>
                         </div>
                       </div>
@@ -320,7 +320,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.age' | translate}}</h6>
+                          <h6 class="title_2">{{ 'age' | translate}}</h6>
                           <h5 class="title-1">{{calculateAge(user?.meta?.date_of_birth)}}</h5>
                         </div>
                       </div>
@@ -335,8 +335,8 @@
               <div class="col-lg-12 image-gallery mt-4 bg-color p-3 favourite_images">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="Feature_images">
-                    <h2>{{ 'TalentsTranslate.highlights' | translate}}</h2>
-                    <p>{{ 'TalentsTranslate.featuredPhotosAndVideos' | translate}}</p>
+                    <h2>{{ 'highlights' | translate}}</h2>
+                    <p>{{ 'featuredPhotosAndVideos' | translate}}</p>
                   </div>
                 </div>
                 <div class="unlock-view">
@@ -358,7 +358,7 @@
                     </clipPath>
                     </defs>
                     </svg>
-                    {{ 'TalentsTranslate.upgradeToUnlock' | translate}}
+                    {{ 'upgradeToUnlock' | translate}}
                   </button>
               </div>
               </div>
@@ -369,15 +369,15 @@
               <!-- Add a loader in your template -->
               <div *ngIf="loading" class="loader-container py-5">
                 <div class="loader"></div>
-                <p>{{'TalentsTranslate.loading' | translate}}</p>
+                <p>{{'loading' | translate}}</p>
               </div>
 
               <!-- The rest of your content goes here -->
               <div *ngIf="!loading" class="">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="Feature_images">
-                    <h2>{{'TalentsTranslate.highlights' | translate}}</h2>
-                    <p>{{'TalentsTranslate.featuredPhotosAndVideos' | translate}}</p>
+                    <h2>{{'highlights' | translate}}</h2>
+                    <p>{{'featuredPhotosAndVideos' | translate}}</p>
                   </div>
                   <div class="settings cursor-pointer" (click)="openHighlight()">
 
@@ -433,7 +433,7 @@
                       <path
                         d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z" />
                     </svg>
-                    <span>{{'TalentsTranslate.uploadYourCoverPhoto' | translate}}</span>
+                    <span>{{'uploadYourCoverPhoto' | translate}}</span>
                   </label>
                 </div>
                 <input id="file-upload" (change)="onCoverFileChange($event)" accept="image/*" type="file" class="d-none" />
@@ -543,11 +543,11 @@
               </ul>
             </div>
             <div class="general_details mt-4 p-4 bg-color ">
-              <scout-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></scout-profile-tab>
-              <scout-app-history-tab *ngIf="activeTab == 'company_history'" role="Scout"></scout-app-history-tab>
+              <scout-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" [isPremium]="isPremium"></scout-profile-tab>
+              <scout-app-history-tab *ngIf="activeTab == 'company_history'" role="Scout" ></scout-app-history-tab>
               <scout-portfolio-tab *ngIf="activeTab == 'portfolio'" role="Scout"></scout-portfolio-tab>
               <scout-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage"
-                (dataEmitter)="handleCoverImageData($event)"></scout-gallery-tab>
+                (dataEmitter)="handleCoverImageData($event)" [isPremium]="isPremium"></scout-gallery-tab>
             </div>
           </div>
         </div>

@@ -4,6 +4,9 @@ import { EditGeneralDetailsComponent } from '../../edit-general-details/edit-gen
 import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
 import { TalentService } from '../../../../services/talent.service';
 import { ScoutService } from '../../../../services/scout.service';
+import { UserService } from '../../../../services/user.service';
+import { AddRepresentatorPopupComponent } from '../../add-representator-popup/add-representator-popup.component';
+import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 
 @Component({
   selector: 'scout-profile-tab',
@@ -17,18 +20,23 @@ export class ProfileTabComponent {
   position:any;
   mainPosition : any;
   otherPositions : any;
-
+  representators:any = [];
+  baseUrl : any;
   @Input() userData: any;
   @Input() isPremium: any;
+  userId:any = "";
+  idsToDelete:any = "";
 
-  constructor( public dialog: MatDialog,private scoutService: ScoutService) {
+  constructor( public dialog: MatDialog,private scoutService: ScoutService, private userService : UserService) {
     // If you want to load the user data from localStorage during initialization    
   }
 
   ngOnInit(): void {
     this.user = this.userData;
+
+    this.getRepresentators();
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['userData']) {
       // Update the user object with the latest userData
@@ -58,7 +66,18 @@ export class ProfileTabComponent {
     this.getMainPosition();
     this.getOtherPositions();
   }
- 
+
+
+  getRepresentators(){
+    this.scoutService.getRepresentators().subscribe((response)=>{
+      if (response && response.status && response.data) {
+        this.representators = response.data.representators;
+        this.baseUrl = response.data.uploads_path
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
 
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string
@@ -164,4 +183,121 @@ export class ProfileTabComponent {
       .map((pos : any) => pos.position_name)
       .join('/');
   }
+
+
+  addRepresentator(){
+    const dialog = this.dialog.open(AddRepresentatorPopupComponent,{
+      height: '400',
+      width: '400px',
+      data : {
+        action: 'add',
+        userId: this.userId
+      }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "added"){
+          this.getRepresentators();
+          this.showMatDialog("Invite sent successfully.",'display');
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  updateRepresentatorRole(event: Event, id:any) {
+    const target = event.target as HTMLSelectElement;
+    let newRole = target.value;
+
+    this.userService.updateRepresentatorRole(id, {site_role:newRole}).subscribe((response)=>{
+      if (response && response.status) {
+        this.showMatDialog("Role updated successfully.",'display');
+      } else {
+        console.error('Invalid API response structure:', response);
+      }
+    });
+  }
+
+  editRepresentator(representator:any){
+    const editDialog = this.dialog.open(AddRepresentatorPopupComponent,{
+      height: '400',
+      width: '400px',
+      data : {
+        action: 'edit',
+        userId: "",
+        representator: representator
+      }
+    });
+
+    editDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "updated"){
+          this.getRepresentators();
+          this.showMatDialog("Representator updated successfully.",'display');
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+  confirmSingleDeletion(id:any){
+    this.idsToDelete = id;
+    this.showMatDialog("", "delete-representator-confirmation");
+  }
+
+  deleteRepresentator():any {
+
+    this.userService.deleteRepresentator(this.idsToDelete).subscribe(
+      response => {
+        if(response.status){
+          this.getRepresentators();
+          this.showMatDialog('Representator removed successfully!.', 'display');
+        }else{
+          this.showMatDialog('Error in removing Representator. Please try again.', 'display');
+        }
+      },
+      error => {
+        console.error('Error deleting user:', error);
+
+      }
+    );
+  }
+
+  showMatDialog(message:string, action:string){
+    const messageDialog = this.dialog.open(MessagePopupComponent,{
+      width: '500px',
+      position: {
+        top:'150px'
+      },
+      data: {
+        message: message,
+        action: action
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        if(result.action == "delete-confirmed"){
+          this.deleteRepresentator();
+        }
+      //  console.log('Dialog result:', result);
+      }
+    });
+  }
+
+
+  getMetaValue(stringifyData:any, key:any):any{
+    if(stringifyData){
+      stringifyData = JSON.parse(stringifyData);
+      if(stringifyData[key]){
+        return stringifyData[key];
+      }else{
+        return "NA";
+      }
+    }else{
+      return "NA";
+    }
+  }
+
 }

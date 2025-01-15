@@ -126,11 +126,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       // Ensure userNationalities is parsed correctly as an array of IDs only
       this.userNationalities = JSON.parse(this.user.user_nationalities || '[]');
       this.nationality = Array.isArray(this.userNationalities) ? this.userNationalities.map(item =>
-<<<<<<< HEAD
-           String(item.country_id)
-=======
         String(item.country_id)
->>>>>>> f672bae076ce0b96ab78dcc52f9960eb249133bb
       ) : [];
 
       this.birthCountry = this.user.meta.birth_country || '3';

@@ -34,6 +34,10 @@ export class ScoutService {
   languages:any = environment.langs;
   private apiUrl3 = "https://alerts.socceryou.ch/";
 
+  private apiUrl2: any;
+  private stripe!: any;
+  private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
+
   constructor(private http: HttpClient) {
 
       // Retrieve the selected language code from localStorage
@@ -47,15 +51,12 @@ export class ScoutService {
       // Default to a specific language ID if none is found (e.g., English)
       this.lang = lang ? lang.id : 1;
 
-    this.apiUrl = environment.apiUrl;
+    this.apiUrl = this.apiUrl2 = environment.apiUrl;
     this.userToken = localStorage.getItem('authToken');
     this.domain = environment.targetDomain.id;
     console.log(this.domain);
   }
 
-  private apiUrl2 = 'https://api.socceryou.ch/api/';
-  private stripe!: any;
-  private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
 
   async getStripe() {
     return await this.stripePromise;
@@ -75,6 +76,7 @@ export class ScoutService {
     });
   }
 
+
   // Call the backend to create a customer
   createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
     // Replace with your CodeIgniter backend API URL
@@ -88,6 +90,17 @@ export class ScoutService {
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}scout/get-company-history`, {headers}
+    );
+  }
+
+
+  getRepresentators(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}scout/get-representators`, {headers}
     );
   }
 
