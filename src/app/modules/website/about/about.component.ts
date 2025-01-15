@@ -28,6 +28,9 @@ export class AboutComponent {
   about_banner_bg_img:string='';
   about_banner_img:string='';
   country_section_banner_img:string='';
+  advertisemnetData:any=null;
+  advertisemnet_base_url:string= '';
+
 
   constructor(
     private webPages: WebPages,
@@ -54,15 +57,52 @@ export class AboutComponent {
           this.about_banner_img =  res.data.base_url+res.data.pageData.country_section_banner_img;
           this.country_section_banner_img=  res.data.base_url+res.data.pageData.country_section_banner_img;
          
+          this.advertisemnetData = res.data.advertisemnetData;
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
+        
         }
     });
   }
  
 
-  closeAd(index: number) {
-    this.adVisible[index] = false; // Hide the ad
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
 
+  isEmptyObject(obj:any) {
+    if(typeof obj != 'undefined'){
+      return (obj && (Object.keys(obj).length === 0));
+    }
+    return true;
+  }
   openModal(modalId: string) {
     console.log(`Open modal: ${modalId}`);
     // Implement modal opening logic here
