@@ -1,7 +1,15 @@
 {
+  "privacyPolicy": "Privatlivspolitik",
+  "terms&Conditions": "Terms and Conditions",
+  "cookies": "Cookies",
+
+  "createProfile": "Opret profil",
+  "club&scout": "Klubber og spejdere",
   "premium": "Premium",
+  "getStartedNow": "Kom i gang nu",
   "boostProfileActive": "Boost-profil aktiv",
   "eltonPrince": "Elton Prince",
+  "signup": "Tilmeld dig",
   "edit": "Redigere",
   "currentClub": "Nuværende klub",
   "nationality": "Nationalitet",

@@ -1,5 +1,5 @@
 <div class="card rounded-end rounded-0 overflow-hidden webpage-card" style="padding: 0px 0px 15px 0px">
-  <div class="card-header">
+  <div class="card-header p-3">
     <div class="d-flex align-items-center justify-content-between website-header-bar">
       <div class="d-flex align-items-center heading w-100 website-create-btn">
         <h2 class="card-title mb-0 me-3 ms-3">{{'webpages' | translate}}</h2>
@@ -43,13 +43,9 @@
                 fill="#646464" />
             </svg>
           </button>
-          <!-- <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul> -->
+          
         </div>
-        <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('published')">
+        <button class="btn btn-outline-white" (click)="getPublishOrDraftFilterData('Published')">
           <svg id="users-icon" width="24" height="24" viewBox="0 0 24 25" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -81,7 +77,7 @@
               font-size: 14px;
               font-weight: 500;
             ">
-          {{allPages.length}} {{(allPages.length > 1) ? "Items" : 'Item'}}
+          {{allPages.length}} {{ allPages.length > 1 ? ('items' | translate) : ('item' | translate) }}
         </div>
 
       </div>
@@ -408,7 +404,8 @@
           <td>{{page?.created_at}}</td>
           <td>{{page?.updated_at}}</td>
           <td>
-            <span [ngClass]="getStatusClass(page?.status)">{{page?.status}}</span>
+            <span [ngClass]="getStatusClass(page?.status)" *ngIf="page?.status == 'published'">{{ 'published' | translate }}</span>
+            <span [ngClass]="getStatusClass(page?.status)" *ngIf="page?.status == 'draft'">{{ 'draft' | translate }}</span>
           </td>
           <!-- <td class="c_pointer text-center view" >
                   <svg id="users-icon"

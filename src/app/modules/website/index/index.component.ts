@@ -289,7 +289,7 @@ export class IndexComponent {
 
           this.sliderDetail = sliderData;
           this.advertisemnetData = res.data.advertisemnetData;
-
+          console.log('advertisemnetData',this.advertisemnetData);
           this.imageBaseUrl = res.data.base_url;
           this.advertisemnet_base_url = res.data.advertisemnet_base_url;
         }

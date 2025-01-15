@@ -30,4 +30,9 @@ export class IndexComponent implements OnInit{
     this.path = this.router.url;
   }
 
+  get isDashboard() {
+    // Return true if the current route is '/admin/dashboard', else false
+    return this.path !== '/admin/dashboard';
+  }
+
 }

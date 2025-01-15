@@ -1,5 +1,12 @@
 {
+  "privacyPolicy": "Integritetspolicy",
+  "terms&Conditions": "Terms and Conditions",
+  "cookies": "Cookies",
+
+  "createProfile": "Skapa profil",
+  "signup": "Registrera dig",
   "premium": "Premium",
+  "club&scout": "Klubbar och scouter",
   "boostProfileActive": "Boost Profile aktiv",
   "eltonPrince": "Elton Prince",
   "edit": "Redigera",
@@ -7,6 +14,7 @@
   "nationality": "Nationalitet",
   "dateOfBirth": "Födelsedag",
   "placeOfBirth": "Födelseort",
+  "getStartedNow": "Kom igång nu",
   "height": "Storlek",
   "weight": "Vikt",
   "contract": "Kontrakt",

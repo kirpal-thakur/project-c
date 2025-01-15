@@ -1,7 +1,7 @@
 <section class="website-code">
     <div class="main">
-        <app-header></app-header>
-        <div class="banner py-0">
+        <!-- <app-header></app-header> -->
+        <div class="banner py-0" style="background-image: url('{{baseUrl + pageData?.banner_bg_img}}');">
             <div class="overlay1"></div>
             <div class="container">
                 <div class="banner-data1">
@@ -272,18 +272,18 @@
                         </div>
                     </div>
 
-                    <div *ngIf="adVisible[0]" class="skyscraper-image">
-                        <img src="./assets/images/skyscraper - 120x600.png">
-                        <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+                        <img src="{{ advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image }}">
+                        <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="advertisment" [ngClass]="{'hidden': !adVisible[1]}">
-            <div *ngIf="adVisible[1]" class="leaderboard-image">
-                <img src="./assets/images/leaderboard - 728x90.png">
-                <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
+            <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+                <img [src]="advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image">
+                <button (click)="closeAd('leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
@@ -295,21 +295,21 @@
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group1.svg">
                             <img class="dark-images" src="./assets/images/dark-group1.svg">
-                            <p class="club-text1">{{pageData?.club_nd_scout_section['first_tab'].txt}}</p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section?.first_tab?.txt}}</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group2.svg">
                             <img class="dark-images" src="./assets/images/dark-group2.svg">
-                            <p class="club-text1">{{pageData?.club_nd_scout_section['sec_tab'].txt}}</p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section?.sec_tab?.txt}}</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="club_text">
                             <img class="light-images" src="./assets/images/club-group3.svg">
                             <img class="dark-images" src="./assets/images/dark-group3.svg">
-                            <p class="club-text1">{{pageData?.club_nd_scout_section['third_tab'].txt}}</p>
+                            <p class="club-text1">{{pageData?.club_nd_scout_section?.third_tab?.txt}}</p>
                         </div>
                     </div>
                 </div>
@@ -752,16 +752,18 @@
         </div>
         <!-- mobile-features -->
 
-        <div class="advertisement" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]}">
+        <div class="advertisement" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.small_square)}">
             <div class="container">
                 <div class="adv">
-                    <div *ngIf="adVisible[2]" class="small-sqaure-image">
-                        <img src="./assets/images/small sqaure - 200x200.png" alt="small sqaure">
-                        <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+                        <img [src]="advertisemnet_base_url + advertisemnetData?.small_square?.featured_image">
+                        <button (click)="closeAd('small_square')" class="ad-close-button"><i
+                                class="fa-solid fa-xmark"></i></button>
                     </div>
-                    <div *ngIf="adVisible[3]" class="banner-image">
-                        <img src="./assets/images/banner - 468x60.png">
-                        <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                    <div *ngIf="!isEmptyObject(advertisemnetData?.banner_image)" class="banner-image">
+                        <img [src]="advertisemnet_base_url + advertisemnetData?.banner_image?.featured_image">
+                        <button (click)="closeAd('banner_image')" class="ad-close-button"><i
+                                class="fa-solid fa-xmark"></i></button>
                     </div>
                 </div>
             </div>
@@ -820,27 +822,37 @@
 
         <div>
             <div class="container">
-                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[4] && !adVisible[5]  && !adVisible[6]}">
-                    <div *ngIf="adVisible[4]" class="large-rectangle">
-                        <img src="./assets/images/large rectangle - 336x280 .png">
-                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+                <div class="advertisement1"  [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.large_rectangle) && isEmptyObject(advertisemnetData?.inline_rectangle) && isEmptyObject(advertisemnetData?.square)}">
+                     <!-- Large Rectangle Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.large_rectangle)" class="large-rectangle">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.large_rectangle?.featured_image"
+                        alt="Large Rectangle Ad">
+                    <button (click)="closeAd('large_rectangle')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
 
-                    </div>
+                <!-- Inline Rectangle Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.inline_rectangle)" class="inline-rectangle">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.inline_rectangle?.featured_image"
+                        alt="Inline Rectangle Ad">
+                    <button (click)="closeAd('inline_rectangle')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
 
-                    <div *ngIf="adVisible[5]" class="inline-rectangle">
-                        <img src="./assets/images/inline rectangle - 300x250.png">
-                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-
-                    <div *ngIf="adVisible[6]" class="square">
-                        <img src="./assets/images/sqaure - 250x250.png">
-                        <button (click)="closeAd(6)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
+                <!-- Square Ad -->
+                <div *ngIf="!isEmptyObject(advertisemnetData?.square)" class="square">
+                    <img [src]="advertisemnet_base_url + advertisemnetData?.square?.featured_image" alt="Square Ad">
+                    <button (click)="closeAd('square')" class="ad-close-button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
                 </div>
 
             </div>
         </div>
 
-        <app-footer></app-footer>
+        <!-- <app-footer></app-footer> -->
     </div>
 </section>

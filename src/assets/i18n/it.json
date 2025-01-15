@@ -1,5 +1,11 @@
 {
+  "privacyPolicy": "Politica sulla privacy",
+  "terms&Conditions": "Termini e condizioni",
+  "cookies": "Cookies",
+
+
   "premium": "Premium",
+  "club&scout": "Club e scout",
   "boostProfileActive": "Profilo Boost attivo",
   "eltonPrince": "Elton Prince",
   "edit": "Modifica",
@@ -260,8 +266,8 @@
   "attractAttention": "Attirate l'attenzione di scout e club di altri Paesi con il vostro profilo.",
   "growNetwork": "Espandere la propria rete globale.",
 
-
-
+  "signup": "Registrati",
+  "createProfile": "Crea profilo",
 
 
 
@@ -302,6 +308,7 @@
   "imprint": "Impronta",
   "privacy": "Privacy",
   "terms": "Termini",
+  "getStartedNow": "Inizia ora",
   "cookiePolicy": "Politica sui cookie",
   "copyright": "© 2024 SoccerYou Group, Tutti i diritti riservati.",
   "welcomeBack": "Benvenuto di nuovo – SoccerYou ti aspetta!",

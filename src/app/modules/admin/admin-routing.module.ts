@@ -14,6 +14,8 @@ import { GalleryTabComponent } from './tabs/gallery-tab/gallery-tab.component';
 import { ScoutDetailComponent } from './scout-detail/scout-detail.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
 import { PrivacyComponent } from '../website/privacy/privacy.component';
+import { FaqComponent } from '../website/faq/faq.component';
+import { TermsComponent } from '../website/terms/terms.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,9 @@ const routes: Routes = [
       { path: 'gallery-detail', component: GalleryTabComponent },
       { path: 'scout/:id', component: ScoutDetailComponent },
       { path: 'club/:id', component: ClubDetailComponent },
-      { path: 'privacy', component: PrivacyComponent }
+      { path: 'privacy', component: PrivacyComponent },
+      { path: 'faq', component: FaqComponent },
+      { path: 'terms', component: TermsComponent },
     ]
   }
 
