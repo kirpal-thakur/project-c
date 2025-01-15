@@ -142,42 +142,6 @@ export class EditPersonalDetailsComponent implements OnInit {
     // this.initGooglePlacesAutocomplete();
   }
 
-  // initGooglePlacesAutocomplete(): void {
-
-  //   if (this.placeOfBirthInput) {
-  //     const autocomplete = new google.maps.places.Autocomplete(this.placeOfBirthInput.nativeElement, {
-  //       types: ['(cities)'],
-  //     });
-
-  //     autocomplete.addListener('place_changed', () => {
-  //       const place = autocomplete.getPlace();
-  //       if (place && place.address_components) {
-  //         this.placeOfBirth = place.formatted_address || '';
-  //       }
-  //     });
-  //   }
-
-  // }
-  
-  // ngAfterViewInit(): void {
-  //   this.setupPlaceAutocomplete();
-  // }
-
-  // setupPlaceAutocomplete() {
-  //   fromEvent(this.placeOfBirthInput.nativeElement, 'input')
-  //     .pipe(
-  //       debounceTime(300),          // Wait for 300ms pause in events
-  //       distinctUntilChanged(),      // Only emit if the value has changed
-  //       switchMap((event: any) => {
-  //         const input = event.target.value;
-  //         return this.authService.getPlacePredictions(input);
-  //       })
-  //     )
-  //     .subscribe((response: any) => {
-  //       this.placeSuggestions = response.predictions || [];
-  //     });
-  // }
-
   onSelectSuggestion(place: any): void {
     this.placeOfBirthInput.nativeElement.value = place.description;
     this.placeSuggestions = [];  // Clear suggestions

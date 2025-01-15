@@ -57,6 +57,19 @@ import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
+import { LightboxDialogComponent } from './lightbox-dialog/lightbox-dialog.component';
+import { LoaderComponent } from './loader/loader.component';
+import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdateCountryPlanComponent } from './update-country-plan/update-country-plan.component';
+import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
+import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
+import { LightboxModule } from 'ngx-lightbox';
+import { GuidedTourModule } from 'ngx-guided-tour';
+import { SharedModule } from '../shared/shared.module';
+import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
+import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -98,7 +111,16 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AddPerfomanceReportComponent,
     AddCardComponent,   
     PerformanceAnalysisTabComponent,
-    // ResetPasswordComponent,
+    AddCountryComponent,
+    LightboxDialogComponent,
+    LoaderComponent,
+    AddBoosterComponent,
+    ResetPasswordComponent,
+    UpdateCountryPlanComponent,
+    CancelCountryPlanComponent,
+    UpdateConfirmationPlanComponent,
+    HistoryTabComponent,
+    PortfolioTabComponent
   ],
   imports: [
     CommonModule,
@@ -123,7 +145,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatToolbarModule,
     MatTableModule,
     NgxEditorModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    LightboxModule,
+    GuidedTourModule,
+    SharedModule
     // NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })

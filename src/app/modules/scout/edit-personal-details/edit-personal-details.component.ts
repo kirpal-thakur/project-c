@@ -1,7 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
-import { NgForm } from '@angular/forms';
+import { FormControl, NgForm } from '@angular/forms';
+import { ScoutService } from '../../../services/scout.service';
+
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
+import { ToastrService } from 'ngx-toastr';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-edit-personal-details',
@@ -9,6 +16,33 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-personal-details.component.scss'],
 })
 export class EditPersonalDetailsComponent implements OnInit {
+
+  clubName: string = '';
+  readonly date = new FormControl(moment());
+
+  formationDate: string = '';
+  city: string = '';
+  contactNumber: string = '';
+  website: string = '';
+  zipcode: string = '';
+  address: string = '';
+  social_facebook: string = '';
+  social_instagram: string = '';
+  social_tiktok: string = '';
+  social_vimeo: string = '';
+  social_x: string = ''; // assuming this is for Twitter (X)
+  social_youtube: string = '';
+
+  socialMediaPlatforms = [
+    { id: 'x', name: 'X (Twitter)', placeholder: 'x.com/' },
+    { id: 'facebook', name: 'Facebook', placeholder: 'facebook.com/' },
+    { id: 'instagram', name: 'Instagram', placeholder: 'instagram.com/' },
+    { id: 'tiktok', name: 'TikTok', placeholder: 'tiktok.com/' },
+    { id: 'youtube', name: 'YouTube', placeholder: 'youtube.com/' },
+    { id: 'vimeo', name: 'Vimeo', placeholder: 'vimeo.com/' },
+  ];
+
+  cities: string[] = ['City1', 'City2', 'City3']; // Example cities
   countries: any ;
   leagueLevels: string[] = ['Amateur', 'Professional', 'Semi-Pro'];
   teams: any[] = [];
@@ -35,7 +69,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -53,7 +87,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   loadTeams(): void {
-    this.talentService.getClubs().subscribe(
+    this.scoutService.getClubs().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.teams = response.data.clubs;
@@ -67,7 +101,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.scoutService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
@@ -81,7 +115,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   }
 
   getUserProfile(userId: any) {
-    this.talentService.getProfileData(userId).subscribe((response: any) => {
+    this.scoutService.getProfileData(userId).subscribe((response: any) => {
       if (response && response.status && response.data && response.data.user_data) {
         this.user = response.data.user_data;
 
@@ -111,6 +145,9 @@ export class EditPersonalDetailsComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     if (form.valid) {
+
+      console.log('Form Data:', form.value);
+      this.dialogRef.close(form.value);
       const formData = new FormData();
 
        // Append each field to FormData
@@ -130,7 +167,7 @@ export class EditPersonalDetailsComponent implements OnInit {
       formData.append('user[userNationalities]', this.nationality);
       formData.append('lang', 'en');
 
-      this.talentService.updateUserProfile(formData).subscribe(
+      this.scoutService.updateUserProfile(formData).subscribe(
         (response: any) => {
           console.log('Form submitted successfully:', response);
           this.dialogRef.close(response.data);
@@ -141,4 +178,6 @@ export class EditPersonalDetailsComponent implements OnInit {
       );
     }
   }
+
+
 }

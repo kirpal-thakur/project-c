@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TalentService } from '../../../services/talent.service';
 import { NgForm } from '@angular/forms';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'edit-general-details',
@@ -42,7 +42,7 @@ export class EditGeneralDetailsComponent {
   constructor(
     public dialogRef: MatDialogRef<EditGeneralDetailsComponent>,
     public dialog: MatDialog,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -91,7 +91,7 @@ export class EditGeneralDetailsComponent {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+    this.scoutService.getCountries().subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
@@ -105,7 +105,7 @@ export class EditGeneralDetailsComponent {
   }
 
   loadPositions(): void {
-    this.talentService.getPositions().subscribe(
+    this.scoutService.getPositions().subscribe(
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
@@ -154,7 +154,7 @@ export class EditGeneralDetailsComponent {
       
       formData.append('lang', 'en');
 
-      this.talentService.updateGeneralProfile(formData).subscribe(
+      this.scoutService.updateGeneralProfile(formData).subscribe(
         (response: any) => {
           console.log('Form submitted successfully:', response);
           this.dialogRef.close(response.data);

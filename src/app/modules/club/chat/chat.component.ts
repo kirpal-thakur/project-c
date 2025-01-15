@@ -5,7 +5,7 @@ import { TalkService } from '../../../services/talkjs.service';
 import { ChatPopupComponent } from './chat-popup/chat-popup.component';
 
 @Component({
-  selector: 'talent-chat',
+  selector: 'scout-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
@@ -46,7 +46,7 @@ export class ChatComponent  {
 
 
    // Start a one-on-one chat
-   startOneOnOneChat(user:any) {
+  startOneOnOneChat(user:any) {
     this.talkService.createOneOnOneConversation(user.id,user.name,user.email,user.photoUrl)
       .then(() => {
         this.talkService.mountChat('talkjs-container');
@@ -58,16 +58,16 @@ export class ChatComponent  {
 
 
   
-    // Start a group chat
-    startGroupChat() {
-      this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
-        .then(() => {
-          this.talkService.mountChat('talkjs-container');
-        })
-        .catch(err => {
-          console.error('Error starting group chat:', err);
-        });
-    }
+  // Start a group chat
+  startGroupChat() {
+    this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
+      .then(() => {
+        this.talkService.mountChat('talkjs-container');
+      })
+      .catch(err => {
+        console.error('Error starting group chat:', err);
+      });
+  }
 
   editinbox() {
     this.users = [];

@@ -8,7 +8,7 @@
               <tr class="explore-inputs">
                 <!-- Talent Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{ 'talent' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedRole" (selectionChange)="applyFilter()" id="roles" name="role">
@@ -20,7 +20,7 @@
 
                 <!-- Country Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{ 'country' | translate }}</mat-label>
                       <mat-select [(ngModel)]="selectedCountry" (selectionChange)="applyFilter()" id="country"
@@ -34,7 +34,7 @@
 
                 <!-- Position Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'position' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedPositions" (selectionChange)="applyFilter()" id="position"
@@ -48,7 +48,7 @@
 
                 <!-- Age Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'age' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedAge" (selectionChange)="applyFilter()" id="age" name="age"
@@ -61,7 +61,7 @@
 
                 <!-- Foot Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'foot' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedFoot" (selectionChange)="applyFilter()" id="foot" name="foot"
@@ -76,7 +76,7 @@
 
                 <!-- Top Speed Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'topSpeed' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedTopSpeed" (selectionChange)="applyFilter()" id="top-speed"
@@ -93,7 +93,7 @@
 
                 <!-- League Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'leagueLevel' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedLeague" (selectionChange)="applyFilter()" id="league"
@@ -107,7 +107,7 @@
 
                 <!-- Club Filter -->
                 <th>
-                  <div class="form-group">
+                  <div class="form-group explore-all_input">
                     <mat-form-field appearance="fill">
                       <mat-label>{{'club' | translate}}</mat-label>
                       <mat-select [(ngModel)]="selectedClub" (selectionChange)="applyFilter()" id="club" name="club">
@@ -265,7 +265,6 @@
                 <div class="player-team-logo">
                   <div class="team-logo-bg">
                   </div>
-                  <img src="{{player.meta.cover_image_path}}" alt="team-logo">
                 </div>
                 <div class="flag_box">
                   <img src="{{getNationality(player.user_nationalities)}}">

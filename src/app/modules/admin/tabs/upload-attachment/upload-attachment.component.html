@@ -1,5 +1,4 @@
 <div class="create-sight bg-0C3453">
-<<<<<<< HEAD
     <div class="p-3 d-flex align-items-center ">
   
       <h4 class="text-center title-text m-auto">{{ 'addAttachment' | translate}}</h4>
@@ -59,25 +58,6 @@
             </svg>
           </div>
           
-=======
-  <div class="p-3 d-flex align-items-center ">
-
-    <h4 class="text-center title-text m-auto">{{ 'addAttachment' | translate }}</h4>
-
-    <div class="close-img" (click)="close()">
-    </div>
-  </div>
-
-  <hr class="m-0">
-
-  <div class="overflow-card mt-3">
-
-    <div class="row mb-4" *ngFor="let row of attachmentRows; let i = index">
-      <div class="col-lg-12  gap-3 d-flex input-box">
-        <div class="document-input  col-lg-5">
-          <label for="document" class="code-text"> {{ 'documentTitle' | translate }}</label> <br>
-          <input type="text" id="document" class="cupen-btn  code-text w-100" (keyup)="titleUpdate($event, i)">
->>>>>>> main
         </div>
         <div class="city-input col-lg-5">
           <div class="choose-file-box d-flex align-items-center justify-content-between" *ngIf="row.file != ''">
@@ -124,19 +104,8 @@
 
       </div>
     </div>
-<<<<<<< HEAD
     <div class="dialog-actions align-items-center d-flex justify-content-between mt-5">
       <button type="button" class="cancel-btn" (click)="close()">{{'cancel' | translate}}</button>
       <button type="submit" class="create-btn" (click)="upload()">{{'upload' | translate}}</button>
     </div>
   </div>
-=======
-
-
-  </div>
-  <div class="dialog-actions align-items-center d-flex justify-content-between mt-5">
-    <button type="button" class="cancel-btn" (click)="close()">{{ 'cancel' | translate }}</button>
-    <button type="submit" class="create-btn" (click)="upload()">{{ 'upload' | translate }}</button>
-  </div>
-</div>
->>>>>>> main
