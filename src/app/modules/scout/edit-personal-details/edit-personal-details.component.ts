@@ -33,6 +33,13 @@ export class EditPersonalDetailsComponent implements OnInit {
   social_x: string = ''; // assuming this is for Twitter (X)
   social_youtube: string = '';
 
+  sm_x:any = "";
+  sm_facebook:any = "";
+  sm_instagram:any = "";
+  sm_tiktok:any = "";
+  sm_youtube:any = "";
+  sm_vimeo:any = "";
+
   socialMediaPlatforms = [
     { id: 'x', name: 'X (Twitter)', placeholder: 'x.com/' },
     { id: 'facebook', name: 'Facebook', placeholder: 'facebook.com/' },
@@ -66,7 +73,14 @@ export class EditPersonalDetailsComponent implements OnInit {
   firstName: string = '';
   lastName: string = '';
   nationality: string = '';
-  
+  company_name :any ;
+  contact_number :any ;
+  cover_image :any ;
+  cover_image_path :any ;
+  designation :any ;
+  profile_image :any ;
+  profile_image_path :any ;
+
   constructor(
     public dialogRef: MatDialogRef<EditPersonalDetailsComponent>,
     private scoutService: ScoutService,
@@ -121,21 +135,23 @@ export class EditPersonalDetailsComponent implements OnInit {
 
         // Update component properties with user data
         if (this.user.meta) {
-          this.dateOfBirth = this.user.meta.date_of_birth || '';
-          this.height = this.user.meta.height || 0;
-          this.heightUnit = this.user.meta.height_unit || 'cm';
-          this.weight = this.user.meta.weight || 0;
-          this.weightUnit = this.user.meta.weight_unit || 'kg';
-          this.contractStart = this.user.meta.contract_start || '';
-          this.contractEnd = this.user.meta.contract_end || '';
-          this.leagueLevel = this.user.meta.league_level || '';
-          this.placeOfBirth = this.user.meta.place_of_birth || '';
-          this.dominantFoot = this.user.meta.foot || 'Right';
-          this.currentClub = this.user.current_club || '';
-          this.firstName = this.user.first_name || '';
-          this.lastName = this.user.last_name || '';
-          this.userNationalities = JSON.parse(this.user.user_nationalities);
-          this.nationality = this.userNationalities[0];
+          this.address = this.user.meta.address;
+          this.city = this.user.meta.city;
+          this.company_name = this.user.meta.company_name;
+          this.contact_number = this.user.meta.contact_number;
+          this.cover_image = this.user.meta.cover_image;
+          this.cover_image_path = this.user.meta.cover_image_path;
+          this.designation = this.user.meta.designation;
+          this.profile_image = this.user.meta.profile_image;
+          this.profile_image_path = this.user.meta.profile_image_path;
+          this.sm_facebook = this.user.meta.sm_facebook;
+          this.sm_instagram = this.user.meta.sm_instagram;
+          this.sm_tiktok = this.user.meta.sm_tiktok;
+          this.sm_vimeo = this.user.meta.sm_vimeo;
+          this.sm_x = this.user.meta.sm_x;
+          this.sm_youtube = this.user.meta.sm_youtube;
+          this.website = this.user.meta.website;
+          this.zipcode = this.user.meta.zipcode;
         }
       } else {
         console.error('Invalid API response structure:', response);
@@ -150,22 +166,23 @@ export class EditPersonalDetailsComponent implements OnInit {
       this.dialogRef.close(form.value);
       const formData = new FormData();
 
-       // Append each field to FormData
-      formData.append('user[current_club]', this.currentClub);
-      formData.append('user[date_of_birth]', this.dateOfBirth);
-      formData.append('user[place_of_birth]', this.placeOfBirth);
-      formData.append('user[height]', this.height.toString());
-      formData.append('user[height_unit]', this.heightUnit);
-      formData.append('user[weight]', this.weight.toString());
-      formData.append('user[weight_unit]', this.weightUnit);
-      formData.append('user[contract_start]', this.contractStart);
-      formData.append('user[contract_end]', this.contractEnd);
-      formData.append('user[league_level]', this.leagueLevel);
-      formData.append('user[foot]', this.dominantFoot);
-      formData.append('user[first_name]', this.firstName);
-      formData.append('user[last_name]', this.lastName);
-      formData.append('user[userNationalities]', this.nationality);
-      formData.append('lang', 'en');
+      formData.append('user[address]' , this.address);
+      formData.append('user[city]' , this.city);
+      formData.append('user[company_name]' , this.company_name);
+      formData.append('user[contact_number]' , this.contact_number);
+      formData.append('user[cover_image]' , this.cover_image);
+      formData.append('user[cover_image_path]' , this.cover_image_path);
+      formData.append('user[designation]' , this.designation);
+      formData.append('user[profile_image]' , this.profile_image);
+      formData.append('user[profile_image_path]' , this.profile_image_path);
+      formData.append('user[sm_facebook]' , this.sm_facebook);
+      formData.append('user[sm_instagram]' , this.sm_instagram);
+      formData.append('user[sm_tiktok]' , this.sm_tiktok);
+      formData.append('user[sm_vimeo]' , this.sm_vimeo);
+      formData.append('user[sm_x]' , this.sm_x);
+      formData.append('user[sm_youtube]' , this.sm_youtube);
+      formData.append('user[website]' , this.website);
+      formData.append('user[zipcode]' , this.zipcode);
 
       this.scoutService.updateUserProfile(formData).subscribe(
         (response: any) => {

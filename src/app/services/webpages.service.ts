@@ -11,7 +11,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class WebPages {
 
     private apiUrl = environment?.apiUrl;
-    private frontendApiUrl = this.apiUrl + 'frontend/';
+    private url = environment?.url;
+    private frontendApiUrl = this.url + 'frontend/';
     private langId =  localStorage.getItem('lang_id') || '1';
     private languageId = new BehaviorSubject<string>(this.langId); // Initial value
     languageId$ = this.languageId.asObservable(); // Expose as observable
@@ -74,7 +75,7 @@ export class WebPages {
     addTalentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-talentpage`, params);
     }
-    
+
     addPricingPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-pricingpage`, params);
     }

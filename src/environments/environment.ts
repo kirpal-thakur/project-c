@@ -47,6 +47,7 @@ export const environment = {
       'home','talent','clubs_and_scouts','about_us','pricing','news','contact','imprint','privacy_policy','terms_and_conditions','cookie_policy','faq','content_page'
     ],
     apiUrl:'https://apitest.socceryou.ch/api/',
+    url:'https://apitest.socceryou.ch/',
     socketUrl:'https://alerts.socceryou.ch/',
     mailchimp: {
       apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',
