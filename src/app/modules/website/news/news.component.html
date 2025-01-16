@@ -6,20 +6,19 @@
         <div class="banner-inner py_0">
           <div class="container">
             <div class="about">
-              <h2 class="cookie-text">Your Guide to</h2>
-              <h2 class="cookie-text">SoccerYou</h2>
+              <h2 class="cookie-text">{{banner_title}}</h2>
             </div>
           </div>
         </div>
   
-        <div *ngIf="adVisible[0]" class="skyscraper-left">
-          <img src="./assets/images/skyscraper - 120x600.png">
-          <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-left">
+          <img [src]="advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image">
+          <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
   
-        <div *ngIf="adVisible[1]" class="skyscraper-right">
-          <img src="./assets/images/skyscraper - 120x600.png">
-          <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper_large)" class="skyscraper-right">
+          <img [src]="advertisemnet_base_url + advertisemnetData?.skyscraper_large?.featured_image" >
+          <button (click)="closeAd('skyscraper_large')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
   
@@ -73,18 +72,18 @@
             </div>
           </div>
   
-          <div class="advertisement1" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3] && !adVisible[4]}">
-            <div *ngIf="adVisible[2]" class="large-rectangle">
-              <img src="./assets/images/large rectangle - 336x280 .png">
-              <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          <div class="advertisement1">
+            <div *ngIf="!isEmptyObject(advertisemnetData?.large_rectangel)" class="large-rectangle">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.large_rectangel?.featured_image">
+              <button (click)="closeAd('large_rectangel')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div *ngIf="adVisible[3]" class="inline-rectangle">
-              <img src="./assets/images/inline rectangle - 300x250.png">
-              <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            <div  *ngIf="!isEmptyObject(advertisemnetData?.inline_rectangel)" class="inline-rectangle">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.inline_rectangel?.featured_image">
+              <button (click)="closeAd('inline_rectangel')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div *ngIf="adVisible[4]" class="square">
-              <img src="./assets/images/sqaure - 250x250.png">
-              <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            <div *ngIf="!isEmptyObject(advertisemnetData?.square)" class="square">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.square?.featured_image">
+              <button (click)="closeAd('square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
         </div>

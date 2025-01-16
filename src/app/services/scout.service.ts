@@ -93,6 +93,25 @@ export class ScoutService {
     );
   }
 
+  getScoutPlayers(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}scout/get-scout-players`, {headers}
+    );
+  }
+
+  deleteScoutPlayer(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}scout/delete-scout-player/${id}`, {headers}
+    );
+  }
 
   getRepresentators(): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -495,11 +514,6 @@ export class ScoutService {
 
     return this.http.post<any>(`${this.apiUrl}user/upload-cover-image/`, formdata, { headers });
   }
-
-  // getFavoritesData(userId:any, params:any): Observable<any> {
-  //   return this.http.get<{ status: boolean, message: string, data: { } }>(
-  //     `${this.apiUrl}get-favorites`    );
-  // }
 
   getAllUses(): Observable<any> {
     const headers = this.headers();
