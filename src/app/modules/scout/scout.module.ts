@@ -63,6 +63,7 @@ import { UpdateConfirmationPlanComponent } from './membership/update-confirmatio
 import { AddCountryComponent } from './countries/add-country/add-country.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
+import { InviteScoutTalentPopupComponent } from './invite-scout-talent-popup/invite-scout-talent-popup.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -106,7 +107,8 @@ import { AddRepresentatorPopupComponent } from './add-representator-popup/add-re
     AddCountryComponent,
     ResetPasswordComponent,
     FooterComponent,
-    AddRepresentatorPopupComponent
+    AddRepresentatorPopupComponent,
+    InviteScoutTalentPopupComponent
   ],
   imports: [
     CommonModule,
