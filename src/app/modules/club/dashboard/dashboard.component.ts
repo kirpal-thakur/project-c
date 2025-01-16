@@ -20,6 +20,7 @@ import { ScoutService } from '../../../services/scout.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
+
 export class DashboardComponent implements OnInit , OnDestroy {
   lightboxIsOpen: boolean = false; // Track the state of the lightbox
   mainImage: { src: string } = { src: '' }; // Current main image source
@@ -53,7 +54,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
   booster : any = false;
   activeDomains : any;
   countries :  any;
-  isPremium: any = false;
+  isPremium: any = true;
   StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
   private routeSubscription: Subscription | null = null; // Initialize with null
@@ -80,12 +81,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     await this.getAllTeams();
 
-    // Listen for route changes
-    // this.routeSubscription = this.router.events.subscribe((event) => {
-    //   if (event instanceof NavigationEnd) {
-    //     this.stopIntroTour(); // Stop the tour on navigation
-    //   }
-    // });
   }
 
   ngAfterViewInit() {
@@ -260,7 +255,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
           //   }, 2500);
           // }
 
-          this.isPremium = this.user?.active_subscriptions?.premium.length > 0 ? true : false;
+          this.isPremium = this.user?.active_subscriptions?.premium.length > 0 ? true : true;
           this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
           this.activeDomains = this.user.active_subscriptions?.country?.length > 0 ? true : false;
@@ -637,7 +632,5 @@ export class DashboardComponent implements OnInit , OnDestroy {
     this.coverImage = data; // Assign the received data to a variable
     console.log('Data received from child:', data);
   }
-
-
 
 }

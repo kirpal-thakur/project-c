@@ -70,6 +70,7 @@ import { GuidedTourModule } from 'ngx-guided-tour';
 import { SharedModule } from '../shared/shared.module';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
+import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -120,7 +121,8 @@ import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.compon
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
     HistoryTabComponent,
-    PortfolioTabComponent
+    PortfolioTabComponent,
+    AddRepresentatorPopupComponent
   ],
   imports: [
     CommonModule,

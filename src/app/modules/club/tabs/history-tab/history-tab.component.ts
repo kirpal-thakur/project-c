@@ -2,9 +2,10 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ScoutService } from '../../../../services/scout.service';
+import { ClubService } from '../../../../services/club.service';
 
 @Component({
-  selector: 'scout-app-history-tab',
+  selector: 'club-history-tab',
   templateUrl: './history-tab.component.html',
   styleUrl: './history-tab.component.scss'
 })
@@ -15,19 +16,19 @@ export class HistoryTabComponent {
   isEditable: boolean = false;
   @Input() role: any;
   @ViewChild('historyTextarea', { static: false }) textarea!: ElementRef;
-  
-  constructor(private route: ActivatedRoute, private scoutService: ScoutService){
+
+  constructor(private route: ActivatedRoute, private scoutService: ClubService){
 
   }
 
   ngOnInit(): void { 
-    this.getScoutHistory();
+    this.getClubHistory();
   }
 
-  getScoutHistory(){
+  getClubHistory(){
     this.isLoading = true;
     try {
-      this.scoutService.getScoutHistory().subscribe((response)=>{
+      this.scoutService.getClubHistory().subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = response.data.company_history.meta_value; 
           this.isLoading = false;
@@ -60,7 +61,7 @@ export class HistoryTabComponent {
 
     try {
       this.isLoading = true;
-      this.scoutService.updateScoutHistory(history).subscribe((response)=>{
+      this.scoutService.updateClubHistory(history).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.history = history; 
           this.isEditable = false;

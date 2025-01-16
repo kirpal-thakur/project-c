@@ -83,28 +83,38 @@ export class ClubService {
     });
   }
 
+  getRepresentators(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-representators`, {headers}
+    );
+  }
+
   // Call the backend to create a customer
   createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
     // Replace with your CodeIgniter backend API URL
     return this.http.post('http://your-backend-url/create-customer', { email, name, paymentMethodId });
   }
 
-  getScoutHistory(): Observable<any> {
+  getClubHistory(): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}club/get-company-history`, {headers}
+      `${this.apiUrl2}club/get-club-history`, {headers}
     );
   }
 
-  updateScoutHistory(history:any): Observable<any> {
+  updateClubHistory(history:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}club/add-company-history`, {company_history: history}, { headers });
+    return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {company_history: history}, { headers });
   }
 
 

@@ -4,6 +4,7 @@
       <div class="card-body py-0">
         <div class="row">
 
+
           <div class="col-lg-3 border-end p-0 card_box-1">
 
             <div class="user-details-left col-lg-12">
@@ -33,11 +34,11 @@
                       <path
                         d="M464 0H112c-4 0-7.8 2-10 5.4L2 152.6c-2.9 4.4-2.6 10.2 .7 14.2l276 340.8c4.8 5.9 13.8 5.9 18.6 0l276-340.8c3.3-4.1 3.6-9.8 .7-14.2L474.1 5.4C471.8 2 468.1 0 464 0zm-19.3 48l63.3 96h-68.4l-51.7-96h56.8zm-202.1 0h90.7l51.7 96H191l51.6-96zm-111.3 0h56.8l-51.7 96H68l63.3-96zm-43 144h51.4L208 352 88.3 192zm102.9 0h193.6L288 435.3 191.2 192zM368 352l68.2-160h51.4L368 352z" />
                     </svg>
-                    <span>{{'TalentsTranslate.premium' | translate}}</span>
+                    <span>{{'premium' | translate}}</span>
                   </div>
                   <div class="boost_profile d-flex align-items-center" *ngIf="booster">
-                    <span>{{'TalentsTranslate.boostProfile' | translate}}</span>
-                    <span class="active_btn">{{'TalentsTranslate.active' | translate}}</span>
+                    <span>{{'boostProfile' | translate}}</span>
+                    <span class="active_btn">{{'active' | translate}}</span>
                     <a href="scout/plans" class="cursor-pointer" >
                       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -72,7 +73,7 @@
                               d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z"
                               fill="#787878" />
                           </svg>
-                          <span>{{'TalentsTranslate.edit' | translate}}</span>
+                          <span>{{'edit' | translate}}</span>
                         </div>
                       </button>
                     </div>
@@ -88,13 +89,13 @@
                             class="fc-club-img" alt="">
                         </div>
                         <div class="team-badge_content col-lg-9 p-0">
-                          <h6 class="title_2 mb-1">{{ 'TalentsTranslate.currentClub' | translate}}</h6>
-                          <h5 class="title-1">{{user?.pre_current_club_name |translate }} </h5>
+                          <h6 class="title_2 mb-1">{{ 'Club Name' | translate}}</h6>
+                          <h5 class="title-1">{{user?.meta?.club_name |translate }} </h5>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-6 team-logos">
-                      <h6 class="title_2 mb-1">{{ 'TalentsTranslate.nationality' | translate }}</h6>
+                      <h6 class="title_2 mb-1">{{ 'country' | translate }}</h6>
                       <div class="d-flex align-items-center gap-2 mb-1 " *ngFor="let nation of userNationalities">
                         <div class="team-badge_image">
                           <img *ngIf="nation.flag_path" [src]="nation.flag_path" alt="">
@@ -116,8 +117,8 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.dateOfBirth' | translate}}</h6>
-                          <h5 class="title-1">{{user?.meta?.date_of_birth | date:'dd.MM.yyyy' }}</h5>
+                          <h6 class="title_2">{{ 'Since' | translate}}</h6>
+                          <h5 class="title-1">{{user?.meta?.since }}</h5>
                         </div>
                       </div>
                     </div>
@@ -127,8 +128,8 @@
                           <img [src]="countryFlagUrl" alt="" />
                         </div>
                         <div class=" col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2"> {{"TalentsTranslate.placeOfBirth" | translate }}</h6>
-                          <h5 class="title-1">{{user?.meta?.place_of_birth}}</h5>
+                          <h6 class="title_2"> {{"City" | translate }}</h6>
+                          <h5 class="title-1">{{user?.meta?.city}}</h5>
                         </div>
                       </div>
                     </div>
@@ -153,10 +154,9 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.height' | translate }}</h6>
-                          <h5 *ngIf="user.meta && user.meta.height" class="title-1">{{user.meta.height}}
-                            {{user.meta.height_unit}}</h5>
-                          <h5 *ngIf="!user.meta || !user.meta.height">NA</h5>
+                          <h6 class="title_2">{{ 'Contact Number' | translate }}</h6>
+                          <h5 *ngIf="user.meta && user.meta.contact_number" class="title-1">{{user.meta.contact_number}}</h5>
+                          <h5 *ngIf="!user.meta || !user.meta.contact_number">NA</h5>
                         </div>
                       </div>
                     </div>
@@ -170,10 +170,9 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.weight' | translate }}</h6>
-                          <h5 *ngIf="user.meta && user.meta.weight" class="title-1">{{user.meta.weight}}
-                            {{user.meta.weight_unit}}</h5>
-                          <h5 *ngIf="!user.meta || !user.meta.weight">NA</h5>
+                          <h6 class="title_2">{{ 'website' | translate }}</h6>
+                          <h5 *ngIf="user.meta && user.meta.website" class="title-1">{{user.meta.website}}</h5>
+                          <h5 *ngIf="!user.meta || !user.meta.website">NA</h5>
                         </div>
                       </div>
                     </div>
@@ -204,13 +203,110 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.contract' | translate}}</h6>
-                          <h5 class="title-1" *ngIf="user?.meta?.contract_start">{{user?.meta?.contract_start | date:'y'
-                            }} - {{user?.meta?.contract_end | date:'y' }}</h5>
-                          <h5 class="title-1" *ngIf="!user?.meta?.contract_start">NA</h5>
+                          <h6 class="title_2">{{ 'zip code' | translate}}</h6>
+                          <h5 class="title-1" *ngIf="user?.meta?.zipcode">{{user?.meta?.zipcode}}</h5>
+                          <h5 class="title-1" *ngIf="!user?.meta?.zipcode">NA</h5>
                         </div>
                       </div>
                     </div>
+                    <div class="col-lg-6 team-logos">
+                      <div class="row align-items-center">
+                        <div class="col-lg-12 p-0 team-badge_content">
+                          <h6 class="title_2">{{ 'Social Media' | translate}}</h6>
+
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_x" [href]="'https://www.x.com/' + user.meta.sm_x">
+                              <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3008_6581)">
+                                    <path d="M10.0834 7.19844L16.276 0H14.8084L9.43159 6.25016L5.13697 0H0.183594L6.67786 9.45147L0.183594 17H1.65117L7.32944 10.3996L11.8647 17H16.8181L10.083 7.19844H10.0834ZM8.07345 9.53461L7.41537 8.5935L2.1799 1.10473H4.43399L8.65889 7.1485L9.31684 8.08961L14.809 15.9455H12.5552L8.07345 9.53501V9.53461Z" fill="black"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3008_6581">
+                                    <rect width="17" height="17" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_facebook" [href]="'https://www.facebook.com/' + user.meta.sm_facebook">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3009_6591)">
+                                    <path d="M17.3151 0.716797H1.68609C1.15077 0.716797 0.716797 1.15077 0.716797 1.68609V17.3151C0.716797 17.8504 1.15077 18.2844 1.68609 18.2844H17.3151C17.8504 18.2844 18.2844 17.8504 18.2844 17.3151V1.68609C18.2844 1.15077 17.8504 0.716797 17.3151 0.716797Z" fill="#3D5A98"/>
+                                    <path d="M12.8366 18.2829V11.48H15.1196L15.461 8.82892H12.8366V7.13673C12.8366 6.36931 13.0504 5.84532 14.1503 5.84532H15.5545V3.47032C14.8745 3.39959 14.1912 3.36589 13.5076 3.36939C11.4859 3.36939 10.0935 4.60142 10.0935 6.874V8.82892H7.81055V11.48H10.0935V18.2829H12.8366Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3009_6591">
+                                    <rect width="19" height="19" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_instagram" [href]="'https://www.instagram.com/' + user.meta.sm_instagram">
+                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3008_6583)">
+                                    <path d="M15.3125 0H4.6875C2.09867 0 0 2.09867 0 4.6875V15.3125C0 17.9013 2.09867 20 4.6875 20H15.3125C17.9013 20 20 17.9013 20 15.3125V4.6875C20 2.09867 17.9013 0 15.3125 0Z" fill="url(#paint0_radial_3008_6583)"/>
+                                    <path d="M15.3125 0H4.6875C2.09867 0 0 2.09867 0 4.6875V15.3125C0 17.9013 2.09867 20 4.6875 20H15.3125C17.9013 20 20 17.9013 20 15.3125V4.6875C20 2.09867 17.9013 0 15.3125 0Z" fill="url(#paint1_radial_3008_6583)"/>
+                                    <path d="M10.0007 2.1875C7.87898 2.1875 7.61266 2.1968 6.77938 2.23469C5.94766 2.27281 5.37992 2.40445 4.8832 2.59766C4.3693 2.79719 3.93344 3.06414 3.49922 3.49852C3.06461 3.93281 2.79766 4.36867 2.5975 4.88234C2.40375 5.37922 2.27195 5.94719 2.23453 6.77852C2.19727 7.61188 2.1875 7.87828 2.1875 10.0001C2.1875 12.1219 2.19688 12.3873 2.23469 13.2206C2.27297 14.0523 2.40461 14.6201 2.59766 15.1168C2.79734 15.6307 3.0643 16.0666 3.49867 16.5008C3.93281 16.9354 4.36867 17.203 4.88219 17.4025C5.3793 17.5957 5.94711 17.7273 6.77867 17.7655C7.61203 17.8034 7.87813 17.8127 9.99977 17.8127C12.1217 17.8127 12.3872 17.8034 13.2205 17.7655C14.0522 17.7273 14.6205 17.5957 15.1177 17.4025C15.6313 17.203 16.0666 16.9354 16.5006 16.5008C16.9352 16.0666 17.2021 15.6307 17.4023 15.117C17.5944 14.6201 17.7262 14.0522 17.7653 13.2208C17.8027 12.3875 17.8125 12.1219 17.8125 10.0001C17.8125 7.87828 17.8027 7.61203 17.7653 6.77867C17.7262 5.94695 17.5944 5.3793 17.4023 4.88258C17.2021 4.36867 16.9352 3.93281 16.5006 3.49852C16.0661 3.06398 15.6315 2.79703 15.1172 2.59773C14.6191 2.40445 14.0511 2.27273 13.2194 2.23469C12.386 2.1968 12.1207 2.1875 9.99828 2.1875H10.0007ZM9.29984 3.59539C9.50789 3.59508 9.74 3.59539 10.0007 3.59539C12.0867 3.59539 12.3339 3.60289 13.1577 3.64031C13.9194 3.67516 14.3328 3.80242 14.6082 3.90938C14.9728 4.05094 15.2327 4.22023 15.506 4.49375C15.7795 4.76719 15.9487 5.02758 16.0906 5.39219C16.1976 5.66719 16.325 6.08063 16.3597 6.84234C16.3971 7.66594 16.4052 7.91328 16.4052 9.99828C16.4052 12.0833 16.3971 12.3307 16.3597 13.1542C16.3248 13.9159 16.1976 14.3294 16.0906 14.6045C15.9491 14.9691 15.7795 15.2287 15.506 15.502C15.2326 15.7754 14.973 15.9446 14.6082 16.0863C14.3331 16.1937 13.9194 16.3206 13.1577 16.3555C12.3341 16.3929 12.0867 16.401 10.0007 16.401C7.91461 16.401 7.66734 16.3929 6.84383 16.3555C6.08211 16.3203 5.66867 16.193 5.39305 16.0861C5.02852 15.9445 4.76805 15.7752 4.49461 15.5018C4.22117 15.2284 4.05195 14.9686 3.91 14.6038C3.80305 14.3287 3.67562 13.9153 3.64094 13.1536C3.60352 12.33 3.59602 12.0827 3.59602 9.99633C3.59602 7.91008 3.60352 7.66398 3.64094 6.84039C3.67578 6.07867 3.80305 5.66523 3.91 5.38984C4.05164 5.02523 4.22117 4.76484 4.49469 4.49141C4.76813 4.21797 5.02852 4.04867 5.39312 3.9068C5.66852 3.79938 6.08211 3.67242 6.84383 3.63742C7.56453 3.60484 7.84383 3.59508 9.29984 3.59344V3.59539ZM14.171 4.89258C13.6534 4.89258 13.2335 5.31211 13.2335 5.82977C13.2335 6.34734 13.6534 6.76727 14.171 6.76727C14.6886 6.76727 15.1085 6.34734 15.1085 5.82977C15.1085 5.31219 14.6886 4.89227 14.171 4.89227V4.89258ZM10.0007 5.98797C7.78508 5.98797 5.98867 7.78438 5.98867 10.0001C5.98867 12.2158 7.78508 14.0113 10.0007 14.0113C12.2164 14.0113 14.0122 12.2158 14.0122 10.0001C14.0122 7.78445 12.2163 5.98797 10.0005 5.98797H10.0007ZM10.0007 7.39586C11.4389 7.39586 12.6049 8.56172 12.6049 10.0001C12.6049 11.4383 11.4389 12.6043 10.0007 12.6043C8.56242 12.6043 7.39656 11.4383 7.39656 10.0001C7.39656 8.56172 8.56242 7.39586 10.0007 7.39586Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                    <radialGradient id="paint0_radial_3008_6583" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(5.3125 21.5404) rotate(-90) scale(19.8215 18.4355)">
+                                    <stop stop-color="#FFDD55"/>
+                                    <stop offset="0.1" stop-color="#FFDD55"/>
+                                    <stop offset="0.5" stop-color="#FF543E"/>
+                                    <stop offset="1" stop-color="#C837AB"/>
+                                    </radialGradient>
+                                    <radialGradient id="paint1_radial_3008_6583" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-3.35008 1.4407) rotate(78.681) scale(8.86031 36.5225)">
+                                    <stop stop-color="#3771C8"/>
+                                    <stop offset="0.128" stop-color="#3771C8"/>
+                                    <stop offset="1" stop-color="#6600FF" stop-opacity="0"/>
+                                    </radialGradient>
+                                    <clipPath id="clip0_3008_6583">
+                                    <rect width="20" height="20" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_tiktok" [href]="'https://www.tiktok.com/@' + user.meta.sm_tiktok">
+                              <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3009_6594)">
+                                    <path d="M11.8575 6.48185C13.0249 7.31016 14.455 7.79753 15.9995 7.79753V4.84739C15.7072 4.84745 15.4157 4.81716 15.1297 4.75702V7.07921C13.5852 7.07921 12.1553 6.5919 10.9877 5.76365V11.7841C10.9877 14.7959 8.52792 17.2372 5.49392 17.2372C4.36186 17.2372 3.30961 16.8975 2.43555 16.3148C3.43317 17.3274 4.82442 17.9554 6.36355 17.9554C9.3978 17.9554 11.8576 15.5141 11.8576 12.5022V6.48185H11.8575ZM12.9306 3.50552C12.334 2.85858 11.9422 2.02251 11.8575 1.09818V0.71875H11.0332C11.2407 1.89353 11.9485 2.89718 12.9306 3.50552ZM4.35455 14.0037C4.02123 13.57 3.84105 13.0393 3.84186 12.4936C3.84186 11.1162 4.96692 9.9993 6.35498 9.9993C6.61362 9.99917 6.87074 10.0386 7.1173 10.1162V7.10006C6.82917 7.06089 6.53842 7.0442 6.2478 7.05034V9.39791C6.00113 9.32027 5.74387 9.28087 5.48511 9.2811C4.09711 9.2811 2.97211 10.3978 2.97211 11.7755C2.97211 12.7496 3.53442 13.5929 4.35455 14.0037Z" fill="#FF004F"/>
+                                    <path d="M10.987 5.76359C12.1547 6.59184 13.5845 7.07914 15.129 7.07914V4.75696C14.2669 4.57466 13.5037 4.12752 12.9299 3.50552C11.9477 2.89712 11.24 1.89347 11.0325 0.71875H8.86733V12.5021C8.86239 13.8758 7.73927 14.9881 6.3542 14.9881C5.53808 14.9881 4.81295 14.602 4.35377 14.0037C3.53377 13.5929 2.97139 12.7495 2.97139 11.7755C2.97139 10.398 4.09639 9.28116 5.48439 9.28116C5.75033 9.28116 6.00664 9.32225 6.24708 9.39798V7.05041C3.26633 7.11154 0.869141 9.52901 0.869141 12.5022C0.869141 13.9864 1.46608 15.3318 2.43495 16.3149C3.30902 16.8975 4.3612 17.2373 5.49333 17.2373C8.52739 17.2373 10.9871 14.7958 10.9871 11.7841L10.987 5.76359Z" fill="black"/>
+                                    <path d="M15.1297 4.75634V4.12858C14.3522 4.12975 13.5902 3.91364 12.9306 3.50497C13.5144 4.13945 14.2833 4.57698 15.1297 4.75647M11.0331 0.718138C11.0133 0.605893 10.9982 0.492896 10.9876 0.379428V0H7.998V11.7835C7.99325 13.1571 6.87013 14.2693 5.485 14.2693C5.09233 14.2699 4.70502 14.1788 4.35437 14.0033C4.81356 14.6014 5.53869 14.9875 6.35481 14.9875C7.73981 14.9875 8.86306 13.8753 8.86794 12.5016V0.7182L11.0331 0.718138ZM6.24788 7.04979V6.38137C5.99806 6.34746 5.7462 6.3305 5.49406 6.3306C2.45969 6.3306 0 8.77202 0 11.7835C0 13.6716 0.966688 15.3355 2.43569 16.3143C1.46681 15.3312 0.869875 13.9857 0.869875 12.5016C0.869875 9.52845 3.267 7.11093 6.24788 7.04979Z" fill="#00F2EA"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3009_6594">
+                                    <rect width="16" height="18" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_youtube" [href]="'https://www.youtube.com/c/' + user.meta.sm_youtube">
+                              <svg width="22" height="15" viewBox="0 0 22 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3008_6588)">
+                                    <path d="M21.5141 2.33958C21.3879 1.88738 21.1418 1.47512 20.8002 1.14386C20.4586 0.812593 20.0335 0.573884 19.5671 0.4515C17.8599 0 10.9888 0 10.9888 0C10.9888 0 4.11745 0.0136666 2.41022 0.465167C1.94388 0.587558 1.51874 0.82628 1.17714 1.15756C0.835539 1.48884 0.589395 1.90111 0.46322 2.35333C-0.0531788 5.29483 -0.253499 9.777 0.477399 12.6008C0.603588 13.053 0.849737 13.4653 1.19134 13.7966C1.53294 14.1278 1.95807 14.3665 2.4244 14.4889C4.13163 14.9404 11.0029 14.9404 11.0029 14.9404C11.0029 14.9404 17.874 14.9404 19.5811 14.4889C20.0475 14.3665 20.4726 14.1278 20.8142 13.7966C21.1559 13.4653 21.402 13.053 21.5282 12.6008C22.0729 9.65517 22.2407 5.17575 21.5141 2.33958Z" fill="#FF0000"/>
+                                    <path d="M8.80273 10.6725L14.5028 7.47103L8.80273 4.26953V10.6725Z" fill="white"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3008_6588">
+                                    <rect width="22" height="15" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                            <a class="platform_image px-1" *ngIf="user.meta.sm_vimeo" [href]="'https://www.vimeo.com/' + user.meta.sm_vimeo">
+                              <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_3009_6598)">
+                                    <path d="M18.9908 3.70619C18.9063 5.49761 17.6144 7.95063 15.1159 11.064C12.5327 14.3162 10.3471 15.9422 8.5592 15.9422C7.45201 15.9422 6.5144 14.9521 5.74906 12.9713C5.23754 11.1557 4.7267 9.34012 4.2154 7.52452C3.64666 5.54482 3.03696 4.55368 2.38509 4.55368C2.24296 4.55368 1.74555 4.84341 0.893965 5.42048L0 4.305C0.930608 3.51356 1.85491 2.71521 2.77281 1.91002C4.0234 0.863208 4.96227 0.312751 5.58793 0.257074C7.06674 0.119531 7.97681 1.09854 8.31844 3.19433C8.6876 5.45542 8.94299 6.86185 9.0866 7.4123C9.51277 9.28818 9.98168 10.2249 10.4942 10.2249C10.8918 10.2249 11.4892 9.61664 12.2857 8.39993C13.0814 7.18285 13.5076 6.25693 13.5652 5.62088C13.6784 4.57062 13.252 4.04419 12.2857 4.04419C11.8308 4.04419 11.3619 4.14558 10.8795 4.34597C11.8132 1.38346 13.5972 -0.0553209 16.2307 0.0267599C18.1829 0.0822217 19.1032 1.3087 18.9908 3.70619Z" fill="#32B8E8"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_3009_6598">
+                                    <rect width="19" height="16" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="col-lg-6 team-logos">
                       <div class="row align-items-center">
                         <div class="col-lg-3 team-badge_image">
@@ -231,100 +327,13 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.leagueLevel' | translate}}</h6>
-                          <h5 class="title-1" *ngIf="user?.meta?.league_level">{{user?.meta?.league_level}}</h5>
-                          <h5 class="title-1" *ngIf="!user?.meta?.league_level">NA</h5>
+                          <h6 class="title_2">{{ 'Address' | translate}}</h6>
+                          <h5 class="title-1" *ngIf="user?.meta?.address">{{user?.meta?.address}}</h5>
+                          <h5 class="title-1" *ngIf="!user?.meta?.address">NA</h5>
                         </div>
                       </div>
                     </div>
 
-                    <div class="col-lg-6 team-logos">
-                      <div class="row align-items-center">
-                        <div class="col-lg-3 team-badge_image">
-                          <svg *ngIf="user?.meta?.foot=='Right'" width="100%" height="36px" viewBox="0 0 30 31" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_2961_4755793)">
-                              <path
-                                d="M8.26172 28.8867C8.26172 28.8867 8.07617 29.0723 7.70508 29.4434C7.33398 29.8145 6.64062 30 5.625 30C4.60938 30 3.73047 29.6289 2.98828 28.8867C2.24609 28.1445 1.875 27.2656 1.875 26.25V24.375H9.375V26.25C9.375 27.2656 9.00391 28.1445 8.26172 28.8867ZM0.410156 8.73047C1.07422 5.72266 2.05078 3.51562 3.33984 2.10938C4.62891 0.703125 6.01562 0 7.5 0C8.71094 0 9.74609 0.488281 10.6055 1.46484C11.4648 2.44141 12.0996 3.69141 12.5098 5.21484C12.9199 6.73828 13.125 8.41797 13.125 10.2539C13.125 12.4414 12.5 14.4727 11.25 16.3477C10.7812 17.0898 10.459 17.6074 10.2832 17.9004C10.1074 18.1934 9.91211 18.7598 9.69727 19.5996C9.48242 20.4395 9.375 21.4062 9.375 22.5H1.875L0.9375 19.1016C0.429688 17.3438 0.136719 15.7812 0.0585938 14.4141C-0.0976562 12.4219 0.0195312 10.5273 0.410156 8.73047Z"
-                                fill="#D5D5D5" />
-                              <path class="blue-bg"
-                                d="M27.0112 29.3867C27.0112 29.3867 26.8256 29.5723 26.4545 29.9434C26.0834 30.3145 25.3901 30.5 24.3744 30.5C23.3588 30.5 22.4799 30.1289 21.7377 29.3867C20.9955 28.6445 20.6244 27.7656 20.6244 26.75V24.875H28.1244V26.75C28.1244 27.7656 27.7533 28.6445 27.0112 29.3867ZM16.8744 10.7539C16.8744 7.90234 17.3627 5.48047 18.3393 3.48828C19.3158 1.49609 20.7026 0.5 22.4994 0.5C23.9838 0.5 25.3705 1.20312 26.6596 2.60938C27.9487 4.01562 28.9252 6.22266 29.5893 9.23047C29.9799 10.9883 30.0971 12.8828 29.9408 14.9141C29.8627 16.2812 29.5698 17.8438 29.0619 19.6016L28.1244 23H20.6244C20.6244 21.9062 20.517 20.9395 20.3022 20.0996C20.0873 19.2598 19.892 18.6934 19.7162 18.4004C19.5405 18.1074 19.2182 17.5898 18.7494 16.8477C17.4994 14.9727 16.8744 12.9414 16.8744 10.7539Z"
-                                fill="#023A4A" />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_2961_4755793">
-                                <rect width="31" height="30" fill="white" transform="matrix(0 -1 -1 0 30 31)" />
-                              </clipPath>
-                            </defs>
-                          </svg>
-
-                          <svg *ngIf="user?.meta?.foot=='Left'" width="100%" height="36px" viewBox="0 0 30 31" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_2961_4755793)">
-                              <path
-                                d="M8.26172 28.8867C8.26172 28.8867 8.07617 29.0723 7.70508 29.4434C7.33398 29.8145 6.64062 30 5.625 30C4.60938 30 3.73047 29.6289 2.98828 28.8867C2.24609 28.1445 1.875 27.2656 1.875 26.25V24.375H9.375V26.25C9.375 27.2656 9.00391 28.1445 8.26172 28.8867ZM0.410156 8.73047C1.07422 5.72266 2.05078 3.51562 3.33984 2.10938C4.62891 0.703125 6.01562 0 7.5 0C8.71094 0 9.74609 0.488281 10.6055 1.46484C11.4648 2.44141 12.0996 3.69141 12.5098 5.21484C12.9199 6.73828 13.125 8.41797 13.125 10.2539C13.125 12.4414 12.5 14.4727 11.25 16.3477C10.7812 17.0898 10.459 17.6074 10.2832 17.9004C10.1074 18.1934 9.91211 18.7598 9.69727 19.5996C9.48242 20.4395 9.375 21.4062 9.375 22.5H1.875L0.9375 19.1016C0.429688 17.3438 0.136719 15.7812 0.0585938 14.4141C-0.0976562 12.4219 0.0195312 10.5273 0.410156 8.73047Z"
-                                fill="#023A4A" />
-                              <path
-                                d="M27.0112 29.3867C27.0112 29.3867 26.8256 29.5723 26.4545 29.9434C26.0834 30.3145 25.3901 30.5 24.3744 30.5C23.3588 30.5 22.4799 30.1289 21.7377 29.3867C20.9955 28.6445 20.6244 27.7656 20.6244 26.75V24.875H28.1244V26.75C28.1244 27.7656 27.7533 28.6445 27.0112 29.3867ZM16.8744 10.7539C16.8744 7.90234 17.3627 5.48047 18.3393 3.48828C19.3158 1.49609 20.7026 0.5 22.4994 0.5C23.9838 0.5 25.3705 1.20312 26.6596 2.60938C27.9487 4.01562 28.9252 6.22266 29.5893 9.23047C29.9799 10.9883 30.0971 12.8828 29.9408 14.9141C29.8627 16.2812 29.5698 17.8438 29.0619 19.6016L28.1244 23H20.6244C20.6244 21.9062 20.517 20.9395 20.3022 20.0996C20.0873 19.2598 19.892 18.6934 19.7162 18.4004C19.5405 18.1074 19.2182 17.5898 18.7494 16.8477C17.4994 14.9727 16.8744 12.9414 16.8744 10.7539Z"
-                                fill="#D5D5D5" />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_2961_4755793">
-                                <rect width="31" height="30" fill="white" transform="matrix(0 -1 -1 0 30 31)" />
-                              </clipPath>
-                            </defs>
-                          </svg>
-
-                          <svg *ngIf="user?.meta?.foot=='Both'" width="100%" height="36" viewBox="0 0 30 31"  fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <g clip-path="url(#clip0_12147_24624)">
-                              <path d="M8.26172 28.8867C8.26172 28.8867 8.07617 29.0723 7.70508 29.4434C7.33398 29.8145 6.64062 30 5.625 30C4.60938 30 3.73047 29.6289 2.98828 28.8867C2.24609 28.1445 1.875 27.2656 1.875 26.25V24.375H9.375V26.25C9.375 27.2656 9.00391 28.1445 8.26172 28.8867ZM0.410156 8.73047C1.07422 5.72266 2.05078 3.51562 3.33984 2.10938C4.62891 0.703125 6.01562 0 7.5 0C8.71094 0 9.74609 0.488281 10.6055 1.46484C11.4648 2.44141 12.0996 3.69141 12.5098 5.21484C12.9199 6.73828 13.125 8.41797 13.125 10.2539C13.125 12.4414 12.5 14.4727 11.25 16.3477C10.7812 17.0898 10.459 17.6074 10.2832 17.9004C10.1074 18.1934 9.91211 18.7598 9.69727 19.5996C9.48242 20.4395 9.375 21.4062 9.375 22.5H1.875L0.9375 19.1016C0.429688 17.3438 0.136719 15.7812 0.0585938 14.4141C-0.0976562 12.4219 0.0195312 10.5273 0.410156 8.73047Z" fill="#D5D5D5"/>
-                              <path d="M27.0112 29.3867C27.0112 29.3867 26.8256 29.5723 26.4545 29.9434C26.0834 30.3145 25.3901 30.5 24.3744 30.5C23.3588 30.5 22.4799 30.1289 21.7377 29.3867C20.9955 28.6445 20.6244 27.7656 20.6244 26.75V24.875H28.1244V26.75C28.1244 27.7656 27.7533 28.6445 27.0112 29.3867ZM16.8744 10.7539C16.8744 7.90234 17.3627 5.48047 18.3393 3.48828C19.3158 1.49609 20.7026 0.5 22.4994 0.5C23.9838 0.5 25.3705 1.20312 26.6596 2.60938C27.9487 4.01562 28.9252 6.22266 29.5893 9.23047C29.9799 10.9883 30.0971 12.8828 29.9408 14.9141C29.8627 16.2812 29.5698 17.8438 29.0619 19.6016L28.1244 23H20.6244C20.6244 21.9062 20.517 20.9395 20.3022 20.0996C20.0873 19.2598 19.892 18.6934 19.7162 18.4004C19.5405 18.1074 19.2182 17.5898 18.7494 16.8477C17.4994 14.9727 16.8744 12.9414 16.8744 10.7539Z" fill="#D5D5D5"/>
-                              </g>
-                              <defs>
-                              <clipPath id="clip0_12147_24624">
-                              <rect width="31" height="30" fill="white" transform="matrix(0 -1 -1 0 30 31)"/>
-                              </clipPath>
-                              </defs>
-                          </svg>
-
-
-                        </div>
-                        <div class="col-lg-9 p-0  team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.foot' | translate}}</h6>
-                          <h5 class="title-1">{{user?.meta?.foot}}</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 team-logos">
-                      <div class="row align-items-center">
-                        <div class="col-lg-3 team-badge_image">
-                          <svg width="100%" height="36px" viewBox="0 0 27 27" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_2961_4755811)">
-                              <path class="blue-bg"
-                                d="M21.0938 -5.16341e-07C20.87 -5.35904e-07 20.6554 0.0888943 20.4971 0.247128C20.3389 0.405362 20.25 0.619973 20.25 0.843749L20.25 1.6875L6.75 1.6875L6.75 0.843748C6.75 0.619972 6.66111 0.405361 6.50287 0.247127C6.34464 0.088893 6.13003 -1.82451e-06 5.90625 -1.84407e-06C5.68247 -1.86364e-06 5.46786 0.088893 5.30963 0.247127C5.1514 0.405361 5.0625 0.619972 5.0625 0.843748L5.0625 1.6875L3.375 1.6875C2.4799 1.6875 1.62145 2.04308 0.988518 2.67601C0.355581 3.30895 1.54302e-06 4.16739 1.46477e-06 5.0625L-1.58015e-07 23.625C-2.36267e-07 24.5201 0.355579 25.3785 0.988515 26.0115C1.62145 26.6444 2.47989 27 3.375 27L23.625 27C24.5201 27 25.3785 26.6444 26.0115 26.0115C26.6444 25.3786 27 24.5201 27 23.625L27 5.0625C27 4.16739 26.6444 3.30895 26.0115 2.67601C25.3785 2.04308 24.5201 1.6875 23.625 1.6875L21.9375 1.6875L21.9375 0.84375C21.9375 0.619973 21.8486 0.405362 21.6904 0.247128C21.5321 0.0888944 21.3175 -4.96778e-07 21.0938 -5.16341e-07ZM25.3125 6.75L25.3125 23.625C25.3125 24.0726 25.1347 24.5018 24.8182 24.8182C24.5018 25.1347 24.0726 25.3125 23.625 25.3125L3.375 25.3125C2.92745 25.3125 2.49822 25.1347 2.18176 24.8182C1.86529 24.5018 1.6875 24.0726 1.6875 23.625L1.6875 6.75L25.3125 6.75Z"
-                                fill="#023A4A" />
-                              <rect class="green-bg" x="5.625" y="10.125" width="3.375" height="3.375" fill="#6FB95D" />
-                              <rect class="green-bg" x="12.375" y="10.125" width="3.375" height="3.375" fill="#6FB95D" />
-                              <rect class="green-bg" x="19.125" y="10.125" width="3.375" height="3.375" fill="#6FB95D" />
-                              <rect class="green-bg" x="5.625" y="18" width="3.375" height="3.375" fill="#6FB95D" />
-                              <rect class="green-bg" x="12.375" y="18" width="3.375" height="3.375" fill="#6FB95D" />
-                              <rect class="green-bg" x="19.125" y="18" width="3.375" height="3.375" fill="#6FB95D" />
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_2961_4755811">
-                                <rect width="27" height="27" fill="white"
-                                  transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 27 0)" />
-                              </clipPath>
-                            </defs>
-                          </svg>
-                        </div>
-                        <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'TalentsTranslate.age' | translate}}</h6>
-                          <h5 class="title-1">{{calculateAge(user?.meta?.date_of_birth)}}</h5>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -335,8 +344,8 @@
               <div class="col-lg-12 image-gallery mt-4 bg-color p-3 favourite_images">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="Feature_images">
-                    <h2>{{ 'TalentsTranslate.highlights' | translate}}</h2>
-                    <p>{{ 'TalentsTranslate.featuredPhotosAndVideos' | translate}}</p>
+                    <h2>{{ 'highlights' | translate}}</h2>
+                    <p>{{ 'featuredPhotosAndVideos' | translate}}</p>
                   </div>
                 </div>
                 <div class="unlock-view">
@@ -358,7 +367,7 @@
                     </clipPath>
                     </defs>
                     </svg>
-                    {{ 'TalentsTranslate.upgradeToUnlock' | translate}}
+                    {{ 'upgradeToUnlock' | translate}}
                   </button>
               </div>
               </div>
@@ -369,15 +378,15 @@
               <!-- Add a loader in your template -->
               <div *ngIf="loading" class="loader-container py-5">
                 <div class="loader"></div>
-                <p>{{'TalentsTranslate.loading' | translate}}</p>
+                <p>{{'loading' | translate}}</p>
               </div>
 
               <!-- The rest of your content goes here -->
               <div *ngIf="!loading" class="">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="Feature_images">
-                    <h2>{{'TalentsTranslate.highlights' | translate}}</h2>
-                    <p>{{'TalentsTranslate.featuredPhotosAndVideos' | translate}}</p>
+                    <h2>{{'highlights' | translate}}</h2>
+                    <p>{{'featuredPhotosAndVideos' | translate}}</p>
                   </div>
                   <div class="settings cursor-pointer" (click)="openHighlight()">
 
@@ -415,6 +424,7 @@
 
           </div>
 
+
           <div class="col-lg-9">
 
             <div class="players_image d-flex align-items-center justify-content-center">
@@ -433,7 +443,7 @@
                       <path
                         d="M512 144v288c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48h88l12.3-32.9c7-18.7 24.9-31.1 44.9-31.1h125.5c20 0 37.9 12.4 44.9 31.1L376 96h88c26.5 0 48 21.5 48 48zM376 288c0-66.2-53.8-120-120-120s-120 53.8-120 120 53.8 120 120 120 120-53.8 120-120zm-32 0c0 48.5-39.5 88-88 88s-88-39.5-88-88 39.5-88 88-88 88 39.5 88 88z" />
                     </svg>
-                    <span>{{'TalentsTranslate.uploadYourCoverPhoto' | translate}}</span>
+                    <span>{{'uploadYourCoverPhoto' | translate}}</span>
                   </label>
                 </div>
                 <input id="file-upload" (change)="onCoverFileChange($event)" accept="image/*" type="file" class="d-none" />
@@ -460,6 +470,19 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('club_history')" [ngClass]="{ active: activeTab == 'club_history' }"
+                    id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                    type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
+                    <svg id="users-icon" width="26" height="21" viewBox="0 0 26 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Club History" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
                   <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{ active: activeTab == 'gallery' }"
                     id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
                     type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
@@ -475,8 +498,9 @@
               </ul>
             </div>
             <div class="general_details mt-4 p-4 bg-color ">
-              <club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user"></club-profile-tab>
-              <club-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"></club-gallery-tab>
+              <club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" [isPremium]="isPremium"></club-profile-tab>
+              <club-history-tab *ngIf="activeTab == 'club_history'" role="Scout" ></club-history-tab>
+              <club-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"  [isPremium]="isPremium"></club-gallery-tab>
             </div>
           </div>
         </div>
