@@ -219,21 +219,21 @@ export class CreateSightPopupComponent implements AfterViewInit {
     this.users.map(function(user:any) {
       formData.append('invites[]', user.id);
     });
-    
+
     try {
       this.userService.addSight(this.clubId, formData).subscribe((response)=>{
-        console.log(response)
-       if (response && response.status) {
-         this.dialogRef.close({
-          action: 'added'
-         })
-       } else {
-         console.error('Invalid API response structure:', response); 
-       }
-     });     
-   } catch (error) {
-     console.error('Error:', error);
-   }
+
+        if (response && response.status) {
+          this.dialogRef.close({
+            action: 'added'
+          })
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
 
   }
 
