@@ -1,7 +1,7 @@
  import { Component } from '@angular/core';
 
  @Component({
-   selector: 'scout-sidebar',
+   selector: 'club-sidebar',
    templateUrl: './sidebar.component.html',
    styleUrl: './sidebar.component.scss'
 })

@@ -268,7 +268,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/delete-scout-player/${id}`, {headers}
     );
-  }  
+  }
 
   getClubTeams(id:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -288,7 +288,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/get-club-players/${teamId}`, {headers}
     );
-  } 
+  }
 
   getSightings(id:any, params:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -308,7 +308,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/get-sighting/${id}`);
   }
-  
+
   uploadProfileImage(userId:any, formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({

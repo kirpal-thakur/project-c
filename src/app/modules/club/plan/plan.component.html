@@ -4,13 +4,13 @@
     <!-- Loader for Plans -->
     <div *ngIf="isLoadingPlans" class="loader-container py-5">
       <div class="loader"></div>
-      <p>{{'TalentsTranslate.loading' | translate}}</p>
+      <p>{{'loading' | translate}}</p>
     </div>
 
     <!-- If not loading, show the plans -->
     <div *ngIf="!isLoadingPlans">
       <div class="card subscription-plan">
-        <h2>{{'TalentsTranslate.subscriptionPlans' | translate}}</h2>
+        <h2>{{'subscriptionPlans' | translate}}</h2>
 
         <div class="row mt-3">
 
@@ -18,19 +18,19 @@
           <div class="col-lg-4 my-2 ">
             <div class="subscription-switch mb-2">
               <label class="switch_off cursor-pointer" (click)="toggleBillingPlan(premiumPlans, false ,premium)">
-                {{'TalentsTranslate.billedMonthly' | translate}}</label>
+                {{'billedMonthly' | translate}}</label>
               <input class="cursor-pointer" type="checkbox" [id]="premiumPlans.id" [checked]="(premiumPlans.isYearly)"
                 [(ngModel)]="premiumPlans.isYearly"
                 (change)="toggleBillingPlan(premiumPlans, (premiumPlans.isYearly),premium)"
                 [value]="premiumPlans.isYearly">
               <label class="switch_on cursor-pointer" (click)="toggleBillingPlan(premiumPlans, true,premium)">
-                {{'TalentsTranslate.billedYearly' | translate}}
+                {{'billedYearly' | translate}}
               </label>
             </div>
             <div class="premium-plan_box">
               <div class="plan_box">
                 <div class="d-flex align-items-center justify-content-between gap-2">
-                  <h3>{{'TalentsTranslate.premium' | translate}}</h3>
+                  <h3>{{'premium' | translate}}</h3>
 
                   <!-- Display this only if there is an active premium plan -->
                   <div class="premium_button py-1 px-3" *ngIf="(( premiumPlans?.package_name==premium?.package_name ))">
@@ -41,8 +41,8 @@
                         </path>
                       </svg>
                     </span>
-                    <span>{{'TalentsTranslate.youHaveAnActive' | translate}} {{ premiumPlans.package_name }}
-                      {{'TalentsTranslate.plan' | translate}}</span>
+                    <span>{{'youHaveAnActive' | translate}} {{ premiumPlans.package_name }}
+                      {{'plan' | translate}}</span>
                   </div>
                 </div>
 
@@ -60,7 +60,7 @@
                   <div class="col-lg-12">
                     <button class="choose-plan-btn" [disabled]="( premiumPlans?.package_name == premium?.package_name )"
                       (click)="openCouponDialog(premiumPlans.isYearly ? premiumPlans.year_package_id : premiumPlans.month_package_id)">
-                      {{'TalentsTranslate.choosePlan' | translate}}
+                      {{'choosePlan' | translate}}
                     </button>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
 
               <!-- Plan includes list -->
               <div class="plan_box premium-plan-list">
-                <h3>{{'TalentsTranslate.premium' | translate}}</h3>
+                <h3>{{'premium' | translate}}</h3>
                 <ul class="premium_list">
                   <li *ngFor="let feature of premiumPlans.includes">
                     <label>
@@ -94,18 +94,18 @@
           <div class="col-lg-4 my-2 ">
             <div class="subscription-switch mb-2">
               <label class="switch_off cursor-pointer" (click)="toggleBillingPlan(demoPlans, false ,premium)">
-                {{'TalentsTranslate.billedMonthly' | translate}}</label>
+                {{'billedMonthly' | translate}}</label>
               <input class="cursor-pointer" type="checkbox" [id]="demoPlans.id" [checked]="(demoPlans.isYearly)"
                 [(ngModel)]="demoPlans.isYearly" (change)="toggleBillingPlan(demoPlans, (demoPlans.isYearly),premium)"
                 [value]="demoPlans.isYearly">
               <label class="switch_on cursor-pointer" (click)="toggleBillingPlan(demoPlans, true,premium)">
-                {{'TalentsTranslate.billedYearly' | translate}}
+                {{'billedYearly' | translate}}
               </label>
             </div>
             <div class="premium-plan_box">
               <div class="plan_box">
                 <div class="d-flex align-items-center justify-content-between gap-2">
-                  <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
+                  <h3>{{'multiCountry' | translate}}</h3>
 
                   <!-- Display this only if there is an active premium plan -->
                   <div class="premium_button py-1 px-3" *ngIf="(( demoPlans?.package_name==demo?.package_name ))">
@@ -116,8 +116,8 @@
                         </path>
                       </svg>
                     </span>
-                    <span>{{'TalentsTranslate.youHaveAnActive' | translate}} {{ demoPlans.package_name }}
-                      {{'TalentsTranslate.plan' | translate}}</span>
+                    <span>{{'youHaveAnActive' | translate}} {{ demoPlans.package_name }}
+                      {{'plan' | translate}}</span>
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@
                   <div class="col-lg-12">
                     <button class="choose-plan-btn" [disabled]="( demoPlans?.package_name == premium?.package_name )"
                       (click)="openCouponDialog(demoPlans.isYearly ? demoPlans.year_package_id : demoPlans.month_package_id)">
-                      {{'TalentsTranslate.choosePlan' | translate}}
+                      {{'choosePlan' | translate}}
                     </button>
                   </div>
                 </div>
@@ -144,7 +144,7 @@
 
               <!-- Plan includes list -->
               <div class="plan_box premium-plan-list">
-                <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
+                <h3>{{'multiCountry' | translate}}</h3>
                 <ul class="premium_list">
                   <li *ngFor="let feature of demoPlans.includes">
                     <label>
@@ -167,15 +167,15 @@
           <!-- countries plans -->
           <div class="col-lg-4 my-2 ">
             <div class="subscription-switch mb-2">
-              <label class="switch_off cursor-pointer">{{'TalentsTranslate.billedMonthly' | translate}}</label>
+              <label class="switch_off cursor-pointer">{{'billedMonthly' | translate}}</label>
               <input type="checkbox" class="cursor-pointer">
-              <label class="switch_on cursor-pointer">{{'TalentsTranslate.billedYearly' | translate}}</label>
+              <label class="switch_on cursor-pointer">{{'billedYearly' | translate}}</label>
             </div>
 
             <div class="premium-plan_box ">
               <div class="plan_box">
                 <div class="d-flex align-items-center justify-content-between gap-2">
-                  <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
+                  <h3>{{'multiCountry' | translate}}</h3>
                   <div class="premium_button  py-1 px-3" *ngIf="getActiveMultiCountryPlanCount() > 0">
                     <span class="px-1">
                       <svg width="22" height="23" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -184,7 +184,7 @@
                         </path>
                       </svg>
                     </span>
-                    <span class="ps-2">{{getActiveMultiCountryPlanCount()}} {{'TalentsTranslate.activeMulti-CountryPlan'| translate}}</span>
+                    <span class="ps-2">{{getActiveMultiCountryPlanCount()}} {{'activeMulti-CountryPlan'| translate}}</span>
                     <button class="premium_btn" (click)="editPlanPopup(countryPlans.plans,country)">
                       <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -204,7 +204,7 @@
                 <div class="row  multi-country-select ">
                   <div class="col-lg-12 plan-2">
                     <button class="choose-plan-btn"
-                      (click)="editPlanPopup(countryPlans,country)">{{'TalentsTranslate.choosePlan' |
+                      (click)="editPlanPopup(countryPlans,country)">{{'choosePlan' |
                       translate}}</button>
                   </div>
                 </div>
@@ -213,7 +213,7 @@
               <hr class="premium_list-line">
 
               <div class="plan_box premium-plan-list">
-                <h3>{{'TalentsTranslate.multiCountry' | translate}}</h3>
+                <h3>{{'multiCountry' | translate}}</h3>
                 <ul class="premium_list">
                   <li *ngFor="let feature of countryPlans?.includes">
                     <label>
@@ -237,14 +237,14 @@
           <div class="col-lg-4 my-2">
             <div class="subscription-switch mb-2">
               <label class="switch_off cursor-pointer"
-                (click)="toggleBillingPlan(boostedPlans, false ,booster)">{{'TalentsTranslate.billedMonthly' |
+                (click)="toggleBillingPlan(boostedPlans, false ,booster)">{{'billedMonthly' |
                 translate}}</label>
               <input type="checkbox" class="switch_on cursor-pointer" [id]="boostedPlans.id"
                 [(ngModel)]="boostedPlans.isYearly"
                 [checked]="boostedPlans.isYearly || (booster && booster.interval == 'yearly')"
                 (change)="toggleBillingPlan(boostedPlans, (boostedPlans.isYearly ? false: true),booster)">
               <label class="switch_on cursor-pointer"
-                (click)="toggleBillingPlan(boostedPlans, true,booster)">{{'TalentsTranslate.billedYearly' |
+                (click)="toggleBillingPlan(boostedPlans, true,booster)">{{'billedYearly' |
                 translate}}</label>
             </div>
             <div class="premium-plan_box">
@@ -285,7 +285,7 @@
               </div>
               <hr class="premium_list-line">
               <div class="plan_box premium-plan-list">
-                <h3>{{'TalentsTranslate.boostProfile' | translate}}</h3>
+                <h3>{{'boostProfile' | translate}}</h3>
                 <ul class="premium_list">
                   <li *ngFor="let feature of boostedPlans.includes">
                     <label>
