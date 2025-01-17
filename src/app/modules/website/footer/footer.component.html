@@ -81,7 +81,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <a *ngFor="let country of countrie" href="{{ country.url }}" class="dropdown-item ai-icon options-country"
-            [class.selected]="name === country.name">
+            [class.selected]="selectedcountry == country.id">
             <img src="https://api.socceryou.ch/uploads/logos/{{country.flag}}" width="30" height="24" class="me-3">
             <span>{{ country.name }}</span>
           </a>

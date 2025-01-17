@@ -8,7 +8,7 @@ import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
-
+import { WebPages } from '../../../services/webpages.service';
 
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
@@ -22,8 +22,9 @@ export class FooterComponent implements OnInit{
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm; // Define registerForm using ViewChild
   
-  name: string = 'Switzerland'; // Current country name, update as needed
-  countrie = [
+  selectedcountry :number  = 1;
+  name: string = 'England'; // Current country name, update as needed
+/*   countrie = [
     { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
     { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
     { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
@@ -34,6 +35,18 @@ export class FooterComponent implements OnInit{
     { name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
     { name: 'Denmark', slug: "dk", id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
     { name: 'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ]; */
+
+  countrie = [
+    { name: 'England', slug: "ch", id: 1, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Spain', slug: "es", id: 5, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 6, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    //{ name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Denmark', slug: "dk", id: 7, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sweden', slug: "se", id: 8, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
   ];
 
   customOptions: OwlOptions = {
@@ -103,6 +116,7 @@ export class FooterComponent implements OnInit{
 
   constructor(
     private themeService: ThemeService,
+    private webPages: WebPages,
     private authService: AuthService,
      private route: ActivatedRoute,
       private router: Router, 
@@ -117,6 +131,12 @@ export class FooterComponent implements OnInit{
   tokenVerified = false;
 
   ngOnInit(): void {
+    this.webPages.languageId$.subscribe((data) => {
+      this.selectedcountry = Number(data);
+      const selectedLang = this.countrie.find((data:any) => data.id == this.selectedcountry);
+      this.name = selectedLang?.name || '';
+      
+    });
       // Check if the google.accounts.id library is loaded
       if (typeof google !== 'undefined' && typeof google.accounts !== 'undefined' && typeof google.accounts.id !== 'undefined') {
       // Initialize Google Sign-In

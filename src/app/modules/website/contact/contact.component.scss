@@ -222,6 +222,7 @@ transform: translate(-50%, -50%);
 }
 .location {
 display: flex;
+color: white;
 }
 .location-image{
 margin-right: 10px;
@@ -230,6 +231,7 @@ margin-right: 10px;
 display: flex;
 margin-top: 30px;
 }
+
 .location-text{
 font-size: 20px;
 color: white;
@@ -246,10 +248,12 @@ position: absolute;
 left: 1%;
 top: 43%;
 }
+
 .skyscraper-left img{
 height: 600px;
 width: 120px;
 }
+
 .skyscraper-right{
 height: 600px;
 width: 120px;
@@ -259,6 +263,7 @@ position: absolute;
 right: 1%;
 top: 43%;
 }
+
 .skyscraper-right img{
 height: 600px;
 width: 120px;

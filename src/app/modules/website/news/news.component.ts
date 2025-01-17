@@ -32,7 +32,7 @@ export class NewsComponent implements OnInit, OnDestroy {
   intervalId: any;
   touchStartX: number = 0;
   advertisemnetData: any;
-  advertisemnetUrl: string = '';
+  advertisemnet_base_url: string = '';
   base_url: string = '';
   adVisible: boolean[] = [true, true, true, true, true];
 
@@ -76,8 +76,10 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.webPages.getDynamicContentPage('news', languageId).subscribe((res) => {
       if (res.status) {
         this.advertisemnetData = res.data.advertisemnetData;
-        this.advertisemnetUrl = res.data.advertisemnet_base_url;
+        this.advertisemnet_base_url = res.data.advertisemnet_base_url;
         this.slider_title = res.data.pageData.slider_title;
+        this.banner_title = res.data.pageData.banner_title;
+        
         this.news_title = res.data.pageData.news_title;
         this.latestNewsData = res.data.latestNewsData;
         this.news_img_path = res.data.news_img_path;
@@ -146,8 +148,36 @@ export class NewsComponent implements OnInit, OnDestroy {
     // Optional: Logic for touch end can be added here if needed
   }
 
-  closeAd(index: number) {
-    this.adVisible[index] = false;
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
 
   get currentImage() {
@@ -156,6 +186,12 @@ export class NewsComponent implements OnInit, OnDestroy {
   
   getRouterLink(index: number): string {
     // Returns a dynamic URL based on the slider index
-    return '/slider-details/' + index;
+    return '/news/' + index;
+  }
+  isEmptyObject(obj:any) {
+    if(typeof obj != 'undefined'){
+      return (obj && (Object.keys(obj).length === 0));
+    }
+    return true;
   }
 }
