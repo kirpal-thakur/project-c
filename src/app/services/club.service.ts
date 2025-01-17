@@ -117,8 +117,6 @@ export class ClubService {
     return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {company_history: history}, { headers });
   }
 
-
-
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);
   }
@@ -650,5 +648,43 @@ export class ClubService {
     }
   }
 
+  getSightings(id:any, params:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-sightings`, {params}
+    );
+  }
+
+  getSingleSighting(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-sighting/${id}`);
+  }
+
+
+  deleteSightings(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}club/delete-sighting`, params, { headers });
+  }
+
+  deleteAttachment(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/delete-sighting-attachment/${id}`, {headers}
+    );
+  }
 }
 

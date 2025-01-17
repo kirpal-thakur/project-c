@@ -71,6 +71,11 @@ import { SharedModule } from '../shared/shared.module';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
 import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
+import { TeamsTabComponent } from './tabs/teams-tab/teams-tab.component';
+import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component';
+import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
+import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-talent-popup.component';
+import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sight-popup.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -122,7 +127,12 @@ import { AddRepresentatorPopupComponent } from './add-representator-popup/add-re
     UpdateConfirmationPlanComponent,
     HistoryTabComponent,
     PortfolioTabComponent,
-    AddRepresentatorPopupComponent
+    AddRepresentatorPopupComponent,
+    TeamsTabComponent,
+    SightingTabComponent,
+    UploadAttachmentComponent,
+    InviteTalentPopupComponent,
+    CreateSightPopupComponent
   ],
   imports: [
     CommonModule,

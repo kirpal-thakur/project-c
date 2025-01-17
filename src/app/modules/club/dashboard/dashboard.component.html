@@ -435,7 +435,6 @@
                   fill="#9F9F9F" />
               </svg>
 
-
               <div class="edit-photo d-flex align-items-center tour-cover-photo" matTooltip="Edit Cover Image" matTooltipPosition="right">
                 <div class="edit_image-2 ">
                   <label for="file-upload" class="cursor-pointer ">
@@ -483,6 +482,19 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('teams')" [ngClass]="{ active: activeTab == 'teams' }"
+                    id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                    type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
+                    <svg id="users-icon" width="26" height="21" viewBox="0 0 26 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Teams" | translate }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
                   <button class="nav-link" (click)="switchTab('gallery')" [ngClass]="{ active: activeTab == 'gallery' }"
                     id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
                     type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
@@ -495,12 +507,27 @@
                     {{ "Gallery" | translate }}
                   </button>
                 </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" (click)="switchTab('sighting')" [ngClass]="{ active: activeTab == 'sighting' }"
+                    id="contact-tab-1" id="manage-button" data-bs-toggle="tab" data-bs-target="#contact-tab-pane-1"
+                    type="button" role="tab" aria-controls="contact-tab-pane-1" aria-selected="false">
+                    <svg id="users-icon" width="26" height="21" viewBox="0 0 26 21" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.75 0.875H25.25V20.125H0.75V0.875ZM2.5 2.625V13.8906L8.625 7.76562L14.2852 13.4805L18.25 9.51562L23.5 14.793V2.625H2.5ZM20 4.375C20.4922 4.375 20.9023 4.54818 21.2305 4.89453C21.5768 5.22266 21.75 5.63281 21.75 6.125C21.75 6.61719 21.5768 7.03646 21.2305 7.38281C20.9023 7.71094 20.4922 7.875 20 7.875C19.5078 7.875 19.0885 7.71094 18.7422 7.38281C18.4141 7.03646 18.25 6.61719 18.25 6.125C18.25 5.63281 18.4141 5.22266 18.7422 4.89453C19.0885 4.54818 19.5078 4.375 20 4.375ZM8.625 10.2539L2.5 16.3789V18.375H16.6641L8.625 10.2539ZM18.25 12.0039L15.5156 14.7109L19.1523 18.375H23.5V17.2539L18.25 12.0039Z"
+                        fill="#023A4A" />
+                    </svg>
+                    {{ "Sighting" | translate }}
+                  </button>
+                </li>
               </ul>
             </div>
             <div class="general_details mt-4 p-4 bg-color ">
               <club-profile-tab *ngIf="activeTab == 'profile'" [userData]="user" [isPremium]="isPremium"></club-profile-tab>
-              <club-history-tab *ngIf="activeTab == 'club_history'" role="Scout" ></club-history-tab>
+              <club-history-tab *ngIf="activeTab == 'club_history'" role="club" ></club-history-tab>
+              <club-teams-tab *ngIf="activeTab == 'teams'"></club-teams-tab>
               <club-gallery-tab *ngIf="activeTab == 'gallery'" [coverImage]="coverImage" (dataEmitter)="handleCoverImageData($event)"  [isPremium]="isPremium"></club-gallery-tab>
+              <club-sighting-tab *ngIf="activeTab == 'sighting'"></club-sighting-tab>
             </div>
           </div>
         </div>

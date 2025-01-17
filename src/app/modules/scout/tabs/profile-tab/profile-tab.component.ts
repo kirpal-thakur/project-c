@@ -131,7 +131,7 @@ export class ProfileTabComponent {
       data: { user: this.user }  // Corrected data passing      
     });
 
-    
+
     dialogRef.afterClosed().subscribe(result => {
         this.getUserProfile()
     });
