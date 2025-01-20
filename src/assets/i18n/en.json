@@ -8,13 +8,6 @@
   "homePage": "Home Page",
   "updatePage": "Update Page",
   "description": "Description",
-
-
-
-
-
-
-
   "premium": "Premium",
   "boostProfileActive": "Boost Profile active",
   "eltonPrince": "Elton Prince",
@@ -656,9 +649,9 @@
   "loading": "Loading , please wait...",
   "deafultProfilePreview": "Default Profile Preview",
   "choosePlan": "Choose Plan",
-  "ConfirmDeleteinformation": "Once information is deleted, it can’t be undone.",
-  "ConfirmDeleteinformation1": "Do you want to delete?",
-  "ConfirmDeleteinformation3": "Once information is deleted, it can’t be undone. Do you want to delete?",
+  "confirmDeleteinformation": "Once information is deleted, it can’t be undone.",
+  "confirmDeleteinformation1": "Do you want to delete?",
+  "confirmDeleteinformation3": "Once information is deleted, it can’t be undone. Do you want to delete?",
   "confirmDeleteUser": "Once user is deleted, it can’t be undone.",
   "confirmDeleteUser1": "Do you want to delete?",
   "templateIsDeleted": "Once template is deleted, it can’t be undone.",

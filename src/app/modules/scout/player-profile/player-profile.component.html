@@ -3,7 +3,7 @@
         <button class="close-btn" (click)="onCancel()">X</button>
         <div class="player-elton d-flex align-items-center gap-1">
             <div class="player-title">
-                <h6>{{'Player :' | translate}}</h6>
+                <h6>{{'player:' | translate}}</h6>
             </div>
             <div class="elton-btn d-flex align-items-center gap-2">
                <div class="player-elton-img ">
@@ -26,10 +26,10 @@
 
     <div class="overflow-card">
         <div class="general-details">
-            <h2>{{'TalentsTranslate.generalDetails' | translate}}</h2>
+            <h2>{{'generalDetails' | translate}}</h2>
             <div class="row general-details-items">
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.currentClub' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'currentClub' | translate}}</h4>
                     <span>
                         <img 
                           width="26px"
@@ -43,11 +43,11 @@
                         [src]="user.club_logo_path ? user.club_logo_path : '../../../../assets/images/flag.svg'" alt=""></span> -->
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'League level' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'leagueLevel' | translate}}</h4>
                     <span class="details-1">{{user.league_name}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.nationality' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'nationality' | translate}}</h4>
                     
                     <div class="mt-2" *ngFor="let nation of userNationalities">
                         <span><img width="26px" src="{{nation.flag_path}}" alt=""></span>
@@ -55,41 +55,41 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.position' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'position' | translate}}</h4>
                     <span class="details-1" *ngFor="let position of positions">{{position.name}}</span>              
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.internationalPlayer' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'internationalPlayer' | translate}}</h4>
                     <span><img width="26px" src="assets\images\team-badge.png" alt=""></span>
                     <span class="details-1">{{user.int_player_country}}</span>    
                 </div>
             </div>
         </div>
         <div class="personal-details pb-5">
-            <h2>{{'personal-details' | translate}}</h2>
+            <h2>{{'personalDetails' | translate}}</h2>
             <div class="row general-details_box">
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'Full Name' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'fullName' | translate}}</h4>
                     <span class="details-1 p-0">{{user.first_name + ' ' + user.last_name}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.dateOfBirth' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'dateOfBirth' | translate}}</h4>
                     <span class="details-1">{{userData.date_of_birth}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.foot' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'foot' | translate}}</h4>
                     <span class="details-1">{{userData.foot}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.InTheTeamSince' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'InTheTeamSince' | translate}}</h4>
                     <span class="details-1">{{userData.in_team_since}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.age' | translate}}</h4>                
+                    <h4 class="details_2 mb-2">{{'age' | translate}}</h4>                
                     <span class="details-1">{{userData.age}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.placeOfBirth' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'placeOfBirth' | translate}}</h4>
                     <span class="details-1">{{userData.place_of_birth}}</span>
                 </div>
                 <div class="col-lg-3">
@@ -97,19 +97,19 @@
                     <span class="details-1">{{userData.contract_end}}</span>                
                 </div>
                 <div class="col-lg-3">
-                 <h4 class="details_2 mb-2">{{'TalentsTranslate.topSpeed' | translate}}</h4>
+                 <h4 class="details_2 mb-2">{{'topSpeed' | translate}}</h4>
                     <span class="details-1">{{userData.top_speed}}</span>    
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.height' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'height' | translate}}</h4>
                        <span class="details-1">{{userData.height}}</span>    
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.position' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'position' | translate}}</h4>
                     <span class="details-1" *ngFor="let position of positions">{{position.name}}</span>        
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'TalentsTranslate.socialMedia' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'socialMedia' | translate}}</h4>
                     <div class="facebook_links mb-2 d-flex align-items-center">
                         <span>
                             <svg id="users-icon" width="20" height="18" viewBox="0 0 9 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="social-svg">
