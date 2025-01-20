@@ -13,7 +13,7 @@
             <div class="col-5 image-right-border">
 
                 <div class="profile-preview text-center mb-4">
-                    <h2 class="boosted-profile">{{ 'TalentsTranslate.boostedProfilePreview' | translate }}</h2>
+                    <h2 class="boosted-profile">{{ 'boostedProfilePreview' | translate }}</h2>
                     <div class=" profile_preview">
                         <div class="player_img player-image-bg">
 
@@ -48,13 +48,13 @@
                             <span class="player-age">{{calculateAge(loggedInUser?.meta?.date_of_birth ??'--')}}</span>
 
                         </div>
-                        <div class="boosted-box"> {{'TalentsTranslate.boosted' | translate}} </div>
+                        <div class="boosted-box"> {{'boosted' | translate}} </div>
                     </div>
 
                 </div>
 
                 <div class="profile-preview text-center mb-4">
-                    <h2 class="boosted-profile">{{'TalentsTranslate.deafultProfilePreview' | translate}}</h2>
+                    <h2 class="boosted-profile">{{'deafultProfilePreview' | translate}}</h2>
                     <div class=" profile_preview">
                         <div class="player_img player-image-bg-2">
                             <img [src]="loggedInUser?.meta?.profile_image_path" alt="player-image"
@@ -98,7 +98,7 @@
 
                 <div class="target-audience mb-4">
                     <div class="form-group col-lg-8">
-                      <mat-label>{{ 'TalentsTranslate.selectTargetAudience' | translate }}</mat-label>
+                      <mat-label>{{ 'selectTargetAudience' | translate }}</mat-label>
                       <mat-select
                         ngClass="mat-options"
                         [(ngModel)]="selectedAudienceIds"
@@ -138,7 +138,7 @@
 
 
                 <div class="stats mb-4">
-                    <h3>{{ 'TalentsTranslate.stats' | translate }}</h3>
+                    <h3>{{ 'stats' | translate }}</h3>
                     <div class="d-flex mt-3 align-items-center justify-content-between total-bg">
                         <p>
                             <span class="totle-view">
@@ -152,7 +152,7 @@
                                         fill="#787878" class="td-icon-favourites"></path>
                                 </svg>
                             </span>
-                            {{ 'Total Views' | translate }}: <span class="bold-text">{{stats?.views_count}}</span>
+                            {{ 'totalViews' | translate }}: <span class="bold-text">{{stats?.views_count}}</span>
                         </p>
                         <p>
                             <span>
@@ -171,7 +171,7 @@
                                     </defs>
                                 </svg>
                             </span>
-                            {{ 'Total Clicks' | translate }}: <span class="bold-text">{{stats?.click_count}}</span>
+                            {{ 'totalClicks' | translate }}: <span class="bold-text">{{stats?.click_count}}</span>
                         </p>
                     </div>
                     <div class="overflow-stats">
@@ -215,8 +215,8 @@
                 </div>
 
                 <div class="actions text-end mb-0">
-                    <button class="btn puse-btn" (click)="pauseBoost()">{{ 'TalentsTranslate.cancel' | translate }}</button>
-                    <button class="btn save_button" (click)="saveBoost()">{{ 'TalentsTranslate.saveAndBoost' | translate }}</button>
+                    <button class="btn puse-btn" (click)="pauseBoost()">{{ 'cancel' | translate }}</button>
+                    <button class="btn save_button" (click)="saveBoost()">{{ 'saveAndBoost' | translate }}</button>
                 </div>
             </div>
         </div>
