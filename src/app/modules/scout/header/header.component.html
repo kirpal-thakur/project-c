@@ -9,7 +9,7 @@
       </ul>
 
       <div class="dashboard-title">
-        <span class="page-heading"> Dashboard</span>
+        <span class="page-heading"> {{ 'dashboard' | translate }}</span>
       </div>
 
     <div class="input-group search-area">
@@ -52,7 +52,7 @@
                 <div class="dropdown-menu py-0 notification-box">
 
                         <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
-                            <h6>Notification</h6>
+                            <h6>{{'notification' | translate}}</h6>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <rect x="0" y="0" width="24" height="24"></rect>
@@ -123,7 +123,7 @@
                           </div>
                         </div>
                         <div class="load_more">
-                          <p (click)="loadMoreNotifications()">View all notifications</p>
+                          <p (click)="loadMoreNotifications()">{{'viewAllNotifications' | translate}}</p>
                         </div>
 
                 </div>
@@ -149,7 +149,7 @@
 
               </a>
               <div class="dropdown-menu dropdown-menu-end">
-                <h6 class="mx-3 border-bottom pb-2 fs-15">Select Country</h6>
+                <h6 class="mx-3 border-bottom pb-2 fs-15">{{'selectCountry' | translate}}</h6>
 
                 <a href="#" class="dropdown-item ai-icon" [class.selected]="lang==='en'" (click)="ChangeLang('en')">
                   <svg width="40" height="27" viewBox="0 0 40 27" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -244,7 +244,7 @@
                                 <path d="M21.9999843,15.009808 L22.0249378,15 L22.0249378,19.5857864 C22.0249378,20.1380712 21.5772226,20.5857864 21.0249378,20.5857864 C20.7597213,20.5857864 20.5053674,20.4804296 20.317831,20.2928932 L18.0249378,18 L5,18 C3.34314575,18 2,16.6568542 2,15 L2,6 C2,4.34314575 3.34314575,3 5,3 L19,3 C20.6568542,3 22,4.34314575 22,6 L22,15 C22,15.0032706 21.9999948,15.0065399 21.9999843,15.009808 Z M6.16794971,10.5547002 C7.67758127,12.8191475 9.64566871,14 12,14 C14.3543313,14 16.3224187,12.8191475 17.8320503,10.5547002 C18.1384028,10.0951715 18.0142289,9.47430216 17.5547002,9.16794971 C17.0951715,8.86159725 16.4743022,8.98577112 16.1679497,9.4452998 C15.0109146,11.1808525 13.6456687,12 12,12 C10.3543313,12 8.9890854,11.1808525 7.83205029,9.4452998 C7.52569784,8.98577112 6.90482849,8.86159725 6.4452998,9.16794971 C5.98577112,9.47430216 5.86159725,10.0951715 6.16794971,10.5547002 Z" fill="#c2c2c2"></path>
                             </g>
                         </svg>
-                        <span class="ms-1 fs-15">Activity Log</span>
+                        <span class="ms-1 fs-15"> {{'activityLog' | translate}}</span>
                     </a>
                     <a href="javascript:void(0);" class="dropdown-item ai-icon px-0 py-2">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px" height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
@@ -254,11 +254,11 @@
                                 <path d="M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"></path>
                             </g>
                         </svg>
-                        <span class="ms-1 fs-15">Account Setting</span>
+                        <span class="ms-1 fs-15">{{'accountSetting' | translate}}</span>
                     </a>
                     <a href="#" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
                       <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c2c2c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                        <span class="ms-1 fs-14">Sign out </span>
+                        <span class="ms-1 fs-14">{{'signOut' | translate}} </span>
                     </a>
 
 

@@ -88,7 +88,7 @@
                             class="fc-club-img" alt="">
                         </div>
                         <div class="team-badge_content col-lg-9 p-0">
-                          <h6 class="title_2 mb-1">{{ 'Company Name' | translate}}</h6>
+                          <h6 class="title_2 mb-1">{{ 'companyName' | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.company_name |translate }} </h5>
                         </div>
                       </div>
@@ -127,7 +127,7 @@
                           <img [src]="countryFlagUrl" alt="" />
                         </div>
                         <div class=" col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2"> {{"City" | translate }}</h6>
+                          <h6 class="title_2"> {{"city" | translate }}</h6>
                           <h5 class="title-1">{{user?.meta?.city}}</h5>
                         </div>
                       </div>
@@ -153,7 +153,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Contact Number' | translate }}</h6>
+                          <h6 class="title_2">{{ 'contactNumber' | translate }}</h6>
                           <h5 *ngIf="user.meta && user.meta.contact_number" class="title-1">{{user.meta.contact_number}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.contact_number">NA</h5>
                         </div>
@@ -202,7 +202,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'zip code' | translate}}</h6>
+                          <h6 class="title_2">{{ 'zipCode' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.zipcode">{{user?.meta?.zipcode}}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.zipcode">NA</h5>
                         </div>
@@ -211,7 +211,7 @@
                     <div class="col-lg-6 team-logos">
                       <div class="row align-items-center">
                         <div class="col-lg-12 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Social Media' | translate}}</h6>
+                          <h6 class="title_2">{{ 'socialMedia' | translate}}</h6>
 
                             <a class="platform_image px-1" *ngIf="user.meta.sm_x" [href]="'https://www.x.com/' + user.meta.sm_x">
                               <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -326,7 +326,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Address' | translate}}</h6>
+                          <h6 class="title_2">{{ 'address' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.address">{{user?.meta?.address}}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.address">NA</h5>
                         </div>
