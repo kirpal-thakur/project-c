@@ -47,4 +47,6 @@
     border-bottom: 0;
     border-left: .3em solid transparent;
 }
-
+.mat-mdc-dialog-inner-container.mdc-dialog__container{
+    top: 0px !important;
+}

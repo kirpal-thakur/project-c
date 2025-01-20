@@ -249,12 +249,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.StartTour = this.user?.show_tour == 1 ? true : false;
 
-          // if(this.StartTour) {
-          //   setTimeout(() => {
-          //     this.startIntroTour();  // Start the tour after a slight delay
-          //   }, 2500);
-          // }
-
           this.isPremium = this.user?.active_subscriptions?.premium.length > 0 ? true : true;
           this.premium = this.user.active_subscriptions?.premium?.length > 0 ? true : false;
           this.booster = this.user.active_subscriptions?.booster?.length > 0 ? true : false;
@@ -267,15 +261,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
           if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
-
-          // this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
-
-          // if (this.userNationalities?.length) {
-          //   // Fetch flag details for each nationality
-          //   this.userNationalities.forEach((nat:any, index:any) => {
-          //     this.getCountry(nat.flag_path, index);
-          //   });
-          // }
 
         }
 
@@ -292,7 +277,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
       console.error("Place of birth is empty.");
       return;
     }
-
 
     // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
     const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
@@ -337,6 +321,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
   }
 
   openEditDialog() {
+    console.log(this.user)
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
       data: {user : this.user , countries : this.countries}

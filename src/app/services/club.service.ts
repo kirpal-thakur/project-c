@@ -686,5 +686,17 @@ export class ClubService {
       `${this.apiUrl2}club/delete-sighting-attachment/${id}`, {headers}
     );
   }
+
+
+  getClubTeamPlayers(teamId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}club/get-club-players/${teamId}`, {headers}
+    );
+  }
+
 }
 
