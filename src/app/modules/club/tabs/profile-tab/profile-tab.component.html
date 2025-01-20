@@ -1,36 +1,36 @@
 <!-- unlock page  -->
 <div class="unlock_page" *ngIf="!isPremium">
     <div class="general_titels d-flex align-items-center">
-        <h2>{{ 'GeneralDetails' | translate}}</h2>
+        <h2>{{ 'generalDetails' | translate}}</h2>
         <div class="edit_button">
             <button class="tour-general-details" matTooltip="Edit General Details" matTooltipPosition="right" >
                 <svg width="22" height="23" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 17.7505V21.5005H6.75L17.81 10.4405L14.06 6.69049L3 17.7505ZM20.71 7.54049C20.8027 7.44798 20.8762 7.33809 20.9264 7.21712C20.9766 7.09614 21.0024 6.96646 21.0024 6.83549C21.0024 6.70452 20.9766 6.57484 20.9264 6.45387C20.8762 6.33289 20.8027 6.223 20.71 6.13049L18.37 3.79049C18.2775 3.69779 18.1676 3.62424 18.0466 3.57406C17.9257 3.52388 17.796 3.49805 17.665 3.49805C17.534 3.49805 17.4043 3.52388 17.2834 3.57406C17.1624 3.62424 17.0525 3.69779 16.96 3.79049L15.13 5.62049L18.88 9.37049L20.71 7.54049Z" fill="#787878"/>
                     </svg>
-                <span>Edit</span>
+                <span>{{'edit' | translate}}</span>
             </button>
         </div>
     </div>
     <div class="unlock-view">
         <div class="d-flex justify-content-between mt-4 details_info">
             <div class="general_details">
-                <h6 class="details_2">{{ 'In the team since ' | translate}}</h6>
+                <h6 class="details_2">{{ 'inTheTeamSince' | translate}}</h6>
                 <h5 class="details-1">--</h5>
             </div>
             <div class="general_details">
-                <h6 class="details_2"> {{ 'Top Speed' | translate}}</h6>
+                <h6 class="details_2"> {{ 'topSpeed' | translate}}</h6>
                 <h5 class="details-1" >NA</h5>
             </div>
             <div class="general_details">
-                <h6 class="details_2">{{ 'InternationalPlayer' | translate}}</h6>
+                <h6 class="details_2">{{ 'internationalPlayer' | translate}}</h6>
                 <span class="m-2">--</span>
             </div>
             <div class="general_details">
-                <h6 class="details_2"> {{ 'Current Market Value' | translate}}</h6>
+                <h6 class="details_2"> {{ 'currentMarketValue' | translate}}</h6>
                 <h5 class="details-1" >NA</h5>
             </div>
             <div class="general_details">
-                <h6 class="details_2"> {{ 'Last Change' | translate}}</h6>
+                <h6 class="details_2"> {{ 'lastChange' | translate}}</h6>
                 <h5 class="details-1" >--</h5>
             </div>
         </div>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-lg-6 p-3">
                 <div class="main-position">
-                    <h6 class="details_2">{{ 'Social Media' | translate}}</h6>
+                    <h6 class="details_2">{{ 'socialMedia' | translate}}</h6>
                     <div class="social_icons my-2">
                         <span class="me-2">
                             <svg id="users-icon" class="social-svg" width="20" height="18" viewBox="0 0 9 18" fill="none"
@@ -92,7 +92,7 @@
                     </clipPath>
                     </defs>
                 </svg>
-                {{'Upgrade to unlock'|translate}}
+                {{'upgradeToUnlock'|translate}}
               </a>
         </div>
     </div>
@@ -100,7 +100,7 @@
 
 <ng-container *ngIf="isPremium">
     <div class="general_titels d-flex align-items-center mb-2">
-        <h2>{{ 'GeneralDetails' | translate}}</h2>
+        <h2>{{ 'generalDetails' | translate}}</h2>
     </div>
     <div class="forms_details mb-2">
         <form class="d-flex align-items-center form-boxs">

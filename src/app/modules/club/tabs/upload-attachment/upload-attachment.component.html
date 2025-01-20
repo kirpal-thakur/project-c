@@ -87,8 +87,7 @@
           </div>
 
           <div class="ms-3 mt-4" *ngIf="row.file == ''">
-            <label for="file-upload-{{i}}" type="button" class="btn btn-outline-white code-text upload-label">{{
-              'upload' | translate }}</label>
+            <label for="file-upload-{{i}}" type="button" class="btn btn-outline-white code-text upload-label">{{'upload' | translate }}</label>
             <input id="file-upload-{{i}}" (change)="onAttachmentFileChange($event, i)" type="file" class="d-none" />
           </div>
         </div>
