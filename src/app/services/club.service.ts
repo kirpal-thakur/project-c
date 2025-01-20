@@ -698,5 +698,19 @@ export class ClubService {
     );
   }
 
+
+  getAllPlayers(): Observable<any> {
+    const params = new HttpParams()
+      .set('whereClause[role]',4)
+      .set('noLimit', true)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}users-frontend-with-login`,
+      { params }
+    );
+  }
+
 }
 

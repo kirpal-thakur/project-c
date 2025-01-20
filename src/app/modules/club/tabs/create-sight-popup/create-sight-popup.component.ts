@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angul
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ClubService } from '../../../../services/club.service';
 
 @Component({
   selector: 'app-create-sight-popup',
@@ -40,7 +41,9 @@ export class CreateSightPopupComponent implements AfterViewInit {
     file: ""
   }];
   @ViewChild('fileInput', { static: false }) fileInputElement!: ElementRef;
-  constructor(public dialogRef : MatDialogRef<CreateSightPopupComponent>, public userService: UserService,
+  constructor(public dialogRef : MatDialogRef<CreateSightPopupComponent>,
+    public userService: UserService,
+    public clubService: ClubService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
       this.clubId = data.clubId;
@@ -62,7 +65,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
 
   ngOnInit(): void {
     try {
-       this.userService.getAllPlayers().subscribe((response)=>{
+       this.clubService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
           this.allUsers = response.data.userData; 
           if(this.data.invitees){
@@ -83,7 +86,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
       console.error('Error fetching users:', error);
     }
   }
-  
+
 
   close(){
     this.dialogRef.close();
