@@ -114,7 +114,7 @@ export class ClubService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {company_history: history}, { headers });
+    return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {club_history: history}, { headers });
   }
 
   updatePicOnHeader(pic: string) {
@@ -696,6 +696,53 @@ export class ClubService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}club/get-club-players/${teamId}`, {headers}
     );
+  }
+
+
+  getAllPlayers(): Observable<any> {
+    const params = new HttpParams()
+      .set('whereClause[role]',4)
+      .set('noLimit', true)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}users-frontend-with-login`,
+      { params }
+    );
+  }
+
+
+  addSight(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting`, params, { headers });
+  }
+
+  updateSight(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/edit-sighting-detail/${id}`, params, { headers });
+  }
+
+  uploadSightAttachment(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting-attachments/${id}`, params, { headers });
+  }
+
+  sendSightingInvite(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting-invites/${id}`, params, { headers });
   }
 
 }

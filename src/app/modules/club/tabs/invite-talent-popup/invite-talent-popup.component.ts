@@ -6,6 +6,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { UserService } from '../../../../services/user.service';
 import { TalentService } from '../../../../services/talent.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { ClubService } from '../../../../services/club.service';
 
 @Component({
   selector: 'app-invite-talent-popup',
@@ -25,7 +26,7 @@ export class InviteTalentPopupComponent {
   sightId:any = "";
   constructor(
     private userService: UserService,
-    private talentService: TalentService,
+    private clubService: ClubService,
     public dialogRef: MatDialogRef<InviteTalentPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -45,17 +46,17 @@ export class InviteTalentPopupComponent {
  
   async fetchPlayers(): Promise<void> {
     try {
-      this.userService.getAllPlayers().subscribe((response)=>{
+      this.clubService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
           this.allUsers = response.data.userData; 
           } else {
             console.error('Invalid API response structure:', response);
           }
-        });     
+        });
       } catch (error) {
         console.error('Error fetching users:', error);
       }
-  
+
   }
 
   close() {

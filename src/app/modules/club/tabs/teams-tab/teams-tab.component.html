@@ -11,11 +11,19 @@
 <div class="player-view-container" *ngIf="view == 'player'">
     <div class="container"> 
       <div class="row">
-        <span class="back-link">
-          <svg (click)="backToTeamView()" class="pointer" width="22" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 12H5M5 12L9 8M5 12L9 16" stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+        <div class="back-and-add-container">
+          <span class="back-link">
+            <svg (click)="backToTeamView()" class="pointer" width="22" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 12H5M5 12L9 8M5 12L9 16" stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="add-player-link">
+            <svg  class="pointer" width="22" height="23" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 5V19M5 12H19" stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
         <div class="col pl-5">
           <div class="table-responsive">
             <table mat-table [dataSource]="players" class="table table-hover table-striped table-users ">

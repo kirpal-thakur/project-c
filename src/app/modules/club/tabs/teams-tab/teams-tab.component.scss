@@ -61,3 +61,15 @@
   padding: 0px 5px;
   letter-spacing: .3px;
 }
+
+.back-and-add-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.add-player-link {
+  margin-left: auto; /* This will push the add button to the right */
+}
