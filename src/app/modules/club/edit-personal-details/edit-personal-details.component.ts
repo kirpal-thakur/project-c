@@ -135,10 +135,10 @@ export class EditPersonalDetailsComponent implements OnInit {
         this.user = response.data.user_data;
 
         // Update component properties with user data
-        if (this.user.meta) {
+        if (this.user?.meta) {
           this.address = this.user.meta.address;
           this.city = this.user.meta.city;
-          this.club_name = this.data?.meta?.club_name;
+          this.club_name = this.user?.meta?.club_name;
           this.contact_number = this.user.meta.contact_number;
           this.cover_image = this.user.meta.cover_image;
           this.cover_image_path = this.user.meta.cover_image_path;
