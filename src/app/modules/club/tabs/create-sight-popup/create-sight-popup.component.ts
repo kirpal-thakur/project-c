@@ -67,7 +67,8 @@ export class CreateSightPopupComponent implements AfterViewInit {
     try {
        this.clubService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
-          this.allUsers = response.data.userData; 
+          this.allUsers = response.data.userData.users;
+          console.log(this.allUsers)
           if(this.data.invitees){
             let tempInvitees:any = [];
             this.data.invitees.map((i:any) => {
@@ -79,7 +80,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
             this.users = tempInvitees;
           }
         } else {
-          console.error('Invalid API response structure:', response); 
+          console.error('Invalid API response structure:', response);
         }
       });     
     } catch (error) {
@@ -224,7 +225,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
     });
 
     try {
-      this.userService.addSight(this.clubId, formData).subscribe((response)=>{
+      this.clubService.addSight(this.clubId, formData).subscribe((response)=>{
 
         if (response && response.status) {
           this.dialogRef.close({
@@ -262,7 +263,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
     });
     
     try {
-      this.userService.updateSight(this.idToBeUpdate, formData).subscribe((response)=>{
+      this.clubService.updateSight(this.idToBeUpdate, formData).subscribe((response)=>{
         console.log(response)
         if (response && response.status) {
           this.dialogRef.close({
