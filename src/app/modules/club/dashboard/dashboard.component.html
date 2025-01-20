@@ -89,7 +89,7 @@
                             class="fc-club-img" alt="">
                         </div>
                         <div class="team-badge_content col-lg-9 p-0">
-                          <h6 class="title_2 mb-1">{{ 'Club Name' | translate}}</h6>
+                          <h6 class="title_2 mb-1">{{ 'clubName' | translate}}</h6>
                           <h5 class="title-1">{{user?.meta?.club_name |translate }} </h5>
                         </div>
                       </div>
@@ -128,7 +128,7 @@
                           <img [src]="countryFlagUrl" alt="" />
                         </div>
                         <div class=" col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2"> {{"City" | translate }}</h6>
+                          <h6 class="title_2"> {{"city" | translate }}</h6>
                           <h5 class="title-1">{{user?.meta?.city}}</h5>
                         </div>
                       </div>
@@ -154,7 +154,7 @@
                           </svg>
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'Contact Number' | translate }}</h6>
+                          <h6 class="title_2">{{ 'contactNumber' | translate }}</h6>
                           <h5 *ngIf="user.meta && user.meta.contact_number" class="title-1">{{user.meta.contact_number}}</h5>
                           <h5 *ngIf="!user.meta || !user.meta.contact_number">NA</h5>
                         </div>
@@ -203,7 +203,7 @@
 
                         </div>
                         <div class="col-lg-9 p-0 team-badge_content">
-                          <h6 class="title_2">{{ 'zip code' | translate}}</h6>
+                          <h6 class="title_2">{{ 'zipcode' | translate}}</h6>
                           <h5 class="title-1" *ngIf="user?.meta?.zipcode">{{user?.meta?.zipcode}}</h5>
                           <h5 class="title-1" *ngIf="!user?.meta?.zipcode">NA</h5>
                         </div>

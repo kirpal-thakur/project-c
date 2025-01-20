@@ -3,7 +3,7 @@
         <button class="close-btn" (click)="onCancel()">X</button>
         <div class="player-elton d-flex align-items-center gap-1">
             <div class="player-title">
-                <h6>{{'Player :' | translate}}</h6>
+                <h6>{{'player:' | translate}}</h6>
             </div>
             <div class="elton-btn d-flex align-items-center gap-2">
                <div class="player-elton-img ">
@@ -69,7 +69,7 @@
             <h2>{{'personal-details' | translate}}</h2>
             <div class="row general-details_box">
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'Full Name' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'fullName' | translate}}</h4>
                     <span class="details-1 p-0">{{user.first_name + ' ' + user.last_name}}</span>
                 </div>
                 <div class="col-lg-3">
@@ -93,7 +93,7 @@
                     <span class="details-1">{{userData.place_of_birth}}</span>
                 </div>
                 <div class="col-lg-3">
-                    <h4 class="details_2 mb-2">{{'Contract until' | translate}}</h4>
+                    <h4 class="details_2 mb-2">{{'contractUntil' | translate}}</h4>
                     <span class="details-1">{{userData.contract_end}}</span>                
                 </div>
                 <div class="col-lg-3">
