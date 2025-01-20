@@ -160,7 +160,26 @@ import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sigh
     MatProgressSpinnerModule,
     LightboxModule,
     GuidedTourModule,
-    SharedModule
+    SharedModule,
+    CommonModule,
+    TranslateModule ,
+    FormsModule,
+    MatDialogModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    RouterModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatTabsModule ,
+    MatTableModule,
+    MatPaginator,
+    NgxEditorModule,
+    MatProgressSpinnerModule,
     // NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })

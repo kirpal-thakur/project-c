@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
+import { ClubService } from '../../../../services/club.service';
 
 @Component({
   selector: 'club-teams-tab',
@@ -16,14 +17,13 @@ export class TeamsTabComponent {
   displayedColumns: string[] = ['Player Name', 'Joining Date', 'Exit Date', 'Location','Edit'];
   isLoading:boolean = false;
   selectedTeam:any = "";
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router){}
+  @Input() userData: any;
 
+  constructor(private route: ActivatedRoute, private userService: UserService, private clubService: ClubService, private router: Router){}
 
   ngOnInit(){
-    this.route.params.subscribe((params:any) => {
-      this.userId = params.id;
+      this.userId = this.userData.id;
       this.getClubTeams(this.userId)
-    })
   }
 
   getClubTeams(userId:any){
@@ -50,7 +50,7 @@ export class TeamsTabComponent {
     this.view = 'player';
     this.isLoading = true;
     try {
-      this.userService.getTeamPlayers(teamId).subscribe((response)=>{
+      this.clubService.getClubTeamPlayers(teamId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.players = response.data.players;
           console.log(this.players) 
@@ -62,7 +62,7 @@ export class TeamsTabComponent {
       });
     } catch (error) {
       this.isLoading = false;
-      console.error('Error fetching users:', error);  
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -72,7 +72,7 @@ export class TeamsTabComponent {
   }
 
   navigate(playerId:any){
-    let pageRoute = 'admin/player';
+    let pageRoute = 'view/player';
     this.router.navigate([pageRoute, playerId]);
   }
 }

@@ -37,12 +37,11 @@
         <input type="text" id="manager-name" class="cupen-btn w-100" [(ngModel)]="managerName">
       </div>
       <div class="col-lg-4 px-2">
-        <label for="date-select" class="code-text">{{ 'date' | translate }}</label>
-        <div class="cupen-btn sighting-cal" style="min-width: 170px;">
-          <input type="text" datetimepicker placeholder="Select date & time"
-            [(ngModel)]="dateTime">
+        <label for="date-select" class="code-text">{{ 'date' | translate }}</label><br>
 
-        </div>
+        <label class="cupen-btn sighting-cal" style="min-width: 170px;">
+          <input type="text" datetimepicker placeholder="Select date & time"  [(ngModel)]="dateTime">
+        </label>
       </div>
     </div>
 
