@@ -76,6 +76,7 @@ import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component
 import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
 import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-talent-popup.component';
 import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sight-popup.component';
+import { AddNewTalentComponent } from './tabs/add-new-talent/add-new-talent.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -132,7 +133,8 @@ import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sigh
     SightingTabComponent,
     UploadAttachmentComponent,
     InviteTalentPopupComponent,
-    CreateSightPopupComponent
+    CreateSightPopupComponent,
+    AddNewTalentComponent
   ],
   imports: [
     CommonModule,
@@ -180,7 +182,6 @@ import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sigh
     MatPaginator,
     NgxEditorModule,
     MatProgressSpinnerModule,
-    // NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
   ]
 })
 

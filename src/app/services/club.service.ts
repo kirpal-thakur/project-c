@@ -745,5 +745,13 @@ export class ClubService {
     return this.http.post<any>(`${this.apiUrl}club/add-sighting-invites/${id}`, params, { headers });
   }
 
+  addTeamPlayer(params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-club-player`, params, { headers });
+  }
+
 }
 

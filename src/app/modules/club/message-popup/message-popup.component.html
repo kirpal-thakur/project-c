@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <div class="display-message" *ngIf="data.action == 'delete-activity-confirmation'">
+        <div class="display-message" *ngIf="data.action == 'delete-activity-confirmation' || data.action == 'delete-sighting-confirmation'">
             {{data.message}}
 
             <div class="popup-delete-btn">
