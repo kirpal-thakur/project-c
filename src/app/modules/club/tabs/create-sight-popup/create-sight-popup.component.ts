@@ -41,25 +41,29 @@ export class CreateSightPopupComponent implements AfterViewInit {
     file: ""
   }];
   @ViewChild('fileInput', { static: false }) fileInputElement!: ElementRef;
-  constructor(public dialogRef : MatDialogRef<CreateSightPopupComponent>,
+
+  constructor(
+    public dialogRef : MatDialogRef<CreateSightPopupComponent>,
     public userService: UserService,
     public clubService: ClubService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
 
-      this.clubId = data.clubId;
+    this.clubId = data.clubId;
 
-      if(data.sightData){
-        this.eventName = data.sightData.event_name;
-        this.managerName = data.sightData.manager_name;
-        this.date = data.sightData.event_date;
-        this.dateTime = this.reverseDateFormat(data.sightData.event_date, data.sightData.event_time);
-        this.address = data.sightData.address;
-        this.zipcode = data.sightData.zipcode;
-        this.city = data.sightData.city;
-        this.about = data.sightData.about_event;
-        this.idToBeUpdate = data.sightData.id;
-      }
+    if(data.sightData){
+      this.eventName = data.sightData.event_name;
+      this.managerName = data.sightData.manager_name;
+      this.date = data.sightData.event_date;
+      this.dateTime = this.reverseDateFormat(data.sightData.event_date, data.sightData.event_time);
+      this.address = data.sightData.address;
+      this.zipcode = data.sightData.zipcode;
+      this.city = data.sightData.city;
+      this.about = data.sightData.about_event;
+      this.idToBeUpdate = data.sightData.id;
+    }
   }
+
   ngAfterViewInit() {
   }
 
@@ -88,7 +92,6 @@ export class CreateSightPopupComponent implements AfterViewInit {
     }
   }
 
-
   close(){
     this.dialogRef.close();
   }
@@ -107,6 +110,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
       this.bannerFile = input.files[0];
     }
   }
+
   onAttachmentFileChange(event: Event, index:any): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -127,7 +131,6 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   removeRow(index:any):any {
-
     if(this.attachmentRows.length == 1){
       return false;
     }
@@ -161,11 +164,10 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-
     if (!this.users?.length){
       this.users.push(event.option.value);
       this.userInput.nativeElement.value = "";
-    }else if (this.users?.length && !this.users.find((user:any) => user.id === event.option.value.id)) {
+    } else if (this.users?.length && !this.users.find((user:any) => user.id === event.option.value.id)) {
       this.users.push(event.option.value);
       this.userInput.nativeElement.value = "";
     } else {
@@ -279,4 +281,5 @@ export class CreateSightPopupComponent implements AfterViewInit {
     }
 
   }
+
 }

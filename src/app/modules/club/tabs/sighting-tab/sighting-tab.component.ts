@@ -60,7 +60,7 @@ export class SightingTabComponent {
         if (response && response.status && response.data) {
           this.sightings = response.data.sightings;
           // this.totalSightings = response.data.totalCount;
-          this.paginator.length = response.data.totalCount;;
+          this.paginator.length = response.data.totalCount;
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -98,7 +98,7 @@ export class SightingTabComponent {
   }
 
   navigate(id:string): void {
-    let pageRoute = 'admin/'+id.toLowerCase();
+    let pageRoute = 'view/'+id.toLowerCase();
     this.router.navigate([pageRoute, id]);
   }
 
@@ -121,7 +121,7 @@ export class SightingTabComponent {
   }
 
   showDeleteConfirmationPopup(){
-    this.showMatDialog("", "delete-sighting-confirmation");
+    this.showMatDialog("Are you sure You want to delete this?", "delete-sighting-confirmation");
   }
 
   showMatDialog(message:string, action:string){
@@ -158,8 +158,10 @@ export class SightingTabComponent {
           this.allSelected = false;
           
           this.showMatDialog('Sighting(s) deleted successfully!.', 'display');
+          this.getSightings();
         }else{
           this.showMatDialog('Error in deleting sighting. Please try again.', 'display');
+          this.getSightings();
         }
       },
       error => {
