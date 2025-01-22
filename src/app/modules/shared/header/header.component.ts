@@ -61,15 +61,18 @@ export class HeaderComponent {
   role:any;
   roles:any= environment.roles;
   showAll : boolean = true;
+  isDarkMode: boolean = false;
 
   notificationSeen : boolean = false;
 
   ngOnInit() {
 
+    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+
     let notificationStatus = localStorage.getItem("notificationSeen");
     if (notificationStatus) {
       let jsonData = JSON.parse(notificationStatus);
-      this.notificationSeen = jsonData; 
+      this.notificationSeen = jsonData;
     }
     else {
       console.log("No data found in localStorage.");
@@ -299,6 +302,7 @@ export class HeaderComponent {
   updateThemeText() {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
+    localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
     document.getElementById('theme-text')!.textContent = this.themeText
   }
 

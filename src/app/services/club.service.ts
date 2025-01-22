@@ -83,31 +83,39 @@ export class ClubService {
     });
   }
 
+  getRepresentators(): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-representators`, {headers}
+    );
+  }
+
   // Call the backend to create a customer
   createCustomer(email: string, name: string, paymentMethodId: string): Observable<any> {
     // Replace with your CodeIgniter backend API URL
     return this.http.post('http://your-backend-url/create-customer', { email, name, paymentMethodId });
   }
 
-  getScoutHistory(): Observable<any> {
+  getClubHistory(): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl2}club/get-company-history`, {headers}
+      `${this.apiUrl2}club/get-club-history`, {headers}
     );
   }
 
-  updateScoutHistory(history:any): Observable<any> {
+  updateClubHistory(history:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}club/add-company-history`, {company_history: history}, { headers });
+    return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {club_history: history}, { headers });
   }
-
-
 
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);
@@ -638,6 +646,111 @@ export class ClubService {
         catchError(this.handleError<any>('getTeams', [])) // Handle errors gracefully
       );
     }
+  }
+
+  getSightings(id:any, params:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-sightings`, {params}
+    );
+  }
+
+  getSingleSighting(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/get-sighting/${id}`);
+  }
+
+
+  deleteSightings(params: any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl2}club/delete-sighting`, params, { headers });
+  }
+
+  deleteAttachment(id:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl2}club/delete-sighting-attachment/${id}`, {headers}
+    );
+  }
+
+
+  getClubTeamPlayers(teamId:any): Observable<any> {
+    const userToken = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+    return this.http.get<{ status: boolean, message: string, data: { } }>(
+      `${this.apiUrl}club/get-club-players/${teamId}`, {headers}
+    );
+  }
+
+
+  getAllPlayers(): Observable<any> {
+    const params = new HttpParams()
+      .set('whereClause[role]',4)
+      .set('noLimit', true)
+      .set('orderBy', 'id')
+      .set('order', 'desc');
+
+    return this.http.get<{ status: boolean, message: string, data: { userData: User[],totalCount:number } }>(
+      `${this.apiUrl}users-frontend-with-login`,
+      { params }
+    );
+  }
+
+
+  addSight(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting`, params, { headers });
+  }
+
+  updateSight(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/edit-sighting-detail/${id}`, params, { headers });
+  }
+
+  uploadSightAttachment(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting-attachments/${id}`, params, { headers });
+  }
+
+  sendSightingInvite(id:any, params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-sighting-invites/${id}`, params, { headers });
+  }
+
+  addTeamPlayer(params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/add-club-player`, params, { headers });
   }
 
 }

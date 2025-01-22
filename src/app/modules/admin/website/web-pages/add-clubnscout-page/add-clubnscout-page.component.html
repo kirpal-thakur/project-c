@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
-    <h2>{{ 'talentPage' | translate }}</h2>
+    <h2>{{ 'club&scoutPage' | translate }}</h2>
 
     <!-- General Information Block -->
     <fieldset class="border p-3 mb-4" *ngIf="!pageId">
@@ -79,11 +79,11 @@
     </div>
 
     <div class="mb-3">
-      <label for="banner_desc" class="form-label">{{ bannerDescription' | translate }}</label>
+      <label for="banner_desc" class="form-label">{{ 'bannerDescription' | translate }}</label>
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
         <ngx-editor [editor]="editor" class="editor-width" name="banner_desc" [(ngModel)]="formData.banner_desc"
-          [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+          [disabled]="false" [placeholder]="'typeHere' | translate"></ngx-editor>
       </div>
     </div>
 
@@ -203,7 +203,7 @@
             <label for="feature_title_{{ i }}" class="form-label">{{ 'featureTitle' | translate }}</label>
 
             <input type="text" [(ngModel)]="feature.title" class="form-control" name="feature_title_{{ i }}"
-              placeholder="Feature Title" required />
+              placeholder="{{ 'featureTitle' | translate }}" required />
           </div>
 
           <div class="col-md-6">
@@ -225,10 +225,10 @@
 
           <div class="col-md-9">
             <textarea [(ngModel)]="feature.desc" class="form-control" name="feature_desc_{{ i }}"
-              placeholder="Feature Description" required></textarea>
+              placeholder="{{ 'featureDescription' | translate }}" required></textarea>
           </div>
           <div class="col-md-3">
-            <button type="button" (click)="removeFeature(i)" class="btn btn-danger btn-sm ">
+            <button type="button" (click)="removeFeature(i)" class="next_btn btn-danger btn-sm ">
               {{ 'remove' | translate }}
             </button>
           </div>
@@ -241,7 +241,7 @@
           </div>
         </div>
       </div>
-      <button type="button" (click)="addFeature()" class="btn btn-primary btn-sm mt-2">
+      <button type="button" (click)="addFeature()" class="next_btn btn-sm mt-2">
         {{ 'addFeature' | translate }}
       </button>
     </div>
@@ -263,15 +263,15 @@
           <div class="col-md-6">
             <label for="monthly_plan_label_{{ i }}" class="form-label">{{ 'monthlyLabel' | translate }}</label>
             <input type="text" [(ngModel)]="plan.monthly_plan_label" class="form-control"
-              name="monthly_plan_label_{{ i }}" id="monthly_plan_label_{{ i }}" placeholder="Monthly label" required />
-            <label for="monthly_plan_label_{{ i }}" class="form-label">Monthly label</label>
+              name="monthly_plan_label_{{ i }}" id="monthly_plan_label_{{ i }}" placeholder="{{ 'monthlyLabel' | translate }}" required />
+            <label for="monthly_plan_label_{{ i }}" class="form-label">{{ 'monthlyLabel' | translate }}</label>
             <input
               type="text"
               [(ngModel)]="plan.monthly_label"
               class="form-control"
               name="monthly_plan_label_{{ i }}"
               id="monthly_plan_label_{{ i }}"
-              placeholder="Monthly label"
+              placeholder="{{ 'monthlyLabel' | translate }}"
               required
             />
           </div>
@@ -280,21 +280,21 @@
           <div class="col-md-6">
             <label for="yearly_plan_label_{{ i }}" class="form-label">{{ 'yearlyLabel' | translate }}</label>
             <input type="text" [(ngModel)]="plan.yearly_plan_label" class="form-control"
-              name="yearly_plan_label_{{ i }}" id="yearly_plan_label_{{ i }}" placeholder="Yearly label" required />
+              name="yearly_plan_label_{{ i }}" id="yearly_plan_label_{{ i }}" placeholder="{{ 'yearlyLabel' | translate }}" required />
           </div>
 
           <!-- Monthly Price -->
           <div class="col-md-6">
             <label for="monthly_plan_price_{{ i }}" class="form-label">{{ 'monthlyPrice' | translate }}</label>
             <input type="text" [(ngModel)]="plan.monthly_plan_price" class="form-control"
-              name="monthly_plan_price_{{ i }}" id="monthly_plan_price_{{ i }}" placeholder="Monthly Price" required />
+              name="monthly_plan_price_{{ i }}" id="monthly_plan_price_{{ i }}" placeholder="{{ 'monthlyPrice' | translate }}" required />
           </div>
 
           <!-- Yearly Price -->
           <div class="col-md-6">
             <label for="yearly_plan_price_{{ i }}" class="form-label">{{ 'yearlyPrice' | translate }}</label>
             <input type="text" [(ngModel)]="plan.yearly_plan_price" class="form-control"
-              name="yearly_plan_price_{{ i }}" id="yearly_plan_price_{{ i }}" placeholder="Yearly Price" required />
+              name="yearly_plan_price_{{ i }}" id="yearly_plan_price_{{ i }}" placeholder="{{ 'yearlyPrice' | translate }}" required />
           </div>
 
 
@@ -302,14 +302,14 @@
           <div class="col-md-6">
             <label for="monthly_plan_currency_{{ i }}" class="form-label">{{ 'monthlyCurrency' | translate }}</label>
             <input type="text" [(ngModel)]="plan.monthly_plan_price_currency" class="form-control"
-              name="monthly_plan_currency_{{ i }}" id="monthly_plan_currency_{{ i }}" placeholder="Currency" required />
+              name="monthly_plan_currency_{{ i }}" id="monthly_plan_currency_{{ i }}" placeholder="{{ 'currency' | translate }}" required />
           </div>
 
           <!-- Yearly Price Currency -->
           <div class="col-md-6">
             <label for="yearly_plan_currency_{{ i }}" class="form-label">{{ 'yearlyCurrency' | translate }}</label>
             <input type="text" [(ngModel)]="plan.yearly_plan_price_currency" class="form-control"
-              name="yearly_plan_currency_{{ i }}" id="yearly_plan_currency_{{ i }}" placeholder="Currency" required />
+              name="yearly_plan_currency_{{ i }}" id="yearly_plan_currency_{{ i }}" placeholder="{{ 'currency' | translate }}" required />
           </div>
         </div>
 
@@ -319,30 +319,30 @@
           <div *ngFor="let feature of plan.plan_feature_desc; let j = index" class="input-group mb-2">
             <!-- <label for="plan_feature_{{ i }}_{{ j }}" class="form-label">Feature {{ j + 1 }}</label> -->
             <input type="text" [(ngModel)]="plan.plan_feature_desc[j]" class="form-control"
-              name="plan_feature_{{ i }}_{{ j }}" id="plan_feature_{{ i }}_{{ j }}" placeholder="Feature Description"
+              name="plan_feature_{{ i }}_{{ j }}" id="plan_feature_{{ i }}_{{ j }}" placeholder="{{ 'featureDescription' | translate }}"
               required />
-            <button type="button" (click)="removePricingFeature(i, j)" class="btn btn-outline-danger">
+            <button type="button" (click)="removePricingFeature(i, j)" class="next_btn btn-outline-danger">
               {{ 'remove' | translate }}
             </button>
           </div>
-          <button type="button" (click)="addPricingFeature(i)" class="btn btn-outline-primary btn-sm ms-2">
+          <button type="button" (click)="addPricingFeature(i)" class="next_btn btn-sm ms-2">
             {{ 'addFeature' | translate }}
           </button>
         </div>
 
         <!-- Remove Plan Button -->
-        <button type="button" (click)="removePricingPlan(i)" class="btn btn-danger btn-sm mt-3 w-25">
+        <button type="button" (click)="removePricingPlan(i)" class="next_btn btn-danger btn-sm mt-3 w-25">
           {{ 'removePlan' | translate }}
         </button>
       </div>
 
       <!-- Add Pricing Plan Button -->
-      <button type="button" (click)="addPricingPlan()" class="btn btn-primary btn-sm mb-3">
+      <button type="button" (click)="addPricingPlan()" class="next_btn btn-sm mb-3">
         {{ 'addPricingPlan' | translate }}
       </button>
     </div>
 
 
-    <button type="submit" class="btn btn-primary w-100 mb-2 mt-2">{{ 'submit' | translate }}</button>
+    <button type="submit" class="next_btn mb-3 float-end">{{ 'submit' | translate }}</button>
   </form>
 </div>

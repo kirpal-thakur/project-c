@@ -10,7 +10,9 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ImprintComponent implements OnInit {
   banner_title:any = null;
+  advertisemnetData:any;
   page_content:any=null;
+  advertisemnet_base_url:string = '';
   banner_img:any=null;
   base_url:any=null;
   adVisible: boolean[] = [true, true, true]; // Array to manage ad visibility
@@ -33,13 +35,50 @@ export class ImprintComponent implements OnInit {
       if(res.status){
           this.banner_title = res.data.pageData.banner_title;
           this.page_content = res.data.pageData.page_content;
-          this.banner_img = this.sanitizer.bypassSecurityTrustHtml(res.data.pageData.banner_img);
+          this.advertisemnetData =  res.data.advertisemnetData;
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
+         
+          this.banner_img = res.data.pageData.banner_img;
           this.base_url =  res.data.base_url;
         }
     });
   }
-  closeAd(index: number) {
-    this.adVisible[index] = false; // Set the specific ad to not visible based on index
+  isEmptyObject(obj:any) {
+    if(typeof obj != 'undefined'){
+      return (obj && (Object.keys(obj).length === 0));
+    }
+    return true;
+  }
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
 
 }

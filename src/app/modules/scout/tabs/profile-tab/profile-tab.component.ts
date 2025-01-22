@@ -28,7 +28,7 @@ export class ProfileTabComponent {
   idsToDelete:any = "";
 
   constructor( public dialog: MatDialog,private scoutService: ScoutService, private userService : UserService) {
-    // If you want to load the user data from localStorage during initialization    
+    // If you want to load the user data from localStorage during initialization
   }
 
   ngOnInit(): void {
@@ -41,17 +41,17 @@ export class ProfileTabComponent {
     if (changes['userData']) {
       // Update the user object with the latest userData
       this.user = changes['userData'].currentValue;
-  
+
       // Check if user_nationalities exist and parse it
       if (this.user && this.user.user_nationalities) {
         this.userNationalities = JSON.parse(this.user.user_nationalities);
       }
-      
+
     }
     if (changes['user']) {
       // Update the user object with the latest userData
       this.user = changes['user'].currentValue;
-  
+
       // Check if user_nationalities exist and parse it
       if (this.user && this.user.user_nationalities) {
         this.userNationalities = JSON.parse(this.user.user_nationalities);
@@ -131,7 +131,7 @@ export class ProfileTabComponent {
       data: { user: this.user }  // Corrected data passing      
     });
 
-    
+
     dialogRef.afterClosed().subscribe(result => {
         this.getUserProfile()
     });

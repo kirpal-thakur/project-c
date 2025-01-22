@@ -70,6 +70,13 @@ import { GuidedTourModule } from 'ngx-guided-tour';
 import { SharedModule } from '../shared/shared.module';
 import { HistoryTabComponent } from './tabs/history-tab/history-tab.component';
 import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.component';
+import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
+import { TeamsTabComponent } from './tabs/teams-tab/teams-tab.component';
+import { SightingTabComponent } from './tabs/sighting-tab/sighting-tab.component';
+import { UploadAttachmentComponent } from './tabs/upload-attachment/upload-attachment.component';
+import { InviteTalentPopupComponent } from './tabs/invite-talent-popup/invite-talent-popup.component';
+import { CreateSightPopupComponent } from './tabs/create-sight-popup/create-sight-popup.component';
+import { AddNewTalentComponent } from './tabs/add-new-talent/add-new-talent.component';
 // import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
@@ -120,7 +127,14 @@ import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.compon
     CancelCountryPlanComponent,
     UpdateConfirmationPlanComponent,
     HistoryTabComponent,
-    PortfolioTabComponent
+    PortfolioTabComponent,
+    AddRepresentatorPopupComponent,
+    TeamsTabComponent,
+    SightingTabComponent,
+    UploadAttachmentComponent,
+    InviteTalentPopupComponent,
+    CreateSightPopupComponent,
+    AddNewTalentComponent
   ],
   imports: [
     CommonModule,
@@ -148,8 +162,26 @@ import { PortfolioTabComponent } from './tabs/portfolio-tab/portfolio-tab.compon
     MatProgressSpinnerModule,
     LightboxModule,
     GuidedTourModule,
-    SharedModule
-    // NgxStripeModule.forRoot('pk_test_51PVE08Ru80loAFQXg7MVGXFZuriJbluM9kOaTzZ0GteRhI0FIlkzkL2TSVDQ9QEIp1bZcVBzmzWne3fGkCITAy7X00gGODbR8a')
+    SharedModule,
+    CommonModule,
+    TranslateModule ,
+    FormsModule,
+    MatDialogModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    RouterModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatTabsModule ,
+    MatTableModule,
+    MatPaginator,
+    NgxEditorModule,
+    MatProgressSpinnerModule,
   ]
 })
 

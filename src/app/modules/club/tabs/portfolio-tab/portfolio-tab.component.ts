@@ -10,7 +10,7 @@ export interface DialogData {
   name: string;
 }
 @Component({
-  selector: 'scout-portfolio-tab',
+  selector: 'club-portfolio-tab',
   templateUrl: './portfolio-tab.component.html',
   styleUrl: './portfolio-tab.component.scss'
 })

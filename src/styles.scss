@@ -15,6 +15,24 @@ img.admin-logo {
   height: 40px;
 }
 
+.next_btn{
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 8px 24px;
+  border: none;
+  background: #e05263;
+  color: white;
+}
+.light-theme .next_btn{
+  background: #e05263;
+  color: white;
+}
+.light-theme .next_btn:hover {
+  background: linear-gradient(to bottom right, #6fb95d, #236115);
+  color: white;
+  border: none;
+}
+
 // .mdc-list-item__primary-text {
 //   font-weight: normal !important;
 //   font-size: 16px !important;
@@ -509,7 +527,7 @@ button.btn.btn-secondary.dropdown-toggle {
 // }
 .dark-theme a.dropdown-item.ai-icon.selected {
   background: linear-gradient(45deg, #efffc1, #bde34f) !important;
- 
+
 }
 
 .dropdown-item.active,
@@ -1242,7 +1260,7 @@ input:checked+.slider:before {
 
 .mat-mdc-dialog-inner-container.mdc-dialog__container {
   position: relative;
-  top: 30px;
+  top: 0px;
 
   // left: 386px;
   // bottom: 311px;
@@ -1579,6 +1597,27 @@ input:checked+.slider:before {
   .bottom_box {
     min-height: 45px !important;
   }
+}
+
+.join-end-date {
+  font-size: 16px;
+}
+
+.date-input .form-control {
+  padding: 12px 10px;
+}
+
+.join-start {
+  border-radius: 6px 0px 0px 6px !important;
+}
+
+.join-end {
+  border-left: none !important;
+  border-radius: 0px 6px 6px 0px !important;
+}
+
+.example-chip-list .messanger-selector .mdc-evolution-chip-set__chips p {
+  margin: 0 !important;
 }
 
 .messanger-selector .mdc-evolution-chip-set__chips {

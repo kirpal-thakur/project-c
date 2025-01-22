@@ -55,7 +55,7 @@ a {
 }
 
 .page-container {
-  margin-left: 245px;
+  // margin-left: 245px;
   width: 100%;
   position: relative;
   transition: all 0.4s;
@@ -320,12 +320,21 @@ a {
 .dark-theme #users-icon path {
   fill: white;
 }
+.dark-theme .next_btn{
+  background: #bde34f;
+  color: #0c3453;
+}
+.dark-theme .next_btn:hover {
+  background: linear-gradient(0deg, #BDE34F, #EFFFC1);;
+  color: #0c3453;
+  border: none;
+}
 
 .btn {
   font-size: 16px;
   font-weight: 700;
   border-radius: 10px;
-  padding: 5px 10px;
+  // padding: 5px 10px;
 
   &.btn-sm {
     padding: .5rem 2.5rem;

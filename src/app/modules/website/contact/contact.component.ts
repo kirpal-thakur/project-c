@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit {
   talent_label_txt: string = '';
   txt_before_radio_btn: string = '';
   advertisemnetData:any;
-  advertisemnetUrl:string = '';
+  advertisemnet_base_url:string = '';
   selectedOption = 'option1'; // Default option for some dropdown/radio buttons
   contactForm!: FormGroup; // Form group for the contact form
   isChecked = false; // Checkbox state
@@ -69,7 +69,7 @@ export class ContactComponent implements OnInit {
           this.txt_before_radio_btn = res.data.pageData.txt_before_radio_btn;
           this.semail= res.data.pageData.email;
           this.advertisemnetData =  res.data.advertisemnetData;
-          this.advertisemnetUrl = res.data.advertisemnet_base_url;
+          this.advertisemnet_base_url = res.data.advertisemnet_base_url;
           this.base_url =  res.data.base_url;
           this.name_placeholder = res.data.pageData.name_placeholder;
           this.phone_placeholder = res.data.pageData.phone_placeholder;
@@ -77,6 +77,43 @@ export class ContactComponent implements OnInit {
           this.message_placeholder = res.data.pageData.message_placeholder;
         }
     });
+  }
+  isEmptyObject(obj:any) {
+    if(typeof obj != 'undefined'){
+      return (obj && (Object.keys(obj).length === 0));
+    }
+    return true;
+  }
+  closeAd(object: any) {
+
+    switch(object){
+      case 'skyscraper':
+          this.advertisemnetData.skyscraper = [];
+          break;
+      case 'small_square':
+          this.advertisemnetData.small_square = [];
+          break;
+      case 'leaderboard':
+          this.advertisemnetData.leaderboard = [];
+          break;
+      case 'large_leaderboard':
+          this.advertisemnetData.large_leaderboard = [];
+          break;
+      case 'large_rectangle':
+          this.advertisemnetData.large_rectangle = [];
+          break;
+
+      case 'inline_rectangle':
+          this.advertisemnetData.inline_rectangle = [];
+          break;
+      case 'square':
+          this.advertisemnetData.square = [];
+          break;
+      default:
+          //when no case is matched, this block will be executed;
+          break;  //optional
+      }
+
   }
   // Form field getters for template validation
   get name() {
@@ -163,9 +200,7 @@ export class ContactComponent implements OnInit {
     );
   }
   // Close specific ad
-  closeAd(index: number): void {
-    this.adVisible[index] = false; // Hide the ad at the given index
-  }
+
 
   setResponseMessage(message: string, type: string): void {
     this.responseMessage = message;

@@ -61,7 +61,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   // triggerFileInput(): void {
-  //   this.fileInputElement.nativeElement.click();  
+  //   this.fileInputElement.nativeElement.click();
   // } 
 
   ngOnInit(): void {
@@ -151,7 +151,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
     let keyword = event.target.value;
     console.log(keyword); // You can use this to see the current input value
 
-    this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  && 
+    this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  &&
       user.first_name.toLowerCase().indexOf(keyword.toLowerCase()) != -1);
   }
 
@@ -180,7 +180,6 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   /*onDateChange(event: any): void {
-    
     const selectedDate = event.value;
     console.log(event)
     console.log(selectedDate)
@@ -208,10 +207,11 @@ export class CreateSightPopupComponent implements AfterViewInit {
 
     const formattedDate = `${dateArr[2]}-${dateArr[0]}-${dateArr[1]}`;
     const formattedTime = `${arr[1]} ${arr[2]}`;
+
     return {
       date: formattedDate,
       time: formattedTime
-    }; 
+    };
   }
 
   createSight(){

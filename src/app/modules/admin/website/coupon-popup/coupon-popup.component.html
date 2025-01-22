@@ -62,7 +62,7 @@
       <div class="row mb-3" *ngFor="let discount of discountInputs; let i = index">
         <div class="col-md-4">
           <input type="number" class="cupen-btn-1 w-100" [(ngModel)]="discount.discount"
-            placeholder="Enter discount value">
+            placeholder="{{ 'enterDiscountValue' | translate }}">
         </div>
         <div class="col-md-4">
           <select class="cupen-btn-1 w-100" [(ngModel)]="discount.currency" (change)="validateCurrencySelection(i)">
