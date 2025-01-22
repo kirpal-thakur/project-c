@@ -341,7 +341,7 @@
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Zurück zur Anmeldung",
   "createAccountTitle": "Konto erstellen",
-  "createAccountDescription": "Geben Sie unten Ihre Daten ein, um loszulegen",
+  "createAccountDescription": "Gib deine Daten ein um loszulegen.",
   "firstNameLabel": "Vorname",
   "lastNameLabel": "Nachname",
   "usernameLabel": "Benutzername",
