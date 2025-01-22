@@ -12,9 +12,9 @@
   <div class="country-plan">
     <div class="country-selection mb-4">
       <div class="form-group col-lg-4">
-        <label for="select-countries">{{ 'Select Countries' | translate }}</label>
+        <label for="select-countries">{{ 'selectCountries' | translate }}</label>
         <select class="form-select" id="select-countries" (change)="onCountrySelect($event)">
-          <option value="" disabled selected>{{ 'Select a country' | translate }}</option>
+          <option value="" disabled selected>{{ 'selectACountries' | translate }}</option>
           <option
             *ngFor="let country of countries"
             [selected]="selectedPlan?.id == country.id"
@@ -46,27 +46,27 @@
     </div>
 
     <div class="subscription-type mt-5">
-      <h2 class="mb-3">{{'Subscription Type' | translate}}</h2>
+      <h2 class="mb-3">{{'subscriptionType' | translate}}</h2>
       <div class="form-check p-0">
         <input id="radio-1" class="form-check-input radio-custom" type="radio" name="isYearly"
                [value]="false" [(ngModel)]="isYearly" (change)="toggleBillingPlan(false)">
-        <label for="radio-1" class="form-check-label radio-custom-label">Monthly</label>
+        <label for="radio-1" class="form-check-label radio-custom-label">{{'monthly' | translate}}</label>
       </div>
       <div class="form-check p-0">
         <input id="radio-2" class="form-check-input radio-custom" type="radio" name="isYearly"
                [value]="true" [(ngModel)]="isYearly" (change)="toggleBillingPlan(true)">
-        <label for="radio-2" class="form-check-label radio-custom-label">Yearly</label>
+        <label for="radio-2" class="form-check-label radio-custom-label">{{yearly' | translate}}</label>
       </div>
     </div>
   </div>
 
   <div class="country-plan-2">
     <p class="prorata-explanation mb-4">
-      {{ 'You will be charged a percentage of a subscriptions cost to reflect partial use on the basis of Prorata.' | translate }}
+      {{ 'editPlan-text' | translate }}
     </p>
 
     <div class="actions d-flex justify-content-end">
-      <button class="btn action-cancel" (click)="cancel()">{{'TalentsTranslate.cancel' | translate}}</button>
+      <button class="btn action-cancel" (click)="cancel()">{{'cancel' | translate}}</button>
       <button
         class="btn buy-btn d-flex align-items-center gap-5"
         (click)="buyNow()"
@@ -77,9 +77,9 @@
             {{ isYearly ? selectedPlan?.priceYearly : selectedPlan?.priceMonthly }}
             -{{ selectedPlan?.currency }}/{{ isYearly ? 'Year' : 'Month' }}
           </h4>
-          <p>{{'Total' | translate}}</p>
+          <p>{{'total' | translate}}</p>
         </div>
-        {{'Buy Now' | translate}}
+        {{'buyNow' | translate}}
       </button>
 
     </div>
