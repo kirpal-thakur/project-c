@@ -1171,5 +1171,16 @@
   "pause": "Pause",
   "editPerformaceDetails": "Leistungsdetails bearbeiten",
   "tabSection": "Registerkarte Abschnitt",
-  "darkImages": "Dunkle Bilder"
+  "darkImages": "Dunkle Bilder",
+  "countriesName": {
+    "belgium": "Belgium",
+    "denmark": "Denmark",
+    "germany": "Germany",
+    "england": "England",
+    "france": "France",
+    "italy": "Italy",
+    "portugal": "Portugal",
+    "sweden": "Sweden",
+    "switzerland": "Switzerland"
+  }
 }
