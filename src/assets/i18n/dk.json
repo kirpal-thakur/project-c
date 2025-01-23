@@ -324,7 +324,7 @@
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Tilbage til login",
   "createAccountTitle": "Opret konto",
-  "createAccountDescription": "Indtast dine detaljer nedenfor for at komme i gang",
+  "createAccountDescription": "Indtast dine oplysninger nedenfor for at komme i gang.",
   "firstNameLabel": "Fornavn",
   "lastNameLabel": "Efternavn",
   "usernameLabel": "Brugernavn",

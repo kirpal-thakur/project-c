@@ -342,17 +342,17 @@
                                     }}</label>
                                 <input type="email" class="form-control" id="exampleFormControlInput1"
                                     [placeholder]="'example@email.com'" [(ngModel)]="forgotPasswordEmail" />
+                                    <div *ngIf="forgotPasswordMessage" class="text-danger mt-2">
+                                        <!-- {{forgotPasswordMessage}} -->
+                                        {{ 'provideEmailAddress' | translate }}
+                                    </div>
 
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="forgotPasswordMessage" class="alert alert-info text-center">
-                    <!-- {{forgotPasswordMessage}} -->
-                    {{ 'provideEmailAddress' | translate }}
-                </div>
+            </div>
+        </div>
                 <div class="modal-footer modal-btn border-0 justify-content-center">
-                    <button (click)="forgotPassword()" class="btn btn-primary d-block">{{ 'resetButton' | translate
+                    <button (click)="forgotPassword()" class="btn btn-primary d-block">{{ 'reset' | translate
                         }}</button>
                     <a class="register mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal-login">{{
                         'backToLogin' | translate }}</a>
