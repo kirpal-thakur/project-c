@@ -263,9 +263,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
           }
-          if (this.user?.meta?.cover_image_path) {
-            this.coverImage = this.user.meta.cover_image_path;
-          }
 
           // this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
@@ -422,7 +419,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
         if (response?.data?.userData?.metaValue) {
-            this.coverImage = response.data.userData.cover_image_path;
+            this.coverImage = response?.data?.userData?.meta_value && response.data.userData.meta_value != '' ? response.data.userData.cover_image_path + response.data.userData.meta_value : undefined;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);

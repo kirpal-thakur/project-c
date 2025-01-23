@@ -4,6 +4,7 @@ import {
 } from '@angular/material/dialog';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { ScoutService } from '../../../services/scout.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class AddRepresentatorPopupComponent {
   error:boolean = false
   errorMsg:any = {}
 
-  constructor(private userService: UserService,private route: ActivatedRoute, public dialogRef : MatDialogRef<AddRepresentatorPopupComponent>,
+  constructor(private scoutService: ScoutService,private route: ActivatedRoute, public dialogRef : MatDialogRef<AddRepresentatorPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     
       this.userId = data.userId;
@@ -56,6 +57,7 @@ export class AddRepresentatorPopupComponent {
       return "";
     }
   }
+
   close(): void {
     this.dialogRef.close();
   }
@@ -107,11 +109,11 @@ export class AddRepresentatorPopupComponent {
     if(validForm){
       return false;
     }
-    
+
     let params:any = {}
     params.email = this.email;
     params.site_role = this.role;
-    this.userService.sendInviteToRepresentator(this.userId, params).subscribe((response)=>{
+    this.scoutService.sendInviteToRepresentator(this.userId, params).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added'
@@ -120,6 +122,7 @@ export class AddRepresentatorPopupComponent {
         console.error('Invalid API response structure:', response);
       }
     });
+
   }
 
   updateRepresentator():any{
@@ -135,7 +138,7 @@ export class AddRepresentatorPopupComponent {
     formdata.append("user[last_name]", this.lastName);
     formdata.append("user[designation]", this.designation);
 
-    this.userService.updateRepresentator(this.idToUpdate, formdata).subscribe((response)=>{
+    this.scoutService.updateRepresentator(this.idToUpdate, formdata).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'updated'
@@ -146,24 +149,4 @@ export class AddRepresentatorPopupComponent {
     });
   }
 
-  sendAdminInvite():any {
-
-    let validForm:any = this.validateInviteForm();
-    if(validForm){
-      return false;
-    }
-    
-    let params:any = {}
-    params.email = this.email;
-    params.site_role = this.role;
-    this.userService.sendInviteToAdminRepresentator(params).subscribe((response)=>{
-      if (response && response.status) {
-        this.dialogRef.close({
-          action: 'added'
-        });
-      } else {
-        console.error('Invalid API response structure:', response);
-      }
-    });
-  }
 }
