@@ -877,20 +877,23 @@ body {
 .light-theme .website-code .join-text:hover {
   background: linear-gradient(0deg, #065f06, #4a8c37);
 }
-
-
-
-
-ul,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 1rem;
+ .website-code .learn {
+  color: white;
 }
+
+
+
+
+// ul,
+// p,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin-bottom: 1rem;
+// }
 
 a {
   text-decoration: none;

@@ -191,6 +191,9 @@ button.btn.btn-secondary.dropdown-toggle {
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
 }
+.bottom_box .sidebar_menu {
+  transform: none !important;
+}
 
 .toggle-padding {
   padding: 4px 8px !important;

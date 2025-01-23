@@ -399,6 +399,9 @@ margin-left: 0;
 input#name, input#email, input#phone, textarea#message{
 padding-left: 10px;
 }
+.radio-group{
+  display: block;
+}
 }
 
 @media (max-width: 321px){

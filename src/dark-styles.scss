@@ -119,6 +119,14 @@ a {
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
 }
+.dark-theme .page-sidebar {
+  border-radius: 20px;
+  // background: linear-gradient(180deg, #236115 0%, #6fb95d 100%);
+  width: 210px;
+  margin: 20px 0px 20px 20px;
+  position: fixed;
+  height: 95%;
+}
 
 .compact-sidebar .sidebar_menu_span {
   display: none;

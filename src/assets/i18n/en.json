@@ -1063,6 +1063,18 @@
     "totalSales": "Total Sales: {{count}}",
     "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+  "countriesName": {
+    "belgium": "Belgium",
+    "denmark": "Denmark",
+    "germany": "Germany",
+    "england": "England",
+    "france": "France",
+    "italy": "Italy",
+    "portugal": "Portugal",
+    "sweden": "Sweden",
+    "switzerland": "Switzerland"
+  },
+ 
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select Position",
