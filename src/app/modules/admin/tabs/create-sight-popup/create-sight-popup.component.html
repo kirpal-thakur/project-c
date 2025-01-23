@@ -101,7 +101,7 @@
                         </span>
                       </mat-chip-row>
                       }
-                      <input placeholder="Search users..." #userInput [matAutocomplete]="auto"
+                      <input placeholder="{{ 'searchUser' | translate }}" #userInput [matAutocomplete]="auto"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputFor]="chipGrid"
                         (focus)="callListApi(userInput)" (keyup)="onKeyPress($event)" />
                     </mat-chip-grid>

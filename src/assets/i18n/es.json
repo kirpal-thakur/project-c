@@ -323,7 +323,7 @@
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Volver al inicio de sesión",
   "createAccountTitle": "Crear cuenta",
-  "createAccountDescription": "Ingrese sus datos a continuación para comenzar",
+  "createAccountDescription": "Ingresa tus datos a continuación para comenzar.",
   "firstNameLabel": "Nombre",
   "lastNameLabel": "Apellido",
   "usernameLabel": "Nombre de usuario",

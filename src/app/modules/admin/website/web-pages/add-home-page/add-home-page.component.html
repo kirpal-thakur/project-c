@@ -11,7 +11,7 @@
         <div class="mb-3 col-md-12">
           <label for="langId" class="form-label">{{ 'selectLanguage' | translate }}</label>
           <select class="form-select" id="langId" formControlName="lang_id">
-            <option value="" disabled selected>Select a language</option>
+            <option value="" disabled selected>{{ 'selectALanguage' | translate }}</option>
             @if(languages && languages.length > 0){
             @for (language of languages; track $index) {
             <option value="{{language.id}}">{{language.language}}</option>
@@ -145,7 +145,7 @@
       </div>
     </fieldset>
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mb-3">{{ 'next' | translate }}</button>
+    <button type="submit" class="next_btn mb-3 float-end">{{ 'next' | translate }}</button>
   </form>
 
 </div>
@@ -284,7 +284,7 @@
     </fieldset>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mb-3">{{ 'updatePage' | translate }}</button>
+    <button type="submit" class="next_btn mb-3 float-end">{{ 'updatePage' | translate }}</button>
   </form>
 
 </div>

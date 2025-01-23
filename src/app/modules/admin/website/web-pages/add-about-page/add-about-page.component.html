@@ -77,7 +77,7 @@
 
     <!-- Country Names -->
     <div class="mb-3">
-      <label class="form-label">Country Names</label>
+      <label class="form-label">{{ 'countryNames' | translate }}</label>
       <mat-form-field class="w-100">
         <mat-select multiple name="about_country_names" [(ngModel)]="formData.about_country_names" required>
           <mat-option *ngFor="let country of countries" [value]="country">
@@ -157,13 +157,13 @@
       <div class="NgxEditor__Wrapper">
         <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
         <ngx-editor [editor]="editor" class="editor-width" name="address" [(ngModel)]="formData.about_banner_desc"
-          [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+          [disabled]="false" [placeholder]="'typeHere' | translate"></ngx-editor>
       </div>
 
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary mb-3">{{ 'submit' | translate }}</button>
+    <button type="submit" class="next_btn mb-3 float-end">{{ 'submit' | translate }}</button>
   </form>
 
 </div>

@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <form (ngSubmit)="submitForm()" #aboutForm="ngForm" enctype="multipart/form-data">
-    <h2>News Page</h2>
+    <h2>{{ 'newsPage' | translate }}</h2>
 
     <!-- General Information Block -->
     <fieldset class="border p-3 mb-4" *ngIf="!pageId">
@@ -71,6 +71,6 @@
         required />
     </div>
 
-    <button type="submit" class="btn btn-primary w-100 mb-2 mt-2">{{ 'submit' | translate }}</button>
+    <button type="submit" class="next_btn mb-3 float-end">{{ 'submit' | translate }}</button>
   </form>
 </div>
