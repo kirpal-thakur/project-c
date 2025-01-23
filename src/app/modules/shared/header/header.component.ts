@@ -269,10 +269,10 @@ export class HeaderComponent {
       this.currentPageName = 'Home'; // Default to 'Home' if no title found
     }
   }
+
   navigateToTab(tab: string) {
     this.router.navigate([`/${this.role.slug}/setting`], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
   }
-
 
   ChangeLang(lang: any) {
 
@@ -287,7 +287,6 @@ export class HeaderComponent {
   }
 
   logout() {
-
     this.authService.logout();
   }
 
@@ -303,7 +302,6 @@ export class HeaderComponent {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
     localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
-    // document.getElementById('theme-text')!.textContent = this.themeText
   }
 
 
@@ -443,7 +441,6 @@ export class HeaderComponent {
   }
 
   something : boolean = false;
-  
 
   // Load notifications in chunks of 3
   loadMoreNotifications(): void {
@@ -462,7 +459,6 @@ export class HeaderComponent {
     if(this.notificationsPerPage>=3){
       this.notificationsPerPage = 3;
     }
-    
   }
 
   onSearch() {
@@ -480,7 +476,6 @@ export class HeaderComponent {
         console.error('Invalid API response structure:', response);
       }
     });
-
   }
 
   selectUser(user: any): void {

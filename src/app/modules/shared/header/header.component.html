@@ -221,8 +221,8 @@
               alt="">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
-            <span class="badgewarning">{{ 'talent' | translate }}</span>
+            <h6>{{loggedInUser?.first_name}} {{loggedInUser?.last_name}}</h6>
+            <span class="badgewarning">{{loggedInUser?.role_name}}</span>
             <br>
             <a routerLink="/talent/dashboard" class="header-view-profile"> {{ 'viewMyProfile' | translate }}</a>
 

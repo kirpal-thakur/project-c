@@ -275,16 +275,16 @@
                     <div class="team-logo-bg">
                     </div>
                     <img *ngIf="player.pre_current_club_logo_path" src="{{player.pre_current_club_logo_path}}" alt="team-logo">
-                    <img *ngIf="!player.pre_current_club_logo_path" src="../../../../assets/images/default/Club-logo-default.png" alt="team-logo">
                   </div>
                     @if (getNationality(player.user_nationalities) ||player?.meta?.formation_date) {
                       <div class="flag_box">
                         @if (getNationality(player.user_nationalities)) {
                           <img src="{{getNationality(player.user_nationalities)}}" >
-                        }@else{
-                          <span>--</span>
                         }
-                        <hr>
+                        <ng-container *ngIf="player?.meta?.formation_date && getNationality(player.user_nationalities)">
+                          <hr>
+                        </ng-container>
+
                         <ng-container *ngIf="player?.meta?.formation_date">
                           <span>
                             <svg width="16" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
