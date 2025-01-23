@@ -30,12 +30,10 @@ export class AddNewTalentComponent {
   teamId:any;
 
   constructor(
-    private userService: UserService,
     private clubService: ClubService,
     public dialogRef: MatDialogRef<AddNewTalentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
     this.teamId = data.teamId;
   }
 
@@ -55,7 +53,6 @@ export class AddNewTalentComponent {
     } catch (error) {
       console.error('Error fetching users:', error);
     }
-
   }
 
   close() {

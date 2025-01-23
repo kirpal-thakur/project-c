@@ -4,9 +4,7 @@ import { FormControl, NgForm } from '@angular/forms';
 import { ScoutService } from '../../../services/scout.service';
 
 import * as _moment from 'moment';
-// tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment } from 'moment';
-import { ToastrService } from 'ngx-toastr';
 
 const moment = _rollupMoment || _moment;
 
@@ -59,6 +57,7 @@ export class EditPersonalDetailsComponent implements OnInit {
   loggedInUser: any = localStorage.getItem('userData');
   userId: any;
   userNationalities : any;
+
   // Declare individual properties for binding
   dateOfBirth: string = '';
   height: number = 0;

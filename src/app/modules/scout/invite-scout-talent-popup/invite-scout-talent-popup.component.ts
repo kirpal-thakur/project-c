@@ -6,6 +6,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UserService } from '../../../services/user.service';
 import { TalentService } from '../../../services/talent.service';
+import { ScoutService } from '../../../services/scout.service';
 
 @Component({
   selector: 'app-invite-scout-talent-popup',
@@ -25,7 +26,7 @@ export class InviteScoutTalentPopupComponent {
   scoutId:any = "";
   constructor(
     private userService: UserService,
-    private talentService: TalentService,
+    private scoutService: ScoutService,
     public dialogRef: MatDialogRef<InviteScoutTalentPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -38,9 +39,9 @@ export class InviteScoutTalentPopupComponent {
  
   async fetchPlayers(): Promise<void> {
     try {
-      this.userService.getAllPlayers().subscribe((response)=>{
+      this.scoutService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
-          this.allUsers = response.data.userData; 
+          this.allUsers = response?.data?.userData?.users;
           } else {
             console.error('Invalid API response structure:', response);
           }
@@ -62,7 +63,7 @@ export class InviteScoutTalentPopupComponent {
       x++;
     });
 
-    this.userService.sendScoutPortfolioInvite(this.scoutId, formData).subscribe((response)=>{
+    this.scoutService.sendScoutPortfolioInvite(this.scoutId, formData).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added',

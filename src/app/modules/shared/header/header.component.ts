@@ -303,7 +303,7 @@ export class HeaderComponent {
     const isDarkMode = this.themeService.isDarkMode();
     this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
     localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
-    document.getElementById('theme-text')!.textContent = this.themeText
+    // document.getElementById('theme-text')!.textContent = this.themeText
   }
 
 
