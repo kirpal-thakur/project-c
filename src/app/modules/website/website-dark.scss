@@ -774,6 +774,14 @@ button.faq-scout-button {
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
 }
+.dark-theme .page-sidebar {
+  border-radius: 20px;
+  width: 210px;
+  margin: 20px 0px 20px 20px;
+  position: static !important;
+  height: 95%;
+  transition: all 0.4s;
+}
 
 .compact-sidebar .sidebar_menu_span {
   display: none;
