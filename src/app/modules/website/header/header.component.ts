@@ -84,6 +84,102 @@ export class HeaderComponent implements OnInit {
       { id: 4, name: 'Team Delta' },
       { id: 5, name: 'Team Echo' },
     ];
+    countrie: any[] = [];
+
+    countrie_en = [
+      { name: 'England', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Germany', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italy', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'France', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Spain', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Denmark', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Sweden', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    // German Country Names
+    countrie_de = [
+      { name: 'England', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Deutschland', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italien', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'Frankreich', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Spanien', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Dänemark', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Schweden', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    // Italian Country Names
+    countrie_it = [
+      { name: 'Inghilterra', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Germania', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italia', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'Francia', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Spagna', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portogallo', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Danimarca', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Svezia', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    countrie_fr = [
+      { name: 'Angleterre', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Allemagne', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italie', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'France', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Suède', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Danemark', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Suède', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    // Spanish Country Names
+    countrie_es = [
+      { name: 'Inglaterra', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Alemania', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italia', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'Francia', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'España', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Dinamarca', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Suecia', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    // Portuguese Country Names
+    countrie_pt = [
+      { name: 'Inglaterra', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Alemanha', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Itália', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'França', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Espanha', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Dinamarca', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Suécia', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    
+    // Danish Country Names
+    countrie_dk = [
+      { name: 'England', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Tyskland', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italien', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'Frankrig', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Spanien', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Danmark', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Sverige', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
+    
+    // Swedish Country Names
+    countrie_se = [
+      { name: 'England', slug: 'ch', id: 1, flag: 'England.svg', url: 'https://www.socceryou.co.uk' },
+      { name: 'Tyskland', slug: 'de', id: 2, flag: 'Germany.svg', url: 'https://www.socceryou.de' },
+      { name: 'Italien', slug: 'it', id: 3, flag: 'Italy.svg', url: 'https://www.socceryou.it' },
+      { name: 'Frankrike', slug: 'fr', id: 4, flag: 'France.svg', url: 'https://www.socceryou.fr' },
+      { name: 'Spanien', slug: 'es', id: 5, flag: 'Spain.svg', url: 'https://www.socceryou.es' },
+      { name: 'Portugal', slug: 'pt', id: 6, flag: 'Portugal.svg', url: 'https://www.socceryou.pt' },
+      { name: 'Danmark', slug: 'dk', id: 7, flag: 'Denmark.svg', url: 'https://www.socceryou.se' },
+      { name: 'Sverige', slug: 'se', id: 8, flag: 'Sweden-sweden.svg', url: 'https://www.socceryou.dk' },
+    ];
 
     customOptions: OwlOptions = {
       loop: true,
@@ -116,8 +212,32 @@ export class HeaderComponent implements OnInit {
       private webpage: WebPages,
       private socketService: SocketService
     ) {
-      this.translateService.setDefaultLang('en'); // Set default language
-      this.translateService.use('en'); // Use default language
+      this.language = translateService.currentLang || 'en';  // Get current language
+      this.loadCountries();  // Load countries based on selected language
+      translateService.onLangChange.subscribe(() => {
+        this.language = translateService.currentLang;
+        this.loadCountries();
+      });
+    }
+
+    loadCountries() {
+      if (this.language === 'en') {
+      this.countrie = this.countrie_en;
+    } else if (this.language === 'de') {
+      this.countrie = this.countrie_de;
+    } else if (this.language === 'it') {
+      this.countrie = this.countrie_it;
+    } else if (this.language === 'fr') {
+      this.countrie = this.countrie_fr;
+    } else if (this.language === 'es') {
+      this.countrie = this.countrie_es;
+    } else if (this.language === 'pt') {
+      this.countrie = this.countrie_pt;
+    } else if (this.language === 'dk') {
+      this.countrie = this.countrie_dk;
+    } else if (this.language === 'se') {
+      this.countrie = this.countrie_se;
+    } 
     }
 
     isScrolled = false;

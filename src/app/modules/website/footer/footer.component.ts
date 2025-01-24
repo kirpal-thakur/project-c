@@ -259,6 +259,7 @@ countrie_se = [
    
 
   }
+  
   loadCountries() {
     if (this.language === 'en') {
     this.countrie = this.countrie_en;
