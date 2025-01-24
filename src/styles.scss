@@ -181,7 +181,29 @@ button.btn.btn-secondary.dropdown-toggle {
   height: 95%;
   z-index: 2;
 }
+// mat-datepicker-toggle.mat-datepicker-toggle {
+//   position: absolute;
+//   left: 50px;
+ // }
+ mat-datepicker-toggle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 0 !important;
+}
+.d-flex.align-items-center.justify-content-center.dob1 {
+  position: relative;
+}
+input#dateOfBirth, input#contractStart, input#contractEnd {
+  padding-left: 4rem;
+}
+.custom-datepicker .mat-datepicker-content {
+  transform: translateX(-100%) !important; /* Moves the datepicker to the left */
+}
 
+.custom-datepicker .mat-calendar {
+  margin-right: auto; /* Ensures alignment to the left */
+}
 .compact-sidebar .page-sidebar:before {
   position: fixed;
   height: 95%;
