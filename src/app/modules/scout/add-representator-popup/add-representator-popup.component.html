@@ -58,7 +58,7 @@
             </div>
             <div class="d-flex1 mb-3">
                 <div>
-                    <p class="code-text">{{ 'lastName' | translate }}</p>
+                    <p class="code-text">{{ 'Designation' | translate }}</p>
                     <input class="cupen-btn-1 code-text" style="width:100%;" [(ngModel)]="designation">
                 </div>
             </div>
@@ -108,8 +108,6 @@
                 <a class="btn Launch px-5" *ngIf="data.action == 'add'" (click)="sendInvite()">{{ 'invite' | translate
                     }}</a>
                 <a class="btn Launch px-5" *ngIf="data.action == 'edit'" (click)="updateRepresentator()">{{ 'update' |
-                    translate }}</a>
-                <a class="btn Launch px-5" *ngIf="data.action == 'admin-add'" (click)="sendAdminInvite()">{{ 'invite' |
                     translate }}</a>
             </div>
         </div>
