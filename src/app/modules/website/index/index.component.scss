@@ -718,7 +718,7 @@ li {
   // color: #E05263;
   border-radius: 20px;
   height: 41px;
-  width: 210px;
+  width: 230px;
   font-weight: bold;
 }
 
@@ -3870,6 +3870,13 @@ img.image5 {
   .main-bnr {
     height: 700px;
   }
+  .joined{
+    display: block;
+}
+.joined-btn button.btn {
+  width: 100%;
+  margin-top: 10px;
+}
 
   .joined-text {
     display: flex;
@@ -3982,7 +3989,6 @@ img.image5 {
   }
 
   .joined {
-    display: flex;
     padding-left: 0;
     padding-right: 0;
     margin-bottom: 10px;
