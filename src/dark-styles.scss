@@ -2055,6 +2055,7 @@ input:checked+.slider:before {
 .border-bottom,
 .border-top {
   border-color: #1F4360 !important;
+
 }
 
 
@@ -2704,6 +2705,17 @@ input:checked+.slider:before {
 
 .dark-theme .form-group mat-select {
   color: #fff;
+  background-color: #072944 !important;
+}
+ .dark-theme .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+  color: white !important;
+}
+.dark-theme div#notifications {
+  color: white;
+}
+.dark-theme .page-content .form-group mat-select {
+  color: #fff;
+  background-color: transparent !important;
 }
 
 .dark-theme .title_2 {
@@ -2732,6 +2744,10 @@ input:checked+.slider:before {
   background: #BDE34F !important;
   border: 1px solid #BDE34F !important;
 }
+.dark-theme .save-btn{
+  background: #BDE34F !important;
+  color: #072944 !important;
+}
 
 .dark-theme .premium-plan_box {
 
@@ -2758,9 +2774,9 @@ input:checked+.slider:before {
 //   color: #fff !important;
 // }
 
-.dark-theme .navbar-expand .navbar-nav .dropdown-menu span {
-  color: #072944 !important;
-}
+// .dark-theme .navbar-expand .navbar-nav .dropdown-menu span {
+//   color: #072944 !important;
+// }
 .dark-theme .website-code .dropdown-item:focus, .dark-theme .dropdown-item:hover {
   background: rgba(169, 169, 169, 0.3098039216) !important;
   color: #072944;
@@ -2832,6 +2848,13 @@ input:checked+.slider:before {
 
 .dark-theme .bg-light {
   background: #072944 !important;
+}
+.dark-theme .bg-light-color {
+  background: #072944 !important;
+  color: white !important;
+}
+.dark-theme .bg-light1{
+  background-color: #0C3453 !important;
 }
 
 .dark-theme .settings svg path {
