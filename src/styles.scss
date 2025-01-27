@@ -200,6 +200,9 @@ input#dateOfBirth, input#contractStart, input#contractEnd {
 .custom-datepicker .mat-datepicker-content {
   transform: translateX(-100%) !important; /* Moves the datepicker to the left */
 }
+.unlock_page .transfer_underline{
+  margin: 0 !important;
+}
 
 .custom-datepicker .mat-calendar {
   margin-right: auto; /* Ensures alignment to the left */
