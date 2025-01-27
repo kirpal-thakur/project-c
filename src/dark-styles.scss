@@ -320,6 +320,10 @@ a {
 // .dark-theme.users-icon svg path {
 //   fill: white;
 // }
+.dark-theme .unlock_page .unlock_btn {
+  background: #bde34f !important;
+  color: #0c3453 !important;
+}
 
 .dark-theme #users-icon svg path {
   fill: white;
@@ -333,7 +337,7 @@ a {
   color: #0c3453;
 }
 .dark-theme .next_btn:hover {
-  background: linear-gradient(0deg, #BDE34F, #EFFFC1);;
+  background: linear-gradient(0deg, #BDE34F, #EFFFC1);
   color: #0c3453;
   border: none;
 }
@@ -355,7 +359,7 @@ legend.w-auto.px-2 {
 .dark-theme .card {
   color: white;
   background: transparent;
-  border: 1px solid;
+  border: 1px solid transparent;
 }
 
 .btn {
@@ -394,6 +398,7 @@ legend.w-auto.px-2 {
   color: #ffffff;
   display: flex;
   align-items: center;
+  padding: 0.50rem !important;
 
   .input-group-text,
   .form-control {
@@ -478,18 +483,8 @@ legend.w-auto.px-2 {
 .page-sidebar-inner {
   height: 77% !important;
 }
-
-.sidebar_state {
-  position: absolute;
-  background-color: #fff;
-  right: -10px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  cursor: pointer;
+.sidebar_menu a svg path{
+  fill: white;
 }
 
 // .sidebar_menu {
@@ -1882,10 +1877,10 @@ input:checked+.slider:before {
 
 // new changes css Start
 
-.dark-theme .right-sidebar .card .card-header a {
-  color: #4379EE !important;
+// .dark-theme .right-sidebar .card .card-header a {
+//   color: #4379EE !important;
 
-}
+// }
 
 .dark-theme .card-tabs .nav-tabs .nav-item .nav-link.active {
   background-color: #0C3453 !important;
@@ -1903,7 +1898,13 @@ input:checked+.slider:before {
 }
 
 .dark-theme .view-all a {
-  color: #4379EE;
+  color: white;
+}
+// .dark-theme .card-search{
+//   background-color: #0C3453;
+// }
+.dark-theme .mat-mdc-table {
+  background-color: transparent;
 }
 
 .dark-theme .badgeinfo {

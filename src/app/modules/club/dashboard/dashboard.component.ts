@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
   booster : any = false;
   activeDomains : any;
   countries :  any;
-  isPremium: any = true;
+  isPremium: any = false;
   StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
   private routeSubscription: Subscription | null = null; // Initialize with null
@@ -597,6 +597,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
   }
 
   switchTab(tab: string){
+    if(!this.isPremium){
+      this.activeTab = 'profile';
+    }
     this.activeTab = tab;
   }
 
@@ -604,7 +607,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     this.userService.deleteUser([this.userId]).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
-        this.router.navigate(['/talent/dashboard']);
+        this.router.navigate(['/club/dashboard']);
       },
       error => {
         console.error('Error deleting user:', error);

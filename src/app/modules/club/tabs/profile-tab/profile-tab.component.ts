@@ -210,7 +210,7 @@ export class ProfileTabComponent {
     const target = event.target as HTMLSelectElement;
     let newRole = target.value;
 
-    this.userService.updateRepresentatorRole(id, {site_role:newRole}).subscribe((response)=>{
+    this.scoutService.updateRepresentatorRole(id, {site_role:newRole}).subscribe((response)=>{
       if (response && response.status) {
         this.showMatDialog("Role updated successfully.",'display');
       } else {
@@ -248,7 +248,7 @@ export class ProfileTabComponent {
 
   deleteRepresentator():any {
 
-    this.userService.deleteRepresentator(this.idsToDelete).subscribe(
+    this.scoutService.deleteRepresentator(this.idsToDelete).subscribe(
       response => {
         if(response.status){
           this.getRepresentators();
