@@ -1,13 +1,13 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditGeneralDetailsComponent } from '../../edit-general-details/edit-general-details.component';
-import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
 import { TalentService } from '../../../../services/talent.service';
 import { ScoutService } from '../../../../services/scout.service';
 import { UserService } from '../../../../services/user.service';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { AddRepresentatorPopupComponent } from '../../add-representator-popup/add-representator-popup.component';
 import { ClubService } from '../../../../services/club.service';
+import { ResetPasswordComponent } from '../../../shared/reset-password/reset-password.component';
 
 @Component({
   selector: 'club-profile-tab',
