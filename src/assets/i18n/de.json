@@ -1154,7 +1154,10 @@
   "gn-note": "Hinweis: Sie müssen nur Ihren Benutzernamen hinzufügen.",
   "demoPlayer": "Demo-Spieler",
   "pause": "Pause",
-  "editPerformaceDetails": "Leistungsdetails bearbeiten"
+  "editPerformaceDetails": "Leistungsdetails bearbeiten",
+  "thanksMessage": "Ich danke Ihnen vielmals",
+  "thanksMessage2": "Wir werden uns mit Ihnen in Verbindung setzen.",
+  "backToHome" : "Zurück zu Home"
 }
 
 

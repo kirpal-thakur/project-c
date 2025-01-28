@@ -1210,5 +1210,8 @@
   "dimensions:": "Dimension:",
   "don'tsetAnEnd": "Don't og set og an og end og date",
   "maxViews": "Max og views",
-  "editProfile": "Edit og profile"
+  "editProfile": "Edit og profile",
+  "thanksMessage": "Mange tak skal du have",
+  "thanksMessage2": "Vi tager kontakt til dig.",
+  "backToHome" : "Tilbage til start"
 }
