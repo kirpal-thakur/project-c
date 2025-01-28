@@ -117,7 +117,7 @@
 
 
   <div class="NgxEditor__Wrapper">
-    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+    <ngx-editor-menu [editor]="editor" [colorPresets]="colorPresets"> </ngx-editor-menu>
     <ngx-editor [editor]="editor" class="editor-width" [(ngModel)]="content" [disabled]="false"
       [placeholder]="'editors.placeholder' | translate"></ngx-editor>
     <div *ngIf="errorMsg.content" class="error-msg" style="padding-left:20px;">{{errorMsg.content}}</div>

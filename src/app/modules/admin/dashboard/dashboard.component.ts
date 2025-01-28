@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers: any = [];
   newRegistrationScouts: any = [];
   years: any = [];
-  selectedYear: any = new Date().getFullYear();
+  selectedYear: any = 2024;
   language: any;
   loggedInUser: any = localStorage.getItem('userData');
 
@@ -157,7 +157,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.getChardData(this.selectedYear);
     this.loggedInUser = JSON.parse(this.loggedInUser);
-    console.log(this.loggedInUser)
     this.updateThemeText();
     this.getNewRegistrations();
     this.getNewRegistrationsWithScout();
@@ -219,7 +218,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-
+  yearChange(e:any){
+   this.updateChartData(e.target.value);
+  }
   getNewRegistrations() {
     try {
       this.dashboardApi.getNewRegistration(5).subscribe((response) => {
@@ -274,6 +275,32 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
   setSelectedYear(year: any) {
     this.getChardData(year);
+  }
+  updateChartData(year: any){
+    try {
+      this.chart1.destroy();
+      this.chart2.destroy();
+      this.chart3.destroy();
+      
+      this.dashboardApi.getChartData(year).subscribe((response) => {
+        if (response && response.status && response.data) {
+          this.chartData = response.data;
+          setTimeout(() => {
+            this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1', response.data.users.labels, response.data.users.values)!;
+            this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2', response.data.sales.labels, response.data.sales.values)!;
+            this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3', response.data.subscriptions.labels, response.data.subscriptions.values)!;
+            //this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
+            this.updateChartBackgroundColor();
+
+          }, 1000);
+
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   }
   getChardData(year: any) {
     try {
