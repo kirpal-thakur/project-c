@@ -304,7 +304,6 @@
   "privacy": "Privatlivspolitik",
   "terms": "Vilkår",
   "cookiePolicy": "Cookiepolitik",
-  "copyright": "© 2025 SoccerYou Group. Alle rettigheder forbeholdes.",
   "welcomeBack": "Velkommen tilbage – SoccerYou venter!",
   "loginMessage": "Log ind og kom i gang!",
   "emailLabel": "Email",
@@ -430,7 +429,7 @@
   "UserAlreadyVerified": "Denne bruger er allerede verificeret.",
   "ConfirmDeleteUser": "Når brugeren er slettet, kan det ikke gøres om. Vil du slette?",
   "DeleteAccount": "Slet konto",
-  "Copyright": "© 2025 SoccerYou Group, Alle rettigheder forbeholdes.",
+  "Copyright": "© 2025 Succer You Sports AG. Alle rettigheder forbeholdes.",
   "Privacy": "Privatlivspolitik",
   "Terms": "Vilkår",
   "FAQ": "Ofte stillede spørgsmål",
@@ -1211,5 +1210,8 @@
   "dimensions:": "Dimension:",
   "don'tsetAnEnd": "Don't og set og an og end og date",
   "maxViews": "Max og views",
-  "editProfile": "Edit og profile"
+  "editProfile": "Edit og profile",
+  "thanksMessage": "Mange tak skal du have",
+  "thanksMessage2": "Vi tager kontakt til dig.",
+  "backToHome" : "Tilbage til start"
 }

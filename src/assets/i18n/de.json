@@ -321,7 +321,7 @@
   "privacy": "Datenschutz",
   "terms": "Nutzungsbedingungen",
   "cookiePolicy": "Cookie-Richtlinie",
-  "copyright": "© 2025 SoccerYou Group. Alle Rechte vorbehalten.",
+  "copyright": "© 2025 Succer You Sports AG. Alle Rechte vorbehalten.",
   "welcomeBack": "Willkommen zurück - SoccerYou wartet!",
   "loginMessage": "Logge dich ein und starte durch!",
   "emailLabel": "E-Mail",
@@ -1170,6 +1170,10 @@
   "demoPlayer": "Demo-Spieler",
   "pause": "Pause",
   "editPerformaceDetails": "Leistungsdetails bearbeiten",
+  "thanksMessage": "Ich danke Ihnen vielmals",
+  "thanksMessage2": "Wir werden uns mit Ihnen in Verbindung setzen.",
+  "backToHome" : "Zurück zu Home",
+
   "tabSection": "Registerkarte Abschnitt",
   "darkImages": "Dunkle Bilder",
   "countriesName": {
