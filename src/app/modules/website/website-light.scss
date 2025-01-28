@@ -141,8 +141,8 @@
 }
 
 .light-theme form button {
-  background: #e05263;
-  color: white;
+  background: transparent;
+  color: black;
 }
 
 .light-theme .website-code .custom-list-item:hover::before {
@@ -877,20 +877,23 @@ body {
 .light-theme .website-code .join-text:hover {
   background: linear-gradient(0deg, #065f06, #4a8c37);
 }
-
-
-
-
-ul,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 0px;
+ .website-code .learn {
+  color: white;
 }
+
+
+
+
+// ul,
+// p,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin-bottom: 1rem;
+// }
 
 a {
   text-decoration: none;
@@ -1975,7 +1978,7 @@ a {
 
 .mat-mdc-dialog-inner-container.mdc-dialog__container {
   position: relative;
-  top: 30px;
+  top: 0px;
 
   // left: 386px;
   // bottom: 311px;

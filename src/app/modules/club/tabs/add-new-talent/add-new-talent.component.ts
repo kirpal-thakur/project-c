@@ -1,19 +1,19 @@
-import { COMMA, ENTER} from '@angular/cdk/keycodes';
-import { Component, Inject,ViewChild,ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { inject } from '@angular/core';
+import {  MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UserService } from '../../../../services/user.service';
-import { TalentService } from '../../../../services/talent.service';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ClubService } from '../../../../services/club.service';
 
 @Component({
-  selector: 'app-invite-talent-popup',
-  templateUrl: './invite-talent-popup.component.html',
-  styleUrl: './invite-talent-popup.component.scss'
+  selector: 'add-new-talent',
+  templateUrl: './add-new-talent.component.html',
+  styleUrls: ['./add-new-talent.component.scss']
 })
-export class InviteTalentPopupComponent {
+export class AddNewTalentComponent {
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly announcer = inject(LiveAnnouncer);
   filteredUsers:any = [];
@@ -24,20 +24,17 @@ export class InviteTalentPopupComponent {
   invitedUsers:any = [];
   eventName:any = "";
   sightId:any = "";
+  startDate: string | null = null;
+  endDate: string | null = null;
+  noEndDate: boolean = false;
+  teamId:any;
+
   constructor(
-    private userService: UserService,
     private clubService: ClubService,
-    public dialogRef: MatDialogRef<InviteTalentPopupComponent>,
+    public dialogRef: MatDialogRef<AddNewTalentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data);
-    this.action = data.action;
-    if(this.action == "showInvitedUsers"){
-      this.invitedUsers = data.data
-    }else if(this.action == "inviteUsers"){
-      this.eventName = data.data;
-      this.sightId = data.sightId;
-    }
+    this.teamId = data.teamId;
   }
 
   ngOnInit(): void {
@@ -49,37 +46,42 @@ export class InviteTalentPopupComponent {
       this.clubService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
           this.allUsers = response.data.userData.users;
-          } else {
-            console.error('Invalid API response structure:', response);
-          }
-        });
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   }
 
   close() {
     this.dialogRef.close();
   }
 
-  sendInvite(){
+  sendInvite() {
+
     const formData = new FormData();
-    this.users.map(function(user:any) {
-      formData.append('invites[]', user.id);
+    let i = 0 ;
+    this.users.map((user: any) => {
+      formData.append(`players[${i}][player_id]`, user.id);
+      formData.append(`players[${i}][team_id]`, this.teamId);
+      formData.append(`players[${i}][join_date]`, this.startDate || '');
+      formData.append(`players[${i}][end_date]`, this.noEndDate ? '' : this.endDate || '');
+      i=+1;
     });
 
-    this.userService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
+    this.clubService.addTeamPlayer(formData).subscribe((response) => {
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added',
-          id: this.sightId
+          id: this.sightId,
         });
-      
       } else {
         console.error('Invalid API response structure:', response);
       }
     });
+
   }
 
   onKeyPress(event: any){
@@ -121,5 +123,5 @@ export class InviteTalentPopupComponent {
       this.userInput.nativeElement.value = "";
     }
   }
- 
+
 }

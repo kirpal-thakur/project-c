@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
+import { ClubService } from '../../../../services/club.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddNewTalentComponent } from '../add-new-talent/add-new-talent.component';
 
 @Component({
   selector: 'club-teams-tab',
@@ -13,17 +16,17 @@ export class TeamsTabComponent {
   teams:any = [];
   players:any = [];
   view: string = "team";
-  displayedColumns: string[] = ['Player Name', 'Joining Date', 'Exit Date', 'Location','Edit'];
+  displayedColumns: string[] = ['Player Name','Joining Date','Exit Date','Location','Edit'];
   isLoading:boolean = false;
   selectedTeam:any = "";
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router){}
+  selectedTeamId:any;
+  @Input() userData: any;
 
+  constructor(private route: ActivatedRoute, private userService: UserService, private clubService: ClubService, private router: Router, public dialog: MatDialog){}
 
   ngOnInit(){
-    this.route.params.subscribe((params:any) => {
-      this.userId = params.id;
-      this.getClubTeams(this.userId)
-    })
+    this.userId = this.userData.id;
+    this.getClubTeams(this.userId)
   }
 
   getClubTeams(userId:any){
@@ -40,20 +43,20 @@ export class TeamsTabComponent {
         }
       });
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+      console.error('Error fetching users:', error);
     }
   }
 
   getTeamPlayers(teamId:any, teamName:any){
     this.selectedTeam = teamName;
+    this.selectedTeamId = teamId;
     this.view = 'player';
     this.isLoading = true;
     try {
-      this.userService.getTeamPlayers(teamId).subscribe((response)=>{
+      this.clubService.getClubTeamPlayers(teamId).subscribe((response)=>{
         if (response && response.status && response.data) {
           this.players = response.data.players;
-          console.log(this.players) 
+          console.log(this.players)
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -62,7 +65,7 @@ export class TeamsTabComponent {
       });
     } catch (error) {
       this.isLoading = false;
-      console.error('Error fetching users:', error);  
+      console.error('Error fetching users:', error);
     }
   }
 
@@ -72,7 +75,24 @@ export class TeamsTabComponent {
   }
 
   navigate(playerId:any){
-    let pageRoute = 'admin/player';
+    let pageRoute = 'view/player';
     this.router.navigate([pageRoute, playerId]);
   }
+
+
+  addPlayer(){
+
+    const messageDialog = this.dialog.open(AddNewTalentComponent,{
+      width: '800px',
+      data: {
+        teamId: this.selectedTeamId,
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      console.log('result',result);
+    });
+
+   }
+
 }

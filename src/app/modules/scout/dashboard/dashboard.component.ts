@@ -73,8 +73,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
     this.loadCountries();
     this.getGalleryData();
 
+    this.getCoverImg();
     this.route.params.subscribe(() => {
-      this.getCoverImg();
       this.activeTab = 'profile';
     });
 
@@ -263,9 +263,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
           }
-          if (this.user?.meta?.cover_image_path) {
-            this.coverImage = this.user.meta.cover_image_path;
-          }
 
           // this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
@@ -421,8 +418,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
   getCoverImg(){
     try {
       this.talentService.getCoverImg().subscribe((response)=>{
-        if (response?.data?.userData?.metaValue) {
-            this.coverImage = response.data.userData.cover_image_path;
+        if (response?.data) {
+            this.coverImage = response?.data?.userData?.meta_value && response.data.userData.meta_value != '' ? response.data.userData.cover_image_path : undefined;
+            // console.log('coverImage',this.coverImage)
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);

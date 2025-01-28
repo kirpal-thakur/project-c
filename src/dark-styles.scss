@@ -119,6 +119,14 @@ a {
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
 }
+.dark-theme .page-sidebar {
+  border-radius: 20px;
+  // background: linear-gradient(180deg, #236115 0%, #6fb95d 100%);
+  width: 210px;
+  margin: 20px 0px 20px 20px;
+  position: fixed;
+  height: 95%;
+}
 
 .compact-sidebar .sidebar_menu_span {
   display: none;
@@ -320,12 +328,41 @@ a {
 .dark-theme #users-icon path {
   fill: white;
 }
+.dark-theme .next_btn{
+  background: #bde34f;
+  color: #0c3453;
+}
+.dark-theme .next_btn:hover {
+  background: linear-gradient(0deg, #BDE34F, #EFFFC1);;
+  color: #0c3453;
+  border: none;
+}
+.dark-theme .web-create-bg {
+  background-color: #BDE34F !important;
+  border: 1px solid #BDE34F !important;
+  color: #0c3453 !important;
+}
+.dark-theme a.btn.btn-success.web-create-bg{
+  color: #0c3453 !important;
+}
+legend.w-auto.px-2 {
+  padding-left: 0 !important;
+}
+.dark-theme legend.w-auto.px-2 {
+  padding-left: 0 !important;
+  color: white;
+}
+.dark-theme .card {
+  color: white;
+  background: transparent;
+  border: 1px solid;
+}
 
 .btn {
   font-size: 16px;
   font-weight: 700;
   border-radius: 10px;
-  padding: 5px 10px;
+  // padding: 5px 10px;
 
   &.btn-sm {
     padding: .5rem 2.5rem;
@@ -2345,12 +2382,21 @@ input:checked+.slider:before {
 
 .dark-theme .form-group input,
 .dark-theme .form-group select {
-  background: #0C3453 !important;
+  background: #072944 !important;
   color: #fff !important;
 }
 
 .dark-theme .form-group option {
   background: #1F4360 !important;
+}
+
+.dark-theme .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #072944;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+.dark-theme .tabs{
+  color: white;
 }
 
 // .dark-theme .form-group select{

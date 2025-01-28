@@ -39,8 +39,8 @@
   filter: brightness(0) invert(1) !important;
 }
 .dark-theme form button {
-  background: #bde34f;
-  color: #0c3453;
+  background: transparent;
+  color: black;
 }
 
 .dark-theme .website-code h2.coming-heading {
@@ -773,6 +773,14 @@ button.faq-scout-button {
   content: "";
   box-shadow: 0 0 1.25rem rgba(31, 45, 61, 0.04);
   z-index: -1;
+}
+.dark-theme .page-sidebar {
+  border-radius: 20px;
+  width: 210px;
+  margin: 20px 0px 20px 20px;
+  position: static !important;
+  height: 95%;
+  transition: all 0.4s;
 }
 
 .compact-sidebar .sidebar_menu_span {

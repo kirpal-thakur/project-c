@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angul
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { ClubService } from '../../../../services/club.service';
 
 @Component({
   selector: 'app-create-sight-popup',
@@ -40,31 +41,38 @@ export class CreateSightPopupComponent implements AfterViewInit {
     file: ""
   }];
   @ViewChild('fileInput', { static: false }) fileInputElement!: ElementRef;
-  constructor(public dialogRef : MatDialogRef<CreateSightPopupComponent>, public userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-      this.clubId = data.clubId;
+  constructor(
+    public dialogRef : MatDialogRef<CreateSightPopupComponent>,
+    public userService: UserService,
+    public clubService: ClubService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
 
-      if(data.sightData){
-        this.eventName = data.sightData.event_name;
-        this.managerName = data.sightData.manager_name;
-        this.date = data.sightData.event_date;
-        this.dateTime = this.reverseDateFormat(data.sightData.event_date, data.sightData.event_time);
-        this.address = data.sightData.address;
-        this.zipcode = data.sightData.zipcode;
-        this.city = data.sightData.city;
-        this.about = data.sightData.about_event;
-        this.idToBeUpdate = data.sightData.id;
-      }
+    this.clubId = data.clubId;
+
+    if(data.sightData){
+      this.eventName = data.sightData.event_name;
+      this.managerName = data.sightData.manager_name;
+      this.date = data.sightData.event_date;
+      this.dateTime = this.reverseDateFormat(data.sightData.event_date, data.sightData.event_time);
+      this.address = data.sightData.address;
+      this.zipcode = data.sightData.zipcode;
+      this.city = data.sightData.city;
+      this.about = data.sightData.about_event;
+      this.idToBeUpdate = data.sightData.id;
+    }
   }
+
   ngAfterViewInit() {
   }
 
   ngOnInit(): void {
     try {
-       this.userService.getAllPlayers().subscribe((response)=>{
+       this.clubService.getAllPlayers().subscribe((response)=>{
         if (response && response.status && response.data && response.data.userData) {
-          this.allUsers = response.data.userData; 
+          this.allUsers = response.data.userData.users;
+          console.log(this.allUsers)
           if(this.data.invitees){
             let tempInvitees:any = [];
             this.data.invitees.map((i:any) => {
@@ -76,14 +84,13 @@ export class CreateSightPopupComponent implements AfterViewInit {
             this.users = tempInvitees;
           }
         } else {
-          console.error('Invalid API response structure:', response); 
+          console.error('Invalid API response structure:', response);
         }
       });     
     } catch (error) {
       console.error('Error fetching users:', error);
     }
   }
-  
 
   close(){
     this.dialogRef.close();
@@ -103,6 +110,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
       this.bannerFile = input.files[0];
     }
   }
+
   onAttachmentFileChange(event: Event, index:any): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -123,7 +131,6 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   removeRow(index:any):any {
-
     if(this.attachmentRows.length == 1){
       return false;
     }
@@ -157,11 +164,10 @@ export class CreateSightPopupComponent implements AfterViewInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-
     if (!this.users?.length){
       this.users.push(event.option.value);
       this.userInput.nativeElement.value = "";
-    }else if (this.users?.length && !this.users.find((user:any) => user.id === event.option.value.id)) {
+    } else if (this.users?.length && !this.users.find((user:any) => user.id === event.option.value.id)) {
       this.users.push(event.option.value);
       this.userInput.nativeElement.value = "";
     } else {
@@ -219,21 +225,21 @@ export class CreateSightPopupComponent implements AfterViewInit {
     this.users.map(function(user:any) {
       formData.append('invites[]', user.id);
     });
-    
+
     try {
-      this.userService.addSight(this.clubId, formData).subscribe((response)=>{
-        console.log(response)
-       if (response && response.status) {
-         this.dialogRef.close({
-          action: 'added'
-         })
-       } else {
-         console.error('Invalid API response structure:', response); 
-       }
-     });     
-   } catch (error) {
-     console.error('Error:', error);
-   }
+      this.clubService.addSight(this.clubId, formData).subscribe((response)=>{
+
+        if (response && response.status) {
+          this.dialogRef.close({
+            action: 'added'
+          })
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
 
   }
 
@@ -259,7 +265,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
     });
     
     try {
-      this.userService.updateSight(this.idToBeUpdate, formData).subscribe((response)=>{
+      this.clubService.updateSight(this.idToBeUpdate, formData).subscribe((response)=>{
         console.log(response)
         if (response && response.status) {
           this.dialogRef.close({
@@ -275,4 +281,5 @@ export class CreateSightPopupComponent implements AfterViewInit {
     }
 
   }
+
 }

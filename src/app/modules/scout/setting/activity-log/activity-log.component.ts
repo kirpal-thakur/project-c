@@ -99,7 +99,7 @@ export class ActivityLogComponent {
         this.getActivity();
         this.selectedIds = [];
         this.allSelected = false;
-        this.showMessage('Activity deleted successfully!');
+        this.showMessage(response.data.success);
       },
       error => {
         console.error('Error deleting activity:', error);

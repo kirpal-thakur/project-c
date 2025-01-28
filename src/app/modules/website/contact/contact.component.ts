@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { WebPages } from '../../../services/webpages.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 
 export class ContactComponent implements OnInit {
+  apiUrl:any = environment.url;
   base_url: string = '';
   address: string = '';
   semail: string = '';
@@ -34,7 +36,8 @@ export class ContactComponent implements OnInit {
   email_placeholder: string = '';
   phone_placeholder: string = '';
   message_placeholder: string = '';
-  constructor(private route: ActivatedRoute, 
+  constructor(
+    private route: ActivatedRoute, 
     private webPages: WebPages,
     private fb: FormBuilder,
     private http: HttpClient,
@@ -158,7 +161,7 @@ export class ContactComponent implements OnInit {
     else{
       role = 3;
     }
-    if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
+/*     if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
       const formData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
       const result = {};
       // Send the form data and captcha token to the server
@@ -178,13 +181,10 @@ export class ContactComponent implements OnInit {
       if (this.contactForm.invalid) {
         console.error('Form is invalid:', this.contactForm.errors);
       }
-    }
-    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };
-
-    console.log(ContactformData);
-    return;
-    
-    this.http.post<any>('https://api.socceryou.ch/frontend/save-contact-form', ContactformData).subscribe(
+    } 
+  */
+    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };    
+    this.http.post<any>(this.apiUrl+'/frontend/save-contact-form', ContactformData).subscribe(
       (response) => {
         // console.log('Form submitted successfully:', response);
         if(response.message != '' && response.data.redirect_url != ''){

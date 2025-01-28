@@ -258,9 +258,11 @@ export class WebPagesComponent {
 
   editPage(page: any){
     const addNewPage = this.dialog.open(AddPageComponent,{
-      panelClass: 'full-width-dialog',
-      width: '90vw',
-      height: '90vh',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      panelClass: 'full-screen-modal',
       data : page
     })
     addNewPage.afterClosed().subscribe(result => {

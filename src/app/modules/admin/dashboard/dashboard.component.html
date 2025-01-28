@@ -13,8 +13,8 @@
         </div>
         <span>
           <div>
-            <select name="" id="">
-              <option *ngFor="let year of years.reverse()" [value]="year">{{ year }}</option>
+            <select name="" id="" (change)='yearChange($event)'>
+              <option *ngFor="let year of years.reverse()" [value]="year" >{{ year }}</option>
             </select>
           </div>
         </span>

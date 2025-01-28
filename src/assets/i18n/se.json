@@ -306,7 +306,7 @@
   "forgotPasswordMessage": "{{ forgotPasswordMessage }}",
   "backToLogin": "Tillbaka till inloggningen",
   "createAccountTitle": "Skapa konto",
-  "createAccountDescription": "Ange dina uppgifter nedan för att komma igång",
+  "createAccountDescription": "Fyll i dina uppgifter nedan för att komma igång.",
   "firstNameLabel": "Förnamn",
   "lastNameLabel": "Efternamn",
   "usernameLabel": "Användarnamn",
