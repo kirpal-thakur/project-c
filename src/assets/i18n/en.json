@@ -514,7 +514,7 @@
   "privacy": "Privacy",
   "terms": "Terms",
   "cookiePolicy": "Cookie Policy",
-  "copyright": "© 2025 SoccerYou Group. All Rights Reserved.",
+  "copyright": "© 2025 Succer You Sports AG. All Rights Reserved.",
   "welcomeBack": "Welcome back - SoccerYou is waiting!",
   "loginMessage": "Log in and get started!",
   "emailLabel": "Email",
@@ -1089,6 +1089,9 @@
   "don'tsetAnEnd": "Don't set an end date",
   "maxViews": "Max Views",
   "editProfile": "edit Profile",
+  "thanksMessage": "thank you very much",
+  "thanksMessage2": "We will get in touch with you.",
+  "backToHome" : "Back To Home",
   "tabSection": "Tab Section",
   "darkImages": "Dark Images",
   "createAccountDescription": "Enter your details below to get started."
