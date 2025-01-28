@@ -7,7 +7,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,20 +29,11 @@ import { EditPersonalDetailsComponent } from './edit-personal-details/edit-perso
 import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PlayerProfileComponent } from './player-profile/player-profile.component';
-import { ExploreComponent } from './explore/explore.component';
-import { CountriesComponent } from './countries/countries.component';
-import { ChatComponent } from './chat/chat.component';
 import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
 import { PaymentsPopupComponent } from './payments-popup/payments-popup.component';
 import { EditMembershipProfileComponent } from './edit-membership-profile/edit-membership-profile.component';
-import { EditPlanComponent } from './edit-plan/edit-plan.component';
 // import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditGeneralDetailsComponent } from './edit-general-details/edit-general-details.component';
-import { SettingComponent } from './setting/setting.component';
-import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
-import { AppSettingComponent } from './setting/app-setting/app-setting.component';
-import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
@@ -59,9 +49,6 @@ import { GuidedTourModule } from 'ngx-guided-tour';
 import { SharedModule } from '../shared/shared.module';
 import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
 import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
-import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
-import { AddCountryComponent } from './countries/add-country/add-country.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AddRepresentatorPopupComponent } from './add-representator-popup/add-representator-popup.component';
 import { InviteScoutTalentPopupComponent } from './invite-scout-talent-popup/invite-scout-talent-popup.component';
 // import { NgxStripeModule } from 'ngx-stripe';
@@ -72,23 +59,13 @@ import { InviteScoutTalentPopupComponent } from './invite-scout-talent-popup/inv
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
-    FavoritesComponent,
     ProfileTabComponent,
-    PlayerProfileComponent,
     ViewMembershipPopupComponent,
-    CountriesComponent,
-    SettingComponent,
-    ActivityLogComponent,
-    AppSettingComponent,
     PlanComponent,
-    EditPlanComponent,
     EditMembershipProfileComponent,
     EditPersonalDetailsComponent,
     PaymentsPopupComponent,
     MembershipComponent,
-    ChatComponent,
-    ChatPopupComponent,
-    ExploreComponent,
     UploadPopupComponent,
     EditHighlightsComponent,
     DeletePopupComponent,
@@ -103,12 +80,10 @@ import { InviteScoutTalentPopupComponent } from './invite-scout-talent-popup/inv
     CancelCountryPlanComponent,
     EditNewTalentComponent,
     AddBoosterComponent,
-    UpdateConfirmationPlanComponent,
-    AddCountryComponent,
-    ResetPasswordComponent,
     FooterComponent,
     AddRepresentatorPopupComponent,
-    InviteScoutTalentPopupComponent
+    InviteScoutTalentPopupComponent,
+    ProfileTabComponent
   ],
   imports: [
     CommonModule,

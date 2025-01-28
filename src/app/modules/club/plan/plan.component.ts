@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPlanComponent } from '../edit-plan/edit-plan.component';
 import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../../../environments/environment';
@@ -14,6 +13,7 @@ import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-
 import { ToastrService } from 'ngx-toastr';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { ScoutService } from '../../../services/scout.service';
+import { EditPlanComponent } from '../../shared/edit-plan/edit-plan.component';
 
 
 interface Plan {
