@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SharedRoutingModule } from './shared-routing.module';
 import { SuccessComponent } from './success/success.component';
 import { CancelComponent } from './cancel/cancel.component';
@@ -29,11 +28,24 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxEditorModule } from 'ngx-editor';
 import { MessagePopupComponent } from './message-popup/message-popup.component';
 import { IndexComponent } from './index/index.component';
-
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { CouponCodeAlertComponent } from './coupon-code-alert/coupon-code-alert.component';
 import { HeaderComponent } from './header/header.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
+import { CountriesComponent } from './countries/countries.component';
+import { AddCountryComponent } from './countries/add-country/add-country.component';
+import { EditPlanComponent } from './edit-plan/edit-plan.component';
+import { UpdateConfirmationPlanComponent } from './update-confirmation-plan/update-confirmation-plan.component';
+import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SettingComponent } from './setting/setting.component';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { ExploreComponent } from './explore/explore.component';
+import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
+import { AppSettingComponent } from './setting/app-setting/app-setting.component';
 
 
 @NgModule({
@@ -47,13 +59,27 @@ import { HeaderComponent } from './header/header.component';
     GeneralDetailsComponent,
     PerformanceDetailsComponent,
     PerformanceReportComponent,
-    TransferDetailsComponent,   
+    TransferDetailsComponent,
     MessagePopupComponent,
     IndexComponent,
     SidebarComponent,
     FooterComponent,
     CouponCodeAlertComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChatComponent,
+    CountriesComponent,
+    ChatPopupComponent,
+    AddCountryComponent,
+    EditPlanComponent,
+    UpdateConfirmationPlanComponent,
+    ViewMembershipPopupComponent,
+    PlayerProfileComponent,
+    ResetPasswordComponent,
+    SettingComponent,
+    ActivityLogComponent,
+    AppSettingComponent,
+    FavoritesComponent,
+    ExploreComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +101,7 @@ import { HeaderComponent } from './header/header.component';
     MatTableModule,
     MatToolbarModule,
     MatPaginator,
-    NgxEditorModule,    
+    NgxEditorModule,
   ],
   exports:[
     SuccessComponent,
@@ -85,13 +111,13 @@ import { HeaderComponent } from './header/header.component';
     GeneralDetailsComponent,
     PerformanceDetailsComponent,
     PerformanceReportComponent,
-    TransferDetailsComponent,   
+    TransferDetailsComponent,
     MessagePopupComponent,
     IndexComponent,
     SidebarComponent,
     FooterComponent,
     CouponCodeAlertComponent,
-    HeaderComponent
+    HeaderComponent,
   ]
 })
 export class SharedModule { }
