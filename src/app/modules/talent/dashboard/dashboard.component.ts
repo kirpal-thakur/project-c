@@ -14,6 +14,7 @@ import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
 import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -476,7 +477,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadProfileImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
 
@@ -520,7 +521,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadCoverImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.coverImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
               this.toastr.clear();
               this.toastr.success('Cover image uploaded successfully!', 'Success');
