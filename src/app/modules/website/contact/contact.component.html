@@ -56,7 +56,7 @@
               <div>
                 <input id="name" formControlName="name" [placeholder]="name_placeholder" ng-model="contactForm.name" />
                 <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error">
-                  <div *ngIf="name?.errors?.['required']">Name is required.</div>
+                  <div *ngIf="name?.errors?.['required']">{{'nameRequired' | translate}}</div> 
                 </div>
               </div>
 
@@ -64,8 +64,9 @@
                 <input id="email" type="email" formControlName="email" [placeholder]="email_placeholder"
                   ng-model="contactForm.email" />
                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
-                  <div *ngIf="email?.errors?.['required']">Email is required.</div>
-                  <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+                  <div *ngIf="email?.errors?.['required']">{{'emailRequired' | translate}}</div>
+                  <div *ngIf="email?.errors?.['email']">{{'emailRequired' | translate}}</div>
+                  <!-- <div *ngIf="email?.errors?.['email']">Invalid email address.</div> -->
                 </div>
               </div>
 
@@ -73,8 +74,9 @@
                 <input id="phone" type="tel" formControlName="phone" [placeholder]="phone_placeholder"
                   ng-model="contactForm.phone" />
                 <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
-                  <div *ngIf="phone?.errors?.['required']">Phone is required.</div>
-                  <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div>
+                  <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div>
+                  <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div>
+                  <!-- <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div> -->
                 </div>
               </div>
 
@@ -82,14 +84,16 @@
                 <textarea id="message" formControlName="message" [placeholder]="message_placeholder"
                   ng-model="contactForm.message"></textarea>
                 <div *ngIf="message?.invalid && (message?.dirty || message?.touched)" class="error">
-                  <div *ngIf="message?.errors?.['required']">Message is required.</div>
+                  <div *ngIf="message?.errors?.['required']">{{'messageRequired' | translate}}</div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
 
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
-                    <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
+                    <!-- <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
+                    </re-captcha> -->
+                    <re-captcha siteKey="6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
 
