@@ -4,6 +4,7 @@ import {DateAdapter, MAT_DATE_LOCALE} from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { AdvertisementService } from '../../../../services/advertisement.service';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-AdvertisingPopupComponent',
   templateUrl: './advertising-popup.component.html',
@@ -80,7 +81,7 @@ export class AdvertisingPopupComponent   {
       this.typeForView = this.type.split('-')[0];
       let index = this.pageOptions.findIndex((x:any) => x.id == this.page);
       this.pageName = this.pageOptions[index].page;
-      this.imageUrl = "https://api.socceryou.ch/uploads/"+existingRecord.featured_image
+      this.imageUrl = environment.url+"uploads/"+existingRecord.featured_image
     }
 
   }

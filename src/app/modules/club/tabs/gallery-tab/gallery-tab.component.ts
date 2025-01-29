@@ -6,6 +6,7 @@ import { TalentService } from '../../../../services/talent.service';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
 import { ToastrService } from 'ngx-toastr';
 import { ScoutService } from '../../../../services/scout.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'club-gallery-tab',
@@ -75,7 +76,7 @@ export class GalleryTabComponent {
 
         this.scoutService.uploadCoverImage(formdata).subscribe((response)=>{
           if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.coverImage = `${environment.url}uploads/`+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
             // this.isLoading = false;
           } else {
