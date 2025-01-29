@@ -251,6 +251,7 @@ export class EditPersonalDetailsComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
+    console.log('Form:', form);
     if (form.valid) {
       // Enable loading state and notify user
       this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });

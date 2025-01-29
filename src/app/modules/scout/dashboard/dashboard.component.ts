@@ -6,7 +6,6 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
-import { TalentService } from '../../../services/talent.service';
 import { ToastrService } from 'ngx-toastr';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
