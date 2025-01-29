@@ -536,7 +536,7 @@
                                             <select class="form-select" (change)="onCountryChange($event)">
                                                 <option value="" disabled selected>{{ 'country' | translate
                                                     }}</option>
-                                                <option *ngFor="let country of countrie" [value]="country.code">{{
+                                                <option *ngFor="let country of countrie" [value]="country.country_id">{{
                                                     country.name }}</option>
                                             </select>
                                         </div>
