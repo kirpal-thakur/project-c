@@ -25,8 +25,8 @@
   <div class="contact-form py_0">
     <div class="container">
       <h3 class="form-heading">{{form_title}}</h3>
-      <div class="row">
-        <div class="col-lg-8 col-md-12 col-12">
+      <div class="row justify-content-between">
+        <div class="col-lg-7 col-md-12 col-12">
 
           <div class="radio-group">
             <label>{{txt_before_radio_btn}}</label>
@@ -87,7 +87,7 @@
                   <div *ngIf="message?.errors?.['required']">{{'messageRequired' | translate}}</div>
                 </div>
               </div>
-              <div class="row">
+              <div class="row justify-content-between">
                 <div class="col-lg-6 col-md-6 col-12">
 
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
@@ -98,8 +98,8 @@
                   </form>
 
                 </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                  <button type="submit" [disabled]="contactForm.invalid"> {{submit_btn_txt}}</button>
+                <div class="col-lg-5 col-md-5 col-12">
+                  <button class="submit_btn" type="submit" [disabled]="contactForm.invalid"> {{submit_btn_txt}}</button>
                 </div>
               </div>
 
