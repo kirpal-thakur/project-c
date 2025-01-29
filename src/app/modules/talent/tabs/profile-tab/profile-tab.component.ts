@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditGeneralDetailsComponent } from '../../edit-general-details/edit-general-details.component';
-import { ResetPasswordComponent } from '../../reset-password/reset-password.component';
 import { TalentService } from '../../../../services/talent.service';
+import { ResetPasswordComponent } from '../../../shared/reset-password/reset-password.component';
 
 @Component({
   selector: 'talent-profile-tab',
