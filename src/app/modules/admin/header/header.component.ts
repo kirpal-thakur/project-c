@@ -263,6 +263,7 @@ export class HeaderComponent {
 
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
+    this.lang = selectedLanguage;
     this.translateService.use(selectedLanguage);
     // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = selectedLanguage;

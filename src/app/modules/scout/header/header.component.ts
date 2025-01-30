@@ -37,6 +37,8 @@ export class HeaderComponent {
   ChangeLang(lang:any){
     const selectedLanguage = typeof lang != 'string' ? lang.target.value: lang;
     localStorage.setItem('lang', selectedLanguage);
+    this.lang = selectedLanguage;
+    
     this.translateService.use(selectedLanguage)
   }
 
