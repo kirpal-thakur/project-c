@@ -56,6 +56,6 @@ export const environment = {
     },
     //6Ld7hb8qAAAAAOVuEobWsckFQVqnzeqmXm6ljs_W  
     //for staging : 6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26
-    captchaKey:'6Ld7hb8qAAAAAOVuEobWsckFQVqnzeqmXm6ljs_W'
+    captchaKey:'6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ'
   } as const;
   
