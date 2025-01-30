@@ -28,31 +28,8 @@ export class FooterComponent implements OnInit {
 
   selectedcountry: number = 1;
   name: string = 'England'; // Current country name, update as needed
-  //  countrie = [
-  //   { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
-  //   { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
-  //   { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
-  //   { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
-  //   { name: 'United Kingdom', slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
-  //   { name: 'Spain', slug: "es", id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
-  //   { name: 'Portugal', slug: "pt", id: 7, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
-  //   { name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
-  //   { name: 'Denmark', slug: "dk", id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
-  //   { name: 'Sweden', slug: "se", id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
-  // ]; 
   countrie: any[] = [];
 
-  // countrie = [
-  //   { name: 'England', slug: "ch", id: 1, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
-  //   { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
-  //   { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
-  //   { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
-  //   { name: 'Spain', slug: "es", id: 5, flag: "Spain.svg", url: 'https://www.socceryou.es' },
-  //   { name: 'Portugal', slug: "pt", id: 6, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
-  //   //{ name: 'Belgium', slug: "be", id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
-  //   { name: 'Denmark', slug: "dk", id: 7, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
-  //   { name: 'Sweden', slug: "se", id: 8, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
-  // ];
   // English Country Names
   countrie_en = [
     { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
@@ -251,7 +228,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.webPages.languageId$.subscribe((data) => {
-      this.selectedcountry = Number(data);
+      this.selectedcountry = 1; //Number(data);
       const selectedLang = this.countrie.find((data: any) => data.id == this.selectedcountry);
       this.name = selectedLang?.name || '';
 
