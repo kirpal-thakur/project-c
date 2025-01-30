@@ -294,7 +294,7 @@
                     <!-- <div class="seperter">
                         <h6 class="mb-0 font-w400">or</h6>
                     </div>
-                    
+
                     <div class="google-sign-in">
                         <div class="google-box" >
                             <img class="google-image" src="./assets/images/devicon_google.png">
@@ -536,7 +536,7 @@
                                             <select class="form-select" (change)="onCountryChange($event)">
                                                 <option value="" disabled selected>{{ 'country' | translate
                                                     }}</option>
-                                                <option *ngFor="let country of countrie" [value]="country.code">{{
+                                                <option *ngFor="let country of countrie" [value]="country.country_id">{{
                                                     country.name }}</option>
                                             </select>
                                         </div>

@@ -286,10 +286,8 @@ export class FooterComponent implements OnInit {
     );
   }
 
-
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
 
   login() {

@@ -15,6 +15,8 @@ import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.comp
 import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
+import { CommonDataService } from '../../../services/common-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +39,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private router: Router,
     private lightbox: Lightbox,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private commonDataService: CommonDataService
   ) { }
   activeTab: string = 'profile';
   userId: any;
@@ -226,8 +229,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 console.log('User selected "Don’t show it again"');
                 // Save the user's preference
                 localStorage.setItem('dontShowIntroTour', 'true');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
               } else {
                 console.log('User unchecked "Don’t show it again"');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
                 localStorage.removeItem('dontShowIntroTour');
               }
             });
@@ -311,6 +316,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
+            this.commonDataService.updateProfilePic(this.profileImage);
+
           }
           if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
@@ -498,9 +505,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.talentService.uploadProfileImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
+              this.commonDataService.updateProfilePic(this.profileImage);
 
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {
@@ -542,7 +550,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.talentService.uploadCoverImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.coverImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
               this.toastr.clear();
               this.toastr.success('Cover image uploaded successfully!', 'Success');

@@ -4,7 +4,6 @@ import { ScoutRoutingModule } from './scout-routing.module';
 import { IndexComponent } from './index/index.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatPaginator } from '@angular/material/paginator';
@@ -57,7 +56,6 @@ import { InviteScoutTalentPopupComponent } from './invite-scout-talent-popup/inv
   declarations: [
     IndexComponent,
     DashboardComponent,
-    HeaderComponent,
     SidebarComponent,
     ProfileTabComponent,
     ViewMembershipPopupComponent,

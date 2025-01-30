@@ -216,9 +216,7 @@
         </li>
         <li class="nav-item dropdown  profile">
           <a class="nav-link" role="button" data-bs-toggle="dropdown">
-            <img *ngIf="profileImgUrl" src="{{profileImgUrl}}" width="56" alt="">
-            <img *ngIf="!profileImgUrl" src="../../../../assets/images/default/talent-profile-default.png" width="56"
-              alt="">
+            <img *ngIf="profileImgUrl" [src]="profileImgUrl" width="56" alt="">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <h6>{{loggedInUser?.first_name}} {{loggedInUser?.last_name}}</h6>

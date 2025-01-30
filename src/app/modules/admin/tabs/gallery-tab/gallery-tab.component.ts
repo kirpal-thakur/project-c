@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-gallery-tab',
@@ -14,7 +15,7 @@ export class GalleryTabComponent {
   userId: any = '';
   userImages: any = [];
   userVideos: any = [];
-  imageBaseUrl: any = "https://api.socceryou.ch/uploads/";
+  imageBaseUrl: any = `${environment.url}uploads/`;
   selectedFile: any = '';
   // defaultCoverImage:any = "./media/palyers.png";
   defaultCoverImage:any = "../../../../assets/images/palyers.png";

@@ -93,16 +93,15 @@
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
                     <!-- <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
                     </re-captcha> -->
-                    <re-captcha siteKey="6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ" (resolved)="resolved($event)">
+                    <re-captcha siteKey="{{captchaKey}}" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
                   <div class="error">
                     <div *ngIf="showcaptchaError">{{'fillCaptcha' | translate}}</div>
                   </div>
-
                 </div>
                 <div class="col-lg-5 col-md-5 col-12">
-                  <button class="submit_btn" type="submit" [disabled]="contactForm.invalid"> {{submit_btn_txt}}</button>
+                  <button class="submit_btn" type="submit"> {{submit_btn_txt}}</button>
                 </div>
               </div>
 
