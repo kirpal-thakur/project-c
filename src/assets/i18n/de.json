@@ -361,7 +361,7 @@
   "submitButton": "Konto erstellen",
   "alreadyHaveAccount": "Sie haben bereits ein Konto?",
   "loginLink": "Einloggen",
-  "nameErforderlich": "Name ist erforderlich.",
+  "nameRequired": "Name ist erforderlich.",
   "emailRequired": "E-Mail ist erforderlich.",
   "phoneRequired": "Telefon ist erforderlich.",
   "messageRequired": "Nachricht ist erforderlich.",
