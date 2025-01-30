@@ -46,13 +46,16 @@ export const environment = {
     pages:[
       'home','talent','clubs_and_scouts','about_us','pricing','news','contact','imprint','privacy_policy','terms_and_conditions','cookie_policy','faq','content_page'
     ],
-    apiUrl:'https://apitest.socceryou.ch/api/',
-    url:'https://apitest.socceryou.ch/',
+    apiUrl:'https://api.socceryou.ch/api/',
+    url:'https://api.socceryou.ch/',
     socketUrl:'https://alerts.socceryou.ch/',
     mailchimp: {
       apiUrl: 'https://us5.api.mailchimp.com/3.0/lists/7afbbb070a/members',
       apiKey: '62a0ffa8d6e9c3d5ed7c8a09e9111b41-us17',  // Correct API key
       listId: '7afbbb070a'
-    }
+    },
+    //6Ld7hb8qAAAAAOVuEobWsckFQVqnzeqmXm6ljs_W  
+    //for staging : 6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26
+    captchaKey:'6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ'
   } as const;
   

@@ -284,6 +284,7 @@ export class HeaderComponent {
 
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
+    this.lang = selectedLanguage;
     
     const selectedLang = this.domains.find((lang:any) => lang.slug === selectedLanguage);
     this.language = selectedLang;
