@@ -23,11 +23,12 @@
               <input
                 placeholder="{{'searchUser' | translate}}"
                 #userInput
+                (input)="callListApi(userInput)"
                 [matAutocomplete]="auto"
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 [matChipInputFor]="chipGrid"
-                (focus)="callListApi(userInput)"
               />
+
             </mat-chip-grid>
            
               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" class="listBox w-100 users-name-list">
@@ -41,7 +42,7 @@
   
           </mat-form-field>
         </div>
-      
+
       </div>
       
   </div>

@@ -207,8 +207,10 @@ export class DashboardComponent implements OnInit , OnDestroy {
                 console.log('User selected "Don’t show it again"');
                 // Save the user's preference
                 localStorage.setItem('dontShowIntroTour', 'true');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
               } else {
                 console.log('User unchecked "Don’t show it again"');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
                 localStorage.removeItem('dontShowIntroTour');
               }
             });
