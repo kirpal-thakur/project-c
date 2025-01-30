@@ -50,12 +50,12 @@
       <div class="form-check p-0">
         <input id="radio-1" class="form-check-input radio-custom" type="radio" name="isYearly"
                [value]="false" [(ngModel)]="isYearly" (change)="toggleBillingPlan(false)">
-        <label for="radio-1" class="form-check-label radio-custom-label">Monthly</label>
+        <label for="radio-1" class="form-check-label radio-custom-label">{{'monthly' | translate}}</label>
       </div>
       <div class="form-check p-0">
         <input id="radio-2" class="form-check-input radio-custom" type="radio" name="isYearly"
                [value]="true" [(ngModel)]="isYearly" (change)="toggleBillingPlan(true)">
-        <label for="radio-2" class="form-check-label radio-custom-label">Yearly</label>
+        <label for="radio-2" class="form-check-label radio-custom-label">{{'yearly' | translate}}</label>
       </div>
     </div>
   </div>
@@ -75,11 +75,11 @@
         <div class="buy-button">
           <h4>
             {{ isYearly ? selectedPlan?.priceYearly : selectedPlan?.priceMonthly }}
-            -{{ selectedPlan?.currency }}/{{ isYearly ? 'Year' : 'Month' }}
+            -{{ selectedPlan?.currency }}/{{ isYearly ? ('year' | translate) : ('month' | translate) }}
           </h4>
-          <p>{{'Total' | translate}}</p>
+          <p>{{'total' | translate}}</p>
         </div>
-        {{'Buy Now' | translate}}
+        {{'buyNow' | translate}}
       </button>
 
     </div>

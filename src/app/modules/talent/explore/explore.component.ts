@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { SocketService } from '../../../services/socket.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-explore',
@@ -21,12 +22,7 @@ export class ExploreComponent implements OnInit {
   nation: any = [];
   ageRange: number[] = [];
 
-  roles: any = [
-    { role: "Clubs", id: 2 },
-    { role: "Scouts", id: 3 },
-    { role: "Talent", id: 4 },
-    { role: "League", id: 5 }
-  ];
+  roles: any = [];
 
   positions: any[] = [];
   countries: any;
@@ -50,13 +46,80 @@ export class ExploreComponent implements OnInit {
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
   isLoading: boolean = false;
 
+  language: string;
+
+  roles_en = [
+    { role: 'Clubs', id: 2 },
+    { role: 'Scouts', id: 3 },
+    { role: 'Talents', id: 4 },
+    { role: 'League', id: 5 }
+  ];
+
+  roles_de = [
+    { role: 'Verein', id: 2 },
+    { role: 'Scout', id: 3 },
+    { role: 'Talent', id: 4 },
+    { role: 'Liga', id: 5 }
+  ];
+
+  roles_dk = [
+    { role: 'Klub', id: 2 },
+    { role: 'Spejder', id: 3 },
+    { role: 'Talent', id: 4 },
+    { role: 'Liga', id: 5 }
+  ];
+
+  roles_es = [
+    { role: 'Club', id: 2 },
+    { role: 'Ojeador', id: 3 },
+    { role: 'Talento', id: 4 },
+    { role: 'Liga', id: 5 }
+  ];
+
+  roles_fr = [
+    { role: 'Club', id: 2 },
+    { role: 'Recruteur', id: 3 },
+    { role: 'Talent', id: 4 },
+    { role: 'Ligue', id: 5 }
+  ];
+
+  roles_it = [
+    { role: 'Club', id: 2 },
+    { role: 'Osservatore', id: 3 },
+    { role: 'Talento', id: 4 },
+    { role: 'Lega', id: 5 }
+  ];
+
+  roles_pt = [
+    { role: 'Clube', id: 2 },
+    { role: 'Olheiro', id: 3 },
+    { role: 'Talento', id: 4 },
+    { role: 'Liga', id: 5 }
+  ];
+
+  roles_se = [
+    { role: 'Klubb', id: 2 },
+    { role: 'Scout', id: 3 },
+    { role: 'Talang', id: 4 },
+    { role: 'Liga', id: 5 }
+  ];
+
   constructor(
     private toastr: ToastrService,
     private talentService: TalentService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private socketService: SocketService
-  ) { }
+    private socketService: SocketService,
+    private translateService: TranslateService
+  ) {
+    this.language = translateService.currentLang || 'en';  // Get current language
+    this.loadRoles(this.language);  // Load Roles based on selected language
+    translateService.onLangChange.subscribe(() => {
+      this.language = translateService.currentLang;
+      console.log(this.language);
+      this.loadRoles(this.language);
+    });
+  }
 
   ngOnInit(): void {
 
@@ -72,6 +135,21 @@ export class ExploreComponent implements OnInit {
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
     // Initialize viewsTracked from sessionStorage
     this.loadTrackedViews();
+  }
+
+  loadRoles(lang : string) {
+    const currentRole : { [key: string]: any } = {
+      en: this.roles_en,
+      de: this.roles_de,
+      dk: this.roles_dk,
+      es: this.roles_es,
+      fr: this.roles_fr,
+      it: this.roles_it,
+      pt: this.roles_pt,
+      se: this.roles_se
+    };
+
+    this.roles = currentRole[lang] || this.roles_en;
   }
 
   private loadTrackedViews() {

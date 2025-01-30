@@ -65,7 +65,7 @@
                   ng-model="contactForm.email" />
                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
                   <div *ngIf="email?.errors?.['required']">{{'emailRequired' | translate}}</div>
-                  <div *ngIf="email?.errors?.['email']">{{'emailRequired' | translate}}</div>
+                  <!-- <div *ngIf="email?.errors?.['email']">{{'emailRequired' | translate}}</div> -->
                   <!-- <div *ngIf="email?.errors?.['email']">Invalid email address.</div> -->
                 </div>
               </div>
@@ -73,11 +73,11 @@
               <div>
                 <input id="phone" type="tel" formControlName="phone" [placeholder]="phone_placeholder"
                   ng-model="contactForm.phone" />
-                <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
-                  <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div>
-                  <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div>
+                <!-- <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error"> -->
+                  <!-- <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div> -->
+                  <!-- <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div> -->
                   <!-- <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div> -->
-                </div>
+                <!-- </div> -->
               </div>
 
               <div>
@@ -93,7 +93,7 @@
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
                     <!-- <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
                     </re-captcha> -->
-                    <re-captcha siteKey="6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26" (resolved)="resolved($event)">
+                    <re-captcha siteKey="6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
 
