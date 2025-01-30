@@ -10,6 +10,7 @@ import { map,filter, timeout } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
+import { CommonDataService } from '../../../services/common-data.service';
 
 interface Notification {
   id: number;
@@ -36,9 +37,19 @@ export class HeaderComponent {
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private talentService: TalentService,
+    private themeService: ThemeService,
+    private authService: AuthService,
+    private translateService: TranslateService,
+    private socketService: SocketService,
+    private commonDataService: CommonDataService,
+  ) { }
+
   loggedInUser: any = localStorage.getItem('userInfo');
-  profileImgUrl: any = "";
+  profileImgUrl: any = "../../../../assets/images/default/talent-profile-default.png";
   lang: string = '';
   domains: any = environment.langs;
   message: string = '';
@@ -95,11 +106,9 @@ export class HeaderComponent {
     this.fetchNotifications(userId);
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
-    this.talentService.message$.subscribe(msg => {
-      this.profileImgUrl = msg;
+    this.commonDataService.profilePic$.subscribe(url => {
+      this.profileImgUrl = url;
     });
-    this.profileImgUrl = this.loggedInUser?.meta?.profile_image_path;
-
 
     this.lang = localStorage.getItem('lang') || 'en';
     const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
@@ -108,11 +117,8 @@ export class HeaderComponent {
     }else{
       this.language = this.domains[0];
     }
-    console.log(this.language);
 
     this.updateThemeText();
-
-    
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data

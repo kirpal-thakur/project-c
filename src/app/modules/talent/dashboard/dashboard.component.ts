@@ -15,6 +15,7 @@ import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.comp
 import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { CommonDataService } from '../../../services/common-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,7 +37,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private lightbox: Lightbox
+    private lightbox: Lightbox,
+    private commonDataService: CommonDataService
   ) { }
   activeTab: string = 'profile';
   userId: any ;
@@ -290,6 +292,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
           if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
+            this.commonDataService.updateProfilePic(this.profileImage);
+
           }
           if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
@@ -480,6 +484,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
               this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
+              this.commonDataService.updateProfilePic(this.profileImage);
 
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {

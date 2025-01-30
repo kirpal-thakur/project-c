@@ -14,6 +14,7 @@ import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.comp
 import { Subscription } from 'rxjs';
 import { ScoutService } from '../../../services/scout.service';
 import { environment } from '../../../../environments/environment';
+import { CommonDataService } from '../../../services/common-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +35,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private lightbox: Lightbox
+    private lightbox: Lightbox,
+    private commonDataService: CommonDataService
   ) { }
   activeTab: string = 'profile';
   userId: any ;
@@ -261,6 +263,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
           if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
+            this.commonDataService.updateProfilePic(this.profileImage);
             this.sendMessage();
           }
 
@@ -450,6 +453,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
               this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
+              this.commonDataService.updateProfilePic(this.profileImage);
 
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {
@@ -508,9 +512,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
           },
         );
       } catch (error) {
-              this.toastr.clear();
-        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
-        console.error('Error during cover image upload:', error);
+            this.toastr.clear();
+            this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+            console.error('Error during cover image upload:', error);
       }
     }
   }
