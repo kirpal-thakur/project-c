@@ -30,6 +30,7 @@ export class ContactComponent implements OnInit {
   isChecked = false; // Checkbox state
   adVisible: boolean[] = [true, true, true, true]; // Array to manage ad visibility
   captchaResolved = false; // Track if captcha is resolved
+  showcaptchaError = false; 
   recaptchaToken: string | null = null; // Captcha token for backend validation
   responseMessage: string = '';
   messageType: string = '';  
@@ -198,7 +199,7 @@ export class ContactComponent implements OnInit {
 
     } else {
       if (!this.captchaResolved) {
-        console.error('Captcha not solved');
+          this.showcaptchaError = true;
       }
       if (this.contactForm.invalid) {
         console.error('Form is invalid:', this.contactForm.errors);
