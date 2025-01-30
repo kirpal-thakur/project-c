@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers: any = [];
   newRegistrationScouts: any = [];
   years: any = [];
-  selectedYear: any = 2024;
+  selectedYear: any = new Date().getFullYear();
   language: any;
   loggedInUser: any = localStorage.getItem('userData');
 
