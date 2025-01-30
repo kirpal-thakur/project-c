@@ -222,7 +222,7 @@ a.dropdown-item.ai-icon.selected {
 }
 
 .toggle-checkbox:checked~.toggle-slot {
-  background-color: black;
+  background-color: #BDE34E;
   border-color: #404040de;
 }
 
@@ -234,7 +234,7 @@ a.dropdown-item.ai-icon.selected {
   width: 45%;
   border-radius: 50%;
   background-color: #ffbb52;
-  background-image: url('../../../../assets/images/light-green/sun-icon-removebg-preview.png');
+  background-image: url('../../../../assets/images/sun-icon-removebg-preview-34IM7KGZ.png');
   background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
@@ -244,6 +244,6 @@ a.dropdown-item.ai-icon.selected {
 .toggle-checkbox:checked~.toggle-slot .toggle-button {
   background-color: #404040de;
   transform: translate(110%, -50%) rotate(360deg);
-  background-image:  url('../../../../assets/images/light-green/images-moon-removebg-preview.png');
+  background-image:  url('../../../../assets/images/images-moon-removebg-preview-A5CDJ5QQ.png');
   background-size: 80%;
 }

@@ -33,20 +33,20 @@ export class ChatPopupComponent {
  
   async fetchUsers(): Promise<void> {
     try {
-      //  this.userService.getUsers(page, pageSize,this.filterValue).subscribe((response)=>{
-       this.talentService.getAllUses().subscribe((response)=>{
+      this.talentService.getAllUses().subscribe((response) => {
+        console.log('User API response:', response);  // Debugging line
         if (response && response.status && response.data && response.data.userData) {
-          this.allUsers = response.data.userData.users; 
-        
+          this.allUsers = response.data.userData.users || [];
+          this.filteredUsers = [...this.allUsers]; // Initialize filtered list
         } else {
           console.error('Invalid API response structure:', response);
         }
-        });     
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-  
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
   }
+
 
   close() {
     this.dialogRef.close();
@@ -61,13 +61,17 @@ export class ChatPopupComponent {
   }
 
   callListApi(userInput: HTMLInputElement) {
-    setTimeout(() => {
-      this.filteredUsers = this.allUsers.filter((user:any) => (user.first_name !== null && user.first_name !== undefined)  && 
-      user.first_name.toLowerCase().indexOf(userInput.value.toLowerCase()) != -1
-      );
-    }, 2000);
-    console.log(userInput.value);
+    if (!this.allUsers || !Array.isArray(this.allUsers)) {
+      console.error('User data is not available');
+      return;
+    }
+
+    const searchText = userInput.value.toLowerCase().trim();
+    this.filteredUsers = this.allUsers.filter((user: any) =>
+      user.first_name && user.first_name.toLowerCase().includes(searchText)
+    );
   }
+
 
   remove(user: any): void {
     const index = this.users.indexOf(user);
