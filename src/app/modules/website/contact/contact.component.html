@@ -75,7 +75,7 @@
                   ng-model="contactForm.phone" />
                 <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
                   <!-- <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div> -->
-                  <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div>
+                  <!-- <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div> -->
                   <!-- <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div> -->
                 </div>
               </div>
