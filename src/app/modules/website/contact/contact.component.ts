@@ -24,6 +24,7 @@ export class ContactComponent implements OnInit {
   txt_before_radio_btn: string = '';
   advertisemnetData:any;
   advertisemnet_base_url:string = '';
+  captchaKey: string = environment.captchaKey;
   selectedOption = 'option1'; // Default option for some dropdown/radio buttons
   contactForm!: FormGroup; // Form group for the contact form
   isChecked = false; // Checkbox state
@@ -49,7 +50,7 @@ export class ContactComponent implements OnInit {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]], // Adjust pattern as needed
+      phone: ['', [Validators.pattern('^[0-9]+$')]], // Adjust pattern as needed
       message: ['', Validators.required],
       domain : window.location.hostname,
       lang : localStorage.getItem('lang'),
@@ -161,7 +162,11 @@ export class ContactComponent implements OnInit {
     else{
       role = 3;
     }
-/*     if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
+    if(!this.contactForm.valid) {
+      console.log('toched');
+      this.contactForm.markAllAsTouched();
+    }
+     if (this.contactForm.valid && this.captchaResolved && this.recaptchaToken) {
       const formData = { ...this.contactForm.value, captchaToken: this.recaptchaToken };
       const result = {};
       // Send the form data and captcha token to the server
@@ -174,6 +179,23 @@ export class ContactComponent implements OnInit {
           console.error('Error submitting form:', error);
         }
       );
+
+      const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };    
+      this.http.post<any>(this.apiUrl+'/frontend/save-contact-form', ContactformData).subscribe(
+        (response) => {
+          // console.log('Form submitted successfully:', response);
+          if(response.message != '' && response.data.redirect_url != ''){
+            this.setResponseMessage(response.message, response.data.class);
+            this.router.navigate(['/'+response.data.redirect_url]);
+          }else{
+            console.log('something went wrong');
+          }
+        },
+        (error) => {
+          console.error('Error submitting form:', error);
+        }
+      );
+
     } else {
       if (!this.captchaResolved) {
         console.error('Captcha not solved');
@@ -181,23 +203,10 @@ export class ContactComponent implements OnInit {
       if (this.contactForm.invalid) {
         console.error('Form is invalid:', this.contactForm.errors);
       }
+      
     } 
-  */
-    const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };    
-    this.http.post<any>(this.apiUrl+'/frontend/save-contact-form', ContactformData).subscribe(
-      (response) => {
-        // console.log('Form submitted successfully:', response);
-        if(response.message != '' && response.data.redirect_url != ''){
-          this.setResponseMessage(response.message, response.data.class);
-          this.router.navigate(['/'+response.data.redirect_url]);
-        }else{
-          alert('something went wrong');
-        }
-      },
-      (error) => {
-        console.error('Error submitting form:', error);
-      }
-    );
+  
+
   }
   // Close specific ad
 

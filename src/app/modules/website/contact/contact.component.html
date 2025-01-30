@@ -74,7 +74,7 @@
                 <input id="phone" type="tel" formControlName="phone" [placeholder]="phone_placeholder"
                   ng-model="contactForm.phone" />
                 <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error">
-                  <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div>
+                  <!-- <div *ngIf="phone?.errors?.['required']">{{'phoneRequired' | translate}}</div> -->
                   <div *ngIf="phone?.errors?.['pattern']">{{'phoneRequired' | translate}}</div>
                   <!-- <div *ngIf="phone?.errors?.['pattern']">Invalid phone number.</div> -->
                 </div>
@@ -93,13 +93,13 @@
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
                     <!-- <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
                     </re-captcha> -->
-                    <re-captcha siteKey="6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26" (resolved)="resolved($event)">
+                    <re-captcha siteKey="captchaKey" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
 
                 </div>
                 <div class="col-lg-5 col-md-5 col-12">
-                  <button class="submit_btn" type="submit" [disabled]="contactForm.invalid"> {{submit_btn_txt}}</button>
+                  <button class="submit_btn" type="submit"> {{submit_btn_txt}}</button>
                 </div>
               </div>
 
