@@ -2,6 +2,7 @@
   "privacyPolicy": "Politica sulla privacy",
   "terms&Conditions": "Termini e condizioni",
   "cookies": "Cookies",
+  "fillCaptcha": "Si prega di compilare il captcha",
   "premium": "Premium",
   "club&scout": "Clubs & Scouts",
   "boostProfileActive": "Profilo Boost attivo",
@@ -94,6 +95,9 @@
   "resultsPerPage": "Risultati per pagina",
   "back": "Indietro",
   "next": "Avanti",
+  "previous": "Precedente",
+  "finish": "Finitura",
+  
   "messages": "Messaggi",
   "chat": "Chat",
   "inbox": "Posta in arrivo",

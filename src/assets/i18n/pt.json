@@ -2,6 +2,7 @@
   "privacyPolicy": "Política de privacidade",
   "terms&Conditions": "Termos e condições",
   "cookies": "Cookies",
+  "fillCaptcha": "Preencher o captcha",
   "createProfile": "Criar perfil",
   "signup": "Inscrever-se",
   "premium": "Premium",
@@ -97,6 +98,9 @@
   "resultsPerPage": "Resultados por página",
   "back": "Voltar",
   "next": "Seguinte",
+  "previous": "Anterior",
+  "finish": "Acabamento",
+  
   "messages": "Mensagens",
   "chat": "Conversa",
   "inbox": "Caixa de entrada",

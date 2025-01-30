@@ -109,7 +109,7 @@ export class ExploreComponent implements OnInit {
     private toastr: ToastrService,
     private talentService: TalentService,
     private router: Router,
-    private cdr: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef, 
     private socketService: SocketService,
     private translateService: TranslateService
   ) {

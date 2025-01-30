@@ -96,6 +96,9 @@
                     <re-captcha siteKey="6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
+                  <div class="error">
+                    <div *ngIf="showcaptchaError">{{'fillCaptcha' | translate}}</div>
+                  </div>
 
                 </div>
                 <div class="col-lg-5 col-md-5 col-12">

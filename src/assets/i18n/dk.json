@@ -2,7 +2,7 @@
   "privacyPolicy": "Privatlivspolitik",
   "terms&Conditions": "Terms and Conditions",
   "cookies": "Cookies",
-
+"fillCaptcha": "Udfyld venligst captcha",
   "createProfile": "Opret profil",
   "club&scout": "Klubber & spejdere",
   "premium": "Premium",
@@ -98,6 +98,9 @@
   "resultsPerPage": "Resultater pr. side",
   "back": "Tilbage",
   "next": "Næste",
+  
+  "previous": "Tidligere",
+  "finish": "Afslut",
   "messages": "Beskeder",
   "chat": "Chat",
   "inbox": "Indbakke",
