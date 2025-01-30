@@ -157,7 +157,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.getChardData(this.selectedYear);
     this.loggedInUser = JSON.parse(this.loggedInUser);
-    this.updateThemeText();
     this.getNewRegistrations();
     this.getNewRegistrationsWithScout();
     this.getNewRegistrationsWithClub();
@@ -437,7 +436,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   updateChartBackgroundColor() {
-    const isDarkMode = this.themeService.isDarkMode();
+    let isDarkMode : any;
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      isDarkMode = isDarkTheme;
+    });
     const charts = [this.chart1, this.chart2, this.chart3];
 
     charts.forEach((chart) => {
@@ -460,17 +462,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
 
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-    this.updateThemeText();
-    this.updateChartBackgroundColor();
-  }
-
-  updateThemeText() {
-    const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode' : 'Light Mode';
-    // document.getElementById('theme-text')!.textContent = this.themeText;
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
 
   logout() {

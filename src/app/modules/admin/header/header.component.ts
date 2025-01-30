@@ -71,7 +71,9 @@ export class HeaderComponent {
 
   ngOnInit() {
 
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      this.isDarkMode = isDarkTheme;
+    });
 
     let notificationStatus = localStorage.getItem("notificationSeen");
     if (notificationStatus) {
@@ -161,7 +163,6 @@ export class HeaderComponent {
         this.language = this.envLang[0];
       }
 
-      this.updateThemeText();
     });
 
 
@@ -289,19 +290,9 @@ export class HeaderComponent {
 
   themeText: string = 'Light Mode'
 
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-    this.updateThemeText();
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
-  
-  updateThemeText() {
-    const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
-    document.getElementById('theme-text')!.textContent = this.themeText
-  }
-
 
   onSearch() {
     if (this.searchUser.trim().length === 0) {

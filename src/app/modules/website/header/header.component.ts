@@ -343,7 +343,9 @@ export class HeaderComponent implements OnInit {
     this.translateService.use(this.lang);  // Set the language for ngx-translate
 
     // Apply dark mode from localStorage
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      this.isDarkMode = isDarkTheme;
+    });
     this.applyTheme();
 
     // Initialize Google Sign-In if available
@@ -367,12 +369,8 @@ export class HeaderComponent implements OnInit {
     document.body.classList.toggle('navbar-expanded', this.isNavbarExpanded);
   }
 
-  toggleTheme(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.isDarkMode = input.checked;
-    localStorage.setItem('isDarkMode', JSON.stringify(this.isDarkMode));
-    this.applyTheme();
-    this.themeService.toggleTheme();
+  toggleTheme(event: any) {
+    this.themeService.setDarkTheme(event.target.checked);
   }
 
   applyTheme() {
