@@ -93,7 +93,7 @@
                   <form class="recapthe-code" (ngSubmit)="onSubmit()">
                     <!-- <re-captcha siteKey="6Ld7hb8qAAAAAKFcBW581ppk9_MZnGPIwgAQ3nWE" (resolved)="resolved($event)">
                     </re-captcha> -->
-                    <re-captcha siteKey="captchaKey" (resolved)="resolved($event)">
+                    <re-captcha siteKey="{{captchaKey}}" (resolved)="resolved($event)">
                     </re-captcha>
                   </form>
 
