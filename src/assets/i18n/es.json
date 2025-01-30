@@ -2,7 +2,7 @@
   "privacyPolicy": "Política de privacidad",
   "terms&Conditions": "Términos y condiciones",
   "cookies": "Cookies",
-
+"fillCaptcha": "Por favor, rellene el captcha",
   "createProfile": "Crear perfil",
   "premium": "Premium",
   "boostProfileActive": "Perfil Boost activo",
@@ -10,7 +10,7 @@
   "edit": "Editar",
   "getStartedNow": "Comienza ahora",
   "signup": "Registrarse",
-  "club&scout": "Clubs & Scouts",
+  "club&scout": "Clubes & Scouts",
   "currentClub": "Club actual",
   "nationality": "Nacionalidad",
   "dateOfBirth": "Cumpleaños",
@@ -97,6 +97,9 @@
   "resultsPerPage": "Resultados por página",
   "back": "Volver",
   "next": "Siguiente",
+  "previous": "Anterior",
+  "finish": "Finalizar",
+  
   "messages": "Mensajes",
   "chat": "Chat",
   "inbox": "Bandeja de entrada",

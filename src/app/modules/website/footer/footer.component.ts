@@ -33,7 +33,7 @@ export class FooterComponent implements OnInit {
   // English Country Names
   countrie_en = [
     { name: 'Switzerland', slug: "ch", id: 1, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
-    { name: 'German', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Germany', slug: "de", id: 2, flag: "Germany.svg", url: 'https://www.socceryou.de' },
     { name: 'Italy', slug: "it", id: 3, flag: "Italy.svg", url: 'https://www.socceryou.it' },
     { name: 'French Republic', slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
     { name: 'United Kingdom', slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
