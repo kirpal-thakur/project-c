@@ -80,11 +80,9 @@
                     </div>
                     <p class="player-name">{{slider.first_name +' '+ slider.last_name}}</p>
 
-                    <!-- 
-                    Not coming corner image
-                    <div class="corner-image">
-                      <img src="./assets/images/FC Thun 1.png">
-                    </div> -->
+                    <div *ngIf="slider?.meta?.club_logo" class="corner-image">
+                      <img src="{{slider.meta.club_logo}}">
+                    </div> 
                     <div *ngIf="slider.meta.date_of_birth"  class="flag">
                       <div class="flag-image">
                         <!-- <img src="{{getFlagImage(slider.user_nationalities)}}" class="flag-img"> -->
