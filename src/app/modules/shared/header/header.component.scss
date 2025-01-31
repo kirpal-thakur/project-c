@@ -248,10 +248,12 @@ a.dropdown-item.ai-icon.selected {
   cursor: pointer;
 }
 
+
 .toggle-checkbox:checked~.toggle-slot {
   background-color: #BDE34E;
-  border-color: #404040de;   
+  // border-color: #404040de;
 }
+
 
 .toggle-button {
   position: absolute;

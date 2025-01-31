@@ -221,19 +221,21 @@ a.dropdown-item.ai-icon.selected {
   cursor: pointer;
 }
 
+
 .toggle-checkbox:checked~.toggle-slot {
   background-color: #BDE34E;
-  border-color: #404040de;
+  // border-color: #404040de;
 }
+
 
 .toggle-button {
   position: absolute;
-  height: 85%;
+  height: 86%;
   top: 50%;
   transform: translate(10%, -50%) rotate(0deg);
-  width: 45%;
+  width: 46%;
   border-radius: 50%;
-  background-color: #072944;
+  background-color: #ffbb52;
   background-image: url('../../../../assets/images/sun-icon-removebg-preview-34IM7KGZ.png');
   background-size: 80%;
   background-position: center;
