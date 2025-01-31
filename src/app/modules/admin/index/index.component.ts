@@ -14,6 +14,7 @@ export class IndexComponent implements OnInit{
 
   event$: any;
   path: any;
+
   constructor(
     private router: Router,
   ){
@@ -26,7 +27,12 @@ export class IndexComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+    this.path = this.router.url;
+  }
+
+  get isDashboard() {
+    // Return true if the current route is '/admin/dashboard', else false
+    return this.path !== '/admin/dashboard';
   }
 
 }

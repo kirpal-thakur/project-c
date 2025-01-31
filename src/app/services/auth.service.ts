@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'https://api.socceryou.ch/api';
+  private apiUrl = environment?.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -17,10 +18,25 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, loginData);
   }
 
-
+  resetPassword(newPassword: string, confirmPassword: string): Observable<any> {
+    let token = localStorage.getItem('authToken');
+    const data = {
+      new_password: newPassword,
+      new_con_password: confirmPassword,
+    };
+    return this.http.post(this.apiUrl+'/reset-password', data, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Replace with actual token or fetch dynamically
+      },
+    });
+  }
 
   register(registrationData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, registrationData);
+  }
+
+  verifyEmail(token: any, time: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/verify-email/${token}/${time}`);
   }
 
   logout() {
@@ -35,25 +51,21 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-   forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  forgotPassword(email: string): Observable<any> {
+    let confirmation_link = window.location.origin+'/home?confirm-token=';
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email , confirmation_link});
   }
 
-  // magicLogin(magic_link_url: string): Observable<any> {
-  //   console.log('Magic link URL received:', magic_link_url);
-  //   // return this.http.get(`${this.apiUrl}/magic-login`);
-
-  //   return this.http.get(`${magic_link_url}`);
-  // }
+  loginWithMagic(magic_link_url: string): Observable<any> {
+    console.log('Magic link URL received:', magic_link_url);
+    return this.http.get(`${magic_link_url}`);
+  }
 
   magicLogin(token: string): Observable<any> {
-    const endpointUrl = `${this.apiUrl}/magic-login/${token}`;
-    console.log(endpointUrl,"chek the magic token")
-    console.log('Token:', token); 
+    const endpointUrl = `${this.apiUrl}/validate-forgot-password-token/${token}`;
+
     return this.http.get<any>(endpointUrl);
   }
-
-
 
   showToken(token: string): Observable<any> {
     console.log('Showing token:', token);

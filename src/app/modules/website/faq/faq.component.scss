@@ -48,9 +48,9 @@ li {
     padding-bottom: 50px;
 }
 
-body {
-    background-color: #fff;
-}
+// body {
+//     background-color: #fff;
+// }
 
 .tabs {
     margin-bottom: 20px;
@@ -283,7 +283,7 @@ button.faq-scout-button {
     content: "";
     z-index: 1;
     position: absolute;
-    left: 0;
+    left: 1%;
     top: 43%;
 }
 
@@ -298,7 +298,7 @@ button.faq-scout-button {
     content: "";
     z-index: 1;
     position: absolute;
-    right: 0;
+    right: 1%;
     top: 43%;
 }
 

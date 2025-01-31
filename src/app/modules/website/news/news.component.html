@@ -1,128 +1,93 @@
-
 <section class="website-code">
-<app-header></app-header>
-<div class="main">
-    <div class="main-bnr">
+    <!-- <app-header></app-header> -->
+    <div class="main">
+      <div class="main-bnr">
         <div class="overlay"></div>
         <div class="banner-inner py_0">
+          <div class="container">
+            <div class="about">
+              <h2 class="cookie-text">{{banner_title}}</h2>
+            </div>
+          </div>
+        </div>
+  
+        <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-left">
+          <img [src]="advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image">
+          <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+  
+        <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper_large)" class="skyscraper-right">
+          <img [src]="advertisemnet_base_url + advertisemnetData?.skyscraper_large?.featured_image" >
+          <button (click)="closeAd('skyscraper_large')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+  
+      <div class="news-slider py_0">
+        <div class="container">
+          <div class="image-slider">
+            <div class="image-wrapper" 
+                 (touchstart)="onTouchStart($event)" 
+                 (touchmove)="onTouchMove($event)"
+                 (touchend)="onTouchEnd($event)">
+              <!-- Dynamic Image -->
+              <img [src]="currentImage" [alt]="images[currentImageIndex].title" />
+              <div class="image-text">
+                <!-- Dynamic Content for Each Slide -->
+                <p class="p-text">{{images[currentImageIndex].date}}</p>
+                <h3 class="text-heading">{{images[currentImageIndex].title}}</h3>
+                <button class="learn-more" [routerLink]="getRouterLink(currentImageIndex)">
+                  {{images[currentImageIndex].buttonText || 'Learn More'}}
+                </button>
+              </div>
+            </div>
+  
+            <!-- Thumbnails for Navigation -->
             <div class="container">
-                <div class="about">
-                    <h2 class="cookie-text">Your Guide to</h2>
-                    <h2 class="cookie-text">SoccerYou</h2>
+              <div class="thumbnail-scroll">
+                <div class="slider-image">
+                  <img 
+                    *ngFor="let image of images; let i = index" 
+                    [src]="image.featured_image" 
+                    [alt]="image.title"
+                    (click)="changeImage(image.featured_image, i)" 
+                    [class.active]="i === currentImageIndex"
+                    class="thumbnail" />
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-
-        <div *ngIf="adVisible[0]" class="skyscraper-left">
-            <img src="./assets/images/skyscraper - 120x600.png">
-            <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-        <div *ngIf="adVisible[1]" class="skyscraper-right">
-            <img src="./assets/images/skyscraper - 120x600.png">
-            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-
-    </div>
-
-    <div class="news-slider py_0">
+      </div>
+  
+      <div class="latest-news py_0">
         <div class="container">
-            <div class="image-slider">
-                <div class="image-wrapper" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
-                    (touchend)="onTouchEnd($event)">
-                    <img [src]="currentImage" [alt]="images[currentImageIndex].alt" />
-                    <div class="image-text">
-                        <p class="p-text">02.02.2024</p>
-                        <h3 class="text-heading">SoccerYou</h3>
-                        <h3 class="text-heading">Launched in 10</h3>
-                        <h3 class="text-heading">Countries</h3>
-                        <button class="learn-more" [routerLink]="'/learn-more'">Learn More</button>
-                    </div>
-                </div>
-
-                <div class="container">
-                <div class="thumbnail-scroll">
-                    <div class="slider-image">
-                        <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt"
-                            (click)="changeImage(image.src)" [class.active]="image.src === currentImage"
-                            class="thumbnail" />
-                    </div>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </div>
-
-
-    <div class="latest-news py_0">
-        <div class="container">
-            <h4>Latest News</h4>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div  [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news1.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>SoccerYou Hosts Charity Tournament in Germany</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news4.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Innovative Training Programs Launched to Boost Youth Talent</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news2.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Legendary Midfielder Joins SoccerYou as Global Ambassador</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news5.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Tech Meets Sport: Launch of the New Performance Analytics App</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news3.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Behind the Scenes: Exclusive Interview with the Head Coach</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div [routerLink]="'/learn-more'" class="news-box">
-                        <img src="./assets/images/news6.png">
-                        <p class="p-text">02.02.2024</p>
-                        <p>Upcoming Talent Showcase: Scouts and Clubs Gather for Annual Event</p>
-                    </div>
-                </div>
+          <h4>{{news_title}}</h4>
+          <div class="row">
+            <div *ngFor="let newsData of latestNewsData; let i = index;" class="col-lg-4 col-md-6 col-12">
+              <div routerLink="{{'/news/' + newsData.id}}" class="news-box">
+                <img [src]="news_img_path + newsData.featured_image" />
+                <p class="p-text">{{newsData.created_at | date: 'dd.MM.yy'}}</p>
+                <p>{{newsData.title}}</p>
+              </div>
             </div>
-
-                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[2] && !adVisible[3]  && !adVisible[4]}">
-
-                <div *ngIf="adVisible[2]" class="large-rectangle">
-                    <img src="./assets/images/large rectangle - 336x280 .png">
-                    <button (click)="closeAd(2)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
-                <div *ngIf="adVisible[3]" class="inline-rectangle">
-                    <img src="./assets/images/inline rectangle - 300x250.png">
-                    <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
-                <div *ngIf="adVisible[4]" class="square">
-                    <img src="./assets/images/sqaure - 250x250.png">
-                    <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-
+          </div>
+  
+          <div class="advertisement1">
+            <div *ngIf="!isEmptyObject(advertisemnetData?.large_rectangel)" class="large-rectangle">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.large_rectangel?.featured_image">
+              <button (click)="closeAd('large_rectangel')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
+            <div  *ngIf="!isEmptyObject(advertisemnetData?.inline_rectangel)" class="inline-rectangle">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.inline_rectangel?.featured_image">
+              <button (click)="closeAd('inline_rectangel')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div *ngIf="!isEmptyObject(advertisemnetData?.square)" class="square">
+              <img [src]="advertisemnet_base_url + advertisemnetData?.square?.featured_image">
+              <button (click)="closeAd('square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<app-footer></app-footer>
-</section>
+    <!-- <app-footer></app-footer> -->
+  </section>

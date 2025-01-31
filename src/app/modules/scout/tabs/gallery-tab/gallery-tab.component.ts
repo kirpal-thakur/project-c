@@ -1,10 +1,12 @@
-import { ScoutService } from './../../../../services/scout.service';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../../../../services/user.service';
 import { UploadPopupComponent } from '../../upload-popup/upload-popup.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TalentService } from '../../../../services/talent.service';
 import { DeletePopupComponent } from '../../delete-popup/delete-popup.component';
+import { ToastrService } from 'ngx-toastr';
+import { ScoutService } from '../../../../services/scout.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'scout-gallery-tab',
@@ -22,7 +24,15 @@ export class GalleryTabComponent {
   openedMenuId:any = '';
   @Input() coverImage: string = '';  // Define an input property
   @Output() dataEmitter = new EventEmitter<string>();
-  constructor(private route: ActivatedRoute, private userService: UserService,private scoutService: ScoutService, public dialog: MatDialog) { }
+  @Input() isPremium: any;
+
+  isLoading: boolean = false;
+
+  constructor(
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private scoutService: ScoutService,
+    public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
@@ -66,7 +76,7 @@ export class GalleryTabComponent {
 
         this.scoutService.uploadCoverImage(formdata).subscribe((response)=>{
           if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.coverImage = environment.url+"uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
             // this.isLoading = false;
           } else {
@@ -101,14 +111,15 @@ export class GalleryTabComponent {
     }
   }
 
-  addPhotosPopup(){
+  addPhotosPopup(type:string='all'){
     const messageDialog = this.dialog.open(UploadPopupComponent,{
-      width: '500px',
+      width: '715px',
       position: {
-        top:'150px'
+        top:'150px',
       },
       data: {
-        userId: this.userId
+        userId: this.userId,
+        file:type
       }
     })
 
@@ -116,45 +127,57 @@ export class GalleryTabComponent {
       if (result !== undefined) {
         if(result.files.length){
           console.log(result.files)
-         this.userImages = [...result.files, ...this.userImages];
-         console.log(this.userImages)
+          this.getGalleryData()
         }
       }
     });
   }
 
-  openMenu(id:any){
-    this.openedMenuId = id;
+  openMenu(imageId: string): void {
+    // Toggle the menu for the given image ID
+    this.openedMenuId = this.openedMenuId === imageId ? null : imageId;
   }
 
-  deleteImage(id:any){    
+  deleteImage(id: any) {
     try {
-        let params = {id: [id]};
-        this.scoutService.deleteGalleryImage(params).subscribe((response)=>{
-            if (response && response.status) {
-              let index = this.userImages.findIndex((x:any) => x.id == id)
-              this.userImages.splice(index, 1);
-              // this.isLoading = false;
-            } else {
-              // this.isLoading = false;
-              console.error('Invalid API response structure:', response);
-            }
-        });
+      const loadingToast = this.toastr.info('Deleting image...', 'Please wait', { disableTimeOut: true });
+      let params = { id: [id] };
+  
+      this.scoutService.deleteGalleryImage(params).subscribe({
+        next: (response) => {
+          this.toastr.clear(loadingToast.toastId);
+          if (response && response.status) {
+            const index = this.userImages.findIndex((x: any) => x.id === id);
+            this.userImages.splice(index, 1);
+            this.toastr.success('Image deleted successfully!', 'Delete Success');
+          } else {
+            this.toastr.error('Failed to delete image.', 'Delete Failed');
+            console.error('Invalid API response structure:', response);
+          }
+        },
+        error: (error) => {
+          this.toastr.clear(loadingToast.toastId);
+          this.toastr.error('An error occurred while deleting the image.', 'Error');
+          console.error('Error deleting image:', error);
+        }
+      });
     } catch (error) {
-      // this.isLoading = false;
-      console.error('Error fetching users:', error); 
+      this.toastr.error('An error occurred. Please try again.', 'Unexpected Error');
+      console.error('Unexpected error:', error);
     }
   }
 
+  openDeleteDialog(id: any): void {
+    // Close the floating menu when opening the dialog
+    this.openedMenuId = null;
   
-  openDeleteDialog(id:any) {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '600px',
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // If result is true, proceed with deletion logic
+        // Proceed with deletion if the user confirms
         this.deleteImage(id);
       } else {
         console.log('User canceled the delete');

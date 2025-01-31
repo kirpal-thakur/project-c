@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { WebPages } from '../../../../../services/webpages.service';
 import { NgForm } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../../../environments/environment';
+
 import { CKEditorModule, loadCKEditorCloud, CKEditorCloudResult } from '@ckeditor/ckeditor5-angular';
 import type { ClassicEditor, EditorConfig } from 'https://cdn.ckeditor.com/typings/ckeditor5.d.ts';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
@@ -26,28 +27,55 @@ interface Language {
   styleUrl: './add-page.component.scss'
 })
 export class AddPageComponent {
-  languages: Language[] = [];
+  languages: any = localStorage.getItem('languages');
+  lang_id: any = localStorage.getItem('lang_id');
+  lang: any = localStorage.getItem('lang');
   title: string = '';
   content: string = '';
-  selectedLanguage: string = '1';
+  selectedLanguage: string = '0';
   featured_image: File | null = null;
   status: number = 1;
   slug: string = '';
   public Editor: typeof ClassicEditor | null = null;
   public config: EditorConfig | null = null;
+  pageDetail: any | null = null;
+  pages:any = environment.pages;
+  selectedPageTitle: string = "";
+  selectedPageType: string = "";
+  selectedPageId:string=""
+
   @ViewChild('myForm') form!: NgForm;
 
+  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {
+    if(data){
+      this.selectedPageType = data.page_type;
+      this.selectedPageId = data.id;
+    }
+   
+  }
 
-
-  constructor(private webpages: WebPages, public dialogRef : MatDialogRef<AddPageComponent>) { }
   ngOnInit() {
-    this.getAllLanguages();
+    this.languages = JSON.parse(this.languages);
+
     loadCKEditorCloud({
       version: '44.0.0',
       premium: true
     }).then(this._setupEditor.bind(this));
+    if(this.data){
+      this.pageDetail = this.data.page
+     // this.title = this.pageDetail.title;
+      this.slug = this.pageDetail.slug;
+      this.status = (this.pageDetail.status == 'draft') ? 1 : 2;
+      this.selectedLanguage = this.lang_id;
+     // this.title = this.pageDetail.title;
+    }
+   // this.getAllPages();
   }
 
+  close(): void {
+    console.log('Close button clicked');
+    this.dialogRef.close();
+  }
   private _setupEditor ( cloud: CKEditorCloudResult<{ version: '44.0.0', premium: true }> ) {
     const {
         ClassicEditor,
@@ -171,12 +199,13 @@ export class AddPageComponent {
           ]
         }
     };
-}
+  }
 
-  getAllLanguages() {
-    this.webpages.getAllLanguage().subscribe((response) => {
+
+  getAllPages(){
+    this.webpages.getFrontendPages(this.lang_id).subscribe((response) => {
       if (response.status) {
-        this.languages = response.data.languages;
+       // this.pages = response.data.pages;
       }
     });
   }
@@ -198,11 +227,18 @@ export class AddPageComponent {
   }
 
   onSubmit(): void {
+    let formData = new FormData();
     let form = this.form.value;
     form.featured_image = this.featured_image
     form.content = this.content
     form.language = this.selectedLanguage;
-    this.addNewPage(form);
+    formData.append('title', form.title);
+    formData.append('status', form.status);
+    formData.append('slug', form.slug);
+    formData.append('language', form.language);
+    formData.append('content', form.content);
+    formData.append('featured_image', form.featured_image);
+    this.addNewPage(formData);
   }
 
   handleFileInput(files: Event) {
@@ -210,6 +246,7 @@ export class AddPageComponent {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.featured_image = file
+      console.log(this.featured_image, 'handle-file-Input');
     }
   }
 
@@ -231,5 +268,15 @@ export class AddPageComponent {
         });
       }
     });
+  }
+
+  onChangeSelectedPage(event:any){
+    let getPageId = event.target.value;
+    //console.log('selectedPageType',event.target.value);
+    this.selectedPageType = getPageId;
+    this.selectedPageId = '';
+    //let findPageIndex =  this.pages.findIndex((val:any) => val.page_type == getPageId);
+    // console.log(this.pages[findPageIndex],getPageId)
+    //this.selectedPageId = this.pages[findPageIndex].id;
   }
 }

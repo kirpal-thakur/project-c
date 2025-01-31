@@ -1,7 +1,7 @@
 <div class="container p-4">
   <!-- Dialog header -->
   <div class="modal-header pb-2">
-    <h5 class="modal-title" id="couponModalLabel">{{'Enter Coupon Code' | translate}}</h5>
+    <h5 class="modal-title" id="couponModalLabel">{{'enterCouponCode' | translate}}</h5>
     <button type="button" class="btn-close" (click)="closeDialog()"></button>
   </div>
 
@@ -9,14 +9,8 @@
   <div class="modal-body">
     <!-- Form field for coupon code -->
     <div class="my-2">
-      <input
-        type="text"
-        class="form-control"
-        id="couponCode"
-        [(ngModel)]="couponCode"
-        placeholder="{{'Enter your coupon code' | translate}}"
-        (input)="onCouponInput()"
-      />
+      <input type="text" class="form-control" id="couponCode" [(ngModel)]="couponCode"
+        placeholder="{{'Enter your coupon code' | translate}}" (input)="onCouponInput()" />
 
       <!-- Display error message if coupon is invalid -->
       <div *ngIf="couponError" class="text-danger mt-2">
@@ -32,7 +26,7 @@
     <!-- Option for users who don't have a coupon -->
     <div class="mt-3">
       <button class="btn btn-link coupon-btn-link" (click)="noCoupon()">
-        {{ "I don't have a coupon, Proceed to checkout." | translate }}
+        {{ "dont'tHaveCoupon" | translate }}
       </button>
     </div>
   </div>
@@ -40,18 +34,13 @@
   <!-- Dialog footer -->
   <div class="modal-footer mt-1">
     <!-- Disable Apply button if the coupon code is invalid or empty -->
-    <button
-      *ngIf="!couponApplied"
-      type="button"
-      class="btn btn-success coupon-btn"
-      [disabled]="!couponCode.trim()"
-      (click)="applyCoupon()"
-    >
-      {{ 'Check Coupon' | translate }}
+    <button *ngIf="!couponApplied" type="button" class="btn btn-success coupon-btn" [disabled]="!couponCode.trim()"
+      (click)="applyCoupon()">
+      {{ 'checkCoupon' | translate }}
     </button>
 
     <button *ngIf="couponApplied" class="btn btn-primary" (click)="proceedToCheckout()">
-      {{ 'Proceed to Checkout' | translate }}
+      {{ 'proceedToCheckout' | translate }}
     </button>
   </div>
 </div>

@@ -4,7 +4,7 @@
       <div class="col-md-12 p-0">
         <div  class="personal_edit">
           <div class="dialog-header m-auto">
-            <h2>{{'Add Performace Details' | translate}}</h2>
+            <h2>{{'addPerformaceDetails' | translate}}</h2>
           </div>
           
           <div class="close_buttons">
@@ -16,7 +16,7 @@
           <div class="overflow-card">        
           <div class="row">
             <div class="form-group col-lg-6">
-              <label for="team" class="form-label">Team</label>
+              <label for="team" class="form-label">{{'team' | translate}}</label>
               <!-- <input type="number" id="team" name="team_id" [(ngModel)]="performance.team_id" required> -->
   
               <!-- <select id="team" name="team" [(ngModel)]="performance.team" required>
@@ -45,29 +45,29 @@
               </ul>
             </div>
             <div class="form-group col-lg-6">
-              <label for="matches" class="form-label">{{'Matches' | translate}}</label>
+              <label for="matches" class="form-label">{{'matches' | translate}}</label>
               <input type="number" id="matches" name="matches" [(ngModel)]="performance.matches" required>
             </div>
           </div>
           
           <div class="row">
             <div class="form-group col-lg-6">
-              <label for="goals" class="form-label">{{'Goals' | translate}}</label>
+              <label for="goals" class="form-label">{{'goal' | translate}}</label>
               <input type="number" id="goals" name="goals" [(ngModel)]="performance.goals" required>
             </div>
             <div class="form-group col-lg-6">
-              <label for="Coach" class="form-label">{{'Coach during debut' | translate}}</label>
+              <label for="Coach" class="form-label">{{'coachDuringDebut' | translate}}</label>
               <input type="text" id="Coach" name="coach" [(ngModel)]="performance.coach" required>
             </div>
           </div>
   
           <div class="row">
             <div class="form-group col-lg-6">
-              <label for="session" class="form-label">{{'Session' | translate}}</label>
+              <label for="session" class="form-label">{{'session' | translate}}</label>
               <input type="text" id="session" name="session" [(ngModel)]="performance.session" required>
             </div>
             <div class="form-group col-lg-6">
-              <label for="player_age" class="form-label">{{'Player Age' | translate}}</label>
+              <label for="player_age" class="form-label">{{'playerAge' | translate}}</label>
               <input type="text" id="player_age" name="player_age" [(ngModel)]="performance.player_age" required>
             </div>
           </div>
@@ -115,8 +115,8 @@
           </div>
         </div>
           <div class="dialog-actions align-items-center d-flex justify-content-between">
-            <button class="cancel-btn" type="button" (click)="onCancel()">{{'Cancel' | translate}}</button>
-            <button class="save-btn" type="submit">{{'Save' | translate}}</button>
+            <button class="cancel-btn" type="button" (click)="onCancel()">{{'cancel' | translate}}</button>
+            <button class="save-btn" type="submit">{{'save' | translate}}</button>
           </div>
           
         </form>

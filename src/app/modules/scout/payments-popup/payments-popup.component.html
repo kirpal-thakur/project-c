@@ -2,8 +2,8 @@
   <!-- Close button at the top-right -->
   <div class="d-flex justify-content-between mb-4">
     <div class="payment-titles">
-      <h2 class="mb-2">Payment Methods</h2>
-      <p>Choose your preferred payment method for making future payments.</p>
+      <h2 class="mb-2">{{'paymentMethods' | translate}}</h2>
+      <p>{{'chooseYourPreferredPayment' | translate}}</p>
     </div>
     <div class="close-btns">
       <button type="button" class="btn-close close-button" aria-label="Close" (click)="closeDialog()"></button>
@@ -34,18 +34,18 @@
   
       <div class="actions mt-3 d-flex align-items-center justify-content-between">
         <div class="primary_card-title">
-          <span *ngIf="payment.is_default" class="primary-label">Primary Card</span>
-          <span *ngIf="!payment.is_default" class="primary-label">Set Primary</span>
+          <span *ngIf="payment.is_default" class="primary-label">{{'primaryCard' | translate}}</span>
+          <span *ngIf="!payment.is_default" class="primary-label">{{'setPrimary' | translate}}</span>
         </div>
         <div class="payment-method_buttons">
-          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">Remove</button>
-          <button class="btn" (click)="updatePayment(payment)">Update</button>
+          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">{{'Remove' | translate}}</button>
+          <button class="btn" (click)="updatePayment(payment)">{{'update' | translate}}</button>
         </div>
       </div>
     </div>
   
     <div class="text-justify">
-      <button class="btn" (click)="addNewPaymentMethod()">+ Add New Payment Method</button>
+      <button class="btn" (click)="addNewPaymentMethod()">+ {{'addNewPaymentMethod' | translate}}</button>
     </div>
   </div>
 </div>

@@ -6,7 +6,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer.component';
-import { FavoritesComponent } from './favorites/favorites.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -33,18 +32,9 @@ import { MembershipComponent } from './membership/membership.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PerformanceAnalysisTabComponent } from './tabs/performance-analysis-tab/performance-analysis-tab.component';
-import { ExploreComponent } from './explore/explore.component';
-import { CountriesComponent } from './countries/countries.component';
-import { ChatComponent } from './chat/chat.component';
 import { ViewMembershipPopupComponent } from './view-membership-popup/view-membership-popup.component';
 import { PaymentsPopupComponent } from './payments-popup/payments-popup.component';
-import { EditPlanComponent } from './edit-plan/edit-plan.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EditGeneralDetailsComponent } from './edit-general-details/edit-general-details.component';
-import { SettingComponent } from './setting/setting.component';
-import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
-import { AppSettingComponent } from './setting/app-setting/app-setting.component';
-import { ChatPopupComponent } from './chat/chat-popup/chat-popup.component';
 import { EditPerformanceDetailsComponent } from './edit-performance-details/edit-performance-details.component';
 import { AddPerformanceComponent } from './tabs/performance-tab/add-performance/add-performance.component';
 import { DeletePopupComponent } from './delete-popup/delete-popup.component';
@@ -54,10 +44,8 @@ import { AddPerfomanceReportComponent } from './tabs/performance-analysis-tab/ad
 import { EditHighlightsComponent } from './tabs/edit-highlights/edit-highlights.component';
 import { PlanComponent } from './plan/plan.component';
 import { AddCardComponent } from './membership/add-card/add-card.component';
-import { AddCountryComponent } from './countries/add-country/add-country.component';
 import { UpdateCountryPlanComponent } from './update-country-plan/update-country-plan.component';
 import { CancelCountryPlanComponent } from './membership/cancel-country-plan/cancel-country-plan.component';
-import { UpdateConfirmationPlanComponent } from './membership/update-confirmation-plan/update-confirmation-plan.component';
 import { AddBoosterComponent } from './plan/add-booster-profile/add-booster.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
@@ -90,7 +78,6 @@ export const MY_FORMATS = {
     DashboardComponent,
     SidebarComponent,
     FooterComponent,
-    FavoritesComponent,
     ProfileTabComponent,
     PerformanceTabComponent,
     TransfersTabComponent,
@@ -101,19 +88,10 @@ export const MY_FORMATS = {
     MembershipComponent,
     PlayerProfileComponent,
     PerformanceAnalysisTabComponent,
-    ExploreComponent,
-    CountriesComponent,
     ViewMembershipPopupComponent,
     PaymentsPopupComponent,
     EditMembershipProfileComponent,
-    EditPlanComponent,
-    ResetPasswordComponent,
     EditGeneralDetailsComponent,
-    ChatComponent,
-    SettingComponent,
-    ActivityLogComponent,
-    AppSettingComponent,
-    ChatPopupComponent,
     EditPerformanceDetailsComponent,
     AddPerformanceComponent,
     DeletePopupComponent,
@@ -123,14 +101,11 @@ export const MY_FORMATS = {
     EditHighlightsComponent,
     PlanComponent,
     AddCardComponent,
-    AddCountryComponent,
     UpdateCountryPlanComponent,
     CancelCountryPlanComponent,
-    UpdateConfirmationPlanComponent,
-    AddBoosterComponent
+    AddBoosterComponent,
   ],
   imports: [
-
     CommonModule,
     TranslateModule ,
     TalentRoutingModule,  // This includes RouterModule
@@ -160,4 +135,5 @@ export const MY_FORMATS = {
     SharedModule
   ]
 })
+
 export class TalentModule { }

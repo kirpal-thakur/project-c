@@ -1,7 +1,7 @@
 <div let user of users class="offcanvas offcanvas-end edit-canvas show" tabindex="-1">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">User Details</h5>
-    <a class="close c_pointer" data-bs-dismiss="offcanvas" (click)="close()" aria-label="Close">Close</a>
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">{{ 'userDetail' | translate }}</h5>
+    <a class="close c_pointer" data-bs-dismiss="offcanvas" (click)="close()" aria-label="Close">{{ 'close' | translate }}</a>
   </div>
   <div class="offcanvas-body">
     <div class="d-flex align-items-center edit-bx">
@@ -19,7 +19,7 @@
         <h6 class="font-w400">{{(user.role_name == 'Player') ? 'Talent' : user.role_name}}</h6>
       </div>
     </div>
-    <h6 (click)="closePopup(user.role_name, user.id)" class="list-view-title">View Full Profile</h6>
+    <h6 (click)="closePopup(user.role_name, user.id)" class="list-view-title">{{ 'viewFullProfile' | translate }}</h6>
      
       <!-- <h6 class="list-view-title">
         <a  class="text-danger">View Full Profile</a>
@@ -27,10 +27,10 @@
        -->
 
     <div class="list-view d-flex align-items-center">
-      <h6 class="mb-0 me-3">Status:</h6>
-      <span class="bg_pending" *ngIf="user.status == '1'">Pending</span>
-      <span class="bg_success" *ngIf="user.status == '2'">Approved</span>
-      <span class="bg_reject" *ngIf="user.status == '3'">Rejected</span>
+      <h6 class="mb-0 me-3">{{ 'status' | translate }}:</h6>
+      <span class="bg_pending" *ngIf="user.status == '1'">{{ 'pending' | translate }}</span>
+      <span class="bg_success" *ngIf="user.status == '2'">{{ 'approved' | translate }}</span>
+      <span class="bg_reject" *ngIf="user.status == '3'">{{ 'rejected' | translate }}</span>
     </div>
     <!-- comment -->
 
@@ -63,29 +63,29 @@
     </div> -->
 
     <div class="list-view">
-      <h6 class="mb-2">Registration Date:</h6>
+      <h6 class="mb-2">{{ 'registrationDate' | translate }}:</h6>
       <h6 class="mb-0">{{user.created_at}}</h6>
       <!-- <h6 class="mb-0">{{ user.created_at.strftime('%I:%M %p') }}</h6> -->
     </div>
     <div class="list-view">
-      <h6 class="mb-2">Next payment due:</h6>
+      <h6 class="mb-2">{{ 'nextPaymentDue' | translate }}:</h6>
       <h6 class="mb-2 font-w400" *ngIf="user.plan_period_end">{{user.plan_period_end | date:'MMM d, y' }} / {{user.plan_interval}} cycle</h6>
       <h6 class="mb-2 font-w400" *ngIf="!user.plan_period_end">NA</h6>
       <h6 class="text-light font-w400">View payment details</h6>
     </div>
     <div class="list-view">
-      <h6 class="mb-2">Last payment:</h6>
+      <h6 class="mb-2">{{ 'lastPayment' | translate }}:</h6>
       <h6 class="mb-2 font-w400" *ngIf="user.plan_period_start">{{user.plan_period_start | date:'MMM d, y' }}</h6>
       <h6 class="mb-2 font-w400" *ngIf="!user.plan_period_start">NA</h6>
       <h6 class="text-light font-w400">View Invoice</h6>
     </div>
     <div class="list-view">
-      <h6 class="mb-2">Voucher Applied:</h6>
+      <h6 class="mb-2">{{ 'voucherApplied' | translate }}:</h6>
       <h6 class="mb-2 font-w400" *ngIf="user.coupon_used">{{user.coupon_used}}</h6>
       <h6 class="mb-2 font-w400" *ngIf="!user.coupon_used">NA</h6>
     </div>
     <div class="list-view">
-      <h6 class="mb-2">Payment method:</h6>
+      <h6 class="mb-2">{{ 'paymentMethod' | translate }}:</h6>
       <div class="d-flex align-items-center">
         <svg *ngIf="user.last4"
           width="29"
@@ -111,7 +111,7 @@
       </div>
     </div>
 
-    <div class="list-view mb-3">
+    <div class="list-view mb-3" style="border: none;">
       <div class="form-check" *ngIf="user.status == '1' || user.status == '3'">
         <label class="form-check-label pointer" for="flexCheckDefault1">
           <input
@@ -120,7 +120,7 @@
             type="radio"
             value="2"
             id="flexCheckDefault1" (change)="onSelectionChange($event)"
-          /> Verify user after save
+          /> {{ 'verifyUserAfterSave' | translate }}
         </label>
       </div>
       <div class="form-check" *ngIf="user.status == '1' || user.status == '2'">
@@ -131,15 +131,15 @@
             type="radio"
             value="3"
             id="flexCheckDefault2" (change)="onSelectionChange($event)"
-          /> Reject user after save
+          /> {{ 'rejectUserAfterSave' | translate }}
         </label>
       </div>
     </div>
   </div>
-  <div class="offcanvas-footer">
+  <div class="offcanvas-footer p-3">
     <div class="d-flex align-items-center justify-content-between">
-      <span class="text-danger pointer" (click)="closePopup(user.role_name, user.id)">Edit Account</span>   
-      <button class="btn btn-success btn-sm web-create-bg" (click)="save()">Save</button>
+      <span class="text-danger pointer" (click)="closePopup(user.role_name, user.id)">{{ 'editAccount' | translate }}</span>   
+      <button class="btn btn-success btn-sm web-create-bg" (click)="save()">{{ 'save' | translate }}</button>
 
     </div>
   </div>

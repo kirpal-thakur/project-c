@@ -5,6 +5,7 @@ import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SocketService } from '../../../services/socket.service';
 import { environment } from '../../../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -35,6 +36,7 @@ export class ViewProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     private talentService: TalentService,
+    private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
     private socketService: SocketService
@@ -62,26 +64,26 @@ export class ViewProfileComponent implements OnInit {
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.profileImage = this.user.meta.profile_image_path || this.profileImage;
           this.coverImage = this.user.meta.cover_image_path || this.coverImage;
-          if(this.user?.meta?.place_of_birth){
-            this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
-          }
+          // if(this.user?.meta?.place_of_birth){
+          //   this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          // }
 
-          if (this.userNationalities.length) {
-            // Fetch flag details for each nationality
-            this.userNationalities.forEach((nat:any, index:any) => {
-              this.getCountry(nat.flag_path, index);
-            });
-          }
+          // if (this.userNationalities?.length) {
+          //   // Fetch flag details for each nationality
+          //   this.userNationalities.forEach((nat:any, index:any) => {
+          //     this.getCountry(nat.flag_path, index);
+          //   });
+          // }
 
           // Set isFavorite status based on user data or API response
           this.isFavorite = this.user.marked_favorite; // Assuming API returns this
-          
+
           if(this.isPremium){
             this.getHighlightsData(this.userId);
             this.getGalleryData(this.userId);
-            this.exportSingleUser(this.userId);
+            // this.exportSingleUser(this.userId);
           }
-          
+
         } else {
           console.error('Invalid API response structure:', response);
         }
@@ -162,7 +164,7 @@ export class ViewProfileComponent implements OnInit {
         myUserId = userData.id;
     }
     else{
-      console.log("No data found in localStorage."); 
+      console.log("No data found in localStorage.");
     }
 
     try {
@@ -199,20 +201,33 @@ export class ViewProfileComponent implements OnInit {
   exportSingleUser(userId: number) {
 
     try {
+
+      // Set loading state and display info toast
+      this.toastr.info('Downloading...', 'Please wait', { disableTimeOut: true });
+
       this.userService.exportSingleUser(userId).subscribe((response) => {
         if (response && response.status && response.data) {
-          this.downloadPath = response.data.file_path; 
+          this.toastr.clear();
+
+          this.downloadPath = response.data.file_path;
+          // Open the file in a new tab
+          window.open(response.data.file_path);
+
         } else {
+          this.toastr.clear();
+          this.toastr.error('Failed to download. Please try again.', 'Download Failed');
+
           console.error('Invalid API response structure:', response);
         }
       });
     } catch (error) {
+      this.toastr.clear();
       console.error('Error adding to favorites:', error);
     }
 
   }
-  
-  
+
+
   getCountryFromPlaceOfBirth(placeOfBirth: string): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");

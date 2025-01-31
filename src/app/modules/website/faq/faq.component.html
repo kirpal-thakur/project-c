@@ -1,12 +1,11 @@
 <section class="website-code">
-<app-header></app-header>
+<!-- <app-header></app-header> -->
 <div class="main">
     <div class="overlay"></div>
     <div class="banner-inner py_0">
         <div class="container">
             <div class="about">
-                <h2 class="cookie-text">Your Guide to</h2>
-                <h2 class="cookie-text">SoccerYou</h2>
+                <h2 class="cookie-text">{{faq_banner_title}}</h2>
             </div>
         </div>
     </div>
@@ -23,24 +22,24 @@
 
 <div class="faq py_0">
     <div class="container">
-        <h3>Frequently Asked Questions (FAQ)</h3>
+        <h3>{{faq_collapse_titile}}</h3>
         <div class="tabs">
             <button class="faq-talent-button" (click)="selectTab('talent')"
                 [ngClass]="{'active': selectedTab === 'talent'}">
-                Talent
+                {{faq_first_btn_txt}}
             </button>
             <button class="faq-club-button" (click)="selectTab('club')" [ngClass]="{'active': selectedTab === 'club'}">
-                Clubs
+                {{faq_sec_btn_txt}}
             </button>
             <button class="faq-scout-button" (click)="selectTab('scout')"
                 [ngClass]="{'active': selectedTab === 'scout'}">
-                Scouts
+                {{faq_third_btn_txt}}
             </button>
         </div>
 
 
         <div *ngIf="selectedTab === 'talent'">
-            <div class="talent-content" *ngFor="let section of getCurrentSections(); let i = index">
+            <div class="talent-content" *ngFor="let section of talentSections; let i = index">
                 <div class="header" (click)="toggleContent(i)" style="cursor: pointer;">
                     <h4>{{ section.title }}</h4>
                     <span [attr.id]="'toggle-icon-' + i" (click)="toggleContent(i); $event.stopPropagation();"
@@ -49,18 +48,16 @@
                     </span>
                 </div>
                 <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content1 }}
+                    {{ section.desc }}
                   </p>
-                  <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content2 }}
-                  </p>
+
             </div>
 
         </div>
 
         <!-- Repeat the following block for each tab -->
         <div *ngIf="selectedTab === 'club'">
-            <div class="club-content" *ngFor="let section of getCurrentSections(); let i = index">
+            <div class="club-content" *ngFor="let section of clubSections; let i = index">
                 <div class="header" (click)="toggleContent(i)" style="cursor: pointer;">
                     <h4>{{ section.title }}</h4>
                     <span [attr.id]="'toggle-icon-' + i" (click)="toggleContent(i); $event.stopPropagation();"
@@ -69,16 +66,14 @@
                     </span>
                 </div>
                 <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content1 }}
+                    {{ section.desc }}
                 </p>
-                <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content2 }}
-                </p>
+             
             </div>
         </div>
 
         <div *ngIf="selectedTab === 'scout'">
-            <div class="scout-content" *ngFor="let section of getCurrentSections(); let i = index">
+            <div class="scout-content" *ngFor="let section of scoutSections; let i = index">
                 <div class="header" (click)="toggleContent(i)" style="cursor: pointer;">
                     <h4>{{ section.title }}</h4>
                     <span [attr.id]="'toggle-icon-' + i" (click)="toggleContent(i); $event.stopPropagation();"
@@ -87,11 +82,9 @@
                     </span>
                 </div>
                 <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content1 }}
+                    {{ section.desc }}
                 </p>
-                <p class="faq-content" [ngClass]="{'faq-content-open': isOpen[selectedTab][i]}">
-                    {{ section.content2 }}
-                </p>
+              
             </div>
 
         </div>
@@ -105,5 +98,5 @@
 
     </div>
 </div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 </section>

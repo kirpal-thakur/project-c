@@ -5,6 +5,18 @@ import { environment } from '../../environments/environment';
 import { Observable, of, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators'; // For storing data after fetching
 
+export interface Notification {
+  id: number;
+  event: string;
+  message: string;
+  senderId: number;
+  receiverId: number;
+  seen: number; // 0 for unseen, 1 for seen
+  time: string; // Assuming this is a date-time string
+  senderName: string;
+  senderProfileImage: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,9 +29,10 @@ export class TalentService {
   message$ = this.messageSource.asObservable();
   public lang:any; // You can dynamically set this if needed
   languages:any = environment.langs;
+  private apiUrl3 = "https://alerts.socceryou.ch/";
 
   constructor(private http: HttpClient) {
-    
+
       // Retrieve the selected language code from localStorage
       const selectedLanguageSlug = localStorage.getItem('lang') || '';
 
@@ -48,6 +61,18 @@ export class TalentService {
 
   updatePicOnHeader(pic: string) {
     this.messageSource.next(pic);
+  }
+
+  getNotifications(userId: any = 1): Observable<any> {
+    return this.http.get<{ status: boolean, notifications: Notification[], unseen_count: number, total_count:number }>(
+      `${this.apiUrl3}notifications?userId=${userId}`,
+    );
+  }
+
+  updateNotificationSeen(id: number, seen: number): Observable<any> {
+    return this.http.get<{ status: boolean, message: string }>(
+      `${this.apiUrl3}updateNotificationSeen?id=${id}&seen=${seen}`,
+    );
   }
 
   getProfileData(userId: any = 1): Observable<any> {
@@ -141,7 +166,7 @@ export class TalentService {
     const headers = this.headers();
     return this.http.get(`${this.apiUrl}get-leagues`, {headers});
   }
-  
+
   getCoverImg(): Observable<any> {
     const headers = this.headers();
 
@@ -150,20 +175,20 @@ export class TalentService {
     );
   }
 
-  // Method to update user profile  
+  // Method to update user profile
   updateUserProfile(formData: FormData): Observable<any> {
     const headers = this.headers();
 
     return this.http.post(`${this.apiUrl}user/update-profile`, formData, { headers });
   }
-  
-  // Method to update user profile  
+
+  // Method to update user profile
   updateGeneralProfile(formData: FormData): Observable<any> {
     const headers = this.headers();
 
     return this.http.post(`${this.apiUrl}player/update-general-info`, formData, { headers });
   }
-  
+
   getPerformanceData(): Observable<any> {
     const headers = this.headers();
 
@@ -179,7 +204,7 @@ export class TalentService {
       `${this.apiUrl}player/get-transfer-detail`, { headers }
     );
   }
-  
+
   getViewTransferData(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -187,7 +212,7 @@ export class TalentService {
       `${this.apiUrl}get-transfer-detail/${id}`, { headers }
     );
   }
-  
+
   getCountries(): Observable<any> {
     const headers = this.headers();
 
@@ -196,7 +221,7 @@ export class TalentService {
     );
 
   }
-  
+
   getDomains(): Observable<any> {
     const headers = this.headers();
 
@@ -259,7 +284,7 @@ export class TalentService {
       `${this.apiUrl}user/delete-cover-image/`, {headers}
     );
   }
-  
+
   uploadProfileImage(formdata: any): Observable<any> {
     const headers = this.headers();
 
@@ -283,11 +308,11 @@ export class TalentService {
 
     return this.http.post<any>(
       `${this.apiUrl}player/edit-transfer-detail/${transferId}`,
-      transferData, 
+      transferData,
       { headers }
     );
   }
-  
+
   getPerformanceReports(): Observable<any> {
     const headers = this.headers();
 
@@ -297,7 +322,7 @@ export class TalentService {
     );
   }
 
-  
+
   updatePerformance(performanceId:any, params: any): Observable<any> {
     const headers = this.headers();
 
@@ -320,7 +345,7 @@ export class TalentService {
       observe: 'events',     // This allows us to observe the full event stream, including upload progress
     });
   }
- 
+
 
   addPerformance(params: any): Observable<any> {
     const headers = this.headers();
@@ -358,7 +383,7 @@ export class TalentService {
     // Make sure you use DELETE, not GET
     return this.http.get<any>(`${this.apiUrl}player/delete-transfer-detail/${id}`, { headers });
   }
-  
+
   /**
    * Change password for the user.
    * @param newPassword The new password to set.
@@ -376,7 +401,7 @@ export class TalentService {
     return this.http.post<any>(`${this.apiUrl}change-password`, formData, { headers });
   }
 
-  
+
   getPositions(): Observable<any> {
     const headers = this.headers();
 
@@ -396,7 +421,7 @@ export class TalentService {
 
     return this.http.post(`${this.apiUrl}user/set-featured-file`, params , {headers});
   }
-  
+
 
   getPerformanceReportsData(id:any): Observable<any> {
     const headers = this.headers();
@@ -416,7 +441,7 @@ export class TalentService {
     );
   }
 
-  
+
   getGalleryFiles(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -425,7 +450,7 @@ export class TalentService {
     );
   }
 
-  
+
   getHighlightsFiles(id:any): Observable<any> {
     const headers = this.headers();
 
@@ -452,7 +477,7 @@ export class TalentService {
     const headers = this.headers();
 
     let params = new HttpParams();
-      params = params.append('coupon_code', couponCode);  
+      params = params.append('coupon_code', couponCode);
 
     return this.http.post(`${this.apiUrl}user/validate-coupon`, params , {headers});
   }
@@ -462,7 +487,7 @@ export class TalentService {
     const headers = this.headers();
 
     let params = new HttpParams();
-      params = params.append('user[show_tour]', showTour);  
+      params = params.append('user[show_tour]', showTour);
 
     // Send POST request with payload in body
     return this.http.post(`${this.apiUrl}player/update-general-info`, params , {headers});
@@ -528,7 +553,7 @@ export class TalentService {
 
     // Send the HTTP GET request with both params and headers
     return this.http.get<{ status: boolean, message: string, data: {} }>(
-      `${this.apiUrl}users-frontend`,
+      `${this.apiUrl}users-frontend-with-login`,
       { params: queryParams, headers } // Combine params and headers here
     );
   }
@@ -616,15 +641,28 @@ export class TalentService {
   }
 
   // Download reports (assuming backend supports this feature)
+  // downloadReports(reportIds: string[]): Observable<any> {
+  //   console.log(reportIds);
+
+  //   const headers = this.headers();
+
+  //   let params = new HttpParams();
+  //   reportIds.forEach(id => {
+  //     params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+  //   });
+
+  //   return this.http.post(`${this.apiUrl}player/download-performance-reports`, { params, responseType: 'blob',headers });
+  // }
+
+  // Download reports (assuming backend supports this feature)
   downloadReports(reportIds: string[]): Observable<any> {
-    const headers = this.headers();
 
-    let params = new HttpParams();
-    reportIds.forEach(id => {
-      params = params.append('id[]', id);  // Append each ID to the 'ids[]' query param
+    const headers = this.headers(); // Assuming this.headers() provides correct headers
+    const body = { id: reportIds }; // Send report IDs as an array in the request body
+
+    return this.http.post(`${this.apiUrl}player/download-performance-reports`, body, {
+      headers // Specify response type for downloading files
     });
-
-    return this.http.get(`${this.apiUrl}download-reports`, { params, responseType: 'blob',headers });
   }
 
   // talent.service.ts

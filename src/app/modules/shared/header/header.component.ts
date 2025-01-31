@@ -6,16 +6,22 @@ import { TalentService } from '../../../services/talent.service';
 import { environment } from '../../../../environments/environment';
 import { UserService } from '../../../services/user.service';
 import { SocketService } from '../../../services/socket.service';
-import { map,filter } from 'rxjs/operators';
+import { map,filter, timeout } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
+import { CommonDataService } from '../../../services/common-data.service';
 
 interface Notification {
+  id: number;
   image: string;
   title: string;
   content: string;
   time: string;
+  seen: number;
+  senderId: number;
+  shouldAnimate: boolean;
+  relativeTime: string;
 }
 
 @Component({
@@ -31,11 +37,21 @@ export class HeaderComponent {
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private talentService: TalentService,
+    private themeService: ThemeService,
+    private authService: AuthService,
+    private translateService: TranslateService,
+    private socketService: SocketService,
+    private commonDataService: CommonDataService,
+  ) { }
+
   loggedInUser: any = localStorage.getItem('userInfo');
-  profileImgUrl: any = "";
+  profileImgUrl: any = "../../../../assets/images/default/talent-profile-default.png";
   lang: string = '';
-  domains: any = environment.domains;
+  domains: any = environment.langs;
   message: string = '';
   isLoading: boolean = false; // Flag to track loading state
   language : any;
@@ -44,48 +60,99 @@ export class HeaderComponent {
 
   searchControl = new FormControl('');
   filteredUsers: any[] = [];
+  clickedNewNotification : boolean = false;
+  isScrolledBeyond : boolean = false;
+
+  isClosed: boolean = false;
+  allNotifications: Notification[] = [];
+  notifications: Notification[] = [];
+  currentIndex = 0;
+  notificationsPerPage = 3;
+  unseenCount = 0;
+  role:any;
+  roles:any= environment.roles;
+  showAll : boolean = true;
+  isDarkMode: boolean = false;
+
+  notificationSeen : boolean = false;
 
   ngOnInit() {
-    this.loggedInUser = JSON.parse(this.loggedInUser);
 
-    this.profileImgUrl = this.loggedInUser.profile_image_path;
-
-    this.talentService.message$.subscribe(msg => {
-      this.profileImgUrl = msg;
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      this.isDarkMode = isDarkTheme;
     });
 
-    this.lang = localStorage.getItem('lang') || 'en'
+    let notificationStatus = localStorage.getItem("notificationSeen");
+    if (notificationStatus) {
+      let jsonData = JSON.parse(notificationStatus);
+      this.notificationSeen = jsonData;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
 
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    let userRole = localStorage.getItem("userRole");
+
+    // Find the role based on the id
+    this.role = this.roles.find((role:any) => role.id == userRole);
+    this.fetchNotifications(userId);
+    this.loggedInUser = JSON.parse(this.loggedInUser);
+
+    this.commonDataService.profilePic$.subscribe(url => {
+      this.profileImgUrl = url;
+    });
+
+    this.lang = localStorage.getItem('lang') || 'en';
     const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
     if (selectedLanguage) {
       this.language = selectedLanguage;
     }else{
       this.language = this.domains[0];
     }
-    console.log(this.language);
-
-    this.updateThemeText();
 
     this.socketService.on('notification').subscribe((data) => {
-      // Create a new notification object
-      console.log(data);
-      const obj = {
-        image: data.senderProfileImage,
-        title: data.senderId,
-        content: data.message,
-        time: 'just now'
-      };
+      // Fetch all notifications to update this.allNotifications with the latest data
+      // let userId = this.loggedInUser?.id;
+      // if (userId) {
+      //   this.fetchNotifications(userId);
+      // }
 
+      const obj = {
+        id: 0,
+        image: data.senderProfileImage,
+        title: data.senderName,
+        content: data.message,
+        time: 'just now',
+        seen: data.seen,
+        senderId: data.senderId,
+        shouldAnimate: true,
+        relativeTime : 'just now',
+      };
+      
       // Add the notification to the array and show the notification box
       this.liveNotification = [obj]; // Keep only the latest notification
       this.showNotification = true;
-
-      console.log('New notification:', data.message);
+      if(this.isScrolledBeyond){
+        this.clickedNewNotification = true;
+      }
+      
+      this.notifications.unshift(obj);
 
       // Hide the notification after 3 seconds
       setTimeout(() => {
         this.liveNotification = [];
         this.showNotification = false;
+        obj.shouldAnimate = false;
       }, 5000); // 5000 ms = 5 seconds
     });
 
@@ -145,6 +212,60 @@ export class HeaderComponent {
     );
   }
 
+  isUserOnline(senderId: number): boolean {
+    if(!this.socketService.onlineUsers){
+      return false;
+    }
+    return senderId.toString() in this.socketService.onlineUsers;
+  }
+
+  // isSenderOnline(senderId: number): boolean {
+  //   if (!this.onlineUsers) {
+  //     return false; // Return false if onlineUsers is not yet populated
+  //   }
+
+  //   console.log("data is here = ", this.onlineUsers)
+  //   return senderId.toString() in this.onlineUsers;
+  // }
+
+  toggleDropdown() {
+    this.notificationSeen = true;
+    localStorage.setItem('notificationSeen', 'true');
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    this.isClosed = !this.isClosed;
+  }
+
+  notificationClicked(id:number, seen: number, notification: any){
+    if(!notification.seen){
+      this.talentService.updateNotificationSeen(notification.id, 1).subscribe({
+        next: (response) => {
+          if(response.status){
+            notification.seen = 1;
+            console.log('Message from API:', response.message);
+          }
+          else{
+            console.log("something went wrong");
+          }
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        }
+      });
+    }
+    else{
+      console.log("already seen");
+    }
+  }
+
   // Method to set the page title on the initial load
   private setPageTitleFromRoute() {
     const childRoute = this.route.firstChild;
@@ -154,14 +275,21 @@ export class HeaderComponent {
       this.currentPageName = 'Home'; // Default to 'Home' if no title found
     }
   }
+
   navigateToTab(tab: string) {
-    this.router.navigate(['/talent/setting'], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
+    this.router.navigate([`/${this.role.slug}/setting`], { fragment: tab === 'setting' ? 'app-settings' : 'activity' });
   }
 
-
   ChangeLang(lang: any) {
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
+    this.lang = selectedLanguage;
+    
+    const selectedLang = this.domains.find((lang:any) => lang.slug === selectedLanguage);
+    this.language = selectedLang;
+    let selectedLandId = selectedLang ? selectedLang.id : 1;
+    localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
   }
 
@@ -171,18 +299,9 @@ export class HeaderComponent {
 
   themeText: string = 'Light Mode'
 
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-    this.updateThemeText()
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
-
-  updateThemeText() {
-    const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    document.getElementById('theme-text')!.textContent = this.themeText
-  }
-
 
   toggleSidebar() {
     document.body.classList.toggle('mobile-sidebar-active');
@@ -192,69 +311,152 @@ export class HeaderComponent {
     document.body.classList.toggle('mobile-sidebar-active');
   }
 
-  notifications: Notification[] = [
-    {
-      image: '../../../assets/images/1.jpg',
-      title: 'Elton Price',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      time: '14 hours ago'
+  // notifications: Notification[] = [
+  //   {
+  //     image: '../../../assets/images/1.jpg',
+  //     title: 'Elton Price1',
+  //     content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //     time: '14 hours ago'
+  //   }
+  // ];
+
+
+
+  // loadMoreNotifications() {
+  //   const moreNotifications: Notification[] = [
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe2',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '13 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '12 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '11 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '10 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '9 hours ago'
+  //     },
+  //     {
+  //       image: '../../../assets/images/1.jpg',
+  //       title: 'John Doe',
+  //       content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //       time: '18 hours ago'
+  //     }
+  //   ];
+
+  //   this.notifications = [...this.notifications, ...moreNotifications];
+
+  // }
+
+  onNotificationClick(event: Event) {
+    event.stopPropagation(); // Prevent dropdown from closing
+  }
+
+  onScroll(): void {
+    const notificationBox = document.getElementById('notification-box-id');
+    if (notificationBox) {
+      // Check if scroll position is greater than 300
+      this.isScrolledBeyond = notificationBox.scrollTop > 200;
     }
-  ];
+  }
 
-  loadMoreNotifications() {
-    const moreNotifications: Notification[] = [
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '13 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '12 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '11 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '10 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '9 hours ago'
-      },
-      {
-        image: '../../../assets/images/1.jpg',
-        title: 'John Doe',
-        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        time: '18 hours ago'
-      }
-    ];
+  scrollToTop(): void {
+    const notificationBox = document.getElementById('notification-box-id');
+    if (notificationBox) {
+      notificationBox.scrollTop = 0;
+    }
+    this.clickedNewNotification = false;
+  }
 
-    this.notifications = [...this.notifications, ...moreNotifications];
+  fetchNotifications(userId: number): void {
+    this.talentService.getNotifications(userId).subscribe({
+      next: (response) => {
+        console.log('Fetched notifications response:', response);
+  
+        if (response.status && response.notifications) {
+          this.unseenCount = response.unseen_count;
+          // Clear existing notifications to avoid stale data
+          this.allNotifications = [];
+          this.notifications = [];
+          console.log("info", this.currentIndex, this.notificationsPerPage)
+          if(this.currentIndex != 0){
+            this.notificationsPerPage = this.currentIndex;
+          }
+          this.currentIndex = 0;
+  
+          // Map fetched notifications to the Notification interface
+          this.allNotifications = response.notifications.map((notif: any) => ({
+            id: notif.id,
+            image: notif.senderProfileImage || '../../../assets/images/default.jpg',
+            title: notif.senderName || 'Unknown',
+            content: notif.message,
+            time: notif.time,
+            seen: notif.seen,
+            senderId : notif.senderId,
+            shouldAnimate:false,
+            relativeTime: notif.relativeTime,
+          }));
+  
+          this.loadMoreNotifications(); // Load the initial set of notifications
+        } else {
+          console.warn('No notifications found in the response.');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      },
+    });
+  }
 
+  something : boolean = false;
+
+  // Load notifications in chunks of 3
+  loadMoreNotifications(): void {
+    this.something=true;
+
+    const nextNotifications = this.allNotifications.slice(
+      this.currentIndex,
+      this.currentIndex + this.notificationsPerPage
+    );
+    setTimeout(() => {
+      this.something = false;
+      this.notifications = [...this.notifications, ...nextNotifications];
+    }, 1000);
+
+    this.currentIndex += this.notificationsPerPage;
+    if(this.notificationsPerPage>=3){
+      this.notificationsPerPage = 3;
+    }
   }
 
   onSearch() {
@@ -272,9 +474,7 @@ export class HeaderComponent {
         console.error('Invalid API response structure:', response);
       }
     });
-
   }
-
 
   selectUser(user: any): void {
 

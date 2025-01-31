@@ -1,25 +1,28 @@
 /*--------------------------------------------------------------
    banner
 --------------------------------------------------------------*/
-h4{
+.content_page h4{
     font-size: 20px;
     color: white;
     font-weight: 700;
     margin-bottom: 30px;
 }
-p{
+.content_page p{
     font-size: 18px;
     color: white;
     font-weight: 400;
 }
-li{
+.content_page li{
     font-size: 18px;
     color: white;
     font-weight: 400;
     margin-top: 20px;
 }
+// li{
+//     display: none;
+// }
 
-.py_0 {
+.content_page .py_0 {
   padding-top: 50px;
   padding-bottom: 50px;
 }
@@ -62,12 +65,13 @@ body {
   top: 0;
 }
 
-.main{
+.main1{
   background-image: url("../../../../assets/images/cookie.png");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 375px;
+  height: auto;
+  min-height: 375px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,19 +97,19 @@ body {
 #  Banner
 --------------------------------------------------------------*/
 
-ul {
+.content_page ul {
   list-style-type: none; /* Remove default markers */
   padding: 0;
   margin: 0;
   text-align: left; /* Center the list items */
 }
 
-li {
+.content_page li {
   position: relative;
   padding-left: 2rem; /* Space for the custom marker */
 }
 
-li::before {
+.content_page li::before {
   content: '•'; /* Custom marker */
   position: absolute;
   font-size: 60px;
@@ -114,7 +118,7 @@ li::before {
   left: 0;
   transform: translateY(-50%);
 }
-.contact-text{
+.content_page .contact-text{
     margin-bottom: 20px;
 }
 
@@ -126,7 +130,7 @@ li::before {
     content: "";
     z-index: 1;
     position: absolute;
-    left: 0;
+    left: 1%;
     top: 43%;
 }
 .skyscraper-left img{
@@ -139,7 +143,7 @@ li::before {
     content: "";
     z-index: 1;
     position: absolute;
-    right: 0;
+    right: 1%;
     top: 43%;
 }
 .skyscraper-right img{
@@ -168,35 +172,35 @@ li::before {
     .main-bnr {
         height: 270px;
     }
-    .cookie-text {
+    .content_page .cookie-text {
         font-size: 35px;
     }
-    h4{
+    .content_page h4{
         font-size: 18px;
         margin-bottom: 20px;
     }
-    p{
+    .content_page p{
         font-size: 16px;
     }
-    li{
+    .content_page li{
         font-size: 16px;
     }
-    .py_0{
+    .content_page .py_0{
         padding-top: 40px;
         padding-bottom: 40px;
     }
 }
 @media (max-width: 991px) {
-    li::before {
+    .content_page li::before {
         top: 14px;
     }
     .main-bnr {
         height: 200px;
     }
-    .cookie-text {
+    .content_page .cookie-text {
         font-size: 28px;
     }
-    li::marker {
+    .content_page li::marker {
         font-size: 18px;
     }
     .leaderboard-club-image img,
@@ -216,7 +220,7 @@ li::before {
 }
 @media (max-width: 767px) {}
 @media (max-width: 575px) {
-    li::before {
+    .content_page li::before {
         top: 13px;
         font-size: 50px;
     }
@@ -224,64 +228,64 @@ li::before {
         height: 250px;
         background-position: bottom;
     }
-    .information{
+    .content_page .information{
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    .address{
+    .content_page .address{
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    .py_0 {
+    .content_page .py_0 {
         padding-top: 20px;
         padding-bottom: 20px;
     }
-    h4{
+    .content_page h4{
         font-size: 16px;
         margin-bottom: 10px;
     }
-    p {
+    .content_page p {
         font-size: 14px;
     }
-    .info-text {
+    .content_page .info-text {
         margin-top: 20px;
         margin-bottom: 20px;
     }
-    li::marker {
+    .content_page li::marker {
         font-size: 19px;
     }
 }
 @media (max-width: 400px) {
-    li::before {
+    .content_page li::before {
         top: 13px;
         font-size: 45px;
     }
-    li {
+    .content_page li {
         padding-left: 25px;
     }
-    p.list-text {
+    .content_page p.list-text {
         padding-left: 25px;
     }
 }
 @media (max-width: 321px) {
-    h4{
+    .content_page h4{
         font-size: 14px;
     }
-    p {
+    .content_page p {
         font-size: 12px;
     }
-    li {
+    .content_page li {
         font-size: 12px;
         margin-top: 10px;
     }
-    li::before {
+    .content_page li::before {
         top: 11px;
         font-size: 35px;
     }
-    li {
+    .content_page li {
         padding-left: 20px;
     }
-    p.list-text {
+    .content_page p.list-text {
         padding-left: 20px;
     }
 }

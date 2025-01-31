@@ -3,6 +3,7 @@ import { UserService } from '../../../../services/user.service';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { BarController } from 'chart.js';
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -68,10 +69,10 @@ export class ProfileComponent {
       formdata.append("profile_image", this.imageToUpload);
       this.imageLoading = true;
       this.userService.updateAdminImage(formdata).subscribe((response)=>{
-        if (response && response.status) {        
+        if (response && response.status) {
           // this.isLoading = false;
           this.imageLoading = false;
-          let newImageUrl = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+          let newImageUrl = environment.url+"uploads/"+response.data.uploaded_fileinfo;
           let localData:any = localStorage.getItem('userData');
           localData = JSON.parse(localData);
           localData.profile_image_path = newImageUrl;

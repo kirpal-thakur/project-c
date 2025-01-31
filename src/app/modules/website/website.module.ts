@@ -32,6 +32,7 @@ import { TermsComponent } from './terms/terms.component';
 import { CookieComponent } from './cookie/cookie.component';
 import { TalentComponent } from './talent/talent.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { DetailPagesComponent } from './detail-pages/detail-pages.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { ErrorComponent } from './error/error.component';
 import { ThankuComponent } from './thanku/thanku.component';
@@ -40,11 +41,13 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { LoaderComponent } from './loader/loader.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { EmailVerifyComponent } from './email-verify/email-verify.component';
 import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 
 // Import services
 import { AuthService } from '../../services/auth.service';
 import { ThemeService } from '../../services/theme.service';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -54,6 +57,7 @@ import { ThemeService } from '../../services/theme.service';
     IndexComponent,
     ConfirmPasswordComponent,
     HeaderComponent,
+    EmailVerifyComponent,
     FooterComponent,
     AboutComponent,
     FeatureComponent,
@@ -69,13 +73,15 @@ import { ThemeService } from '../../services/theme.service';
     PlayerListComponent,
     FaqComponent,
     LearnMoreComponent,
+    DetailPagesComponent,
     ImprintComponent,
     TermsComponent,
     PrivacyComponent,
     CookieComponent,
     ThankuComponent,
     ErrorComponent,
-    LoaderComponent
+    LoaderComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

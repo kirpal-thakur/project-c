@@ -16,7 +16,7 @@
     </ul>
 
     <div class="dashboard-title">
-      <span class="page-heading">{{currentPageName}}</span>
+      <span class="page-heading">{{ 'dashboard' | translate }}</span>
     </div>
 
     <label for="search-text" class="input-group search-area d-flex align-items-center">
@@ -36,48 +36,35 @@
 
       <div class="search-container w-75 ms-2">
         <!-- <mat-form-field class="w-100"> -->
-          <input
-            matInput
-            placeholder="Search"
-            [formControl]="searchControl"
-            [matAutocomplete]="auto"
-            class="form-control w-100"
-          />
-          <mat-autocomplete class="suggestion-list"
-            #auto="matAutocomplete"
-            (optionSelected)="selectUser($event.option.value)"
-          >
-            <!-- Show loader while loading -->
-            <mat-option *ngIf="isLoading" class="loading-option" disabled>
-              <div>
-                Loading...
-              </div>
-            </mat-option>
+        <input matInput placeholder="{{ 'search' | translate }}" [formControl]="searchControl" [matAutocomplete]="auto" class="form-control w-100" />
+        <mat-autocomplete class="suggestion-list" #auto="matAutocomplete"
+          (optionSelected)="selectUser($event.option.value)">
+          <!-- Show loader while loading -->
+          <mat-option *ngIf="isLoading" class="loading-option" disabled>
+            <div>
+              {{ 'loading' | translate }}
+            </div>
+          </mat-option>
 
-            <!-- Show user list -->
-            <mat-option *ngFor="let user of filteredUsers" [value]="user">
-              <img
-                width="20"
-                height="20"
-                class="img-list me-2"
-                src="{{
+          <!-- Show user list -->
+          <mat-option *ngFor="let user of filteredUsers" [value]="user">
+            <img width="20" height="20" class="img-list me-2" src="{{
                   user?.profile_image
                     ? user?.profile_image
                     : '../../../../assets/images/default/talent-profile-default.png'
-                }}"
-              />
-              <span>
-                {{ user.first_name }} {{ user.last_name }}
-              </span>
-            </mat-option>
+                }}" />
+            <span>
+              {{ user.first_name }} {{ user.last_name }}
+            </span>
+          </mat-option>
 
-            <!-- Show "No results found" if no users are available -->
-            <mat-option *ngIf="!isLoading && filteredUsers.length === 0" disabled>
-              <div>
-                No results found.
-              </div>
-            </mat-option>
-          </mat-autocomplete>
+          <!-- Show "No results found" if no users are available -->
+          <mat-option *ngIf="!isLoading && filteredUsers.length === 0" disabled>
+            <div>
+              {{ 'noResultFound' | translate }}
+            </div>
+          </mat-option>
+        </mat-autocomplete>
         <!-- </mat-form-field> -->
       </div>
     </label>
@@ -87,18 +74,30 @@
       <ul class="navbar-nav align-items-center">
 
         <li class="nav-item dropdown theme_dropdown me-3">
-          <div class="d-flex align-items-center light-theme">
-            <p id="theme-text">Light mode</p>
+          <div class="d-flex align-items-center light-theme justify-content-end">
+            <!-- (click)="toggleTheme($event)" -->
+
             <label class="switch">
-              <input type="checkbox" (change)="toggleTheme($event)" />
-              <span class="slider round"></span>
+              <input class='toggle-checkbox' type='checkbox' (change)="toggleTheme($event)" id="themeToggle" [checked]="isDarkMode"/>
+              <div class='toggle-slot'>
+                  <div class='sun-icon-wrapper'>
+                      <div class="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
+                  </div>
+                  <div class='toggle-button'></div>
+                  <div class='moon-icon-wrapper'>
+                      <div class="iconify moon-icon" data-icon="feather-moon" data-inline="false">
+                      </div>
+                  </div>
+              </div>
             </label>
           </div>
         </li>
         <li class="nav-item dropdown notification_dropdown">
-          <a class="nav-link nav-action" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link nav-action" type="button" (click)="toggleDropdown()" data-bs-toggle="dropdown"
+            aria-expanded="false">
 
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg [ngClass]="{'bell-animate' : unseenCount > 0, 'new-bell-animate' : showNotification}" width="28"
+              height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M10.4524 25.6682C11.0605 27.0357 12.409 28 14.0005 28C15.592 28 16.9405 27.0357 17.5487 25.6682C16.4265 25.7231 15.2594 25.76 14.0005 25.76C12.7417 25.76 11.5746 25.723 10.4524 25.6682Z"
                 fill="#737B8B"></path>
@@ -106,12 +105,18 @@
                 d="M26.3532 19.74C24.877 17.8785 22.3996 14.2195 22.3996 10.64C22.3996 7.09073 20.1193 3.89758 16.7996 2.72382C16.7593 1.21406 15.5183 0 14.0007 0C12.482 0 11.2422 1.21406 11.2018 2.72382C7.88101 3.89758 5.6007 7.09073 5.6007 10.64C5.6007 14.2207 3.1244 17.8785 1.64712 19.74C1.15433 20.3616 1.00197 21.1825 1.24058 21.9363C1.47354 22.6721 2.05367 23.2422 2.79288 23.4595C4.08761 23.8415 6.20997 24.2715 9.44682 24.491C10.8479 24.5851 12.3543 24.64 14.0008 24.64C15.646 24.64 17.1525 24.5851 18.5535 24.491C21.7915 24.2715 23.9128 23.8415 25.2086 23.4595C25.9478 23.2422 26.5268 22.6722 26.7598 21.9363C26.9983 21.1825 26.8449 20.3616 26.3532 19.74Z"
                 fill="#737B8B"></path>
             </svg>
-            <span class="badge light text-white bg-danger rounded-circle">3</span>
+            <span *ngIf="unseenCount>0 && !notificationSeen" class="badge light text-white bg-danger rounded-circle">{{unseenCount}}</span>
           </a>
-          <div class="dropdown-menu py-0 notification-box">
+          <div class="dropdown-menu py-0 notification-box" id="notification-box-id"
+            (click)="onNotificationClick($event)" (scroll)="onScroll()">
+
+            <div *ngIf="isScrolledBeyond && clickedNewNotification" class="go-to-top-btn my-animate"
+              style="position: sticky; top: 0; z-index: 10;">
+              <button class="btn btn-primary" (click)="scrollToTop()" style="width: 100%;">New Notification</button>
+            </div>
 
             <div class="d-flex align-items-center justify-content-between pt-3 pb-3 px-4">
-              <h6>Notification</h6>
+              <h6>{{ 'notification' | translate }}</h6>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
                 height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -126,95 +131,72 @@
               </svg>
             </div>
             <div>
-              <div class="d-flex bg-light p-3 justify-content-between border-bottom">
-                <div>
-                  <img src="../../../../assets/images/default/talent-profile-default.png" class="avatar me-2" width="40"
-                    height="40" class="rounded-circle" alt="">
-                </div>
-                <div style="padding-left: 10px;">
-                  <h6>Elton Price</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  <small>14 hours ago</small>
-                </div>
-                <span><svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                  </svg></span>
-              </div>
-              <div class="d-flex p-3 justify-content-between border-bottom">
-                <div>
-                  <img src="../../../assets/images/1.jpg" class="avatar me-2" width="40" height="40"
-                    class="rounded-circle" alt="">
-                </div>
-                <div style="padding-left: 10px;">
-                  <h6>Elton Price</h6>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  <small>14 hours ago</small>
-                </div>
-                <span><svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                  </svg></span>
-              </div>
 
               <div id="notifications">
-                <div class="d-flex bg-light p-3 justify-content-between border-bottom"
-                  *ngFor="let notification of notifications">
-                  <div>
-                    <img src="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
-                      alt="">
-                  </div>
-                  <div style="padding-left: 10px;">
-                    <h6>{{ notification.title }}</h6>
-                    <p>{{ notification.content }}</p>
-                    <small>{{ notification.time }}</small>
-                  </div>
-                  <span>
-                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                    </svg>
-                  </span>
-                </div>
 
-                <div class="d-flex bg-light p-3 justify-content-between border-bottom"
-                  *ngFor="let notification of notifications">
-                  <div>
+                <div class="row bg-light p-3 justify-content-between border-bottom"
+                  [ngClass]="{'my-animate' : notification.shouldAnimate}" *ngFor="let notification of notifications">
+                  <div class="col-2">
                     <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
                       alt="">
                   </div>
-                  <div style="padding-left: 10px;">
+
+                  <div class="col-9" (click)="notificationClicked(notification.id, notification.seen, notification)"
+                    style="cursor: pointer;">
+                    <h6 [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.title }}
+                    </h6>
+                    <p class="pb-3" [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.content }}
+                    </p>
+                    <small [ngStyle]="{'font-weight': notification.seen == 0 ? 'bold' : 'normal'}">
+                      {{ notification.relativeTime }}
+                    </small>
+                  </div>
+
+                  <div class="col-1">
+                    <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
+                    </svg>
+                  </div>
+                </div>
+
+                <div *ngIf="notifications.length<=0 || something" style="text-align: center;margin:10px 0;">
+                  <span class="loader"></span>
+                </div>
+              </div>
+              <div class="load_more" *ngIf="currentIndex < allNotifications.length && !something">
+                <span (click)="loadMoreNotifications()" style="cursor: pointer;">{{ 'viewAllNotifications' | translate
+                  }}</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show live-notification-box"
+            data-bs-popper="static" style="z-index: 0;">
+            <div>
+              <div id="notifications">
+                <div class="row bg-light p-3 justify-content-between" *ngFor="let notification of liveNotification">
+                  <div class="col-2">
+                    <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
+                      alt="">
+                  </div>
+                  <div class="col-9">
                     <h6>{{ notification.title }}</h6>
                     <p>{{ notification.content }}</p>
                     <small>{{ notification.time }}</small>
                   </div>
-                  <span>
+                  <div class="col-1">
                     <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
+                      <circle cx="4" cy="4.5" r="4"
+                        [attr.fill]="isUserOnline(notification.senderId) ? '#4CBC9A' : 'gray'">
+                      </circle>
                     </svg>
-                  </span>
+                  </div>
                 </div>
-              </div>
-              <div class="load_more">
-                <p (click)="loadMoreNotifications()">View all notifications</p>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="showNotification" class="dropdown-menu py-0 notification-box show" data-bs-popper="static"
-            style="z-index: 0;">
-            <div id="notifications">
-              <div class="d-flex bg-light p-3 justify-content-between" *ngFor="let notification of liveNotification">
-                <div>
-                  <img [src]="notification.image" class="avatar me-2" width="40" height="40" class="rounded-circle"
-                    alt="">
-                </div>
-                <div style="padding-left: 10px;">
-                  <h6>{{ notification.title }}</h6>
-                  <p>{{ notification.content }}</p>
-                  <small>{{ notification.time }}</small>
-                </div>
-                <span>
-                  <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="4" cy="4.5" r="4" fill="#4CBC9A"></circle>
-                  </svg>
-                </span>
               </div>
             </div>
           </div>
@@ -225,7 +207,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <h6 class="mx-3 border-bottom pb-2 fs-15">Select Language</h6>
-            <a href="/talent/dashboard" *ngFor="let domain of domains" class="dropdown-item ai-icon "
+            <a href="javascript:void(0)" *ngFor="let domain of domains" class="dropdown-item ai-icon "
               [class.selected]="lang===domain.slug" (click)="ChangeLang(domain.slug)">
               <img src="https://api.socceryou.ch/uploads/logos/{{domain.flag}}" width="30" height="24" class="me-3">
               <span style="text-transform: uppercase;">{{ domain.slug | translate }}</span>
@@ -234,17 +216,16 @@
         </li>
         <li class="nav-item dropdown  profile">
           <a class="nav-link" role="button" data-bs-toggle="dropdown">
-            <img *ngIf="profileImgUrl" src="{{profileImgUrl}}" width="56" alt="">
-            <img *ngIf="!profileImgUrl" src="../../../../assets/images/default/talent-profile-default.png" width="56"
-              alt="">
+            <img *ngIf="profileImgUrl" [src]="profileImgUrl" width="56" alt="">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <h6>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</h6>
-            <span class="badgewarning">Talent</span>
+            <h6>{{loggedInUser?.first_name}} {{loggedInUser?.last_name}}</h6>
+            <span class="badgewarning">{{loggedInUser?.role_name}}</span>
             <br>
-            <a routerLink="/talent/dashboard" class="header-view-profile">View my Profile</a>
+            <a routerLink="/talent/dashboard" class="header-view-profile"> {{ 'viewMyProfile' | translate }}</a>
 
-            <a (click)="navigateToTab('activity')" class="cursor-pointer dropdown-item ai-icon px-0 py-2 border-bottom ">
+            <a (click)="navigateToTab('activity')"
+              class="cursor-pointer dropdown-item ai-icon px-0 py-2 border-bottom ">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
                 height="16px" viewBox="0 0 24 24" version="1.1" class="svg-main-icon">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -254,7 +235,7 @@
                     fill="#c2c2c2"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15">Activity Log</span>
+              <span class="ms-1 fs-15">{{ 'activityLog' | translate }}</span>
             </a>
             <a (click)="navigateToTab('setting')" class="cursor-pointer dropdown-item ai-icon px-0 py-2">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16px"
@@ -269,7 +250,7 @@
                     fill="#000000"></path>
                 </g>
               </svg>
-              <span class="ms-1 fs-15">Account Setting</span>
+              <span class="ms-1 fs-15">{{ 'accountSettings' | translate }}</span>
             </a>
             <a href="#" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
               <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
@@ -278,7 +259,7 @@
                 <polyline points="16 17 21 12 16 7"></polyline>
                 <line x1="21" y1="12" x2="9" y2="12"></line>
               </svg>
-              <span class="ms-1 fs-14">Sign out </span>
+              <span class="ms-1 fs-14"> {{ 'signOut' | translate }} </span>
             </a>
           </div>
         </li>

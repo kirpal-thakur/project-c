@@ -63,9 +63,6 @@ export class UserService {
 
     return this.http.post<any>(`${this.apiUrl2}/update-user-status`, { id: userIds, status: newStatus }, { headers });
   }
-  
-
-
 
   // getProfileData(): Observable<any> {
   //   const authToken = localStorage.getItem('authToken'); 
@@ -271,7 +268,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/delete-scout-player/${id}`, {headers}
     );
-  }  
+  }
 
   getClubTeams(id:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -279,9 +276,9 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}/get-club-teams/${id}`, {headers}
+      `${this.apiUrl}get-club-teams/${id}`, {headers}
     );
-  } 
+  }
 
   getTeamPlayers(teamId:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -291,7 +288,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/get-club-players/${teamId}`, {headers}
     );
-  } 
+  }
 
   getSightings(id:any, params:any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
@@ -311,7 +308,7 @@ export class UserService {
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl2}/get-sighting/${id}`);
   }
-  
+
   uploadProfileImage(userId:any, formdata: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
@@ -477,7 +474,7 @@ export class UserService {
       'Authorization': `Bearer ${this.userToken}`
     });
     return this.http.get<any>(
-      `${this.apiUrl}/export-single-user/${userId}`, {headers}
+      `${this.apiUrl}export-single-user/${userId}`, {headers}
     );
   }
 

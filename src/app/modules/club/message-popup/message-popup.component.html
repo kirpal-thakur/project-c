@@ -4,24 +4,36 @@
     </div>
 
     <div class="msg-popup-content">
-        @if (data.action == 'display') {
-            <div class="display-message">{{data.message}}</div>
-        }
-        @else if (data.action == 'delete-confirmation') {
-            <div class="display-message">
-                Once user is deleted, it can’t be undone. <br> Do you want to delete?
-                <div class="popup-delete-btn">
-                    <span (click)="deleteConfirmed()">Delete Account</span>
-                </div>
+        <div class="display-message" *ngIf="data.action == 'display'">{{data.message}}</div>
+        <div class="display-message" *ngIf="data.action == 'delete-confirmation'">
+            {{'confirmDeleteUser' | translate}} <br> {{'confirmDeleteUser1' | translate}}
+
+            <div class="popup-delete-btn">
+                <span (click)="deleteConfirmed()">{{'deleteAccount' | translate}}</span>
             </div>
-        }
-        @else if (data.action == 'delete-favorite-confirmation') {
-            <div class="display-message">
-                Are to sure to remove?
-                <div class="popup-delete-btn">
-                    <span (click)="deleteConfirmed()">Remove</span>
-                </div>
+        </div>
+
+        <div class="display-message" *ngIf="data.action == 'delete-activity-confirmation' || data.action == 'delete-sighting-confirmation'">
+            {{data.message}}
+
+            <div class="popup-delete-btn">
+                <span (click)="deleteConfirmed()">{{'delete' | translate}}</span>
             </div>
-        }
+        </div>
+
+        <div class="display-message" *ngIf="data.action == 'newsletter-confirmation'">
+            {{data.message}}
+
+            <div class="popup-delete-btn">
+                <span (click)="deleteConfirmed()">{{'proceed' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="display-message" *ngIf="data.action == 'delete-favorite-confirmation'">
+            {{'areToSure' | translate}}
+            <div class="popup-delete-btn">
+                <span (click)="deleteConfirmed()">{{'remove' | translate}}</span>
+            </div>
+        </div>
     </div>
 </div>

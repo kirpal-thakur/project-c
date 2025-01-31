@@ -1,4 +1,4 @@
-import { Component, OnInit ,EventEmitter, Output, OnDestroy} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,7 +7,6 @@ import { TalentService } from '../../../services/talent.service';
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
-import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
@@ -15,18 +14,22 @@ import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
 import { NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../environments/environment';
+import { CommonDataService } from '../../../services/common-data.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 
 })
-export class DashboardComponent implements OnInit , OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   lightboxIsOpen: boolean = false; // Track the state of the lightbox
   mainImage: { src: string } = { src: '' }; // Current main image source
   album: any[] = []; // Array for album images
-  loggedInUser:any = localStorage.getItem('userData');
-  countryFlagUrl : any;
+  loggedInUser: any = localStorage.getItem('userData');
+  countryFlagUrl: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,25 +38,27 @@ export class DashboardComponent implements OnInit , OnDestroy {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private lightbox: Lightbox
+    private lightbox: Lightbox,
+    private translateService: TranslateService,
+    private commonDataService: CommonDataService
   ) { }
   activeTab: string = 'profile';
-  userId: any ;
+  userId: any;
   user: any = {};
   userNationalities: any = [];
-  coverImage: any ;
-  profileImage: any ;
-  selectedFile : any;
-  teams : any;
-  highlights : any;
+  coverImage: any;
+  profileImage: any;
+  selectedFile: any;
+  teams: any;
+  highlights: any;
   userImages: any = [];
   userVideos: any = [];
-  imageBaseUrl : any;
-  defaultCoverImage:any = "./media/palyers.png";
-  premium : any = false;
-  booster : any = false;
-  activeDomains : any;
-  countries :  any;
+  imageBaseUrl: any;
+  defaultCoverImage: any = "./media/palyers.png";
+  premium: any = false;
+  booster: any = false;
+  activeDomains: any;
+  countries: any;
   isPremium: any = false;
   StartTour: boolean = true;
   @Output() dataEmitter = new EventEmitter<string>();
@@ -67,7 +72,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.userId = this.loggedInUser.id;
-    
+
     // Adding a slight delay to ensure elements are rendered before the tour starts
     this.getUserProfile(this.userId);
     this.getHighlightsData();
@@ -87,7 +92,27 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.stopIntroTour(); // Stop the tour on navigation
       }
     });
+
+    this.getClubsForPlayer();
   }
+
+  getClubsForPlayer() {
+    this.talentService.getClubsForPlayer().subscribe(
+      response => {
+        if (response.status) {
+          let clubs = response.data.clubs;
+          localStorage.setItem('clubs', JSON.stringify(clubs));
+
+        } else {
+
+        }
+      },
+      error => {
+        console.error('Error publishing advertisement:', error);
+      }
+    );
+  }
+
 
   ngAfterViewInit() {
   }
@@ -107,45 +132,65 @@ export class DashboardComponent implements OnInit , OnDestroy {
     this.stopIntroTour(); // Ensure the tour stops when the component is destroyed
   }
 
-  startIntroTour() {
+  startIntroTour(lang: string) {
 
-    this.introInstance.setOptions({
-      steps: [
-        {
-          element: '.edit-profile',
-          intro: `<div><h6>Profile Photo</h6>Upload your best headshot.</div>`,
-          tooltipClass: 'custom-tooltip',
-        },
-        {
-          element: '.tour-personal-details',
-          intro: `<div><h6>Personal Details</h6>Add your personal details here.</div>`,
-          tooltipClass: 'custom-tooltip',
-        },
-        {
-          element: '.tour-highlights',
-          intro: `<div><h6>Highlights</h6>Upload photos and videos to highlight on your profile.</div>`,
-          tooltipClass: 'custom-tooltip',
-        },
-        {
-          element: '.tour-cover-photo',
-          intro: `<div><h6>Cover Photo</h6>Upload your cover photo.</div>`,
-          tooltipClass: 'custom-tooltip',
-        },
-        {
-          element: '.tour-general-details',
-          intro: `<div><h6>General Details</h6>Add your other profile details here.</div>`,
-          tooltipClass: 'custom-tooltip',
-        },
-      ],
-      showBullets: false,
-      showProgress: false,
-      scrollToElement: true,
-      prevLabel: 'Previous',
-      nextLabel: 'Next',
-      doneLabel: 'Finish',
-      tooltipPosition: 'auto',
+    this.translateService.use(lang); // Change language before fetching translations
+
+    this.translateService.get([
+      'profilePhoto',
+      'uploadYourBestHeadshot',
+      'personalDetails',
+      'addYourPersonalDetails',
+      'highlights',
+      'uploadPhotosAndVideos',
+      'coverPhoto',
+      'uploadCoverPhoto',
+      'generalDetails',
+      'editGeneralDetails',
+      'previous',
+      'next',
+      'finish'
+    ]).subscribe((translations) => {
+      this.introInstance.setOptions({
+        steps: [
+          {
+            element: '.edit-profile',
+            intro: `<div><h6>${translations['profilePhoto']}</h6>${translations['uploadYourBestHeadshot']}.</div>`,
+            tooltipClass: 'custom-tooltip',
+          },
+          {
+            element: '.tour-personal-details',
+            intro: `<div><h6>${translations['personalDetails']}</h6>${translations['addYourPersonalDetails']}.</div>`,
+            tooltipClass: 'custom-tooltip',
+          },
+          {
+            element: '.tour-highlights',
+            intro: `<div><h6>${translations['highlights']}</h6>${translations['uploadPhotosAndVideos']}.</div>`,
+            tooltipClass: 'custom-tooltip',
+          },
+          {
+            element: '.tour-cover-photo',
+            intro: `<div><h6>${translations['coverPhoto']}</h6>${translations['uploadCoverPhoto']}.</div>`,
+            tooltipClass: 'custom-tooltip',
+          },
+          {
+            element: '.tour-general-details',
+            intro: `<div><h6>${translations['generalDetails']}</h6>${translations['editGeneralDetails']}.</div>`,
+            tooltipClass: 'custom-tooltip',
+          },
+        ],
+        showBullets: false,
+        showProgress: false,
+        scrollToElement: true,
+        prevLabel: translations['previous'],
+        nextLabel: translations['next'],
+        doneLabel: translations['finish'],
+        tooltipPosition: 'auto',
+      });
+
+      this.introInstance.start(); // Start the tour after setting options
     });
-  
+
     // Add the "Don't show again" checkbox dynamically
     this.introInstance.onafterchange(() => {
       const tooltipHeader = document.querySelector('.introjs-tooltip-header') as HTMLElement;
@@ -184,8 +229,10 @@ export class DashboardComponent implements OnInit , OnDestroy {
                 console.log('User selected "Don’t show it again"');
                 // Save the user's preference
                 localStorage.setItem('dontShowIntroTour', 'true');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
               } else {
                 console.log('User unchecked "Don’t show it again"');
+                this.updateShowTour(checkbox.checked ? 0 : 1);
                 localStorage.removeItem('dontShowIntroTour');
               }
             });
@@ -196,26 +243,26 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     // Handle when the tour finishes
     this.introInstance.oncomplete(() => this.handleTourExit());
-  
+
     // Handle when the tour is exited manually
     // introInstance.onexit(() => this.handleTourExit());
-  
+
     this.introInstance.start();
   }
-  
+
   // Centralized handling of "Don't show again" logic
   handleTourExit() {
     const checkbox = document.getElementById('dontShowAgain') as HTMLInputElement;
     const dontShowAgain = checkbox?.checked || false;
-  
+
     // Call the API to update showTour (replace with your API call logic)
     this.updateShowTour(dontShowAgain ? 0 : 1);
   }
-  
+
   updateShowTour(showTour: number) {
     this.talentService.updateShowTour(this.userId, showTour).subscribe(
       () => {
-          console.log('Tour preferences updated successfully!');
+        console.log('Tour preferences updated successfully!');
       },
       (error) => {
         console.error('Error updating tour preferences:', error);
@@ -255,9 +302,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
           this.userNationalities = JSON.parse(this.user.user_nationalities);
           this.StartTour = this.user?.show_tour == 1 ? true : false;
 
-          if(this.StartTour) {
+          if (this.StartTour) {
             setTimeout(() => {
-              this.startIntroTour();  // Start the tour after a slight delay
+              this.startIntroTour('en');  // Start the tour after a slight delay
             }, 2500);
           }
 
@@ -269,19 +316,21 @@ export class DashboardComponent implements OnInit , OnDestroy {
           if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
             this.sendMessage();
+            this.commonDataService.updateProfilePic(this.profileImage);
+
           }
           if (this.user?.meta?.cover_image_path) {
             this.coverImage = this.user.meta.cover_image_path;
           }
 
-          this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
+          // this.getCountryFromPlaceOfBirth(this.user?.meta?.place_of_birth);
 
-          if (this.userNationalities?.length) {
-            // Fetch flag details for each nationality
-            this.userNationalities.forEach((nat:any, index:any) => {
-              this.getCountry(nat.flag_path, index);
-            });
-          }
+          // if (this.userNationalities?.length) {
+          //   // Fetch flag details for each nationality
+          //   this.userNationalities.forEach((nat:any, index:any) => {
+          //     this.getCountry(nat.flag_path, index);
+          //   });
+          // }
 
         }
 
@@ -293,42 +342,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     }
   }
 
-  getCountryFromPlaceOfBirth(placeOfBirth: string): void {
-    if (!placeOfBirth) {
-      console.error("Place of birth is empty.");
-      return;
-    }
-
-
-    // const apiKey = environment.googleApiKey;  // Replace with your Google Maps API key
-    const apiKey = 'environment.googleApiKey';  // Replace with your Google Maps API key
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(placeOfBirth)}&key=${apiKey}`;
-
-    fetch(geocodingUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK' && data.results.length > 0) {
-          const addressComponents = data.results[0].address_components;
-
-          // Extract country from address components
-          const countryComponent = addressComponents.find((component: any) =>
-            component.types.includes('country')
-          );
-
-          if (countryComponent) {
-            const country = countryComponent.short_name;  // Set country name, use short_name for country code
-            this.getCountryFlag(country);
-          } else {
-            console.error("Country not found in placeOfBirth.");
-          }
-        } else {
-          console.error("Geocoding API error:", data.status, data.error_message);
-        }
-      })
-      .catch(error => console.error("Error fetching geocoding data:", error));
-  }
-
-  getCountry(placeOfBirth: string ,key : any): void {
+  getCountry(placeOfBirth: string, key: any): void {
     if (!placeOfBirth) {
       console.error("Place of birth is empty.");
       return;
@@ -367,16 +381,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
       .catch(error => console.error("Error fetching geocoding data:", error));
   }
 
-  getCountryFlag(countryCode: string) {
-    console.log("Country found:", countryCode);
-
-    // Using Flagpedia API for flag images
-    const flagUrl = `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`;
-
-    // Set the URL to an <img> element in your template or save it in a variable
-    this.countryFlagUrl = flagUrl;
-  }
-
   // After loading, mark countries as loaded and check if both are ready
   loadCountries() {
     return this.talentService.getCountries().subscribe(
@@ -384,18 +388,18 @@ export class DashboardComponent implements OnInit , OnDestroy {
         if (response && response.status) {
           this.countries = response.data.countries;
         }
-    });
+      });
   }
 
   openEditDialog() {
     const dialogRef = this.dialog.open(EditPersonalDetailsComponent, {
       width: '800px',
-      data: {user : this.user , countries : this.countries}
+      data: { user: this.user, countries: this.countries }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-    		this.getUserProfile(this.userId);
+        this.getUserProfile(this.userId);
       } else {
         console.log('User canceled the edit');
       }
@@ -407,9 +411,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
     const dialogRef = this.dialog.open(EditHighlightsComponent, {
       width: '800px',
       data: {
-          images: this.userImages ,
-          videos: this.userVideos , 
-          url: this.imageBaseUrl 
+        images: this.userImages,
+        videos: this.userVideos,
+        url: this.imageBaseUrl
       }
     });
 
@@ -417,19 +421,19 @@ export class DashboardComponent implements OnInit , OnDestroy {
       this.getHighlightsData()
     });
 
-  }  
+  }
 
-  getHighlightsData(){
+  getHighlightsData() {
     try {
-      this.talentService.getHighlightsData().subscribe((response)=>{
+      this.talentService.getHighlightsData().subscribe((response) => {
         if (response && response.status && response.data && response.data.images) {
-          this.highlights = response.data; 
+          this.highlights = response.data;
           // this.isLoading = false;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
@@ -438,7 +442,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
   openImage(index: number): void {
     // Prepare album
-    this.album = this.highlights.images.map((image: any)=> ({
+    this.album = this.highlights.images.map((image: any) => ({
       src: this.highlights.file_path + image.file_name,
     }));
 
@@ -461,31 +465,31 @@ export class DashboardComponent implements OnInit , OnDestroy {
       console.warn("Main image not found in the album.");
       return;
     }
-  
+
     // Handle edge cases (first and last image)
     const newIndex = Math.max(0, Math.min(this.album.length - 1, currentIndex + (direction === 'next' ? 1 : -1)));
-  
+
     // Update main image and handle potential wrapping
     this.mainImage = { src: this.album[newIndex].src };
   }
 
 
-  getCoverImg(){
+  getCoverImg() {
     try {
-      this.talentService.getCoverImg().subscribe((response)=>{
+      this.talentService.getCoverImg().subscribe((response) => {
         if (response?.data?.userData?.metaValue) {
-            this.coverImage = response.data.userData.cover_image_path;
+          this.coverImage = response.data.userData.cover_image_path;
         } else {
           // this.isLoading = false;
           console.error('Invalid API response structure:', response);
         }
-      });     
+      });
     } catch (error) {
       // this.isLoading = false;
       console.error('Error fetching users:', error);
     }
   }
-    
+
   onProfileFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -501,9 +505,10 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadProfileImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
+              this.commonDataService.updateProfilePic(this.profileImage);
 
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {
@@ -513,13 +518,13 @@ export class DashboardComponent implements OnInit , OnDestroy {
             }
           },
           (error) => {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading profile image:', error);
           },
         );
       } catch (error) {
-              this.toastr.clear();
+        this.toastr.clear();
         this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
         console.error('Error during file upload:', error);
       }
@@ -534,7 +539,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
-      
+
       // Set loading state and display info toast
       this.toastr.info('Uploading cover image...', 'Please wait', { disableTimeOut: true });
 
@@ -545,7 +550,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadCoverImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.coverImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
               this.toastr.clear();
               this.toastr.success('Cover image uploaded successfully!', 'Success');
@@ -556,13 +561,13 @@ export class DashboardComponent implements OnInit , OnDestroy {
             }
           },
           (error) => {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('An error occurred during upload. Please try again.', 'Upload Error');
             console.error('Error uploading cover image:', error);
           },
         );
       } catch (error) {
-              this.toastr.clear();
+        this.toastr.clear();
         this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
         console.error('Error during cover image upload:', error);
       }
@@ -579,22 +584,22 @@ export class DashboardComponent implements OnInit , OnDestroy {
           if (response && response.status) {
             this.coverImage = null;  // Indicates no value is set
             this.dataEmitter.emit('');  // Emit empty string to indicate deletion
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.success('Cover image deleted successfully.', 'Success');
           } else {
-              this.toastr.clear();
+            this.toastr.clear();
             this.toastr.error('Failed to delete cover image. Please try again.', 'Delete Failed');
             console.error('Invalid API response structure:', response);
           }
         },
         (error) => {
-              this.toastr.clear();
+          this.toastr.clear();
           this.toastr.error('An error occurred during deletion. Please try again.', 'Delete Error');
           console.error('Error deleting cover image:', error);
         },
       );
     } catch (error) {
-              this.toastr.clear();
+      this.toastr.clear();
       this.toastr.error('An unexpected error occurred. Please try again.', 'Delete Error');
       console.error('Error during cover image deletion:', error);
     }
@@ -615,12 +620,12 @@ export class DashboardComponent implements OnInit , OnDestroy {
       }
     });
   }
-  
-  showMatDialog(message:string, action:string){
-    const messageDialog = this.dialog.open(MessagePopupComponent,{
+
+  showMatDialog(message: string, action: string) {
+    const messageDialog = this.dialog.open(MessagePopupComponent, {
       width: '500px',
       position: {
-        top:'150px'
+        top: '150px'
       },
       data: {
         message: message,
@@ -630,19 +635,19 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
     messageDialog.afterClosed().subscribe(result => {
       if (result !== undefined) {
-        if(result.action == "delete-confirmed"){
+        if (result.action == "delete-confirmed") {
           this.deleteUser();
         }
       }
     });
   }
-  
-  getAllTeams(){
+
+  getAllTeams() {
     this.talentService.getTeams().subscribe((data) => {
       this.teams = data;
     });
   }
-  
+
   calculateAge(dob: string | Date): number {
     // Convert the input date to a Date object if it's a string
     const birthDate = new Date(dob);
@@ -654,7 +659,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     // Adjust the age if the current date is before the birthday
     const monthDifference = today.getMonth() - birthDate.getMonth();
     const dayDifference = today.getDate() - birthDate.getDate();
-    
+
     if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
       age--;
     }
@@ -662,11 +667,11 @@ export class DashboardComponent implements OnInit , OnDestroy {
     return age;
   }
 
-  switchTab(tab: string){
+  switchTab(tab: string) {
     this.activeTab = tab;
   }
 
-  deleteUser(){
+  deleteUser() {
     this.userService.deleteUser([this.userId]).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');

@@ -3,14 +3,19 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AuthService } from '../../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../services/theme.service';
 import { environment } from '../../../../environments/environment';
 import { ConfirmPasswordComponent } from '../SetPassword/confirmPassword.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonDataService } from '../../../services/common-data.service';
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../../../services/shared.service';
 declare var bootstrap: any; // Declare bootstrap
 declare var google: any; // Declare google
+import { WebPages } from '../../../services/webpages.service';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +25,10 @@ declare var google: any; // Declare google
 export class HeaderComponent implements OnInit {
   @ViewChild('invalidCredMessage') invalidCredMessage!: ElementRef;
   @ViewChild('registerForm') registerForm!: NgForm;
+  
+  //default language
+  slug: string = 'en'; 
+  lang_id:any = 1;
 
   isNavbarExpanded = false;
   isDarkMode: boolean = false;
@@ -49,95 +58,306 @@ export class HeaderComponent implements OnInit {
   selectedCountry: string = '';
   selectedTeam: number | null = null;
   companyName: string = '';
+  verifyToken:any = null;
+  verifyTime:any = null;
  //this is get by the domain
  countries: Array<{ code: string; name: string }> = [];
  clubs: Array<{ id: number; name: string }> = [];
-  //clubs
-  // clubs = [
-  //   { id: 1, name: 'Club A' },
-  //   { id: 2, name: 'Club B' },
-  //   { id: 3, name: 'Club C' },
-  //   { id: 4, name: 'Club D' },
-  //   { id: 5, name: 'Club E' },
-  // ];
+ langs: any = environment.langs;
 
-  teams = [
-    { id: 1, name: 'Team Alpha' },
-    { id: 2, name: 'Team Bravo' },
-    { id: 3, name: 'Team Charlie' },
-    { id: 4, name: 'Team Delta' },
-    { id: 5, name: 'Team Echo' },
+
+  allLanguage = [];
+  selectedLanguageId = null;
+    //clubs
+    // clubs = [
+    //   { id: 1, name: 'Club A' },
+    //   { id: 2, name: 'Club B' },
+    //   { id: 3, name: 'Club C' },
+    //   { id: 4, name: 'Club D' },
+    //   { id: 5, name: 'Club E' },
+    // ];
+
+    teams = [
+      { id: 1, name: 'Team Alpha' },
+      { id: 2, name: 'Team Bravo' },
+      { id: 3, name: 'Team Charlie' },
+      { id: 4, name: 'Team Delta' },
+      { id: 5, name: 'Team Echo' },
+    ];
+    countrie: any[] = [];
+
+  // English Country Names
+  countrie_en = [
+    { name: 'Switzerland', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'German', slug: "de", id: 2,    country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italy', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'French Republic', slug: "fr",  country_id: 181, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'United Kingdom', slug: "uk",  country_id: 177, id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Spain', slug: "es", id: 6,  country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7,  country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgium', slug: "be", id: 8,  country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Denmark', slug: "dk", id: 9,  country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sweden', slug: "se", id: 10,  country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
   ];
-  
 
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
-    responsive: {
-      0: { items: 1 },
-      400: { items: 2 },
-      740: { items: 3 },
-      940: { items: 6 }
-    },
-    nav: true
-  };
+  countrie_de = [
+    { name: 'Schweiz', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Deutschland', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italien', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'Französische Republik', country_id: 181, slug: "fr", id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Vereinigtes Königreich', country_id: 177, slug: "uk", id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Spanien', slug: "es", id: 6, country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, country_id: 205,flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgien', slug: "be", id: 8, country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Dänemark', slug: "dk", id: 9, country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Schweden', slug: "se", id: 10, country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
 
-  constructor(
-    private themeService: ThemeService,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private translateService: TranslateService,
-    public dialog: MatDialog,
-    private commonDataService: CommonDataService
-  ) {}
+  countrie_it = [
+    { name: 'Svizzera', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Germania', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italia', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'Repubblica Francese', slug: "fr",country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Regno Unito', slug: "uk", id: 5, country_id: 177, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Spagna', slug: "es", id: 6, country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portogallo', slug: "pt", id: 7,country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgio', slug: "be", id: 8, country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Danimarca', slug: "dk", id: 9, country_id: 175,flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Svezia', slug: "se", id: 10, country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
 
-  isScrolled = false;
-  serverBusy = false;
-  @HostListener('window:scroll', [])
+  countrie_fr = [
+    { name: 'Suisse', slug: "ch", id: 1,  country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Allemagne', slug: "de", id: 2,  country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italie', slug: "it", id: 3,  country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'République Française', slug: "fr",  country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Royaume-Uni', slug: "uk", id: 5,  country_id: 177, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Espagne', slug: "es", id: 6,  country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7,  country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgique', slug: "be", id: 8,  country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Danemark', slug: "dk", id: 9,  country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Suède', slug: "se", id: 10,  country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
+
+  countrie_es = [
+    { name: 'Suiza', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Alemania', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italia', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'República Francesa', slug: "fr", country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Reino Unido', slug: "uk", id: 5, country_id: 177, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'España', slug: "es", id: 6, country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Bélgica', slug: "be", id: 8, country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Dinamarca', slug: "dk", id: 9, country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Suecia', slug: "se", id: 10, country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
+
+  countrie_pt = [
+    { name: 'Suíça', slug: "ch", id: 1, country_id: 211,flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Alemanha', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Itália', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'República Francesa', slug: "fr", country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Reino Unido', slug: "uk", country_id: 177, id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Espanha', slug: "es", country_id: 215, id: 6, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", country_id: 205, id: 7, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Bélgica', slug: "be", country_id: 172, id: 8, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Dinamarca', slug: "dk",country_id: 175, id: 9, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Suécia', slug: "se", country_id: 210, id: 10, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
+
+  countrie_dk = [
+    { name: 'Schweiz', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Tyskland', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italien', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'Franske Republik', slug: "fr", country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Storbritannien', slug: "uk", country_id: 177, id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Spanien', slug: "es", id: 6, country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgien', slug: "be", id: 8, country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Danmark', slug: "dk", id: 9, country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sverige', slug: "se", id: 10, country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
+
+  countrie_se = [
+    { name: 'Schweiz', slug: "ch", id: 1, country_id: 211, flag: "Switzerland.svg", url: 'https://www.socceryou.ch' },
+    { name: 'Tyskland', slug: "de", id: 2, country_id: 176, flag: "Germany.svg", url: 'https://www.socceryou.de' },
+    { name: 'Italien', slug: "it", id: 3, country_id: 188, flag: "Italy.svg", url: 'https://www.socceryou.it' },
+    { name: 'Franska Republiken', slug: "fr", country_id: 282, id: 4, flag: "France.svg", url: 'https://www.socceryou.fr' },
+    { name: 'Storbritannien', slug: "uk", country_id: 177, id: 5, flag: "England.svg", url: 'https://www.socceryou.co.uk' },
+    { name: 'Spanien', slug: "es", id: 6, country_id: 215, flag: "Spain.svg", url: 'https://www.socceryou.es' },
+    { name: 'Portugal', slug: "pt", id: 7, country_id: 205, flag: "Portugal.svg", url: 'https://www.socceryou.pt' },
+    { name: 'Belgien', slug: "be", id: 8, country_id: 172, flag: "Belgium.svg", url: 'https://www.socceryou.be' },
+    { name: 'Danmark', slug: "dk", id: 9, country_id: 175, flag: "Denmark.svg", url: 'https://www.socceryou.se' },
+    { name: 'Sverige', slug: "se", id: 10, country_id: 210, flag: "Sweden-sweden.svg", url: 'https://www.socceryou.dk' },
+  ];
+
+
+    customOptions: OwlOptions = {
+      loop: true,
+      mouseDrag: false,
+      touchDrag: false,
+      pullDrag: false,
+      dots: false,
+      navSpeed: 700,
+      navText: ['', ''],
+      responsive: {
+        0: { items: 1 },
+        400: { items: 2 },
+        740: { items: 3 },
+        940: { items: 6 }
+      },
+      nav: true
+    };
+
+    constructor(
+      private sharedservice:SharedService,
+      private themeService: ThemeService,
+      private authService: AuthService,
+      private route: ActivatedRoute,
+      private router: Router,
+      private translateService: TranslateService,
+      public dialog: MatDialog,
+      private commonDataService: CommonDataService,
+      private http: HttpClient,
+      private toastr : ToastrService,
+      private webpage: WebPages,
+      private socketService: SocketService
+    ) {
+      this.language = translateService.currentLang || 'en';  // Get current language
+      this.loadCountries();  // Load countries based on selected language
+      translateService.onLangChange.subscribe(() => {
+        this.language = translateService.currentLang;
+        this.loadCountries();
+      });
+    }
+
+    loadCountries() {
+      if (this.language === 'en') {
+      this.countrie = this.countrie_en;
+    } else if (this.language === 'de') {
+      this.countrie = this.countrie_de;
+    } else if (this.language === 'it') {
+      this.countrie = this.countrie_it;
+    } else if (this.language === 'fr') {
+      this.countrie = this.countrie_fr;
+    } else if (this.language === 'es') {
+      this.countrie = this.countrie_es;
+    } else if (this.language === 'pt') {
+      this.countrie = this.countrie_pt;
+    } else if (this.language === 'dk') {
+      this.countrie = this.countrie_dk;
+    } else if (this.language === 'se') {
+      this.countrie = this.countrie_se;
+    } 
+    }
+
+    isScrolled = false;
+    serverBusy = false;
+    @HostListener('window:scroll', [])
+
   onWindowScroll() {
     this.isScrolled = window.scrollY > 50; // Adjust the scroll value as needed
   }
 
   ngOnInit(): void {
-    this.getAllCountries();
-    this.getAllClubs();
-    this.lang = localStorage.getItem('lang') || 'en';
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
-    this.applyTheme();
 
     this.route.queryParams.subscribe(params => {
       this.token = params['confirm-token'] || '';
       if (this.token) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
         this.authService.magicLogin(this.token).subscribe(
           response => {
-            if (response.success) {
+            if (response.status && response.data) {
+              const token = response.data.token;
+              const userData = response.data.user;
+              const userRole = userData.role;
+
+              localStorage.setItem('authToken', token);
+              localStorage.setItem('userRole', userRole);
+              localStorage.setItem('userData', JSON.stringify(userData));
               this.tokenVerified = true;
               this.openModal();
+
             } else {
               this.tokenVerified = false;
-              this.notVerified();
+              this.router.navigate(['/expired-link']);
             }
           },
           error => {
             console.error('Error verifying token:', error);
             this.tokenVerified = false;
-            this.notVerified();
+            this.router.navigate(['/expired-link']);
           }
         );
       }
+
+      this.verifyToken = params['token'];
+      this.verifyTime = params['time'];
+
+      if (this.verifyToken && this.verifyTime) {
+        this.toastr.info('Processing...', 'Please Wait!');
+
+        this.authService.verifyEmail(this.verifyToken,this.verifyTime).subscribe(
+          response => {
+            if (response.status) {
+              this.toastr.clear();
+
+              this.toastr.success('Email is verified. You can login now...', 'Email Verified!');
+
+              const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+              loginModal.show();
+
+            } else {
+              this.toastr.clear();
+
+              this.router.navigate(['/expired-link']);
+            }
+          },
+          error => {
+            this.toastr.clear();
+
+            this.router.navigate(['/expired-link']);
+          }
+        );
+      }
+
+
     });
+
+    // Ensure language is set to 'en' if it's not already in localStorage
+    this.lang = localStorage.getItem('lang') || 'en'; // Default to 'en' if no language is set
+    this.slug = this.lang;
+    // Set default language to English if not set
+    if (!this.lang || this.lang === '') {
+      this.lang = 'en';
+      localStorage.setItem('lang', this.lang); // Store default language in localStorage
+    }
+
+    this.lang_id = localStorage.getItem('lang_id');
+    if (this.lang_id == null) {
+      this.lang_id = environment.targetDomain.default_lang;
+      localStorage.setItem('lang_id', this.lang_id); // Store default language in localStorage
+    }
+    // Use the selected language (or 'en' if none)
+    this.translateService.use(this.lang);  // Set the language for ngx-translate
+
+    // Apply dark mode from localStorage
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      this.isDarkMode = isDarkTheme;
+    });
+    this.applyTheme();
 
     // Initialize Google Sign-In if available
     if (typeof google !== 'undefined' && google.accounts) {
-      this.initializeGoogleSignIn();
+    //  this.initializeGoogleSignIn();
     }
+
+    this.getAllCountries();
+    this.getAllClubs();
+    this.getAllLanguage();
   }
+
 
   setActive(index: number): void {
     this.activeIndex = index; // Set the active index
@@ -149,25 +369,76 @@ export class HeaderComponent implements OnInit {
     document.body.classList.toggle('navbar-expanded', this.isNavbarExpanded);
   }
 
-  toggleTheme(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.isDarkMode = input.checked;
-    localStorage.setItem('isDarkMode', JSON.stringify(this.isDarkMode));
-    this.applyTheme();
-    this.themeService.toggleTheme();
+  toggleTheme(event: any) {
+    this.themeService.setDarkTheme(event.target.checked);
   }
 
   applyTheme() {
     document.body.classList.toggle('dark-mode', this.isDarkMode);
   }
 
-  ChangeLang(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedLanguage = selectElement.value;
+  ChangeLang(newSlug: string, event: Event): void {
+    this.translateService.use(newSlug);  // Switch translation language
+    console.log('working',newSlug);
 
-    localStorage.setItem('lang', selectedLanguage);
-    this.translateService.use(selectedLanguage);
+    this.slug = newSlug;  // Update the slug to the selected language
+    event.preventDefault(); // Prevent default action (e.g., preventing link navigation)
+
+    let selectedLanguageId : any = null;
+    let getLanguageIndex = this.langs.findIndex((val:any) => {
+      if(val.slug == newSlug){
+        selectedLanguageId = val.id
+        return val;
+      }
+    });
+    
+    this.selectedLanguageId = selectedLanguageId;
+    localStorage.setItem('lang', newSlug);
+
+    // Retrieve the selected language code from localStorage
+    const selectedLanguageSlug = newSlug;
+    // Find the corresponding language ID from the langs array
+    const selectedLanguageObj = this.langs.find(
+      (lang: any) => lang.slug === selectedLanguageSlug
+    );
+
+    // Default to a specific language ID if none is found (e.g., English)
+    selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+
+
+    this.webpage.updateData(selectedLanguageId);
+    localStorage.setItem('lang_id', selectedLanguageId);
+
+    console.log('selectedLanguageId',selectedLanguageId);
+    this.sharedservice.updateData({
+      action:'updatedLang',
+      id:selectedLanguageId
+    });
+
+
+    this.translateService.use(newSlug);
+
+    const target = event.target as HTMLSelectElement;  // Cast target to HTMLSelectElement
+    if (target) {
+      this.lang = target.value;
+      this.getContentForLanguage(this.lang);
+    }
   }
+
+  getContentForLanguage(lang: string): void {
+    const apiUrl = `${environment.apiUrl}language/${lang}`;  // Use the API URL from the environment file
+    this.http.get(apiUrl).subscribe({
+      next: (response: any) => {
+        // Handle the API response based on the selected language
+        console.log(response);
+        // You can update the UI or internal state with the response data
+      },
+      error: (error) => {
+        console.error('Error fetching language content', error);
+      }
+    });
+  }
+
 
   login() {
     this.loginButtonClicked = true;
@@ -176,7 +447,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    const selectedLanguage = localStorage.getItem('lang') || '';
+    const selectedLanguage = localStorage.getItem('lang') || environment.targetDomain?.default_lang;
     const domain = environment.targetDomain?.domain || 'ch';
 
     const loginData = {
@@ -214,6 +485,7 @@ export class HeaderComponent implements OnInit {
               break;
           }
           localStorage.setItem('authToken', token);
+          localStorage.setItem('userRole', userRole);
           localStorage.setItem('userData', JSON.stringify(userData));
 
           let modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal-login'));
@@ -238,24 +510,29 @@ export class HeaderComponent implements OnInit {
   register() {
     this.serverBusy = true;
     this.registerFormSubmitted = true;
+
     if (!this.isFormValid()) {
       this.serverBusy = false;
-      console.error('Please fill in all required fields.');
+      this.toastr.warning('Please fill in all required fields.', 'Validation Error');
       return;
     }
+
+    this.toastr.info('Registration is in process...', 'Please wait', { disableTimeOut: true });
+
     const selectedLanguage = localStorage.getItem('lang') || '';
     const domain = environment.targetDomain?.domain || 'ch';
 
-      // Retrieve the selected language code from localStorage
+    // Retrieve the selected language code from localStorage
     const selectedLanguageSlug = localStorage.getItem('lang') || '';
 
     // Find the corresponding language ID from the langs array
     const selectedLanguageObj = this.languages.find(
-      (lang:any) => lang.slug === selectedLanguageSlug
+      (lang: any) => lang.slug === selectedLanguageSlug
     );
 
     // Default to a specific language ID if none is found (e.g., English)
     const selectedLanguageId = selectedLanguageObj ? selectedLanguageObj.id : 1;
+    let verification_link = window.location.origin+'/home';
 
     const registrationData = {
       first_name: this.firstName,
@@ -270,56 +547,58 @@ export class HeaderComponent implements OnInit {
       privacy_policy: this.privacyPolicy,
       lang: selectedLanguageId,
       domain: domain,
-      club_id: this.selectedClub
+      club_id: this.selectedClub,
+      verification_link : verification_link
     };
 
     this.authService.register(registrationData).subscribe(
-      // response => {
-      //   if (response.status === true) {
-      //     this.serverBusy = false;
-      //     bootstrap.Modal.getInstance(document.getElementById('exampleModal1'))?.hide();
-      //     const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-      //     loginModal.show();
-      //   } else {
-      //     console.log("status is false", response);
-      //     this.serverBusy = false;
-      //     this.registerError = typeof response.message === 'object'
-      //       ? Object.values(response.message).join(' ')
-      //       : response.message;
-      //     this.registerFormSubmitted = false;
-      //   }
-      // },
-      // error => {
-      //   this.handleRegistrationError(error);
-      // }
-
-      response => {
+      (response) => {
         console.log('Registration response:', response);
         if (response.status === true) {
+          // sending registration notification to admin
+          let senderId = response.data.userInfo?.id ;
+          if(senderId){
+            this.socketService.emit('userRegistered', {senderId: senderId, receiverId: "1"});
+            console.log("work done");
+          }
+
+          this.toastr.clear();
+
           this.serverBusy = false;
+          this.toastr.success('Registration successful! Thank you.', 'Success');
           const registerModal = bootstrap.Modal.getInstance(document.getElementById('exampleModal1'));
           if (registerModal) {
             registerModal.hide();
           }
-          const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
-          loginModal.show();
+
+          if (registerModal) {
+            registerModal.hide();
+          }
+          this.router.navigate(['/email-verify']);
+
+          // const loginModal = new bootstrap.Modal(document.getElementById('exampleModal-login'));
+          // loginModal.show();
         } else {
+          this.toastr.clear();
+
           let errorMessage = '';
-          // Check if response.message is an object
           if (typeof response.message === 'object') {
-            // Loop through each error message and concatenate them
-            Object.keys(response.message).forEach(key => {
+            Object.keys(response.message).forEach((key) => {
               errorMessage += response.message[key] + ' ';
             });
           } else {
             errorMessage = response.message;
           }
-          this.registerError = errorMessage.trim(); // Trim to remove any leading or trailing spaces
-          this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+          this.toastr.error(errorMessage.trim(), 'Registration Failed');
+          this.registerError = errorMessage.trim();
+          this.registerFormSubmitted = false;
         }
       },
-      error => {
+      (error) => {
+        this.toastr.clear();
+
         console.error('Registration failed:', error);
+        let errorMessage = 'An error occurred during registration. Please try again.';
         if (error && error.status === 400 && error.error && error.error.data) {
           const errorData = error.error.data;
           if (errorData.username) {
@@ -328,12 +607,11 @@ export class HeaderComponent implements OnInit {
           if (errorData.email) {
             this.registerForm.controls['email'].setErrors({ emailExists: true });
           }
-          this.registerError = errorData.message || 'An error occurred during registration.';
-        } else {
-          console.error('An error occurred while registering:', error);
-          this.registerError = 'An error occurred during registration. Please try again.';
+          errorMessage = errorData.message || errorMessage;
         }
-        this.registerFormSubmitted = false; // Reset form submission flag to allow re-submission
+        this.toastr.error(errorMessage, 'Registration Failed');
+        this.registerError = errorMessage;
+        this.registerFormSubmitted = false;
       }
     );
   }
@@ -355,7 +633,7 @@ export class HeaderComponent implements OnInit {
     this.registerFormSubmitted = false;
   }
 
-  
+
   isFormValid(): boolean {
     let fieldType = ['string', 'boolean'];
     return [
@@ -369,7 +647,6 @@ export class HeaderComponent implements OnInit {
     ].every(field => fieldType.includes(typeof field)) &&
     this.role > 0 && // Assuming role should be a positive number
     this.language.trim() !== '' && // Ensure language is a non-empty string
-    this.newsletter && // Ensure this boolean value is checked as needed
     this.userDomain.trim() !== ''; // Assuming userDomain is a string
   }
 
@@ -381,20 +658,8 @@ export class HeaderComponent implements OnInit {
 
     this.authService.forgotPassword(this.forgotPasswordEmail).subscribe(
       response => {
-        if (response.status === true) {
-          const magicToken = response.data.magic_link_url;
-          this.authService.magicLogin(`http://localhost:4200/Index?confirm-token=${magicToken}`).subscribe(
-            magicLoginResponse => {
-              if (magicLoginResponse.status === true) {
-                this.router.navigate(['/Admin/Dashboard']);
-              } else {
-                this.forgotPasswordMessage = 'Auto-login failed. Please try again.';
-              }
-            },
-            () => {
-              this.forgotPasswordMessage = 'An error occurred during auto-login. Please try again later.';
-            }
-          );
+        if (response.status) {
+            this.forgotPasswordMessage = response.message;
         } else {
           this.forgotPasswordMessage = response.message;
         }
@@ -439,15 +704,10 @@ export class HeaderComponent implements OnInit {
     this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
   }
 
-  notVerified() {
-    this.dialog.open(ConfirmPasswordComponent, { width: '500px' });
-  }
-
-
   onCountryChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCountry = selectElement.value;
-    console.log('Selected Country:', this.selectedCountry);
+    this.getClugById(this.selectedCountry);
   }
 
   onClubChange(event: Event): void {
@@ -481,12 +741,23 @@ export class HeaderComponent implements OnInit {
   getAllCountries(){
     this.commonDataService.getAllCountries().subscribe((resp) => {
       this.countries = resp.data.domains.map((country: any) => ({
-        code: country.domain_country_code || '',
+        code: country.country_id || '',
         name: country.location || ''
       }));
     });
   }
 
+  getClugById(id :any ){
+    if(id){
+      this.commonDataService.getAllClubsbyId(id).subscribe((resp) => {
+        this.clubs = resp.data.clubs.map((club: any) => ({
+          id: club.id || '',
+          name: club.club_name || ''
+        }));
+        console.log(resp, 'club-resp');
+      });
+    }
+  }
   getAllClubs(){
     this.commonDataService.getAllClubs().subscribe((resp) => {
       this.clubs = resp.data.clubs.map((club: any) => ({
@@ -494,6 +765,17 @@ export class HeaderComponent implements OnInit {
         name: club.club_name || ''
       }));
       console.log(resp, 'club-resp');
+    });
+  }
+
+
+  getAllLanguage(){
+
+    this.webpage.getAllLanguage().subscribe((response) => {
+      if (response.status) {
+        this.languages = response.data.languages;
+        localStorage.setItem('languages', JSON.stringify(this.languages));
+      }
     });
   }
 

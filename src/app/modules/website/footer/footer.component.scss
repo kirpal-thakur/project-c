@@ -15,6 +15,9 @@ h3 {
   font-size: 35px;
   color: white;
 }
+i.fa-brands.fa-instagram, i.fa-brands.fa-linkedin-in {
+  color: white;
+}
 
 h4 {
   font-size: 30px;
@@ -796,6 +799,7 @@ img.ng-star-inserted {
   border: none;
   opacity: 75%;
 }
+
 .footer-contact img {
   margin-bottom: 20px;
   width: 218px;
@@ -970,7 +974,7 @@ img.vector-img {
 }
 
 .form-select {
-  width: 160px;
+  width: 180px;
   font-size: 16px;
   line-height: 28px;
   margin-top: 10px;
@@ -981,14 +985,23 @@ img.vector-img {
   filter: none;
 }
 
+p.country {
+  font-size: 14px;
+  text-align: left;
+  font-weight: 700;
+  
+}
+
+
+
 option.countary {
   color: white;
   background-color: #6FB95D;
 }
 
-.footer-links {
-  text-transform: capitalize;
-}
+// .footer-links {
+//   text-transform: capitalize;
+// }
 
 
 /* Responsive Design for Mobile */
@@ -1082,7 +1095,7 @@ option.countary {
     margin-bottom: 40px;
   }
 
-  .select-country {
+  .select-country, p.country {
     margin-left: 119px;
   }
 
@@ -1106,6 +1119,9 @@ option.countary {
     text-align: left;
     margin-left: 119px;
     margin-bottom: 20px;
+  }
+  p.country{
+    margin-left: 119px;
   }
 
   .footer-logo {
@@ -1208,6 +1224,9 @@ option.countary {
     margin-left: 119px;
     margin-bottom: 20px;
   }
+  p.country{
+    margin-left: 119px;
+  }
 
   .footer-logo {
     height: 87px;
@@ -1306,7 +1325,7 @@ option.countary {
     margin-bottom: 20px;
   }
 
-  .select-country {
+  .select-country,  p.country {
     margin-left: 90px;
   }
 
@@ -1333,11 +1352,12 @@ option.countary {
     margin-bottom: 0;
     font-size: 16px;
   }
+
   .footer-contact img {
     margin-bottom: 20px;
     width: 180px;
     height: 82px;
-}
+  }
 
   p {
     font-size: 12px;
@@ -1353,7 +1373,7 @@ option.countary {
     margin-top: 0;
   }
 
-  .select-country {
+  .select-country,  p.country {
     margin-left: 70px;
   }
 

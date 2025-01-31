@@ -102,8 +102,8 @@ export class MarketingComponent {
   createSystemPoup(){
     console.log('Edit user button clicked!');
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
-      height: '537px',
-      width: '800px',
+      height: '80vh',
+      width: '70vw',
     })
 
     dialogRef.afterClosed().subscribe(result => {
@@ -229,8 +229,8 @@ export class MarketingComponent {
   editPopup(data:any){
     
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
-      height: '537px',
-      width: '600px',
+      height: '80vh',
+      width: '70vw',
       data: data
     })
 

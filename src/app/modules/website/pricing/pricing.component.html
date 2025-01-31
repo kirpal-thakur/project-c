@@ -1,213 +1,162 @@
 <section class="website-code">
-<app-header></app-header>
-<div class="main">
-    <div class="main-bnr">
+    <!-- <app-header></app-header> -->
+    <div class="main">
+      <div class="main-bnr">
         <div class="overlay"></div>
         <div class="banner-inner py_0">
-            <div class="container">
-                <div class="about">
-                    <h2 class="imprint-text">Pricing</h2>
-                </div>
+          <div class="container">
+            <div class="about">
+              <h2 class="imprint-text">{{ pageData?.pricing_title }}</h2> <!-- Dynamic Title -->
             </div>
+          </div>
         </div>
-
+  
         <div *ngIf="adVisible[0]" class="skyscraper-left">
-            <img src="./assets/images/skyscraper - 120x600.png">
-            <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          <img src="./assets/images/skyscraper - 120x600.png">
+          <button (click)="closeAd(0)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
-
+  
         <div *ngIf="adVisible[1]" class="skyscraper-right">
-            <img src="./assets/images/skyscraper - 120x600.png">
-            <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
+          <img src="./assets/images/skyscraper - 120x600.png">
+          <button (click)="closeAd(1)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
         </div>
-    </div>
-
-    <div class="pricing py_0">
+      </div>
+  
+      <div class="pricing py_0">
         <div class="container">
-            <h3 class="price-heading3">Membership Plans</h3>
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-12">
-                    <mat-card>
-                        <div class="billed">
-                            <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
-                                Billed Monthly
-                            </p>
-                            <div class="toggle-button" [ngClass]="{ 'active': isActive1, 'inactive': !isActive1 }"
-                                (click)="toggle1()"></div>
-                            <p [ngClass]="{ 'active-text': !isActive1, 'inactive-text': isActive1 }">
-                                Billed Yearly
-                            </p>
-                        </div>
-
-                        <div class="premium">
-                            <div class="premium-img">
-                            <h2 class="premium-heading2">Premium</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive1 ? '470' : '47' }}<span>.- CHF / {{ isActive1 ? 'Year' : 'Month' }}</span>
-                            </h3>
-                        </div>
-                        </div>
-                    </mat-card>
+          <h3 class="price-heading3">{{ pageData?.pricing_tabs_title }}</h3> <!-- Dynamic Subtitle -->
+          <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card>
+                <div class="billed">
+                  <p [ngClass]="{ 'active-text': isActive1, 'inactive-text': !isActive1 }" class="billed-monthly">
+                    {{ pageData?.first_tab_monthly_label }}
+                  </p>
+                  <div class="toggle-button" [ngClass]="{ 'active': isActive1, 'inactive': !isActive1 }" (click)="toggle1()"></div>
+                  <p [ngClass]="{ 'active-text': !isActive1, 'inactive-text': isActive1 }">
+                    {{ pageData?.first_tab_yearly_label }}
+                  </p>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12">
-                    <mat-card>
-                        <div class="billed">
-                            <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">Billed Monthly</p>
-                            <div class="toggle-button" [ngClass]="{ 'active': isActive2, 'inactive': !isActive2 }"
-                                (click)="toggle2()"></div>
-                            <p [ngClass]="{ 'active-text': !isActive2, 'inactive-text': isActive2 }">Billed Yearly</p>
-                        </div>
-
-                        <div class="premium">
-                            <div class="premium-img">
-                            <h2 class="premium-heading2">Multi-Country</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive2 ? '110' : '11' }}<span>.- CHF / {{ isActive2 ? 'Year' : 'Month' }}</span>
-                            </h3>
-                            </div>
-                        </div>
-                    </mat-card>
+  
+                <div class="premium">
+                  <div class="premium-img">
+                    <h2 class="premium-heading2">{{ pageData?.first_tab_plan_name }}</h2>
+                    <h3 class="premium-heading3">
+                      {{ isActive1 ? pageData?.first_tab_yearly_price : pageData?.first_tab_monthly_price }}
+                      <span>.- CHF / {{ isActive1 ? ('year' | translate) : ('month' | translate) }}</span>
+                    </h3>
+                  </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-12">
-                    <mat-card>
-                        <div class="billed">
-                            <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">Billed Monthly</p>
-                            <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }"
-                                (click)="toggle3()"></div>
-                            <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">Billed Yearly</p>
-                        </div>
-
-                        <div class="premium">
-                            <div class="premium-img">
-                            <h2 class="premium-heading2">Boost Profile</h2>
-                            <h3 class="premium-heading3">
-                                {{ isActive3 ? '110' : '11' }}<span>.- CHF / {{ isActive3 ? 'Year' : 'Month' }}</span>
-                            </h3>
-                            </div>
-                        </div>
-                    </mat-card>
-                </div>
+              </mat-card>
             </div>
-        </div>
-
-        
-
-        <div class="features py_0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <mat-card class="feature-box">
-                            <h3 class="feature-heading">For Talents, Clubs and Scouts</h3>
-                            <div class="feature-data">
-                                <div class="feature-height">
-                                <div class="free">
-                                    <h4 class="free-heading">Free Features:</h4>
-                                    <ul>
-                                        <li>Full display of the complete talent profile with career stages and performance data.</li>
-                                        <li>Download a player profile as a PDF.</li>
-                                        <li>Create a favorites list of talents, football clubs and scouts.</li>
-                                        <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
-                                        <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 11.00 per country and month).</li>
-                                    </ul>
-                                </div>
-
-                                <!-- <div class="premium-feature">
-                                    <h4 class="premium-heading">Premium Features:</h4>
-                                    <ul>
-                                        <li>Full display of the complete talent profile with career stages and performance data.</li>
-                                        <li>Download a player profile as a PDF.</li>
-                                        <li>Chat or message function to write to other registered talents and football clubs/scouts.</li> 
-                                        <li>Create a favorites list of talents, football clubs, and scouts.</li>
-                                        <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
-                                        <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
-                                    </ul>
-                                </div> -->
-                                </div>
-
-                                <button type="button" class="btn btn-join" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal1">Join Today</button>
-                            </div>
-                        </mat-card>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <mat-card class="right_side">
-                            <div class="feature-box">
-                                <h3 class="feature-heading">For Talents and Scouts</h3>
-                                <div class="feature-data">
-                                    <div class="feature-height">
-                                    <div class="free">
-                                        <h4 class="free-heading">Free Features:</h4>
-                                        <ul>
-                                            <li>Access to the complete talent profiles with detailed performance data.</li>
-                                            <li>Download a player profile as a PDF.</li>
-                                            <li>Create a favorites list of talents, football clubs and scouts.</li>
-                                            <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
-                                            <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 11.00 per country and month).</li>
-                                        </ul>
-                                    </div>
-                                    <!-- <div class="premium-feature">
-                                        <h4 class="premium-heading">Premium Features:</h4>
-                                        <ul>
-                                            <li>Access to the complete talent profiles with detailed performance data.</li>
-                                            <li>Download a player profile as a PDF.</li>
-                                             <li>Ability to contact talents through the messaging system.</li>
-                                            <li>Create a favorites list of talents, football clubs and scouts.</li>
-                                            <li>Gallery of highlight pictures and videos viewable by other talents, football clubs, and scouts.</li>
-                                            <li>Cross-platform country and club selection to be displayed in other countries and leagues (CHF 22.00 per country and month).</li>
-                                        </ul>
-                                    </div> -->
-                                    </div>
-                                    <button type="button" class="btn btn-join" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1">Join Today</button>
-                                </div>
-                            </div>
-                        </mat-card>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-12">
-                        <mat-card class="right_side">
-                            <div class="feature-box">
-                                <h3 class="feature-heading">For Talents and Scouts</h3>
-                                <div class="feature-data">
-                                    <div class="feature-height">
-                                    <div class="free">
-                                        <h4 class="free-heading">Boost Features:</h4>
-                                        <ul>
-                                            <li>Jump to the top of search results.</li>
-                                            <li>Higher chances to get discovered.</li>
-                                            <li>Profile boosts help you grow your network and following faster.</li>
-                                            <li>You can boost your profile to reach a specific audience, such as Talents, Clubs or Scouts.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                    <button type="button" class="btn btn-join" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal1">Join Today</button>
-                                </div>
-                            </div>
-                        </mat-card>
-                    </div>
+  
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card>
+                <div class="billed">
+                  <p [ngClass]="{ 'active-text': isActive2, 'inactive-text': !isActive2 }">{{ pageData?.sec_tab_monthly_label }}</p>
+                  <div class="toggle-button" [ngClass]="{ 'active': isActive2, 'inactive': !isActive2 }" (click)="toggle2()"></div>
+                  <p [ngClass]="{ 'active-text': !isActive2, 'inactive-text': isActive2 }">{{ pageData?.sec_tab_yearly_label }}</p>
                 </div>
-
-                <div class="advertisement1" [ngClass]="{'hidden': !adVisible[3] && !adVisible[4]  && !adVisible[5]}">
-
-                    <div *ngIf="adVisible[3]" class="large-rectangle">
-                        <img src="./assets/images/large rectangle - 336x280 .png">
-                        <button (click)="closeAd(3)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-        
-                    <div *ngIf="adVisible[4]" class="inline-rectangle">
-                        <img src="./assets/images/inline rectangle - 300x250.png">
-                        <button (click)="closeAd(4)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-        
-                    <div *ngIf="adVisible[5]" class="square">
-                        <img src="./assets/images/sqaure - 250x250.png">
-                        <button (click)="closeAd(5)" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
-        
+  
+                <div class="premium">
+                  <div class="premium-img">
+                    <h2 class="premium-heading2">{{ pageData?.sec_tab_plan_name }}</h2>
+                    <h3 class="premium-heading3">
+                      {{ isActive2 ? pageData?.sec_tab_yearly_price : pageData?.sec_tab_monthly_price }}
+                      <span>.- CHF / {{ isActive1 ? ('year' | translate) : ('month' | translate) }}</span>
+                    </h3>
+                  </div>
                 </div>
+              </mat-card>
             </div>
+  
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card>
+                <div class="billed">
+                  <p [ngClass]="{ 'active-text': isActive3, 'inactive-text': !isActive3 }">{{ pageData?.third_tab_monthly_label }}</p>
+                  <div class="toggle-button" [ngClass]="{ 'active': isActive3, 'inactive': !isActive3 }" (click)="toggle3()"></div>
+                  <p [ngClass]="{ 'active-text': !isActive3, 'inactive-text': isActive3 }">{{ pageData?.third_tab_yearly_label }}</p>
+                </div>
+  
+                <div class="premium">
+                  <div class="premium-img">
+                    <h2 class="premium-heading2">{{ pageData?.third_tab_plan_name }}</h2>
+                    <h3 class="premium-heading3">
+                      {{ isActive3 ? pageData?.third_tab_yearly_price : pageData?.third_tab_monthly_price }}
+                      <span>.- CHF / {{ isActive1 ? ('year' | translate) : ('month' | translate) }}</span>
+                    </h3>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
         </div>
+      </div>
+  
+      <div class="features py_0">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card class="feature-box">
+                <h3 class="feature-heading">{{ pageData?.first_tab_free_features_title }}</h3>
+                <div class="feature-data">
+                  <div class="feature-height">
+                    <div class="free">
+                      <h4 class="free-heading">{{ pageData?.first_tab_free_features_sub_title }}</h4>
+                      <ul>
+                        <li *ngFor="let feature of pageData?.first_tab_free_features_desc">{{ feature }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    {{ pageData?.first_tab_btn_txt }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card class="feature-box">
+                <h3 class="feature-heading">{{ pageData?.sec_tab_free_features_title }}</h3>
+                <div class="feature-data">
+                  <div class="feature-height">
+                    <div class="free">
+                      <h4 class="free-heading">{{ pageData?.sec_tab_free_features_sub_title }}</h4>
+                      <ul>
+                        <li *ngFor="let feature of pageData?.sec_tab_free_features_desc">{{ feature }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    {{ pageData?.sec_tab_btn_txt }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+            <div class="col-lg-4 col-md-12 col-12">
+              <mat-card class="feature-box">
+                <h3 class="feature-heading">{{ pageData?.third_tab_free_features_title }}</h3>
+                <div class="feature-data">
+                  <div class="feature-height">
+                    <div class="free">
+                      <h4 class="free-heading">{{ pageData?.third_tab_free_features_sub_title }}</h4>
+                      <ul>
+                        <li *ngFor="let feature of pageData?.third_tab_free_features_desc">{{ feature }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    {{ pageData?.third_tab_btn_txt }}
+                  </button>
+                </div>
+              </mat-card>
+            </div>
+  
+            <!-- Repeat for the other feature sections... -->
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<app-footer></app-footer>
-</section>
+  
+    <!-- <app-footer></app-footer> -->
+  </section>
+  

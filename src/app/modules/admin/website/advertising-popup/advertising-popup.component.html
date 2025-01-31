@@ -2,67 +2,65 @@
   <div class="p-0 code-parent">
     <div class="bg-0C3453 p-4">
       <h6 class=" code-text text-center " >
-       Advertising
+        {{ 'advertising' | translate }}
       </h6>
-      <div (click)="close()" class="close-img mb-1" >
-     </div>
+      <div (click)="close()" class="close-img mb-1"> </div>
 
     </div>
-  <hr class="m-0">
-
+    <hr class="m-0">
 
   <div class="p-3 create-new_popup">
 
-
     <div class="d-flex mb-3 add-banners">
       <div>
+
       <p  class="code-text">
-       Name
+        {{ 'name' | translate }}
       </p>
         <input class="cupen-btn-1 code-text" [(ngModel)]="name">
         <div *ngIf="errorMsg.name" class="error-msg">{{errorMsg.name}}</div>
       </div>
       <div class="ms-5">
         <p  class="code-text">
-          On click redirect to url:
+          {{ 'clickDirectUrl' | translate }}
         </p>
           <input class="cupen-btn-1" [(ngModel)]="redirect">
           <div *ngIf="errorMsg.redirect" class="error-msg">{{errorMsg.redirect}}</div>
         </div>
-     </div>
+    </div>
 
-     <div class="d-flex mb-3 add-banners">
-      <div>
-        <p  class="code-text">
-        Page
-        </p>
-        <div class="btn-group">
-          <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="page" (change)="onChange($event)">
-            <option value="">Select</option>
-            <option *ngFor="let option of pageOptions" [value]="option.id">{{option.page}}</option>
+    <div class="d-flex mb-3 add-banners">
+    <div>
+      <p  class="code-text">
+        {{ 'page' | translate }}
+      </p>
+      <div class="btn-group">
+        <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="page" (change)="onChange($event)">
+          <option value="">{{ 'select' | translate }}</option>
+          <option *ngFor="let option of pageOptions" [value]="option.id">{{option.page}}</option>
+        </select>
+        <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
+        </svg>
+      </div>
+      <div *ngIf="errorMsg.page" class="error-msg">{{errorMsg.page}}</div>
+    </div>
+    <div class="ms-5">
+      <p  class="code-text">
+        {{ 'type' | translate }}
+      </p>
+      <div class="btn-group">
+          <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="type">
+            <option value="">{{ 'select' | translate }}</option>
+            <option *ngFor="let option of typeOptions" value="{{option}}">{{option}}</option>
           </select>
           <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
           </svg>
-        </div>
-        <div *ngIf="errorMsg.page" class="error-msg">{{errorMsg.page}}</div>
       </div>
-      <div class="ms-5">
-        <p  class="code-text">
-        Type
-        </p>
-        <div class="btn-group">
-            <select class="cupen-btn-1 form-select" aria-label="Default select example" [(ngModel)]="type">
-              <option value="">Select</option>
-              <option *ngFor="let option of typeOptions" value="{{option}}">{{option}}</option>
-            </select>
-            <svg class="dropdown-icon" width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.08333 3.25838L0.995812 0.170854C0.768006 -0.0569515 0.39866 -0.0569515 0.170854 0.170854C-0.0569515 0.39866 -0.0569515 0.768006 0.170854 0.995812L3.67085 4.49581C3.89866 4.72362 4.26801 4.72362 4.49581 4.49581L7.99581 0.995812C8.22362 0.768006 8.22362 0.39866 7.99581 0.170854C7.76801 -0.0569515 7.39866 -0.0569515 7.17085 0.170854L4.08333 3.25838Z" fill="#646464"/>
-            </svg>
-        </div>
-        <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
-      </div>
-     </div>
+      <div *ngIf="errorMsg.type" class="error-msg">{{errorMsg.type}}</div>
+    </div>
+    </div>
     <div class="upload-img mb-3">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.0007 29.3347H6.66732C5.93094 29.3347 5.33398 28.7377 5.33398 28.0013V4.0013C5.33398 3.26492 5.93094 2.66797 6.66732 2.66797H25.334C26.0704 2.66797 26.6673 3.26492 26.6673 4.0013V16.0013" stroke="#787878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -73,24 +71,23 @@
     </svg>
 
       <h5 class="heading-text mb-1 mt-2">
-        Drag and Drop files here
+        {{ 'dragAndDropFiles' | translate }}
       </h5>
       <p class="main-upload-text mb-2">
-      <span class="mr-4">Dimension: 160 x 600 px</span> Files supported: JPG, GIF, PNG,  MP4
+      <span class="mr-4"> {{ 'dimensions' | translate }} {{type}}</span> {{ 'fileSupported1' | translate }}
       </p>
-      <label for="file-upload" class="btn btn-secondary upload-btn mb-2 mt-2">Choose File</label>
+      <label for="file-upload" class="btn btn-secondary upload-btn mb-2 mt-2">{{ 'chooseFile' | translate }}</label>
       <input id="file-upload" type="file" class="setting-media-2" style="display: none;" (change)="onImageChange($event)" accept="image/*" />
       <p class="main-upload-text mb-1">
-        Maximum Size: 5MB
+        {{ 'maximumSize5MB' | translate }}
       </p>
     </div>
-
 
     <!-- fjghkdhfg -->
 
     <div class="mb-3">
       <p  class="code-text">
-        Valid Between
+        {{ 'validBetween' | translate }}
       </p>
       <div class="d-flex calender-inputs-box">
 
@@ -98,11 +95,9 @@
 
           <div>
             <div class="cupen-btn-date">
-              <!-- <svg id="users-icon"  xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>  May 8, 2024 -->
               <mat-form-field class="meta-date">
-                <mat-label>Choose a date</mat-label>
+                <mat-label>{{ 'chooseADate' | translate }}</mat-label>
                 <input matInput  [matDatepicker]="dp" [(ngModel)]="startDate" (dateChange)="onDateChange('start', $event)">
-                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconPrefix [for]="dp"></mat-datepicker-toggle>
                 <mat-datepicker #dp ></mat-datepicker>
               </mat-form-field>
@@ -111,11 +106,9 @@
 
           <div>
               <div class="cupen-btn-date-1" [ngClass]="{'disable-end-date': disableEndDate}">
-                <!-- <svg id="users-icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>   May 8, 2024 -->
                 <mat-form-field class="meta-date">
-                  <mat-label>Choose a date</mat-label>
+                  <mat-label>{{ 'chooseADate' | translate }}</mat-label>
                   <input matInput [matDatepicker]="dp1" [(ngModel)]="endDate" (dateChange)="onDateChange('end', $event)">
-                  <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                   <mat-datepicker-toggle matIconPrefix [for]="dp1"></mat-datepicker-toggle>
                   <mat-datepicker #dp1></mat-datepicker>
                 </mat-form-field>
@@ -135,7 +128,7 @@
                 (change)="onNoEndDateChange($event)"
               />
             </label>
-          </span> Don't set an end date
+          </span> {{ 'dontsetAnEnd' | translate }}
         </div>
 
       </div>
@@ -186,28 +179,27 @@
        </div>
 
      </div> -->
+
      <div class="d-flex mb-3 add-banners ">
-      <div>
+    <div>
+    <p  class="code-text">
+      {{ 'maxViews' | translate }}
+    </p>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
+      <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
+    </div>
+    <div class="ms-3">
       <p  class="code-text">
-        Max Views
+        {{ 'maxClicks' | translate }}
       </p>
-        <input class="cupen-btn-1 code-text" [(ngModel)]="maxViews">
-        <div *ngIf="errorMsg.maxViews" class="error-msg">{{errorMsg.maxViews}}</div>
-      </div>
-      <div class="ms-3">
-        <p  class="code-text">
-          Max Clicks
-        </p>
-        <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
-        <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
-      </div>
+      <input class="cupen-btn-1 code-text" [(ngModel)]="maxClicks">
+      <div *ngIf="errorMsg.maxClicks" class="error-msg">{{errorMsg.maxClicks}}</div>
+    </div>
 
-     </div>
-
+    </div>
   </div>
 
   <hr class="m-0">
-
 
   <!--  <div>
     <div class="upload"> -->
@@ -215,24 +207,20 @@
      <!-- <div style=" margin-left: 52px;">
       <a class="btn btn-delete text-danger code-text">Delete</a>
      </div>
-
       <div>
       <a class="btn Launch" >Create and Launch</a>
      </div>
-
   </div> -->
 
   <div>
     <div class=" d-flex justify-content-around bg-0C3453 p-3">
-
      <div>
-       <a class="btn btn-delete text-danger" (click)="close()">Cancel</a>
+       <a class="btn btn-delete text-danger" (click)="close()">{{ 'cancel' | translate }}</a>
      </div>
      <div>
-       <a class="btn Launch px-5" *ngIf="data.action == 'create'" (click)="createAd()">Create and Launch</a>
-       <a class="btn Launch px-5" *ngIf="data.action == 'update'" (click)="updateAd()">Update</a>
+       <a class="btn Launch px-5" *ngIf="data.action == 'create'" (click)="createAd()">{{ 'createAndLaunch' | translate }}</a>
+       <a class="btn Launch px-5" *ngIf="data.action == 'update'" (click)="updateAd()">{{ 'update' | translate }}</a>
      </div>
-
     </div>
   </div>
 
@@ -247,7 +235,7 @@
     <div class="p-0 code-parent">
       <div class="bg-0C3453 p-4">
         <h6 class=" code-text text-center " >
-         Advertising
+          {{ 'advertising' | translate }}
         </h6>
         <div (click)="close()" class="close-img mb-1" >
        </div>
@@ -262,7 +250,7 @@
       <div class="d-flex mb-3">
         <div>
         <p  class="code-text">
-         Name
+          {{ 'name' | translate }}
         </p>
           <div class="cupen-btn-1  code-text">
             {{name}}
@@ -270,7 +258,7 @@
         </div>
         <div class="ms-5">
           <p  class="code-text">
-            On click redirect to url:
+            {{ 'clickDirectUrl' | translate }}
           </p>
             <div class="cupen-btn-1  code-text">
               {{redirect}}
@@ -281,7 +269,7 @@
        <div class="d-flex mb-3">
         <div>
           <p  class="code-text">
-          Page
+            {{ 'page' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{pageName}}
@@ -289,7 +277,7 @@
         </div>
         <div class="ms-5">
           <p  class="code-text">
-          Type
+            {{ 'type' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{typeForView}}
@@ -308,7 +296,7 @@
 
       <div class="mb-3">
         <p  class="code-text">
-          Display Duration
+          {{ 'displayDuration' | translate }}
         </p>
         <div class="d-flex">
 
@@ -395,7 +383,7 @@
                   [(ngModel)]="noEndDate"
                 />
               </label>
-            </span> Don't set an end date
+            </span> {{ "don'tSetDate" | translate }}
           </div>
 
         </div>
@@ -413,7 +401,7 @@
         </div>
         <div class="ms-3">
           <p  class="code-text">
-            Max Clicks
+            {{ 'maxClicks' | translate }}
           </p>
           <div class="cupen-btn-1  code-text">
             {{maxClicks}}

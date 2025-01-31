@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-thanku',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrl: './thanku.component.scss'
 })
 export class ThankuComponent {
+  constructor(
+    private translateService: TranslateService,
+  ){
+    this.translateService.setDefaultLang('en'); // Set default language
+    this.translateService.use('en'); // Use default language
+  }
+
+  
+
+  
 
 }
