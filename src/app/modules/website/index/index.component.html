@@ -73,8 +73,8 @@
           <owl-carousel-o [options]="customOptions">
             @for (slider of sliderDetail?.users; track $index) {
               <ng-template carouselSlide>
-                <div class="player-carousel">
-                  <div class="player-border">
+                <div *ngIf="slider.role_name != 'Club'" class="player-carousel">
+                  <div  class="player-border">
                     <div class="player-img">
                       <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
                     </div>
@@ -95,6 +95,24 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="slider.role_name == 'Club'" class="player-carousel-club">
+                  <div  class="player-border">
+                    <div class="player-img">
+                      <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
+                    </div>
+                    <p class="player-name">{{slider.first_name +' '+ slider.last_name}}</p>
+                    <!-- <div *ngIf="slider.meta.date_of_birth"  class="flag">
+                      <div class="flag-image">
+                        <div class="bottom-line"></div>
+                        <div class="flag-bottom">
+                          <img src="./assets/images/birthday.svg" class="birthday-img">
+                          <p class="d-o-b">{{getBirthYear(slider.meta.date_of_birth)}}</p>
+                        </div>
+                      </div>
+                    </div> -->
                   </div>
                 </div>
               </ng-template>
