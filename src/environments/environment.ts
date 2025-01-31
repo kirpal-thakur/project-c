@@ -54,7 +54,7 @@ export const environment = {
       apiKey: '62a0ffa8d6e9c3d5ed7c8a09e9111b41-us17',  // Correct API key
       listId: '7afbbb070a'
     },
-    //6Ld7hb8qAAAAAOVuEobWsckFQVqnzeqmXm6ljs_W  
+    //6Ld7hb8qAAAAAOVuEobWsckFQVqnzeqmXm6ljs_W
     //for staging : 6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26
     captchaKey:'6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ'
   } as const;
