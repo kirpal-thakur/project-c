@@ -15,7 +15,8 @@ export class DetailPagesComponent {
 
   ngOnInit() {
     // Initially, all ads are visible
-    this.adVisible = [true, true, true,true, true, true];
+    // this.adVisible = [true, true, true,true, true, true];
+    this.adVisible = [false, false, false,false, false, false];
     this.route.params.subscribe((params) => {
       this.id = params['slug'];
       //this.getPageData(1);
