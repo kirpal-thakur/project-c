@@ -374,9 +374,15 @@ export class PlanComponent implements OnInit, OnDestroy {
 
 
   toggleBillingPlan(plan: any, isYearly: boolean, subscribeId: any): void {
+    console.log('toggleBillingPlan', plan, isYearly, subscribeId);
     const originalIsYearly = plan.isYearly;
 
-    if (plan.isYearly != isYearly) {
+    if (isYearly && plan.active_interval == 'yearly') {
+      this.toastr.info(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
+      return;
+    }
+
+    if (!isYearly && plan.active_interval == 'monthly') {
       this.toastr.info(`You're already subscribed to the ${isYearly ? 'yearly' : 'monthly'} plan.`);
       return;
     }

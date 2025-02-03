@@ -106,7 +106,10 @@ export class MembershipComponent {
         this.isbooster = this.booster ? true : false;
         this.isdemo = this.demo ? true : false;
         this.country.count = this.userPlans.country.length;
-        console.log('userPlans',this.userPlans)
+        this.premium.count = this.userPlans.premium.length;
+        this.booster.count = this.userPlans.booster.length;
+        this.demo.count = this.userPlans.demo.length;
+
       } else {
         console.error('Invalid API response:', response);
       }
