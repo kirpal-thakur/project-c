@@ -18,14 +18,14 @@ import { ScoutService } from '../../../services/scout.service';
   styleUrl: './membership.component.scss'
 })
 export class MembershipComponent {
-  
+
   userId: any = '';
   userPurchases: any = [];
   userCards: any = [];
   userPlans: any = [];
   allSelected: boolean = false;
   idsToDownload: any = [];
-  selectedIds: number[] = [];  
+  selectedIds: number[] = [];
   totalItems: number = 0; // Total number of items for pagination
   pageSize: number = 10; // Number of items per page
   currentPage: number = 1; // Current page index
@@ -35,6 +35,10 @@ export class MembershipComponent {
   demo: any=[];
   stats: any;
   exportLink: any;
+  ispremium : any = false;
+  iscountry: any = false;
+  isbooster: any = false;
+  isdemo: any = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private route: ActivatedRoute, private scoutService: ScoutService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
@@ -97,7 +101,14 @@ export class MembershipComponent {
         this.booster = this.userPlans.booster[0];
         this.demo = this.userPlans.demo[0];
         this.country = this.userPlans.country;
+        this.ispremium  = this.premium ? true : false;
+        this.iscountry = this.country ? true : false;
+        this.isbooster = this.booster ? true : false;
+        this.isdemo = this.demo ? true : false;
         this.country.count = this.userPlans.country.length;
+        this.premium.count = this.userPlans.premium.length;
+        this.booster.count = this.userPlans.booster.length;
+        this.demo.count = this.userPlans.demo.length;
         console.log('userPlans',this.userPlans)
       } else {
         console.error('Invalid API response:', response);
@@ -191,13 +202,13 @@ export class MembershipComponent {
         cards: this.userCards
       }
     });
-  
+
     // Optionally handle dialog closing events
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result:', result);
     });
   }
-  
+
   selectAllCheckboxes() {
     console.log('p', this.allSelected)
     this.allSelected = !this.allSelected;
@@ -211,7 +222,7 @@ export class MembershipComponent {
   }
 
   async downloadInvoice(invoideId:any, invoiceUrl:any){
-    // use the fetch/blob method because single download isn't working 
+    // use the fetch/blob method because single download isn't working
     fetch(invoiceUrl)
       .then(response => {
         if (!response.ok) {
@@ -244,11 +255,11 @@ export class MembershipComponent {
     const allLinksToDownload = this.selectedIds.map(id => {
       // Find the user object by matching the id
       const purchase = this.userPurchases.find((purchase:any) => purchase.id === id);
-      
+
       // Return the image link if the user is found, otherwise return null or undefined
       return purchase ? purchase.invoice_file_path : null;
     });
-    
+
     this.downloadAllFiles(allLinksToDownload);
 
   }
