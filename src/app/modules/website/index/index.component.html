@@ -7,12 +7,12 @@
       <div class="overlay" >
       </div>
 
-      <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image}}">
         <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div *ngIf="!isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.wide_skyscraper?.featured_image}}">
         <button (click)="closeAd('wide_skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -44,7 +44,7 @@
 
     </div>
     <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
-      <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image}}">
         <button (click)="closeAd('leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -843,11 +843,11 @@
 
         <div class="container1">
           <div class="advertisment">
-            <div *ngIf="!isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
+            <div *ngIf="isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.large_leaderboard?.featured_image}}">
               <button (click)="closeAd('large_leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-           <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+           <div *ngIf="isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.small_square?.featured_image}}">
               <button (click)="closeAd('small_square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
