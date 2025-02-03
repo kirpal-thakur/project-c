@@ -37,7 +37,7 @@ export class ContactComponent implements OnInit {
   email_placeholder: string = '';
   phone_placeholder: string = '';
   message_placeholder: string = '';
-  showcaptchaError: boolean = false;
+  // showcaptchaError: boolean = false;
   constructor(
     private route: ActivatedRoute, 
     private webPages: WebPages,
@@ -74,6 +74,8 @@ export class ContactComponent implements OnInit {
           this.txt_before_radio_btn = res.data.pageData.txt_before_radio_btn;
           this.semail= res.data.pageData.email;
           this.advertisemnetData =  res.data.advertisemnetData;
+          this.advertisemnetData = [];
+          
           this.advertisemnet_base_url = res.data.advertisemnet_base_url;
           this.base_url =  res.data.base_url;
           this.name_placeholder = res.data.pageData.name_placeholder;

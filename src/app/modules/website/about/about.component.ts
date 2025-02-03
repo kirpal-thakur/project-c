@@ -58,6 +58,7 @@ export class AboutComponent {
           this.country_section_banner_img=  res.data.base_url+res.data.pageData.country_section_banner_img;
          
           this.advertisemnetData = res.data.advertisemnetData;
+          this.advertisemnetData = [];
           this.advertisemnet_base_url = res.data.advertisemnet_base_url;
         
         }
