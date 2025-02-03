@@ -30,7 +30,6 @@ export class ContactComponent implements OnInit {
   isChecked = false; // Checkbox state
   adVisible: boolean[] = [true, true, true, true]; // Array to manage ad visibility
   captchaResolved = false; // Track if captcha is resolved
-  showcaptchaError = false; 
   recaptchaToken: string | null = null; // Captcha token for backend validation
   responseMessage: string = '';
   messageType: string = '';  

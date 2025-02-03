@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers: any = [];
   newRegistrationScouts: any = [];
   years: any = [];
-  selectedYear: any = new Date().getFullYear();
+  selectedYear: any = new Date().getFullYear()-1;
   language: any;
   loggedInUser: any = localStorage.getItem('userData');
 
@@ -155,7 +155,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }, 5000); // 5000 ms = 5 seconds
     });
 
-    this.getChardData(this.selectedYear);
     this.loggedInUser = JSON.parse(this.loggedInUser);
     this.getNewRegistrations();
     this.getNewRegistrationsWithScout();
@@ -330,7 +329,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.error(`Failed to get canvas context for ${chartId}`);
       return null;
     }
-
+   
 
     const gradientStroke = ctx.createLinearGradient(100, 0, 700, 0);
     gradientStroke.addColorStop(0, '#7BDA66');
@@ -358,7 +357,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         } as ChartDataset<'line'>,
       ],
     };
-
+   
     return new Chart(ctx, {
       type: 'line',
       data,
@@ -441,8 +440,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       isDarkMode = isDarkTheme;
     });
     const charts = [this.chart1, this.chart2, this.chart3];
-
     charts.forEach((chart) => {
+      
       if (chart.options && chart.options.scales && chart.options.plugins) {
         if (chart.options.scales['x'] && chart.options.scales['x'].grid) {
           chart.options.scales['x'].grid.color = isDarkMode ? '#333' : '#E0E0E0';
@@ -664,15 +663,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     return daysAgo + text;
   }
-
+  // Sort years in descending order
+  sortYearsDescending(years: number[]): number[] {
+    return years.sort((a, b) => b - a); // This will sort in descending order
+  }
   generateYears() {
     const startYear = this.selectedYear;
     const currentYear = new Date().getFullYear();
-    console.log('currentYear', currentYear);
     // Populate the years array from startYear to currentYear
-    for (let year = startYear; year <= currentYear; year++) {
+    for (let year = startYear; year <= currentYear; year++) { 
       this.years.push(year);
     }
+    this.years = this.sortYearsDescending(this.years);
+    this.getChardData(this.years[0]);
+    
   }
 
   scrollToTop2() {
