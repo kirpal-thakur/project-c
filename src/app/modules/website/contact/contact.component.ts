@@ -37,7 +37,7 @@ export class ContactComponent implements OnInit {
   email_placeholder: string = '';
   phone_placeholder: string = '';
   message_placeholder: string = '';
-  // showcaptchaError: boolean = false;
+  showcaptchaError: boolean = false;
   constructor(
     private route: ActivatedRoute, 
     private webPages: WebPages,
