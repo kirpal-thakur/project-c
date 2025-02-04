@@ -19,6 +19,7 @@ export class PrivacyComponent implements OnInit {
   ngOnInit() {
     // Initially, all ads are visible
     this.adVisible = [true, true, true];
+    this.adVisible = [false, false, false];
     this.webPages.languageId$.subscribe((data) => {
       this.getPageData(data)
     });

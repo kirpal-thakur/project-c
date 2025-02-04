@@ -76,6 +76,8 @@ export class NewsComponent implements OnInit, OnDestroy {
     this.webPages.getDynamicContentPage('news', languageId).subscribe((res) => {
       if (res.status) {
         this.advertisemnetData = res.data.advertisemnetData;
+        this.advertisemnetData = [];
+        
         this.advertisemnet_base_url = res.data.advertisemnet_base_url;
         this.slider_title = res.data.pageData.slider_title;
         this.banner_title = res.data.pageData.banner_title;

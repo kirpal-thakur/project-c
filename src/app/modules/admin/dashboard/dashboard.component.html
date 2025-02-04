@@ -14,18 +14,18 @@
         <span>
           <div>
             <select name="" id="" (change)='yearChange($event)'>
-              <option *ngFor="let year of years.reverse()" [value]="year" >{{ year }}</option>
+              <option *ngFor="let year of years" [value]="year" >{{ year }}</option>
             </select>
           </div>
         </span>
       </div>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+        <div class="tab-pane fade " id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
           tabindex="0">
 
           <canvas id="canvas1" class="canvas" #canvas1></canvas>
         </div>
-        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
           <canvas id="canvas2" class="canvas" #canvas2></canvas>
         </div>
         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">

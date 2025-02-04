@@ -52,7 +52,7 @@
                   <div class="user-info pt-3 row align-items-center justify-content-between p-3 responsive-name">
                     <div class="col-lg-9 d-flex align-items-center player-name-box">
                       <h6 class="user-info-name">
-                        {{ user.first_name }} {{ user.last_name }}
+                        {{user?.meta?.club_name |translate }}
                       </h6>
                       <div class="name_icon">
                         <img src="../../../assets/images/pending.png" alt="" class="user-pending-icon"

@@ -12,7 +12,8 @@ export class PricingComponent {
   isActive3 = true; // Boost Profile Plan
   pageData: any; // To hold the API response data
 
-  adVisible: boolean[] = [true, true, true, true, true, true, true]; // Array to manage ad visibility
+  // adVisible: boolean[] = [true, true, true, true, true, true, true]; // Array to manage ad visibility
+  adVisible: boolean[] = [false, false, false, false, false, false, false];
   
   constructor(private webPages: WebPages) {}
 

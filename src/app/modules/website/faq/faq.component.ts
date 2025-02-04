@@ -25,7 +25,9 @@ export class FaqComponent {
   }
 
   ngOnInit() {
-    this.adVisible = [true, true, true, true, true, true, true];
+    // this.adVisible = [true, true, true, true, true, true, true];
+
+    this.adVisible = [false, false, false, false, false, false, false];
   
     this.webPages.languageId$.subscribe((data) => {
       this.getPageData(data)
