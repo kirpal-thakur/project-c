@@ -100,7 +100,8 @@ export class ClubDetailComponent implements OnInit {
 
 
   deleteUser(){
-    this.userService.deleteUser([this.userId]).subscribe(
+    let langId = localStorage.getItem('lang_id');
+    this.userService.deleteUser([this.userId], langId).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
         this.router.navigate(['/admin/users']);

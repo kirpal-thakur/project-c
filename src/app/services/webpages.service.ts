@@ -12,7 +12,8 @@ export class WebPages {
 
     private apiUrl = environment?.apiUrl;
     private url = environment?.url;
-    private frontendApiUrl = this.url + 'frontend/';
+    // private frontendApiUrl = this.url + 'frontend/';
+    private frontendApiUrl = 'https://api.socceryou.ch/frontend/';
     private langId =  localStorage.getItem('lang_id') || '1';
     private languageId = new BehaviorSubject<string>(this.langId); // Initial value
     languageId$ = this.languageId.asObservable(); // Expose as observable

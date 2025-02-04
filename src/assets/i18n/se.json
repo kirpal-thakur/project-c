@@ -1228,6 +1228,11 @@
     "totalSales": "Total Sales: {{count}}",
     "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+
+
+  "more_news": "Fler nyheter",  
+  "back_to_news": "Tillbaka till Nyheter och Media",
+  "share": "Dela",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select och position",

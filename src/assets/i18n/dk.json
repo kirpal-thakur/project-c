@@ -421,7 +421,6 @@
   "ContractUntil": "Kontrakt indtil",
   "TopSpeed": "Tophastighed",
   "Foot": "Fod",
-  "InTheTeamSince": "I holdet siden",
   "Height": "Højde",
   "SocialMedia": "Sociale medier",
   "Password": "Adgangskode",
@@ -1207,6 +1206,11 @@
       "totalSales": "Total Sales: {{count}}",
       "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+
+
+  "more_news": "Flere nyheder",
+  "back_to_news": "Tilbage til Nyheder og Media",
+  "share": "Del",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select og position",

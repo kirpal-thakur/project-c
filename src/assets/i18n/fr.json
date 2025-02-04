@@ -1240,6 +1240,11 @@
     "totalSales": "Total Sales: {{count}}",
     "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+
+
+  "more_news": "Plus de nouvelles",  
+  "back_to_news": "Retour aux Actualités et Médias",
+  "share": "Partager",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select et position",

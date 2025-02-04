@@ -1224,6 +1224,11 @@
     "totalSales": "Total Sales: {{count}}",
     "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+
+
+  "more_news": "Altre notizie",  
+  "back_to_news": "Torna a Notizie e Media",
+  "share": "Condividere",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select e position",

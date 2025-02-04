@@ -719,7 +719,7 @@
   "newsLetter": "Newsletter",
   "deleteAccount": "Delete Account",
   "proceed": "Proceed",
-  "areToSure": "Are to sure to remove?",
+  "areToSure": "Are you sure to remove?",
   "chooseYourPreferredPayment": "Choose your preferred payment method for making future payments.",
   "searchUser": "Search users...",
   "to:": "To:",
@@ -1082,7 +1082,10 @@
     "sweden": "Sweden",
     "switzerland": "Switzerland"
   },
- 
+
+  "more_news": "More News",  
+  "back_to_news": "Back to News & Media",
+  "share": "Share",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select Position",

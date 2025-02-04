@@ -951,6 +951,10 @@
     "totalSales": "Gesamtverkäufe: {{count}}",
     "totalSubscriptions": "Gesamtabonnements: {{count}}"
   },
+
+  "more_news": "Weitere News",  
+  "back_to_news": "Zurück zu News & Medien",
+  "share": "Teilen",
   "uses": "verwendet",
   "news": "Nachrichten",
   "eltonPrinceCreatedAccount": "(Benutzername) hat ein neues Profil erstellt und wartet auf die Genehmigung.",
