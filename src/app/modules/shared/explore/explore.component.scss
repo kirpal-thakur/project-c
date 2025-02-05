@@ -99,12 +99,8 @@
     text-align: center;
 }
 .image_box .player_img img{
-    width: 100%;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-bottom: 0;
     height: 260px;
-    object-fit: cover;
+    object-fit: contain;
 }
 .player-names{
     background: #429130;
