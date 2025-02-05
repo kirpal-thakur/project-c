@@ -94,7 +94,9 @@ export class HeaderComponent {
       console.log("No data found in localStorage.");
     }
 
-    this.fetchNotifications(userId);
+    let langId = localStorage.getItem('lang_id');
+
+    this.fetchNotifications(userId, langId);
     this.languages = JSON.parse(this.languages); 
 
     this.socketService.on('notification').subscribe((data) => {
@@ -262,6 +264,8 @@ export class HeaderComponent {
 
   ChangeLang(lang: any) {
 
+    this.notifications = [];
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.lang = selectedLanguage;
@@ -281,6 +285,20 @@ export class HeaderComponent {
       action:'lang_updated',
       id:selectedLanguageId
     })
+
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+
+    this.fetchNotifications(userId, selectedLanguageId);
+
+    
 
   }
 
@@ -351,7 +369,6 @@ export class HeaderComponent {
   }
 
   onScroll(): void {
-    console.log("something")
     const notificationBox = document.getElementById('notification-box-id');
     if (notificationBox) {
       // Check if scroll position is greater than 300
@@ -367,8 +384,8 @@ export class HeaderComponent {
     this.clickedNewNotification = false;
   }
 
-  fetchNotifications(userId: number): void {
-    this.talentService.getNotifications(userId).subscribe({
+  fetchNotifications(userId: number, langId: any): void {
+    this.talentService.getNotifications(userId, langId).subscribe({
       next: (response) => {
         console.log('Fetched notifications response:', response);
   
