@@ -30,7 +30,7 @@ export class HistoryTabComponent {
     try {
       this.scoutService.getClubHistory().subscribe((response)=>{
         if (response && response.status && response.data) {
-          this.history = response.data.company_history.meta_value; 
+          this.history = response.data.club_history.meta_value;
           this.isLoading = false;
         } else {
           this.isLoading = false;

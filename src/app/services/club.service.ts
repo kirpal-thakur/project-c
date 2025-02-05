@@ -52,7 +52,7 @@ export class ClubService {
 
   }
 
-  private apiUrl2 = 'https://api.socceryou.ch/api/';
+  private apiUrl2 = environment.apiUrl;
   private stripe!: any;
   private stripePromise = loadStripe(environment.stripePublishableKey); // Replace with your Stripe publishable key
 
@@ -751,6 +751,14 @@ export class ClubService {
     });
 
     return this.http.post<any>(`${this.apiUrl}club/add-club-player`, params, { headers });
+  }
+
+  updateTeamPlayer(id:any,params: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.userToken}`
+    });
+
+    return this.http.post<any>(`${this.apiUrl}club/edit-club-player/${id}`, params, { headers });
   }
 
 
