@@ -69,7 +69,7 @@ export class InviteTalentPopupComponent {
       formData.append('invites[]', user.id);
     });
 
-    this.userService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
+    this.clubService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added',

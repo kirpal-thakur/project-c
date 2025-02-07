@@ -58,4 +58,4 @@ export const environment = {
     //for staging : 6LegcsYqAAAAAGqGAxm-bpXs96qJdYcxBMIOrD26
     captchaKey:'6LdrnMcqAAAAAFF3MvbmI8vhzplwmf_EIUuQc1jZ'
   } as const;
-  
+
