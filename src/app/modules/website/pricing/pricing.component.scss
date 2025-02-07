@@ -264,7 +264,10 @@ span {
     text-align: center;
 }
 .feature-height {
-    height: 550px;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .btn {
@@ -286,6 +289,7 @@ button.btn.btn-join {
 }
 
 .feature-box {
+    height: 100% !important;
     width: 100%;
     padding-bottom: 20px;
     border-radius: 10px;
@@ -294,12 +298,13 @@ button.btn.btn-join {
 
 .feature-heading {
     padding: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 0 !important;
     position: relative;
     border-bottom: 1px solid #175B07;
 }
 
 .feature-data {
+    height: 100% !important;
     padding: 20px;
 }
 
