@@ -296,14 +296,24 @@ export class HeaderComponent {
       console.log("No data found in localStorage.");
     }
 
+    this.socketService.emit('updateLanguage', {userId, langId: selectedLanguageId});
     this.fetchNotifications(userId, selectedLanguageId);
-
-    
 
   }
 
 
   logout() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    this.socketService.disconnectUser(userId);
+    
     this.authService.logout();
   }
 

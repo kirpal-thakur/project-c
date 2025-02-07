@@ -295,6 +295,7 @@ export class HeaderComponent {
     localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
 
+    
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -304,12 +305,26 @@ export class HeaderComponent {
     else {
       console.log("No data found in localStorage.");
     }
-
+    
+    this.socketService.emit('updateLanguage', {userId, langId: selectedLandId});
     this.fetchNotifications(userId, selectedLandId);
   }
 
   logout() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    console.log(userId);
+    this.socketService.disconnectUser(userId);
+    
     this.authService.logout();
+
   }
 
   themeText: string = 'Light Mode'

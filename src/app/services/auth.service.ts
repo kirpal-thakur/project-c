@@ -41,7 +41,11 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('authToken');
-    localStorage.setItem('logoutMessage', 'true');
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('notificationSeen');
+    
+    // localStorage.setItem('logoutMessage', 'true');
     this.router.navigate(['/']); // Redirect to the login or home page
   }
 

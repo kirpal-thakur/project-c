@@ -183,7 +183,7 @@
                   <div class="col-9">
                     <h6>{{ notification.title }}</h6>
                     <p>{{ notification.content }}</p>
-                    <small>{{ notification.time }}</small>
+                    <small>{{ 'justNow' | translate }}</small>
                   </div>
                   <div class="col-1">
                     <svg width="8" height="9" viewBox="0 0 8 9" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,7 +248,7 @@
               </svg>
               <span class="ms-1 fs-15">{{ 'accountSettings' | translate }}</span>
             </a>
-            <a href="#" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
+            <a href="javascript:void(0)" class="dropdown-item ai-icon px-0 pt-2" (click)="logout()">
               <svg class="ms-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                 fill="none" stroke="#c2c2c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>

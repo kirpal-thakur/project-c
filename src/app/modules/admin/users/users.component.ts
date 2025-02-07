@@ -340,7 +340,7 @@ export class UsersComponent implements OnInit {
         // this.fetchUsers();
         // this.selectedUserIds = [];
         // this.allSelected = false;
-        // console.log('User status updated successfully:', response);
+        console.log('User status updated successfully:', response);
         this.showMessage('User status updated successfully!');
       },
       error => {

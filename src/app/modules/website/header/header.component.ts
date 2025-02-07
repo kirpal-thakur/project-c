@@ -465,6 +465,11 @@ export class HeaderComponent implements OnInit {
         } else {
           const token = response.data.token;
           const userData = response.data.user_data;
+
+          let langId = localStorage.getItem("lang_id") || '1';
+          console.log("socket connected with user: ", response.data.user_data.id)
+          this.socketService.connectUser({userId:response.data.user_data.id, langId});
+          
           const userRole = userData.role;
           let navigationRoute = '';
           switch (userRole) {
