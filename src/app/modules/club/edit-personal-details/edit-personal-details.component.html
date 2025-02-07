@@ -14,7 +14,7 @@
       <div class="row">
         <!-- Club Name -->
         <div class="form-group col-lg-6">
-          <label for="club_name">{{ 'Club Name' | translate }}:</label>
+          <label for="club_name">{{ 'clubName' | translate }}:</label>
           <input type="text" id="club_name" name="club_name" [(ngModel)]="club_name" required>
         </div>
 
@@ -34,13 +34,13 @@
       <div class="row">
         <!-- City -->
         <div class="form-group col-lg-6">
-          <label for="city">City:</label>
+          <label for="city">{{'city' | translate}}:</label>
           <input type="text" id="city" name="city" [(ngModel)]="city" >
         </div>
 
         <!-- Contact Number -->
         <div class="form-group col-lg-6">
-          <label for="contact_number">Contact Number:</label>
+          <label for="contact_number">{{'contactNumber' | translate}}:</label>
           <input type="tel" id="contact_number" name="contact_number" [(ngModel)]="contact_number" >
         </div>
       </div>
@@ -48,13 +48,13 @@
       <div class="row">
         <!-- Website -->
         <div class="form-group col-lg-6">
-          <label for="website">Website:</label>
+          <label for="website">{{'website' | translate}}:</label>
           <input type="url" id="website" name="website" [(ngModel)]="website" >
         </div>
 
         <!-- Zipcode -->
         <div class="form-group col-lg-6">
-          <label for="zipcode">Zipcode:</label>
+          <label for="zipcode">{{'zipcode' | translate}}:</label>
           <input type="text" id="zipcode" name="zipcode" [(ngModel)]="zipcode" >
         </div>
       </div>
@@ -62,7 +62,7 @@
       <div class="row">
         <!-- Address -->
         <div class="form-group col-lg-12">
-          <label for="address">Address:</label>
+          <label for="address">{{'address' | translate}}:</label>
           <textarea id="address" name="address" [(ngModel)]="address" ></textarea>
         </div>
       </div>
@@ -72,7 +72,7 @@
       <!-- Social media usernames -->
       <div class="social_form-box my-3">
         <span class="social_heddig pe-2" >Social Media</span>
-        <span class="note_titles">Note : You only need to add your username.</span>
+        <span class="note_titles">{{'note' | translate}}</span>
       </div>
 
       <div class="row">

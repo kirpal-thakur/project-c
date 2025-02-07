@@ -6,7 +6,7 @@
     <div class="msg-popup-content">
         <div class="display-message" *ngIf="data.action == 'display'">{{data.message}}</div>
         <div class="display-message" *ngIf="data.action == 'delete-confirmation'">
-            {{'ConfirmDeleteinformation' | translate}} <br> {{'ConfirmDeleteinformation1' | translate}}
+            {{'confirmDeleteinformation' | translate}} <br> {{'confirmDeleteinformation1' | translate}}
 
             <div class="popup-delete-btn">
                 <span (click)="deleteConfirmed()">{{'deleteAccount' | translate}}</span>

@@ -105,7 +105,8 @@ export class HeaderComponent {
 
     // Find the role based on the id
     this.role = this.roles.find((role:any) => role.id == userRole);
-    this.fetchNotifications(userId);
+    let langId = localStorage.getItem('lang_id');
+    this.fetchNotifications(userId, langId);
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
     this.commonDataService.profilePic$.subscribe(url => {
@@ -282,6 +283,8 @@ export class HeaderComponent {
 
   ChangeLang(lang: any) {
 
+    this.notifications = [];
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.lang = selectedLanguage;
@@ -291,10 +294,37 @@ export class HeaderComponent {
     let selectedLandId = selectedLang ? selectedLang.id : 1;
     localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
+
+    
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    
+    this.socketService.emit('updateLanguage', {userId, langId: selectedLandId});
+    this.fetchNotifications(userId, selectedLandId);
   }
 
   logout() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    console.log(userId);
+    this.socketService.disconnectUser(userId);
+    
     this.authService.logout();
+
   }
 
   themeText: string = 'Light Mode'
@@ -398,8 +428,8 @@ export class HeaderComponent {
     this.clickedNewNotification = false;
   }
 
-  fetchNotifications(userId: number): void {
-    this.talentService.getNotifications(userId).subscribe({
+  fetchNotifications(userId: number, langId: any): void {
+    this.talentService.getNotifications(userId, langId).subscribe({
       next: (response) => {
         console.log('Fetched notifications response:', response);
   
