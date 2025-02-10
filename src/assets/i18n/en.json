@@ -84,6 +84,7 @@
   "accountSettings": "Account Settings",
   "activityLog": "Activity Log",
   "overviewActivities": "Overview activities",
+  "justNow": "just now",
   "name": "Name",
   "dateTime": "Date - Time",
   "remove": "Remove",
@@ -672,7 +673,7 @@
   "adding_countreis": "By adding countries, your profile will be showcased in that country. Your profile would be visible to all the Talent, Clubs and Scouts of that country.",
   "files-supported": "Files supported: JPG, PNG, MP4",
   "anywhere": "Zurich, Switzerland",
-  "renewsOn": "Renews on Nov. 21, 2024",
+  "renewsOn": "Renews on",
   "editPlan": "Edit Plan",
   "cancelSubscription": "Cancel subscription",
   "renewSubscription": "Renew subscription",
@@ -719,7 +720,7 @@
   "newsLetter": "Newsletter",
   "deleteAccount": "Delete Account",
   "proceed": "Proceed",
-  "areToSure": "Are to sure to remove?",
+  "areToSure": "Are you sure to remove?", 
   "chooseYourPreferredPayment": "Choose your preferred payment method for making future payments.",
   "searchUser": "Search users...",
   "to:": "To:",
@@ -1082,7 +1083,10 @@
     "sweden": "Sweden",
     "switzerland": "Switzerland"
   },
- 
+
+  "more_news": "More News",  
+  "back_to_news": "Back to News & Media",
+  "share": "Share",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select Position",

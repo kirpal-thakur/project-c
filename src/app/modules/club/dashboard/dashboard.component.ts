@@ -608,7 +608,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
   }
 
   deleteUser(){
-    this.userService.deleteUser([this.userId]).subscribe(
+    let langId = localStorage.getItem('lang_id');
+    this.userService.deleteUser([this.userId], langId).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
         this.router.navigate(['/club/dashboard']);

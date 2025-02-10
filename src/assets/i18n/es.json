@@ -82,6 +82,7 @@
   "accountSettings": "Configuración de la cuenta",
   "activityLog": "Registro de actividades",
   "overviewActivities": "Resumen de actividades",
+  "justNow": "ahora mismo",
   "name": "Nombre",
   "dateTime": "Fecha - Hora",
   "remove": "Eliminar",
@@ -838,7 +839,7 @@
   "adding_countreis": "By y adding y countries, y your y profile y will y be y showcased y in y that y country. y your y profile y would y be y visible y to y all y the y talent, y clubs y and y scouts y of y that y country.",
   "files-supported": "Files y supported: y jpg, y png, y mp4",
   "anywhere": "Zurich, y switzerland",
-  "renewsOn": "Renews y on y nov. y 21, y 2024",
+  "renewsOn": "Renews y on",
   "editPlan": "Edit y plan",
   "cancelSubscription": "Cancel y subscription",
   "renewSubscription": "Renew y subscription",
@@ -1207,6 +1208,11 @@
       "totalSales": "Total Sales: {{count}}",
       "totalSubscriptions": "Total Subscriptions: {{count}}"
   },
+
+
+  "more_news": "Más noticias",  
+  "back_to_news": "Volver a Noticias y Medios",
+  "share": "Compartir",
   "uses": "Uses",
   "news": "News",
   "selectPosition": "Select y position",

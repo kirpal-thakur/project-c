@@ -113,7 +113,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.log("No data found in localStorage.");
     }
 
-    this.fetchNotifications(userId);
+    let langId = localStorage.getItem('lang_id');
+
+    this.fetchNotifications(userId, langId);
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -559,8 +561,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.clickedNewNotification = false;
   }
 
-  fetchNotifications(userId: number): void {
-    this.talentService.getNotifications(userId).subscribe({
+  fetchNotifications(userId: number, langId: any): void {
+    this.talentService.getNotifications(userId, langId).subscribe({
       next: (response) => {
         console.log('Fetched notifications response:', response);
   
