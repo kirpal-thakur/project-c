@@ -52,7 +52,7 @@ export class ActivityLogComponent {
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
-      });     
+      });
     } catch (error) {
       this.isLoading = false;
       console.error('Error fetching users:', error);

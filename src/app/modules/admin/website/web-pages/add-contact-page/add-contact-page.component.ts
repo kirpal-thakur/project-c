@@ -6,6 +6,7 @@ import {
   MatDialogRef, MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
+import { environment } from '../../../../../../environments/environment';
 
 interface Language {
   id: string;
@@ -35,6 +36,8 @@ export class AddContactPageComponent {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ];
+
+  colorPresets :any = environment.colors;
   bannerImagePreview:any;
   imageLoaded: boolean = false;
 
