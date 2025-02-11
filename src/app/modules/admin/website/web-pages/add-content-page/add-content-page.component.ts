@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WebPages } from '../../../../../services/webpages.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
+import { environment } from '../../../../../../environments/environment';
 
 interface Language {
   id: string;
@@ -34,6 +35,8 @@ export class AddContentPageComponent implements OnInit {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify']
   ];
+  colorPresets :any = environment.colors;
+
   content: string = '';
   formData: any = {
     slug: '',

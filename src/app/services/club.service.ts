@@ -114,7 +114,7 @@ export class ClubService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
-    return this.http.post<any>(`${this.apiUrl2}club/add-club-history`, {club_history: history}, { headers });
+    return this.http.post<any>(`${this.apiUrl2}club/edit-club-history`, {club_history: history}, { headers });
   }
 
   updatePicOnHeader(pic: string) {
@@ -535,6 +535,7 @@ export class ClubService {
     return this.http.post<any>(`${this.apiUrl}change-password`, formData, { headers });
   }
 
+  
 
   getPositions(): Observable<any> {
     const headers = this.headers();
