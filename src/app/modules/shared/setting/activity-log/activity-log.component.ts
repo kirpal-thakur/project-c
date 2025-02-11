@@ -33,7 +33,7 @@ export class ActivityLogComponent {
 
     this.isLoading = true;
     
-    const page = this.paginator ? this.paginator.pageIndex*10 : 0;
+    const page = this.paginator ? this.paginator.pageIndex * 10 : 0;
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
@@ -52,7 +52,7 @@ export class ActivityLogComponent {
         this.isLoading = false;
         console.error('Invalid API response structure:', response);
       }
-      });     
+      });
     } catch (error) {
       this.isLoading = false;
       console.error('Error fetching users:', error);
@@ -81,7 +81,7 @@ export class ActivityLogComponent {
     }
     console.log('Selected user IDs:', this.selectedIds);
   }
-  
+
   confirmDeletion():any {
     if(this.selectedIds.length == 0){
       this.showMessage('Select activity(s) first.');

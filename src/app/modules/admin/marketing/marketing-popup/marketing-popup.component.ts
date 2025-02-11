@@ -22,6 +22,7 @@ export class MarketingPopupComponent {
   // roles:any = [];
   // langs:any = [];
   // locations:any = [];
+  colorPresets :any = environment.colors;
 
   title:any = "";
   selectedRole: any = [];
