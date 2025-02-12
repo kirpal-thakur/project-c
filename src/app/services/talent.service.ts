@@ -27,7 +27,7 @@ export class TalentService {
   public teams: any[] = [];
   private messageSource = new Subject<string>();
   message$ = this.messageSource.asObservable();
-  public lang:any; // You can dynamically set this if needed
+  public lang:any;
   languages:any = environment.langs;
   private apiUrl3 = "https://alerts.socceryou.ch/";
 
