@@ -140,12 +140,14 @@
                 <div class="image_box cursor-pointer"
                   [ngClass]="{'booster_box': player?.package_name == 'Booster'}"
                   (click)="exploreUser(player.role_name, player.id)">
-                  <div class="player-names">
-                    <a href="javascript:void(0)">{{player?.first_name?? 'N/A'}}</a>
-                  </div>
-                  <div class="player_img">
-                    <img *ngIf="player.meta.profile_image_path" [src]="player.meta.profile_image_path" alt="player-image"class="w-100">
-                    <img *ngIf="!player.meta.profile_image_path" src="../../../../assets/images/default/talent-profile-default.png" class="w-100" alt="player-image">
+                  <div class="image_box2">
+                    <div class="player_img">
+                      <img *ngIf="player.meta.profile_image_path" [src]="player.meta.profile_image_path" alt="player-image"class="w-100">
+                      <img *ngIf="!player.meta.profile_image_path" src="../../../../assets/images/default/talent-profile-default.png" class="w-100" alt="player-image">
+                    </div>
+                    <div class="player-names">
+                      <a href="javascript:void(0)">{{player?.first_name?? 'N/A'}}</a>
+                    </div>
                   </div>
 
                   <div class="card-shape">
