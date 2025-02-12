@@ -69,7 +69,7 @@ export class GalleryTabComponent {
 
         this.userService.uploadCoverImage(this.userId, formdata).subscribe((response)=>{
           if (response && response.status) {
-            this.coverImage = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.coverImage = environment.url+"uploads/"+response.data.uploaded_fileinfo;
             this.dataEmitter.emit(this.coverImage); // Emitting the data
             // this.isLoading = false;
           } else {

@@ -11,8 +11,18 @@ import { environment } from '../../environments/environment';
 export class AuthService {
 
   private apiUrl = environment?.apiUrl;
+  languages:any = environment.langs;
+  public lang:any;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+
+      // Retrieve the selected language code from localStorage
+      const selectedLanguageSlug = localStorage.getItem('lang_id') || '';
+
+      // Default to a specific language ID if none is found (e.g., English)
+      this.lang = selectedLanguageSlug ? selectedLanguageSlug : 1;
+
+  }
 
   login(loginData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, loginData);
@@ -32,7 +42,11 @@ export class AuthService {
   }
 
   register(registrationData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, registrationData);
+    return this.http.post<any>(`${this.apiUrl}register`, registrationData, {
+      headers: {
+        'Lang': this.lang
+      }
+    });
   }
 
   verifyEmail(token: any, time: any): Observable<any> {
