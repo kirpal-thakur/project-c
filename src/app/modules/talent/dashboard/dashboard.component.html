@@ -141,9 +141,10 @@
                         <div class="col-lg-3 team-badge_image">
                           <img [src]="countryFlagUrl" alt="" />
                         </div>
+
                         <div class=" col-lg-9 p-0 team-badge_content">
                           <h6 class="title_2"> {{"placeOfBirth" | translate }}</h6>
-                          <h5 class="title-1">{{"anywhere" | translate }}</h5>
+                          <h5 class="title-1">{{user?.meta?.place_of_birth }}</h5>
                         </div>
                       </div>
                     </div>
