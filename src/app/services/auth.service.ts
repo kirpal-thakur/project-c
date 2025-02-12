@@ -44,7 +44,7 @@ export class AuthService {
   register(registrationData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}register`, registrationData, {
       headers: {
-        'Lang': this.lang
+        'Lang': localStorage.getItem('lang_id') || '1'
       }
     });
   }
