@@ -32,24 +32,10 @@ export class BlogPopupComponent  implements OnInit, OnDestroy  {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
-  colorPresets =[
-      '#FFCDD2', // Light Red
-      '#F8BBD0', // Light Pink
-      '#E1BEE7', // Light Purple
-      '#C5CAE9', // Light Indigo
-      '#BBDEFB', // Light Blue
-      '#B2EBF2', // Light Cyan
-      '#B2DFDB', // Light Teal
-      '#C8E6C9', // Light Green
-      '#F0F4C3', // Light Lime
-      '#FFF9C4', // Light Yellow
-      '#FFECB3', // Light Amber
-      '#FFE0B2', // Light Orange
-      '#D7CCC8', // Light Brown
-      '#F5F5F5', // Light Grey
-      '#FFFFFF', // White
-      '#000000', // Black
-    ];
+
+  colorPresets :any = environment.colors;
+
+
   content: string = '';
   isLoading:boolean = false
   error:boolean = false

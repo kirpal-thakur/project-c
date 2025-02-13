@@ -38,7 +38,7 @@
             <li>
               <a href="javascript:void(0);" class="login-btn" data-bs-toggle="modal"
                 data-bs-target="#exampleModal-login">
-                {{ 'signup' | translate }}
+                {{ 'signIn' | translate }}
                 <svg class="ms-2" width="8" height="12" viewBox="0 0 8 12" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                 </svg>
@@ -46,7 +46,7 @@
             </li>
             <li>
               <a data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                {{ 'createProfile' | translate }}</a>
+                {{ 'createAccount' | translate }}</a>
             </li>
             <li><a [routerLink]="'/faq'">{{ 'faq' | translate }}</a></li>
           </ul>
@@ -55,8 +55,8 @@
         <div class="col-lg-3 col-md-4  col-12 footer-links">
           <h4>{{ 'about' | translate }}</h4>
           <ul>
-            <li><a [routerLink]="'/talent'">{{ 'talents' | translate }}</a></li>
-            <li><a [routerLink]="'/club'">{{ 'club' | translate }} & {{ 'scout' | translate }}</a></li>
+            <li><a [routerLink]="'/talent'">{{ 'talents' | translate }}</a></li> 
+            <li><a [routerLink]="'/club'">{{ 'club&scout' | translate }}</a></li>
             <li><a [routerLink]="'/about'">{{ 'about' | translate }}</a></li>
             <li><a [routerLink]="'/news'">{{ 'news&Media' | translate }}</a></li>
             <li><a [routerLink]="'/contact'">{{ 'contact' | translate }}</a></li>
