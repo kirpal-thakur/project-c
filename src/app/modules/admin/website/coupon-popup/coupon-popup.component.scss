@@ -11,9 +11,11 @@
     cursor: pointer;
     background: none;
     font-size: 14px;
-      
+width: 350px !important;
     }
-    
+    .cupen-btn.code-text,.cupen-btn{
+width: 350px !important;
+    }
   
 .custom-button:hover {
   color: #E05263;
@@ -64,7 +66,7 @@
     // cursor: pointer;
     font-size: 13px;
     background: none;
-    width: 130px;
+    width: 350px;
   }
 
   .codeCoupen{
