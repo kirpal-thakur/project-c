@@ -186,8 +186,7 @@ export class ViewProfileComponent implements OnInit {
 
   removeFromFavorites(userId: number) {
     let idsToDelete = [userId];
-    let params = {id:idsToDelete};
-    console.log("remove fav", idsToDelete)
+    let params = {favorite_id:idsToDelete};
     try {
       this.userService.removeFavorites(params).subscribe((response) => {
         if (response && response.status && response.data) {
