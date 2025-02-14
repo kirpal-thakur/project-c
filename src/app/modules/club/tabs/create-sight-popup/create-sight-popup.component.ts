@@ -7,6 +7,7 @@ import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/ma
 import { UserService } from '../../../../services/user.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ClubService } from '../../../../services/club.service';
+import { SocketService } from '../../../../services/socket.service';
 
 @Component({
   selector: 'app-create-sight-popup',
@@ -44,6 +45,7 @@ export class CreateSightPopupComponent implements AfterViewInit {
     public dialogRef: MatDialogRef<CreateSightPopupComponent>,
     public userService: UserService,
     public clubService: ClubService,
+    private socketService: SocketService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
 
@@ -204,6 +206,8 @@ export class CreateSightPopupComponent implements AfterViewInit {
   createSight() {
     const formData = new FormData();
     let { date, time } = this.getDateTimeFormat(this.dateTime);
+    let receiverIds : any[] = [];
+
     formData.append('event_name', this.eventName);
     formData.append('manager_name', this.managerName);
     formData.append('event_date', date);
@@ -221,14 +225,29 @@ export class CreateSightPopupComponent implements AfterViewInit {
 
     this.users.map(function (user: any) {
       formData.append('invites[]', user.id);
+      receiverIds.push(user.id);
+      // console.log(receiverIds);
     });
+
 
     try {
       this.clubService.addSight(this.clubId, formData).subscribe((response) => {
+        console.log(this.clubId)
         if (response && response.status) {
           this.dialogRef.close({
             action: 'added'
           })
+
+          let jsonData = localStorage.getItem("userData");
+          let myUserId: any;
+          if (jsonData) {
+            let userData = JSON.parse(jsonData);
+            myUserId = userData.id;
+          }
+          else {
+            console.log("No data found in localStorage.");
+          }
+          this.socketService.emit('inviteTalent', {senderId: myUserId, receiverIds: receiverIds});
         } else {
           console.error('Invalid API response structure:', response);
         }

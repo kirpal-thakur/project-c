@@ -27,6 +27,7 @@ import { CookiePopupComponent } from './cookie-popup/cookie-popup.component';
 import { EmailVerifyComponent } from './email-verify/email-verify.component';
 import { PasswordResetLinkComponent } from './password-reset-link/password-reset-link.component';
 import { HomeComponent } from './home/home.component';
+import { SuccessComponent } from '../shared/success/success.component';
 
 
 const routes: Routes = [
@@ -62,9 +63,10 @@ const routes: Routes = [
       { path: 'expired-link', component: PasswordResetLinkComponent},
       { path: 'password-reset-link', component: PasswordResetLinkComponent},
       { path: 'email-verify', component:EmailVerifyComponent},
+      
     ]
-  }
-  // { path: 'check', component:HomeComponent}
+  },
+  { path: 'success', component:SuccessComponent},
   // {path: '', component: ComingSoonComponent},
 ];
 

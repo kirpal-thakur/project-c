@@ -1543,12 +1543,12 @@ a {
 }
 
 .nav-action svg {
-  stroke-width: 2px;
+  stroke-width: 0 !important;
   stroke: #000;
 }
 
 .nav-action svg path {
-  fill: #f0f0f0;
+  fill: #000;
 }
 
 .profile img {

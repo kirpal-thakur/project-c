@@ -172,12 +172,12 @@ export class UserService {
   }
 
   removeFavorites(params: any): Observable<any> {
-    const userToken = localStorage.getItem('authToken');
+    // const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/delete-favorites`, params, { headers });
+    return this.http.post<any>(`${this.apiUrl}delete-favorites`, params, { headers });
   }
 
   uploadCoverImage(userId:any, formdata: any): Observable<any> {
