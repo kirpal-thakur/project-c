@@ -224,33 +224,25 @@ input#dateOfBirth, input#contractStart, input#contractEnd {
   padding: 4px 8px !important;
   border-radius: 4px !important;
 }
-
-
-mat-select .mat-mdc-select-min-line {
-  display: none;
-}
-.mat-mdc-select-min-line {
-  display: none;
-}
-// .mdc-text-field--filled .mdc-floating-label--float-above {
-//   transform: unset !important;
+// mat-select span.mat-mdc-select-min-line.ng-tns-c2329325083-2.ng-star-inserted {
+//   display: none;
 // }
 .mdc-text-field--filled .mdc-floating-label--float-above {
   transform: none !important;
   // scale: 1 !important;
 }
-.mat-mdc-select-trigger {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  position: static !important;
-  box-sizing: border-box;
-  width: 100%;
-}
+
 .mdc-text-field .mdc-floating-label {
   top: 38% !important;
   transform: translateY(0) !important;
   pointer-events: none;
+}
+.mat-mdc-select-value {
+  display: none;
+}
+.mat-mdc-select-trigger {
+  position: static !important;
+  justify-content: end !important;
 }
 
 .compact-sidebar .sidebar_menu_span {
