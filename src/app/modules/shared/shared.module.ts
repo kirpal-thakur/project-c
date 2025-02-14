@@ -14,6 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
@@ -91,6 +92,7 @@ import { AppSettingComponent } from './setting/app-setting/app-setting.component
     MatAutocompleteModule,
     MatChipsModule,
     RouterModule,
+    MatTooltipModule,
     MatSelectModule,
     MatFormFieldModule,
     MatDatepickerModule,

@@ -226,7 +226,32 @@ input#dateOfBirth, input#contractStart, input#contractEnd {
 }
 
 
-
+mat-select .mat-mdc-select-min-line {
+  display: none;
+}
+.mat-mdc-select-min-line {
+  display: none;
+}
+// .mdc-text-field--filled .mdc-floating-label--float-above {
+//   transform: unset !important;
+// }
+.mdc-text-field--filled .mdc-floating-label--float-above {
+  transform: none !important;
+  // scale: 1 !important;
+}
+.mat-mdc-select-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: static !important;
+  box-sizing: border-box;
+  width: 100%;
+}
+.mdc-text-field .mdc-floating-label {
+  top: 38% !important;
+  transform: translateY(0) !important;
+  pointer-events: none;
+}
 
 .compact-sidebar .sidebar_menu_span {
   display: none;

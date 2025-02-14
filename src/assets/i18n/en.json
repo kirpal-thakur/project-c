@@ -498,10 +498,6 @@
   "youChangedYourPassword": "You changed your password.",
   "youGeneratedReports": "You generated reports using the app's reporting tools to analyze sales performance and track progress against targets.",
   "owner": "Owner",
-
-
-
-
   "loginButton": "Login",
   "register": "Register",
   "product": "Product",
@@ -720,7 +716,7 @@
   "newsLetter": "Newsletter",
   "deleteAccount": "Delete Account",
   "proceed": "Proceed",
-  "areToSure": "Are you sure to remove?", 
+  "areToSure": "Are you sure to remove?",
   "chooseYourPreferredPayment": "Choose your preferred payment method for making future payments.",
   "searchUser": "Search users...",
   "to:": "To:",
@@ -972,8 +968,6 @@
   "heroButtonText": "Hero Button Text",
   "heroButtonLink": "Hero Button Link",
   "aboutBannerDescription": "About Banner Description",
-
-
   "talentPage": "Talent Page",
   "talentSectionTitle": "Talent Section Title",
   "bannerImages": "Banner Images",
@@ -1083,8 +1077,7 @@
     "sweden": "Sweden",
     "switzerland": "Switzerland"
   },
-
-  "more_news": "More News",  
+  "more_news": "More News",
   "back_to_news": "Back to News & Media",
   "share": "Share",
   "uses": "Uses",
@@ -1103,8 +1096,20 @@
   "editProfile": "edit Profile",
   "thanksMessage": "thank you very much",
   "thanksMessage2": "We will get in touch with you.",
-  "backToHome" : "Back To Home",
+  "backToHome": "Back To Home",
   "tabSection": "Tab Section",
   "darkImages": "Dark Images",
-  "createAccountDescription": "Enter your details below to get started."
+  "createAccountDescription": "Enter your details below to get started.",
+  "verifyYourEmail": "VERIFY YOUR EMAIL",
+  "verifyHeading": "We’ve sent a confirmation link to your email.",
+  "verifyText": "Click the link in your inbox to complete the verification process.",
+  "cookiepopupText": "We value your privacy. We and our partners use trackers to measure the audience of our website and to provide you with offers and improve our own SoccerYou marketing operations.",
+  "cookiepopupText1": " More info on cookies and providers we use.",
+  "cookiepopupText2": " You can withdraw your consent at any time in your settings.",
+  "iAccept": "I accept",
+  "iDecline": "I decline",
+  "personalizeMyChoices": "Personalize my choices",
+  "manageConsentPreferences": "Manage Consent Preferences",
+  "allowAll": "Allow All",
+  "refuseAll": "Refuse All"
 }

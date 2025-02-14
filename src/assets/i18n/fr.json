@@ -1249,5 +1249,18 @@
   "dimensions:": "Dimension:",
   "don'tsetAnEnd": "Don't et set et an et end et date",
   "maxViews": "Max et views",
-  "editProfile": "Edit et profile"
+  "editProfile": "Edit et profile",
+  "backToHome": "Retour à l'accueil",
+  "verifyYourEmail": "VÉRIFIEZ VOTRE E-MAIL",
+  "verifyHeading": "Nous avons envoyé un lien de confirmation à votre e-mail.",
+  "verifyText": "Cliquez sur le lien dans votre boîte de réception pour terminer le processus de vérification.",
+  "iAccept": "J'accepte",
+  "iDecline": "Je refuse",
+  "personalizeMyChoices": "Personnaliser mes choix",
+  "manageConsentPreferences": "Gérer les préférences de consentement",
+  "allowAll": "Tout autoriser",
+  "refuseAll": "Tout refuser",
+  "cookiepopupText": "Nous accordons de l'importance à votre vie privée. Nous et nos partenaires utilisons des traceurs pour mesurer l'audience de notre site web, vous proposer des offres et améliorer nos propres opérations marketing SoccerYou.",
+  "cookiepopupText1": " Plus d'informations sur les cookies et les fournisseurs que nous utilisons.",
+  "cookiepopupText2": " Vous pouvez retirer votre consentement à tout moment dans vos paramètres."
 }

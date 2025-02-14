@@ -1,5 +1,5 @@
 .filter-button{
-    padding: 1px 0px !important;
+    padding: 0px !important;
     width: 135px;
     border-radius: 5px;
     font-size: 13px;
@@ -76,6 +76,7 @@
   select.location-filter{
     background: #c6c7c8;
     border: none;
+    padding: 2px 0px !important;
     outline: none !important;
   }
   

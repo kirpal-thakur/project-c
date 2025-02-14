@@ -952,8 +952,7 @@
     "totalSales": "Gesamtverkäufe: {{count}}",
     "totalSubscriptions": "Gesamtabonnements: {{count}}"
   },
-
-  "more_news": "Weitere News",  
+  "more_news": "Weitere News",
   "back_to_news": "Zurück zu News & Medien",
   "share": "Teilen",
   "uses": "verwendet",
@@ -1183,8 +1182,7 @@
   "editPerformaceDetails": "Leistungsdetails bearbeiten",
   "thanksMessage": "Ich danke Ihnen vielmals",
   "thanksMessage2": "Wir werden uns mit Ihnen in Verbindung setzen.",
-  "backToHome" : "Zurück zu Home",
-
+  "backToHome": "Zurück zu Home",
   "tabSection": "Registerkarte Abschnitt",
   "darkImages": "Dunkle Bilder",
   "countriesName": {
@@ -1197,5 +1195,17 @@
     "portugal": "Portugal",
     "sweden": "Sweden",
     "switzerland": "Switzerland"
-  }
+  },
+  "verifyYourEmail": "BESTÄTIGE DEINE E-MAIL",
+  "verifyHeading": "Wir haben einen Bestätigungslink an deine E-Mail gesendet.",
+  "verifyText": "Klicke auf den Link in deinem Posteingang, um den Verifizierungsprozess abzuschließen.",
+  "iAccept": "Ich akzeptiere",
+  "iDecline": "Ich lehne ab",
+  "personalizeMyChoices": "Meine Auswahl personalisieren",
+  "manageConsentPreferences": "Einwilligungseinstellungen verwalten",
+  "allowAll": "Alle zulassen",
+  "refuseAll": "Alle ablehnen",
+  "cookiepopupText": "Wir schätzen Ihre Privatsphäre. Wir und unsere Partner verwenden Tracker, um die Reichweite unserer Website zu messen, Ihnen Angebote zu unterbreiten und unsere eigenen SoccerYou-Marketingmaßnahmen zu verbessern.",
+  "cookiepopupText1": " Mehr Informationen zu den verwendeten Cookies und Anbietern.",
+  "cookiepopupText2": " Sie können Ihre Einwilligung jederzeit in Ihren Einstellungen widerrufen."
 }

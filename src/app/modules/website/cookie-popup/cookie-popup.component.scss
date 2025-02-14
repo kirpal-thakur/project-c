@@ -7,6 +7,9 @@
     background-color: #aaa;
     /* Grey background for disabled toggle */
 }
+.cookie-popup1{
+    width: 860px;
+}
 
 /* Optional: Add styles for the toggle switch when disabled */
 .slider-toggle input[disabled]:checked+.slider {
@@ -58,12 +61,13 @@
 }
 
 .accept {
-    width: 133px;
-    height: 42px;
     font-size: 18px;
-    font-weight: 500;
+    height: 42px;
+    width: 140px;
     border-radius: 8px;
-    margin-right: 20px;
+    margin-left: 10px;
+    font-weight: 500;
+    margin-right: 10px;
 }
 
 .decline {
@@ -171,14 +175,14 @@
 }
 
 
-.accept {
-    font-size: 18px;
-    height: 42px;
-    width: 133px;
-    border-radius: 8px;
-    margin-left: 20px;
-    font-weight: 500;
-}
+// .accept {
+//     font-size: 18px;
+//     height: 42px;
+//     width: 133px;
+//     border-radius: 8px;
+//     margin-left: 20px;
+//     font-weight: 500;
+// }
 
 .model-heading {
     height: 68px;
@@ -313,8 +317,8 @@ p {
         width: 120px;
     }
 
-    .cookie-popup {
-        height: 140px;
+    .cookie-popup1 {
+        height: 120px;
     }
 }
 
@@ -368,14 +372,15 @@ p {
     input:checked+.slider:before {
         transform: translateX(15px);
     }
+    .cookie-popup1 {
+        height: 100%;
+        width: 100%;
+    }
 }
 
 @media (max-width: 767px) {}
 
 @media (max-width: 575px) {
-    .cookie-popup {
-        height: 180px;
-    }
 
     .choice {
         width: 160px;
@@ -438,6 +443,9 @@ p {
     .cookie-popup .accept {
         margin-right: 3px;
     }
+    .cookie-popup {
+        padding: 10px;
+    }
 }
 
 @media (max-width: 376px) {
@@ -462,6 +470,9 @@ p {
         font-size: 10px;
         height: 28px;
         width: 68px;
+    }
+    .cookie-text {
+        line-height: 15px;
     }
 
     .cookie-text {
@@ -523,5 +534,8 @@ p {
         height: 23px;
         bottom: 0;
         width: 23px;
+    }
+    .cookie-popup {
+        height: 140px;
     }
 }

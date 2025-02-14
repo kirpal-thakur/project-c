@@ -198,7 +198,8 @@ mat-list-item {
 }
 
 .map {
-  height: 750px;
+  height: 100%;
+  min-height: 750px;
 }
 
 .map img {
@@ -496,7 +497,7 @@ img.join-btn {
   }
 
   .map {
-    height: 850px;
+    min-height: 850px;
   }
 
   .map img {
@@ -517,7 +518,7 @@ img.join-btn {
   }
 
   .map{
-    height: 1100px;
+    min-height: 1100px;
   }
 
 }
@@ -539,7 +540,7 @@ img.join-btn {
   width: 670px;
 }
 .map {
-  height: 540px;
+  min-height: 540px;
 }
 }
 
@@ -576,7 +577,7 @@ img.join-btn {
   }
 
   .map {
-    height: 470px;
+    min-height: 470px;
   }
 
   .map img {
@@ -646,7 +647,7 @@ img.join-btn {
   }
 
   .map {
-    height: 300px;
+    min-height: 300px;
   }
 
   h3 {
@@ -702,7 +703,7 @@ img.join-btn {
   }
 
   .map {
-    height: 600px;
+    min-height: 600px;
     width: 100%;
   }
 
@@ -760,14 +761,16 @@ img.join-btn {
   }
 
   .map {
-    height: 400px;
+    min-height: 100%;
+    padding-top: 1rem;
   }
 
-  .map img {
-    top: 55%;
-    height: 360px;
-    width: 100%;
-  }
+    .map img {
+      height: 100%;
+      width: 100%;
+      position: static;
+      object-fit: contain;
+    }
 
   h3 {
     font-size: 26px;
@@ -802,13 +805,9 @@ img.join-btn {
     padding-top: 50px;
   }
 
-  .map img {
-    height: 315px;
-  }
-
-  .map {
-    height: 340px;
-  }
+  // .map {
+  //   min-height: 340px;
+  // }
 
   .join-text {
     width: 220px;
@@ -821,6 +820,11 @@ img.join-btn {
     height: 55px;
   }
 }
+// @media (max-width: 391px){
+//   .map{
+//     min-height: 500px;
+//   }
+// }
 
 @media (max-width: 321px) {
   .main-bnr {
