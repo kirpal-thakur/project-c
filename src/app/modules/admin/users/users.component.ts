@@ -286,13 +286,15 @@ export class UsersComponent implements OnInit {
 
 
   deleteUsers(): any {
-    this.userService.deleteUser(this.selectedUserIds).subscribe(
+    let langId = localStorage.getItem('lang_id');
+    console.log(langId, typeof(langId));
+    this.userService.deleteUser(this.selectedUserIds, langId).subscribe(
       response => {
         this.fetchUsers();
         this.selectedUserIds = [];
         this.allSelected = false;
         console.log('User deleted successfully:', response);
-        this.showMessage('User deleted successfully!');
+        this.showMessage(response.message);
       },
       error => {
         console.error('Error deleting user:', error);
@@ -338,7 +340,7 @@ export class UsersComponent implements OnInit {
         // this.fetchUsers();
         // this.selectedUserIds = [];
         // this.allSelected = false;
-        // console.log('User status updated successfully:', response);
+        console.log('User status updated successfully:', response);
         this.showMessage('User status updated successfully!');
       },
       error => {

@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newRegistrationPlayers: any = [];
   newRegistrationScouts: any = [];
   years: any = [];
-  selectedYear: any = new Date().getFullYear();
+  selectedYear: any = new Date().getFullYear()-1;
   language: any;
   loggedInUser: any = localStorage.getItem('userData');
 
@@ -113,7 +113,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.log("No data found in localStorage.");
     }
 
-    this.fetchNotifications(userId);
+    let langId = localStorage.getItem('lang_id');
+
+    this.fetchNotifications(userId, langId);
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -155,10 +157,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }, 5000); // 5000 ms = 5 seconds
     });
 
-    this.getChardData(this.selectedYear);
     this.loggedInUser = JSON.parse(this.loggedInUser);
-    console.log(this.loggedInUser)
-    this.updateThemeText();
     this.getNewRegistrations();
     this.getNewRegistrationsWithScout();
     this.getNewRegistrationsWithClub();
@@ -219,7 +218,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-
+  yearChange(e:any){
+   this.updateChartData(e.target.value);
+  }
   getNewRegistrations() {
     try {
       this.dashboardApi.getNewRegistration(5).subscribe((response) => {
@@ -275,6 +276,32 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   setSelectedYear(year: any) {
     this.getChardData(year);
   }
+  updateChartData(year: any){
+    try {
+      this.chart1.destroy();
+      this.chart2.destroy();
+      this.chart3.destroy();
+      
+      this.dashboardApi.getChartData(year).subscribe((response) => {
+        if (response && response.status && response.data) {
+          this.chartData = response.data;
+          setTimeout(() => {
+            this.chart1 = this.createChart(this.canvas1.nativeElement, 'canvas1', response.data.users.labels, response.data.users.values)!;
+            this.chart2 = this.createChart(this.canvas2.nativeElement, 'canvas2', response.data.sales.labels, response.data.sales.values)!;
+            this.chart3 = this.createChart(this.canvas3.nativeElement, 'canvas3', response.data.subscriptions.labels, response.data.subscriptions.values)!;
+            //this.chart4 = this.createChart(this.canvas4.nativeElement, 'canvas4')!;
+            this.updateChartBackgroundColor();
+
+          }, 1000);
+
+        } else {
+          console.error('Invalid API response structure:', response);
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  }
   getChardData(year: any) {
     try {
       this.dashboardApi.getChartData(year).subscribe((response) => {
@@ -304,7 +331,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       console.error(`Failed to get canvas context for ${chartId}`);
       return null;
     }
-
+   
 
     const gradientStroke = ctx.createLinearGradient(100, 0, 700, 0);
     gradientStroke.addColorStop(0, '#7BDA66');
@@ -332,7 +359,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
         } as ChartDataset<'line'>,
       ],
     };
-
+   
     return new Chart(ctx, {
       type: 'line',
       data,
@@ -410,10 +437,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   updateChartBackgroundColor() {
-    const isDarkMode = this.themeService.isDarkMode();
+    let isDarkMode : any;
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      isDarkMode = isDarkTheme;
+    });
     const charts = [this.chart1, this.chart2, this.chart3];
-
     charts.forEach((chart) => {
+      
       if (chart.options && chart.options.scales && chart.options.plugins) {
         if (chart.options.scales['x'] && chart.options.scales['x'].grid) {
           chart.options.scales['x'].grid.color = isDarkMode ? '#333' : '#E0E0E0';
@@ -433,17 +463,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
 
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-    this.updateThemeText();
-    this.updateChartBackgroundColor();
-  }
-
-  updateThemeText() {
-    const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode' : 'Light Mode';
-    // document.getElementById('theme-text')!.textContent = this.themeText;
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
 
   logout() {
@@ -540,8 +561,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.clickedNewNotification = false;
   }
 
-  fetchNotifications(userId: number): void {
-    this.talentService.getNotifications(userId).subscribe({
+  fetchNotifications(userId: number, langId: any): void {
+    this.talentService.getNotifications(userId, langId).subscribe({
       next: (response) => {
         console.log('Fetched notifications response:', response);
   
@@ -644,15 +665,20 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
     return daysAgo + text;
   }
-
+  // Sort years in descending order
+  sortYearsDescending(years: number[]): number[] {
+    return years.sort((a, b) => b - a); // This will sort in descending order
+  }
   generateYears() {
     const startYear = this.selectedYear;
     const currentYear = new Date().getFullYear();
-    console.log('currentYear', currentYear);
     // Populate the years array from startYear to currentYear
-    for (let year = startYear; year <= currentYear; year++) {
+    for (let year = startYear; year <= currentYear; year++) { 
       this.years.push(year);
     }
+    this.years = this.sortYearsDescending(this.years);
+    this.getChardData(this.years[0]);
+    
   }
 
   scrollToTop2() {

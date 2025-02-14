@@ -132,13 +132,13 @@ export class UserService {
     );
   }
 
-  deleteUser(userIds: any): Observable<any> {
+  deleteUser(userIds: any, langId: any): Observable<any> {
     const userToken = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.userToken}`
     });
 
-    return this.http.post<any>(`${this.apiUrl2}/delete-user`, { id: userIds }, { headers });
+    return this.http.post<any>(`${this.apiUrl2}/delete-user`, { id: userIds, lang: langId }, { headers });
   }
 
   getPerformanceData(userId:any): Observable<any> {

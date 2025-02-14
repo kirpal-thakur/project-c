@@ -36,6 +36,8 @@ export class ImprintComponent implements OnInit {
           this.banner_title = res.data.pageData.banner_title;
           this.page_content = res.data.pageData.page_content;
           this.advertisemnetData =  res.data.advertisemnetData;
+          this.advertisemnetData = [];
+          
           this.advertisemnet_base_url = res.data.advertisemnet_base_url;
          
           this.banner_img = res.data.pageData.banner_img;

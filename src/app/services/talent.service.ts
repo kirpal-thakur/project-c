@@ -27,7 +27,7 @@ export class TalentService {
   public teams: any[] = [];
   private messageSource = new Subject<string>();
   message$ = this.messageSource.asObservable();
-  public lang:any; // You can dynamically set this if needed
+  public lang:any;
   languages:any = environment.langs;
   private apiUrl3 = "https://alerts.socceryou.ch/";
 
@@ -63,9 +63,9 @@ export class TalentService {
     this.messageSource.next(pic);
   }
 
-  getNotifications(userId: any = 1): Observable<any> {
+  getNotifications(userId: any = 1, langId: any): Observable<any> {
     return this.http.get<{ status: boolean, notifications: Notification[], unseen_count: number, total_count:number }>(
-      `${this.apiUrl3}notifications?userId=${userId}`,
+      `${this.apiUrl3}notifications?userId=${userId}&langId=${langId}`,
     );
   }
 

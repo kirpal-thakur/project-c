@@ -7,12 +7,12 @@
       <div class="overlay" >
       </div>
 
-      <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image}}">
         <button (click)="closeAd('skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div *ngIf="!isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.wide_skyscraper)" class="wide-skyscraper-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.wide_skyscraper?.featured_image}}">
         <button (click)="closeAd('wide_skyscraper')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -44,7 +44,7 @@
 
     </div>
     <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
-      <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+      <div *ngIf="isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
         <img src="{{advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image}}">
         <button (click)="closeAd('leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -73,17 +73,17 @@
           <owl-carousel-o [options]="customOptions">
             @for (slider of sliderDetail?.users; track $index) {
               <ng-template carouselSlide>
-                <div class="player-carousel">
-                  <div class="player-border">
+                <div *ngIf="slider.role_name != 'Club'" class="player-carousel">
+                  <div  class="player-border">
                     <div class="player-img">
                       <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
                     </div>
                     <p class="player-name">{{slider.first_name +' '+ slider.last_name}}</p>
 
-                    <div class="corner-image">
-                      <img src="./assets/images/FC Thun 1.png">
-                    </div>
-                    <div class="flag">
+                    <div *ngIf="slider?.meta?.club_logo" class="corner-image">
+                      <img src="{{slider.meta.club_logo}}">
+                    </div> 
+                    <div *ngIf="slider.meta.date_of_birth"  class="flag">
                       <div class="flag-image">
                         <!-- <img src="{{getFlagImage(slider.user_nationalities)}}" class="flag-img"> -->
                         <div class="bottom-line"></div>
@@ -93,6 +93,24 @@
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="slider.role_name == 'Club'" class="player-carousel-club">
+                  <div  class="player-border">
+                    <div class="player-img">
+                      <img src="{{slider.meta.profile_image_path}}" (error)="handleImageError($event)"  class="player-image">
+                    </div>
+                    <p class="player-name">{{slider.first_name +' '+ slider.last_name}}</p>
+                    <!-- <div *ngIf="slider.meta.date_of_birth"  class="flag">
+                      <div class="flag-image">
+                        <div class="bottom-line"></div>
+                        <div class="flag-bottom">
+                          <img src="./assets/images/birthday.svg" class="birthday-img">
+                          <p class="d-o-b">{{getBirthYear(slider.meta.date_of_birth)}}</p>
+                        </div>
+                      </div>
+                    </div> -->
                   </div>
                 </div>
               </ng-template>
@@ -841,11 +859,11 @@
 
         <div class="container1">
           <div class="advertisment">
-            <div *ngIf="!isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
+            <div *ngIf="isEmptyObject(advertisemnetData?.large_leaderboard)" class="leaderboard-club-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.large_leaderboard?.featured_image}}">
               <button (click)="closeAd('large_leaderboard')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>
-           <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+           <div *ngIf="isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
               <img src="{{advertisemnet_base_url + advertisemnetData?.small_square?.featured_image}}">
               <button (click)="closeAd('small_square')" class="ad-close-button"><i class="fa-solid fa-xmark"></i></button>
             </div>

@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
-import { EditPlanComponent } from '../edit-plan/edit-plan.component';
 import { Subscription } from 'rxjs';
 import { loadStripe } from '@stripe/stripe-js';
 import { environment } from '../../../../environments/environment';
 import { PaymentService } from '../../../services/payment.service';
-import { UpdateConfirmationPlanComponent } from '../membership/update-confirmation-plan/update-confirmation-plan.component';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 import { ActivatedRoute } from '@angular/router';
 import { AddBoosterComponent } from './add-booster-profile/add-booster.component';
@@ -14,6 +12,8 @@ import { CouponCodeAlertComponent } from '../../shared/coupon-code-alert/coupon-
 import { ToastrService } from 'ngx-toastr';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { ScoutService } from '../../../services/scout.service';
+import { UpdateConfirmationPlanComponent } from '../../shared/update-confirmation-plan/update-confirmation-plan.component';
+import { EditPlanComponent } from '../../shared/edit-plan/edit-plan.component';
 
 
 interface Plan {

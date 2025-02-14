@@ -2071,20 +2071,29 @@ a {
 .mat-mdc-paginator-page-size {
   display: none !important;
 }
-
+.marketing-calender-btn{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
 .main-popup-div .mat-mdc-select-trigger {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
-  width: 6rem;
+  width: 8rem;
   border: 1px solid black;
   border-radius: 10px;
   padding: 5px 10px;
   margin-left: 4px;
 }
-
+.main-popup-div .mat-date-range-input-inner{
+  position: relative !important;
+}
+.main-popup-div .mat-datepicker-toggle{
+  position: relative !important;
+}
 .marketing-calender-field .mdc-text-field--filled .mdc-line-ripple::before {
   border-bottom: 0 !important;
 }

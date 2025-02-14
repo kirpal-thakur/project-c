@@ -99,7 +99,8 @@ export class PlayerListComponent implements OnInit {
     { name: 'Jamie Vardy', image: './assets/images/jammie.png', cornerImage: './assets/images/FC Thun 1.png', flagImage: './assets/images/flag.svg', birthYear: 1972 },
   ];
 
-  adVisible: boolean[] = [true, true, true, true, true];
+  // adVisible: boolean[] = [true, true, true, true, true];
+  adVisible: boolean[] = [false, false, false, false, false];
 
   ngOnInit() {
     // Set itemsPerPage to 16 when the component initializes or refreshes

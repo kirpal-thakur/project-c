@@ -32,6 +32,10 @@ export class MembershipComponent {
   country: any=[];
   booster: any=[];
   demo: any=[];
+  ispremium : any = false;
+  iscountry: any = false;
+  isbooster: any = false;
+  isdemo: any = false;
   stats: any;
   exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -96,8 +100,16 @@ export class MembershipComponent {
         this.booster = this.userPlans.booster[0];
         this.demo = this.userPlans.demo[0];
         this.country = this.userPlans.country;
+
+        this.ispremium  = this.premium ? true : false;
+        this.iscountry = this.country ? true : false;
+        this.isbooster = this.booster ? true : false;
+        this.isdemo = this.demo ? true : false;
         this.country.count = this.userPlans.country.length;
-        console.log('userPlans',this.userPlans)
+        this.premium.count = this.userPlans.premium.length;
+        this.booster.count = this.userPlans.booster.length;
+        this.demo.count = this.userPlans.demo.length;
+
       } else {
         console.error('Invalid API response:', response);
       }

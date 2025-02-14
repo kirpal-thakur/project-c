@@ -6,7 +6,6 @@ import { MessagePopupComponent } from '../message-popup/message-popup.component'
 import { EditPersonalDetailsComponent } from '../edit-personal-details/edit-personal-details.component';
 import { EditHighlightsComponent } from '../tabs/edit-highlights/edit-highlights.component';
 import { DeletePopupComponent } from '../delete-popup/delete-popup.component';
-import { TalentService } from '../../../services/talent.service';
 import { ToastrService } from 'ngx-toastr';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css'; // Import the styles for Intro.js
@@ -14,6 +13,8 @@ import { Lightbox } from 'ngx-lightbox';
 import { LightboxDialogComponent } from '../lightbox-dialog/lightbox-dialog.component';
 import { Subscription } from 'rxjs';
 import { ScoutService } from '../../../services/scout.service';
+import { environment } from '../../../../environments/environment';
+import { CommonDataService } from '../../../services/common-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,7 +35,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private lightbox: Lightbox
+    private lightbox: Lightbox,
+    private commonDataService: CommonDataService
   ) { }
   activeTab: string = 'profile';
   userId: any ;
@@ -261,6 +263,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
 
           if (this.user?.meta?.profile_image_path) {
             this.profileImage = this.user.meta.profile_image_path;
+            this.commonDataService.updateProfilePic(this.profileImage);
             this.sendMessage();
           }
 
@@ -447,9 +450,10 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadProfileImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.profileImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.profileImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.profileImage);  // Emit updated profile image
               this.toastr.clear();
+              this.commonDataService.updateProfilePic(this.profileImage);
 
               this.toastr.success('Profile image uploaded successfully!', 'Success');
             } else {
@@ -491,7 +495,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
         this.talentService.uploadCoverImage(formData).subscribe(
           (response) => {
             if (response && response.status) {
-              this.coverImage = `https://api.socceryou.ch/uploads/${response.data.uploaded_fileinfo}`;
+              this.coverImage = `${environment.url}uploads/${response.data.uploaded_fileinfo}`;
               this.dataEmitter.emit(this.coverImage);  // Emit updated cover image
               this.toastr.clear();
               this.toastr.success('Cover image uploaded successfully!', 'Success');
@@ -508,9 +512,9 @@ export class DashboardComponent implements OnInit , OnDestroy {
           },
         );
       } catch (error) {
-              this.toastr.clear();
-        this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
-        console.error('Error during cover image upload:', error);
+            this.toastr.clear();
+            this.toastr.error('An unexpected error occurred. Please try again.', 'Upload Error');
+            console.error('Error during cover image upload:', error);
       }
     }
   }
@@ -613,7 +617,8 @@ export class DashboardComponent implements OnInit , OnDestroy {
   }
 
   deleteUser(){
-    this.userService.deleteUser([this.userId]).subscribe(
+    let langId = localStorage.getItem('lang_id');
+    this.userService.deleteUser([this.userId], langId).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
         this.router.navigate(['/talent/dashboard']);

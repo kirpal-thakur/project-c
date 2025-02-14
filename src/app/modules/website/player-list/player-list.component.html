@@ -5,16 +5,16 @@
 
       <div class="container">
         <div class="player-list">
-          <h1>Explore Talent and Clubs</h1>
+          <h1>{{'explore' | translate}} {{'talent' | translate}} and {{'club' | translate}}</h1>
 
           <!-- Tabs for Talent, Club, and Scouts -->
           <div class="tabs">
             <button class="faq-club-button" (click)="selectTab('talent')"
-              [class.active]="selectedTab === 'talent'">Talent</button>
+              [class.active]="selectedTab === 'talent'">{{'talent' | translate}}</button>
             <button class="faq-club-button" (click)="selectTab('club')"
-              [class.active]="selectedTab === 'club'">Club</button>
+              [class.active]="selectedTab === 'club'">{{'club' | translate}}</button>
             <button class="faq-club-button" (click)="selectTab('scouts')"
-              [class.active]="selectedTab === 'scouts'">Scouts</button>
+              [class.active]="selectedTab === 'scouts'">{{'scout' | translate}}</button>
           </div>
 
           <div class="tab-content">
@@ -26,7 +26,7 @@
                     <div class="player1">
                       <div class="player-img">
                         <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
-                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">{{'boosted' | translate}}</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
                       <p *ngIf="player.class">Class: {{ player.class }}</p>
@@ -53,7 +53,7 @@
               <!-- Pagination controls -->
               <div class="pagination-controls">
                 <div class="input-number">
-                  <label for="numberSelect">Results per page</label>
+                  <label for="numberSelect">{{'resultsPerPage' | translate}}</label>
                   <select id="numberSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()" required>
                     <option *ngFor="let num of getNumbers()" [value]="num">{{ num }}</option>
                   </select>
@@ -64,7 +64,7 @@
                   <ng-container *ngIf="currentPage > 1">
                     <button class="prev-page" (click)="prevPage()">
                       <i class="fa-solid fa-angle-left"></i>
-                      <p>Back</p>
+                      <p>{{'back' | translate}}</p>
                     </button>
                   </ng-container>
 
@@ -78,7 +78,7 @@
                   <!-- "Next" button: Only show if not on the last page -->
                   <ng-container *ngIf="currentPage < totalPages()">
                     <button class="next-page" (click)="nextPage()">
-                      <p>Next</p>
+                      <p>{{'next' | translate}}</p>
                       <i class="fa-solid fa-angle-right"></i>
                     </button>
                   </ng-container>
@@ -97,7 +97,7 @@
                     <div class="player1">
                       <div class="player-img">
                         <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
-                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">{{'boosted' | translate}}</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
                       <p *ngIf="player.class">Class: {{ player.class }}</p>
@@ -122,7 +122,7 @@
               <!-- Pagination controls -->
               <div class="pagination-controls">
                 <div class="input-number">
-                  <label for="numberSelect">Results per page</label>
+                  <label for="numberSelect">{{'resultsPerPage' | translate}}</label>
                   <select id="numberSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()" required>
                     <option *ngFor="let num of getNumbers()" [value]="num">{{ num }}</option>
                   </select>
@@ -133,7 +133,7 @@
                   <ng-container *ngIf="currentPage > 1">
                     <button class="prev-page" (click)="prevPage()">
                       <i class="fa-solid fa-angle-left"></i>
-                      <p>Back</p>
+                      <p>{{'back' | translate}}</p>
                     </button>
                   </ng-container>
 
@@ -147,7 +147,7 @@
                   <!-- "Next" button: Only show if not on the last page -->
                   <ng-container *ngIf="currentPage < totalPages()">
                     <button class="next-page" (click)="nextPage()">
-                      <p>Next</p>
+                      <p>{{'next' | translate}}</p>
                       <i class="fa-solid fa-angle-right"></i>
                     </button>
                   </ng-container>
@@ -165,7 +165,7 @@
                     <div class="player1">
                       <div class="player-img">
                         <img [src]="player.image" alt="{{ player.name }}" [ngClass]="{ 'bg-red': player.name === 'Zidane', 'bg-green': player.name !== 'Zidane' }">
-                        <div *ngIf="player.name === 'Zidane'" class="image-text">Boosted</div>
+                        <div *ngIf="player.name === 'Zidane'" class="image-text">{{'boosted' | translate}}</div>
                       </div>
                       <p class="player-name7">{{ player.name }}</p>
                       <p *ngIf="player.class">Class: {{ player.class }}</p>
@@ -190,7 +190,7 @@
               <!-- Pagination controls -->
               <div class="pagination-controls">
                 <div class="input-number">
-                  <label for="numberSelect">Results per page</label>
+                  <label for="numberSelect">{{'resultsPerPage' | translate}}</label>
                   <select id="numberSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()" required>
                     <option *ngFor="let num of getNumbers()" [value]="num">{{ num }}</option>
                   </select>
@@ -201,7 +201,7 @@
                   <ng-container *ngIf="currentPage > 1">
                     <button class="prev-page" (click)="prevPage()">
                       <i class="fa-solid fa-angle-left"></i>
-                      <p>Back</p>
+                      <p>{{'back' | translate}}</p>
                     </button>
                   </ng-container>
 
@@ -215,7 +215,7 @@
                   <!-- "Next" button: Only show if not on the last page -->
                   <ng-container *ngIf="currentPage < totalPages()">
                     <button class="next-page" (click)="nextPage()">
-                      <p>Next</p>
+                      <p>{{'next' | translate}}</p>
                       <i class="fa-solid fa-angle-right"></i>
                     </button>
                   </ng-container>

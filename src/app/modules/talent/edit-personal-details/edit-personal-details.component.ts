@@ -249,77 +249,89 @@ export class EditPersonalDetailsComponent implements OnInit {
     }
   }
 
-
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      // Enable loading state and notify user
-      this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
+    console.log('Form:', form);
 
-      const formData = new FormData();
-
-      // Handling the `current_club` and `pre_club_id`
-      let index = this.playerClubsListing.findIndex((x: any) => x.id === this.currentClubId);
-      if (this.playerClubsListing[index]?.is_taken === "yes") {
-        this.takenBy = this.playerClubsListing[index].taken_by;
-        formData.append('user[pre_club_id]', this.currentClubId);
-        formData.append('user[current_club]', this.takenBy);
-      } else {
-        formData.append('user[pre_club_id]', this.currentClubId);
-      }
-
-      // Append remaining form fields
-      // Format dates before submission
-      const formattedDateOfBirth = moment(this.dateOfBirth.value).format('YYYY-MM-DD');
-      const formattedContractStart = moment(this.contractStart.value).format('YYYY-MM-DD');
-      const formattedContractEnd = moment(this.contractEnd.value).format('YYYY-MM-DD');
-
-      // Append formatted dates to formData
-      formData.append('user[date_of_birth]', formattedDateOfBirth);
-      formData.append('user[contract_start]', formattedContractStart);
-      formData.append('user[contract_end]', formattedContractEnd);
-      // formData.append('user[date_of_birth]', this.dateOfBirth);
-      formData.append('user[place_of_birth]', this.placeOfBirth);
-      formData.append('user[height]', this.height.toString());
-      formData.append('user[height_unit]', this.heightUnit);
-      formData.append('user[weight]', this.weight.toString());
-      formData.append('user[weight_unit]', this.weightUnit);
-      // formData.append('user[contract_start]', this.contractStart);
-      // formData.append('user[contract_end]', this.contractEnd);
-      formData.append('user[league_level]', this.leagueLevel);
-      formData.append('user[foot]', this.dominantFoot);
-      formData.append('user[first_name]', this.firstName);
-      formData.append('user[last_name]', this.lastName);
-      formData.append('user[birth_country]', this.birthCountry);
-
-      // Append nationality array
-      this.nationality.forEach((nation: any) => {
-        formData.append('user[nationality][]', nation);
-      });
-
-      formData.append('lang', 'en');
-
-      // API call for submitting form data
-      this.talentService.updateUserProfile(formData).subscribe(
-        (response: any) => {
-          if (response?.status) {
-            this.toastr.clear();
-            this.toastr.success('Profile updated successfully!', 'Success');
-            this.dialogRef.close(response.data);
-          } else {
-            this.toastr.clear();
-            this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
-            console.error('API response error:', response);
-          }
-        },
-        (error: any) => {
-          this.toastr.error('Failed to submit profile. Please try again.', 'Error');
-          console.error('Error submitting the form:', error);
-        },
-      );
-    } else {
-      this.toastr.warning('Please fill out all required fields.', 'Form Incomplete');
+    // Manually validate only the required fields
+    if (!this.dateOfBirth.value) {
+      this.toastr.warning('Date of Birth is required.', 'Form Incomplete');
+      return;
     }
+
+    if (!this.nationality || this.nationality.length === 0) {
+      this.toastr.warning('Nationality is required.', 'Form Incomplete');
+      return;
+    }
+
+    if (!this.dominantFoot) {
+      this.toastr.warning('Dominant Foot is required.', 'Form Incomplete');
+      return;
+    }
+
+    // Enable loading state and notify user
+    this.toastr.info('Submitting your profile...', 'Please wait', { disableTimeOut: true });
+
+    const formData = new FormData();
+
+    // Handling `current_club` and `pre_club_id`
+    let index = this.playerClubsListing.findIndex((x: any) => x.id === this.currentClubId);
+    if (this.playerClubsListing[index]?.is_taken === "yes") {
+      this.takenBy = this.playerClubsListing[index].taken_by;
+      formData.append('user[pre_club_id]', this.currentClubId);
+      formData.append('user[current_club]', this.takenBy);
+    } else {
+      formData.append('user[pre_club_id]', this.currentClubId);
+    }
+
+    // Format and append required fields
+    const formattedDateOfBirth = moment(this.dateOfBirth.value).format('YYYY-MM-DD');
+    formData.append('user[date_of_birth]', formattedDateOfBirth);
+    formData.append('user[foot]', this.dominantFoot);
+
+    // Append Nationality array
+    this.nationality.forEach((nation: any) => {
+      formData.append('user[nationality][]', nation);
+    });
+
+    // Append optional fields only if they exist
+    if (this.placeOfBirth) formData.append('user[place_of_birth]', this.placeOfBirth);
+    if (this.height) formData.append('user[height]', this.height.toString());
+    if (this.weight) formData.append('user[weight]', this.weight.toString());
+    if (this.contractStart) {
+      const formattedContractStart = moment(this.contractStart.value).format('YYYY-MM-DD');
+      formData.append('user[contract_start]', formattedContractStart);
+    }
+    if (this.contractEnd) {
+      const formattedContractEnd = moment(this.contractEnd.value).format('YYYY-MM-DD');
+      formData.append('user[contract_end]', formattedContractEnd);
+    }
+    if (this.leagueLevel) formData.append('user[league_level]', this.leagueLevel);
+    if (this.firstName) formData.append('user[first_name]', this.firstName);
+    if (this.lastName) formData.append('user[last_name]', this.lastName);
+    if (this.birthCountry) formData.append('user[birth_country]', this.birthCountry);
+
+    formData.append('lang', 'en');
+
+    // API call for submitting form data
+    this.talentService.updateUserProfile(formData).subscribe(
+      (response: any) => {
+        if (response?.status) {
+          this.toastr.clear();
+          this.toastr.success('Profile updated successfully!', 'Success');
+          this.dialogRef.close(response.data);
+        } else {
+          this.toastr.clear();
+          this.toastr.error('Unexpected error occurred. Please try again.', 'Submission Failed');
+          console.error('API response error:', response);
+        }
+      },
+      (error: any) => {
+        this.toastr.error('Failed to submit profile. Please try again.', 'Error');
+        console.error('Error submitting the form:', error);
+      },
+    );
   }
+
 
   // onDateChange(event: MatDatepickerInputEvent<Date>, type:any): void {
 

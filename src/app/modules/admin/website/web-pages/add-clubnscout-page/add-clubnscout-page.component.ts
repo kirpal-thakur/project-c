@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WebPages } from '../../../../../services/webpages.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Editor, Toolbar } from 'ngx-editor';
+import { environment } from '../../../../../../environments/environment';
 
 interface Language {
   id: string;
@@ -36,6 +37,7 @@ export class AddClubnScoutPageComponent implements OnInit {
       ['align_left', 'align_center', 'align_right', 'align_justify']
     ];
     content: string = '';
+    colorPresets :any = environment.colors;
 
     imageLoaded: boolean = false;
 

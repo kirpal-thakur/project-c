@@ -32,6 +32,10 @@ export class BlogPopupComponent  implements OnInit, OnDestroy  {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
+  colorPresets :any = environment.colors;
+
+
   content: string = '';
   isLoading:boolean = false
   error:boolean = false

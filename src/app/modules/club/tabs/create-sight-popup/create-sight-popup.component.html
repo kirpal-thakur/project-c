@@ -37,9 +37,7 @@
       <div class="col-lg-4 px-2">
         <label for="date-select" class="code-text">{{ 'date' | translate }}</label><br>
 
-        <label class="cupen-btn sighting-cal" style="min-width: 170px;">
-          <input type="text" datetimepicker placeholder="Select date & time" [(ngModel)]="dateTime">
-        </label>
+        <input class="form-control cupen-btn sighting-cal" style="min-width: 170px;" type="datetime-local" id="date-select"  [(ngModel)]="dateTime" placeholder="Select date & time">
       </div>
     </div>
 

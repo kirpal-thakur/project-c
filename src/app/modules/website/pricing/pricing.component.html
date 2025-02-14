@@ -43,7 +43,7 @@
                     <h2 class="premium-heading2">{{ pageData?.first_tab_plan_name }}</h2>
                     <h3 class="premium-heading3">
                       {{ isActive1 ? pageData?.first_tab_yearly_price : pageData?.first_tab_monthly_price }}
-                      <span>.- CHF / {{ isActive1 ? 'Year' : 'Month' }}</span>
+                      <span>.- CHF / {{ isActive1 ? ('year' | translate) : ('month' | translate) }}</span>
                     </h3>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
                     <h2 class="premium-heading2">{{ pageData?.sec_tab_plan_name }}</h2>
                     <h3 class="premium-heading3">
                       {{ isActive2 ? pageData?.sec_tab_yearly_price : pageData?.sec_tab_monthly_price }}
-                      <span>.- CHF / {{ isActive2 ? 'Year' : 'Month' }}</span>
+                      <span>.- CHF / {{ isActive2 ? ('year' | translate) : ('month' | translate) }}</span>
                     </h3>
                   </div>
                 </div>
@@ -83,7 +83,7 @@
                     <h2 class="premium-heading2">{{ pageData?.third_tab_plan_name }}</h2>
                     <h3 class="premium-heading3">
                       {{ isActive3 ? pageData?.third_tab_yearly_price : pageData?.third_tab_monthly_price }}
-                      <span>.- CHF / {{ isActive3 ? 'Year' : 'Month' }}</span>
+                      <span>.- CHF / {{ isActive3 ? ('year' | translate) : ('month' | translate) }}</span>
                     </h3>
                   </div>
                 </div>
@@ -103,14 +103,14 @@
                   <div class="feature-height">
                     <div class="free">
                       <h4 class="free-heading">{{ pageData?.first_tab_free_features_sub_title }}</h4>
-                      <ul>
+                      <ul class="mb-4">
                         <li *ngFor="let feature of pageData?.first_tab_free_features_desc">{{ feature }}</li>
                       </ul>
                     </div>
+                    <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      {{ pageData?.first_tab_btn_txt }}
+                    </button>
                   </div>
-                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    {{ pageData?.first_tab_btn_txt }}
-                  </button>
                 </div>
               </mat-card>
             </div>
@@ -121,14 +121,14 @@
                   <div class="feature-height">
                     <div class="free">
                       <h4 class="free-heading">{{ pageData?.sec_tab_free_features_sub_title }}</h4>
-                      <ul>
+                      <ul class="mb-4">
                         <li *ngFor="let feature of pageData?.sec_tab_free_features_desc">{{ feature }}</li>
                       </ul>
                     </div>
+                    <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      {{ pageData?.sec_tab_btn_txt }}
+                    </button>
                   </div>
-                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    {{ pageData?.sec_tab_btn_txt }}
-                  </button>
                 </div>
               </mat-card>
             </div>
@@ -139,14 +139,14 @@
                   <div class="feature-height">
                     <div class="free">
                       <h4 class="free-heading">{{ pageData?.third_tab_free_features_sub_title }}</h4>
-                      <ul>
+                      <ul class="mb-4">
                         <li *ngFor="let feature of pageData?.third_tab_free_features_desc">{{ feature }}</li>
                       </ul>
                     </div>
+                    <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      {{ pageData?.third_tab_btn_txt }}
+                    </button>
                   </div>
-                  <button type="button" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                    {{ pageData?.third_tab_btn_txt }}
-                  </button>
                 </div>
               </mat-card>
             </div>

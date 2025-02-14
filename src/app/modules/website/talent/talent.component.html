@@ -11,12 +11,8 @@
                         <div class="col-lg-6 col-md-4 col-12">
                             <div class="banner-left">
                                 <h1 class="banner-heading">{{pageData?.banner_title}}</h1>
-
                                 <h4 class="banner-heading5" [innerHTML]="pageData?.banner_desc"></h4>
-                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{
-                                    pageData?.banner_btn_txt}}
-
-                                </a>
+                                <a class="btn btn-register" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ pageData?.banner_btn_txt }}</a>
                             </div>
                         </div>
 
@@ -47,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="!isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
+                    <div *ngIf="isEmptyObject(advertisemnetData?.skyscraper)" class="skyscraper-image">
                         <img src="{{ advertisemnet_base_url + advertisemnetData?.skyscraper?.featured_image }}"
                             alt="Skyscraper-Image Ad">
                         <button (click)="closeAd('skyscraper')" class="ad-close-button"><i
@@ -58,7 +54,7 @@
         </div>
 
         <div class="advertisment" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.leaderboard)}">
-            <div *ngIf="!isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
+            <div *ngIf="isEmptyObject(advertisemnetData?.leaderboard)" class="leaderboard-image">
                 <img [src]="advertisemnet_base_url + advertisemnetData?.leaderboard?.featured_image"
                     alt="Leaderboard-image Ad">
                 <button (click)="closeAd('leaderboard')" class="ad-close-button"><i
@@ -330,12 +326,12 @@
     <div class="advertisement" [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.small_square)}">
         <div class="container">
             <div class="adv">
-                <div *ngIf="!isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
+                <div *ngIf="isEmptyObject(advertisemnetData?.small_square)" class="small-sqaure-image">
                     <img [src]="advertisemnet_base_url + advertisemnetData?.small_square?.featured_image">
                     <button (click)="closeAd('small_square')" class="ad-close-button"><i
                             class="fa-solid fa-xmark"></i></button>
                 </div>
-                <div *ngIf="!isEmptyObject(advertisemnetData?.banner_image)" class="banner-image">
+                <div *ngIf="isEmptyObject(advertisemnetData?.banner_image)" class="banner-image">
                     <img [src]="advertisemnet_base_url + advertisemnetData?.banner_image?.featured_image">
                     <button (click)="closeAd('banner_image')" class="ad-close-button"><i
                             class="fa-solid fa-xmark"></i></button>
@@ -399,7 +395,7 @@
                 [ngClass]="{'hidden': isEmptyObject(advertisemnetData?.large_rectangle) && isEmptyObject(advertisemnetData?.inline_rectangle) && isEmptyObject(advertisemnetData?.square)}">
 
                 <!-- Large Rectangle Ad -->
-                <div *ngIf="!isEmptyObject(advertisemnetData?.large_rectangle)" class="large-rectangle">
+                <div *ngIf="isEmptyObject(advertisemnetData?.large_rectangle)" class="large-rectangle">
                     <img [src]="advertisemnet_base_url + advertisemnetData?.large_rectangle?.featured_image"
                         alt="Large Rectangle Ad">
                     <button (click)="closeAd('large_rectangle')" class="ad-close-button">
@@ -408,7 +404,7 @@
                 </div>
 
                 <!-- Inline Rectangle Ad -->
-                <div *ngIf="!isEmptyObject(advertisemnetData?.inline_rectangle)" class="inline-rectangle">
+                <div *ngIf="isEmptyObject(advertisemnetData?.inline_rectangle)" class="inline-rectangle">
                     <img [src]="advertisemnet_base_url + advertisemnetData?.inline_rectangle?.featured_image"
                         alt="Inline Rectangle Ad">
                     <button (click)="closeAd('inline_rectangle')" class="ad-close-button">
@@ -417,7 +413,7 @@
                 </div>
 
                 <!-- Square Ad -->
-                <div *ngIf="!isEmptyObject(advertisemnetData?.square)" class="square">
+                <div *ngIf="isEmptyObject(advertisemnetData?.square)" class="square">
                     <img [src]="advertisemnet_base_url + advertisemnetData?.square?.featured_image" alt="Square Ad">
                     <button (click)="closeAd('square')" class="ad-close-button">
                         <i class="fa-solid fa-xmark"></i>

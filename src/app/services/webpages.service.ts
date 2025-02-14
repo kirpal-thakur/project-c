@@ -12,7 +12,8 @@ export class WebPages {
 
     private apiUrl = environment?.apiUrl;
     private url = environment?.url;
-    private frontendApiUrl = this.url + 'frontend/';
+    // private frontendApiUrl = this.url + 'frontend/';
+    private frontendApiUrl = 'https://api.socceryou.ch/frontend/';
     private langId =  localStorage.getItem('lang_id') || '1';
     private languageId = new BehaviorSubject<string>(this.langId); // Initial value
     languageId$ = this.languageId.asObservable(); // Expose as observable
@@ -69,9 +70,11 @@ export class WebPages {
             `${this.frontendApiUrl}get-frontend-pages?lang_id=${langId}`
         );
     }
+
     addFaqPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-faqpage`, params);
     }
+
     addTalentPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-talentpage`, params);
     }
@@ -83,6 +86,7 @@ export class WebPages {
     addClubnScoutPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-club-and-scout-page`, params);
     }
+
     addHomePage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-homepage`, params);
     }
@@ -96,16 +100,19 @@ export class WebPages {
             `${this.frontendApiUrl}get-page-by-slug?page_type=home&lang_id=${langId}`
         );
     }
+
     getDynamicContentPage(content:any,langId:any):Observable<any>{
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.frontendApiUrl}get-page-by-slug?page_type=${content}&lang_id=${langId}`
         );
     }
+
     getNewsContentPage(id:any,langId:any):Observable<any>{
         return this.http.get<{ status: boolean, message: string, data: {} }>(
             `${this.frontendApiUrl}get-single-news/${id}`
         );
     }
+
     addContactPage(params: any): Observable<any>{
         return this.http.post<any>(`${this.frontendApiUrl}save-contactpage`, params);
     }

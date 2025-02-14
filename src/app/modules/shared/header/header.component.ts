@@ -10,6 +10,7 @@ import { map,filter, timeout } from 'rxjs/operators';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
+import { CommonDataService } from '../../../services/common-data.service';
 
 interface Notification {
   id: number;
@@ -36,9 +37,19 @@ export class HeaderComponent {
   showSuggestions: boolean = false;
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute, private talentService: TalentService, private themeService: ThemeService, private authService: AuthService, private translateService: TranslateService, private socketService: SocketService) { }
+  constructor(private userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private talentService: TalentService,
+    private themeService: ThemeService,
+    private authService: AuthService,
+    private translateService: TranslateService,
+    private socketService: SocketService,
+    private commonDataService: CommonDataService,
+  ) { }
+
   loggedInUser: any = localStorage.getItem('userInfo');
-  profileImgUrl: any = "";
+  profileImgUrl: any = "../../../../assets/images/default/talent-profile-default.png";
   lang: string = '';
   domains: any = environment.langs;
   message: string = '';
@@ -67,7 +78,9 @@ export class HeaderComponent {
 
   ngOnInit() {
 
-    this.isDarkMode = JSON.parse(localStorage.getItem('isDarkMode') || 'false');
+    this.themeService.isDarkTheme.subscribe((isDarkTheme: boolean) => {
+      this.isDarkMode = isDarkTheme;
+    });
 
     let notificationStatus = localStorage.getItem("notificationSeen");
     if (notificationStatus) {
@@ -92,14 +105,13 @@ export class HeaderComponent {
 
     // Find the role based on the id
     this.role = this.roles.find((role:any) => role.id == userRole);
-    this.fetchNotifications(userId);
+    let langId = localStorage.getItem('lang_id');
+    this.fetchNotifications(userId, langId);
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
-    this.talentService.message$.subscribe(msg => {
-      this.profileImgUrl = msg;
+    this.commonDataService.profilePic$.subscribe(url => {
+      this.profileImgUrl = url;
     });
-    this.profileImgUrl = this.loggedInUser?.meta?.profile_image_path;
-
 
     this.lang = localStorage.getItem('lang') || 'en';
     const selectedLanguage = this.domains.find((lang:any) => lang.slug === this.lang);
@@ -108,11 +120,6 @@ export class HeaderComponent {
     }else{
       this.language = this.domains[0];
     }
-    console.log(this.language);
-
-    this.updateThemeText();
-
-    
 
     this.socketService.on('notification').subscribe((data) => {
       // Fetch all notifications to update this.allNotifications with the latest data
@@ -276,34 +283,55 @@ export class HeaderComponent {
 
   ChangeLang(lang: any) {
 
+    this.notifications = [];
+
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
+    this.lang = selectedLanguage;
     
     const selectedLang = this.domains.find((lang:any) => lang.slug === selectedLanguage);
     this.language = selectedLang;
     let selectedLandId = selectedLang ? selectedLang.id : 1;
     localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
+
+    
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    
+    this.socketService.emit('updateLanguage', {userId, langId: selectedLandId});
+    this.fetchNotifications(userId, selectedLandId);
   }
 
   logout() {
+    let jsonData = localStorage.getItem("userData");
+    let userId;
+    if (jsonData) {
+      let userData = JSON.parse(jsonData);
+      userId = userData.id;
+    }
+    else {
+      console.log("No data found in localStorage.");
+    }
+    console.log(userId);
+    this.socketService.disconnectUser(userId);
+    
     this.authService.logout();
+
   }
 
   themeText: string = 'Light Mode'
 
-  toggleTheme(event: Event) {
-    event.preventDefault();
-    this.themeService.toggleTheme();
-    this.updateThemeText()
+  toggleTheme(event: any): void {
+    this.themeService.setDarkTheme(event.target.checked);
   }
-
-  updateThemeText() {
-    const isDarkMode = this.themeService.isDarkMode();
-    this.themeText = isDarkMode ? 'Dark Mode ' : 'Light Mode'
-    localStorage.setItem('isDarkMode', JSON.stringify(!isDarkMode));
-  }
-
 
   toggleSidebar() {
     document.body.classList.toggle('mobile-sidebar-active');
@@ -400,8 +428,8 @@ export class HeaderComponent {
     this.clickedNewNotification = false;
   }
 
-  fetchNotifications(userId: number): void {
-    this.talentService.getNotifications(userId).subscribe({
+  fetchNotifications(userId: number, langId: any): void {
+    this.talentService.getNotifications(userId, langId).subscribe({
       next: (response) => {
         console.log('Fetched notifications response:', response);
   

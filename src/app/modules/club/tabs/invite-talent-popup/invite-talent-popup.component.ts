@@ -1,10 +1,9 @@
 import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, Inject,ViewChild,ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
+import {  inject } from '@angular/core';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { UserService } from '../../../../services/user.service';
-import { TalentService } from '../../../../services/talent.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ClubService } from '../../../../services/club.service';
 
@@ -56,7 +55,6 @@ export class InviteTalentPopupComponent {
       } catch (error) {
         console.error('Error fetching users:', error);
       }
-
   }
 
   close() {
@@ -69,13 +67,13 @@ export class InviteTalentPopupComponent {
       formData.append('invites[]', user.id);
     });
 
-    this.userService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
+    this.clubService.sendSightingInvite(this.sightId, formData).subscribe((response)=>{
       if (response && response.status) {
         this.dialogRef.close({
           action: 'added',
           id: this.sightId
         });
-      
+
       } else {
         console.error('Invalid API response structure:', response);
       }
@@ -121,5 +119,5 @@ export class InviteTalentPopupComponent {
       this.userInput.nativeElement.value = "";
     }
   }
- 
+
 }

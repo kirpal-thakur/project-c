@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { InviteTalentPopupComponent } from '../invite-talent-popup/invite-talent-popup.component';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { UploadAttachmentComponent } from '../upload-attachment/upload-attachment.component';
+import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-sighting-tab',
   templateUrl: './sighting-tab.component.html',
@@ -22,7 +23,7 @@ export class SightingTabComponent {
   totalSightings: any = '';
   allSelected: boolean = false;
   idsToDelete: any = [];
-  imageBaseUrl: any = "https://api.socceryou.ch/uploads/";
+  imageBaseUrl: any = `${environment.url}uploads/`;
   singleIdToDelete: any = "";
   isLoading:boolean = false;
   selectedIds: number[] = [];

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-club-detail',
@@ -99,7 +100,8 @@ export class ClubDetailComponent implements OnInit {
 
 
   deleteUser(){
-    this.userService.deleteUser([this.userId]).subscribe(
+    let langId = localStorage.getItem('lang_id');
+    this.userService.deleteUser([this.userId], langId).subscribe(
       response => {
         this.showMatDialog('User deleted successfully!', 'display');
         this.router.navigate(['/admin/users']);
@@ -133,7 +135,7 @@ export class ClubDetailComponent implements OnInit {
         this.userService.uploadProfileImage(this.userId, formdata).subscribe((response)=>{
           if (response && response.status) {
             this.showMatDialog('Profile image updated successfully!', 'display');
-            this.user.meta.profile_image_path = "https://api.socceryou.ch/uploads/"+response.data.uploaded_fileinfo;
+            this.user.meta.profile_image_path = environment.url+"uploads/"+response.data.uploaded_fileinfo;
             // this.dataEmitter.emit(this.coverImage); // Emitting the data
             // this.isLoading = false;
           } else {

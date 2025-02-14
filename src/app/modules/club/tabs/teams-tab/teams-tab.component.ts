@@ -86,13 +86,33 @@ export class TeamsTabComponent {
       width: '800px',
       data: {
         teamId: this.selectedTeamId,
+        player: [],
+        edit: false,
       }
     })
 
     messageDialog.afterClosed().subscribe(result => {
       console.log('result',result);
+      this.getTeamPlayers(this.selectedTeamId, this.selectedTeam);
     });
 
-   }
+  }
+
+  editPlayer(player:any){
+    console.log('player',player);
+    const messageDialog = this.dialog.open(AddNewTalentComponent,{
+      width: '800px',
+      data: {
+        teamId: this.selectedTeamId,
+        player: player,
+        edit: true,
+      }
+    })
+
+    messageDialog.afterClosed().subscribe(result => {
+      this.getTeamPlayers(this.selectedTeamId, this.selectedTeam);
+    });
+
+  }
 
 }

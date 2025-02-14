@@ -20,7 +20,7 @@
           </div>
           <div class="visa-titles">
             <span class="d-block">{{ payment.brand }} ending in {{ payment.last4 }}</span>
-            <span class="d-block">Expiry {{ payment.exp_month }}/{{ payment.exp_year }}</span>
+            <span class="d-block">{{'expiry' | translate}} {{ payment.exp_month }}/{{ payment.exp_year }}</span>
           </div>
         </div>
   
@@ -38,7 +38,7 @@
           <span *ngIf="!payment.is_default" class="primary-label">{{'setPrimary' | translate}}</span>
         </div>
         <div class="payment-method_buttons">
-          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">{{'Remove' | translate}}</button>
+          <button class="btn me-2 remove-btn" (click)="removePayment(payment)">{{'remove' | translate}}</button>
           <button class="btn" (click)="updatePayment(payment)">{{'update' | translate}}</button>
         </div>
       </div>

@@ -127,7 +127,7 @@
 
                     <div class=" footer-links">
                         <ul class="footer-links1">
-                            <li><a (click)="closeNavbar()" [routerLink]="'/pricing'">{{ 'pricing' | translate }}PRICING </a></li>
+                            <li><a (click)="closeNavbar()" [routerLink]="'/pricing'">{{ 'pricing' | translate }} </a></li>
                             <li><a (click)="closeNavbar()" href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal-login">{{ 'signIn' | translate }}</a></li>
                             <li><a (click)="closeNavbar()" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{ 'createProfile' | translate }}</a>
@@ -288,13 +288,12 @@
                     </div>
                 </div>
                 <div class="modal-footer modal-btn border-0 d-block" style="text-align: center;">
-                    <a href="javascript:void(0)" (click)="login()" class="btn btn-primary d-block">{{'loginButton' |
-                        translate}}</a>
+                    <a href="javascript:void(0)" (click)="login()" class="btn btn-primary d-block">{{'loginButton' | translate}}</a>
 
                     <!-- <div class="seperter">
                         <h6 class="mb-0 font-w400">or</h6>
                     </div>
-                    
+
                     <div class="google-sign-in">
                         <div class="google-box" >
                             <img class="google-image" src="./assets/images/devicon_google.png">
@@ -536,7 +535,7 @@
                                             <select class="form-select" (change)="onCountryChange($event)">
                                                 <option value="" disabled selected>{{ 'country' | translate
                                                     }}</option>
-                                                <option *ngFor="let country of countrie" [value]="country.code">{{
+                                                <option *ngFor="let country of countrie" [value]="country.country_id">{{
                                                     country.name }}</option>
                                             </select>
                                         </div>

@@ -1,36 +1,35 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-import { ScoutService } from '../../../../services/scout.service';
 import { ClubService } from '../../../../services/club.service';
 
 @Component({
   selector: 'club-history-tab',
   templateUrl: './history-tab.component.html',
-  styleUrl: './history-tab.component.scss'
+  styleUrls: ['./history-tab.component.scss']
 })
-export class HistoryTabComponent {
-  isLoading:boolean = false;
-  userId:any = "";
+export class HistoryTabComponent implements OnInit {
+  isLoading: boolean = false;
+  userId: any = "";
   history: any = "";
   isEditable: boolean = false;
   @Input() role: any;
   @ViewChild('historyTextarea', { static: false }) textarea!: ElementRef;
 
-  constructor(private route: ActivatedRoute, private scoutService: ClubService){
+  constructor(private route: ActivatedRoute, private scoutService: ClubService) {}
 
-  }
-
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.getClubHistory();
   }
 
-  getClubHistory(){
+  getClubHistory() {
     this.isLoading = true;
     try {
-      this.scoutService.getClubHistory().subscribe((response)=>{
+      this.scoutService.getClubHistory().subscribe((response) => {
         if (response && response.status && response.data) {
-          this.history = response.data.company_history.meta_value; 
+          this.history = response.data.club_history.meta_value;
+          this.isEditable = !!this.history; // Set isEditable to true if history has a value
+          console.log(this.history);
+          console.log(this.isEditable);
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -42,7 +41,6 @@ export class HistoryTabComponent {
       console.error('Error fetching users:', error);
     }
   }
-
 
   editHistory(){
     this.isEditable = true;
@@ -63,7 +61,7 @@ export class HistoryTabComponent {
       this.isLoading = true;
       this.scoutService.updateClubHistory(history).subscribe((response)=>{
         if (response && response.status && response.data) {
-          this.history = history; 
+          this.history = history;
           this.isEditable = false;
           this.isLoading = false;
         } else {
