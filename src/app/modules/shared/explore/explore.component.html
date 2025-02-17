@@ -133,8 +133,8 @@
         </div>
 
         <div class="explore-box_images mt-3">
-          <div class="row player-image-list ">
-            <div class="col-lg-2"  *ngFor="let player of players"  >
+          <div class="d-flex flex-wrap player-image-list">
+            <div class="custom-col"  *ngFor="let player of players"  >
               <ng-container  *ngIf="player.id != loggedInUser">
 
                 <div class="image_box cursor-pointer"
