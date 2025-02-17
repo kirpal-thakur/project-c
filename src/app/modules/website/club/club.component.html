@@ -797,8 +797,7 @@
                             <img class="bg-image" src="./assets/images/feature-image.svg">
                             <h2 class="premium-heading2">{{ plan.plan_name }}</h2>
                             <h3 class="premium-heading3">
-                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}
-                            <span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
+                            {{ !isActivePlan[i] ? plan.monthly_plan_price : plan.yearly_plan_price }}<span>.- {{ !isActivePlan[i] ? plan.monthly_plan_price_currency : plan.yearly_plan_price_currency }}
                                 / {{ !isActivePlan[i] ? 'Month' : 'Year' }}</span>
                             </h3>
                         </div>

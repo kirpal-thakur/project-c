@@ -98,16 +98,26 @@
     border-radius: 10px;
     text-align: center;
 }
+
+.image_box2{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.player_img{
+    flex-grow: 1;
+    overflow: hidden;
+}
 .image_box .player_img img{
-    height: 260px;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
 }
 .player-names{
     background: #429130;
     padding: 8px 8px 10px 8px;
     text-align: center;
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 100%;
     z-index: 1;
 }

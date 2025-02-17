@@ -118,7 +118,7 @@ export class FavoritesComponent {
   }
 
   showDeleteConfirmationPopup(){
-    this.showMatDialog("", "delete-favorite-confirmation");
+    this.showMatDialog("", "delete-confirmation");
   }
 
   openViewProfile(user:any) {
@@ -211,6 +211,6 @@ export class FavoritesComponent {
 
   confirmSingleDeletion(favoriteId:any){
     this.idsToDelete = [favoriteId];
-    this.showMatDialog("", "delete-favorite-confirmation");
+    this.showMatDialog("", "delete-confirmation");
   }
 }
