@@ -188,7 +188,7 @@ button.btn.btn-secondary.dropdown-toggle {
  mat-datepicker-toggle {
   position: absolute;
   left: 0;
-  top: 0;
+  top: -20px;
   margin-left: 0 !important;
 }
 .d-flex.align-items-center.justify-content-center.dob1 {
@@ -1282,7 +1282,9 @@ input:checked+.slider:before {
 .mat-mdc-dialog-surface.mdc-dialog__surface {
   z-index: 9;
 }
-
+.blog-popup-2 .mat-mdc-dialog-surface.mdc-dialog__surface{
+height: auto;
+}
 .mat-mdc-dialog-inner-container.mdc-dialog__container {
   position: relative;
   top: 0px;
@@ -1303,6 +1305,9 @@ input:checked+.slider:before {
 
 .cutam-cupen {
   margin: auto;
+}
+.cutam-cupen .mat-mdc-dialog-surface.mdc-dialog__surface{
+  height: auto;
 }
 
 .cutam-cupen .mat-mdc-dialog-surface::-webkit-scrollbar {
@@ -1701,7 +1706,7 @@ input:checked+.slider:before {
 }
 
 .cupen-btn-date .mat-mdc-form-field-infix {
-  width: 120px;
+  width: 168px;
 }
 
 .explore-all_input .mat-mdc-form-field-infix {
@@ -1733,9 +1738,14 @@ input:checked+.slider:before {
 }
 
 .cupen-btn-date-1 .mat-mdc-form-field-infix {
-  width: 120px;
+  width: 168px;
 }
-
+.cupen-btn-date .mat-mdc-form-field-icon-prefix{
+width: 40%;
+}
+.cupen-btn-date-1 .mat-mdc-form-field-icon-prefix{
+  width: 40%;
+  }
 // new changes CSS Start
 
 .nav-tabs .nav-link:focus,
