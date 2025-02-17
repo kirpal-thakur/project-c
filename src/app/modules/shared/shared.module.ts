@@ -46,6 +46,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ActivityLogComponent } from './setting/activity-log/activity-log.component';
 import { AppSettingComponent } from './setting/app-setting/app-setting.component';
+import { CommonFilterPopupComponent } from './common-filter-popup/common-filter-popup.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { AppSettingComponent } from './setting/app-setting/app-setting.component
     ActivityLogComponent,
     AppSettingComponent,
     FavoritesComponent,
-    ExploreComponent
+    ExploreComponent,
+    CommonFilterPopupComponent
   ],
   imports: [
     CommonModule,

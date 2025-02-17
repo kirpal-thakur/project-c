@@ -226,6 +226,7 @@ export class MarketingComponent {
       role.role
     );
   }
+
   editPopup(data:any){
     
     const dialogRef = this.dialog.open(MarketingPopupComponent,{
