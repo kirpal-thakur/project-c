@@ -172,6 +172,7 @@ export class ViewProfileComponent implements OnInit {
         if (response && response.status && response.data) {
           this.isFavorite = true; // Mark as favorite
           console.log(userId);
+          this.getUser(userId);
           this.socketService.emit('addToFav', {senderId: myUserId, receiverId: userId});
 
         } else {
@@ -186,11 +187,12 @@ export class ViewProfileComponent implements OnInit {
 
   removeFromFavorites(userId: number) {
     let idsToDelete = [userId];
-    let params = {favorite_id:idsToDelete};
+    let params = {id:idsToDelete};
     try {
       this.userService.removeFavorites(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.isFavorite = false; // Mark as not favorite
+          this.getUser(userId);
         } else {
           console.error('Invalid API response structure:', response);
         }

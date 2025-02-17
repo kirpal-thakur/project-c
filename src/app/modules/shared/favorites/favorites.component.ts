@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
+import { CommonFilterPopupComponent } from '../common-filter-popup/common-filter-popup.component';
 
 @Component({
   selector: 'shared-favorites',
@@ -119,6 +120,31 @@ export class FavoritesComponent {
 
   showDeleteConfirmationPopup(){
     this.showMatDialog("", "delete-confirmation");
+  }
+
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '340px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'favorites',
+        // appliedfilters:this.customFilters,
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.getUserFavorites();
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
   }
 
   openViewProfile(user:any) {
