@@ -57,7 +57,7 @@ export class ChatComponent  {
   }
 
 
-  
+
   // Start a group chat
   startGroupChat() {
     this.talkService.createGroupConversation(this.talkService.generateUniqueId(), this.users)
@@ -75,8 +75,7 @@ export class ChatComponent  {
       height: '450px',
       width: '760px',
     })
-    .afterClosed()
-      .subscribe(users => {
+    .afterClosed().subscribe(users => {
         
         for(let user of users.data){
             this.users.push({
@@ -93,7 +92,7 @@ export class ChatComponent  {
         }
         console.log('last users',this.users);
         //this.createGroup();
-      });
+    });
   }
 }
 

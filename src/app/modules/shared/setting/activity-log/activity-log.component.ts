@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MessagePopupComponent } from '../../message-popup/message-popup.component';
 import { ActivityService } from '../../../../services/activity';
+import { WebPages } from '../../../../services/webpages.service';
 
 @Component({
   selector: 'app-activity-log',
@@ -23,10 +24,14 @@ export class ActivityLogComponent {
   @ViewChild(MatSort) sort!: MatSort;
   idsToDelete: any = [];
 
-  constructor(private activityService: ActivityService, public dialog: MatDialog){}
+  constructor(private activityService: ActivityService, public dialog: MatDialog, public webPages : WebPages){}
 
   ngOnInit(){
     this.getActivity();
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.getActivity();
+    });
   }
 
   async getActivity(): Promise<void> {
@@ -37,21 +42,22 @@ export class ActivityLogComponent {
     const pageSize = this.paginator ? this.paginator.pageSize : 10;
     const sortOrder = this.sort ? this.sort.direction : 'asc';
     const sortField = this.sort ? this.sort.active : '';
-    
+
     let params:any = {};
     params.offset = page;
     params.limit  = pageSize;
+    params.lang  = localStorage.getItem('lang_id');
 
     try {
       this.activityService.getActivity(params).subscribe((response)=>{
-      if (response && response.status && response.data && response.data.userData) {
-        this.activities = response.data.userData; 
-        this.paginator.length = response.data.totalCount;
-        this.isLoading = false;
-      } else {
-        this.isLoading = false;
-        console.error('Invalid API response structure:', response);
-      }
+        if (response && response.status && response.data && response.data.userData) {
+          this.activities = response.data.userData;
+          this.paginator.length = response.data.totalCount;
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+          console.error('Invalid API response structure:', response);
+        }
       });
     } catch (error) {
       this.isLoading = false;

@@ -109,7 +109,6 @@ export class ContactComponent implements OnInit {
       case 'large_rectangle':
           this.advertisemnetData.large_rectangle = [];
           break;
-
       case 'inline_rectangle':
           this.advertisemnetData.inline_rectangle = [];
           break;

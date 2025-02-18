@@ -8,6 +8,7 @@ import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment} from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { WebPages } from '../../../services/webpages.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -58,6 +59,7 @@ export class EditGeneralDetailsComponent {
     public dialog: MatDialog,
     private talentService: TalentService,
     private toastr: ToastrService,
+    private webPages: WebPages,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -67,7 +69,7 @@ export class EditGeneralDetailsComponent {
   
     this.loadPositions(); // Call to load positions, which now includes setUserPositions() call inside it
     this.loadCountries();
-    console.log('user',this.user)
+
     this.in_team_since = new FormControl(
       this.user?.meta?.in_team_since ? new Date(this.user?.meta?.in_team_since) : null
     );
@@ -89,10 +91,20 @@ export class EditGeneralDetailsComponent {
     this.social_youtube = this.user?.meta.sm_youtube || '';
     this.speed_unit = this.user?.meta.top_speed_unit || '';
     this.top_speed = this.user?.meta.top_speed || 0;
+
+
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.loadPositions();
+      this.loadCountries();
+    });
   }
   
   loadPositions(): void {
-    this.talentService.getPositions().subscribe(
+    let params: any = {};
+    params.lang = localStorage.getItem('lang_id');
+
+    this.talentService.getPositions(params).subscribe(
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
@@ -142,7 +154,11 @@ export class EditGeneralDetailsComponent {
   }
 
   loadCountries(): void {
-    this.talentService.getCountries().subscribe(
+
+    let params: any = {};
+    params.lang = localStorage.getItem('lang_id');
+
+    this.talentService.getCountries(params).subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.countries;
