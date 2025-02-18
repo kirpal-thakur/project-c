@@ -24,16 +24,13 @@ export class PlayerProfileComponent {
     if(this.user.meta){
       this.userData = JSON.parse(this.user.meta);  
       this.userNationalities = JSON.parse(this.user.user_nationalities);
-      console.log(this.userData)
     }
     if(this.user.positions){
       this.positions = JSON.parse(this.user.positions);
     }
-    console.log(this.user)
   }
 
   onCancel(): void {
-    console.log("Popup closed");
     this.dialogRef.close();  
   }
 

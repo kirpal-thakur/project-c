@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EditMembershipProfileComponent } from '../edit-membership-profile/edit-membership-profile.component';
 import { UpdateConfirmationPlanComponent } from '../../shared/update-confirmation-plan/update-confirmation-plan.component';
 import { EditPlanComponent } from '../../shared/edit-plan/edit-plan.component';
+import { WebPages } from '../../../services/webpages.service';
 
 
 interface Plan {
@@ -67,7 +68,8 @@ export class PlanComponent implements OnInit, OnDestroy {
     private paymentService: PaymentService,
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public webPages: WebPages
   ) {}
 
   async ngOnInit() {

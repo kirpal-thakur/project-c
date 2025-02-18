@@ -21,6 +21,12 @@ export class CommonDataService {
   private profilePicSource = new BehaviorSubject<string>('../../assets/images/default/talent-profile-default.png');
   profilePic$ = this.profilePicSource.asObservable();
 
+  // Create a BehaviorSubject to store the current language
+  private currentLangSubject = new BehaviorSubject<string>(localStorage.getItem('lang') || '1');
+
+  // Observable to allow components to subscribe to language changes
+  currentLang$ = this.currentLangSubject.asObservable();
+
   constructor(private http: HttpClient) {
 
 
@@ -74,6 +80,11 @@ export class CommonDataService {
 
   updateProfilePic(newUrl: string) {
     this.profilePicSource.next(newUrl);
+  }
+
+  // Change the language
+  changeLanguage(lang: string) {
+    this.currentLangSubject.next(lang);  // Emit the new language
   }
 
 }

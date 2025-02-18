@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../environments/environment';
 import { CommonDataService } from '../../../services/common-data.service';
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -38,9 +39,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private lightbox: Lightbox,
     private translateService: TranslateService,
-    private commonDataService: CommonDataService
+    private commonDataService: CommonDataService,
+    public webPages: WebPages
   ) { }
   activeTab: string = 'profile';
   userId: any;
@@ -64,7 +65,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   @Output() dataEmitter = new EventEmitter<string>();
   private routeSubscription: Subscription | null = null; // Initialize with null
   private introInstance: any; // Reference to the Intro.js instance
-
   loading: boolean = true;  // Add this line to track loading state
 
   async ngOnInit() {
@@ -82,6 +82,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(() => {
       this.getCoverImg();
       this.activeTab = 'profile';
+    });
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.getUserProfile(this.userId);
+      this.getHighlightsData();
+      this.loadCountries();
+      this.getGalleryData();
     });
 
     await this.getAllTeams();
@@ -224,9 +231,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           if (checkbox) {
             checkbox.addEventListener('click', (event) => {
               event.stopPropagation(); // Ensure clicks do not propagate
-              console.log('Checkbox clicked:', checkbox.checked);
               if (checkbox.checked) {
-                console.log('User selected "Don’t show it again"');
                 // Save the user's preference
                 localStorage.setItem('dontShowIntroTour', 'true');
                 this.updateShowTour(checkbox.checked ? 0 : 1);
@@ -273,8 +278,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getGalleryData() {
     this.loading = true;  // Set loading to true before making the API call
+    let params = {
+      lang: localStorage.getItem('lang_id')
+    };
     try {
-      this.talentService.getGalleryData().subscribe((response) => {
+      this.talentService.getGalleryData(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.userImages = response.data.images;
           this.userVideos = response.data.videos;
@@ -293,8 +301,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getUserProfile(userId: any) {
     this.loading = true;  // Set loading to true before making the API call
 
+    let params = {
+      lang: localStorage.getItem('lang_id')
+    };
+
     try {
-      this.talentService.getProfileData(userId).subscribe((response) => {
+      this.talentService.getProfileData(params).subscribe((response) => {
+
         if (response && response.status && response.data && response.data.user_data) {
           localStorage.setItem('userInfo', JSON.stringify(response.data.user_data));
 
@@ -383,7 +396,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // After loading, mark countries as loaded and check if both are ready
   loadCountries() {
-    return this.talentService.getCountries().subscribe(
+    let params = {
+      lang: localStorage.getItem('lang_id')
+    };
+    return this.talentService.getCountries(params).subscribe(
       (response) => {
         if (response && response.status) {
           this.countries = response.data.countries;
@@ -425,7 +441,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getHighlightsData() {
     try {
-      this.talentService.getHighlightsData().subscribe((response) => {
+      let params = {
+        lang: localStorage.getItem('lang_id')
+      };
+      this.talentService.getHighlightsData(params).subscribe((response) => {
         if (response && response.status && response.data && response.data.images) {
           this.highlights = response.data;
           // this.isLoading = false;

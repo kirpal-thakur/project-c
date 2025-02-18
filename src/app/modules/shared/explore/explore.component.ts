@@ -6,6 +6,8 @@ import { SocketService } from '../../../services/socket.service';
 import { ToastrService } from 'ngx-toastr';
 import { ScoutService } from '../../../services/scout.service';
 import { TranslateService } from '@ngx-translate/core';
+import { WebPages } from '../../../services/webpages.service';
+import { lang } from 'moment';
 
 @Component({
   selector: 'shared-explore',
@@ -111,7 +113,8 @@ export class ExploreComponent implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef, 
     private socketService: SocketService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    public webPages: WebPages
   ) {
     this.language = translateService.currentLang || 'en';  // Get current language
     this.loadRoles(this.language);  // Load Roles based on selected language
@@ -136,6 +139,15 @@ export class ExploreComponent implements OnInit {
     this.ageRange = Array.from({ length: 50 - 15 + 1 }, (_, i) => i + 15);
     // Initialize viewsTracked from sessionStorage
     this.loadTrackedViews();
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.loadPositions();
+      this.loadLeagues();
+      this.loadClubs();
+      this.loadCountries();
+      this.getUsers();
+    });
+
   }
 
   private loadTrackedViews() {
@@ -243,6 +255,7 @@ export class ExploreComponent implements OnInit {
         position: this.selectedPositions
       },
       metaQuery: [],
+      lang: localStorage.getItem('lang_id')
     };
 
     // Add other filters if they are selected
@@ -321,7 +334,12 @@ export class ExploreComponent implements OnInit {
   }
 
   loadCountries(): void {
-    this.talentService.getDomains().subscribe(
+      // Prepare query parameters
+    let params: any = {
+      lang : localStorage.getItem('lang_id'),
+    };
+
+    this.talentService.getDomains(params).subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.domains;
@@ -334,7 +352,13 @@ export class ExploreComponent implements OnInit {
   }
 
   loadPositions(): void {
-    this.talentService.getPositions().subscribe(
+
+    // Prepare query parameters
+    let params: any = {
+      lang : localStorage.getItem('lang_id'),
+    };
+
+    this.talentService.getPositions(params).subscribe(
       (response: any) => {
         if (response.status) {
           this.positions = response.data.positions;
@@ -349,7 +373,13 @@ export class ExploreComponent implements OnInit {
   }
 
   loadLeagues(): void {
-    this.talentService.getLeagues().subscribe(
+
+    // Prepare query parameters
+    let params: any = {
+      lang : localStorage.getItem('lang_id'),
+    };
+
+    this.talentService.getLeagues(params).subscribe(
       (response: any) => {
         if (response.status) {
           this.leagues = response.data.leagues;
@@ -364,7 +394,12 @@ export class ExploreComponent implements OnInit {
   }
 
   loadClubs(): void {
-    this.talentService.getClubs().subscribe(
+      // Prepare query parameters
+      let params: any = {
+        lang : localStorage.getItem('lang_id'),
+      };
+
+    this.talentService.getClubs(params).subscribe(
       (response: any) => {
         if (response.status) {
           this.clubs = response.data.clubs;
