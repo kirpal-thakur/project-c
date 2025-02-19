@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { TalentService } from '../../../services/talent.service';
+import { CommonFilterPopupComponent } from '../common-filter-popup/common-filter-popup.component';
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'shared-favorites',
@@ -31,12 +33,17 @@ export class FavoritesComponent {
   // Filters and UI variables (other code omitted for brevity)
   viewsTracked: { [profileId: string]: { viewed: boolean, clicked: boolean } } = {}; // Track view and click per profile
 
-  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private router: Router, public dialog: MatDialog, public webPages: WebPages) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(this.loggedInUser);
 
     this.route.params.subscribe((params:any) => {
+      this.getUserFavorites();
+    });
+
+
+    this.webPages.languageId$.subscribe((data) => {
       this.getUserFavorites();
     });
   }
@@ -51,7 +58,8 @@ export class FavoritesComponent {
       let params: any = {
         offset: page,
         limit: pageSize,
-        search: this.keyword // Search keyword
+        search: this.keyword,// Search keyword
+        lang : localStorage.getItem('lang_id'),
       };
 
       // Make the API request with query parameters
@@ -119,6 +127,31 @@ export class FavoritesComponent {
 
   showDeleteConfirmationPopup(){
     this.showMatDialog("", "delete-confirmation");
+  }
+
+
+  showFilterPopup():void {
+    const filterDialog = this.dialog.open(CommonFilterPopupComponent,{
+      height: '340px',
+      width: '300px',
+      position: {
+        right: '30px',
+        top:'150px'
+      },
+      data: {
+        page: 'favorites',
+        // appliedfilters:this.customFilters,
+      }
+    })
+
+    filterDialog.afterClosed().subscribe(result => {
+      if (result !== undefined) {
+        this.getUserFavorites();
+        console.log('Dialog result:', result);
+      }else{
+        console.log('Dialog closed without result');
+      }
+    });
   }
 
   openViewProfile(user:any) {

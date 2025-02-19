@@ -11,6 +11,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, finalize } from 'rxjs/operators';
 import { CommonDataService } from '../../../services/common-data.service';
+import { WebPages } from '../../../services/webpages.service';
 
 interface Notification {
   id: number;
@@ -46,6 +47,7 @@ export class HeaderComponent {
     private translateService: TranslateService,
     private socketService: SocketService,
     private commonDataService: CommonDataService,
+    private webPages: WebPages,
   ) { }
 
   loggedInUser: any = localStorage.getItem('userInfo');
@@ -288,14 +290,14 @@ export class HeaderComponent {
     const selectedLanguage = typeof lang != 'string' ? lang.target.value : lang;
     localStorage.setItem('lang', selectedLanguage);
     this.lang = selectedLanguage;
-    
+
     const selectedLang = this.domains.find((lang:any) => lang.slug === selectedLanguage);
     this.language = selectedLang;
     let selectedLandId = selectedLang ? selectedLang.id : 1;
     localStorage.setItem('lang_id', selectedLandId);
     this.translateService.use(selectedLanguage)
+    this.webPages.updateData(selectedLandId);
 
-    
     let jsonData = localStorage.getItem("userData");
     let userId;
     if (jsonData) {
@@ -305,7 +307,7 @@ export class HeaderComponent {
     else {
       console.log("No data found in localStorage.");
     }
-    
+
     this.socketService.emit('updateLanguage', {userId, langId: selectedLandId});
     this.fetchNotifications(userId, selectedLandId);
   }

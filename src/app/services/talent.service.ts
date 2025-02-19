@@ -75,11 +75,11 @@ export class TalentService {
     );
   }
 
-  getProfileData(userId: any = 1): Observable<any> {
+  getProfileData(params: any = {}): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: { userData: User[] } }>(
       `${this.apiUrl}profile`,
-      { headers }
+      { headers , params }
     );
   }
 
@@ -107,35 +107,35 @@ export class TalentService {
     );
   }
 
-  getUser(user: any): Observable<any> {
+  getUser(user: any,params:any = {}): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: {} }>(
       `${this.apiUrl}user/profile/${user}`,
-      { headers }
+      { headers , params }
     );
   }
 
-  getGalleryData(): Observable<any> {
+  getGalleryData(params:any={}): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: {} }>(
       `${this.apiUrl}user/get-gallery`,
-      { headers }
+      { headers , params }
     );
   }
 
-  getHighlightsData(): Observable<any> {
+  getHighlightsData(params:any={}): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: {} }>(
       `${this.apiUrl}user/get-gallery-highlights`,
-      { headers }
+      { headers , params }
     );
   }
 
-  getBoosterData(): Observable<any> {
+  getBoosterData(params:any={}): Observable<any> {
     const headers = this.headers();
     return this.http.get<{ status: boolean, message: string, data: { } }>(
       `${this.apiUrl}user/get-booster-stats`,
-      { headers }
+      { headers , params }
     );
   }
 
@@ -149,10 +149,10 @@ export class TalentService {
   }
 
   // Fetch teams (without any search term)
-  getClubs(): Observable<any> {
+  getClubs(params:any): Observable<any> {
     const headers = this.headers();
 
-    return this.http.get(`${this.apiUrl}get-clubs-list`, { headers });
+    return this.http.get(`${this.apiUrl}get-clubs-list`, { headers, params });
   }
 
   getClubsForPlayer(): Observable<any> {
@@ -162,9 +162,9 @@ export class TalentService {
     );
   }
 
-  getLeagues(): Observable<any> {
+  getLeagues(params:any): Observable<any> {
     const headers = this.headers();
-    return this.http.get(`${this.apiUrl}get-leagues`, {headers});
+    return this.http.get(`${this.apiUrl}get-leagues`, {headers, params});
   }
 
   getCoverImg(): Observable<any> {
@@ -213,28 +213,28 @@ export class TalentService {
     );
   }
 
-  getCountries(): Observable<any> {
+  getCountries(params:any={}): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-countries`, { headers }
+      `${this.apiUrl}get-countries`, { headers , params }
     );
 
   }
 
-  getDomains(): Observable<any> {
+  getDomains(params:any): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-domains`, { headers }
+      `${this.apiUrl}get-domains`, { headers, params }
     );
   }
 
-  getUserDomains(): Observable<any> {
+  getUserDomains(params:any): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}user/get-active-domains`, { headers }
+      `${this.apiUrl}user/get-active-domains`, { headers , params}
     );
   }
 
@@ -244,16 +244,16 @@ export class TalentService {
     return this.http.post<any>(`${this.apiUrl}delete-favorites`, params, { headers });
   }
 
-  getExportLinkPurchaseData(): Observable<any> {
+  getExportLinkPurchaseData(params: any = {}): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: any }>(
-      `${this.apiUrl}user/export-purchase-history`, { headers }    );
+      `${this.apiUrl}user/export-purchase-history`, { headers , params }    );
   }
 
-  getUserPlans(): Observable<any> {
+  getUserPlans(params : any = {}): Observable<any> {
     return this.http.get<{ status: boolean, message: string, data: any }>(
-      `${this.apiUrl}user/get-active-packages`
+      `${this.apiUrl}user/get-active-packages` ,{ params }
     );
   }
 
@@ -402,12 +402,12 @@ export class TalentService {
   }
 
 
-  getPositions(): Observable<any> {
+  getPositions(params:any={}): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<any>(
       `${this.apiUrl}/get-positions`,
-      { headers }
+      { headers , params }
     );
   }
 
@@ -442,20 +442,20 @@ export class TalentService {
   }
 
 
-  getGalleryFiles(id:any): Observable<any> {
+  getGalleryFiles(id:any , params : any = {}): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-gallery/${id}`, { headers }
+      `${this.apiUrl}get-gallery/${id}`, { headers , params }
     );
   }
 
 
-  getHighlightsFiles(id:any): Observable<any> {
+  getHighlightsFiles(id:any , params : any = {} ): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: { } }>(
-      `${this.apiUrl}get-gallery-highlights/${id}`, { headers }
+      `${this.apiUrl}get-gallery-highlights/${id}`, { headers , params }
     );
   }
 
@@ -611,13 +611,14 @@ export class TalentService {
   }
 
 
-  getPurchaseData(pageNumber: number, pageSize: number): Observable<any> {
+  getPurchaseData(pageNumber: number, pageSize: number, lang : any = {}): Observable<any> {
     const headers = this.headers();
 
     return this.http.get<{ status: boolean, message: string, data: any }>(
       `${this.apiUrl}user/get-purchase-history`, {
         params: {
           page: pageNumber.toString(),
+          lang: lang,
           // limit: pageSize.toString()
         }
         ,headers

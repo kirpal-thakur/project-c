@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TalentService } from '../../../services/talent.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCountryComponent } from './add-country/add-country.component';
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'shared-countries',
@@ -25,27 +26,35 @@ export class CountriesComponent {
   userInfo : any=[];
   filteredCountries:any;
 
-  constructor( private talentService: TalentService ,public dialog: MatDialog)  {}
+  constructor( private talentService: TalentService ,public dialog: MatDialog,public webPages : WebPages)  {}
 
   ngOnInit() {
     this.userInfo = localStorage.getItem('userInfo');
     this.userInfo = JSON.parse(this.userInfo);
 
     this.loggedInUser = JSON.parse(this.loggedInUser);
-    console.log(this.loggedInUser)
+
     this.loadCountries();
+
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.loadCountries();
+    });
   }
   
   loadCountries(): void {
-    this.talentService.getUserDomains().subscribe(
+
+    let params:any = {};
+    params.lang  = localStorage.getItem('lang_id');
+
+    this.talentService.getUserDomains(params).subscribe(
       (response: any) => {
         if (response && response.status) {
           this.countries = response.data.domains;
           this.flag_path = response.data.logo_path;
-          console.log('countries',this.countries)
+
           // Filter the countries where is_package_active == 'active'
           this.filteredCountries = this.countries.filter((country:any) => country.is_package_active == 'active');
-          console.log('Active countries', this.filteredCountries);
 
         }
       },

@@ -10,6 +10,7 @@ import { PaymentsPopupComponent } from '../payments-popup/payments-popup.compone
 import { PaymentService } from '../../../services/payment.service';
 import { MessagePopupComponent } from '../../shared/message-popup/message-popup.component';
 import { CancelCountryPlanComponent } from './cancel-country-plan/cancel-country-plan.component';
+import { WebPages } from '../../../services/webpages.service';
 
 @Component({
   selector: 'app-membership',
@@ -40,11 +41,18 @@ export class MembershipComponent {
   exportLink: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router) { }
+  constructor(private route: ActivatedRoute, private talentService: TalentService, private paymentService:PaymentService, public dialog: MatDialog,private router: Router , private webpages : WebPages) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params:any) => {
       this.userId = params.id;
+      this.getUserPurchases();
+      this.getUserPlans();
+      this.getUserCards();
+      this.getBoosterData()
+    });
+
+    this.webpages.languageId$.subscribe((data) => {
       this.getUserPurchases();
       this.getUserPlans();
       this.getUserCards();
@@ -57,7 +65,9 @@ export class MembershipComponent {
     const pageNumber = this.currentPage != 0 ? this.currentPage : 1;
     const pageSize = this.pageSize;
 
-    this.talentService.getPurchaseData(pageNumber, pageSize).subscribe(response => {
+    let lang  = localStorage.getItem('lang_id');
+
+    this.talentService.getPurchaseData(pageNumber, pageSize, lang).subscribe(response => {
       if (response && response.status && response.data) {
         this.userPurchases = response.data.purchaseHistory;
         this.totalItems = response.data.totalCount; // Assuming API returns the total number of purchases
@@ -71,7 +81,11 @@ export class MembershipComponent {
   }
 
   exportData(): void {
-    this.talentService.getExportLinkPurchaseData().subscribe(
+
+    let params:any = {};
+    params.lang  = localStorage.getItem('lang_id');
+
+    this.talentService.getExportLinkPurchaseData(params).subscribe(
       (response) => {
         if (response?.status && response?.data?.file_path) {
           const filePath = response.data.file_path;
@@ -93,7 +107,10 @@ export class MembershipComponent {
   // Fetch purchases from API with pagination parameters
   getUserPlans(): void {
 
-    this.talentService.getUserPlans().subscribe(response => {
+    let params:any = {};
+    params.lang  = localStorage.getItem('lang_id');
+
+    this.talentService.getUserPlans(params).subscribe(response => {
       if (response && response.status && response.data) {
         this.userPlans = response.data.packages;
         this.premium = this.userPlans.premium[0];
@@ -171,8 +188,12 @@ export class MembershipComponent {
   }
 
   async getBoosterData(){
+
+    let params:any = {};
+    params.lang  = localStorage.getItem('lang_id');
+
     try {
-      const response = await this.talentService.getBoosterData().toPromise();
+      const response = await this.talentService.getBoosterData(params).toPromise();
       if (response?.data) {
         this.stats = response.data;
         console.log(this.stats)

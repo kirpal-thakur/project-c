@@ -109,7 +109,6 @@ export class ContactComponent implements OnInit {
       case 'large_rectangle':
           this.advertisemnetData.large_rectangle = [];
           break;
-
       case 'inline_rectangle':
           this.advertisemnetData.inline_rectangle = [];
           break;
@@ -183,7 +182,7 @@ export class ContactComponent implements OnInit {
         }
       );
 
-      const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };    
+      const ContactformData = { ...this.contactForm.value, captchaToken: this.recaptchaToken, role: role };
       this.http.post<any>(this.apiUrl+'/frontend/save-contact-form', ContactformData).subscribe(
         (response) => {
           // console.log('Form submitted successfully:', response);
@@ -206,14 +205,10 @@ export class ContactComponent implements OnInit {
       if (this.contactForm.invalid) {
         console.error('Form is invalid:', this.contactForm.errors);
       }
-      
-    } 
-  
-
+    }
   }
+
   // Close specific ad
-
-
   setResponseMessage(message: string, type: string): void {
     this.responseMessage = message;
     this.messageType = type;

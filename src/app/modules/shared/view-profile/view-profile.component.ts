@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SocketService } from '../../../services/socket.service';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { WebPages } from '../../../services/webpages.service';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -39,7 +40,8 @@ export class ViewProfileComponent implements OnInit {
     private toastr: ToastrService,
     public dialog: MatDialog,
     private router: Router,
-    private socketService: SocketService
+    private socketService: SocketService,
+    private webPages: WebPages
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +55,17 @@ export class ViewProfileComponent implements OnInit {
     if (this.coverImage == '') {
       this.coverImage = this.defaultCoverImage;
     }
+
+    this.webPages.languageId$.subscribe((data) => {
+      this.getUser(this.userId);
+    });
   }
 
   getUser(userId: any) {
     try {
-      this.talentService.getUser(userId).subscribe((response) => {
+      let params: any = {};
+      params.lang = localStorage.getItem('lang_id');
+      this.talentService.getUser(userId,params).subscribe((response) => {
         if (response && response.status && response.data && response.data.user_data) {
           this.user = response.data.user_data;
           this.isPremium = this.loggedInUser?.active_subscriptions?.premium.length>0 ? true : false ;
@@ -93,9 +101,13 @@ export class ViewProfileComponent implements OnInit {
     }
   }
 
-  getGalleryData(id: any) {
+  getGalleryData(id: any ) {
+
+    let params: any = {};
+    params.lang = localStorage.getItem('lang_id');
+
     try {
-      this.talentService.getGalleryFiles(id).subscribe((response) => {
+      this.talentService.getGalleryFiles(id,params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.userImages = response.data.images;
           this.userVideos = response.data.videos;
@@ -110,8 +122,12 @@ export class ViewProfileComponent implements OnInit {
   }
 
   getHighlightsData(id: any) {
+
+    let params: any = {};
+    params.lang = localStorage.getItem('lang_id');
+
     try {
-      this.talentService.getHighlightsFiles(id).subscribe((response) => {
+      this.talentService.getHighlightsFiles(id , params).subscribe((response) => {
         if (response && response.status && response.data && response.data.images) {
           this.highlights = response.data;
         } else {
@@ -172,6 +188,7 @@ export class ViewProfileComponent implements OnInit {
         if (response && response.status && response.data) {
           this.isFavorite = true; // Mark as favorite
           console.log(userId);
+          this.getUser(userId);
           this.socketService.emit('addToFav', {senderId: myUserId, receiverId: userId});
 
         } else {
@@ -186,11 +203,12 @@ export class ViewProfileComponent implements OnInit {
 
   removeFromFavorites(userId: number) {
     let idsToDelete = [userId];
-    let params = {favorite_id:idsToDelete};
+    let params = {id:idsToDelete};
     try {
       this.userService.removeFavorites(params).subscribe((response) => {
         if (response && response.status && response.data) {
           this.isFavorite = false; // Mark as not favorite
+          this.getUser(userId);
         } else {
           console.error('Invalid API response structure:', response);
         }

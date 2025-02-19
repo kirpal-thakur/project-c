@@ -134,8 +134,8 @@ export class AdvertisingComponent {
 
   editAdvertisement(element:any){
     const updateAdDialog = this.dialog.open(AdvertisingPopupComponent,{
-      height: '598px',
-      width: '800px',
+      height: '80vh',
+      width: '80vw',
       panelClass: 'cutam-cupen',
       data : {
         action: 'update',
@@ -157,8 +157,8 @@ export class AdvertisingComponent {
 
   createAdvertisement(){
     const createAdDialog = this.dialog.open(AdvertisingPopupComponent,{
-      height: '598px',
-      width: '600px',
+      height: '80vh',
+      width: '80vw',
       panelClass: 'cutam-cupen',
       data : {
         action: 'create'
@@ -178,8 +178,8 @@ export class AdvertisingComponent {
 
   viewAdvertisement(element:any){
     const viewAdDialog = this.dialog.open(AdvertisingPopupComponent,{
-      height: '598px',
-      width: '600px',
+      height: '80vh',
+      width: '80vw',
       panelClass: 'cutam-cupen',
       data : {
         action: 'view',
